@@ -1,6 +1,6 @@
-# [Project name]
+# Wasatch Pediatrics
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+A web project for Wasatch Pediatrics, wired to GitHub for version control.
 
 ## Run & Operate
 
@@ -30,7 +30,7 @@ _Populate as you build — non-obvious choices a reader couldn't infer from the 
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Wasatch Pediatrics — pediatric healthcare web platform.
 
 ## User preferences
 
