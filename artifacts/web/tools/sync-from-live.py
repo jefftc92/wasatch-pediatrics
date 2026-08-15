@@ -528,6 +528,9 @@ def write_providers(fetch: bool) -> None:
         name = re.search(r'<div class="provider-title">\s*<h3 class="centerme">(.*?)</h3>', body, flags=re.S)
         image = re.search(r'<div class="provider-image">\s*<img src="([^"]*)"', body, flags=re.S)
         quote = re.search(r'<div class="bigquote">\s*<h1 class="lys">(.*?)</h1>', body, flags=re.S)
+        # The rendered name keeps WordPress's entity encoding (&#8220;Meg&#8221;);
+        # the decoded form is kept separately for titles and data use.
+        name_html = tidy(name.group(1)) if name else tidy(card_name.group(1) if card_name else "")
         full_name = text_of(name.group(1)) if name else text_of(card_name.group(1) if card_name else "")
         display, _, credentials = full_name.partition(",")
 
@@ -538,13 +541,15 @@ def write_providers(fetch: bool) -> None:
                 "menuClasses": {i: v for i, v in classes.items() if base_menu.get(i) != v},
                 "menuCurrentIds": current,
                 "name": full_name,
+                "nameHtml": name_html,
                 "displayName": display.strip(),
                 "credentials": credentials.strip(),
                 "cardName": tidy(card_name.group(1)) if card_name else "",
                 "pageTitle": meta(source, r"<title>(.*?)</title>"),
                 "description": meta(source, r'<meta name="description" content="(.*?)"'),
                 "image": image.group(1) if image else (card_image.group(1) if card_image else ""),
-                "quote": ihtml.unescape(tidy(quote.group(1))) if quote else "",
+                # Rendered as markup, so entity encoding is preserved as-is.
+                "quote": tidy(quote.group(1)) if quote else "",
                 "scheduleUrl": (schedule_href.group(1).replace(SITE, "") if schedule_href else ""),
                 "scheduleLabel": text_of(schedule.group(2)) if schedule else "",
                 "scheduleNewTab": bool(schedule and 'target="_blank"' in schedule.group(1)),
@@ -590,6 +595,8 @@ def write_providers(fetch: bool) -> None:
         '  /** Menu items that carry aria-current="page". */',
         "  menuCurrentIds: string[];",
         "  name: string;",
+        "  /** Name markup as WordPress emits it, entities intact. */",
+        "  nameHtml: string;",
         "  displayName: string;",
         "  credentials: string;",
         "  cardName: string;",
@@ -629,7 +636,7 @@ def write_providers(fetch: bool) -> None:
         "export const providers: Provider[] = [",
     ]
     scalar_keys = (
-        "slug", "bodyClass", "name", "displayName", "credentials", "cardName", "pageTitle",
+        "slug", "bodyClass", "name", "nameHtml", "displayName", "credentials", "cardName", "pageTitle",
         "description", "image", "quote", "scheduleUrl", "scheduleLabel", "scheduleNewTab", "gender",
     )
     for provider in providers:

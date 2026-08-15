@@ -157,14 +157,16 @@ export function renderProviderProfile(provider: Provider): string {
 											<img src="${provider.image}" alt="" />
 									</div>
 				<div class="provider-title">
-					<h3 class="centerme">${provider.name}</h3>
+					<h3 class="centerme">${provider.nameHtml}</h3>
 				</div>
 ${offices}
 ${schedule}
 ${provider.sidebar.map(grayBox).join("\n")}
 			</div>
 			<div class="col-lg-7 offset-lg-1 bottomstack-lg">
-				${provider.quote ? `<div class="bigquote">\n					<h1 class="lys">${provider.quote}</h1>\n				</div>` : ""}
+				<div class="bigquote">
+					<h1 class="lys">${provider.quote || " "}</h1>
+				</div>
 ${provider.sections.map(grayBox).join("\n")}
 			</div>
 		</div>

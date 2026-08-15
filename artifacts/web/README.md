@@ -57,18 +57,24 @@ original code running unchanged.
 
 ## Verification
 
-Both versions were compared automatically, with the live site mirrored and served
-locally so network conditions were identical on both sides:
+Compared automatically against the live site, mirrored and served locally so both
+sides face identical network conditions. The real Adobe and Google webfonts are
+fetched and replayed to both, so typography is exercised rather than falling back.
 
-- The served HTML is **token-for-token identical** to the live document on 107 of
-  140 routes. The other 33 are blog posts, where the live theme emits a stray
+- **Pixel-identical on all 140 routes at 1440px** — full-page screenshots, zero
+  differing pixels.
+- **Pixel-identical at 390px** on 20 routes covering every template (home, the
+  content pages, blog index and pagination, category archive, location, provider
+  archive and profile, blog post).
+- The served HTML is **token-for-token identical** to the live document on 113 of
+  140 routes. The remaining 27 are blog posts, where the live theme emits a stray
   `</div>` after `</html>`; browsers parse both to the same DOM.
-- A headless browser found matching page height, rendered text, `<title>` and
-  image loading on all 140 routes at 390px, 768px and 1440px.
-- Accordion heights, carousel classes and autoplay, tab panels, mobile nav,
-  nav hover, button bounce and the search field expansion all match.
+- Interactive parity: accordion heights, carousel classes and autoplay, tab
+  panels, mobile nav, nav hover, button bounce, search field expansion.
 - The provider filter returns the same sets as the live AJAX endpoint for every
   location and category value.
+- The theme stylesheet, Bootstrap and all six LemonYellowSun webfont files are
+  byte-identical to the live ones (verified by re-download and compare).
 
 ## Known differences
 
@@ -82,6 +88,9 @@ locally so network conditions were identical on both sides:
   are copied and render correctly, but there is nowhere for a submission to go.
 - **Canonical and Open Graph URLs still point at wasatchpeds.net**, since that is
   still the live site. Asset URLs are rewritten to this server; these are not.
+- **montserrat is served by Adobe Fonts**, not self-hosted, and Adobe web projects
+  carry a domain allowlist. Add the production domain to that project before
+  cutover or the body font can fall back to system sans.
 
 ## Re-syncing from the live site
 
