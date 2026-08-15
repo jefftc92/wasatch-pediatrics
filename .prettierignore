@@ -2,6 +2,7 @@
 # from it by artifacts/web/tools/sync-from-live.py. Reformatting them would make
 # every sync run show up as a diff.
 artifacts/web/src/content/
+artifacts/web/src/document/
 artifacts/web/src/data/pages.ts
 artifacts/web/src/data/providers.ts
 artifacts/web/src/data/searchIndex.ts

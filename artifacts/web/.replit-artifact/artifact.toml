@@ -17,14 +17,8 @@ run = "pnpm --filter @workspace/web run dev"
 
 [services.production]
 
-[services.production.build]
-args = ["pnpm", "--filter", "@workspace/web", "run", "build"]
-
-[services.production.build.env]
-NODE_ENV = "production"
-
 [services.production.run]
-args = ["pnpm", "--filter", "@workspace/web", "run", "preview"]
+args = ["pnpm", "--filter", "@workspace/web", "run", "start"]
 
 [services.production.run.env]
 PORT = "5000"

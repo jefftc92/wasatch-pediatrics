@@ -13,6 +13,10 @@ export type ContentPage = {
   description: string;
   /** The class list WordPress puts on <body>; some theme CSS keys off it. */
   bodyClass: string;
+  /** Menu item classes that differ from the default for this route. */
+  menuClasses: Record<string, string>;
+  /** Menu items that carry aria-current="page". */
+  menuCurrentIds: string[];
 };
 
 export const contentPages: ContentPage[] = [
@@ -22,6 +26,8 @@ export const contentPages: ContentPage[] = [
     title: "Wasatch Pediatrics",
     description: "Our pediatricians, advanced practice providers, nurses, and medical assistants provide superior pediatric care in the Salt Lake area.",
     bodyClass: "home wp-singular page-template page-template-homepage page-template-homepage-php page page-id-105 wp-theme-wasatch",
+    menuClasses: {},
+    menuCurrentIds: [],
   },
   {
     route: "/about/",
@@ -29,6 +35,8 @@ export const contentPages: ContentPage[] = [
     title: "About Us - Wasatch Pediatrics",
     description: "Learn about our team of pediatricians, our network of pediatric providers, and our commitment to individualized, family-centered care.",
     bodyClass: "wp-singular page-template page-template-page-flex page-template-page-flex-php page page-id-156 wp-theme-wasatch",
+    menuClasses: {"196": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-156 current_page_item menu-item-196"},
+    menuCurrentIds: ["196"],
   },
   {
     route: "/adhd-treatment/",
@@ -36,6 +44,8 @@ export const contentPages: ContentPage[] = [
     title: "ADHD Treatment - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-931 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/behavioral-health/",
@@ -43,6 +53,8 @@ export const contentPages: ContentPage[] = [
     title: "Behavioral Health - Wasatch Pediatrics",
     description: "At Wasatch Pediatrics, we treat the body and the mind. Our commitment to your child’s mental, physical, and behavioral well-being is our top priority.",
     bodyClass: "wp-singular page-template page-template-page-flex page-template-page-flex-php page page-id-138 wp-theme-wasatch",
+    menuClasses: {"111": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-111", "375": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-138 current_page_item menu-item-375"},
+    menuCurrentIds: ["375"],
   },
   {
     route: "/blog/",
@@ -50,6 +62,8 @@ export const contentPages: ContentPage[] = [
     title: "Blog - Wasatch Pediatrics",
     description: "",
     bodyClass: "blog wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "919": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-827 current_page_item current_page_parent menu-item-919"},
+    menuCurrentIds: ["919"],
   },
   {
     route: "/blog/page/2/",
@@ -57,6 +71,8 @@ export const contentPages: ContentPage[] = [
     title: "Blog - Page 2 of 6 - Wasatch Pediatrics",
     description: "",
     bodyClass: "blog paged paged-2 wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "919": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-827 current_page_item current_page_parent menu-item-919"},
+    menuCurrentIds: ["919"],
   },
   {
     route: "/blog/page/3/",
@@ -64,6 +80,8 @@ export const contentPages: ContentPage[] = [
     title: "Blog - Page 3 of 6 - Wasatch Pediatrics",
     description: "",
     bodyClass: "blog paged paged-3 wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "919": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-827 current_page_item current_page_parent menu-item-919"},
+    menuCurrentIds: ["919"],
   },
   {
     route: "/blog/page/4/",
@@ -71,6 +89,8 @@ export const contentPages: ContentPage[] = [
     title: "Blog - Page 4 of 6 - Wasatch Pediatrics",
     description: "",
     bodyClass: "blog paged paged-4 wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "919": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-827 current_page_item current_page_parent menu-item-919"},
+    menuCurrentIds: ["919"],
   },
   {
     route: "/blog/page/5/",
@@ -78,6 +98,8 @@ export const contentPages: ContentPage[] = [
     title: "Blog - Page 5 of 6 - Wasatch Pediatrics",
     description: "",
     bodyClass: "blog paged paged-5 wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "919": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-827 current_page_item current_page_parent menu-item-919"},
+    menuCurrentIds: ["919"],
   },
   {
     route: "/blog/page/6/",
@@ -85,6 +107,8 @@ export const contentPages: ContentPage[] = [
     title: "Blog - Page 6 of 6 - Wasatch Pediatrics",
     description: "",
     bodyClass: "blog paged paged-6 wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "919": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-827 current_page_item current_page_parent menu-item-919"},
+    menuCurrentIds: ["919"],
   },
   {
     route: "/brain-injury-awareness/",
@@ -92,6 +116,8 @@ export const contentPages: ContentPage[] = [
     title: "Brain Injury Awareness - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1012 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/breastfeeding-positioning-tips-for-success/",
@@ -99,6 +125,8 @@ export const contentPages: ContentPage[] = [
     title: "Breastfeeding Positioning: Tips For Success - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1074 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/buckle-up-safely-a-parents-guide-to-car-seat-safety-in-utah/",
@@ -106,6 +134,8 @@ export const contentPages: ContentPage[] = [
     title: "Buckle Up Safely: A Parent’s Guide to Car Seat Safety in Utah - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1260 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/careers/",
@@ -113,6 +143,8 @@ export const contentPages: ContentPage[] = [
     title: "Careers - Wasatch Pediatrics",
     description: "Work for a company that values respect, responsibility, and compassion. View our open positions and learn more about our mission and core values.",
     bodyClass: "wp-singular page-template page-template-page-flex-hero page-template-page-flex-hero-php page page-id-325 wp-theme-wasatch",
+    menuClasses: {},
+    menuCurrentIds: [],
   },
   {
     route: "/category/behavioral-health/",
@@ -120,6 +152,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-behavioral-health category-38 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/colds-illnesses/",
@@ -127,6 +161,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-colds-illnesses category-32 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/dietitian-recipes/",
@@ -134,6 +170,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-dietitian-recipes category-31 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/healthy-living/",
@@ -141,6 +179,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-healthy-living category-24 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/infants/",
@@ -148,6 +188,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-infants category-33 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/nutrition/",
@@ -155,6 +197,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-nutrition category-30 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/parenting/",
@@ -162,6 +206,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-parenting category-28 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/safety-prevention/",
@@ -169,6 +215,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-safety-prevention category-27 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/safety/",
@@ -176,6 +224,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-safety category-40 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/school-age/",
@@ -183,6 +233,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-school-age category-35 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/teens/",
@@ -190,6 +242,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-teens category-36 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/category/toddlers/",
@@ -197,6 +251,8 @@ export const contentPages: ContentPage[] = [
     title: "- Wasatch Pediatrics",
     description: "",
     bodyClass: "archive category category-toddlers category-34 wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/colic-what-it-is-and-what-parents-can-do/",
@@ -204,6 +260,8 @@ export const contentPages: ContentPage[] = [
     title: "Colic: What It Is and What Parents Can Do - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1528 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/comments/",
@@ -211,6 +269,8 @@ export const contentPages: ContentPage[] = [
     title: "Comments - Wasatch Pediatrics",
     description: "Leave us a comment and tell us how we did, how we can improve, and what you loved about your recent pediatrician visit.",
     bodyClass: "wp-singular page-template page-template-page-flex page-template-page-flex-php page page-id-388 wp-theme-wasatch",
+    menuClasses: {},
+    menuCurrentIds: [],
   },
   {
     route: "/contact-us/",
@@ -218,6 +278,8 @@ export const contentPages: ContentPage[] = [
     title: "Contact Us - Wasatch Pediatrics",
     description: "Our network of eight pediatric clinics means that there’s always a pediatrician close by when you and your family need us most.",
     bodyClass: "wp-singular page-template-default page page-id-293 wp-theme-wasatch",
+    menuClasses: {"295": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-293 current_page_item menu-item-295"},
+    menuCurrentIds: ["295"],
   },
   {
     route: "/covid-19/",
@@ -225,6 +287,8 @@ export const contentPages: ContentPage[] = [
     title: "COVID-19 - Wasatch Pediatrics",
     description: "Get up-to-date information and resources about COVID-19 and learn more about keeping your kids and family healthy, happy, and safe.",
     bodyClass: "wp-singular page-template-default page page-id-427 wp-theme-wasatch",
+    menuClasses: {},
+    menuCurrentIds: [],
   },
   {
     route: "/dentistry-orthodontics/",
@@ -232,6 +296,8 @@ export const contentPages: ContentPage[] = [
     title: "Dentistry & Orthodontics - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular page-template page-template-page-dentistry page-template-page-dentistry-php page page-id-1423 wp-theme-wasatch",
+    menuClasses: {"110": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-110", "1438": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1423 current_page_item menu-item-1438", "111": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-111", "1437": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-1423 current_page_item menu-item-1437"},
+    menuCurrentIds: ["1438", "1437"],
   },
   {
     route: "/game-ready-how-to-prevent-sports-injuries-in-children/",
@@ -239,6 +305,8 @@ export const contentPages: ContentPage[] = [
     title: "Game Ready: How to Prevent Sports Injuries in Children - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1450 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/gardening-is-great-for-kids/",
@@ -246,6 +314,8 @@ export const contentPages: ContentPage[] = [
     title: "Gardening is Great for Kids - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-904 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/healthy-body-image/",
@@ -253,6 +323,8 @@ export const contentPages: ContentPage[] = [
     title: "Healthy Body Image - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1174 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/helpful-links/",
@@ -260,6 +332,8 @@ export const contentPages: ContentPage[] = [
     title: "Helpful Links - Wasatch Pediatrics",
     description: "Get helpful pediatric resources from around the web and learn more about recent pediatric research and best practices for forming healthy childhood habits.",
     bodyClass: "wp-singular page-template page-template-page-flex page-template-page-flex-php page page-id-132 wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "143": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-132 current_page_item menu-item-143"},
+    menuCurrentIds: ["143"],
   },
   {
     route: "/how-social-media-helps-teens-feel-connected-and-less-alone/",
@@ -267,6 +341,8 @@ export const contentPages: ContentPage[] = [
     title: "How Social Media Helps Teens Feel Connected and Less Alone - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1353 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/how-to-guard-against-stomach-viruses/",
@@ -274,6 +350,8 @@ export const contentPages: ContentPage[] = [
     title: "How to Guard Against Stomach Viruses - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1133 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/locations/cottonwood/",
@@ -281,6 +359,8 @@ export const contentPages: ContentPage[] = [
     title: "Cottonwood - Wasatch Pediatrics",
     description: "Schedule a doctor visit at our Cottonwood clinic with the best pediatricians at one of the best pediatric clinics in Murray, Utah.",
     bodyClass: "wp-singular locations-template-default single single-locations postid-116 wp-theme-wasatch",
+    menuClasses: {"110": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-110", "292": "menu-item menu-item-type-post_type menu-item-object-locations current-menu-item menu-item-292", "919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: ["292"],
   },
   {
     route: "/locations/draper/",
@@ -288,6 +368,8 @@ export const contentPages: ContentPage[] = [
     title: "Draper - Wasatch Pediatrics",
     description: "Schedule a doctor visit with the best pediatricians in Draper at one of the best pediatric clinics in Draper to see how we help you care for your kids.",
     bodyClass: "wp-singular locations-template-default single single-locations postid-117 wp-theme-wasatch",
+    menuClasses: {"110": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-110", "291": "menu-item menu-item-type-post_type menu-item-object-locations current-menu-item menu-item-291", "919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: ["291"],
   },
   {
     route: "/locations/farmington/",
@@ -295,6 +377,8 @@ export const contentPages: ContentPage[] = [
     title: "Farmington - Wasatch Pediatrics",
     description: "Schedule a doctor visit with the best pediatricians in Farmington at one of the best pediatric clinics in Farmington to see how we help care for your kids.",
     bodyClass: "wp-singular locations-template-default single single-locations postid-118 wp-theme-wasatch",
+    menuClasses: {"110": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-110", "290": "menu-item menu-item-type-post_type menu-item-object-locations current-menu-item menu-item-290", "919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: ["290"],
   },
   {
     route: "/locations/grow-up-great/",
@@ -302,6 +386,8 @@ export const contentPages: ContentPage[] = [
     title: "Grow Up Great - Wasatch Pediatrics",
     description: "Schedule a doctor visit with the best pediatricians in Bountiful at one of the best pediatric clinics in Bountiful to see how we help care for your kids.",
     bodyClass: "wp-singular locations-template-default single single-locations postid-119 wp-theme-wasatch",
+    menuClasses: {"110": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-110", "289": "menu-item menu-item-type-post_type menu-item-object-locations current-menu-item menu-item-289", "919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: ["289"],
   },
   {
     route: "/locations/salt-lake/",
@@ -309,6 +395,8 @@ export const contentPages: ContentPage[] = [
     title: "Salt Lake - Wasatch Pediatrics",
     description: "Schedule a doctor visit with the best pediatricians in Salt Lake at one of the best pediatric clinics in Salt Lake City.",
     bodyClass: "wp-singular locations-template-default single single-locations postid-121 wp-theme-wasatch",
+    menuClasses: {"110": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-110", "287": "menu-item menu-item-type-post_type menu-item-object-locations current-menu-item menu-item-287", "919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: ["287"],
   },
   {
     route: "/locations/southpoint/",
@@ -316,6 +404,8 @@ export const contentPages: ContentPage[] = [
     title: "Southpoint - Wasatch Pediatrics",
     description: "Schedule a doctor visit with the best pediatricians in West Jordan at one of the best pediatric clinics in West Jordan.",
     bodyClass: "wp-singular locations-template-default single single-locations postid-122 wp-theme-wasatch",
+    menuClasses: {"110": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-110", "286": "menu-item menu-item-type-post_type menu-item-object-locations current-menu-item menu-item-286", "919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: ["286"],
   },
   {
     route: "/locations/summit/",
@@ -323,6 +413,8 @@ export const contentPages: ContentPage[] = [
     title: "Summit - Wasatch Pediatrics",
     description: "Schedule a doctor visit with the best pediatricians in Park City at one of the best pediatric clinics in Park City to see how we help care for your kids.",
     bodyClass: "wp-singular locations-template-default single single-locations postid-120 wp-theme-wasatch",
+    menuClasses: {"110": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-110", "288": "menu-item menu-item-type-post_type menu-item-object-locations current-menu-item menu-item-288", "919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: ["288"],
   },
   {
     route: "/locations/willow-creek/",
@@ -330,6 +422,8 @@ export const contentPages: ContentPage[] = [
     title: "Willow Creek - Wasatch Pediatrics",
     description: "Schedule a doctor visit with the best pediatricians in Murray at one of the best pediatric clinics in Murray and learn how we help you care for your kids.",
     bodyClass: "wp-singular locations-template-default single single-locations postid-123 wp-theme-wasatch",
+    menuClasses: {"110": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-110", "285": "menu-item menu-item-type-post_type menu-item-object-locations current-menu-item menu-item-285", "919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: ["285"],
   },
   {
     route: "/managing-screen-time-a-guide-for-parents/",
@@ -337,6 +431,8 @@ export const contentPages: ContentPage[] = [
     title: "Managing Screen Time: A Guide for Parents - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1048 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/navigating-postpartum-depression/",
@@ -344,6 +440,8 @@ export const contentPages: ContentPage[] = [
     title: "Navigating Postpartum Depression - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1022 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/new-patients/",
@@ -351,6 +449,8 @@ export const contentPages: ContentPage[] = [
     title: "New Patients - Wasatch Pediatrics",
     description: "Choose the right pediatrician for your child, learn more about our family-centered approach to pediatric care, and find a pediatric clinic near you.",
     bodyClass: "wp-singular page-template page-template-page-flex-hero page-template-page-flex-hero-php page page-id-124 wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "147": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-124 current_page_item menu-item-147"},
+    menuCurrentIds: ["147"],
   },
   {
     route: "/october-is-bullying-awareness-month/",
@@ -358,6 +458,8 @@ export const contentPages: ContentPage[] = [
     title: "October is Bullying Awareness Month - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1329 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/office-forms/",
@@ -365,6 +467,8 @@ export const contentPages: ContentPage[] = [
     title: "Office Forms - Wasatch Pediatrics",
     description: "Prepare for your Wasatch Pediatrics visit by reading and completing patient registration forms, a medical records release, and other authorizations.",
     bodyClass: "wp-singular page-template page-template-page-flex page-template-page-flex-php page page-id-126 wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "146": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-126 current_page_item menu-item-146"},
+    menuCurrentIds: ["146"],
   },
   {
     route: "/prematurity-awareness/",
@@ -372,6 +476,8 @@ export const contentPages: ContentPage[] = [
     title: "Prematurity Awareness - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-962 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/reach-out-and-read-nurtures-young-readers/",
@@ -379,6 +485,8 @@ export const contentPages: ContentPage[] = [
     title: "Reach Out and Read Nurtures Young Readers - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1203 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/seasonal-depression-in-teens-and-children/",
@@ -386,6 +494,8 @@ export const contentPages: ContentPage[] = [
     title: "Seasonal Depression in Teens and Children - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-995 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/services/",
@@ -393,6 +503,8 @@ export const contentPages: ContentPage[] = [
     title: "Medical Services - Wasatch Pediatrics",
     description: "Learn all about our pediatric services, including immunizations and child check-ups, and what to expect when you meet with your primary care provider.",
     bodyClass: "wp-singular page-template page-template-page-flex page-template-page-flex-php page page-id-128 wp-theme-wasatch",
+    menuClasses: {"111": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-111", "145": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-128 current_page_item menu-item-145"},
+    menuCurrentIds: ["145"],
   },
   {
     route: "/sleep-why-is-it-so-important-for-kids/",
@@ -400,6 +512,8 @@ export const contentPages: ContentPage[] = [
     title: "Sleep: why is it so important for kids? - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-866 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/splash-smart-preventing-and-treating-swimmers-ear/",
@@ -407,6 +521,8 @@ export const contentPages: ContentPage[] = [
     title: "Splash Smart: Preventing and Treating Swimmer’s Ear - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1249 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/sports-hydration-meal-timing/",
@@ -414,6 +530,8 @@ export const contentPages: ContentPage[] = [
     title: "Sports Hydration & Meal Timing - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1006 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/sports-nutrition-guidelines-for-the-young-athlete/",
@@ -421,6 +539,8 @@ export const contentPages: ContentPage[] = [
     title: "Sports Nutrition Guidelines for the Young Athlete - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-949 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/sports-nutrition-guidelines-macronutrients-micronutrients/",
@@ -428,6 +548,8 @@ export const contentPages: ContentPage[] = [
     title: "Sports Nutrition Guidelines: Macronutrients & Micronutrients - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-980 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/strategies-for-managing-meltdowns/",
@@ -435,6 +557,8 @@ export const contentPages: ContentPage[] = [
     title: "Strategies for Managing Meltdowns - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1299 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/symptom-checker/",
@@ -442,6 +566,8 @@ export const contentPages: ContentPage[] = [
     title: "Symptom Checker - Wasatch Pediatrics",
     description: "Does your child need to see a doctor? Use our symptom checker to find reliable, medically accurate information about your child’s symptoms.",
     bodyClass: "wp-singular page-template page-template-page-flex-hero page-template-page-flex-hero-php page page-id-130 wp-theme-wasatch",
+    menuClasses: {"1376": "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-1376", "144": "menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-130 current_page_item menu-item-144"},
+    menuCurrentIds: ["144"],
   },
   {
     route: "/terms-of-use-privacy-statement/",
@@ -449,6 +575,8 @@ export const contentPages: ContentPage[] = [
     title: "Terms of Use & Privacy Statement - Wasatch Pediatrics",
     description: "Learn more about our privacy policy, terms and conditions, consents, and other information you should know when interacting with Wasatch Pediatrics.",
     bodyClass: "wp-singular page-template page-template-page-flex page-template-page-flex-php page page-id-276 wp-theme-wasatch",
+    menuClasses: {},
+    menuCurrentIds: [],
   },
   {
     route: "/water-safety/",
@@ -456,6 +584,8 @@ export const contentPages: ContentPage[] = [
     title: "Water Safety - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1183 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/what-is-hand-foot-and-mouth-disease-hfmd/",
@@ -463,6 +593,8 @@ export const contentPages: ContentPage[] = [
     title: "What is Hand Foot and Mouth Disease (HFMD)? - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-966 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/what-is-pertussis-and-why-is-it-going-around/",
@@ -470,6 +602,8 @@ export const contentPages: ContentPage[] = [
     title: "What is Pertussis and Why is it Going Around? - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1140 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/what-parents-need-to-know-about-measles/",
@@ -477,6 +611,8 @@ export const contentPages: ContentPage[] = [
     title: "What Parents Need to Know About Measles - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-1214 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
   {
     route: "/what-you-need-to-know-about-rsv/",
@@ -484,6 +620,8 @@ export const contentPages: ContentPage[] = [
     title: "What You Need to Know About RSV - Wasatch Pediatrics",
     description: "",
     bodyClass: "wp-singular post-template-default single single-post postid-854 single-format-standard wp-theme-wasatch",
+    menuClasses: {"919": "menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-919"},
+    menuCurrentIds: [],
   },
 ];
 

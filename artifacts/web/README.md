@@ -1,78 +1,98 @@
 # Wasatch Pediatrics website
 
-A 1:1 copy of the live site at https://wasatchpeds.net, rebuilt as a React + Vite
-app so we have a codebase to build on. Every route, every page body, the theme's
-styling and its animations are reproduced; nothing has been redesigned.
+A 1:1 copy of the live site at https://wasatchpeds.net, rebuilt as a plain
+Node.js server that renders HTML. Every route, every page body, the theme's
+styling and its scripts are reproduced; nothing has been redesigned, and there is
+no front-end framework — pages are assembled as HTML strings on the server and
+sent as complete documents.
 
 ```
-pnpm --filter @workspace/web run dev        # http://localhost:5173
-pnpm --filter @workspace/web run build      # static build into dist/
+pnpm --filter @workspace/web run dev        # http://localhost:5000
+pnpm --filter @workspace/web run start
 pnpm --filter @workspace/web run typecheck
 ```
 
+TypeScript runs directly on Node (native type stripping) — there is no build
+step and no bundler.
+
 ## How the copy is put together
 
-The live site is WordPress running a hand-written theme (`wp-content/themes/wasatch`).
-Rather than re-implement its CSS, the copy vendors it:
+The live site is WordPress running a hand-written theme
+(`wp-content/themes/wasatch`). Rather than re-implement it, the copy vendors it:
 
-| Piece                                             | Where it lives                          | Notes                                                                       |
-| ------------------------------------------------- | --------------------------------------- | --------------------------------------------------------------------------- |
-| Theme stylesheet, Bootstrap 5, WordPress core CSS | `public/wp-content/**`                  | Byte-for-byte copies, linked from `index.html` in the original order        |
-| Fonts, icons, photos, PDFs                        | `public/wp-content/{themes,uploads}/**` | Kept at their original URLs so copied markup resolves unchanged             |
-| Page bodies                                       | `src/content/*.html`                    | Exactly the markup the live site renders between `</header>` and `<footer>` |
-| Route table                                       | `src/data/pages.ts`                     | Route → content file, `<title>`, meta description, `<body>` class           |
-| Providers                                         | `src/data/providers.ts`                 | 72 profiles as structured records                                           |
-| Search index                                      | `src/data/searchIndex.ts`               | Powers `/?s=…`, which WordPress handles server-side                         |
+| Piece                                     | Where it lives                                  | Notes                                                                       |
+| ----------------------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------- |
+| Theme CSS and JS, Bootstrap, jQuery       | `public/wp-content/**`, `public/wp-includes/**` | Byte-for-byte copies, served at their original URLs                         |
+| Fonts, icons, photos, PDFs                | `public/wp-content/**`                          | Original paths, so copied markup resolves unchanged                         |
+| Each page's `<head>` and trailing scripts | `src/document/*.html`                           | Verbatim, so canonical/Open Graph/JSON-LD metadata is preserved             |
+| Page bodies                               | `src/content/*.html`                            | Exactly the markup the live site renders between `</header>` and `<footer>` |
+| Route table                               | `src/data/pages.ts`                             | Route → files, `<body>` class, per-route menu state                         |
+| Providers                                 | `src/data/providers.ts`                         | 72 profiles as typed records                                                |
+| Search index                              | `src/data/searchIndex.ts`                       | Powers `/?s=…`                                                              |
 
-Header, footer, the provider directory, search and the 404 page are real React
-components. Everything else renders its stored HTML, so the copied pages stay
-identical to the source while still being routed and animated by the app.
+`src/render/` holds the templates: `document.ts` assembles the page, `header.ts`
+and `footer.ts` are the shared chrome, and `providers.ts` / `search.ts` render
+the two sections that are generated rather than stored. Those are the seams to
+build on — editing the header template changes every page.
 
 ### Animations
 
-`script.js` on the live site is jQuery. Its behaviour is ported, not
-approximated:
+Nothing is re-implemented: the theme's own `script.js`, jQuery, jquery-migrate
+and Bootstrap are vendored and loaded exactly as the live site loads them, so the
+carousel, accordions, tabs, mobile nav, expanding search and button hover are the
+original code running unchanged.
 
-- `src/lib/animate.ts` — jQuery's `slideToggle`/`fadeIn`/`fadeOut`, including its
-  named durations (`fast` = 200ms, `slow` = 600ms) and `swing` easing.
-- `src/lib/carousel.ts` — the Bootstrap 5 carousel, reproducing the class
-  sequence (`carousel-item-next`/`-start`) that drives the CSS transition, the
-  5s autoplay and pause-on-hover.
-- `src/lib/themeInteractions.ts` — delegated handlers for the accordions, FAQ
-  rows, tab panels and the hover "bounce" on buttons.
-- `Header.tsx` — the mobile burger, the sliding sub-menus and the expanding
-  search field.
+### WordPress behaviour that had to be reproduced
 
-The port was verified against the original by driving both with a headless
-browser: page height, rendered text, `<title>`, image loading, the expanded
-heights of every accordion, and the carousel's intermediate classes all match on
-all 140 routes at 390px, 768px and 1440px.
+- **`<body>` classes.** WordPress stamps classes like `single-providers` or
+  `page-id-105` onto `<body>` and the theme's CSS keys off them
+  (`.single-providers .btn` restyles buttons on provider profiles).
+- **Menu state.** The current page's menu item gets extra classes and
+  `aria-current="page"` — and a page can appear in the menu twice (Dentistry &
+  Orthodontics sits under both Locations and Services).
+- **The provider filter.** The theme posts to `/wp-admin/admin-ajax.php` with
+  `action=myfilter`; the server answers that route with the same grid markup, so
+  the original filter script works untouched.
+- **Trailing slashes.** `/about` redirects to `/about/`, as WordPress does.
 
-### WordPress body classes
+## Verification
 
-WordPress stamps classes such as `single-providers` or `page-id-105` onto
-`<body>`, and the theme's CSS keys off them (`.single-providers .btn` restyles
-buttons on provider profiles). Each route re-applies its original class list via
-`src/lib/useBodyClass.ts`.
+Both versions were compared automatically, with the live site mirrored and served
+locally so network conditions were identical on both sides:
+
+- The served HTML is **token-for-token identical** to the live document on 107 of
+  140 routes. The other 33 are blog posts, where the live theme emits a stray
+  `</div>` after `</html>`; browsers parse both to the same DOM.
+- A headless browser found matching page height, rendered text, `<title>` and
+  image loading on all 140 routes at 390px, 768px and 1440px.
+- Accordion heights, carousel classes and autoplay, tab panels, mobile nav,
+  nav hover, button bounce and the search field expansion all match.
+- The provider filter returns the same sets as the live AJAX endpoint for every
+  location and category value.
+
+## Known differences
+
+- **Analytics are not copied.** Google Tag Manager and Analytics tags are
+  stripped by the sync so a copy never reports into production analytics.
+- **Search is re-implemented.** WordPress searches its database; this indexes the
+  stored page text and link targets. Live results come back on top in the same
+  order, but template-built pages can match here where WordPress finds nothing in
+  `post_content`.
+- **The `/comments/` form has no backend.** The Gravity Forms markup and scripts
+  are copied and render correctly, but there is nowhere for a submission to go.
+- **Canonical and Open Graph URLs still point at wasatchpeds.net**, since that is
+  still the live site. Asset URLs are rewritten to this server; these are not.
 
 ## Re-syncing from the live site
 
-While the WordPress site is still the source of truth, pull its changes down with:
+While WordPress is still the source of truth, pull its changes down with:
 
 ```
 python3 tools/sync-from-live.py              # mirror + regenerate everything
 python3 tools/sync-from-live.py --no-fetch   # regenerate from the local cache
 ```
 
-It re-mirrors every page in the sitemap (plus blog pagination and posts), rewrites
-`src/content/`, regenerates the data modules, and downloads any new media. HTML is
-cached in `.sync-cache/` (gitignored). Review `git diff` before committing.
-
-## Deployment note
-
-This is a client-routed single-page app, so the host must serve `index.html` for
-unknown paths (`vite preview` and the dev server already do). Two things worth
-deciding before this replaces the WordPress site: server-side rendering or
-prerendering for SEO, since the marketing pages currently render client-side, and
-where the media should live long-term — `public/wp-content/` is a straight copy of
-the WordPress uploads folder.
+It re-mirrors every page in the sitemap (plus blog pagination and posts),
+rewrites `src/content/` and `src/document/`, regenerates the data modules, and
+downloads any new media. HTML is cached in `.sync-cache/` (gitignored). Review
+`git diff` before committing.

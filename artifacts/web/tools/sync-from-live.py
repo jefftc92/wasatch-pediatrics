@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Re-sync this app from the live wasatchpeds.net site.
 
-The app is a 1:1 copy of the WordPress site: the theme stylesheet and media are
-vendored under `public/`, each page body is stored verbatim under `src/content/`,
-and the repeating records (providers) are extracted into typed data modules.
-This script regenerates all of that from the live site.
+The app is a 1:1 copy of the WordPress site: the theme's stylesheet, scripts and
+media are vendored under `public/`, each page's <head>, body and trailing scripts
+are stored verbatim under `src/document/` and `src/content/`, and the repeating
+records (providers) are extracted into typed data modules. This script
+regenerates all of that from the live site.
 
     python3 tools/sync-from-live.py            # full sync
     python3 tools/sync-from-live.py --no-fetch # regenerate from the local cache
@@ -22,6 +23,7 @@ import html as ihtml
 import json
 import os
 import re
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -29,11 +31,15 @@ SITE = "https://wasatchpeds.net"
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(ROOT, ".sync-cache", "pages")
 CONTENT = os.path.join(ROOT, "src", "content")
+DOCUMENT = os.path.join(ROOT, "src", "document")
 DATA = os.path.join(ROOT, "src", "data")
 PUBLIC = os.path.join(ROOT, "public")
 
-# Pages rendered by React components rather than stored content HTML.
+# Pages rendered by a server template rather than from stored content HTML.
 COMPONENT_ROUTES = {"/providers/"}
+
+# Cached documents that are templates, not routes of their own.
+SPECIAL_SLUGS = {"search", "404"}
 
 # Filter dropdown values, taken from the live /providers/ markup.
 LOCATION_OPTIONS = [
@@ -174,9 +180,54 @@ def to_relative(source: str) -> str:
     return source.replace(f"{SITE}/", "/").replace(SITE, "/")
 
 
+ANALYTICS = re.compile(
+    r"<script[^>]*(?:googletagmanager|gtag/js|google-analytics)[^>]*>.*?</script>"
+    r"|<script[^>]*>[^<]*(?:gtag\(|dataLayer)[^<]*</script>"
+    r"|<noscript><iframe[^>]*googletagmanager.*?</noscript>",
+    re.S,
+)
+
+
+def local_assets(source: str) -> str:
+    """Point asset URLs at this server; leave canonical/og URLs untouched."""
+    for prefix in ("/wp-content", "/wp-includes"):
+        source = source.replace(SITE + prefix, prefix)
+    return source
+
+
+def page_head(source: str) -> str:
+    """The page's <head>, verbatim, minus analytics."""
+    head = source.split("<head>", 1)[1].split("</head>", 1)[0]
+    return local_assets(ANALYTICS.sub("", head)).strip()
+
+
+def page_tail(source: str) -> str:
+    """Everything after </footer> and before </body> — the theme's scripts."""
+    if "</footer>" not in source:
+        return ""
+    tail = source.split("</footer>", 1)[1].split("</body>", 1)[0]
+    return local_assets(ANALYTICS.sub("", tail)).strip()
+
+
+def menu_state(source: str) -> tuple[dict[str, str], list[str]]:
+    """Per-page menu item classes and the items carrying aria-current.
+
+    A page can appear in the menu more than once (Dentistry & Orthodontics sits
+    under both Locations and Services), so every match is recorded.
+    """
+    classes = dict(re.findall(r'<li id="menu-item-(\d+)" class="([^"]*)"', source))
+    current = re.findall(r'<li id="menu-item-(\d+)"[^>]*>\s*<a[^>]*aria-current="page"', source)
+    return classes, current
+
+
 def page_body(source: str) -> str | None:
-    """The markup between </header> and <footer>, as the theme renders it."""
-    body = strip_noise(source)
+    """The markup between </header> and <footer>, as the theme renders it.
+
+    Inline scripts are kept — some pages (the comment form, for one) depend on
+    them — but analytics and HTML comments are dropped.
+    """
+    body = re.sub(r"<!--.*?-->", "", source, flags=re.S)
+    body = ANALYTICS.sub("", body)
     if "</header>" not in body:
         return None
     return to_relative(body.split("</header>", 1)[1].split("<footer", 1)[0]).strip()
@@ -215,12 +266,24 @@ def ts(value) -> str:
 # assets
 # --------------------------------------------------------------------------- #
 
-ASSET_PATTERN = re.compile(r"/wp-content/(?:uploads|themes/wasatch)/[^\"')?\s>]+")
+# Only paths that name a file — a bare directory reference is not an asset.
+ASSET_PATTERN = re.compile(
+    r"/wp-content/(?:uploads|themes/wasatch|plugins)/[^\"')?\s>*]+\.[a-zA-Z0-9]{2,4}"
+    r"|/wp-includes/js/[^\"')?\s>*]+\.[a-zA-Z0-9]{2,4}"
+)
+
+
+# Assets that scripts request at runtime, so they never appear in the HTML.
+EXTRA_ASSETS = [
+    "/wp-content/plugins/gravityformssurvey/images/star0.svg",
+    "/wp-content/plugins/gravityformssurvey/images/star1.svg",
+    "/wp-content/plugins/gravityforms/assets/js/dist/gform-input-mask.9b235301e863cef05486.min.js",
+]
 
 
 def sync_assets(sources: list[str]) -> None:
     """Download every referenced theme/upload asset, keeping its original path."""
-    paths: set[str] = set()
+    paths: set[str] = set(EXTRA_ASSETS)
     for source in sources:
         paths.update(ASSET_PATTERN.findall(source.replace(SITE, "")))
 
@@ -238,13 +301,14 @@ def sync_assets(sources: list[str]) -> None:
         target = PUBLIC + path
         if os.path.exists(target) and os.path.getsize(target) > 0:
             continue
-        os.makedirs(os.path.dirname(target), exist_ok=True)
         print("asset", path)
         try:
+            os.makedirs(os.path.dirname(target), exist_ok=True)
             with open(target, "wb") as handle:
                 handle.write(get(SITE + path))
-        except Exception as error:  # noqa: BLE001 - keep syncing the rest
-            os.path.exists(target) and os.remove(target)
+        except Exception as error:  # noqa: BLE001 - one bad asset must not stop the sync
+            if os.path.exists(target):
+                os.remove(target)
             print("  skipped:", error)
 
 
@@ -269,9 +333,14 @@ def sync_stylesheets() -> None:
 # --------------------------------------------------------------------------- #
 
 def write_content_pages() -> list[dict]:
-    os.makedirs(CONTENT, exist_ok=True)
-    for name in os.listdir(CONTENT):
-        os.remove(os.path.join(CONTENT, name))
+    for directory in (CONTENT, DOCUMENT):
+        os.makedirs(directory, exist_ok=True)
+        for name in os.listdir(directory):
+            os.remove(os.path.join(directory, name))
+
+    # The menu markup is shared; only the current-page classes vary, so the home
+    # page (which is not in the menu) provides the baseline to diff against.
+    base_menu, _ = menu_state(read_cached("home"))
 
     pages: list[dict] = []
     for name in sorted(os.listdir(CACHE)):
@@ -280,7 +349,7 @@ def write_content_pages() -> list[dict]:
         slug = name[:-5]
         route = route_for(slug)
         # Provider pages are rendered from src/data/providers.ts instead.
-        if route in COMPONENT_ROUTES or slug.startswith("providers"):
+        if route in COMPONENT_ROUTES or slug.startswith("providers") or slug in SPECIAL_SLUGS:
             continue
 
         source = read_cached(slug)
@@ -289,8 +358,12 @@ def write_content_pages() -> list[dict]:
             print("skip (no header):", slug)
             continue
 
-        with open(os.path.join(CONTENT, slug + ".html"), "w", encoding="utf-8") as handle:
-            handle.write(body)
+        write(os.path.join(CONTENT, slug + ".html"), body)
+        write(os.path.join(DOCUMENT, slug + ".head.html"), page_head(source))
+        write(os.path.join(DOCUMENT, slug + ".tail.html"), page_tail(source))
+
+        classes, current = menu_state(source)
+        overrides = {item: value for item, value in classes.items() if base_menu.get(item) != value}
 
         pages.append(
             {
@@ -299,6 +372,8 @@ def write_content_pages() -> list[dict]:
                 "title": meta(source, r"<title>(.*?)</title>"),
                 "description": meta(source, r'<meta name="description" content="(.*?)"'),
                 "bodyClass": meta(source, r'<body class="([^"]*)"'),
+                "menuClasses": overrides,
+                "menuCurrentIds": current,
             }
         )
 
@@ -319,6 +394,10 @@ def write_content_pages() -> list[dict]:
         "  description: string;",
         "  /** The class list WordPress puts on <body>; some theme CSS keys off it. */",
         "  bodyClass: string;",
+        "  /** Menu item classes that differ from the default for this route. */",
+        "  menuClasses: Record<string, string>;",
+        "  /** Menu items that carry aria-current=\"page\". */",
+        "  menuCurrentIds: string[];",
         "};",
         "",
         "export const contentPages: ContentPage[] = [",
@@ -327,6 +406,8 @@ def write_content_pages() -> list[dict]:
         lines.append("  {")
         for key in ("route", "slug", "title", "description", "bodyClass"):
             lines.append(f"    {key}: {ts(page[key])},")
+        lines.append(f"    menuClasses: {ts(page['menuClasses'])},")
+        lines.append(f"    menuCurrentIds: {ts(page['menuCurrentIds'])},")
         lines.append("  },")
     lines += [
         "];",
@@ -391,7 +472,15 @@ def gray_boxes(chunk: str) -> list[dict]:
 
 def write_providers(fetch: bool) -> None:
     locations, categories, gender = filter_membership(fetch)
-    index = to_relative(strip_noise(read_cached("providers")))
+    base_menu, _ = menu_state(read_cached("home"))
+
+    # The archive and every profile keep their own <head> and trailing scripts.
+    archive_source = read_cached("providers")
+    write(os.path.join(DOCUMENT, "providers.head.html"), page_head(archive_source))
+    write(os.path.join(DOCUMENT, "providers.tail.html"), page_tail(archive_source))
+    archive_classes, archive_current = menu_state(archive_source)
+
+    index = to_relative(strip_noise(archive_source))
     listing = index.split('id="response"', 1)[1]
 
     providers = []
@@ -405,6 +494,10 @@ def write_providers(fetch: bool) -> None:
         card_locations = [tidy(p) for p in re.findall(r'<p class="centerme">(.*?)</p>', block, flags=re.S) if text_of(p)]
 
         source = read_cached("providers__" + slug)
+        write(os.path.join(DOCUMENT, f"providers__{slug}.head.html"), page_head(source))
+        write(os.path.join(DOCUMENT, f"providers__{slug}.tail.html"), page_tail(source))
+        classes, current = menu_state(source)
+
         body = to_relative(strip_noise(source)).split("</header>", 1)[1].split("<footer", 1)[0]
         left, _, right = body.partition('<div class="col-lg-7')
 
@@ -442,6 +535,8 @@ def write_providers(fetch: bool) -> None:
             {
                 "slug": slug,
                 "bodyClass": meta(source, r'<body class="([^"]*)"'),
+                "menuClasses": {i: v for i, v in classes.items() if base_menu.get(i) != v},
+                "menuCurrentIds": current,
                 "name": full_name,
                 "displayName": display.strip(),
                 "credentials": credentials.strip(),
@@ -490,6 +585,10 @@ def write_providers(fetch: bool) -> None:
         "  slug: string;",
         "  /** The class list WordPress puts on <body> for this profile. */",
         "  bodyClass: string;",
+        "  /** Menu item classes that differ from the default for this route. */",
+        "  menuClasses: Record<string, string>;",
+        '  /** Menu items that carry aria-current="page". */',
+        "  menuCurrentIds: string[];",
         "  name: string;",
         "  displayName: string;",
         "  credentials: string;",
@@ -523,6 +622,10 @@ def write_providers(fetch: bool) -> None:
         "",
         'export const providersArchiveBodyClass = "archive post-type-archive post-type-archive-providers wp-theme-wasatch";',
         "",
+        f"export const providersArchiveMenuClasses: Record<string, string> = {ts({i: v for i, v in archive_classes.items() if base_menu.get(i) != v})};",
+        "",
+        f"export const providersArchiveMenuCurrentIds: string[] = {ts(archive_current)};",
+        "",
         "export const providers: Provider[] = [",
     ]
     scalar_keys = (
@@ -533,6 +636,8 @@ def write_providers(fetch: bool) -> None:
         lines.append("  {")
         for key in scalar_keys:
             lines.append(f"    {key}: {ts(provider[key])},")
+        lines.append(f"    menuClasses: {ts(provider['menuClasses'])},")
+        lines.append(f"    menuCurrentIds: {ts(provider['menuCurrentIds'])},")
         for key in ("locationIds", "categoryIds", "cardLocations"):
             lines.append(f"    {key}: {ts(provider[key])},")
         lines.append("    officeLocations: [")
@@ -580,7 +685,11 @@ def write_search_index(pages: list[dict]) -> None:
             if found:
                 parts = text_of(found.group(1)).split("/")
                 category = parts[-1].strip() if len(parts) > 1 else ""
+        # WordPress searches the raw post_content, so link targets count as
+        # matches too (a post about RSV turns up for "vaccine" through a
+        # cdc.gov/vaccines link). Index the visible text plus those URLs.
         text = text_of(body)
+        links = " ".join(re.findall(r'(?:href|src)="([^"]+)"', body))
         entries.append(
             {
                 "route": route,
@@ -590,7 +699,8 @@ def write_search_index(pages: list[dict]) -> None:
                 "date": meta(source, r'<meta property="article:published_time" content="([^"]*)"')[:10],
                 "category": category,
                 "excerpt": (text[:260] + "…") if len(text) > 260 else text,
-                "text": text[:4000].lower(),
+                "text": text.lower(),
+                "links": links.lower(),
             }
         )
 
@@ -610,18 +720,44 @@ def write_search_index(pages: list[dict]) -> None:
         "  category: string;",
         "  excerpt: string;",
         "  text: string;",
+        "  /** Link targets in the body; WordPress matches these too. */",
+        "  links: string;",
         "};",
         "",
         "export const searchIndex: SearchEntry[] = [",
     ]
     for entry in entries:
         lines.append("  {")
-        for key in ("route", "title", "type", "image", "date", "category", "excerpt", "text"):
+        for key in ("route", "title", "type", "image", "date", "category", "excerpt", "text", "links"):
             lines.append(f"    {key}: {ts(entry[key])},")
         lines.append("  },")
     lines += ["];", ""]
     write(os.path.join(DATA, "searchIndex.ts"), "\n".join(lines))
     print(f"search entries: {len(entries)}")
+
+
+def write_special_documents(fetch: bool) -> None:
+    """The search results and 404 templates, which have no sitemap entry."""
+    for slug, url in (("search", f"{SITE}/?s=vaccine"), ("404", f"{SITE}/no-such-page-xyz/")):
+        target = os.path.join(CACHE, slug + ".html")
+        if fetch or not os.path.exists(target):
+            print("fetch", url)
+            try:
+                body = get(url)
+            except urllib.error.HTTPError as error:  # the 404 template answers with 404
+                body = error.read()
+            with open(target, "wb") as handle:
+                handle.write(body)
+
+        source = read_cached(slug)
+        if slug == "404":
+            body = page_body(source)
+            if body:
+                write(os.path.join(CONTENT, "404.html"), body)
+        write(os.path.join(DOCUMENT, f"{slug}.head.html"), page_head(source))
+        write(os.path.join(DOCUMENT, f"{slug}.tail.html"), page_tail(source))
+        write(os.path.join(DOCUMENT, f"{slug}.bodyclass.txt"), meta(source, r'<body class="([^"]*)"'))
+    print("special documents: search, 404")
 
 
 def write(path: str, body: str) -> None:
@@ -642,6 +778,7 @@ def main() -> None:
         fetch_pages()
 
     pages = write_content_pages()
+    write_special_documents(fetch=not args.no_fetch)
     write_providers(fetch=not args.no_fetch)
     write_search_index(pages)
 
