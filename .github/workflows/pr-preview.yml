@@ -42,6 +42,9 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         if: github.event.action != 'closed'
+        with:
+          # The repo has no packageManager field, so pin it here.
+          version: 10
 
       - uses: actions/setup-node@v4
         if: github.event.action != 'closed'
