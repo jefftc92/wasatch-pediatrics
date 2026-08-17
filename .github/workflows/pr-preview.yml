@@ -1,0 +1,144 @@
+name: PR preview
+
+# Publishes a browsable copy of the website for each pull request to GitHub
+# Pages, under /pr-<number>/, and comments the link on the PR. Closing the PR
+# removes its directory again.
+#
+# One-time setup: enable GitHub Pages for this repository with "Deploy from a
+# branch", branch `gh-pages`, folder `/`.
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+    paths:
+      - "artifacts/web/**"
+      - ".github/workflows/pr-preview.yml"
+
+concurrency:
+  group: pr-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  preview:
+    # Forks cannot push to gh-pages, so skip rather than fail.
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Work out where this preview lives
+        id: target
+        run: |
+          number="${{ github.event.pull_request.number }}"
+          repo="${GITHUB_REPOSITORY#*/}"
+          echo "dir=pr-${number}" >> "$GITHUB_OUTPUT"
+          echo "base=/${repo}/pr-${number}" >> "$GITHUB_OUTPUT"
+          echo "assets=/${repo}/shared" >> "$GITHUB_OUTPUT"
+          echo "url=https://${GITHUB_REPOSITORY%%/*}.github.io/${repo}/pr-${number}/" >> "$GITHUB_OUTPUT"
+
+      - uses: pnpm/action-setup@v4
+        if: github.event.action != 'closed'
+        with:
+          # The repo has no packageManager field, so pin it here.
+          version: 10
+
+      - uses: actions/setup-node@v4
+        if: github.event.action != 'closed'
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install
+        if: github.event.action != 'closed'
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        if: github.event.action != 'closed'
+        run: pnpm --filter @workspace/web run typecheck
+
+      - name: Prerender
+        if: github.event.action != 'closed'
+        run: |
+          # Pages for this PR, pointing at the media every preview shares.
+          pnpm --filter @workspace/web exec node tools/prerender.ts \
+            --out "$GITHUB_WORKSPACE/preview" \
+            --base "${{ steps.target.outputs.base }}" \
+            --asset-base "${{ steps.target.outputs.assets }}" \
+            --skip-assets
+          # The shared media itself (~112MB), published once for all previews.
+          pnpm --filter @workspace/web exec node tools/prerender.ts \
+            --out "$GITHUB_WORKSPACE/shared" \
+            --base "${{ steps.target.outputs.assets }}" \
+            --assets-only
+
+      - name: Publish to gh-pages
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          # Check out (or create) the pages branch in a worktree.
+          git fetch origin gh-pages --depth=1 || true
+          if git show-ref --quiet refs/remotes/origin/gh-pages; then
+            git worktree add --checkout pages origin/gh-pages
+          else
+            git worktree add --detach pages
+            git -C pages checkout --orphan gh-pages
+            git -C pages reset --hard
+          fi
+
+          rm -rf "pages/${{ steps.target.outputs.dir }}"
+          if [ "${{ github.event.action }}" != "closed" ]; then
+            mv preview "pages/${{ steps.target.outputs.dir }}"
+            # Refresh the shared media. Identical files cost nothing extra in
+            # git, so this only grows the branch when the media actually change.
+            rm -rf pages/shared
+            mv shared pages/shared
+          fi
+          touch pages/.nojekyll
+
+          git -C pages add -A
+          if git -C pages diff --cached --quiet; then
+            echo "nothing to publish"
+          else
+            git -C pages commit -m "preview: PR #${{ github.event.pull_request.number }} (${{ github.event.action }})"
+            git -C pages push origin HEAD:gh-pages
+          fi
+
+      - name: Comment the preview link
+        if: github.event.action != 'closed'
+        uses: actions/github-script@v7
+        env:
+          PREVIEW_URL: ${{ steps.target.outputs.url }}
+        with:
+          script: |
+            const url = process.env.PREVIEW_URL;
+            const marker = '<!-- wasatch-preview -->';
+            const body = [
+              marker,
+              '### Website preview',
+              '',
+              `📄 **${url}**`,
+              '',
+              `Built from ${context.payload.pull_request.head.sha.slice(0, 7)}. Pages can take a minute to publish.`,
+              '',
+              'This is the static build: pages, styling and the theme\'s scripts are the real thing, ' +
+              'while the provider filter and site search run client-side because Pages cannot run the ' +
+              'server. Everything else is served by Node in production.',
+            ].join('\n');
+
+            const { data: comments } = await github.rest.issues.listComments({
+              ...context.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find((c) => c.body?.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({ ...context.repo, comment_id: existing.id, body });
+            } else {
+              await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
+            }
