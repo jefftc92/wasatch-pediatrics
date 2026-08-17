@@ -92,6 +92,30 @@ fetched and replayed to both, so typography is exercised rather than falling bac
   carry a domain allowlist. Add the production domain to that project before
   cutover or the body font can fall back to system sans.
 
+## PR previews
+
+Every pull request that touches this artifact gets a browsable copy published to
+GitHub Pages at `/pr-<number>/`, and the workflow comments the link on the PR
+(`.github/workflows/pr-preview.yml`). Closing the PR removes its directory.
+
+Pages cannot run a server, so the preview is a prerendered build:
+
+```
+pnpm --filter @workspace/web run prerender -- --out dist --base /repo/pr-1
+```
+
+`tools/prerender.ts` writes every route to a static file using the same
+templates the server uses, prefixes root-absolute URLs with `--base` (Pages
+serves previews from a subdirectory), and adds `tools/static-preview.js`, which
+reimplements the provider filter and the site search in the browser from JSON
+built at the same time. Media is published once at `/shared/` via
+`--asset-base` + `--skip-assets`, so each preview directory is ~6MB rather than
+~118MB.
+
+The preview is therefore deliberately _not_ byte-identical to the live site —
+the base rewriting alone changes every URL. The server remains the reference for
+the fidelity checks above.
+
 ## Re-syncing from the live site
 
 While WordPress is still the source of truth, pull its changes down with:
