@@ -61,16 +61,20 @@ function megaColumn(pillar: Pillar, menu: MenuState): string {
 
   return `<div class="mega-col" id="menu-item-${id}">
 						<a class="mega-pillar" href="${pillar.href}"${current}>${esc(pillar.name)}</a>
-						<p class="mega-blurb">${esc(pillar.blurb)}</p>
 						<ul class="mega-list">
 							${links}
 						</ul>
-						<a class="mega-more" href="${pillar.href}">All ${esc(pillar.name)}</a>
 					</div>`;
 }
 
 /**
- * The Services panel: one column per pillar, every service listed.
+ * The Services panel: one column per pillar, the services families come for
+ * most under each.
+ *
+ * Kept deliberately spare. A menu is read at a glance, so it carries names and
+ * nothing else — no descriptions, and one button rather than two competing for
+ * the eye. The pillar heading is itself the link to that pillar, so there is no
+ * separate "all of this" link beside it.
  *
  * It is still a `.sub-menu`, so the theme's own scripts open it — hover on
  * desktop, tap on mobile — with no change to script.js. The lists inside are
@@ -93,9 +97,9 @@ function megaPanel(item: NavItem, menu: MenuState): string {
 					${columns}
 		</div>
 		<div class="mega-foot">
-			<a class="btn blue mega-all" href="${ALL_SERVICES_HREF}">View All Services</a>
 			<a class="btn green" href="/contact-us/">Schedule An Appointment</a>
-			<a class="mega-foot-link" href="/providers/">Find a Provider</a>
+			<a class="mega-foot-link" href="${ALL_SERVICES_HREF}">View all services</a>
+			<a class="mega-foot-link" href="/providers/">Find a provider</a>
 			<a class="mega-foot-link" href="/symptom-checker/">Symptom Checker</a>
 		</div>
 	</div>
