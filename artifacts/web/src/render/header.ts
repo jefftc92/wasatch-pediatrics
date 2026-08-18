@@ -97,13 +97,13 @@ function megaPanel(item: NavItem, menu: MenuState): string {
 				<ul class="mega-list">
 					${pillarLinks}
 				</ul>
-				<a class="btn blue mega-cta" href="${ALL_SERVICES_HREF}">View All Services</a>
 			</div>
 			<div class="mega-col mega-popular">
 				<p class="mega-head">Popular services</p>
 				<ul class="mega-list mega-list-split">
 					${popular}
 				</ul>
+				<a class="btn blue mega-cta" href="${ALL_SERVICES_HREF}">View All Services</a>
 			</div>
 		</div>
 	</div>
