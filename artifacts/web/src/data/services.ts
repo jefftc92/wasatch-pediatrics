@@ -44,6 +44,29 @@ export type Pillar = {
   contentSlug?: string;
 };
 
+/** A page below a topic — the deepest level, and never shown in the menu. */
+export type TopicItem = {
+  slug: string;
+  name: string;
+  blurb: string;
+};
+
+/**
+ * A group of related pages under a service.
+ *
+ * This is where depth lives. The menu stops at the service, and a service with
+ * topics renders them as sections on its own page — so "knocked-out tooth" is
+ * reached from the Dental Emergencies page, not from a third level of dropdown.
+ */
+export type Topic = {
+  slug: string;
+  name: string;
+  blurb: string;
+  description: string;
+  intro: string;
+  items: TopicItem[];
+};
+
 export type Service = {
   slug: string;
   name: string;
@@ -63,13 +86,20 @@ export type Service = {
   intro?: string;
   /** Services one office delivers on behalf of the others. */
   deliveredFrom?: string;
+  /**
+   * Shown in the menu panel. The panel lists what families come for most, not
+   * everything — "All <pillar>" and the full index at /services/ carry the rest.
+   */
+  popular?: boolean;
+  /** Groups of pages below this service. See Topic. */
+  topics?: Topic[];
 };
 
 export const pillars: Pillar[] = [
   {
     slug: "medical-care",
     name: "Medical Care",
-    href: "/services/",
+    href: "/medical-care/",
     blurb: "Checkups, sick visits, immunizations and after-hours care.",
     description:
       "Pediatric medical care at Wasatch Pediatrics: Well Child Checkups, same-day sick visits, immunizations, after-hours care, newborn hospital care and in-office procedures.",
@@ -119,6 +149,7 @@ export const services: Service[] = [
   // ------------------------------------------------------------ medical care
   {
     slug: "well-child",
+    popular: true,
     name: "Well Child Checkups",
     pillar: "medical-care",
     blurb: "Routine visits that track growth, development and whole health.",
@@ -139,6 +170,7 @@ export const services: Service[] = [
   },
   {
     slug: "sick-visits",
+    popular: true,
     name: "Same-Day Sick Visits",
     pillar: "medical-care",
     blurb: "Same-day appointments for illness and injury.",
@@ -159,6 +191,7 @@ export const services: Service[] = [
   },
   {
     slug: "after-hours-care",
+    popular: true,
     name: "After Hours Care",
     pillar: "medical-care",
     blurb: "Evenings, weekends and holidays, by appointment.",
@@ -178,6 +211,7 @@ export const services: Service[] = [
   },
   {
     slug: "immunizations",
+    popular: true,
     name: "Immunizations",
     pillar: "medical-care",
     blurb: "The AAP-recommended schedule, explained.",
@@ -197,6 +231,7 @@ export const services: Service[] = [
   },
   {
     slug: "newborn-hospital-care",
+    popular: true,
     name: "Newborn Hospital Care",
     pillar: "medical-care",
     blurb: "Your pediatrician sees your baby at the hospital.",
@@ -278,6 +313,7 @@ export const services: Service[] = [
   // ------------------------------------------------------- behavioral health
   {
     slug: "behavioral-consultation",
+    popular: true,
     name: "Consultation & Screening",
     pillar: "behavioral-health",
     blurb: "Assessment, treatment planning and referrals.",
@@ -298,6 +334,7 @@ export const services: Service[] = [
   },
   {
     slug: "therapy",
+    popular: true,
     name: "Therapy",
     pillar: "behavioral-health",
     blurb: "Brief therapy for anxiety, depression, ADHD, sleep and more.",
@@ -318,6 +355,7 @@ export const services: Service[] = [
   },
   {
     slug: "psychiatry",
+    popular: true,
     name: "Medication Management",
     pillar: "behavioral-health",
     blurb: "Psychiatric assessment and medication management.",
@@ -338,6 +376,7 @@ export const services: Service[] = [
   },
   {
     slug: "autism-testing",
+    popular: true,
     name: "Psychological & Autism Testing",
     pillar: "behavioral-health",
     blurb: "Formal evaluation and diagnosis, at our Summit office.",
@@ -352,6 +391,7 @@ export const services: Service[] = [
   // -------------------------------------------------------------- nutrition
   {
     slug: "dietitian",
+    popular: true,
     name: "Dietitian Consultation",
     pillar: "nutrition",
     blurb: "Registered dietitian support for feeding, growth and sports.",
@@ -373,6 +413,7 @@ export const services: Service[] = [
   },
   {
     slug: "lactation-consultation",
+    popular: true,
     name: "Lactation Consultation",
     pillar: "nutrition",
     blurb: "Feeding support for newborns and their parents.",
@@ -391,6 +432,7 @@ export const services: Service[] = [
   },
   {
     slug: "community-classes",
+    popular: true,
     name: "Community Classes",
     pillar: "nutrition",
     blurb: "Education classes for parents, run at our offices.",
@@ -410,6 +452,7 @@ export const services: Service[] = [
   // -------------------------------------------------------------- dentistry
   {
     slug: "pediatric-dentistry",
+    popular: true,
     name: "Pediatric Dentistry",
     pillar: "dentistry",
     blurb: "First visits, cleanings, fillings and sedation options.",
@@ -422,6 +465,7 @@ export const services: Service[] = [
   },
   {
     slug: "orthodontics",
+    popular: true,
     name: "Orthodontics",
     pillar: "dentistry",
     blurb: "Braces and clear aligners for children and teens.",
@@ -434,6 +478,7 @@ export const services: Service[] = [
   },
   {
     slug: "dental-emergencies",
+    popular: true,
     name: "Dental Emergencies",
     pillar: "dentistry",
     blurb: "Same-day help for knocked-out teeth, pain and swelling.",
@@ -443,6 +488,153 @@ export const services: Service[] = [
     providerCategory: "41",
     intro:
       "Same-day appointments for toothaches, injuries and dental emergencies such as knocked-out or chipped teeth, swelling, and orthodontic problems like broken brackets and poking wires. After-hours phone support is available.",
+    topics: [
+      {
+        slug: "same-day-appointments",
+        name: "Same-Day Appointments",
+        blurb: "Urgent dental care on the day you call.",
+        description:
+          "Same-day dental emergency appointments at Wasatch Pediatrics, with after-hours phone support when the office is closed.",
+        intro:
+          "Call us first. Most dental emergencies are seen the same day, and knowing what to do in the first hour often decides whether a tooth can be saved.",
+        items: [],
+      },
+      {
+        slug: "dental-trauma",
+        name: "Dental Trauma",
+        blurb: "Knocked-out, chipped or broken teeth.",
+        description:
+          "What to do when a child knocks out, chips or breaks a tooth, and how quickly they need to be seen.",
+        intro:
+          "Injuries to the mouth are frightening and time-sensitive. A knocked-out permanent tooth has the best chance of survival within the first 30 to 60 minutes, so call as you set off.",
+        items: [
+          {
+            slug: "knocked-out-tooth",
+            name: "Knocked-Out Tooth",
+            blurb: "The first hour matters most — what to do on the way.",
+          },
+          {
+            slug: "chipped-broken-tooth",
+            name: "Chipped or Broken Tooth",
+            blurb: "When a chip can wait, and when it cannot.",
+          },
+          {
+            slug: "injuries-prevention",
+            name: "Dental Injuries & Prevention",
+            blurb: "Mouthguards and the injuries we see most.",
+          },
+        ],
+      },
+      {
+        slug: "toothache",
+        name: "Toothache & Pain",
+        blurb: "Relief for aches, sensitivity and cavity pain.",
+        description:
+          "Help for children with tooth pain and sensitivity at Wasatch Pediatrics, and how to tell urgent pain from the rest.",
+        intro:
+          "Tooth pain in a child is worth taking seriously, because they rarely complain until it is well established. These pages cover what each kind of pain usually means.",
+        items: [
+          {
+            slug: "severe-tooth-pain",
+            name: "Severe Tooth Pain",
+            blurb: "Pain that wakes a child needs same-day care.",
+          },
+          {
+            slug: "sensitivity",
+            name: "Tooth Sensitivity",
+            blurb: "Cold, sweet and pressure sensitivity explained.",
+          },
+          {
+            slug: "cavity-pain",
+            name: "Cavity Pain",
+            blurb: "What decay feels like before it becomes urgent.",
+          },
+        ],
+      },
+      {
+        slug: "dental-infection",
+        name: "Dental Infection",
+        blurb: "Abscesses and facial swelling.",
+        description:
+          "Dental abscesses and facial swelling in children — the signs that mean call now, and how infections are treated.",
+        intro:
+          "Infection is the one dental problem that can become a medical emergency. Facial swelling, fever, or swelling that closes an eye or reaches the neck means call immediately.",
+        items: [
+          {
+            slug: "abscess",
+            name: "Tooth Abscess",
+            blurb: "A pimple on the gum is rarely nothing.",
+          },
+          {
+            slug: "facial-swelling",
+            name: "Facial Swelling",
+            blurb: "When swelling means the emergency room, not the office.",
+          },
+        ],
+      },
+      {
+        slug: "orthodontic",
+        name: "Orthodontic Emergencies",
+        blurb: "Broken brackets and poking wires.",
+        description:
+          "Broken brackets, poking wires and other orthodontic problems — what you can fix at home and what needs an appointment.",
+        intro:
+          "Most orthodontic emergencies are uncomfortable rather than dangerous, and many can wait until the next working day. Here is how to tell, and how to get through the night.",
+        items: [
+          {
+            slug: "broken-bracket",
+            name: "Broken Bracket",
+            blurb: "Usually not urgent — here is what to do meanwhile.",
+          },
+          {
+            slug: "poking-wire",
+            name: "Poking Wire",
+            blurb: "Relief at home, and when to come in.",
+          },
+        ],
+      },
+      {
+        slug: "treatments",
+        name: "Emergency Treatments",
+        blurb: "The same-day care we provide.",
+        description:
+          "Treatments Wasatch Pediatrics provides for dental emergencies, from fillings and crowns to extractions, pulp therapy and antibiotics.",
+        intro:
+          "What actually happens at an emergency visit depends on what we find. These are the treatments we most often provide on the day.",
+        items: [
+          {
+            slug: "fillings",
+            name: "Emergency Fillings",
+            blurb: "Restoring a tooth in one visit.",
+          },
+          {
+            slug: "crowns",
+            name: "Emergency Crowns",
+            blurb: "For teeth too damaged to fill.",
+          },
+          {
+            slug: "extractions",
+            name: "Emergency Extractions",
+            blurb: "When a tooth cannot be saved.",
+          },
+          {
+            slug: "pulp-therapy",
+            name: "Emergency Pulp Therapy",
+            blurb: "Treating the nerve to save the tooth.",
+          },
+          {
+            slug: "after-hours",
+            name: "After-Hours Care",
+            blurb: "Phone support when the office is closed.",
+          },
+          {
+            slug: "antibiotics",
+            name: "Dental Antibiotics",
+            blurb: "When they help, and when they do not.",
+          },
+        ],
+      },
+    ],
   },
 ];
 
@@ -489,3 +681,18 @@ export function serviceHref(service: Service): string {
   const pillar = pillarBySlug.get(service.pillar);
   return `${pillar?.href ?? "/services/"}${service.slug}/`;
 }
+
+export function topicHref(service: Service, topic: Topic): string {
+  return `${serviceHref(service)}${topic.slug}/`;
+}
+
+export function topicItemHref(
+  service: Service,
+  topic: Topic,
+  item: TopicItem,
+): string {
+  return `${topicHref(service, topic)}${item.slug}/`;
+}
+
+/** The index of everything, which the menu links to as "View All Services". */
+export const ALL_SERVICES_HREF = "/services/";

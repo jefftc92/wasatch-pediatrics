@@ -9,9 +9,15 @@
  * (`/behavioral-health/` and `/dentistry-orthodontics/`). Those keep their own
  * markup and get the generated index appended, so no copy is lost; the other
  * two are generated in full.
+ *
+ * Depth below a service lives on the page rather than in the menu: a service
+ * with `topics` renders them as sections, each topic gets a page listing what
+ * is under it, and a section nav under the header carries sideways movement at
+ * whatever level you are on. The dropdown never goes past the service.
  */
 
 import {
+  ALL_SERVICES_HREF,
   locationHref,
   locationIds,
   locationNames,
@@ -20,8 +26,12 @@ import {
   services,
   serviceHref,
   servicesInPillar,
+  topicHref,
+  topicItemHref,
   type Pillar,
   type Service,
+  type Topic,
+  type TopicItem,
 } from "../data/services.ts";
 import { providers } from "../data/providers.ts";
 import { PILLAR_MENU_IDS } from "./header.ts";
@@ -97,7 +107,7 @@ ${cards}
 }
 
 /** Links across to the other three pillars, on every hub and service page. */
-function otherPillars(current: string): string {
+function otherPillars(current: string, bg = "graybg"): string {
   const links = pillars
     .filter((pillar) => pillar.slug !== current)
     .map(
@@ -106,7 +116,7 @@ function otherPillars(current: string): string {
     )
     .join("");
 
-  return `<div class="graybg padme50 svc-other">
+  return `<div class="${bg} padme50 svc-other">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -143,7 +153,17 @@ export function renderPillarPage(
 	</div>
 </div>`;
 
-  return `${opening}
+  const nav = renderSectionNav(
+    { name: pillar.name, href: pillar.href },
+    servicesInPillar(pillar.slug).map((service) => ({
+      name: service.name,
+      href: serviceHref(service),
+    })),
+    pillar.href,
+  );
+
+  return `${nav}
+${opening}
 ${renderServiceIndex(pillar, storedContent ? `Explore ${pillar.name}` : "What we offer")}
 ${otherPillars(pillar.slug)}`;
 }
@@ -194,8 +214,11 @@ export function renderServicePage(service: Service): string {
 
   const team = providersForService(service);
   const shown = team.slice(0, 8);
-  const teamSection = shown.length
-    ? `<div class="graybg padme90 svc-team">
+  const topicSectionsFor = (bg: string) => topicSections(service, bg);
+  const otherPillarsSection = (bg: string) => otherPillars(pillar.slug, bg);
+  const teamSection = (bg: string) =>
+    shown.length
+      ? `<div class="${bg} padme90 svc-team">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -210,30 +233,31 @@ export function renderServicePage(service: Service): string {
 		</div>
 	</div>
 </div>`
-    : "";
+      : "";
 
-  const siblings = servicesInPillar(pillar.slug).filter(
-    (other) => other.slug !== service.slug,
+  // Sideways movement lives in the section nav now, so the old chip list of
+  // sibling services would just say the same thing twice.
+  const nav = renderSectionNav(
+    { name: pillar.name, href: pillar.href },
+    servicesInPillar(pillar.slug).map((other) => ({
+      name: other.name,
+      href: serviceHref(other),
+    })),
+    serviceHref(service),
   );
-  const siblingSection = siblings.length
-    ? `<div class="whitebg padme50 svc-siblings">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="svc-index-title">More in ${escapeAttribute(pillar.name)}</h2>
-				<ul class="svc-sibling-list">${siblings
-          .map(
-            (other) =>
-              `<li><a href="${serviceHref(other)}">${escapeAttribute(other.name)}</a></li>`,
-          )
-          .join("")}</ul>
-			</div>
-		</div>
-	</div>
-</div>`
-    : "";
 
-  return `${heroSection(escapeAttribute(service.name), crumbs)}
+  // The body is white, so the sections after it alternate grey and white
+  // rather than running together into one long grey block.
+  const sections = [topicSectionsFor, teamSection, otherPillarsSection]
+    .reduce<string[]>((out, build) => {
+      const markup = build(out.length % 2 === 0 ? "graybg" : "whitebg");
+      if (markup) out.push(markup);
+      return out;
+    }, [])
+    .join("\n");
+
+  return `${nav}
+${heroSection(escapeAttribute(service.name), crumbs)}
 <div class="whitebg padme90 svc-body">
 	<div class="container">
 		<div class="row">
@@ -248,9 +272,276 @@ export function renderServicePage(service: Service): string {
 		</div>
 	</div>
 </div>
-${teamSection}
-${siblingSection}
+${sections}`;
+}
+
+/* ----------------------------------------------------------- section nav -- */
+
+export type SectionLink = { name: string; href: string };
+
+/**
+ * The bar under the main nav, showing where you are and what sits beside it.
+ *
+ * This is what lets the dropdown stop at two levels: sideways movement at the
+ * current depth happens here instead. On a pillar hub it lists that pillar's
+ * services; on a service page, its sibling services; on a topic page, the
+ * sibling topics; on the deepest pages, the other pages in the same topic.
+ * On a phone it scrolls sideways rather than wrapping into a wall of links.
+ */
+export function renderSectionNav(
+  parent: SectionLink,
+  items: SectionLink[],
+  currentHref: string,
+): string {
+  if (!items.length) return "";
+
+  const links = items
+    .map((item) => {
+      const current =
+        item.href === currentHref
+          ? ' class="secnav-current" aria-current="page"'
+          : "";
+      return `<li><a href="${item.href}"${current}>${escapeAttribute(item.name)}</a></li>`;
+    })
+    .join("");
+
+  return `<nav class="secnav" aria-label="${escapeAttribute(parent.name)}">
+	<div class="container">
+		<div class="secnav-inner">
+			<a class="secnav-parent" href="${parent.href}">${escapeAttribute(parent.name)}</a>
+			<ul class="secnav-list">${links}</ul>
+		</div>
+	</div>
+</nav>`;
+}
+
+/* ---------------------------------------------------------------- topics -- */
+
+function topicCard(service: Service, topic: Topic): string {
+  const count = topic.items.length;
+  const meta = count
+    ? `<p class="svc-card-where">${count} page${count === 1 ? "" : "s"}</p>`
+    : "";
+
+  return `<div class="col-lg-4 col-md-6">
+	<div class="svc-card">
+		<h2 class="svc-card-title"><a href="${topicHref(service, topic)}">${escapeAttribute(topic.name)}</a></h2>
+		<p class="svc-card-blurb">${escapeAttribute(topic.blurb)}</p>
+		${meta}
+		<a class="btn blue" href="${topicHref(service, topic)}">Learn more</a>
+	</div>
+</div>`;
+}
+
+/** The topic sections on a service page — the level the menu deliberately omits. */
+function topicSections(service: Service, bg: string): string {
+  if (!service.topics?.length) return "";
+
+  return `<div class="${bg} padme90 svc-index">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="svc-index-title">Explore ${escapeAttribute(service.name)}</h2>
+			</div>
+		</div>
+		<div class="row">
+${service.topics.map((topic) => topicCard(service, topic)).join("\n")}
+		</div>
+	</div>
+</div>`;
+}
+
+/* ------------------------------------------------- topic and leaf pages -- */
+
+function scheduleAside(service: Service, pillar: Pillar): string {
+  return `<div class="svc-aside">
+	<h2 class="svc-aside-title">Need to be seen?</h2>
+	<p class="svc-aside-note">Call your office first — most ${escapeAttribute(service.name.toLowerCase())} are seen the same day.</p>
+	<a class="btn green" href="/contact-us/">Schedule an appointment</a>
+	<p class="svc-aside-note"><a href="${serviceHref(service)}">All ${escapeAttribute(service.name)}</a> &middot; <a href="${pillar.href}">${escapeAttribute(pillar.name)}</a></p>
+</div>`;
+}
+
+/** A topic page: the group of pages under a service. */
+export function renderTopicPage(service: Service, topic: Topic): string {
+  const pillar = pillarBySlug.get(service.pillar);
+  if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
+
+  const nav = renderSectionNav(
+    { name: service.name, href: serviceHref(service) },
+    (service.topics ?? []).map((other) => ({
+      name: other.name,
+      href: topicHref(service, other),
+    })),
+    topicHref(service, topic),
+  );
+
+  const crumbs: Crumb[] = [
+    { name: pillar.name, href: pillar.href },
+    { name: service.name, href: serviceHref(service) },
+    { name: topic.name },
+  ];
+
+  const items = topic.items.length
+    ? `<div class="graybg padme90 svc-index">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="svc-index-title">In this section</h2>
+			</div>
+		</div>
+		<div class="row">
+${topic.items
+  .map(
+    (item) => `<div class="col-lg-4 col-md-6">
+	<div class="svc-card">
+		<h2 class="svc-card-title"><a href="${topicItemHref(service, topic, item)}">${escapeAttribute(item.name)}</a></h2>
+		<p class="svc-card-blurb">${escapeAttribute(item.blurb)}</p>
+		<a class="btn blue" href="${topicItemHref(service, topic, item)}">Read more</a>
+	</div>
+</div>`,
+  )
+  .join("\n")}
+		</div>
+	</div>
+</div>`
+    : "";
+
+  return `${nav}
+${heroSection(escapeAttribute(topic.name), crumbs)}
+<div class="whitebg padme90 svc-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="pagebody" style="margin-top:0px">
+					<p>${escapeAttribute(topic.intro)}</p>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				${scheduleAside(service, pillar)}
+			</div>
+		</div>
+	</div>
+</div>
+${items}
+${otherPillars(pillar.slug, items ? "whitebg" : "graybg")}`;
+}
+
+/** The deepest page: one question, answered. */
+export function renderTopicItemPage(
+  service: Service,
+  topic: Topic,
+  item: TopicItem,
+): string {
+  const pillar = pillarBySlug.get(service.pillar);
+  if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
+
+  const nav = renderSectionNav(
+    { name: topic.name, href: topicHref(service, topic) },
+    topic.items.map((other) => ({
+      name: other.name,
+      href: topicItemHref(service, topic, other),
+    })),
+    topicItemHref(service, topic, item),
+  );
+
+  const crumbs: Crumb[] = [
+    { name: pillar.name, href: pillar.href },
+    { name: service.name, href: serviceHref(service) },
+    { name: topic.name, href: topicHref(service, topic) },
+    { name: item.name },
+  ];
+
+  return `${nav}
+${heroSection(escapeAttribute(item.name), crumbs)}
+<div class="whitebg padme90 svc-body">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-8">
+				<div class="pagebody" style="margin-top:0px">
+					<p class="svc-lead">${escapeAttribute(item.blurb)}</p>
+					<p class="svc-pending">This page is waiting on the practice's own words. The
+					copy for it already exists on the dentistry site and is queued for
+					migration — the page, its place in the menu and its links are in
+					place so the copy can drop straight in.</p>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				${scheduleAside(service, pillar)}
+			</div>
+		</div>
+	</div>
+</div>
 ${otherPillars(pillar.slug)}`;
+}
+
+/* --------------------------------------------------- all services index -- */
+
+/**
+ * Every service on one page, filtered by pillar.
+ *
+ * The whole list is in the markup and the filter only hides rows, so a crawler
+ * (and anyone without JavaScript) still sees all of it.
+ */
+export function renderAllServices(): string {
+  const chips = [
+    `<button type="button" class="svc-chip is-on" data-pillar="">Everything</button>`,
+    ...pillars.map(
+      (pillar) =>
+        `<button type="button" class="svc-chip" data-pillar="${pillar.slug}">${escapeAttribute(pillar.name)}</button>`,
+    ),
+  ].join("");
+
+  const cards = services
+    .map((service) => {
+      const pillar = pillarBySlug.get(service.pillar);
+      const offices =
+        service.locations.length === 8
+          ? "All eight offices"
+          : `${service.locations.length} office${service.locations.length === 1 ? "" : "s"}`;
+
+      return `<div class="col-lg-4 col-md-6 svc-hit" data-pillar="${service.pillar}">
+	<div class="svc-card">
+		<p class="svc-card-pillar"><a href="${pillar?.href ?? "/services/"}">${escapeAttribute(pillar?.name ?? "")}</a></p>
+		<h2 class="svc-card-title"><a href="${serviceHref(service)}">${escapeAttribute(service.name)}</a></h2>
+		<p class="svc-card-blurb">${escapeAttribute(service.blurb)}</p>
+		<p class="svc-card-where">${offices}</p>
+		<a class="btn blue" href="${serviceHref(service)}">Learn more</a>
+	</div>
+</div>`;
+    })
+    .join("\n");
+
+  return `${heroSection("Services", [{ name: "Services" }])}
+<div class="whitebg svc-intro">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-9">
+				<div class="pagebody">
+					<p>Everything we offer, in one place. Filter by the kind of care you are
+					looking for, or browse the lot.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="whitebg padme90 svc-index">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="svc-chips">${chips}</div>
+			</div>
+		</div>
+		<div class="row" id="svc-results">
+${cards}
+		</div>
+		<div class="row">
+			<div class="col-12">
+				<p class="svc-empty" hidden>Nothing matches that filter.</p>
+			</div>
+		</div>
+	</div>
+</div>`;
 }
 
 /* --------------------------------------------------------------- routing -- */
@@ -315,10 +606,88 @@ export function serviceDocument(
 }
 
 /** Every route this module owns: the generated hubs, and all service pages. */
+export function topicDocument(
+  service: Service,
+  topic: Topic,
+): GeneratedPage & { route: string } {
+  const pillar = pillarBySlug.get(service.pillar);
+  if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
+
+  return {
+    route: topicHref(service, topic),
+    title: `${topic.name} - Wasatch Pediatrics`,
+    description: topic.description,
+    bodyClass: BODY_CLASS,
+    menu: menuState(service.pillar),
+    breadcrumbs: [
+      { name: pillar.name, href: pillar.href },
+      { name: service.name, href: serviceHref(service) },
+      { name: topic.name },
+    ],
+    content: renderTopicPage(service, topic),
+  };
+}
+
+export function topicItemDocument(
+  service: Service,
+  topic: Topic,
+  item: TopicItem,
+): GeneratedPage & { route: string } {
+  const pillar = pillarBySlug.get(service.pillar);
+  if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
+
+  return {
+    route: topicItemHref(service, topic, item),
+    title: `${item.name} - Wasatch Pediatrics`,
+    description: item.blurb,
+    bodyClass: BODY_CLASS,
+    menu: menuState(service.pillar),
+    breadcrumbs: [
+      { name: pillar.name, href: pillar.href },
+      { name: service.name, href: serviceHref(service) },
+      { name: topic.name, href: topicHref(service, topic) },
+      { name: item.name },
+    ],
+    content: renderTopicItemPage(service, topic, item),
+  };
+}
+
+export function allServicesDocument(): GeneratedPage & { route: string } {
+  return {
+    route: ALL_SERVICES_HREF,
+    title: "Services - Wasatch Pediatrics",
+    description:
+      "Every service Wasatch Pediatrics offers, from Well Child Checkups and behavioral health to nutrition, dentistry and orthodontics — filterable by the kind of care you need.",
+    bodyClass: BODY_CLASS,
+    menu: {
+      classes: {
+        "111":
+          "menu-item menu-item-type-custom menu-item-object-custom current-menu-ancestor current-menu-parent menu-item-has-children menu-item-111",
+      },
+      currentIds: [],
+    },
+    breadcrumbs: [{ name: "Services" }],
+    content: renderAllServices(),
+  };
+}
+
+/** Every route this module owns, from the index down to the deepest page. */
 export function serviceRoutes(): Array<GeneratedPage & { route: string }> {
+  const deep: Array<GeneratedPage & { route: string }> = [];
+  for (const service of services) {
+    for (const topic of service.topics ?? []) {
+      deep.push(topicDocument(service, topic));
+      for (const item of topic.items) {
+        deep.push(topicItemDocument(service, topic, item));
+      }
+    }
+  }
+
   return [
+    allServicesDocument(),
     ...generatedPillars.map(pillarDocument),
     ...services.map(serviceDocument),
+    ...deep,
   ];
 }
 
