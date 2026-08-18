@@ -1,0 +1,434 @@
+/*
+ * Styles for the parts of the site this project adds, on top of the theme's
+ * own stylesheet. Kept out of public/wp-content/ so the vendored theme stays a
+ * byte-for-byte copy of the live one, and so tools/sync-from-live.py can never
+ * overwrite it.
+ *
+ * Colours are the theme's: #2B93D1 blue, #F58220 orange, #8DC63F green,
+ * #636466 body text, #F4F4F4 panel grey.
+ */
+
+/* ------------------------------------------------------------- mega menu -- */
+
+/*
+ * The Services panel. The theme shows a sub-menu by adding .active to the
+ * hovered <li> (desktop) or by sliding it open on tap (mobile), and both work
+ * unchanged here: the panel is still a .sub-menu, so no theme JS had to change.
+ * The lists inside it are .mega-list rather than .sub-menu precisely so the
+ * theme's mobile handler does not try to toggle them as a second level.
+ */
+
+.megamenu > li {
+  margin: 0 !important;
+}
+
+.mega-grid {
+  display: block;
+}
+
+.mega-col .mega-pillar {
+  font-size: 19px !important;
+  font-weight: 700 !important;
+  color: #2b93d1 !important;
+  letter-spacing: 0 !important;
+  line-height: 24px !important;
+}
+
+.mega-col .mega-pillar:hover {
+  color: #f58220 !important;
+}
+
+.mega-blurb {
+  font-size: 14px !important;
+  line-height: 19px !important;
+  color: #636466;
+  margin: 0 0 12px 0;
+}
+
+.mega-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mega-list li {
+  margin: 0 0 9px 0;
+}
+
+.mega-list a {
+  font-size: 15px !important;
+  line-height: 20px !important;
+  padding: 0 !important;
+}
+
+.mega-list a:hover {
+  color: #f58220 !important;
+}
+
+.mega-all a {
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  color: #2b93d1 !important;
+  padding: 0 !important;
+}
+
+@media (min-width: 768px) {
+  /* Static, so the panel positions against #graynav and can span the page. */
+  .mainnav > li.mega {
+    position: static;
+  }
+
+  .mainnav > li.mega > .sub-menu.megamenu {
+    left: 0;
+    right: 0;
+    width: auto;
+    min-width: 0;
+    padding: 32px 0 36px 0;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0 8px 16px rgba(33, 33, 33, 0.15);
+  }
+
+  .megamenu > li {
+    position: static;
+  }
+
+  .mega-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0 34px;
+  }
+
+  .mega-col + .mega-col {
+    border-left: 1px solid #e2e2e2;
+    padding-left: 34px;
+  }
+
+  .mega-col .mega-pillar {
+    padding: 0 0 6px 0 !important;
+  }
+
+  .mega-list {
+    border-top: 1px solid #e2e2e2;
+    padding-top: 12px;
+  }
+
+  .mega-all {
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 991px) and (min-width: 768px) {
+  .mega-grid {
+    gap: 0 20px;
+  }
+  .mega-col + .mega-col {
+    padding-left: 20px;
+  }
+  .mega-col .mega-pillar {
+    font-size: 17px !important;
+  }
+  .mega-list a {
+    font-size: 14px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  /* One stacked column, with the pillar name as the group heading. */
+  .megamenu .container {
+    width: 100%;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .mega-col {
+    margin: 0 0 22px 0;
+  }
+
+  .mega-col:last-child {
+    margin-bottom: 4px;
+  }
+
+  .mega-blurb {
+    display: none;
+  }
+
+  .mega-col .mega-pillar {
+    padding: 0 20px 8px 20px !important;
+  }
+
+  .mega-list {
+    padding-left: 20px !important;
+  }
+
+  .mega-list a {
+    padding: 4px 0 !important;
+    font-size: 16px !important;
+  }
+
+  .mega-all a {
+    padding: 0 20px !important;
+  }
+}
+
+/* ---------------------------------------------------------- breadcrumbs -- */
+
+.crumbs {
+  clear: both;
+  padding-top: 22px;
+}
+
+.crumbs ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.crumbs li {
+  display: inline;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.crumbs li + li:before {
+  content: "›";
+  padding: 0 8px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.crumbs a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.crumbs a:hover {
+  text-decoration: underline;
+}
+
+/* -------------------------------------------------- pillar and service -- */
+
+.svc-intro {
+  padding-bottom: 0;
+}
+
+.svc-intro .pagebody {
+  margin-top: 45px;
+}
+
+.svc-intro + .svc-index {
+  padding-top: 45px;
+}
+
+.svc-lead {
+  font-weight: 700 !important;
+  margin-bottom: 24px;
+}
+
+/* The theme sets a { font-weight: 700 } globally; these read better regular. */
+.svc-office-list a,
+.svc-sibling-list a,
+.mega-list a,
+.crumbs a {
+  font-weight: 400;
+}
+
+.svc-other-blurb {
+  font-weight: 400;
+}
+
+.svc-index-title {
+  margin-bottom: 30px;
+}
+
+.svc-card {
+  background: #f4f4f4;
+  border-radius: 25px;
+  padding: 32px 30px 30px 30px;
+  margin-bottom: 30px;
+  height: calc(100% - 30px);
+  display: flex;
+  flex-direction: column;
+}
+
+.svc-card-title {
+  font-size: 24px;
+  margin: 0 0 10px 0;
+}
+
+.svc-card-title a {
+  color: #2b93d1;
+  text-decoration: none;
+}
+
+.svc-card-title a:hover {
+  color: #f58220;
+}
+
+.svc-card-blurb {
+  font-size: 18px !important;
+  line-height: 26px !important;
+  margin-bottom: 10px;
+}
+
+.svc-card-where {
+  font-size: 15px !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #8a8a8c;
+  margin-bottom: 20px;
+}
+
+.svc-card .btn {
+  font-size: 17px;
+  padding: 6px 24px;
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.svc-aside {
+  background: #f4f4f4;
+  border-radius: 25px;
+  padding: 30px;
+}
+
+.svc-aside-title {
+  font-size: 22px;
+  margin: 0 0 16px 0;
+}
+
+.svc-office-list {
+  list-style: none;
+  margin: 0 0 16px 0;
+  padding: 0;
+}
+
+.svc-office-list li {
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.svc-office-list li:last-child {
+  border-bottom: 0;
+}
+
+.svc-office-list a {
+  display: block;
+  padding: 8px 0;
+  color: #636466;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.svc-office-list a:hover {
+  color: #f58220;
+}
+
+.svc-aside-note {
+  font-size: 15px !important;
+  line-height: 21px !important;
+  font-style: italic;
+  margin-bottom: 16px;
+}
+
+.svc-aside .btn {
+  font-size: 17px;
+  padding: 8px 22px;
+}
+
+.svc-team-more {
+  margin-top: 20px;
+}
+
+.svc-sibling-list,
+.svc-other-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.svc-sibling-list li {
+  display: inline-block;
+  margin: 0 10px 10px 0;
+}
+
+.svc-sibling-list a {
+  display: block;
+  background: #f4f4f4;
+  border-radius: 20px;
+  padding: 7px 20px;
+  color: #636466;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.svc-sibling-list a:hover {
+  background: #2b93d1;
+  color: #ffffff;
+}
+
+.svc-other-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.svc-other-list a {
+  display: block;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 22px 24px;
+  text-decoration: none;
+  height: 100%;
+}
+
+.svc-other-name {
+  display: block;
+  color: #2b93d1;
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.svc-other-list a:hover .svc-other-name {
+  color: #f58220;
+}
+
+.svc-other-blurb {
+  display: block;
+  color: #636466;
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 400;
+}
+
+@media (max-width: 991px) {
+  .svc-other-list {
+    grid-template-columns: 1fr;
+  }
+
+  .svc-aside {
+    margin-top: 40px;
+  }
+
+  .svc-card {
+    height: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .svc-card {
+    padding: 26px 24px;
+    border-radius: 20px;
+  }
+
+  .svc-card-title {
+    font-size: 21px;
+  }
+
+  .crumbs {
+    padding-top: 16px;
+  }
+
+  .crumbs li {
+    font-size: 14px;
+  }
+}
