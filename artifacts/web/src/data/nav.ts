@@ -13,6 +13,8 @@ export type NavItem = {
   classes: string;
   external?: boolean;
   children?: NavItem[];
+  /** Rendered as the services mega panel rather than a plain sub-menu. */
+  mega?: boolean;
 };
 
 const PAGE = "menu-item menu-item-type-post_type menu-item-object-page";
@@ -95,26 +97,11 @@ export const mainNav: NavItem[] = [
     label: "Services",
     href: "#",
     classes: `${PARENT} menu-item-111`,
-    children: [
-      {
-        id: "145",
-        label: "Medical Services",
-        href: "/services/",
-        classes: `${PAGE} menu-item-145`,
-      },
-      {
-        id: "375",
-        label: "Behavioral Health",
-        href: "/behavioral-health/",
-        classes: `${PAGE} menu-item-375`,
-      },
-      {
-        id: "1437",
-        label: "Dentistry &#038; Orthodontics",
-        href: "/dentistry-orthodontics/",
-        classes: `${PAGE} menu-item-1437`,
-      },
-    ],
+    // Rendered as the mega panel in render/header.ts, built from the service
+    // registry rather than listed here. The panel reuses the menu item ids
+    // WordPress gave the three links it replaces, so the per-route menu state
+    // stored in pages.ts still marks the current pillar.
+    mega: true,
   },
   {
     id: "1376",

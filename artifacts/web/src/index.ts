@@ -21,6 +21,12 @@ import {
   renderProvidersArchive,
 } from "./render/providers.ts";
 import { renderSearchResults, searchSite } from "./render/search.ts";
+import { renderGeneratedDocument } from "./render/generated.ts";
+import {
+  pillarByContentSlug,
+  renderPillarPage,
+  serviceRoutes,
+} from "./render/services.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(here, "..", "public");
@@ -57,6 +63,32 @@ app.post("/wp-admin/admin-ajax.php", (request, response) => {
     category: body.credentialsfilter,
   });
   response.type("html").send(renderProviderCards(matches));
+});
+
+/**
+ * The pillar hubs this project renders in full, and every service page. These
+ * come before the copied pages so /services/ resolves to the generated hub
+ * rather than the page it replaces; the copy that page carried now lives on the
+ * four medical service pages below it.
+ */
+const generated = new Map(
+  serviceRoutes().map((page) => [page.route, page] as const),
+);
+
+app.get("/{*path}", (request, response, next) => {
+  const route = withTrailingSlash(request.path);
+  const page = generated.get(route);
+  if (!page) {
+    next();
+    return;
+  }
+
+  if (route !== request.path) {
+    response.redirect(301, route);
+    return;
+  }
+
+  response.type("html").send(renderGeneratedDocument(page));
 });
 
 app.get("/providers{/}", (request, response) => {
@@ -138,12 +170,19 @@ app.get("/{*path}", (request, response, next) => {
     return;
   }
 
+  // Two pillars keep the landing page copied from the live site and get their
+  // index of services appended to it, so none of that copy is lost.
+  const pillar = pillarByContentSlug.get(page.slug);
+  const content = pillar
+    ? renderPillarPage(pillar, pageContent(page.slug))
+    : pageContent(page.slug);
+
   response.type("html").send(
     renderDocument({
       slug: page.slug,
       bodyClass: page.bodyClass,
       menu: { classes: page.menuClasses, currentIds: page.menuCurrentIds },
-      content: pageContent(page.slug),
+      content,
     }),
   );
 });
@@ -158,6 +197,7 @@ app.use((request, response, next) => {
   const candidate = `${request.path}/`;
   if (
     contentPageByRoute.has(candidate) ||
+    generated.has(candidate) ||
     /^\/providers\/[^/]+\/$/.test(candidate)
   ) {
     response.redirect(301, candidate);

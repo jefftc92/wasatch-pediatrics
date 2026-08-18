@@ -14,6 +14,11 @@ regenerates all of that from the live site.
 Downloaded HTML is cached under `.sync-cache/` so re-runs are cheap. Review the
 resulting diff before committing — content changes on the live site will show up
 as changes to `src/content/` and `src/data/`.
+
+This script empties `src/content/` and `src/document/` on every run, so nothing
+hand-written may live there. Copy this project authors goes in `src/authored/`,
+its stylesheet in `public/assets/`, and the service registry in
+`src/data/services.ts` — none of which this script touches.
 """
 
 from __future__ import annotations

@@ -47,6 +47,13 @@ export type DocumentOptions = {
 };
 
 /**
+ * This project's own stylesheet, added to every copied page's head. It sits
+ * outside public/wp-content/ so the vendored theme stays a byte-for-byte copy,
+ * and it loads after style.css so it can override the theme.
+ */
+const SITE_CSS = `<link rel='stylesheet' id='site-css' href='/assets/site.css' media='all' />`;
+
+/**
  * Assembles a full page the same way the WordPress theme does: the page's own
  * head, then the shared header, the page body, the shared footer, and the
  * theme's scripts.
@@ -61,6 +68,7 @@ export function renderDocument({
 <html lang="en-US">
 <head>
 ${documentHead(slug)}
+${SITE_CSS}
 </head>
 <body class="${bodyClass}">
 ${renderHeader(menu)}
