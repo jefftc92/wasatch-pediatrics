@@ -1,5 +1,6 @@
 import { mainNav, type NavItem } from "../data/nav.ts";
 import {
+  ALL_SERVICES_HREF,
   pillars,
   serviceHref,
   servicesInPillar,
@@ -47,20 +48,25 @@ export const PILLAR_MENU_IDS: Record<string, string> = {
 function megaColumn(pillar: Pillar, menu: MenuState): string {
   const id = PILLAR_MENU_IDS[pillar.slug] ?? pillar.slug;
   const current = menu.currentIds.includes(id) ? ' aria-current="page"' : "";
-  const links = servicesInPillar(pillar.slug)
+  const all = servicesInPillar(pillar.slug);
+  // The panel lists what families come for most; "All <pillar>" and the full
+  // index carry the rest, so the menu never becomes a directory.
+  const shown = all.filter((service) => service.popular);
+  const links = (shown.length ? shown : all)
     .map(
       (service) =>
         `<li><a href="${serviceHref(service)}">${esc(service.name)}</a></li>`,
     )
-    .join("\n\t\t\t\t\t\t\t\t");
+    .join("\n\t\t\t\t\t\t\t\t\t");
 
   return `<div class="mega-col" id="menu-item-${id}">
-							<a class="mega-pillar" href="${pillar.href}"${current}>${esc(pillar.name)}</a>
-							<p class="mega-blurb">${esc(pillar.blurb)}</p>
-							<ul class="mega-list">
-								${links}
-							</ul>
-						</div>`;
+						<a class="mega-pillar" href="${pillar.href}"${current}>${esc(pillar.name)}</a>
+						<p class="mega-blurb">${esc(pillar.blurb)}</p>
+						<ul class="mega-list">
+							${links}
+						</ul>
+						<a class="mega-more" href="${pillar.href}">All ${esc(pillar.name)}</a>
+					</div>`;
 }
 
 /**
@@ -77,14 +83,20 @@ function megaPanel(item: NavItem, menu: MenuState): string {
   const classes = menu.classes[item.id] ?? item.classes;
   const columns = pillars
     .map((pillar) => megaColumn(pillar, menu))
-    .join("\n\t\t\t\t\t\t");
+    .join("\n\t\t\t\t\t");
 
   return `<li id="menu-item-${item.id}" class="${classes} mega"><a href="${item.href}">${item.label}</a>
 <ul class="sub-menu megamenu">
 <li class="megamenu-inner">
 	<div class="container">
 		<div class="mega-grid">
-						${columns}
+					${columns}
+		</div>
+		<div class="mega-foot">
+			<a class="btn blue mega-all" href="${ALL_SERVICES_HREF}">View All Services</a>
+			<a class="btn green" href="/contact-us/">Schedule An Appointment</a>
+			<a class="mega-foot-link" href="/providers/">Find a Provider</a>
+			<a class="mega-foot-link" href="/symptom-checker/">Symptom Checker</a>
 		</div>
 	</div>
 </li>

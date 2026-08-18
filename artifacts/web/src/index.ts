@@ -27,6 +27,7 @@ import {
   renderPillarPage,
   serviceRoutes,
 } from "./render/services.ts";
+import { serviceBySlug } from "./data/services.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(here, "..", "public");
@@ -74,6 +75,20 @@ app.post("/wp-admin/admin-ajax.php", (request, response) => {
 const generated = new Map(
   serviceRoutes().map((page) => [page.route, page] as const),
 );
+
+/**
+ * Medical services briefly lived under /services/ before that path became the
+ * index of everything. The pages are a day old, but a 301 costs nothing and
+ * keeps any link already made working.
+ */
+app.get("/services/:slug{/}", (request, response, next) => {
+  const service = serviceBySlug.get(request.params.slug);
+  if (!service || service.pillar !== "medical-care") {
+    next();
+    return;
+  }
+  response.redirect(301, `/medical-care/${service.slug}/`);
+});
 
 app.get("/{*path}", (request, response, next) => {
   const route = withTrailingSlash(request.path);

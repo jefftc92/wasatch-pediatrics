@@ -79,44 +79,82 @@ Immunizations; two offices listed behavioral health with no behavioral health
 provider assigned).
 
 `src/data/services.ts` replaces that with one registry: four pillars, nineteen
-services, and for each service the offices that offer it and the provider
-category that staffs it. Everything downstream is generated from it, so adding a
-service adds its menu entry, its card on the pillar hub, its page, and its
-search entry at once.
+services, and — where a service has real depth below it — the topics and pages
+under that. Everything downstream is generated from it, so adding a service adds
+its menu entry, its card on the hub, its page and its search entry at once.
 
-| Pillar                   | Landing page               | Services                                                                                                                                                                                 |
-| ------------------------ | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Medical Care             | `/services/`               | Well Child Checkups, Same-Day Sick Visits, After Hours Care, Immunizations, Newborn Hospital Care, Lab Tests & Screenings, Ear Piercing, Medical Home Coordination, In-Office Procedures |
-| Behavioral Health        | `/behavioral-health/`      | Consultation & Screening, Therapy, Medication Management, Psychological & Autism Testing                                                                                                 |
-| Nutrition & Lactation    | `/nutrition/`              | Dietitian Consultation, Lactation Consultation, Community Classes                                                                                                                        |
-| Dentistry & Orthodontics | `/dentistry-orthodontics/` | Pediatric Dentistry, Orthodontics, Dental Emergencies                                                                                                                                    |
+| Pillar                   | Landing page               | In the menu                                                                                       |
+| ------------------------ | -------------------------- | ------------------------------------------------------------------------------------------------- |
+| Medical Care             | `/medical-care/`           | Well Child Checkups, Same-Day Sick Visits, After Hours Care, Immunizations, Newborn Hospital Care |
+| Behavioral Health        | `/behavioral-health/`      | Consultation & Screening, Therapy, Medication Management, Psychological & Autism Testing          |
+| Nutrition & Lactation    | `/nutrition/`              | Dietitian Consultation, Lactation Consultation, Community Classes                                 |
+| Dentistry & Orthodontics | `/dentistry-orthodontics/` | Pediatric Dentistry, Orthodontics, Dental Emergencies                                             |
 
 Each pillar is a real clinical grouping, so nothing sits under a heading it does
 not belong to — ear piercing is medical care performed in a medical office, not
-dentistry, even though both involve a chair and a bit of nerve.
+dentistry.
 
-**The menu.** Services is a four-column panel built from the registry
-(`src/render/header.ts`). It is still a `.sub-menu`, so the theme's own
-`script.js` opens it: hover on desktop, tap on mobile, no change to the vendored
-script. The lists inside are `.mega-list` rather than nested `.sub-menu`s for
-the same reason — the theme's mobile handler slides every descendant
-`.sub-menu`, and a second level would fight it. On a phone the panel collapses
-to one stacked column with each pillar name as a group heading, inside the
-burger menu the theme already had.
+### Depth without a deeper menu
 
-**The pages.** `/behavioral-health/` and `/dentistry-orthodontics/` keep the
-landing page copied from the live site and gain an index of their services
-below it, so none of that copy is lost. `/services/` and `/nutrition/` are
-rendered in full: `/services/` replaces the copied page whose three tab sections
-now live on the service pages under it, and `/nutrition/` is new. Every service
-page carries the practice's own words where they exist, the offices that offer
-it, the providers who staff it, and links across to the rest of the pillar.
+The dentistry site has around seventy pages three levels below its pillars —
+Dental Emergencies alone breaks into trauma, toothache, infection, orthodontic
+and treatments, each with its own pages. None of that can go in a dropdown.
 
-**Still to confirm with the practice.** The office-by-office `locations` lists
-are transcribed from the live location pages, drift included; the schedule
-button on every service page points at `/contact-us/` rather than the
-location-specific Phreesia link; and the services without copy on the live site
-carry standing text that should be replaced.
+The structure follows the pattern large health systems use (Intermountain's is
+the closest analogue):
+
+1. **The menu stops at the service.** Each column lists what families come for
+   most — `popular` in the registry — not everything.
+2. **Every column has an "All &lt;pillar&gt;" link**, and the panel has a
+   **View All Services** button to `/services/`: every service on one page with
+   a category filter. The full list is in the markup and the filter only hides
+   rows, so crawlers and anyone without JavaScript still get all of it.
+3. **A service with depth lists its topics on its own page**, as cards.
+4. **A section nav under the header** carries sideways movement at whatever
+   level you are on — the pillar's services on a service page, the service's
+   topics on a topic page, the topic's pages below that. This is what lets the
+   dropdown stay two levels deep.
+
+So Dental Emergencies reads:
+
+```
+/dentistry-orthodontics/                      pillar hub      (in the menu)
+  dental-emergencies/                         service         (in the menu)
+    dental-trauma/                            topic           (on the service page)
+      knocked-out-tooth/                      page            (on the topic page)
+```
+
+On a phone the mega panel is one stacked column with each pillar name as a group
+heading, inside the burger menu the theme already had — no nested accordions —
+and the section nav scrolls sideways, scrolling the current item into view.
+
+### Staying on brand
+
+The panel is built from the theme's own vocabulary rather than new styling: the
+grey `#F4F4F4` ground the nav already uses, white cards at `.dentistry-card`'s
+20px radius, blue headings at `.d-location-title`'s size, the orange hover the
+theme gives every sub-menu link, and a green `.btn` pill for the appointment
+CTA. No new colours or shapes were introduced, and `script.js` was not touched —
+the panel is still a `.sub-menu`, so the theme's own hover and mobile-tap
+handling opens it. Tabbing into it opens it too, via `:focus-within`.
+
+### Pages
+
+`/behavioral-health/` and `/dentistry-orthodontics/` keep the landing page copied
+from the live site and gain an index of their services below it, so none of that
+copy is lost. `/services/`, `/medical-care/` and `/nutrition/` are rendered in
+full. Every service page carries the practice's own words where they exist, the
+offices that offer it, the providers who staff it, and links across the pillar.
+
+### Still to confirm with the practice
+
+- The office-by-office `locations` lists are transcribed from the live location
+  pages, drift included.
+- The schedule button points at `/contact-us/` rather than the location-specific
+  Phreesia link.
+- The pages below Dental Emergencies are structural: the copy for them exists on
+  the dentistry site and still has to be migrated. They say so on the page.
+- Services without copy on the live site carry standing text.
 
 ## Verification
 
@@ -148,17 +186,23 @@ Every copied route was rendered before and after the change and diffed. Of the
 140 routes, **137 differ only by the added stylesheet link and the Services menu
 panel** — no page body moved. The three that differ further are the pillar
 landing pages, deliberately: `/behavioral-health/` and `/dentistry-orthodontics/`
-gain their service index, and `/services/` is replaced by the generated hub.
+gain their service index, and `/services/` is replaced by the index of
+everything.
 
 Because every page now carries `site.css` in its head, no route is
 byte-identical to the live document any more. Nothing else about the copy
 changed.
 
+The category filter was exercised in a browser: 19 services with no filter, 3
+under Dentistry & Orthodontics, 4 under Behavioral Health, back to 19 on
+"Everything".
+
 ## Known differences
 
 - **The services section is deliberately not a copy.** See
-  [Services](#services); `/services/` and `/nutrition/` and the nineteen service
-  pages under the four pillars do not exist on the live site in this form.
+  [Services](#services). `/services/` is now the index of everything rather than
+  the Medical Services page; that pillar moved to `/medical-care/`, and the
+  briefly-live `/services/<service>/` URLs 301 to their new home.
 - **Analytics are not copied.** Google Tag Manager and Analytics tags are
   stripped by the sync so a copy never reports into production analytics.
 - **Search is re-implemented.** WordPress searches its database; this indexes the
