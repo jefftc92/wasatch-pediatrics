@@ -27,6 +27,30 @@
     }
   }
 
+  /* --------------------------------------------------- mobile dropdowns -- */
+
+  /*
+   * The theme opens each dropdown independently on a phone, so tapping three of
+   * them leaves three open and the menu runs for several screens. Make them
+   * behave as an accordion: opening one closes the rest.
+   *
+   * This binds before jQuery's ready callback does, so it runs first on each
+   * tap — the siblings are closed, then the theme toggles the one you tapped.
+   * Closing uses the theme's own slideUp so the motion matches.
+   */
+  var mobile = window.matchMedia("(max-width: 767px)");
+  if (window.jQuery) {
+    var $ = window.jQuery;
+    $(".mainnav > li.menu-item-has-children").on("click", function () {
+      if (!mobile.matches) return;
+      var self = this;
+      $(".mainnav > li.menu-item-has-children").each(function () {
+        if (this === self || !$(this).hasClass("open")) return;
+        $(this).removeClass("open").children(".sub-menu").slideUp("fast");
+      });
+    });
+  }
+
   /* ----------------------------------------------------- service filter -- */
 
   var chips = document.querySelectorAll(".svc-chip");
