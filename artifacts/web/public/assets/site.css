@@ -84,8 +84,8 @@
    reads as an action rather than as another thing to browse. The theme's
    sub-menu rule sets display:block and a left padding on every link in here,
    which knocks the label off centre, so both are restated. */
+/* Flush with the first column of shortcuts, so it lines up with something. */
 .mega-cta-wrap {
-  text-align: center;
   margin-top: 24px;
 }
 
@@ -171,9 +171,13 @@
     margin-left: -48px;
   }
 
-  /* Six shortcuts read better as two short columns than one long one. */
+  /*
+   * Three columns, so the six shortcuts fill the panel rather than leaving its
+   * right third empty — which is what left the pill below them centred on the
+   * gap between two columns, anchored to nothing.
+   */
   .mega-list-split {
-    column-count: 2;
+    column-count: 3;
     column-gap: 40px;
   }
 
