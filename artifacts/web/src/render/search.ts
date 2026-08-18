@@ -1,4 +1,15 @@
 import { searchIndex, type SearchEntry } from "../data/searchIndex.ts";
+import { generatedSearchRoutes, serviceSearchEntries } from "./services.ts";
+
+/**
+ * The copied index plus the pages this project adds. Copied entries for routes
+ * this project now renders are dropped, so /services/ is described by the hub
+ * rather than by the page it replaced.
+ */
+export const fullSearchIndex: SearchEntry[] = [
+  ...searchIndex.filter((entry) => !generatedSearchRoutes.has(entry.route)),
+  ...serviceSearchEntries(),
+];
 
 const MONTHS = [
   "Jan",
@@ -40,7 +51,7 @@ export function searchSite(term: string): SearchEntry[] {
   const needle = term.trim().toLowerCase();
   if (!needle) return [];
 
-  return searchIndex
+  return fullSearchIndex
     .map((entry) => ({
       entry,
       rank: entry.title.toLowerCase().includes(needle)

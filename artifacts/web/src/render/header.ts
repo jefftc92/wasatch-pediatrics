@@ -1,4 +1,10 @@
 import { mainNav, type NavItem } from "../data/nav.ts";
+import {
+  pillars,
+  serviceHref,
+  servicesInPillar,
+  type Pillar,
+} from "../data/services.ts";
 
 export type MenuState = {
   /** Menu item classes that replace the defaults on this route. */
@@ -20,7 +26,75 @@ function searchForm(): string {
 </form>`;
 }
 
+/**
+ * Menu item ids for the pillar links. The first three are the ids WordPress
+ * gave "Medical Services", "Behavioral Health" and "Dentistry & Orthodontics"
+ * under Services, so the current-page state stored per route in pages.ts keeps
+ * pointing at the right column. Nutrition is new and has no WordPress id.
+ */
+/** Service names carry ampersands; WordPress escapes them in menu markup. */
+function esc(value: string): string {
+  return value.replace(/&/g, "&#038;");
+}
+
+export const PILLAR_MENU_IDS: Record<string, string> = {
+  "medical-care": "145",
+  "behavioral-health": "375",
+  dentistry: "1437",
+  nutrition: "nutrition",
+};
+
+function megaColumn(pillar: Pillar, menu: MenuState): string {
+  const id = PILLAR_MENU_IDS[pillar.slug] ?? pillar.slug;
+  const current = menu.currentIds.includes(id) ? ' aria-current="page"' : "";
+  const links = servicesInPillar(pillar.slug)
+    .map(
+      (service) =>
+        `<li><a href="${serviceHref(service)}">${esc(service.name)}</a></li>`,
+    )
+    .join("\n\t\t\t\t\t\t\t\t");
+
+  return `<div class="mega-col" id="menu-item-${id}">
+							<a class="mega-pillar" href="${pillar.href}"${current}>${esc(pillar.name)}</a>
+							<p class="mega-blurb">${esc(pillar.blurb)}</p>
+							<ul class="mega-list">
+								${links}
+							</ul>
+						</div>`;
+}
+
+/**
+ * The Services panel: one column per pillar, every service listed.
+ *
+ * It is still a `.sub-menu`, so the theme's own scripts open it — hover on
+ * desktop, tap on mobile — with no change to script.js. The lists inside are
+ * `.mega-list` rather than nested `.sub-menu`s for the same reason: the theme's
+ * mobile handler slides every descendant `.sub-menu`, and a second level would
+ * fight it. On a phone the panel is one stacked column with the pillar name as
+ * each group heading.
+ */
+function megaPanel(item: NavItem, menu: MenuState): string {
+  const classes = menu.classes[item.id] ?? item.classes;
+  const columns = pillars
+    .map((pillar) => megaColumn(pillar, menu))
+    .join("\n\t\t\t\t\t\t");
+
+  return `<li id="menu-item-${item.id}" class="${classes} mega"><a href="${item.href}">${item.label}</a>
+<ul class="sub-menu megamenu">
+<li class="megamenu-inner">
+	<div class="container">
+		<div class="mega-grid">
+						${columns}
+		</div>
+	</div>
+</li>
+</ul>
+</li>`;
+}
+
 function menuItem(item: NavItem, menu: MenuState): string {
+  if (item.mega) return megaPanel(item, menu);
+
   const classes = menu.classes[item.id] ?? item.classes;
   const current = menu.currentIds.includes(item.id)
     ? ' aria-current="page"'

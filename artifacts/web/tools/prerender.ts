@@ -33,7 +33,7 @@ import {
   providersArchiveMenuClasses,
   providersArchiveMenuCurrentIds,
 } from "../src/data/providers.ts";
-import { searchIndex } from "../src/data/searchIndex.ts";
+
 import {
   documentBodyClass,
   pageContent,
@@ -45,7 +45,13 @@ import {
   renderProviderProfile,
   renderProvidersArchive,
 } from "../src/render/providers.ts";
-import { renderSearchResults } from "../src/render/search.ts";
+import { fullSearchIndex, renderSearchResults } from "../src/render/search.ts";
+import { renderGeneratedDocument } from "../src/render/generated.ts";
+import {
+  pillarByContentSlug,
+  renderPillarPage,
+  serviceRoutes,
+} from "../src/render/services.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(here, "..");
@@ -87,16 +93,20 @@ function applyBase(html: string): string {
         },
       )
       .replace(/url\((['"]?)\/(?!\/)/g, `url($1${base}/`)
-      // Media lives at the shared asset base; this also catches URLs in inline
-      // JSON (the emoji settings block) rather than attributes.
+      // Media and our own stylesheet live at the shared asset base; this also
+      // catches URLs in inline JSON (the emoji settings block) rather than in
+      // attributes.
       .replace(
         new RegExp(
-          `(["'(])${escapeForRegExp(base)}/(wp-content|wp-includes)/`,
+          `(["'(])${escapeForRegExp(base)}/(wp-content|wp-includes|assets)/`,
           "g",
         ),
         `$1${assetBase}/$2/`,
       )
-      .replace(/(["'(])\/(wp-content|wp-includes)\//g, `$1${assetBase}/$2/`)
+      .replace(
+        /(["'(])\/(wp-content|wp-includes|assets)\//g,
+        `$1${assetBase}/$2/`,
+      )
   );
 }
 
@@ -140,14 +150,32 @@ if (assetsOnly) {
   process.exit(0);
 }
 
+// The pillar hubs and service pages this project adds. Written first so the
+// generated /services/ hub wins over the copied page it replaces.
+const generated = serviceRoutes();
+const generatedRoutes = new Set(generated.map((page) => page.route));
+
+for (const page of generated) {
+  write(page.route, renderGeneratedDocument(page));
+}
+
 for (const page of contentPages) {
+  if (generatedRoutes.has(page.route)) continue;
+
+  // Two pillars keep their copied landing page and get their service index
+  // appended to it.
+  const pillar = pillarByContentSlug.get(page.slug);
+  const content = pillar
+    ? renderPillarPage(pillar, pageContent(page.slug))
+    : pageContent(page.slug);
+
   write(
     page.route,
     renderDocument({
       slug: page.slug,
       bodyClass: page.bodyClass,
       menu: { classes: page.menuClasses, currentIds: page.menuCurrentIds },
-      content: pageContent(page.slug),
+      content,
     }),
   );
 }
@@ -219,7 +247,7 @@ writeFileSync(
 writeFileSync(
   join(out, "search-index.json"),
   JSON.stringify(
-    searchIndex.map((entry) => ({
+    fullSearchIndex.map((entry) => ({
       route: base + entry.route,
       title: entry.title,
       type: entry.type,
@@ -246,5 +274,13 @@ writeFileSync(
 writeFileSync(join(out, ".nojekyll"), "");
 
 console.log(
-  `wrote ${contentPages.length + providers.length + 3} pages (+ assets)`,
+  `wrote ${
+    contentPages.length -
+    [...generatedRoutes].filter((route) =>
+      contentPages.some((page) => page.route === route),
+    ).length +
+    generated.length +
+    providers.length +
+    3
+  } pages (+ assets)`,
 );
