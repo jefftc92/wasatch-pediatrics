@@ -80,14 +80,17 @@
   color: #f58220 !important;
 }
 
-/* The way out of browsing, and the only pill in the panel — so it reads as an
-   action rather than as a fifth category. */
+/* The way out of the shortcut list, and the only pill in the panel — so it
+   reads as an action rather than as another thing to browse. The theme's
+   sub-menu rule sets display:block and a left padding on every link in here,
+   which knocks the label off centre, so both are restated. */
 .mega-cta {
   font-size: 15px !important;
   padding: 7px 22px !important;
   color: #ffffff !important;
   display: inline-block !important;
-  margin-top: 20px;
+  text-align: center !important;
+  margin-top: 22px;
 }
 
 .mega-cta:hover {
@@ -105,7 +108,9 @@
     right: 0;
     width: auto;
     min-width: 0;
-    padding: 26px 0 30px 0;
+    /* White, so the panel reads as its own surface below the grey nav bar. */
+    background: #ffffff;
+    padding: 32px 0 36px 0;
     border-radius: 0 0 25px 25px;
     box-shadow: 0 8px 16px rgba(33, 33, 33, 0.15);
   }
@@ -119,13 +124,12 @@
     position: static;
   }
 
+  /* No inner card — the groups sit directly on the panel, which is the whole
+     dropdown surface. */
   .mega-grid {
     display: grid;
     grid-template-columns: minmax(0, 320px) 1fr;
-    gap: 48px;
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 28px 32px 26px 32px;
+    gap: 56px;
   }
 
   .mega-popular {
@@ -148,8 +152,7 @@
 @media (max-width: 991px) and (min-width: 768px) {
   .mega-grid {
     grid-template-columns: minmax(0, 250px) 1fr;
-    gap: 32px;
-    padding: 24px;
+    gap: 36px;
   }
 
   .mega-popular {
@@ -171,11 +174,15 @@
     padding-right: 0;
   }
 
+  /* Same on a phone: groups sit on the menu itself, no cards. */
   .mega-col {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 16px 20px 12px 20px;
-    margin: 0 0 12px 0;
+    padding: 4px 0 10px 0;
+    margin: 0;
+  }
+
+  .mega-col + .mega-col {
+    border-top: 1px solid #e4e4e4;
+    padding-top: 16px;
   }
 
   .mega-list a {
@@ -210,11 +217,25 @@
   display: none;
 }
 
+/*
+ * The long label only fits alongside the full-width logo above 991px. Between
+ * 768 and 991 the theme still shows the social icons and the search, and the
+ * logo is at its widest, so the label shortens there too — measured: at 820px
+ * the long label put the button straight through the logo.
+ */
 @media (max-width: 991px) {
   .header-cta {
     font-size: 15px !important;
     padding: 6px 18px !important;
     margin-right: 14px;
+  }
+
+  .header-cta-full {
+    display: none;
+  }
+
+  .header-cta-short {
+    display: inline;
   }
 }
 
@@ -244,20 +265,28 @@
     margin-top: 0;
     flex: 0 0 auto;
   }
-
-  .header-cta-full {
-    display: none;
-  }
-
-  .header-cta-short {
-    display: inline;
-  }
 }
 
 /* Below this the logo and the CTA start to meet, so give the logo less room. */
 @media (max-width: 420px) {
   #logo img {
     width: 168px;
+  }
+}
+
+/* On the narrowest phones both have to give: measured clear at 320px. */
+@media (max-width: 374px) {
+  #logo img {
+    width: 118px;
+  }
+
+  #topmenu {
+    gap: 10px;
+  }
+
+  .header-cta {
+    font-size: 13px !important;
+    padding: 5px 12px !important;
   }
 }
 

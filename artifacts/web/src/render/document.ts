@@ -47,11 +47,19 @@ export type DocumentOptions = {
 };
 
 /**
- * This project's own stylesheet, added to every copied page's head. It sits
- * outside public/wp-content/ so the vendored theme stays a byte-for-byte copy,
- * and it loads after style.css so it can override the theme.
+ * This project's own stylesheet and script, added to every copied page's head.
+ * They sit outside public/wp-content/ so the vendored theme stays a byte-for-byte
+ * copy; the stylesheet loads after style.css so it can override the theme, and
+ * the script is deferred and progressive — the page works without it.
+ *
+ * Both belong on copied pages as well as generated ones, because both carry
+ * chrome shared by every page: the services panel and the header CTA in the CSS,
+ * the mobile menu accordion in the JS.
  */
-const SITE_CSS = `<link rel='stylesheet' id='site-css' href='/assets/site.css' media='all' />`;
+const SITE_ASSETS = [
+  `<link rel='stylesheet' id='site-css' href='/assets/site.css' media='all' />`,
+  `<script id="site-js" src="/assets/site.js" defer></script>`,
+].join("\n");
 
 /**
  * Assembles a full page the same way the WordPress theme does: the page's own
@@ -68,7 +76,7 @@ export function renderDocument({
 <html lang="en-US">
 <head>
 ${documentHead(slug)}
-${SITE_CSS}
+${SITE_ASSETS}
 </head>
 <body class="${bodyClass}">
 ${renderHeader(menu)}
