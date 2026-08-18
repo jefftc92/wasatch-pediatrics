@@ -14,11 +14,14 @@
  * The Services panel, built from the theme's own vocabulary: the grey #F4F4F4
  * ground the nav already uses, one white rounded surface like .dentistry-card,
  * blue links, the orange hover the theme applies to every sub-menu link, and a
- * green .btn pill for the one action. No new shapes or colours.
+ * blue .btn pill. No new shapes or colours.
  *
  * Two groups, not nineteen links: the four pillars, and the handful of pages
  * families come for most. Listing every service under every pillar turned the
- * menu into a directory, which is not what a menu is read for.
+ * menu into a directory, which is not what a menu is read for. Everything else
+ * that used to sit in a footer row here has moved: scheduling to the header,
+ * and find-a-provider and the symptom checker back to the main nav entries that
+ * already covered them.
  *
  * The theme shows a sub-menu by adding .active to the hovered <li> (desktop) or
  * by sliding it open on tap (mobile), and both work unchanged here: the panel
@@ -77,26 +80,18 @@
   color: #f58220 !important;
 }
 
-.mega-foot .btn {
-  font-size: 16px !important;
-  padding: 7px 24px !important;
+/* The way out of browsing, and the only pill in the panel — so it reads as an
+   action rather than as a fifth category. */
+.mega-cta {
+  font-size: 15px !important;
+  padding: 7px 22px !important;
   color: #ffffff !important;
   display: inline-block !important;
+  margin-top: 20px;
 }
 
-.mega-foot .btn:hover {
-  color: #8dc63f !important;
-}
-
-.mega-foot-link {
-  font-size: 16px !important;
-  font-weight: 400;
-  padding: 0 !important;
-  display: inline-block !important;
-}
-
-.mega-foot-link:hover {
-  color: #f58220 !important;
+.mega-cta:hover {
+  color: #2b93d1 !important;
 }
 
 @media (min-width: 768px) {
@@ -148,15 +143,6 @@
   .mega-list-split li {
     break-inside: avoid;
   }
-
-  .mega-foot {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px 30px;
-    margin-top: 22px;
-    padding: 0 8px;
-  }
 }
 
 @media (max-width: 991px) and (min-width: 768px) {
@@ -195,19 +181,83 @@
   .mega-list a {
     padding: 7px 0 !important;
   }
+}
 
-  .mega-foot {
-    margin: 4px 0 6px 0;
-    text-align: center;
+/* ------------------------------------------------------------ header CTA -- */
+
+/*
+ * Scheduling used to sit in a footer row inside the services panel, which meant
+ * it was only reachable once you opened that one menu. It belongs in the
+ * header, where it is on every page at every width: left of the social icons on
+ * desktop, left of the burger on a phone, where it shortens to "Schedule" so
+ * the logo still has room.
+ */
+
+.header-cta {
+  font-size: 16px !important;
+  padding: 7px 22px !important;
+  color: #ffffff !important;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 22px;
+}
+
+.header-cta:hover {
+  color: #8dc63f !important;
+}
+
+.header-cta-short {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .header-cta {
+    font-size: 15px !important;
+    padding: 6px 18px !important;
+    margin-right: 14px;
+  }
+}
+
+@media (max-width: 767px) {
+  /*
+   * The theme floats the burger right inside an absolutely positioned #topmenu.
+   * Adding a second floated child there put the burger over the logo, so lay
+   * the two out as a flex row instead: CTA first, burger rightmost where people
+   * expect it. #topmenu stays absolute and sizes to its contents.
+   */
+  #topmenu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
   }
 
-  .mega-foot .btn {
-    display: block !important;
-    margin-bottom: 14px;
+  .header-cta {
+    float: none;
+    margin: 0;
+    font-size: 14px !important;
+    padding: 6px 15px !important;
   }
 
-  .mega-foot-link {
-    margin: 0 10px 8px 10px;
+  #mobileburger {
+    float: none;
+    margin-top: 0;
+    flex: 0 0 auto;
+  }
+
+  .header-cta-full {
+    display: none;
+  }
+
+  .header-cta-short {
+    display: inline;
+  }
+}
+
+/* Below this the logo and the CTA start to meet, so give the logo less room. */
+@media (max-width: 420px) {
+  #logo img {
+    width: 168px;
   }
 }
 

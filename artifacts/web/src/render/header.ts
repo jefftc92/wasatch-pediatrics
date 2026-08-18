@@ -52,7 +52,13 @@ export const PILLAR_MENU_IDS: Record<string, string> = {
  * Kept deliberately spare — a menu is read at a glance, so it carries names and
  * nothing else. Listing every service under every pillar turned it into a
  * directory; the four categories teach how care is organised, the shortcuts
- * cover the common journeys, and /services/ carries the full filterable list.
+ * cover the common journeys, and the pill leads to /services/, which carries
+ * the full filterable list.
+ *
+ * Nothing else lives here. Find a provider and the symptom checker are already
+ * in the main nav under Providers and Resources, and scheduling now sits in the
+ * header where it is reachable from every page rather than only from this
+ * panel.
  *
  * It is still a `.sub-menu`, so the theme's own scripts open it — hover on
  * desktop, tap on mobile — with no change to script.js. The lists inside are
@@ -91,6 +97,7 @@ function megaPanel(item: NavItem, menu: MenuState): string {
 				<ul class="mega-list">
 					${pillarLinks}
 				</ul>
+				<a class="btn blue mega-cta" href="${ALL_SERVICES_HREF}">View All Services</a>
 			</div>
 			<div class="mega-col mega-popular">
 				<p class="mega-head">Popular services</p>
@@ -98,12 +105,6 @@ function megaPanel(item: NavItem, menu: MenuState): string {
 					${popular}
 				</ul>
 			</div>
-		</div>
-		<div class="mega-foot">
-			<a class="btn green" href="/contact-us/">Schedule An Appointment</a>
-			<a class="mega-foot-link" href="${ALL_SERVICES_HREF}">View all services</a>
-			<a class="mega-foot-link" href="/providers/">Find a provider</a>
-			<a class="mega-foot-link" href="/symptom-checker/">Symptom Checker</a>
 		</div>
 	</div>
 </li>
@@ -141,6 +142,7 @@ export function renderHeader(menu: MenuState = NO_MENU_STATE): string {
 					</div>
 					<div id="topmenuwrap">
 						<div id="topmenu">
+							<a class="btn green header-cta" href="/contact-us/"><span class="header-cta-full">Schedule An Appointment</span><span class="header-cta-short">Schedule</span></a>
 							<ul  class="desktop" id="navbuttons">
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/fb.svg" alt="Facebook Icon" /></a></li>
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/ig.svg" alt="Instagram Icon" /></a></li>
