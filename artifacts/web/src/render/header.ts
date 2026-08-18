@@ -3,7 +3,7 @@ import {
   ALL_SERVICES_HREF,
   pillars,
   serviceHref,
-  servicesInPillar,
+  services,
   type Pillar,
 } from "../data/services.ts";
 
@@ -45,62 +45,66 @@ export const PILLAR_MENU_IDS: Record<string, string> = {
   nutrition: "nutrition",
 };
 
-function megaColumn(pillar: Pillar, menu: MenuState): string {
-  const id = PILLAR_MENU_IDS[pillar.slug] ?? pillar.slug;
-  const current = menu.currentIds.includes(id) ? ' aria-current="page"' : "";
-  const all = servicesInPillar(pillar.slug);
-  // The panel lists what families come for most; "All <pillar>" and the full
-  // index carry the rest, so the menu never becomes a directory.
-  const shown = all.filter((service) => service.popular);
-  const links = (shown.length ? shown : all)
-    .map(
-      (service) =>
-        `<li><a href="${serviceHref(service)}">${esc(service.name)}</a></li>`,
-    )
-    .join("\n\t\t\t\t\t\t\t\t\t");
-
-  return `<div class="mega-col" id="menu-item-${id}">
-						<a class="mega-pillar" href="${pillar.href}"${current}>${esc(pillar.name)}</a>
-						<ul class="mega-list">
-							${links}
-						</ul>
-					</div>`;
-}
-
 /**
- * The Services panel: one column per pillar, the services families come for
- * most under each.
+ * The Services panel: the four pillars on the left, a short list of the pages
+ * families come for most on the right.
  *
- * Kept deliberately spare. A menu is read at a glance, so it carries names and
- * nothing else — no descriptions, and one button rather than two competing for
- * the eye. The pillar heading is itself the link to that pillar, so there is no
- * separate "all of this" link beside it.
+ * Kept deliberately spare — a menu is read at a glance, so it carries names and
+ * nothing else. Listing every service under every pillar turned it into a
+ * directory; the four categories teach how care is organised, the shortcuts
+ * cover the common journeys, and the pill leads to /services/, which carries
+ * the full filterable list.
+ *
+ * Nothing else lives here. Find a provider and the symptom checker are already
+ * in the main nav under Providers and Resources, and scheduling now sits in the
+ * header where it is reachable from every page rather than only from this
+ * panel.
  *
  * It is still a `.sub-menu`, so the theme's own scripts open it — hover on
  * desktop, tap on mobile — with no change to script.js. The lists inside are
  * `.mega-list` rather than nested `.sub-menu`s for the same reason: the theme's
  * mobile handler slides every descendant `.sub-menu`, and a second level would
- * fight it. On a phone the panel is one stacked column with the pillar name as
- * each group heading.
+ * fight it. On a phone the two groups stack, each with its own heading.
  */
+function pillarLink(pillar: Pillar, menu: MenuState): string {
+  const id = PILLAR_MENU_IDS[pillar.slug] ?? pillar.slug;
+  const current = menu.currentIds.includes(id) ? ' aria-current="page"' : "";
+  return `<li id="menu-item-${id}"><a class="mega-pillar" href="${pillar.href}"${current}>${esc(pillar.name)}</a></li>`;
+}
+
 function megaPanel(item: NavItem, menu: MenuState): string {
   const classes = menu.classes[item.id] ?? item.classes;
-  const columns = pillars
-    .map((pillar) => megaColumn(pillar, menu))
-    .join("\n\t\t\t\t\t");
+
+  const pillarLinks = pillars
+    .map((pillar) => pillarLink(pillar, menu))
+    .join("\n\t\t\t\t\t\t");
+
+  const popular = services
+    .filter((service) => service.popular)
+    .map(
+      (service) =>
+        `<li><a href="${serviceHref(service)}">${esc(service.name)}</a></li>`,
+    )
+    .join("\n\t\t\t\t\t\t");
 
   return `<li id="menu-item-${item.id}" class="${classes} mega"><a href="${item.href}">${item.label}</a>
 <ul class="sub-menu megamenu">
 <li class="megamenu-inner">
 	<div class="container">
 		<div class="mega-grid">
-					${columns}
-		</div>
-		<div class="mega-foot">
-			<a class="btn green" href="/contact-us/">Schedule An Appointment</a>
-			<a class="mega-foot-link" href="${ALL_SERVICES_HREF}">View all services</a>
-			<a class="mega-foot-link" href="/providers/">Find a provider</a>
-			<a class="mega-foot-link" href="/symptom-checker/">Symptom Checker</a>
+			<div class="mega-col mega-browse">
+				<p class="mega-head">Browse by care</p>
+				<ul class="mega-list">
+					${pillarLinks}
+				</ul>
+				<a class="btn blue mega-cta" href="${ALL_SERVICES_HREF}">View All Services</a>
+			</div>
+			<div class="mega-col mega-popular">
+				<p class="mega-head">Popular services</p>
+				<ul class="mega-list mega-list-split">
+					${popular}
+				</ul>
+			</div>
 		</div>
 	</div>
 </li>
@@ -138,6 +142,7 @@ export function renderHeader(menu: MenuState = NO_MENU_STATE): string {
 					</div>
 					<div id="topmenuwrap">
 						<div id="topmenu">
+							<a class="btn green header-cta" href="/contact-us/"><span class="header-cta-full">Schedule An Appointment</span><span class="header-cta-short">Schedule</span></a>
 							<ul  class="desktop" id="navbuttons">
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/fb.svg" alt="Facebook Icon" /></a></li>
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/ig.svg" alt="Instagram Icon" /></a></li>

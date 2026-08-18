@@ -87,8 +87,9 @@ export type Service = {
   /** Services one office delivers on behalf of the others. */
   deliveredFrom?: string;
   /**
-   * Shown in the menu panel. The panel lists what families come for most, not
-   * everything — "All <pillar>" and the full index at /services/ carry the rest.
+   * Listed under "Popular services" in the menu panel. Deliberately a short
+   * set — the panel offers the four pillars and a handful of shortcuts, and
+   * /services/ carries the full, filterable list.
    */
   popular?: boolean;
   /** Groups of pages below this service. See Topic. */
@@ -231,7 +232,6 @@ export const services: Service[] = [
   },
   {
     slug: "newborn-hospital-care",
-    popular: true,
     name: "Newborn Hospital Care",
     pillar: "medical-care",
     blurb: "Your pediatrician sees your baby at the hospital.",
@@ -313,7 +313,6 @@ export const services: Service[] = [
   // ------------------------------------------------------- behavioral health
   {
     slug: "behavioral-consultation",
-    popular: true,
     name: "Consultation & Screening",
     pillar: "behavioral-health",
     blurb: "Assessment, treatment planning and referrals.",
@@ -355,7 +354,6 @@ export const services: Service[] = [
   },
   {
     slug: "psychiatry",
-    popular: true,
     name: "Medication Management",
     pillar: "behavioral-health",
     blurb: "Psychiatric assessment and medication management.",
@@ -376,7 +374,6 @@ export const services: Service[] = [
   },
   {
     slug: "autism-testing",
-    popular: true,
     name: "Psychological & Autism Testing",
     pillar: "behavioral-health",
     blurb: "Formal evaluation and diagnosis, at our Summit office.",
@@ -391,7 +388,6 @@ export const services: Service[] = [
   // -------------------------------------------------------------- nutrition
   {
     slug: "dietitian",
-    popular: true,
     name: "Dietitian Consultation",
     pillar: "nutrition",
     blurb: "Registered dietitian support for feeding, growth and sports.",
@@ -413,7 +409,6 @@ export const services: Service[] = [
   },
   {
     slug: "lactation-consultation",
-    popular: true,
     name: "Lactation Consultation",
     pillar: "nutrition",
     blurb: "Feeding support for newborns and their parents.",
@@ -432,7 +427,6 @@ export const services: Service[] = [
   },
   {
     slug: "community-classes",
-    popular: true,
     name: "Community Classes",
     pillar: "nutrition",
     blurb: "Education classes for parents, run at our offices.",
@@ -452,7 +446,6 @@ export const services: Service[] = [
   // -------------------------------------------------------------- dentistry
   {
     slug: "pediatric-dentistry",
-    popular: true,
     name: "Pediatric Dentistry",
     pillar: "dentistry",
     blurb: "First visits, cleanings, fillings and sedation options.",
@@ -465,7 +458,6 @@ export const services: Service[] = [
   },
   {
     slug: "orthodontics",
-    popular: true,
     name: "Orthodontics",
     pillar: "dentistry",
     blurb: "Braces and clear aligners for children and teens.",
