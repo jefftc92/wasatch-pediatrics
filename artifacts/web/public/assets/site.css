@@ -12,10 +12,14 @@
 
 /*
  * The Services panel, built from the theme's own vocabulary: the grey #F4F4F4
- * ground the nav already uses, white rounded cards like .dentistry-card, blue
- * bold headings at .d-location-title's size, the orange hover the theme applies
- * to every sub-menu link, and a green .btn pill for the appointment CTA. No new
+ * ground the nav already uses, one white rounded surface like .dentistry-card,
+ * blue headings at .d-location-title's size, the orange hover the theme applies
+ * to every sub-menu link, and a green .btn pill for the one action. No new
  * shapes or colours are introduced.
+ *
+ * Kept spare on purpose: names and one button. Four separate white cards, a
+ * description under each heading and an "all of this" link per column all read
+ * as clutter at a glance, which is the only way a menu gets read.
  *
  * The theme shows a sub-menu by adding .active to the hovered <li> (desktop) or
  * by sliding it open on tap (mobile), and both work unchanged here: the panel
@@ -33,22 +37,15 @@
 }
 
 .mega-col .mega-pillar {
-  font-size: 21px !important;
+  font-size: 20px !important;
   font-weight: 700 !important;
   color: #2b93d1 !important;
   letter-spacing: 0 !important;
-  line-height: 26px !important;
+  line-height: 25px !important;
 }
 
 .mega-col .mega-pillar:hover {
   color: #f58220 !important;
-}
-
-.mega-blurb {
-  font-size: 14px !important;
-  line-height: 20px !important;
-  color: #636466;
-  margin: 0 0 14px 0;
 }
 
 .mega-list {
@@ -58,46 +55,18 @@
 }
 
 .mega-list li {
-  margin: 0 0 9px 0;
+  margin: 0 0 10px 0;
 }
 
 .mega-list a {
-  font-size: 15px !important;
-  line-height: 20px !important;
+  font-size: 16px !important;
+  line-height: 21px !important;
   padding: 0 !important;
   font-weight: 400;
 }
 
 .mega-list a:hover {
   color: #f58220 !important;
-}
-
-/* Same arrow-after-link idiom as the theme's .ineedtoblock links. */
-.mega-more {
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  color: #2b93d1 !important;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 0 !important;
-}
-
-.mega-more:after {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  margin-left: 8px;
-  border: solid #2b93d1;
-  border-width: 0 2px 2px 0;
-  transform: rotate(-45deg);
-  vertical-align: 2px;
-}
-
-.mega-more:hover,
-.mega-more:hover:after {
-  color: #f58220 !important;
-  border-color: #f58220;
 }
 
 .mega-foot .btn {
@@ -112,7 +81,7 @@
 }
 
 .mega-foot-link {
-  font-size: 15px !important;
+  font-size: 16px !important;
   font-weight: 400;
   padding: 0 !important;
   display: inline-block !important;
@@ -147,52 +116,34 @@
     position: static;
   }
 
+  /* One surface holding four columns, rather than four boxes on the grey. */
   .mega-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    align-items: stretch;
-  }
-
-  /* The theme's card: white, 20px radius, sitting on the grey ground. */
-  .mega-col {
+    gap: 36px;
     background: #ffffff;
     border-radius: 20px;
-    padding: 22px 24px 20px 24px;
-    display: flex;
-    flex-direction: column;
+    padding: 28px 32px 30px 32px;
   }
 
   .mega-col .mega-pillar {
-    padding: 0 0 4px 0 !important;
-  }
-
-  .mega-list {
-    margin-bottom: 16px;
-  }
-
-  .mega-more {
-    margin-top: auto;
+    padding: 0 0 14px 0 !important;
   }
 
   .mega-foot {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 12px 28px;
+    gap: 12px 30px;
     margin-top: 22px;
-    padding-top: 20px;
-    border-top: 1px solid #e4e4e4;
+    padding: 0 8px;
   }
 }
 
-@media (max-width: 991px) and (min-width: 768px) {
+@media (max-width: 1199px) and (min-width: 768px) {
   .mega-grid {
-    gap: 14px;
-  }
-
-  .mega-col {
-    padding: 18px 18px 16px 18px;
+    gap: 24px;
+    padding: 24px;
   }
 
   .mega-col .mega-pillar {
@@ -201,7 +152,7 @@
   }
 
   .mega-list a {
-    font-size: 14px !important;
+    font-size: 15px !important;
   }
 }
 
@@ -220,26 +171,16 @@
   .mega-col {
     background: #ffffff;
     border-radius: 20px;
-    padding: 18px 20px 16px 20px;
+    padding: 18px 20px 8px 20px;
     margin: 0 0 12px 0;
   }
 
-  .mega-blurb {
-    display: none;
-  }
-
   .mega-col .mega-pillar {
-    padding: 0 0 10px 0 !important;
+    padding: 0 0 12px 0 !important;
   }
 
   .mega-list a {
     padding: 5px 0 !important;
-    font-size: 16px !important;
-  }
-
-  .mega-more {
-    display: inline-block !important;
-    margin-top: 6px;
   }
 
   .mega-foot {
