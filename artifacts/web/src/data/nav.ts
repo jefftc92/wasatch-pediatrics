@@ -15,6 +15,13 @@ export type NavItem = {
   children?: NavItem[];
   /** Rendered as the services mega panel rather than a plain sub-menu. */
   mega?: boolean;
+  /**
+   * Rendered as a panel like the services one, with this as the group heading.
+   * Set on the other dropdowns so all three menus look and behave alike.
+   */
+  panelHeading?: string;
+  /** How many columns the panel's list runs to on a wide screen. */
+  panelColumns?: number;
 };
 
 const PAGE = "menu-item menu-item-type-post_type menu-item-object-page";
@@ -35,6 +42,8 @@ export const mainNav: NavItem[] = [
     label: "Locations",
     href: "#",
     classes: `${PARENT} menu-item-110`,
+    panelHeading: "Our offices",
+    panelColumns: 3,
     children: [
       {
         id: "292",
@@ -108,6 +117,8 @@ export const mainNav: NavItem[] = [
     label: "Resources",
     href: "#",
     classes: `${PARENT} menu-item-1376`,
+    panelHeading: "Resources",
+    panelColumns: 2,
     children: [
       {
         id: "147",

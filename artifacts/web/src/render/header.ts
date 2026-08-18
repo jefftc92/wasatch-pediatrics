@@ -72,12 +72,51 @@ function pillarLink(pillar: Pillar, menu: MenuState): string {
   return `<li id="menu-item-${id}"><a class="mega-pillar" href="${pillar.href}"${current}>${esc(pillar.name)}</a></li>`;
 }
 
-function megaPanel(item: NavItem, menu: MenuState): string {
+/**
+ * The panel chrome, shared by every dropdown in the main nav.
+ *
+ * Locations, Services and Resources all render the same way: a full-width white
+ * surface that comes out from under the grey nav bar, one or more groups with an
+ * uppercase heading, and the links in a plain list. Only the content differs.
+ *
+ * Each is still a `.sub-menu`, so the theme's own scripts open them — hover on
+ * desktop, tap on mobile — with no change to script.js. The lists inside are
+ * `.mega-list` rather than nested `.sub-menu`s for the same reason: the theme's
+ * mobile handler slides every descendant `.sub-menu`, and a second level would
+ * fight it. On a phone the groups stack, each keeping its heading.
+ */
+function panel(item: NavItem, classes: string, body: string): string {
+  return `<li id="menu-item-${item.id}" class="${classes} mega"><a href="${item.href}">${item.label}</a>
+<ul class="sub-menu megamenu">
+<li class="megamenu-inner">
+	<div class="container">
+${body}
+	</div>
+</li>
+</ul>
+</li>`;
+}
+
+/**
+ * The Services panel: the four pillars on the left, a short list of the pages
+ * families come for most on the right.
+ *
+ * Kept deliberately spare — a menu is read at a glance, so it carries names and
+ * nothing else. Listing every service under every pillar turned it into a
+ * directory; the four categories teach how care is organised, the shortcuts
+ * cover the common journeys, and the pill leads to /services/, which carries
+ * the full filterable list.
+ *
+ * Nothing else lives here. Find a provider and the symptom checker are already
+ * in the main nav under Providers and Resources, and scheduling sits in the
+ * header where it is reachable from every page rather than only from this panel.
+ */
+function servicesPanel(item: NavItem, menu: MenuState): string {
   const classes = menu.classes[item.id] ?? item.classes;
 
   const pillarLinks = pillars
     .map((pillar) => pillarLink(pillar, menu))
-    .join("\n\t\t\t\t\t\t");
+    .join("\n\t\t\t\t\t");
 
   const popular = services
     .filter((service) => service.popular)
@@ -85,13 +124,12 @@ function megaPanel(item: NavItem, menu: MenuState): string {
       (service) =>
         `<li><a href="${serviceHref(service)}">${esc(service.name)}</a></li>`,
     )
-    .join("\n\t\t\t\t\t\t");
+    .join("\n\t\t\t\t\t");
 
-  return `<li id="menu-item-${item.id}" class="${classes} mega"><a href="${item.href}">${item.label}</a>
-<ul class="sub-menu megamenu">
-<li class="megamenu-inner">
-	<div class="container">
-		<div class="mega-grid">
+  return panel(
+    item,
+    classes,
+    `		<div class="mega-grid">
 			<div class="mega-col mega-browse">
 				<p class="mega-head">Browse by care</p>
 				<ul class="mega-list">
@@ -103,17 +141,42 @@ function megaPanel(item: NavItem, menu: MenuState): string {
 				<ul class="mega-list mega-list-split">
 					${popular}
 				</ul>
-				<a class="btn blue mega-cta" href="${ALL_SERVICES_HREF}">View All Services</a>
+				<div class="mega-cta-wrap">
+					<a class="btn blue mega-cta" href="${ALL_SERVICES_HREF}">View All Services</a>
+				</div>
 			</div>
-		</div>
-	</div>
-</li>
-</ul>
-</li>`;
+		</div>`,
+  );
+}
+
+/**
+ * Locations and Resources: one group, the item's own children, in as many
+ * columns as the list length warrants. Same surface and same type as Services,
+ * so moving between the three menus feels like one menu.
+ */
+function listPanel(item: NavItem, menu: MenuState): string {
+  const classes = menu.classes[item.id] ?? item.classes;
+  const links = (item.children ?? [])
+    .map((child) => menuItem(child, menu))
+    .join("\n\t\t\t\t\t");
+
+  return panel(
+    item,
+    classes,
+    `		<div class="mega-grid mega-grid-single">
+			<div class="mega-col">
+				<p class="mega-head">${esc(item.panelHeading ?? item.label)}</p>
+				<ul class="mega-list mega-list-${item.panelColumns ?? 2}">
+					${links}
+				</ul>
+			</div>
+		</div>`,
+  );
 }
 
 function menuItem(item: NavItem, menu: MenuState): string {
-  if (item.mega) return megaPanel(item, menu);
+  if (item.mega) return servicesPanel(item, menu);
+  if (item.panelHeading) return listPanel(item, menu);
 
   const classes = menu.classes[item.id] ?? item.classes;
   const current = menu.currentIds.includes(item.id)
