@@ -376,6 +376,15 @@
 }
 
 /*
+ * While the floating button is standing in for it. visibility rather than
+ * display, so the pill keeps its box and can still be measured as the place to
+ * travel to and from.
+ */
+.header-cta.is-handed-over {
+  visibility: hidden;
+}
+
+/*
  * Between 768 and 991 the theme shows its widest logo and the social icons, and
  * the full label crossed about 200px of the logo — measured. Shorten it there.
  */
@@ -461,6 +470,17 @@
 }
 
 /*
+ * While the ends are being measured. The button carries a width transition of
+ * its own, so simply unfolding it and reading the box back caught it at the
+ * start of that animation and reported the folded size — which sent it past
+ * the header by the difference between the two.
+ */
+.ctadock.is-measuring .ctadock-btn,
+.ctadock.is-measuring .ctadock-label {
+  transition: none !important;
+}
+
+/*
  * While travelling between the header and the corner. The easing is slower and
  * carries the transform too, so the button reads as one thing moving rather
  * than something appearing where it lands.
@@ -468,6 +488,8 @@
 .ctadock.is-morphing .ctadock-btn {
   transition:
     transform 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+    font-size 0.42s cubic-bezier(0.4, 0, 0.2, 1),
     width 0.42s cubic-bezier(0.4, 0, 0.2, 1),
     padding 0.42s cubic-bezier(0.4, 0, 0.2, 1),
     gap 0.42s cubic-bezier(0.4, 0, 0.2, 1),
@@ -548,6 +570,18 @@
   .ctadock-btn {
     width: auto;
     min-width: 56px;
+  }
+
+  /*
+   * Sized like the header pill while travelling, so what arrives at the header
+   * is the pill rather than something a size larger landing on it. Kept apart
+   * from .is-morphing, which carries the transitions — the sizing has to be in
+   * place while measuring, before anything is allowed to animate.
+   */
+  .ctadock.is-travel:not(.is-mini) .ctadock-btn {
+    font-size: 16px;
+    height: 40px;
+    padding: 0 22px;
   }
 }
 
