@@ -240,5 +240,10 @@ export function renderHeader(menu: MenuState = NO_MENU_STATE): string {
 			</div>
 		</div>
 	</header>
-	<div class="ctadock"><a class="btn green" href="/contact-us/">Schedule An Appointment</a></div>`;
+	<div class="ctadock">
+		<a class="ctadock-btn" href="/contact-us/" aria-label="Schedule an appointment">
+			<svg class="ctadock-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M8 3v4M16 3v4M3 10h18"></path></svg>
+			<span class="ctadock-label">Schedule An Appointment</span>
+		</a>
+	</div>`;
 }

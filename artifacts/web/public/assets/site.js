@@ -6,6 +6,9 @@
 (function () {
   "use strict";
 
+  var wide = window.matchMedia("(min-width: 768px)");
+  var mobile = window.matchMedia("(max-width: 767px)");
+
   /* ------------------------------------------------------- section nav -- */
 
   // The bar scrolls sideways on a phone, so the page you are on can start off
@@ -37,7 +40,6 @@
    */
   var graynav = document.getElementById("graynav");
   if (graynav) {
-    var wide = window.matchMedia("(min-width: 768px)");
     var pinAt = 0;
     var measure = function () {
       graynav.classList.remove("is-stuck");
@@ -59,6 +61,34 @@
     });
   }
 
+  /* ------------------------------------------------- floating schedule -- */
+
+  /*
+   * On a phone the button starts as a full-width bar and folds into a circle
+   * once the page has moved, then opens out again at the top. On a wide screen
+   * the header carries the pill until it scrolls away, at which point the folded
+   * button fades in as a reminder.
+   */
+  var dock = document.querySelector(".ctadock");
+  if (dock) {
+    var headerCta = document.querySelector(".header-cta");
+    var syncDock = function () {
+      if (wide.matches) {
+        var gone = headerCta
+          ? headerCta.getBoundingClientRect().bottom < 0
+          : window.scrollY > 200;
+        dock.classList.toggle("is-shown", gone);
+        dock.classList.add("is-mini");
+        return;
+      }
+      dock.classList.remove("is-shown");
+      dock.classList.toggle("is-mini", window.scrollY > 140);
+    };
+    syncDock();
+    window.addEventListener("scroll", syncDock, { passive: true });
+    window.addEventListener("resize", syncDock);
+  }
+
   /* --------------------------------------------------- mobile dropdowns -- */
 
   /*
@@ -70,7 +100,6 @@
    * tap — the siblings are closed, then the theme toggles the one you tapped.
    * Closing uses the theme's own slideUp so the motion matches.
    */
-  var mobile = window.matchMedia("(max-width: 767px)");
   if (window.jQuery) {
     var $ = window.jQuery;
     $(".mainnav > li.menu-item-has-children").on("click", function () {
