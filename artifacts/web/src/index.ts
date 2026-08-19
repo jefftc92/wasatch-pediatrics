@@ -28,6 +28,7 @@ import {
   serviceRoutes,
 } from "./render/services.ts";
 import { serviceBySlug } from "./data/services.ts";
+import { buildId } from "./build.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(here, "..", "public");
@@ -104,6 +105,11 @@ app.get("/{*path}", (request, response, next) => {
   }
 
   response.type("html").send(renderGeneratedDocument(page));
+});
+
+/** Which commit is serving. See src/build.ts. */
+app.get("/__build", (_request, response) => {
+  response.type("text").send(buildId);
 });
 
 app.get("/providers{/}", (request, response) => {
