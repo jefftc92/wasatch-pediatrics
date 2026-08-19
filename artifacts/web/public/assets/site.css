@@ -84,7 +84,6 @@
    reads as an action rather than as another thing to browse. The theme's
    sub-menu rule sets display:block and a left padding on every link in here,
    which knocks the label off centre, so both are restated. */
-/* Flush with the first column of shortcuts, so it lines up with something. */
 .mega-cta-wrap {
   margin-top: 24px;
 }
@@ -183,6 +182,19 @@
 
   .mega-list-split li {
     break-inside: avoid;
+  }
+
+  /*
+   * Optical alignment: the pill carries 22px of padding, so aligning its box
+   * with the column put its label 23px right of the link text above it — the
+   * box lined up and the words did not. Pull it left by that padding so what
+   * you actually read lines up.
+   *
+   * Desktop only. On a phone the list already sits at the container edge, so
+   * the same shift would hang the pill's rounded end off the screen.
+   */
+  .mega-cta-wrap {
+    margin-left: -22px;
   }
 }
 
