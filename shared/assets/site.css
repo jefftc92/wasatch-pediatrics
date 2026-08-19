@@ -460,6 +460,26 @@
     background 0.2s ease;
 }
 
+/*
+ * While travelling between the header and the corner. The easing is slower and
+ * carries the transform too, so the button reads as one thing moving rather
+ * than something appearing where it lands.
+ */
+.ctadock.is-morphing .ctadock-btn {
+  transition:
+    transform 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+    padding 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+    gap 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.2s ease;
+}
+
+.ctadock.is-morphing .ctadock-label {
+  transition:
+    max-width 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.26s ease;
+}
+
 .ctadock-btn:hover {
   background: #f58220;
   color: #ffffff !important;
