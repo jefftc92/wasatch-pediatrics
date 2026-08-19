@@ -25,6 +25,7 @@ import {
 } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildId } from "../src/build.ts";
 import { contentPages } from "../src/data/pages.ts";
 import {
   providerBySlug,
@@ -269,6 +270,9 @@ writeFileSync(
     base,
   ),
 );
+
+// The static build cannot answer /__build, so leave the id as a file instead.
+writeFileSync(join(out, "__build"), buildId);
 
 // Pages would otherwise run the output through Jekyll and drop wp-* folders.
 writeFileSync(join(out, ".nojekyll"), "");

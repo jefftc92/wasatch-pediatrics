@@ -16,6 +16,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { renderFooter } from "./footer.ts";
 import { renderHeader, type MenuState } from "./header.ts";
+import { buildMeta } from "../build.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const AUTHORED = join(here, "..", "authored");
@@ -110,6 +111,7 @@ export function renderGeneratedDocument(page: GeneratedPage): string {
 <html lang="en-US">
 <head>
 ${head}
+${buildMeta}
 </head>
 <body class="${page.bodyClass}">
 ${renderHeader(page.menu)}

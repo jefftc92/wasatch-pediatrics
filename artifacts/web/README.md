@@ -243,6 +243,23 @@ The preview is therefore deliberately _not_ byte-identical to the live site —
 the base rewriting alone changes every URL. The server remains the reference for
 the fidelity checks above.
 
+## Which build is running
+
+Every page carries `<meta name="x-build" content="…">` and the server answers
+`/__build` with the same commit id, so "is what I am looking at actually the
+latest code?" takes one request:
+
+```
+curl -s localhost:5000/__build          # or view-source and look for x-build
+```
+
+This is worth having because a page and the repository can disagree for entirely
+mundane reasons: the Replit workspace does not pull when a PR merges
+(`scripts/post-merge.sh` only installs dependencies), a running dev server keeps
+the modules it started with even after a pull, and an autoscale deployment
+serves whatever was last published. Set `BUILD_ID` in any environment where the
+build is detached from a checkout; otherwise it comes from `git rev-parse`.
+
 ## Re-syncing from the live site
 
 While WordPress is still the source of truth, pull its changes down with:

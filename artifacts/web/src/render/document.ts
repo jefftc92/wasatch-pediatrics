@@ -2,6 +2,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { renderHeader, type MenuState } from "./header.ts";
+import { buildMeta } from "../build.ts";
 import { renderFooter } from "./footer.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -59,6 +60,7 @@ export type DocumentOptions = {
 const SITE_ASSETS = [
   `<link rel='stylesheet' id='site-css' href='/assets/site.css' media='all' />`,
   `<script id="site-js" src="/assets/site.js" defer></script>`,
+  buildMeta,
 ].join("\n");
 
 /**
