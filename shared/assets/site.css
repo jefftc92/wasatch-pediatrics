@@ -80,24 +80,55 @@
   color: #f58220 !important;
 }
 
-/* The way out of the shortcut list, and the only pill in the panel — so it
-   reads as an action rather than as another thing to browse. The theme's
-   sub-menu rule sets display:block and a left padding on every link in here,
-   which knocks the label off centre, so both are restated. */
-.mega-cta-wrap {
+/*
+ * The way out of the shortcut list.
+ *
+ * It used to be a solid uppercase pill parked under the first column of
+ * shortcuts, which read as a stray widget: heavier than anything else in a
+ * panel that is otherwise quiet type, and anchored to nothing in particular.
+ * It is now the panel's footer — a hairline across the full width, and the
+ * link sitting on the right where the eye leaves the panel.
+ *
+ * The theme's `.mainnav .sub-menu > li a` rule (specificity 0,2,2) sets
+ * display, padding and colour on every link in here, so each is restated.
+ */
+.mega-foot {
+  display: flex;
+  justify-content: flex-end;
   margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #e4e4e4;
 }
 
 .mega-cta {
-  font-size: 15px !important;
-  padding: 7px 22px !important;
-  color: #ffffff !important;
-  display: inline-block !important;
-  text-align: center !important;
+  display: inline-flex !important;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 0 !important;
+  font-size: 16px !important;
+  line-height: 22px !important;
+  font-weight: 700 !important;
+  color: #2b93d1 !important;
+}
+
+.mega-cta-arrow {
+  width: 16px;
+  height: 16px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.18s ease;
 }
 
 .mega-cta:hover {
-  color: #2b93d1 !important;
+  color: #f58220 !important;
+}
+
+/* The nudge is the whole affordance — it says the link goes somewhere. */
+.mega-cta:hover .mega-cta-arrow {
+  transform: translateX(3px);
 }
 
 @media (min-width: 768px) {
@@ -184,18 +215,6 @@
     break-inside: avoid;
   }
 
-  /*
-   * Optical alignment: the pill carries 22px of padding, so aligning its box
-   * with the column put its label 23px right of the link text above it — the
-   * box lined up and the words did not. Pull it left by that padding so what
-   * you actually read lines up.
-   *
-   * Desktop only. On a phone the list already sits at the container edge, so
-   * the same shift would hang the pill's rounded end off the screen.
-   */
-  .mega-cta-wrap {
-    margin-left: -22px;
-  }
 }
 
 @media (max-width: 991px) and (min-width: 768px) {
@@ -662,8 +681,18 @@
     padding: 14px 0 !important;
   }
 
+  /*
+   * Stacked, so the footer is a row of its own at the end of the list rather
+   * than a thing off to one side, and tall enough to be a comfortable target.
+   */
+  .mega-foot {
+    justify-content: flex-start;
+    margin-top: 10px;
+    padding-top: 8px;
+  }
+
   .mega-cta {
-    padding: 13px 22px !important;
+    padding: 14px 0 !important;
   }
 
   /* Extends the burger's hit area without moving the bars inside it. */
