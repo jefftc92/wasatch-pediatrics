@@ -178,6 +178,43 @@
     break-inside: avoid;
   }
 
+  /*
+   * Hit areas for the top-level items.
+   *
+   * The bar is 60px tall but `#navwrap`'s 15px padding leaves the links only
+   * 35px of that, and `justify-content: space-between` puts the space between
+   * items outside every `li` — so the grey either side of a word, and the grey
+   * above and below it, belonged to nothing and the panel closed as soon as
+   * the pointer left the glyphs.
+   *
+   * The extender is a pseudo-element rather than real padding because padding
+   * would be flex layout the bar has to redistribute, which moves the words.
+   * This changes nothing about the layout: hit testing on a pseudo resolves to
+   * its own element, so the `li` still gets the mouseenter the theme listens
+   * for, and the link picks up the larger click target with it. Same trick as
+   * `#mobileburger:after`.
+   *
+   * 16px each side clears the narrowest gap between two items — 38px at 768px,
+   * where the type steps down — with room to spare, so two extenders never
+   * meet. The vertical reach has to cover the widest inset the type sizes
+   * produce (20px above, 23px below) and must not stop short at the bottom: a
+   * dead strip between the bar and the panel is the same bug one pixel wide.
+   * Overshooting lands in the panel's 32px of top padding, above its first row
+   * of links, where keeping the panel open is what you want anyway.
+   */
+  .mainnav > li > a {
+    position: relative;
+  }
+
+  .mainnav > li > a:before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    right: -16px;
+    bottom: -24px;
+    left: -16px;
+  }
+
   /* Tabbing into the panel opens it, so it is not hover-only. */
   .mainnav > li.mega:focus-within > .sub-menu.megamenu {
     display: block;
