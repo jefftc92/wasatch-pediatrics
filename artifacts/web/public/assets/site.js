@@ -77,8 +77,27 @@
         var gone = headerCta
           ? headerCta.getBoundingClientRect().bottom < 0
           : window.scrollY > 200;
-        dock.classList.toggle("is-shown", gone);
-        dock.classList.add("is-mini");
+        var shown = dock.classList.contains("is-shown");
+
+        if (gone && !shown) {
+          /*
+           * Show it in full first and fold on the next frame, so the label
+           * visibly collapses into the bubble. Setting both at once would give
+           * the browser nothing to animate between.
+           */
+          dock.classList.remove("is-mini");
+          dock.classList.add("is-shown");
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              if (dock.classList.contains("is-shown")) {
+                dock.classList.add("is-mini");
+              }
+            });
+          });
+        } else if (!gone && shown) {
+          // Unfold on the way back up, then hide once it has opened out.
+          dock.classList.remove("is-mini", "is-shown");
+        }
         return;
       }
       dock.classList.remove("is-shown");

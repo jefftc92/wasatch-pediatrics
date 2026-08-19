@@ -34,3 +34,17 @@ function readBuildId(): string {
 export const buildId = readBuildId();
 
 export const buildMeta = `<meta name="x-build" content="${buildId}" />`;
+
+/**
+ * This project's stylesheet and script, stamped with the build id.
+ *
+ * The version string is the point: `public/` is served with an hour of cache,
+ * so after a deploy a browser would happily keep yesterday's site.css against
+ * today's markup — which renders the floating button as a bare anchor and its
+ * icon as a 300px black rectangle. Changing the URL each build makes that
+ * impossible.
+ */
+export const siteAssets = [
+  `<link rel='stylesheet' id='site-css' href='/assets/site.css?v=${buildId}' media='all' />`,
+  `<script id="site-js" src="/assets/site.js?v=${buildId}" defer></script>`,
+].join("\n");
