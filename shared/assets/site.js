@@ -27,6 +27,38 @@
     }
   }
 
+  /* ------------------------------------------------------- sticky navbar -- */
+
+  /*
+   * Pin the grey nav bar once the page scrolls past it. The theme positions it
+   * absolutely, which cannot stick on its own, and the space it leaves behind
+   * is already reserved by the header's bottom margin — so switching to fixed
+   * moves nothing. Mobile is handled in CSS, where the whole header sticks.
+   */
+  var graynav = document.getElementById("graynav");
+  if (graynav) {
+    var wide = window.matchMedia("(min-width: 768px)");
+    var pinAt = 0;
+    var measure = function () {
+      graynav.classList.remove("is-stuck");
+      pinAt = graynav.getBoundingClientRect().top + window.scrollY;
+    };
+    var sync = function () {
+      if (!wide.matches) {
+        graynav.classList.remove("is-stuck");
+        return;
+      }
+      graynav.classList.toggle("is-stuck", window.scrollY > pinAt);
+    };
+    measure();
+    sync();
+    window.addEventListener("scroll", sync, { passive: true });
+    window.addEventListener("resize", function () {
+      measure();
+      sync();
+    });
+  }
+
   /* --------------------------------------------------- mobile dropdowns -- */
 
   /*
