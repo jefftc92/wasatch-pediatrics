@@ -71,38 +71,82 @@
    */
   var dock = document.querySelector(".ctadock");
   if (dock) {
+    var dockBtn = dock.querySelector(".ctadock-btn");
     var headerCta = document.querySelector(".header-cta");
+    var morphTimer = null;
+    var hideTimer = null;
+
+    /*
+     * Move the button between the header's pill and its resting corner.
+     *
+     * Order matters: the element is display:none until it is shown, and a
+     * transition cannot start from a state it held while hidden. So it is made
+     * visible, snapped to the far end with transitions off, and only then
+     * allowed to animate back. Both ends are measured at the moment of the
+     * switch rather than assumed.
+     */
+    var morph = function (from, fold) {
+      if (!from || (!from.width && !from.height)) {
+        dock.classList.toggle("is-mini", fold);
+        return;
+      }
+
+      dock.classList.remove("is-morphing");
+      dock.classList.toggle("is-mini", !fold);
+      void dockBtn.offsetWidth;
+
+      var to = dockBtn.getBoundingClientRect();
+      dockBtn.style.transform =
+        "translate(" +
+        Math.round(from.left - to.left) +
+        "px," +
+        Math.round(from.top - to.top) +
+        "px)";
+      void dockBtn.offsetWidth;
+
+      dock.classList.add("is-morphing");
+      dockBtn.style.transform = "";
+      dock.classList.toggle("is-mini", fold);
+
+      window.clearTimeout(morphTimer);
+      morphTimer = window.setTimeout(function () {
+        dock.classList.remove("is-morphing");
+      }, 460);
+    };
+
     var syncDock = function () {
       if (wide.matches) {
         var gone = headerCta
-          ? headerCta.getBoundingClientRect().bottom < 0
+          ? headerCta.getBoundingClientRect().bottom < 24
           : window.scrollY > 200;
         var shown = dock.classList.contains("is-shown");
 
         if (gone && !shown) {
-          /*
-           * Show it in full first and fold on the next frame, so the label
-           * visibly collapses into the bubble. Setting both at once would give
-           * the browser nothing to animate between.
-           */
-          dock.classList.remove("is-mini");
           dock.classList.add("is-shown");
-          requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              if (dock.classList.contains("is-shown")) {
-                dock.classList.add("is-mini");
-              }
-            });
-          });
+          morph(headerCta && headerCta.getBoundingClientRect(), true);
         } else if (!gone && shown) {
-          // Unfold on the way back up, then hide once it has opened out.
-          dock.classList.remove("is-mini", "is-shown");
+          /*
+           * Travel back to the header still folded and hand over to the pill,
+           * which is on screen again by then. Unfolding on the way up only
+           * competes with it.
+           */
+          morph(headerCta && headerCta.getBoundingClientRect(), true);
+          window.clearTimeout(hideTimer);
+          hideTimer = window.setTimeout(function () {
+            var back =
+              headerCta && headerCta.getBoundingClientRect().bottom >= 24;
+            if (wide.matches && back) {
+              dock.classList.remove("is-shown", "is-morphing");
+            }
+          }, 430);
         }
         return;
       }
-      dock.classList.remove("is-shown");
+
+      dock.classList.remove("is-shown", "is-morphing");
       dock.classList.toggle("is-mini", window.scrollY > 140);
     };
+
     syncDock();
     window.addEventListener("scroll", syncDock, { passive: true });
     window.addEventListener("resize", syncDock);
