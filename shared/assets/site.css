@@ -556,6 +556,20 @@
   }
 
   /*
+   * The bar is pinned to the top of every page now, so its height is a tax paid
+   * on every screen. The theme gives the logo 30px of margin top and bottom,
+   * which was two thirds of the 99px total; 14px brings the bar to 67px without
+   * touching the logo itself.
+   */
+  #logo {
+    margin: 14px 0 !important;
+  }
+
+  #topmenu {
+    top: 17px;
+  }
+
+  /*
    * #graynav is absolutely positioned, so it adds nothing to the page height —
    * with the header pinned, an open menu taller than the screen could not be
    * scrolled to at all and its lower items were simply unreachable. Give it its
@@ -563,9 +577,43 @@
    * below.
    */
   #graynav {
-    max-height: calc(100vh - 175px);
+    max-height: calc(100vh - 143px);
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  /*
+   * Touch targets. Every link in the menu was an inline anchor, so its tappable
+   * box was only as tall as the line of text: 17px for the top-level items and
+   * 29px inside a panel, against the 44px that is the usual minimum. The
+   * anchors become blocks with real padding, and the list items give up their
+   * own margins so the spacing does not double.
+   */
+  .mainnav > li {
+    margin: 0;
+  }
+
+  .mainnav > li > a {
+    display: block;
+    padding: 13px 0;
+  }
+
+  .mega-list a {
+    padding: 14px 0 !important;
+  }
+
+  .mega-cta {
+    padding: 13px 22px !important;
+  }
+
+  /* Extends the burger's hit area without moving the bars inside it. */
+  #mobileburger:after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    bottom: -7px;
+    left: -7px;
   }
 }
 
