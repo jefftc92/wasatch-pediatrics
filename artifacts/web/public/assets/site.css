@@ -84,7 +84,6 @@
    reads as an action rather than as another thing to browse. The theme's
    sub-menu rule sets display:block and a left padding on every link in here,
    which knocks the label off centre, so both are restated. */
-/* Flush with the first column of shortcuts, so it lines up with something. */
 .mega-cta-wrap {
   margin-top: 24px;
 }
@@ -184,6 +183,19 @@
   .mega-list-split li {
     break-inside: avoid;
   }
+
+  /*
+   * Optical alignment: the pill carries 22px of padding, so aligning its box
+   * with the column put its label 23px right of the link text above it — the
+   * box lined up and the words did not. Pull it left by that padding so what
+   * you actually read lines up.
+   *
+   * Desktop only. On a phone the list already sits at the container edge, so
+   * the same shift would hang the pill's rounded end off the screen.
+   */
+  .mega-cta-wrap {
+    margin-left: -22px;
+  }
 }
 
 @media (max-width: 991px) and (min-width: 768px) {
@@ -227,14 +239,103 @@
   }
 }
 
+/* ------------------------------------------------------- mobile hero --- */
+
+/*
+ * On a phone each slide renders a second .heromessage.mobile block: the mobile
+ * artwork as a plain <img>, then the heading, the line under it and the button
+ * stacked beneath. Two things went wrong with that.
+ *
+ * The text sat on whatever the desktop banner's centre crop happened to be —
+ * a flat pale area — so white type was close to invisible. And every slide came
+ * out a different height because the headings differ in length, so the page
+ * jumped each time the carousel advanced.
+ *
+ * The artwork is a designed graphic rather than a photograph, so it is shown
+ * whole rather than used as a backdrop with type over it: the picture keeps the
+ * top of the slide, and the words sit under it on brand blue. A fixed slide
+ * height keeps every banner the same size, so nothing below the hero moves.
+ */
+@media (max-width: 767px) {
+  .homeslide {
+    /*
+     * Matches the message exactly. Left to itself the slide ran 35px taller,
+     * from the line box the whitespace after the container generates at the
+     * theme's 22px hero font size.
+     */
+    height: 470px;
+    overflow: hidden;
+    /* The desktop artwork is the wrong crop here, and it is set inline. */
+    background-image: none !important;
+    background-color: #2b93d1 !important;
+  }
+
+  .heromessage.mobile {
+    height: 470px;
+    /* The theme's .mobile utility is display: block !important. */
+    display: flex !important;
+    flex-direction: column;
+    padding-bottom: 26px;
+    overflow: hidden;
+  }
+
+  .heromessage.mobile img {
+    display: block;
+    width: 100%;
+    height: 196px;
+    object-fit: cover;
+    object-position: center;
+    flex: 0 0 auto;
+    margin-bottom: 22px;
+  }
+
+  .heromessage.mobile h1 {
+    font-size: 30px;
+    line-height: 36px;
+    margin-bottom: 10px;
+  }
+
+  .heromessage.mobile p {
+    font-size: 17px;
+    margin-bottom: 2px;
+  }
+
+  /* A flex item, and an odd one — it fought the button's margin-top: auto. */
+  .heromessage.mobile br {
+    display: none;
+  }
+
+  /*
+   * The slide's button is .btn.blue, which disappears on the blue panel. White
+   * with blue type keeps it a button. margin-top: auto lands it at the same
+   * height on every slide, so it does not hop about as the carousel advances.
+   */
+  .heromessage.mobile .btn {
+    align-self: flex-start;
+    margin-top: auto;
+    background: #ffffff !important;
+    color: #2b93d1 !important;
+    font-size: 18px;
+    padding: 8px 26px;
+  }
+
+  .heromessage.mobile .btn:hover {
+    background: #f58220 !important;
+    color: #ffffff !important;
+  }
+}
+
 /* ------------------------------------------------------------ header CTA -- */
 
 /*
- * Scheduling used to sit in a footer row inside the services panel, which meant
- * it was only reachable once you opened that one menu. It belongs in the
- * header, where it is on every page at every width: left of the social icons on
- * desktop, left of the burger on a phone, where it shortens to "Schedule" so
- * the logo still has room.
+ * Scheduling is the practice's main call to action, so it is on every page
+ * rather than only inside one menu — but where it goes depends on the width.
+ *
+ * On a desktop it sits in the header, left of the social icons. On a phone that
+ * put it between the logo and the burger, where there is no room for it: it
+ * crowded both and had to shrink to "Schedule" to fit at all. There it becomes
+ * a docked bar at the bottom of the screen instead, which is both out of the
+ * way and where a thumb already is.
  */
 
 .header-cta {
@@ -254,16 +355,19 @@
   display: none;
 }
 
+/* Shown only on a phone; see below. */
+.ctadock {
+  display: none;
+}
+
 /*
- * The long label only fits alongside the full-width logo above 991px. Between
- * 768 and 991 the theme still shows the social icons and the search, and the
- * logo is at its widest, so the label shortens there too — measured: at 820px
- * the long label put the button straight through the logo.
+ * Between 768 and 991 the theme shows its widest logo and the social icons, and
+ * the full label crossed about 200px of the logo — measured. Shorten it there.
  */
 @media (max-width: 991px) {
   .header-cta {
     font-size: 15px !important;
-    padding: 6px 18px !important;
+    padding: 6px 16px !important;
     margin-right: 14px;
   }
 
@@ -277,53 +381,37 @@
 }
 
 @media (max-width: 767px) {
-  /*
-   * The theme floats the burger right inside an absolutely positioned #topmenu.
-   * Adding a second floated child there put the burger over the logo, so lay
-   * the two out as a flex row instead: CTA first, burger rightmost where people
-   * expect it. #topmenu stays absolute and sizes to its contents.
-   */
-  #topmenu {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 14px;
-  }
-
   .header-cta {
-    float: none;
-    margin: 0;
-    font-size: 14px !important;
-    padding: 6px 15px !important;
+    display: none;
   }
 
-  #mobileburger {
-    float: none;
-    margin-top: 0;
-    flex: 0 0 auto;
-  }
-}
-
-/* Below this the logo and the CTA start to meet, so give the logo less room. */
-@media (max-width: 420px) {
-  #logo img {
-    width: 168px;
-  }
-}
-
-/* On the narrowest phones both have to give: measured clear at 320px. */
-@media (max-width: 374px) {
-  #logo img {
-    width: 118px;
+  .ctadock {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    background: #ffffff;
+    box-shadow: 0 -4px 14px rgba(33, 33, 33, 0.18);
+    padding: 10px 14px;
   }
 
-  #topmenu {
-    gap: 10px;
+  .ctadock .btn {
+    display: block;
+    text-align: center;
+    font-size: 17px !important;
+    padding: 12px 0 !important;
+    color: #ffffff !important;
   }
 
-  .header-cta {
-    font-size: 13px !important;
-    padding: 5px 12px !important;
+  .ctadock .btn:hover {
+    color: #8dc63f !important;
+  }
+
+  /* So the dock never covers the end of the page. */
+  body {
+    padding-bottom: 74px;
   }
 }
 
