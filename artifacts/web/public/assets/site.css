@@ -375,11 +375,6 @@
   display: none;
 }
 
-/* Shown only on a phone; see below. */
-.ctadock {
-  display: none;
-}
-
 /*
  * Between 768 and 991 the theme shows its widest logo and the social icons, and
  * the full label crossed about 200px of the logo — measured. Shorten it there.
@@ -400,38 +395,133 @@
   }
 }
 
+/* On a phone the floating button below takes over entirely. */
 @media (max-width: 767px) {
   .header-cta {
     display: none;
   }
 
-  .ctadock {
-    display: block;
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 999;
-    background: #ffffff;
-    box-shadow: 0 -4px 14px rgba(33, 33, 33, 0.18);
-    padding: 10px 14px;
-  }
-
-  .ctadock .btn {
-    display: block;
-    text-align: center;
-    font-size: 17px !important;
-    padding: 12px 0 !important;
-    color: #ffffff !important;
-  }
-
-  .ctadock .btn:hover {
-    color: #8dc63f !important;
-  }
-
-  /* So the dock never covers the end of the page. */
+  /* So the expanded bar never covers the end of the page. */
   body {
-    padding-bottom: 74px;
+    padding-bottom: 88px;
+  }
+}
+
+/*
+ * The floating scheduling button.
+ *
+ * On a phone it starts as a full-width bar and folds into a circle in the
+ * bottom-right corner once the page scrolls, so it stays reachable without
+ * holding a strip of the screen the whole way down. Scroll back to the top and
+ * it opens out again.
+ *
+ * On a wide screen the header carries the pill, so the button only appears once
+ * that has scrolled out of view — and it appears already folded, since the point
+ * there is a reminder rather than a banner.
+ *
+ * The button shrinks rather than moving: the row is anchored to the right, so
+ * losing the label carries it into the corner on its own.
+ */
+
+.ctadock {
+  display: none;
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  z-index: 999;
+  justify-content: flex-end;
+  /* So the strip either side of a folded button does not eat clicks. */
+  pointer-events: none;
+}
+
+.ctadock-btn {
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  height: 56px;
+  padding: 0 24px;
+  border-radius: 28px;
+  background: #8dc63f;
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(33, 33, 33, 0.28);
+  transition:
+    width 0.28s ease,
+    padding 0.28s ease,
+    gap 0.28s ease,
+    background 0.2s ease;
+}
+
+.ctadock-btn:hover {
+  background: #f58220;
+  color: #ffffff !important;
+}
+
+.ctadock-icon {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 auto;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.ctadock-label {
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 320px;
+  transition:
+    max-width 0.28s ease,
+    opacity 0.18s ease;
+}
+
+.ctadock.is-mini .ctadock-btn {
+  width: 56px;
+  padding: 0;
+  gap: 0;
+}
+
+.ctadock.is-mini .ctadock-label {
+  max-width: 0;
+  opacity: 0;
+}
+
+@media (max-width: 767px) {
+  .ctadock {
+    display: flex;
+  }
+}
+
+@media (min-width: 768px) {
+  /* Only ever the folded form here, faded in once the header pill is gone. */
+  .ctadock {
+    left: auto;
+    right: 24px;
+    bottom: 24px;
+  }
+
+  .ctadock.is-shown {
+    display: flex;
+  }
+
+  .ctadock-btn {
+    width: 56px;
+    padding: 0;
+    gap: 0;
+  }
+
+  .ctadock-label {
+    max-width: 0;
+    opacity: 0;
   }
 }
 
