@@ -16,7 +16,7 @@ import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { renderFooter } from "./footer.ts";
 import { renderHeader, type MenuState } from "./header.ts";
-import { buildMeta } from "../build.ts";
+import { buildMeta, siteAssets } from "../build.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const AUTHORED = join(here, "..", "authored");
@@ -105,7 +105,8 @@ export function renderGeneratedDocument(page: GeneratedPage): string {
     .replaceAll("{{TITLE}}", escapeAttribute(page.title))
     .replaceAll("{{DESCRIPTION}}", escapeAttribute(page.description))
     .replaceAll("{{CANONICAL}}", SITE + page.route)
-    .replace("{{JSONLD}}", schema(page));
+    .replace("{{JSONLD}}", schema(page))
+    .replace("{{SITE_ASSETS}}", siteAssets);
 
   return `<!doctype html>
 <html lang="en-US">
