@@ -215,7 +215,13 @@
 }
 
 @media (max-width: 767px) {
-  /* The two groups stack inside the theme's burger menu, each with a heading. */
+  /*
+   * Inside the burger menu a panel's links were the same size and weight as the
+   * top-level items above them, so there was no telling a menu from what was
+   * inside it. The panel now sits on its own tinted, indented block with a rule
+   * down its left edge, and its links are a step smaller than the item that
+   * opened them.
+   */
   .megamenu .container {
     width: 100%;
     max-width: none;
@@ -223,19 +229,33 @@
     padding-right: 0;
   }
 
-  /* Same on a phone: groups sit on the menu itself, no cards. */
+  .mainnav > li.mega > .sub-menu.megamenu {
+    background: #ffffff;
+    border-left: 3px solid #2b93d1;
+    border-radius: 0 12px 12px 0;
+    margin: 8px 0 6px 14px;
+    padding: 14px 16px 10px 16px;
+  }
+
   .mega-col {
-    padding: 4px 0 10px 0;
+    padding: 0;
     margin: 0;
   }
 
   .mega-col + .mega-col {
     border-top: 1px solid #e4e4e4;
-    padding-top: 16px;
+    margin-top: 14px;
+    padding-top: 14px;
   }
 
   .mega-list a {
-    padding: 7px 0 !important;
+    padding: 6px 0 !important;
+    font-size: 16px !important;
+  }
+
+  /* The item that opens a panel reads as the parent of what is inside it. */
+  .mainnav > li.menu-item-has-children > a {
+    font-weight: 700;
   }
 }
 
@@ -412,6 +432,50 @@
   /* So the dock never covers the end of the page. */
   body {
     padding-bottom: 74px;
+  }
+}
+
+/* --------------------------------------------------------- sticky chrome -- */
+
+/*
+ * The theme positions #graynav absolutely under the logo, so the nav scrolls
+ * away with the page and there is no way back to it without scrolling to the
+ * top. Pin it instead.
+ *
+ * On a wide screen only the grey bar pins: site.js adds .is-stuck once the page
+ * has scrolled past it. The space it occupied is already reserved by the
+ * header's 60px bottom margin, so nothing jumps when it switches to fixed.
+ *
+ * On a phone #graynav is hidden until the burger opens, so the whole header
+ * sticks instead — that keeps the burger, the logo and the search within reach.
+ */
+@media (min-width: 768px) {
+  #graynav.is-stuck {
+    position: fixed;
+    top: 0;
+    z-index: 200;
+  }
+}
+
+@media (max-width: 767px) {
+  #header {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    background: #ffffff;
+  }
+
+  /*
+   * #graynav is absolutely positioned, so it adds nothing to the page height —
+   * with the header pinned, an open menu taller than the screen could not be
+   * scrolled to at all and its lower items were simply unreachable. Give it its
+   * own scroll instead, bounded by the header above and the docked button
+   * below.
+   */
+  #graynav {
+    max-height: calc(100vh - 175px);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
