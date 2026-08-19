@@ -239,5 +239,6 @@ export function renderHeader(menu: MenuState = NO_MENU_STATE): string {
 				</div>
 			</div>
 		</div>
-	</header>`;
+	</header>
+	<div class="ctadock"><a class="btn green" href="/contact-us/">Schedule An Appointment</a></div>`;
 }
