@@ -52,8 +52,8 @@ export const PILLAR_MENU_IDS: Record<string, string> = {
  * Kept deliberately spare — a menu is read at a glance, so it carries names and
  * nothing else. Listing every service under every pillar turned it into a
  * directory; the four categories teach how care is organised, the shortcuts
- * cover the common journeys, and the pill leads to /services/, which carries
- * the full filterable list.
+ * cover the common journeys, and the link below them leads to /services/, which
+ * carries the full filterable list.
  *
  * Nothing else lives here. Find a provider and the symptom checker are already
  * in the main nav under Providers and Resources, and scheduling now sits in the
@@ -104,8 +104,8 @@ ${body}
  * Kept deliberately spare — a menu is read at a glance, so it carries names and
  * nothing else. Listing every service under every pillar turned it into a
  * directory; the four categories teach how care is organised, the shortcuts
- * cover the common journeys, and the pill leads to /services/, which carries
- * the full filterable list.
+ * cover the common journeys, and the link below them leads to /services/, which
+ * carries the full filterable list.
  *
  * Nothing else lives here. Find a provider and the symptom checker are already
  * in the main nav under Providers and Resources, and scheduling sits in the
@@ -141,10 +141,10 @@ function servicesPanel(item: NavItem, menu: MenuState): string {
 				<ul class="mega-list mega-list-split">
 					${popular}
 				</ul>
-				<div class="mega-cta-wrap">
-					<a class="btn blue mega-cta" href="${ALL_SERVICES_HREF}">View All Services</a>
-				</div>
 			</div>
+		</div>
+		<div class="mega-foot">
+			<a class="mega-cta" href="${ALL_SERVICES_HREF}">View all services<svg class="mega-cta-arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3l5 5-5 5"></path></svg></a>
 		</div>`,
   );
 }
