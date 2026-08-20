@@ -100,6 +100,9 @@ The dentistry site has around seventy pages three levels below its pillars —
 Dental Emergencies alone breaks into trauma, toothache, infection, orthodontic
 and treatments, each with its own pages. None of that can go in a dropdown.
 
+Sixty of those pages are now here, under Pediatric Dentistry, Orthodontics and
+Dental Emergencies. See "Migrating the dentistry copy" below.
+
 The structure follows the pattern large health systems use (Intermountain's is
 the closest analogue):
 
@@ -138,6 +141,32 @@ CTA. No new colours or shapes were introduced, and `script.js` was not touched �
 the panel is still a `.sub-menu`, so the theme's own hover and mobile-tap
 handling opens it. Tabbing into it opens it too, via `:focus-within`.
 
+### Migrating the dentistry copy
+
+The dentistry site is a separate Astro build with its own design language:
+Tailwind cards, an icon set, photo splits, its own type scale. Its pages are
+typed props to two layouts rather than hand-written markup, which means the copy
+can be read out of it structurally instead of scraped.
+
+`tools/import-dentistry.mjs` does that and writes `src/data/dentalContent.ts`:
+
+```
+node tools/import-dentistry.mjs ../path/to/the/dentistry/checkout
+```
+
+What crosses the boundary is the words and their shape — leads, promises,
+headings, paragraphs, step sequences, callouts, FAQs. Classes, icon names and
+photo splits are dropped there, and inline links are rewritten onto this site's
+routes. `src/render/dental.ts` then renders all of it in this site's own
+vocabulary: the same `.pagebody` prose, the grey panel `.svc-card` already uses,
+the ruled note `.svc-pending` already uses, in the three brand colours. So a
+migrated page reads as a Wasatch Pediatrics page about teeth, not as a piece of
+the dentistry site pasted in.
+
+Re-run the importer when the dentistry copy changes. Do not hand-edit its
+output — a page that needs different words needs them on the dentistry site, or
+it needs to stop being imported.
+
 ### Pages
 
 `/behavioral-health/` and `/dentistry-orthodontics/` keep the landing page copied
@@ -152,8 +181,13 @@ offices that offer it, the providers who staff it, and links across the pillar.
   pages, drift included.
 - The schedule button points at `/contact-us/` rather than the location-specific
   Phreesia link.
-- The pages below Dental Emergencies are structural: the copy for them exists on
-  the dentistry site and still has to be migrated. They say so on the page.
+- The dentistry pages carry the dentistry site's phone number, (801) 676-3700,
+  because that is the number its copy says to call. Every other page on this
+  site points at `/contact-us/`. If the dental office answers on the Southpoint
+  line instead, the copy needs a pass.
+- The dentistry copy is written for West Jordan, which is where the dental
+  office is (Southpoint, 9071 S 1300 W). Headings say so, which reads correctly
+  for those pages and differently from the rest of the site.
 - Services without copy on the live site carry standing text.
 
 ## Verification

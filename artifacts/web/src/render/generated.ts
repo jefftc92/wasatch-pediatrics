@@ -59,6 +59,8 @@ export type GeneratedPage = {
   /** Home is implied; pass the rest of the trail, ending with this page. */
   breadcrumbs: Crumb[];
   content: string;
+  /** Extra nodes for the JSON-LD graph, e.g. the FAQPage a migrated page earns. */
+  extraSchema?: object[];
 };
 
 function schema(page: GeneratedPage): string {
@@ -95,6 +97,7 @@ function schema(page: GeneratedPage): string {
         name: "Wasatch Pediatrics",
         inLanguage: "en-US",
       },
+      ...(page.extraSchema ?? []),
     ],
   });
 }

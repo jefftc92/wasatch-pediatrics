@@ -35,6 +35,7 @@ import {
 } from "../data/services.ts";
 import { providers } from "../data/providers.ts";
 import { PILLAR_MENU_IDS } from "./header.ts";
+import { dentalFaqSchema, dentalPage, renderDentalBody } from "./dental.ts";
 import type { GeneratedPage } from "./generated.ts";
 import type { SearchEntry } from "../data/searchIndex.ts";
 import {
@@ -206,11 +207,15 @@ export function renderServicePage(service: Service): string {
   ];
 
   // Services with the practice's own copy get the meta description as a lead
-  // paragraph above it; the rest would only be repeating themselves.
-  const body = service.bodyFile
-    ? `<p class="svc-lead">${escapeAttribute(service.description)}</p>
+  // paragraph above it; the rest would only be repeating themselves. Copy
+  // migrated from the dentistry site carries its own lead and wins over both.
+  const migrated = dentalPage(serviceHref(service));
+  const body = migrated
+    ? renderDentalBody(migrated)
+    : service.bodyFile
+      ? `<p class="svc-lead">${escapeAttribute(service.description)}</p>
 					${authoredBody(service.bodyFile)}`
-    : `<p>${escapeAttribute(service.intro ?? service.blurb)}</p>`;
+      : `<p>${escapeAttribute(service.intro ?? service.blurb)}</p>`;
 
   const team = providersForService(service);
   const shown = team.slice(0, 8);
@@ -382,6 +387,8 @@ export function renderTopicPage(service: Service, topic: Topic): string {
     { name: topic.name },
   ];
 
+  const migrated = dentalPage(topicHref(service, topic));
+
   const items = topic.items.length
     ? `<div class="graybg padme90 svc-index">
 	<div class="container">
@@ -414,7 +421,7 @@ ${heroSection(escapeAttribute(topic.name), crumbs)}
 		<div class="row">
 			<div class="col-lg-8">
 				<div class="pagebody" style="margin-top:0px">
-					<p>${escapeAttribute(topic.intro)}</p>
+					${migrated ? renderDentalBody(migrated) : `<p>${escapeAttribute(topic.intro)}</p>`}
 				</div>
 			</div>
 			<div class="col-lg-4">
@@ -452,6 +459,8 @@ export function renderTopicItemPage(
     { name: item.name },
   ];
 
+  const migrated = dentalPage(topicItemHref(service, topic, item));
+
   return `${nav}
 ${heroSection(escapeAttribute(item.name), crumbs)}
 <div class="whitebg padme90 svc-body">
@@ -459,11 +468,15 @@ ${heroSection(escapeAttribute(item.name), crumbs)}
 		<div class="row">
 			<div class="col-lg-8">
 				<div class="pagebody" style="margin-top:0px">
-					<p class="svc-lead">${escapeAttribute(item.blurb)}</p>
+					${
+            migrated
+              ? renderDentalBody(migrated)
+              : `<p class="svc-lead">${escapeAttribute(item.blurb)}</p>
 					<p class="svc-pending">This page is waiting on the practice's own words. The
 					copy for it already exists on the dentistry site and is queued for
 					migration — the page, its place in the menu and its links are in
-					place so the copy can drop straight in.</p>
+					place so the copy can drop straight in.</p>`
+          }
 				</div>
 			</div>
 			<div class="col-lg-4">
@@ -602,6 +615,7 @@ export function serviceDocument(
       { name: service.name },
     ],
     content: renderServicePage(service),
+    ...migratedMeta(serviceHref(service)),
   };
 }
 
@@ -625,6 +639,7 @@ export function topicDocument(
       { name: topic.name },
     ],
     content: renderTopicPage(service, topic),
+    ...migratedMeta(topicHref(service, topic)),
   };
 }
 
@@ -649,6 +664,27 @@ export function topicItemDocument(
       { name: item.name },
     ],
     content: renderTopicItemPage(service, topic, item),
+    ...migratedMeta(topicItemHref(service, topic, item)),
+  };
+}
+
+
+/**
+ * What a migrated page contributes to its document beyond the body: the
+ * dentistry site's own meta description, which is written for the page rather
+ * than reused from a card blurb, and a FAQPage node for the questions it
+ * answers. Returns nothing for a route with no migrated copy.
+ */
+function migratedMeta(
+  route: string,
+): { description?: string; extraSchema?: object[] } {
+  const migrated = dentalPage(route);
+  if (!migrated) return {};
+
+  const faq = dentalFaqSchema(migrated);
+  return {
+    ...(migrated.description ? { description: migrated.description } : {}),
+    ...(faq ? { extraSchema: [faq] } : {}),
   };
 }
 
@@ -749,7 +785,52 @@ export function serviceSearchEntries(): SearchEntry[] {
           .join(" ")}`,
       ),
     ),
+    /*
+     * The pages below a service. These carry most of the dentistry copy, and
+     * without them a search for "knocked-out tooth" reached the pillar and
+     * stopped. A migrated page is searched on its own words; one still waiting
+     * on copy has only its name and blurb to offer.
+     */
+    ...services.flatMap((service) =>
+      (service.topics ?? []).flatMap((topic) => [
+        entry(
+          topicHref(service, topic),
+          topic.name,
+          dentalPage(topicHref(service, topic))?.description ??
+            topic.description,
+          searchText(topicHref(service, topic), topic.intro),
+        ),
+        ...topic.items.map((item) =>
+          entry(
+            topicItemHref(service, topic, item),
+            item.name,
+            dentalPage(topicItemHref(service, topic, item))?.description ??
+              item.blurb,
+            searchText(topicItemHref(service, topic, item), item.blurb),
+          ),
+        ),
+      ]),
+    ),
   ];
+}
+
+/** Everything a migrated page says, flattened; its blurb if it has no copy. */
+function searchText(route: string, fallback: string): string {
+  const migrated = dentalPage(route);
+  if (!migrated) return fallback;
+
+  return [
+    migrated.lead,
+    ...(migrated.promises ?? []).map((p) => `${p.title} ${p.text}`),
+    ...migrated.sections.flatMap((section) => [
+      section.heading,
+      ...(section.body ?? []),
+      ...(section.steps ?? []).map((step) => `${step.title} ${step.text}`),
+      section.callout ? `${section.callout.title} ${section.callout.text}` : "",
+    ]),
+    migrated.reassurance ?? "",
+    ...(migrated.faqs ?? []).map((f) => `${f.q} ${f.a}`),
+  ].join(" ");
 }
 
 /** Every route the merged search index should describe rather than the copy. */
