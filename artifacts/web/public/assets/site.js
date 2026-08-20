@@ -281,6 +281,11 @@
     var count = document.querySelector(".loc-count");
     var emptyNote = document.querySelector(".loc-empty");
     var select = document.getElementById("loc-service");
+    var keyBox = document.querySelector(".loc-key");
+    var keyBtns = Array.prototype.slice.call(
+      document.querySelectorAll(".loc-key-btn"),
+    );
+    var care = el.getAttribute("data-care") || "";
 
     var opts = {
       mapTypeControl: false,
@@ -373,21 +378,52 @@
       if (map.getZoom() > 11) map.setZoom(11);
     });
 
-    function apply(slug) {
+    /*
+     * One filter, asked two ways. The select names a single service; the key
+     * names a whole care type. Choosing in one clears the other, because two
+     * live filters on one map is a question nobody can answer by looking.
+     *
+     * A pin that does not match fades rather than disappearing: an office that
+     * does not do the thing you asked for is still an office, and seeing it
+     * greyed says more than seeing nothing.
+     */
+    function apply(serviceSlug, careSlug) {
       var shown = 0;
+      var label = null;
+
       offices.forEach(function (office) {
-        var match = !slug || office.services.indexOf(slug) !== -1;
+        var match = true;
+        if (serviceSlug) match = office.services.indexOf(serviceSlug) !== -1;
+        else if (careSlug) match = office.cares.indexOf(careSlug) !== -1;
         if (match) shown++;
         setDim(office, markers[office.slug], !match);
       });
+
       cards.forEach(function (card) {
-        var list = (card.getAttribute("data-services") || "").split(" ");
-        card.hidden = Boolean(slug) && list.indexOf(slug) === -1;
+        var hide = false;
+        if (serviceSlug) {
+          hide = (card.getAttribute("data-services") || "").split(" ").indexOf(serviceSlug) === -1;
+        } else if (careSlug) {
+          hide = (card.getAttribute("data-cares") || "").split(" ").indexOf(careSlug) === -1;
+        }
+        card.hidden = hide;
       });
+
+      keyBtns.forEach(function (btn) {
+        btn.setAttribute("aria-pressed", String(btn.getAttribute("data-care") === careSlug));
+      });
+      if (keyBox) keyBox.classList.toggle("has-choice", Boolean(careSlug));
+
+      if (serviceSlug && select && select.selectedOptions[0]) {
+        label = select.selectedOptions[0].text;
+      } else if (careSlug) {
+        var chosen = document.querySelector('.loc-key-btn[data-care="' + careSlug + '"]');
+        if (chosen) label = chosen.textContent.trim();
+      }
+
       if (emptyNote) emptyNote.hidden = shown > 0;
       if (count) {
-        var label = select && select.selectedOptions[0] && select.selectedOptions[0].text;
-        count.textContent = !slug
+        count.textContent = !label
           ? "All eight offices."
           : shown === 0
             ? "No office currently offers " + label + "."
@@ -396,6 +432,16 @@
               : shown + " of 8 offices offer " + label + ".";
       }
       info.close();
+    }
+
+    function remember(serviceSlug, careSlug) {
+      if (!window.history || !window.history.replaceState) return;
+      var url = serviceSlug
+        ? "?service=" + encodeURIComponent(serviceSlug)
+        : careSlug
+          ? "?care=" + encodeURIComponent(careSlug)
+          : window.location.pathname;
+      window.history.replaceState({}, "", url);
     }
 
     if (select) {
@@ -408,18 +454,22 @@
         });
       }
       select.addEventListener("change", function () {
-        var slug = select.value;
-        apply(slug);
-        /* The filter is a real URL, so a filtered map can be linked and shared. */
-        if (window.history && window.history.replaceState) {
-          window.history.replaceState(
-            {},
-            "",
-            slug ? "?service=" + encodeURIComponent(slug) : window.location.pathname,
-          );
-        }
+        care = "";
+        apply(select.value, "");
+        remember(select.value, "");
       });
     }
+
+    keyBtns.forEach(function (btn) {
+      btn.addEventListener("click", function (event) {
+        event.preventDefault();
+        var wanted = btn.getAttribute("data-care");
+        care = care === wanted ? "" : wanted;
+        if (select) select.value = "";
+        apply("", care);
+        remember("", care);
+      });
+    });
 
     document.addEventListener("click", function (event) {
       var jump = event.target.closest && event.target.closest("[data-office-jump]");
@@ -431,7 +481,7 @@
       card.focus({ preventScroll: true });
     });
 
-    apply(el.getAttribute("data-active") || "");
+    apply(el.getAttribute("data-active") || "", care);
   }
 
   /**
