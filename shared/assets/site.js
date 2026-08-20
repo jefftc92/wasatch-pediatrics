@@ -282,8 +282,6 @@
     var emptyNote = document.querySelector(".loc-empty");
     var select = document.getElementById("loc-service");
 
-    el.classList.add("is-ready");
-
     var opts = {
       mapTypeControl: false,
       streetViewControl: false,
@@ -437,32 +435,69 @@
   }
 
   /**
-   * Deferred to the load event, so the map can never hold the page hostage.
+   * When the map is built, and why it waits.
    *
-   * Scripts and images requested before that event are subresources that gate
-   * it, so a slow maps host — or a blocker that swallows the domain outright —
-   * would leave the visitor staring at a spinner with the whole page underneath
-   * it. Asking for Google Maps afterwards means the page is already usable, and
-   * everything the map shows is in the HTML regardless.
+   * Google bills Dynamic Maps per successful map load — one billable event each
+   * time `new google.maps.Map()` runs. Everything after that is free: panning,
+   * zooming, the markers, the info windows, the filter redrawing every pin. So
+   * the only number worth reducing is how often a map gets created at all, and
+   * the answer is not to create one for somebody who never looks at it.
+   *
+   * Two gates, in order:
+   *
+   * 1. The load event, so the map can never hold the page hostage. Scripts
+   *    requested before it are subresources that gate it, so a slow maps host —
+   *    or a blocker that swallows the domain outright — would leave the visitor
+   *    staring at a spinner with the whole page underneath it.
+   *
+   * 2. The map scrolling into view. It sits below the intro and the filter, so
+   *    somebody who lands on the page, reads an address and leaves never costs
+   *    anything, while anybody who actually scrolls to it gets it — loading
+   *    300px early, so it is drawn by the time it arrives rather than appearing
+   *    after it. Where IntersectionObserver is missing, it just loads.
+   *
+   * Everything the map shows is in the HTML either way, so a visitor who never
+   * triggers it still gets all eight offices, their addresses, their phone
+   * numbers and everything they offer.
    */
   function whenLoaded(fn) {
     if (document.readyState === "complete") fn();
     else window.addEventListener("load", fn);
   }
 
+  function whenSeen(el, fn) {
+    if (!("IntersectionObserver" in window)) {
+      fn();
+      return;
+    }
+    var seen = false;
+    var watcher = new IntersectionObserver(
+      function (entries) {
+        if (seen || !entries.some(function (e) { return e.isIntersecting; })) return;
+        seen = true;
+        watcher.disconnect();
+        fn();
+      },
+      { rootMargin: "300px 0px" },
+    );
+    watcher.observe(el);
+  }
+
   if (mapEl && mapEl.getAttribute("data-maps-key")) {
     whenLoaded(function () {
-      loadGoogleMaps(
-        mapEl.getAttribute("data-maps-key"),
-        function () {
-          initMap(mapEl);
-        },
-        function () {
-          mapEl.classList.add("is-off");
-          mapEl.innerHTML =
-            '<p class="loc-map-off">The map could not load just now. Every office is listed below with its address, phone number and everything it offers.</p>';
-        },
-      );
+      whenSeen(mapEl, function () {
+        loadGoogleMaps(
+          mapEl.getAttribute("data-maps-key"),
+          function () {
+            initMap(mapEl);
+          },
+          function () {
+            mapEl.classList.add("is-off");
+            mapEl.innerHTML =
+              '<p class="loc-map-off">The map could not load just now. Every office is listed below with its address, phone number and everything it offers.</p>';
+          },
+        );
+      });
     });
   }
 
