@@ -292,6 +292,13 @@
       streetViewControl: false,
       fullscreenControl: true,
       zoomControl: true,
+      /*
+       * Google's default on a scrollable page is "cooperative": the wheel
+       * scrolls the page and only zooms while ctrl is held, which is a rule
+       * nobody is told. "greedy" makes the wheel zoom whenever the pointer is
+       * over the map, which is what a map is expected to do.
+       */
+      gestureHandling: "greedy",
       /* The practice is on the Wasatch Front; nobody needs to pan to Kansas. */
       restriction: {
         latLngBounds: { north: 42.2, south: 39.4, west: -113.2, east: -110.2 },
