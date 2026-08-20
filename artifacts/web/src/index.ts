@@ -29,6 +29,7 @@ import {
 } from "./render/services.ts";
 import { serviceBySlug } from "./data/services.ts";
 import { LOCATIONS_HREF, locationsDocument } from "./render/locations.ts";
+import { RESOURCES_HREF, resourcesDocument } from "./render/resources.ts";
 import { buildId } from "./build.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -106,6 +107,15 @@ app.get("/locations{/}", (request, response) => {
   const service =
     typeof request.query.service === "string" ? request.query.service : "";
   response.type("html").send(renderGeneratedDocument(locationsDocument(service)));
+});
+
+app.get("/resources{/}", (request, response) => {
+  if (request.path !== RESOURCES_HREF) {
+    response.redirect(301, RESOURCES_HREF);
+    return;
+  }
+
+  response.type("html").send(renderGeneratedDocument(resourcesDocument()));
 });
 
 app.get("/{*path}", (request, response, next) => {

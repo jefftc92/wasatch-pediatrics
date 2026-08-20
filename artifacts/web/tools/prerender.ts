@@ -54,6 +54,7 @@ import {
   serviceRoutes,
 } from "../src/render/services.ts";
 import { locationsDocument } from "../src/render/locations.ts";
+import { resourcesDocument } from "../src/render/resources.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(here, "..");
@@ -185,6 +186,10 @@ for (const page of contentPages) {
 // The locations map. Only the unfiltered view: a static host ignores the query
 // string, and the script filters in the browser anyway.
 write("/locations/", renderGeneratedDocument(locationsDocument("")));
+
+// The resources index. Like the two above it is its own route rather than an
+// entry in `generated`, so it has to be asked for by name here too.
+write("/resources/", renderGeneratedDocument(resourcesDocument()));
 
 write(
   "/providers/",

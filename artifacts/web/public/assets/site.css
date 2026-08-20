@@ -215,7 +215,21 @@
     left: -16px;
   }
 
-  /* Tabbing into the panel opens it, so it is not hover-only. */
+  /*
+   * Tabbing to a menu item opens its panel and holds it open while focus is
+   * anywhere inside, so the panel is reachable without a mouse.
+   *
+   * It has to be :focus-within on the item, not :focus-visible on the link.
+   * With the latter, pressing Tab took focus off the link, which un-matched
+   * the rule and hid the panel in the same style recalculation — so the link
+   * about to receive focus was no longer rendered and focus fell through to
+   * the body instead. Measured: tabbing past Locations landed on BODY, and
+   * every link in the panel was unreachable.
+   *
+   * What :focus-within costs is that a mouse click focuses the link too, which
+   * left the panel pinned open after the pointer had moved on. That is dealt
+   * with in site.js by not letting a click take focus in the first place.
+   */
   .mainnav > li.mega:focus-within > .sub-menu.megamenu {
     display: block;
   }
@@ -432,15 +446,6 @@
 }
 
 /*
- * While the floating button is standing in for it. visibility rather than
- * display, so the pill keeps its box and can still be measured as the place to
- * travel to and from.
- */
-.header-cta.is-handed-over {
-  visibility: hidden;
-}
-
-/*
  * Between 768 and 991 the theme shows its widest logo and the social icons, and
  * the full label crossed about 200px of the logo — measured. Shorten it there.
  */
@@ -526,36 +531,13 @@
 }
 
 /*
- * While the ends are being measured. The button carries a width transition of
- * its own, so simply unfolding it and reading the box back caught it at the
- * start of that animation and reported the folded size — which sent it past
- * the header by the difference between the two.
+ * While the resting position is being read back. The button carries transitions
+ * of its own, and measuring it mid-flight returns wherever it happens to be
+ * rather than where it parks.
  */
 .ctadock.is-measuring .ctadock-btn,
 .ctadock.is-measuring .ctadock-label {
   transition: none !important;
-}
-
-/*
- * While travelling between the header and the corner. The easing is slower and
- * carries the transform too, so the button reads as one thing moving rather
- * than something appearing where it lands.
- */
-.ctadock.is-morphing .ctadock-btn {
-  transition:
-    transform 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-    height 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-    font-size 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-    width 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-    padding 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-    gap 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-    background 0.2s ease;
-}
-
-.ctadock.is-morphing .ctadock-label {
-  transition:
-    max-width 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-    opacity 0.26s ease;
 }
 
 .ctadock-btn:hover {
@@ -588,13 +570,6 @@
   gap: 0;
 }
 
-@media (min-width: 768px) {
-  .ctadock.is-mini .ctadock-btn {
-    /* Content-sized, so it lands on min-width rather than jumping to it. */
-    width: auto;
-  }
-}
-
 .ctadock.is-mini .ctadock-label {
   max-width: 0;
   opacity: 0;
@@ -608,10 +583,15 @@
 
 @media (min-width: 768px) {
   /*
-   * Appears in full, then folds — so you see the same button the header had
-   * collapse into the bubble, rather than a circle blinking into existence.
-   * The button sizes to its content here, so the label's own transition is what
-   * shrinks it; min-width leaves a circle behind.
+   * On a wide screen the header keeps its own pill — it is never hidden, it
+   * just scrolls away — so this is only ever the bubble. It carries no label,
+   * which is what makes the trip smooth: the button that used to travel was a
+   * pill plus an icon, wider than the header's pill, so arriving meant growing
+   * to fit the icon and then snapping narrower as the icon went away.
+   *
+   * Nothing about its size changes now. The whole animation is a transform,
+   * from the pill's place at the top of the page to the corner and back, which
+   * is the part that actually says the two are the same button.
    */
   .ctadock {
     left: auto;
@@ -624,20 +604,30 @@
   }
 
   .ctadock-btn {
-    width: auto;
-    min-width: 56px;
+    width: 56px;
+    padding: 0;
+    gap: 0;
+  }
+
+  .ctadock-label {
+    display: none;
+  }
+
+  /* Only while travelling, so hovering the parked bubble cannot animate it. */
+  .ctadock.is-flying .ctadock-btn {
+    transition:
+      transform 0.42s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.34s ease,
+      background 0.2s ease;
   }
 
   /*
-   * Sized like the header pill while travelling, so what arrives at the header
-   * is the pill rather than something a size larger landing on it. Kept apart
-   * from .is-morphing, which carries the transitions — the sizing has to be in
-   * place while measuring, before anything is allowed to animate.
+   * The far end of the trip: up at the pill, small enough to read as the pill's
+   * own icon and transparent, so it emerges from the header rather than sliding
+   * out of it whole. The transform that carries it there is measured in script.
    */
-  .ctadock.is-travel:not(.is-mini) .ctadock-btn {
-    font-size: 16px;
-    height: 40px;
-    padding: 0 22px;
+  .ctadock.is-at-pill .ctadock-btn {
+    opacity: 0;
   }
 }
 
