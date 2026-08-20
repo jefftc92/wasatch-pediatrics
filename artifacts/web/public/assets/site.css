@@ -1187,8 +1187,16 @@
  * The map is an enhancement and starts hidden, so a visitor without Leaflet
  * gets the office list rather than an empty grey box. The script reveals it.
  */
+/*
+ * The map reserves its space from the first paint rather than appearing into
+ * the page later. It used to be display:none until the map was drawn, which
+ * both dropped 460px of layout under the reader's feet when it arrived and —
+ * once the map became lazy — made it invisible to the IntersectionObserver
+ * that decides when to draw it, since a display:none element never intersects
+ * anything. Grey and rounded is what a map looks like before it is a map.
+ */
 .loc-map {
-  display: none;
+  display: block;
   height: 460px;
   margin: 0 0 40px 0;
   border-radius: 25px;
@@ -1203,10 +1211,6 @@
    */
   position: relative;
   z-index: 0;
-}
-
-.loc-map.is-ready {
-  display: block;
 }
 
 /*

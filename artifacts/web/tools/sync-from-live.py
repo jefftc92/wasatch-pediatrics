@@ -193,6 +193,19 @@ ANALYTICS = re.compile(
 )
 
 
+# The live theme puts the Maps JS SDK in the <head> of every page, carrying the
+# live site's own API key, and nothing on any of them ever calls it — there is
+# no `new google.maps.Map` anywhere in the theme or the copied markup. Keeping
+# it would ship ~100KB of SDK on all 142 pages for nothing, on a key this
+# codebase does not manage and cannot rotate. The nine pages with a Google map
+# use an <iframe> embed, which is a different product, needs no key, and is left
+# alone. The one real map here loads the SDK itself, from GOOGLE_MAPS_API_KEY.
+MAPS_SDK = re.compile(
+    r'[ \t]*<script[^>]*src="https://maps\.googleapis\.com/maps/api/js\?[^"]*"[^>]*>'
+    r"</script>\n?"
+)
+
+
 def local_assets(source: str) -> str:
     """Point asset URLs at this server; leave canonical/og URLs untouched."""
     for prefix in ("/wp-content", "/wp-includes"):
@@ -201,9 +214,9 @@ def local_assets(source: str) -> str:
 
 
 def page_head(source: str) -> str:
-    """The page's <head>, verbatim, minus analytics."""
+    """The page's <head>, verbatim, minus analytics and the unused Maps SDK."""
     head = source.split("<head>", 1)[1].split("</head>", 1)[0]
-    return local_assets(ANALYTICS.sub("", head)).strip()
+    return local_assets(MAPS_SDK.sub("", ANALYTICS.sub("", head))).strip()
 
 
 def page_tail(source: str) -> str:
