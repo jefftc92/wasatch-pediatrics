@@ -211,6 +211,73 @@ offices that offer it, the providers who staff it, and links across the pillar.
   there are some; `public/assets/dentistry/` is the only place they live.
 - Services without copy on the live site carry standing text.
 
+## The locations map
+
+`/locations/` draws the eight offices on a Google map, one pin per office, its
+head divided into a segment per kind of care that office gives. The key for it
+comes from the environment:
+
+| variable | required | what it does |
+| --- | --- | --- |
+| `GOOGLE_MAPS_API_KEY` | yes, for the map to draw | the Maps JavaScript API key |
+| `GOOGLE_MAPS_MAP_ID` | no | opts into `AdvancedMarkerElement`; without it the classic `Marker` is used, which needs only the key |
+
+On Replit these go in **Tools → Secrets**, and a deployment picks them up on the
+next redeploy. Locally, `GOOGLE_MAPS_API_KEY=... pnpm dev`.
+
+Without a key the page still lists all eight offices with their addresses,
+phone numbers, categories and full service lists, and says in a sentence that
+the map needs a key rather than showing an empty grey rectangle. The PR preview
+builds have no key, so that is what they show.
+
+### Which APIs to enable
+
+**Maps JavaScript API. That is the only one.** The coordinates are stored in
+`src/data/offices.ts`, so nothing geocodes; the Directions links are ordinary
+`google.com/maps/dir/?api=1` URLs, which are free and keyless; and the nine
+location pages copied from the live site use `<iframe>` map embeds, which are
+the Maps Embed API and also need nothing enabled here.
+
+### What it costs, and what is done about it
+
+Google bills the **Dynamic Maps** SKU per *successful map load* — one billable
+event each time `new google.maps.Map()` runs. Their documentation is explicit
+that "user interactions with the map don't generate additional map loads,
+including panning, zooming, or switching map layers", so the markers, the info
+windows, the filter redrawing every pin, and every drag cost nothing. One visit
+to `/locations/` is at most one event.
+
+At the time of writing the free allowance is **10,000 map loads a month**, and
+$7.00 per 1,000 beyond that on the first tier. A practice this size is very
+unlikely to reach 10,000 views of one page in a month, so the expected bill is
+nothing — but check the current figures rather than trusting this paragraph.
+
+What the code does about it:
+
+- **The map is built only when it scrolls into view**, so a visit that never
+  reaches it never creates one. Honest caveat: the map sits above the fold at
+  every common viewport, so for a real visitor this fires almost immediately.
+  It saves the visits that bounce, and it keeps the page cheap if the map ever
+  moves further down.
+- **No other page can create one.** The live theme shipped the Maps SDK in the
+  `<head>` of all 142 copied pages with the live site's key, and nothing called
+  it; that is stripped, and stripped in `tools/sync-from-live.py` so a re-sync
+  does not restore it.
+
+Two things to do in the Google Cloud console, which no amount of code can do
+from here:
+
+1. **Restrict the key by HTTP referrer** to the site's own domains. A Maps JS
+   key ships in the page — it is public by design — so a referrer restriction
+   is the only thing stopping someone else spending the practice's quota.
+2. **Cap the daily quota** on the Maps JavaScript API. It turns the worst case
+   from an open-ended bill into a map that stops drawing, which is the right
+   way round for a practice website.
+
+If traffic ever does make this expensive, the lever is the Static Maps SKU
+(cheaper per event) as a click-to-activate placeholder. It is not worth the
+complexity until the numbers say so.
+
 ## Verification
 
 ### The copy, against the live site
