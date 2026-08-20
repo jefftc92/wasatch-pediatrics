@@ -71,130 +71,17 @@
    */
   var dock = document.querySelector(".ctadock");
   if (dock) {
-    var dockBtn = dock.querySelector(".ctadock-btn");
-    var headerCta = document.querySelector(".header-cta");
-    var hideTimer = null;
-    // The trip back takes 420ms, during which scrolling keeps firing. Without
-    // this every event restarted it and it never actually went anywhere.
-    var returning = false;
-    // Where the bubble sits when nothing is applied to it. Measured at the top
-    // of each trip so the chase below can re-aim without measuring again.
-    var parked = null;
-
     /*
-     * On a wide screen the header's pill stays put — it scrolls away on its
-     * own and is never hidden — so the bubble is a second object rather than
-     * the same one relocated. All it has to do is come from the right place:
-     * the trip is a transform and a fade, with no size change anywhere in it.
+     * A phone has no room for the header's pill, so the button lives at the
+     * bottom of the screen instead: a full-width bar that folds into a circle
+     * once the page has moved, and opens out again at the top.
      *
-     * Order matters. The element is display:none until it is shown, and a
-     * transition cannot start from a state held while hidden, so the far end
-     * is set with transitions off and read back before the near end is applied.
+     * A wide screen keeps the pill in the header and that is all it gets. The
+     * bubble used to fly down to the corner and back as you scrolled, which
+     * was a second copy of a button already on the page.
      */
-    var naturalRect = function () {
-      var held = dockBtn.style.transform;
-      dock.classList.add("is-measuring");
-      dockBtn.style.transform = "";
-      void dockBtn.offsetWidth;
-      var rect = dockBtn.getBoundingClientRect();
-      dockBtn.style.transform = held;
-      void dockBtn.offsetWidth;
-      dock.classList.remove("is-measuring");
-      return rect;
-    };
-
-    /*
-     * Centre on centre, because the bubble is scaled down at the pill end and
-     * a scale grows from the middle — matching corners would leave it visibly
-     * off to one side of where it is supposed to have come from.
-     */
-    var atPill = function (rest) {
-      var pill = headerCta && headerCta.getBoundingClientRect();
-      if (!pill || (!pill.width && !pill.height) || !rest) return "scale(0.45)";
-      var dx = pill.left + pill.width / 2 - (rest.left + rest.width / 2);
-      var dy = pill.top + pill.height / 2 - (rest.top + rest.height / 2);
-      return (
-        "translate(" +
-        Math.round(dx) +
-        "px," +
-        Math.round(dy) +
-        "px) scale(0.45)"
-      );
-    };
-
-    /* Out of the header and down to the corner. */
-    var flyOut = function () {
-      returning = false;
-      window.clearTimeout(hideTimer);
-      dock.classList.remove("is-flying");
-      dock.classList.add("is-shown");
-      parked = naturalRect();
-
-      dock.classList.add("is-at-pill");
-      dockBtn.style.transform = atPill(parked);
-      void dockBtn.offsetWidth;
-
-      dock.classList.add("is-flying");
-      void dockBtn.offsetWidth;
-      dock.classList.remove("is-at-pill");
-      dockBtn.style.transform = "";
-    };
-
-    /* Back up to the pill, shrinking into it and fading as it goes. */
-    var flyBack = function () {
-      returning = true;
-      parked = parked || naturalRect();
-      dock.classList.add("is-flying");
-      void dockBtn.offsetWidth;
-      dock.classList.add("is-at-pill");
-      dockBtn.style.transform = atPill(parked);
-      window.clearTimeout(hideTimer);
-      hideTimer = window.setTimeout(finishReturn, 440);
-    };
-
-    function finishReturn() {
-      returning = false;
-      parked = null;
-      dock.classList.remove("is-shown", "is-flying", "is-at-pill");
-      dockBtn.style.transform = "";
-    }
-
     var syncDock = function () {
-      if (wide.matches) {
-        var gone = headerCta
-          ? headerCta.getBoundingClientRect().bottom < 24
-          : window.scrollY > 200;
-        var shown = dock.classList.contains("is-shown");
-
-        if (gone) {
-          // Either it is not out yet, or it is on its way home and the page
-          // has turned around under it — both mean send it back to the corner.
-          if (!shown || returning) flyOut();
-        } else if (shown && !returning) {
-          flyBack();
-        }
-        /*
-         * Nothing while it is on its way home. Aiming again at the pill's live
-         * position on each scroll event restarts the transform transition from
-         * wherever it had got to, so it kept setting off afresh and never
-         * arrived — measured: four restarts in 200ms, and it had covered a
-         * third of the distance when the fade ran out. It is aimed once, at the
-         * start, and by the time the page has moved enough for that aim to be
-         * wrong the bubble is transparent anyway.
-         */
-        return;
-      }
-
-      /*
-       * A phone keeps the button it always had: a full-width bar that folds
-       * into a circle once the page has moved. None of the above applies.
-       */
-      returning = false;
-      parked = null;
-      window.clearTimeout(hideTimer);
-      dock.classList.remove("is-shown", "is-flying", "is-at-pill");
-      dockBtn.style.transform = "";
-      dock.classList.toggle("is-mini", window.scrollY > 140);
+      dock.classList.toggle("is-mini", !wide.matches && window.scrollY > 140);
     };
 
     syncDock();
