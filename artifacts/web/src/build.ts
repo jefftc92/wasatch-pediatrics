@@ -48,3 +48,19 @@ export const siteAssets = [
   `<link rel='stylesheet' id='site-css' href='/assets/site.css?v=${buildId}' media='all' />`,
   `<script id="site-js" src="/assets/site.js?v=${buildId}" defer></script>`,
 ].join("\n");
+
+/**
+ * Google Maps configuration, from the environment.
+ *
+ * The key is restricted per-referrer in the Google Cloud console rather than
+ * kept secret — it ships in the page, as every Maps JS key does. Without one
+ * the locations page still renders every office, its address, its phone number
+ * and everything it offers; the map is the part that does not draw, and it says
+ * so rather than leaving a grey box.
+ *
+ * `GOOGLE_MAPS_MAP_ID` is optional. With one the map uses AdvancedMarkerElement,
+ * which is the supported marker going forward; without one it falls back to the
+ * classic Marker, which needs nothing but the key.
+ */
+export const googleMapsKey = process.env.GOOGLE_MAPS_API_KEY ?? "";
+export const googleMapsId = process.env.GOOGLE_MAPS_MAP_ID ?? "";

@@ -26,6 +26,10 @@ import {
   type Service,
 } from "../data/services.ts";
 import {
+  careCategories,
+  categoriesAtLocation,
+} from "../data/careCategories.ts";
+import {
   directionsHref,
   formatAddress,
   formatPhone,
@@ -33,7 +37,7 @@ import {
   offices,
   type Office,
 } from "../data/offices.ts";
-import { buildId } from "../build.ts";
+import { buildId, googleMapsId, googleMapsKey } from "../build.ts";
 import type { SearchEntry } from "../data/searchIndex.ts";
 import {
   escapeAttribute,
@@ -105,6 +109,21 @@ function offersMarkup(offered: Service[]): string {
     .join("\n\t\t\t\t\t");
 }
 
+/**
+ * The office's care categories as a row of chips, in the pin's own colours —
+ * so a pin on the map and a card in the list are recognisably the same office
+ * without having to read either.
+ */
+function categoryChips(locationSlug: string): string {
+  const chips = categoriesAtLocation(locationSlug)
+    .map(
+      (category) =>
+        `<li class="loc-chip" data-category="${category.slug}"><span class="loc-badge" style="background:${category.color}"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${category.icon}"></use></svg></span>${escapeAttribute(category.name)}</li>`,
+    )
+    .join("");
+  return `<ul class="loc-chips">${chips}</ul>`;
+}
+
 function officeCard(office: Office, active: Service | null): string {
   const name = locationNames[office.slug] ?? office.slug;
   const offered = servicesAtLocation(office.slug);
@@ -117,6 +136,7 @@ function officeCard(office: Office, active: Service | null): string {
 		<h2 class="loc-card-title"><a href="${locationHref(office.slug)}">${escapeAttribute(name)}</a></h2>
 		<p class="loc-card-addr">${escapeAttribute(office.street)}<br />${suite}${escapeAttribute(office.city)}, ${office.state} ${office.zip}</p>
 		<p class="loc-card-tel"><a href="tel:${office.phone}">${formatPhone(office.phone)}</a></p>
+		${categoryChips(office.slug)}
 		<div class="loc-offers">
 			${offersMarkup(offered)}
 		</div>
@@ -179,7 +199,22 @@ export function renderLocationsIndex(active: Service | null): string {
     href: locationHref(office.slug),
     directions: directionsHref(office),
     services: servicesAtLocation(office.slug).map((s) => s.slug),
+    /* Legend order, so every pin reads its segments the same way round. */
+    colors: categoriesAtLocation(office.slug).map((c) => c.color),
+    categories: categoriesAtLocation(office.slug).map((c) => c.name),
   }));
+
+  /*
+   * The legend, server-rendered rather than drawn by the script: it is the key
+   * to the whole map and it is real text, so it belongs in the HTML whether or
+   * not Google Maps ever loads.
+   */
+  const legend = careCategories
+    .map(
+      (category) =>
+        `<li><span class="loc-badge" style="background:${category.color}"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${category.icon}"></use></svg></span>${escapeAttribute(category.name)}</li>`,
+    )
+    .join("\n\t\t\t\t\t\t");
 
   return `${heroSection("Locations", [{ name: "Locations" }])}
 <div class="whitebg loc-intro">
@@ -202,7 +237,17 @@ export function renderLocationsIndex(active: Service | null): string {
 			<div class="col-12">
 				${filterControl(active)}
 				<p class="loc-count" role="status">${countLine(shown.length, active)}</p>
-				<div class="loc-map" id="loc-map" data-active="${active?.slug ?? ""}" data-leaflet-css="/assets/leaflet/leaflet.css?v=${buildId}" data-leaflet-js="/assets/leaflet/leaflet.js?v=${buildId}" data-offices="${escapeAttribute(JSON.stringify(pins))}"></div>
+				<div class="loc-mapwrap">
+					<div class="loc-map${googleMapsKey ? "" : " is-off"}" id="loc-map" data-active="${active?.slug ?? ""}" data-maps-key="${escapeAttribute(googleMapsKey)}" data-maps-id="${escapeAttribute(googleMapsId)}" data-offices="${escapeAttribute(JSON.stringify(pins))}">
+						${googleMapsKey ? "" : `<p class="loc-map-off">The map needs a Google Maps key to draw. Every office is listed below with its address, phone number and everything it offers.</p>`}
+					</div>
+					<div class="loc-key">
+						<p class="loc-key-head">What each office offers</p>
+						<ul class="loc-key-list">
+						${legend}
+						</ul>
+					</div>
+				</div>
 				<ol class="loc-list">
 ${all.map((office) => officeCard(office, active)).join("\n")}
 				</ol>
