@@ -170,46 +170,83 @@
   /*
    * The locations map.
    *
-   * Leaflet is fetched only on the page that has a map, so the other 160 pages
+   * Google Maps, loaded only on the page that has a map, so the other 160 pages
    * pay nothing for it. Everything it draws is already in the HTML above it —
-   * this replaces nothing, it just puts the eight offices somewhere you can see
-   * them in relation to each other.
+   * every office's address, phone number, categories and full service list — so
+   * this replaces nothing. It puts the eight offices somewhere you can see them
+   * in relation to each other, and it is the practice's own map provider.
    *
    * One pin per office, never one per service. Two services at one address
    * would be two markers on identical coordinates, which no amount of nudging
-   * makes readable; what an office offers lives inside its pin instead. The
-   * filter then decides which pins are answers and which fade back.
+   * makes readable. What an office offers is drawn *into* its pin instead: the
+   * head is divided into one segment per care category, in the legend's colours
+   * and its order, so every pin reads the same way round. Eight categories is
+   * the most any office has, and eight segments is still legible at 40px.
+   *
+   * The filter then decides which pins are answers and which fade back, rather
+   * than removing them — an office that does not do the thing you asked for is
+   * still an office, and seeing it greyed tells you more than seeing nothing.
    */
   var mapEl = document.getElementById("loc-map");
 
-  /*
-   * OpenStreetMap's own tiles, which need no key. They ask for attribution,
-   * which the control bottom-right carries, and their usage policy is written
-   * for modest traffic — if this page ever gets heavy, this one line is what
-   * changes to point at a paid provider.
+  var PIN_R = 15;
+  var PIN_CX = 20;
+  var PIN_CY = 20;
+
+  /**
+   * The pin, as SVG. `colors` is one entry per care category the office has, in
+   * legend order; `dim` is the filtered-out state.
    */
-  var TILES = "https://tile.openstreetmap.org/{z}/{x}/{y}.png";
-  var TILE_CREDIT =
-    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+  function pinSvg(colors, dim) {
+    var n = colors.length || 1;
+    var seg = "";
 
-  function loadLeaflet(el, done) {
-    var css = document.createElement("link");
-    css.rel = "stylesheet";
-    css.href = el.getAttribute("data-leaflet-css");
-    document.head.appendChild(css);
+    if (n === 1) {
+      seg =
+        '<circle cx="' + PIN_CX + '" cy="' + PIN_CY + '" r="' + PIN_R +
+        '" fill="' + (colors[0] || "#2b93d1") + '"/>';
+    } else {
+      for (var i = 0; i < n; i++) {
+        var a0 = (Math.PI * 2 * i) / n - Math.PI / 2;
+        var a1 = (Math.PI * 2 * (i + 1)) / n - Math.PI / 2;
+        var x0 = PIN_CX + PIN_R * Math.cos(a0);
+        var y0 = PIN_CY + PIN_R * Math.sin(a0);
+        var x1 = PIN_CX + PIN_R * Math.cos(a1);
+        var y1 = PIN_CY + PIN_R * Math.sin(a1);
+        seg +=
+          '<path d="M' + PIN_CX + " " + PIN_CY + " L" + x0.toFixed(2) + " " + y0.toFixed(2) +
+          " A" + PIN_R + " " + PIN_R + " 0 " + (a1 - a0 > Math.PI ? 1 : 0) + " 1 " +
+          x1.toFixed(2) + " " + y1.toFixed(2) + ' Z" fill="' + colors[i] + '"/>';
+      }
+    }
 
-    var js = document.createElement("script");
-    js.src = el.getAttribute("data-leaflet-js");
-    js.onload = done;
-    document.head.appendChild(js);
+    return (
+      '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="52" viewBox="0 0 40 52">' +
+      '<path d="M20 51C20 51 35 32.5 35 20A15 15 0 0 0 5 20C5 32.5 20 51 20 51Z" fill="#ffffff"' +
+      (dim ? ' opacity="0.55"' : "") + "/>" +
+      "<g" + (dim ? ' opacity="0.45"' : "") + ">" + seg + "</g>" +
+      '<circle cx="' + PIN_CX + '" cy="' + PIN_CY + '" r="' + PIN_R +
+      '" fill="none" stroke="#ffffff" stroke-width="3"' + (dim ? ' opacity="0.7"' : "") + "/>" +
+      "</svg>"
+    );
+  }
+
+  function pinUrl(colors, dim) {
+    return (
+      "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(pinSvg(colors, dim))
+    );
   }
 
   function popupMarkup(office) {
+    var cats = office.categories.length
+      ? '<p class="loc-pop-cats">' + office.categories.join(" &middot; ") + "</p>"
+      : "";
     return (
       '<div class="loc-pop">' +
       '<p class="loc-pop-name"><a href="' + office.href + '">' + office.name + "</a></p>" +
       "<p>" + office.address + "</p>" +
       '<p><a href="tel:' + office.phone + '">' + office.phoneText + "</a></p>" +
+      cats +
       '<p class="loc-pop-links">' +
       '<a href="#office-' + office.slug + '" data-office-jump="' + office.slug + '">What we offer here</a>' +
       '<a href="' + office.directions + '" target="_blank" rel="noopener">Directions</a>' +
@@ -217,143 +254,141 @@
     );
   }
 
+  /**
+   * Google's script is loaded by inserting a tag rather than through the newer
+   * bootstrap loader, so there is exactly one way in and a failure is a plain
+   * onerror we can act on. A key that is missing, wrong or over quota must not
+   * leave a grey rectangle where a map was promised.
+   */
+  function loadGoogleMaps(key, done, fail) {
+    var cb = "__wpMapsReady";
+    window[cb] = function () {
+      done();
+    };
+    var js = document.createElement("script");
+    js.src =
+      "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(key) +
+      "&libraries=marker&loading=async&callback=" + cb;
+    js.async = true;
+    js.onerror = fail;
+    document.head.appendChild(js);
+  }
+
   function initMap(el) {
     var offices = JSON.parse(el.getAttribute("data-offices"));
+    var mapId = el.getAttribute("data-maps-id") || "";
     var cards = document.querySelectorAll(".loc-hit");
     var count = document.querySelector(".loc-count");
     var emptyNote = document.querySelector(".loc-empty");
     var select = document.getElementById("loc-service");
 
-    /* Leaflet measures the container as it builds, so it has to be visible
-       first — the class is what takes it out of display:none. */
     el.classList.add("is-ready");
 
-    var map = L.map(el, {
-      scrollWheelZoom: false,
-      /* A one-finger drag inside a 340px map is a scroll the visitor meant for
-         the page. The zoom buttons still work, and so do the pins. */
-      dragging: !L.Browser.mobile,
-      tap: false,
-      /*
-       * Leaflet fits bounds at whole zoom levels by default, which means
-       * rounding down to the one that still contains Farmington and Park City
-       * — and a whole level is a factor of two in scale. That put Cottonwood
-       * and Salt Lake, four kilometres apart, 18px apart with 26px pins: they
-       * overlapped. Allowing a fractional zoom uses the scale the bounds
-       * actually call for and roughly doubles the gap.
-       */
-      zoomSnap: 0,
-      zoomDelta: 0.5,
-    });
+    var opts = {
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      zoomControl: true,
+      /* The practice is on the Wasatch Front; nobody needs to pan to Kansas. */
+      restriction: {
+        latLngBounds: { north: 42.2, south: 39.4, west: -113.2, east: -110.2 },
+        strictBounds: false,
+      },
+    };
+    if (mapId) opts.mapId = mapId;
 
-    L.tileLayer(TILES, { attribution: TILE_CREDIT, maxZoom: 18 }).addTo(map);
-
-    /* Has to agree with .loc-pin in site.css: Leaflet positions the icon by
-       the size it is told, not the size the pin paints at. */
-    var iconPx = mobile.matches ? [18, 18] : [22, 22];
-
+    var map = new google.maps.Map(el, opts);
+    var bounds = new google.maps.LatLngBounds();
+    var info = new google.maps.InfoWindow();
     var markers = {};
-    offices.forEach(function (office) {
-      var marker = L.marker([office.lat, office.lng], {
-        icon: L.divIcon({
-          className: "loc-marker",
-          html: '<span class="loc-pin"></span>',
-          iconSize: iconPx,
-          iconAnchor: [iconPx[0] / 2, iconPx[1] / 2],
-          popupAnchor: [0, -(iconPx[1] / 2 + 2)],
-        }),
-        title: office.name,
-        alt: office.name + " office",
-        riseOnHover: true,
-      });
-      marker.bindPopup(popupMarkup(office));
-      marker.addTo(map);
-      markers[office.slug] = marker;
-    });
 
-    map.fitBounds(
-      L.latLngBounds(
-        offices.map(function (o) {
-          return [o.lat, o.lng];
-        }),
-      ),
-      /* A 44px inset is a quarter of a phone's map. Less padding there buys
-         back scale, which is what keeps the closest pair apart. */
-      { padding: mobile.matches ? [22, 22] : [44, 44] },
-    );
+    /*
+     * AdvancedMarkerElement is the supported marker and needs a Map ID; the
+     * classic Marker needs only the key. Which one is available depends on how
+     * the practice set the account up, so both are handled and the pin is the
+     * same SVG either way.
+     */
+    var Advanced =
+      mapId && google.maps.marker && google.maps.marker.AdvancedMarkerElement
+        ? google.maps.marker.AdvancedMarkerElement
+        : null;
 
-    /* The map is inside a container that was display:none a moment ago, and on
-       a phone the address bar can resize the viewport after that. */
-    map.invalidateSize();
+    function makeMarker(office) {
+      var position = { lat: office.lat, lng: office.lng };
 
-    function pinOf(slug) {
-      var marker = markers[slug];
-      return marker ? marker.getElement() : null;
-    }
-
-    function raise(slug, on) {
-      var pin = pinOf(slug);
-      if (pin) pin.classList.toggle("is-raised", on);
-    }
-
-    /* Pointing at a card lifts its pin, which is what makes two offices four
-       kilometres apart tellable apart at this zoom. */
-    cards.forEach(function (card) {
-      var slug = card.getAttribute("data-office");
-      var on = function () { raise(slug, true); };
-      var off = function () { raise(slug, false); };
-      card.addEventListener("mouseenter", on);
-      card.addEventListener("mouseleave", off);
-      card.addEventListener("focusin", on);
-      card.addEventListener("focusout", off);
-    });
-
-    function pick(slug) {
-      cards.forEach(function (card) {
-        card.classList.toggle("is-picked", card.getAttribute("data-office") === slug);
-      });
-      var card = document.getElementById("office-" + slug);
-      if (!card) return;
-      card.scrollIntoView({ behavior: "smooth", block: "center" });
-      card.focus({ preventScroll: true });
-    }
-
-    /* The popup is rebuilt each time it opens, so the handler goes on the map
-       rather than on a link that may not exist yet. */
-    map.on("popupopen", function (event) {
-      var link = event.popup
-        .getElement()
-        .querySelector("[data-office-jump]");
-      if (!link) return;
-      link.addEventListener("click", function (clicked) {
-        clicked.preventDefault();
-        map.closePopup();
-        pick(link.getAttribute("data-office-jump"));
-      });
-    });
-
-    function apply(slug, label) {
-      var shown = 0;
-      cards.forEach(function (card) {
-        var offered = (card.getAttribute("data-services") || "").split(" ");
-        var match = !slug || offered.indexOf(slug) !== -1;
-        card.hidden = !match;
-        card.classList.remove("is-picked");
-        if (match) shown++;
-
-        /* Say which line in the list the filter was about. */
-        card.querySelectorAll("[data-service]").forEach(function (item) {
-          item.classList.toggle(
-            "is-match",
-            Boolean(slug) && item.getAttribute("data-service") === slug,
-          );
+      if (Advanced) {
+        var img = document.createElement("img");
+        img.src = pinUrl(office.colors, false);
+        img.width = 40;
+        img.height = 52;
+        img.alt = "";
+        return new Advanced({
+          map: map,
+          position: position,
+          title: office.name,
+          content: img,
         });
+      }
 
-        var pin = pinOf(card.getAttribute("data-office"));
-        if (pin) pin.querySelector(".loc-pin").classList.toggle("is-off", !match);
+      return new google.maps.Marker({
+        map: map,
+        position: position,
+        title: office.name,
+        icon: {
+          url: pinUrl(office.colors, false),
+          scaledSize: new google.maps.Size(40, 52),
+          anchor: new google.maps.Point(20, 51),
+        },
       });
+    }
 
+    function setDim(office, marker, dim) {
+      var url = pinUrl(office.colors, dim);
+      if (Advanced) {
+        if (marker.content) marker.content.src = url;
+        marker.zIndex = dim ? 1 : 2;
+      } else {
+        marker.setIcon({
+          url: url,
+          scaledSize: new google.maps.Size(40, 52),
+          anchor: new google.maps.Point(20, 51),
+        });
+        marker.setZIndex(dim ? 1 : 2);
+      }
+    }
+
+    offices.forEach(function (office) {
+      var marker = makeMarker(office);
+      markers[office.slug] = marker;
+      bounds.extend({ lat: office.lat, lng: office.lng });
+      marker.addListener("click", function () {
+        info.setContent(popupMarkup(office));
+        if (Advanced) info.open({ map: map, anchor: marker });
+        else info.open(map, marker);
+      });
+    });
+
+    map.fitBounds(bounds, { top: 40, right: 40, bottom: 40, left: 40 });
+
+    /* Eight offices across fifty kilometres can fit tighter than is useful. */
+    google.maps.event.addListenerOnce(map, "idle", function () {
+      if (map.getZoom() > 11) map.setZoom(11);
+    });
+
+    function apply(slug) {
+      var shown = 0;
+      offices.forEach(function (office) {
+        var match = !slug || office.services.indexOf(slug) !== -1;
+        if (match) shown++;
+        setDim(office, markers[office.slug], !match);
+      });
+      cards.forEach(function (card) {
+        var list = (card.getAttribute("data-services") || "").split(" ");
+        card.hidden = Boolean(slug) && list.indexOf(slug) === -1;
+      });
+      if (emptyNote) emptyNote.hidden = shown > 0;
       if (count) {
+        var label = select && select.selectedOptions[0] && select.selectedOptions[0].text;
         count.textContent = !slug
           ? "All eight offices."
           : shown === 0
@@ -362,58 +397,72 @@
               ? "All eight offices offer " + label + "."
               : shown + " of 8 offices offer " + label + ".";
       }
-      if (emptyNote) emptyNote.hidden = shown > 0;
-
-      /* Keeps the filtered view linkable, which is the same thing the form
-         does without the script. */
-      var url = slug
-        ? window.location.pathname + "?service=" + encodeURIComponent(slug)
-        : window.location.pathname;
-      window.history.replaceState(null, "", url);
+      info.close();
     }
 
     if (select) {
-      var form = select.form;
+      var form = select.closest("form");
       if (form) {
-        /* The submit button is the no-script path; the change handler is why
-           it is not needed here. */
+        var go = form.querySelector(".loc-filter-go");
+        if (go) go.hidden = true;
         form.addEventListener("submit", function (event) {
           event.preventDefault();
         });
-        var go = form.querySelector(".loc-filter-go");
-        if (go) go.hidden = true;
       }
       select.addEventListener("change", function () {
-        apply(select.value, select.options[select.selectedIndex].text);
+        var slug = select.value;
+        apply(slug);
+        /* The filter is a real URL, so a filtered map can be linked and shared. */
+        if (window.history && window.history.replaceState) {
+          window.history.replaceState(
+            {},
+            "",
+            slug ? "?service=" + encodeURIComponent(slug) : window.location.pathname,
+          );
+        }
       });
-      /* The server may have rendered a filtered page; catch the pins up. */
-      if (select.value) {
-        apply(select.value, select.options[select.selectedIndex].text);
-      }
     }
+
+    document.addEventListener("click", function (event) {
+      var jump = event.target.closest && event.target.closest("[data-office-jump]");
+      if (!jump) return;
+      event.preventDefault();
+      var card = document.getElementById("office-" + jump.getAttribute("data-office-jump"));
+      if (!card) return;
+      card.scrollIntoView({ behavior: "smooth", block: "center" });
+      card.focus({ preventScroll: true });
+    });
+
+    apply(el.getAttribute("data-active") || "");
   }
 
-  /*
-   * After `load`, never before.
+  /**
+   * Deferred to the load event, so the map can never hold the page hostage.
    *
-   * The theme hides its full-screen white preloader on `window.load`, not on
-   * DOM ready. Tiles requested before that event are subresources that gate it,
-   * so a slow tile server — or an ad blocker that swallows the tile domain
-   * outright — would leave the visitor staring at the spinner with the whole
-   * page underneath it. Asking for Leaflet after the event means the map can
-   * never hold the page hostage, and its 150KB stops competing with the page's
-   * own assets on the way in.
+   * Scripts and images requested before that event are subresources that gate
+   * it, so a slow maps host — or a blocker that swallows the domain outright —
+   * would leave the visitor staring at a spinner with the whole page underneath
+   * it. Asking for Google Maps afterwards means the page is already usable, and
+   * everything the map shows is in the HTML regardless.
    */
   function whenLoaded(fn) {
     if (document.readyState === "complete") fn();
     else window.addEventListener("load", fn);
   }
 
-  if (mapEl && mapEl.getAttribute("data-leaflet-js")) {
+  if (mapEl && mapEl.getAttribute("data-maps-key")) {
     whenLoaded(function () {
-      loadLeaflet(mapEl, function () {
-        initMap(mapEl);
-      });
+      loadGoogleMaps(
+        mapEl.getAttribute("data-maps-key"),
+        function () {
+          initMap(mapEl);
+        },
+        function () {
+          mapEl.classList.add("is-off");
+          mapEl.innerHTML =
+            '<p class="loc-map-off">The map could not load just now. Every office is listed below with its address, phone number and everything it offers.</p>';
+        },
+      );
     });
   }
 
