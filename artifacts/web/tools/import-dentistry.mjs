@@ -16,7 +16,7 @@
  * Re-run it when the dentistry site's copy changes; do not hand-edit the output.
  */
 
-import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import vm from 'node:vm';
 
@@ -130,6 +130,32 @@ function proseSections(src) {
   return out;
 }
 
+
+/* ---- the images that ship with each page ---- */
+
+/**
+ * The dentistry site files its images by a slightly different tree than its
+ * routes: the hubs live under `overview/`, and pediatric-dentistry is just
+ * `pediatric/`. Every page directory carries a `hero.webp`, and the ones with
+ * a photo-split in the copy also carry a `scene.webp`.
+ */
+function imageDir(from) {
+  const parts = from.replace(/^\//, '').split('/');
+  const tree = parts[0] === 'pediatric-dentistry' ? 'pediatric' : parts[0];
+  const rest = parts.slice(1);
+  return [tree, ...(rest.length ? rest : ['overview'])].join('/');
+}
+
+function imagesFor(from) {
+  const dir = imageDir(from);
+  const out = {};
+  for (const kind of ['hero', 'scene']) {
+    const file = join(SITE, 'public/images', dir, kind + '.webp');
+    if (existsSync(file)) out[kind] = '/assets/dentistry/' + dir + '/' + kind + '.webp';
+  }
+  return out;
+}
+
 const pages = {};
 for (const p of walk(ROOT)) {
   const rel = relative(ROOT, p);
@@ -146,6 +172,7 @@ for (const p of walk(ROOT)) {
       description: pr.description,
       lead: clean(pr.heroIntro),
       benefits: (pr.benefits || []).map((b) => ({ title: b.title, text: clean(b.text) })),
+      sceneAlt: (pr.sections || []).find((s) => s.imageAlt)?.imageAlt || '',
       sections: (pr.sections || []).map((s) => ({
         heading: s.heading,
         body: (s.body || []).map(clean),
@@ -172,6 +199,10 @@ for (const p of walk(ROOT)) {
       faqs: (c.faqs || []).map((f) => ({ q: f.q, a: clean(f.a) })),
     };
   }
+  const art = imagesFor(from);
+  if (art.hero) page.hero = art.hero;
+  if (art.scene) page.scene = art.scene;
+
   // drop empties so the data file stays readable
   page.sections = page.sections.filter((s) => s.body.length || s.steps.length || s.callout);
   for (const s of page.sections) { if (!s.steps.length) delete s.steps; if (!s.body.length) delete s.body; if (!s.callout) delete s.callout; }
@@ -232,6 +263,11 @@ export type DentalPage = {
   description: string;
   /** The opening line, rendered as the page's lead. */
   lead: string;
+  /** Photograph shown beside the lead. */
+  hero?: string;
+  /** Second photograph, dropped into the body partway down. */
+  scene?: string;
+  sceneAlt?: string;
   promises?: DentalPromise[];
   sections: DentalSection[];
   reassurance?: string;
@@ -246,6 +282,9 @@ for (const route of Object.keys(pages).sort()) {
   lines.push(`  ${q(route)}: {`);
   lines.push(`    description: ${q(p.description)},`);
   lines.push(`    lead: ${q(p.lead)},`);
+  if (p.hero) lines.push(`    hero: ${q(p.hero)},`);
+  if (p.scene) lines.push(`    scene: ${q(p.scene)},`);
+  if (p.sceneAlt) lines.push(`    sceneAlt: ${q(p.sceneAlt)},`);
   if (p.benefits) {
     lines.push(`    promises: [`);
     for (const b of p.benefits) lines.push(`      { title: ${q(b.title)}, text: ${q(b.text)} },`);

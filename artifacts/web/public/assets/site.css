@@ -681,38 +681,41 @@
  * so the menu never has to.
  */
 
+/*
+ * The section masthead.
+ *
+ * Two rows at most: the topics of the section you are in, and — when you are a
+ * level below one of them — that topic's own pages. They wrap rather than
+ * scroll, because the old single scrolling strip hid eight of nine orthodontic
+ * treatments off the right edge of a 1280px screen.
+ */
+
 .secnav {
   background: #ffffff;
   border-bottom: 1px solid #e4e4e4;
 }
 
 .secnav-inner {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  min-height: 54px;
+  padding: 16px 0 6px 0;
 }
 
-.secnav-parent {
-  color: #2b93d1;
-  font-weight: 700;
-  font-size: 17px;
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-.secnav-parent:hover {
-  color: #f58220;
-}
-
-.secnav-parent:after {
-  content: "";
+/* Named once, in the display face, so the bar reads as a masthead. */
+.secnav-section {
   display: inline-block;
-  width: 1px;
-  height: 20px;
-  margin-left: 24px;
-  background: #e4e4e4;
-  vertical-align: -4px;
+  color: #2b93d1 !important;
+  font-size: 22px;
+  line-height: 26px;
+  text-decoration: none;
+  margin-bottom: 8px;
+}
+
+.secnav-section:hover {
+  color: #f58220 !important;
+}
+
+/* Only ever a disclosure on a phone; site.js owns the open state. */
+.secnav-summary {
+  display: none;
 }
 
 .secnav-list {
@@ -720,25 +723,17 @@
   margin: 0;
   padding: 0;
   display: flex;
-  gap: 26px;
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-
-.secnav-list::-webkit-scrollbar {
-  display: none;
-}
-
-.secnav-list li {
-  white-space: nowrap;
+  flex-wrap: wrap;
+  gap: 4px 22px;
 }
 
 .secnav-list a {
   display: block;
-  padding: 15px 0;
+  padding: 6px 0;
   color: #636466;
   font-weight: 400;
   font-size: 16px;
+  line-height: 22px;
   text-decoration: none;
   border-bottom: 3px solid transparent;
 }
@@ -747,36 +742,107 @@
   color: #f58220;
 }
 
+/* Where you are, and the branch you came down to get here. */
 .secnav-list a.secnav-current {
   color: #2b93d1;
   border-bottom-color: #f58220;
+  font-weight: 700;
 }
 
-@media (max-width: 991px) {
-  .secnav-inner {
-    display: block;
-    padding: 12px 0 0 0;
+.secnav-list a.secnav-ancestor {
+  color: #2b93d1;
+  font-weight: 700;
+}
+
+/* The second row is subordinate: indented behind a rule, and a size smaller. */
+.secnav-sub {
+  display: flex;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: 6px;
+  padding: 8px 0 4px 14px;
+  border-left: 3px solid #e4e4e4;
+}
+
+.secnav-sub-label {
+  color: #8a8a8c;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.secnav-items a {
+  font-size: 15px;
+}
+
+@media (max-width: 767px) {
+  .secnav-section {
+    font-size: 20px;
+    margin-bottom: 2px;
   }
 
-  .secnav-parent {
-    display: block;
-    margin-bottom: 4px;
+  .secnav-summary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 0 12px 0;
+    color: #2b93d1;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    list-style: none;
   }
 
-  .secnav-parent:after {
+  .secnav-summary::-webkit-details-marker {
     display: none;
   }
 
+  /* The theme's chevron, borrowed from the top-level menu items. */
+  .secnav-summary:after {
+    content: "";
+    border: solid #2b93d1;
+    border-width: 0 3px 3px 0;
+    padding: 3px;
+    transform: rotate(45deg);
+    transition: transform 0.2s ease;
+  }
+
+  .secnav-browse[open] .secnav-summary:after {
+    transform: rotate(-135deg);
+  }
+
+  .secnav-count {
+    background: #f4f4f4;
+    border-radius: 10px;
+    padding: 1px 8px;
+    font-size: 13px;
+    color: #636466;
+  }
+
+  .secnav-browse[open] > .secnav-panel {
+    padding-bottom: 8px;
+  }
+
   .secnav-list {
-    gap: 20px;
-    /* Bleed to the viewport edge so it reads as scrollable, not cut off. */
-    margin: 0 -12px;
-    padding: 0 12px;
+    gap: 0 18px;
   }
 
   .secnav-list a {
-    padding: 8px 0 12px 0;
+    padding: 8px 0;
     font-size: 15px;
+  }
+
+  /* Stacked, so a long label does not squeeze the links into one word a line. */
+  .secnav-sub {
+    display: block;
+    padding-left: 12px;
+  }
+
+  .secnav-sub-label {
+    display: block;
+    margin-bottom: 2px;
   }
 }
 
@@ -1469,44 +1535,83 @@
 /*
  * The dentistry site's pages, in this site's clothes.
  *
- * Nothing here is new design language: the promise cards are the grey
- * `.svc-card` panel at the same radius, the callouts are `.svc-pending`'s
- * ruled note in the three brand colours, and everything else is the prose the
- * theme already sets. The point of the migration was the words, not the look
- * they arrived in.
+ * Nothing here is a new design language. The bands, the display face on the
+ * section headings, the white rounded cards on grey and the accordion are all
+ * what the rest of the site is built from — the accordion is literally the
+ * theme's, markup and script untouched. Only the pieces the theme has no
+ * equivalent for (the numbered steps, the ruled callouts) are defined here, and
+ * those are drawn in the brand's own colours.
  */
 
-.dent-promises {
-  margin: 0 0 34px 0;
+.dent-band-title {
+  color: #636466;
+  font-size: 34px !important;
+  line-height: 40px !important;
+  margin: 0 0 18px 0;
 }
 
-.dent-promise {
-  background: #f4f4f4;
-  border-radius: 25px;
-  padding: 24px 26px;
-  height: 100%;
-  margin-bottom: 24px;
+.dent-lead-row {
+  --dent-gap: 40px;
 }
 
-.dent-promise-title {
-  font-size: 17px !important;
-  line-height: 23px !important;
-  font-weight: 700 !important;
-  color: #2b93d1;
-  margin: 0 0 6px 0;
-}
-
-.dent-promise p {
-  font-size: 16px !important;
-  line-height: 24px !important;
+.dent-lead {
+  font-size: 26px !important;
+  line-height: 34px !important;
+  font-weight: 400 !important;
+  color: #636466;
   margin: 0;
 }
 
-.dent-heading {
-  font-size: 26px !important;
-  line-height: 32px !important;
+.dent-hero-img,
+.dent-scene img {
+  width: 100%;
+  height: auto;
+  border-radius: 25px;
+  display: block;
+}
+
+.dent-scene {
+  margin: 34px 0;
+}
+
+/* The promise cards: the white-on-grey card the dentistry pages already use. */
+.dent-promise {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 28px 30px;
+  height: 100%;
+  margin: 15px 0;
+}
+
+.dent-promise-title {
   color: #2b93d1;
-  margin: 34px 0 14px 0;
+  font-size: 19px !important;
+  line-height: 25px !important;
+  font-weight: 700 !important;
+  margin: 0 0 8px 0;
+}
+
+.dent-promise p {
+  font-size: 17px !important;
+  line-height: 25px !important;
+  margin: 0;
+}
+
+/* .pagebody carries a 60px top margin for the layouts it was written for. */
+.dent-copy {
+  margin-top: 0 !important;
+}
+
+.dent-copy > *:first-child {
+  margin-top: 0;
+}
+
+.dent-copy .dent-band-title {
+  margin-top: 46px;
+}
+
+.dent-copy > .dent-band-title:first-child {
+  margin-top: 0;
 }
 
 .dent-steps {
@@ -1518,8 +1623,8 @@
 
 .dent-steps li {
   position: relative;
-  padding: 0 0 0 44px;
-  margin-bottom: 16px;
+  padding: 0 0 0 52px;
+  margin-bottom: 20px;
 }
 
 /* The number is the marker, so it can carry the brand blue and its own shape. */
@@ -1528,15 +1633,15 @@
   content: counter(dent-step);
   position: absolute;
   left: 0;
-  top: 1px;
-  width: 30px;
-  height: 30px;
+  top: 2px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   background: #2b93d1;
   color: #ffffff;
   font-weight: 700;
-  font-size: 15px;
-  line-height: 30px;
+  font-size: 17px;
+  line-height: 34px;
   text-align: center;
 }
 
@@ -1549,19 +1654,19 @@
   background: #f4f4f4;
   border-left: 4px solid #2b93d1;
   border-radius: 0 12px 12px 0;
-  padding: 16px 20px;
-  margin: 0 0 22px 0;
+  padding: 20px 24px;
+  margin: 26px 0;
 }
 
 .dent-callout p {
   margin: 0;
-  font-size: 16px !important;
-  line-height: 24px !important;
+  font-size: 18px !important;
+  line-height: 27px !important;
 }
 
 .dent-callout-title {
   font-weight: 700 !important;
-  margin-bottom: 4px !important;
+  margin-bottom: 6px !important;
 }
 
 /* Act now, worth knowing, makes it easier. */
@@ -1573,25 +1678,56 @@
   border-left-color: #8dc63f;
 }
 
+/* The one line the page wants you to leave with, so it gets the blue band. */
 .dent-reassurance {
-  border-top: 1px solid #e4e4e4;
-  padding-top: 20px;
-  margin-top: 30px;
-  font-style: italic;
-  color: #636466;
+  color: #ffffff;
+  font-size: 28px !important;
+  line-height: 38px !important;
+  margin: 0;
 }
 
 .dent-faq {
-  margin-bottom: 20px;
+  margin: 10px 0 !important;
 }
 
-.dent-faq-q {
+.dent-faq .cardcontent p {
+  margin: 12px 0 0 0;
   font-size: 18px !important;
-  line-height: 25px !important;
-  font-weight: 700 !important;
-  margin: 0 0 4px 0;
+  line-height: 27px !important;
 }
 
-.dent-faq p {
-  margin: 0;
+.dent-schedule-act {
+  text-align: right;
+}
+
+.dent-schedule-links {
+  margin: 14px 0 0 0;
+  font-size: 16px !important;
+}
+
+@media (max-width: 991px) {
+  .dent-band-title {
+    font-size: 28px !important;
+    line-height: 34px !important;
+  }
+
+  .dent-lead {
+    font-size: 22px !important;
+    line-height: 30px !important;
+  }
+
+  .dent-reassurance {
+    font-size: 23px !important;
+    line-height: 32px !important;
+  }
+
+  /* The photograph reads as an illustration of the text above it, not a banner. */
+  .dent-hero-img {
+    margin-top: 28px;
+  }
+
+  .dent-schedule-act {
+    text-align: left;
+    margin-top: 22px;
+  }
 }

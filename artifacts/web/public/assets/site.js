@@ -89,6 +89,34 @@
     window.addEventListener("resize", syncDock);
   }
 
+  /* --------------------------------------------------------- section nav -- */
+
+  /*
+   * The section bar lists everything at this level, which on a phone ran to
+   * most of a screen before the page began. Closed there, open on a wide
+   * screen, where there is room for it.
+   *
+   * It ships open, so with no script it stays that way — long, but nothing is
+   * hidden. A <details> shipped closed could not be forced open by CSS on a
+   * desktop: the content is hidden through ::details-content, which `display`
+   * on the children does not reach.
+   */
+  var browse = document.querySelector(".secnav-browse");
+  if (browse) {
+    var opened = false;
+    browse.addEventListener("toggle", function () {
+      if (!wide.matches && browse.open) opened = true;
+    });
+
+    var syncBrowse = function () {
+      if (wide.matches) browse.open = true;
+      else if (!opened) browse.open = false;
+    };
+
+    syncBrowse();
+    window.addEventListener("resize", syncBrowse);
+  }
+
   /* ------------------------------------------------------- nav dropdowns -- */
 
   /*

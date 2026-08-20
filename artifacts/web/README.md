@@ -113,10 +113,12 @@ the closest analogue):
    a category filter. The full list is in the markup and the filter only hides
    rows, so crawlers and anyone without JavaScript still get all of it.
 3. **A service with depth lists its topics on its own page**, as cards.
-4. **A section nav under the header** carries sideways movement at whatever
-   level you are on — the pillar's services on a service page, the service's
-   topics on a topic page, the topic's pages below that. This is what lets the
-   dropdown stay two levels deep.
+4. **A section masthead under the header** carries sideways movement: the
+   section named once in the display face, the topics of that section, and —
+   when you are a level below one of them — that topic's own pages. Two rows at
+   most, wrapping rather than scrolling. This is what lets the dropdown stay two
+   levels deep. On a phone it collapses behind a "Browse this section" toggle,
+   because expanded it ran to 384px before the page began.
 
 So Dental Emergencies reads:
 
@@ -154,14 +156,29 @@ can be read out of it structurally instead of scraped.
 node tools/import-dentistry.mjs ../path/to/the/dentistry/checkout
 ```
 
-What crosses the boundary is the words and their shape — leads, promises,
-headings, paragraphs, step sequences, callouts, FAQs. Classes, icon names and
-photo splits are dropped there, and inline links are rewritten onto this site's
-routes. `src/render/dental.ts` then renders all of it in this site's own
-vocabulary: the same `.pagebody` prose, the grey panel `.svc-card` already uses,
-the ruled note `.svc-pending` already uses, in the three brand colours. So a
-migrated page reads as a Wasatch Pediatrics page about teeth, not as a piece of
-the dentistry site pasted in.
+What crosses the boundary is the words, their shape and the photography —
+leads, promises, headings, paragraphs, step sequences, callouts, FAQs, and the
+`hero`/`scene` images each page directory carries. Classes and icon names are
+dropped there, and inline links are rewritten onto this site's routes.
+
+`src/render/dental.ts` then builds the page out of this site's own vocabulary.
+The first pass laid it out as one white slab of prose, which read as a document
+rather than a page of this site; it is now built from the same full-width bands
+everything else here uses:
+
+| band | ground | what it carries |
+| --- | --- | --- |
+| lead | white | the opening line and the page's photograph |
+| promises | grey | the three cards |
+| the copy | white | `lys` headings, prose, numbered steps, ruled callouts, the second photograph |
+| reassurance | blue | the one line the page wants you to leave with |
+| questions | grey | the theme's own accordion |
+| scheduling | white | the green pill and the way back up |
+
+The accordion is literally the theme's — `.d-location-title` and `.plusmin`, the
+markup the dentistry landing page already uses for its office cards, driven by
+the theme's own `script.js`. Only the pieces the theme has no equivalent for
+(the numbered steps, the ruled callouts) are defined here, in brand colours.
 
 Re-run the importer when the dentistry copy changes. Do not hand-edit its
 output — a page that needs different words needs them on the dentistry site, or
@@ -188,6 +205,10 @@ offices that offer it, the providers who staff it, and links across the pillar.
 - The dentistry copy is written for West Jordan, which is where the dental
   office is (Southpoint, 9071 S 1300 W). Headings say so, which reads correctly
   for those pages and differently from the rest of the site.
+- The dentistry photographs are generated rather than taken in the offices, and
+  a few of them have given away by putting malformed lettering on a sign in the
+  background. They should be replaced with photographs of the practice when
+  there are some; `public/assets/dentistry/` is the only place they live.
 - Services without copy on the live site carry standing text.
 
 ## Verification
