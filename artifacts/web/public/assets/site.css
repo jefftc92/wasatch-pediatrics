@@ -215,7 +215,21 @@
     left: -16px;
   }
 
-  /* Tabbing into the panel opens it, so it is not hover-only. */
+  /*
+   * Tabbing to a menu item opens its panel and holds it open while focus is
+   * anywhere inside, so the panel is reachable without a mouse.
+   *
+   * It has to be :focus-within on the item, not :focus-visible on the link.
+   * With the latter, pressing Tab took focus off the link, which un-matched
+   * the rule and hid the panel in the same style recalculation — so the link
+   * about to receive focus was no longer rendered and focus fell through to
+   * the body instead. Measured: tabbing past Locations landed on BODY, and
+   * every link in the panel was unreachable.
+   *
+   * What :focus-within costs is that a mouse click focuses the link too, which
+   * left the panel pinned open after the pointer had moved on. That is dealt
+   * with in site.js by not letting a click take focus in the first place.
+   */
   .mainnav > li.mega:focus-within > .sub-menu.megamenu {
     display: block;
   }

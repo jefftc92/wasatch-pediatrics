@@ -42,7 +42,7 @@ export const mainNav: NavItem[] = [
   {
     id: "110",
     label: "Locations",
-    href: "#",
+    href: "/locations/",
     classes: `${PARENT} menu-item-110`,
     panelHeading: "Our offices",
     panelColumns: 3,
@@ -107,7 +107,7 @@ export const mainNav: NavItem[] = [
   {
     id: "111",
     label: "Services",
-    href: "#",
+    href: "/services/",
     classes: `${PARENT} menu-item-111`,
     // Rendered as the mega panel in render/header.ts, built from the service
     // registry rather than listed here. The panel reuses the menu item ids
@@ -118,10 +118,11 @@ export const mainNav: NavItem[] = [
   {
     id: "1376",
     label: "Resources",
-    href: "#",
+    href: "/resources/",
     classes: `${PARENT} menu-item-1376`,
     panelHeading: "Resources",
     panelColumns: 2,
+    panelFooter: { label: "View all resources", href: "/resources/" },
     children: [
       {
         id: "147",

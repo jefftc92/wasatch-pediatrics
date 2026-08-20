@@ -202,6 +202,31 @@
     window.addEventListener("resize", syncDock);
   }
 
+  /* ------------------------------------------------------- nav dropdowns -- */
+
+  /*
+   * A mouse click on a top-level item used to focus it, and the :focus-within
+   * rule that opens its panel then held that panel open after the pointer had
+   * moved to a different item and opened that one too — two panels at once,
+   * and the first one still there after the pointer had left the bar entirely.
+   *
+   * The keyboard needs :focus-within to reach the links inside the panel, so
+   * the focus is taken off the click rather than out of the rule. Preventing
+   * the default on mousedown suppresses the focus without touching the click,
+   * so the link still follows its href.
+   *
+   * Pointer only. On a phone these taps expand the panel rather than following
+   * the link, which is the theme's own behaviour and wants leaving alone.
+   */
+  var navParents = document.querySelectorAll(
+    ".mainnav > li.menu-item-has-children > a",
+  );
+  navParents.forEach(function (link) {
+    link.addEventListener("mousedown", function (event) {
+      if (wide.matches) event.preventDefault();
+    });
+  });
+
   /* --------------------------------------------------- mobile dropdowns -- */
 
   /*
