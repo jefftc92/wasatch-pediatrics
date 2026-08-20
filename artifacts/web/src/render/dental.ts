@@ -392,6 +392,13 @@ export function renderDentalPage(
   crumbs: string,
   service: { name: string; href: string },
   pillar: { name: string; href: string },
+  /**
+   * The card grid naming what sits under or beside this page. It goes directly
+   * under the hero rather than at the foot: it is the way on, and a way on that
+   * only appears after the whole article has been read is one most people never
+   * find.
+   */
+  navSection = "",
 ): string {
   const parts = page.sections.map(section);
   const scene = sceneBand(page);
@@ -401,6 +408,7 @@ export function renderDentalPage(
   return [
     crumbs,
     heroBand(page, title, service),
+    navSection,
     promiseBand(page),
     ...parts,
     reassuranceBand(page),

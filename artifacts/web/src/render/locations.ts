@@ -262,8 +262,10 @@ export function renderLocationsIndex(
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				${filterControl(active)}
-				<p class="loc-count" role="status">${countLine(shown.length, active, activeCare)}</p>
+				<div class="loc-controls">
+					${filterControl(active)}
+					<p class="loc-count" role="status">${countLine(shown.length, active, activeCare)}</p>
+				</div>
 				<div class="loc-mapwrap">
 					<div class="loc-map${googleMapsKey ? "" : " is-off"}" id="loc-map" data-active="${active?.slug ?? ""}" data-care="${activeCare ?? ""}" data-maps-key="${escapeAttribute(googleMapsKey)}" data-maps-id="${escapeAttribute(googleMapsId)}" data-offices="${escapeAttribute(JSON.stringify(pins))}">
 						${googleMapsKey ? "" : `<p class="loc-map-off">The map needs a Google Maps key to draw. Every office is listed below with its address, phone number and everything it offers.</p>`}

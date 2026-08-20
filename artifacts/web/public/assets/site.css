@@ -805,6 +805,15 @@
   margin-bottom: 30px;
 }
 
+/*
+ * `.svc-card` and `.graybg` are both #F4F4F4, so a card grid on a grey band was
+ * invisible — the cards read as loose text. Rather than thread band colours
+ * through every caller, a card on grey turns white. Either way it is a card.
+ */
+.graybg .svc-card {
+  background: #ffffff;
+}
+
 .svc-card {
   background: #f4f4f4;
   border-radius: 25px;
@@ -1024,7 +1033,7 @@
  */
 .loc-map {
   display: block;
-  height: 460px;
+  height: 520px;
   border-radius: 25px;
   overflow: hidden;
   background: #f4f4f4;
@@ -1327,6 +1336,52 @@
 }
 
 /*
+ * The page's own rhythm. The theme's `padme90` plus the pagebody's top margin
+ * put 400px between the end of the hero and the top of the map — one
+ * paragraph, one dropdown and one line of text, spread over most of a screen.
+ * The map is what the page is for, so it starts near the top of it.
+ */
+.loc-intro {
+  padding: 26px 0 0 0;
+}
+
+.loc-intro .pagebody {
+  margin-top: 0;
+}
+
+.loc-intro .pagebody p {
+  margin-bottom: 0;
+  max-width: 46em;
+}
+
+.loc-index {
+  padding-top: 34px;
+}
+
+/*
+ * The filter and the count on one line. They are one thought — what you asked
+ * for, and how many offices answer — and stacking them put 115px between the
+ * question and the map.
+ */
+.loc-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin: 0 0 22px 0;
+}
+
+.loc-controls .loc-filter {
+  margin: 0;
+}
+
+.loc-controls .loc-count {
+  margin: 0;
+  color: #8a8a8c;
+  font-size: 16px;
+}
+
+/*
  * The key floats over the map's top-left corner, the way a printed map's key
  * sits inside its frame — it is about what is on the map, so it belongs on it
  * rather than beside it in a column of its own.
@@ -1342,19 +1397,19 @@
 
 .loc-key {
   position: absolute;
-  top: 14px;
-  left: 14px;
+  top: 16px;
+  left: 16px;
   z-index: 2;
-  padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 14px;
-  box-shadow: 0 2px 10px rgba(33, 33, 33, 0.22);
+  padding: 14px 16px;
+  background: rgba(255, 255, 255, 0.96);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(33, 33, 33, 0.24);
 }
 
 .loc-key-head {
-  margin: 0 0 8px 0;
+  margin: 0 0 10px 0;
   color: #8a8a8c;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 1.2px;
   text-transform: uppercase;
@@ -1369,14 +1424,14 @@
 .loc-key-btn {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 11px;
   width: 100%;
-  padding: 5px 10px 5px 6px;
+  padding: 7px 14px 7px 7px;
   border: 0;
-  border-radius: 9px;
+  border-radius: 11px;
   background: none;
   color: #636466 !important;
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 400 !important;
   line-height: 1.25;
   text-align: left;
@@ -1434,15 +1489,15 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 7px;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
   color: #ffffff;
 }
 
 .loc-badge svg {
-  width: 14px;
-  height: 14px;
+  width: 19px;
+  height: 19px;
 }
 
 .loc-chips {
