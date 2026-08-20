@@ -95,7 +95,7 @@ app.get("/services/:slug{/}", (request, response, next) => {
 
 /**
  * The locations index. Its own route rather than an entry in `generated`
- * because the page varies with `?service=`, which the map of static routes
+ * because the page varies with `?service=` and `?care=`, which the static route
  * cannot express — the filtered view is a real page, not a client-side state.
  */
 app.get("/locations{/}", (request, response) => {
@@ -106,7 +106,10 @@ app.get("/locations{/}", (request, response) => {
 
   const service =
     typeof request.query.service === "string" ? request.query.service : "";
-  response.type("html").send(renderGeneratedDocument(locationsDocument(service)));
+  const care = typeof request.query.care === "string" ? request.query.care : "";
+  response
+    .type("html")
+    .send(renderGeneratedDocument(locationsDocument(service, care)));
 });
 
 app.get("/resources{/}", (request, response) => {

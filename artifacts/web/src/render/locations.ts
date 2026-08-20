@@ -124,14 +124,17 @@ function categoryChips(locationSlug: string): string {
   return `<ul class="loc-chips">${chips}</ul>`;
 }
 
-function officeCard(office: Office, active: Service | null): string {
+function officeCard(office: Office, matches: boolean): string {
   const name = locationNames[office.slug] ?? office.slug;
   const offered = servicesAtLocation(office.slug);
   const offers = offered.map((service) => service.slug).join(" ");
-  const matches = !active || offered.some((s) => s.slug === active.slug);
   const suite = office.suite ? `${escapeAttribute(office.suite)}<br />` : "";
 
-  return `<li class="loc-hit" data-office="${office.slug}" data-services="${offers}"${matches ? "" : " hidden"}>
+  const cares = categoriesAtLocation(office.slug)
+    .map((c) => c.slug)
+    .join(" ");
+
+  return `<li class="loc-hit" data-office="${office.slug}" data-services="${offers}" data-cares="${cares}"${matches ? "" : " hidden"}>
 	<article class="loc-card" id="office-${office.slug}" tabindex="-1">
 		<h2 class="loc-card-title"><a href="${locationHref(office.slug)}">${escapeAttribute(name)}</a></h2>
 		<p class="loc-card-addr">${escapeAttribute(office.street)}<br />${suite}${escapeAttribute(office.city)}, ${office.state} ${office.zip}</p>
@@ -172,20 +175,38 @@ function filterControl(active: Service | null): string {
 				</form>`;
 }
 
-function countLine(shown: number, active: Service | null): string {
-  if (!active) return "All eight offices.";
-  if (shown === 0) return `No office currently offers ${active.name}.`;
-  if (shown === 8) return `All eight offices offer ${active.name}.`;
-  return `${shown} of 8 offices offer ${active.name}.`;
+function countLine(
+  shown: number,
+  active: Service | null,
+  activeCare: string | null = null,
+): string {
+  const label =
+    active?.name ??
+    careCategories.find((c) => c.slug === activeCare)?.name ??
+    null;
+  if (!label) return "All eight offices.";
+  if (shown === 0) return `No office currently offers ${label}.`;
+  if (shown === 8) return `All eight offices offer ${label}.`;
+  return `${shown} of 8 offices offer ${label}.`;
 }
 
-export function renderLocationsIndex(active: Service | null): string {
+export function renderLocationsIndex(
+  active: Service | null,
+  activeCare: string | null = null,
+): string {
   const all = officesInMenuOrder();
-  const shown = active
-    ? all.filter((office) =>
-        servicesAtLocation(office.slug).some((s) => s.slug === active.slug),
-      )
-    : all;
+  const matches = (office: Office): boolean => {
+    if (active) {
+      return servicesAtLocation(office.slug).some((s) => s.slug === active.slug);
+    }
+    if (activeCare) {
+      return categoriesAtLocation(office.slug).some(
+        (c) => c.slug === activeCare,
+      );
+    }
+    return true;
+  };
+  const shown = all.filter(matches);
 
   /* Everything the map needs, so the script never re-derives it from the DOM. */
   const pins = all.map((office) => ({
@@ -199,22 +220,28 @@ export function renderLocationsIndex(active: Service | null): string {
     href: locationHref(office.slug),
     directions: directionsHref(office),
     services: servicesAtLocation(office.slug).map((s) => s.slug),
-    /* Legend order, so every pin reads its segments the same way round. */
+    /* Key order, so every pin reads its segments the same way round. */
     colors: categoriesAtLocation(office.slug).map((c) => c.color),
     categories: categoriesAtLocation(office.slug).map((c) => c.name),
+    cares: categoriesAtLocation(office.slug).map((c) => c.slug),
   }));
 
   /*
-   * The legend, server-rendered rather than drawn by the script: it is the key
-   * to the whole map and it is real text, so it belongs in the HTML whether or
-   * not Google Maps ever loads.
+   * The key, server-rendered rather than drawn by the script: it is what makes
+   * a divided pin readable, and it is real text, so it belongs in the HTML
+   * whether or not Google Maps ever loads.
+   *
+   * Each row is a button, not a swatch. Pressing one asks the map for the
+   * offices that give that kind of care; pressing it again puts everything
+   * back. Without script they are still eight real links to the filtered URL,
+   * so the same question is answerable with JavaScript off.
    */
   const legend = careCategories
     .map(
       (category) =>
-        `<li><span class="loc-badge" style="background:${category.color}"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${category.icon}"></use></svg></span>${escapeAttribute(category.name)}</li>`,
+        `<li><a class="loc-key-btn" href="${LOCATIONS_HREF}?care=${category.slug}" data-care="${category.slug}" aria-pressed="false"><span class="loc-badge" style="background:${category.color}"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${category.icon}"></use></svg></span>${escapeAttribute(category.name)}</a></li>`,
     )
-    .join("\n\t\t\t\t\t\t");
+    .join("\n\t\t\t\t\t\t")
 
   return `${heroSection("Locations", [{ name: "Locations" }])}
 <div class="whitebg loc-intro">
@@ -236,20 +263,20 @@ export function renderLocationsIndex(active: Service | null): string {
 		<div class="row">
 			<div class="col-12">
 				${filterControl(active)}
-				<p class="loc-count" role="status">${countLine(shown.length, active)}</p>
+				<p class="loc-count" role="status">${countLine(shown.length, active, activeCare)}</p>
 				<div class="loc-mapwrap">
-					<div class="loc-map${googleMapsKey ? "" : " is-off"}" id="loc-map" data-active="${active?.slug ?? ""}" data-maps-key="${escapeAttribute(googleMapsKey)}" data-maps-id="${escapeAttribute(googleMapsId)}" data-offices="${escapeAttribute(JSON.stringify(pins))}">
+					<div class="loc-map${googleMapsKey ? "" : " is-off"}" id="loc-map" data-active="${active?.slug ?? ""}" data-care="${activeCare ?? ""}" data-maps-key="${escapeAttribute(googleMapsKey)}" data-maps-id="${escapeAttribute(googleMapsId)}" data-offices="${escapeAttribute(JSON.stringify(pins))}">
 						${googleMapsKey ? "" : `<p class="loc-map-off">The map needs a Google Maps key to draw. Every office is listed below with its address, phone number and everything it offers.</p>`}
 					</div>
 					<div class="loc-key">
-						<p class="loc-key-head">What each office offers</p>
+						<p class="loc-key-head">Care type</p>
 						<ul class="loc-key-list">
 						${legend}
 						</ul>
 					</div>
 				</div>
 				<ol class="loc-list">
-${all.map((office) => officeCard(office, active)).join("\n")}
+${all.map((office) => officeCard(office, matches(office))).join("\n")}
 				</ol>
 				<p class="loc-empty"${shown.length ? " hidden" : ""}>No office currently offers that. <a href="${LOCATIONS_HREF}">Show all eight offices</a>.</p>
 			</div>
@@ -260,22 +287,29 @@ ${all.map((office) => officeCard(office, active)).join("\n")}
 
 export function locationsDocument(
   serviceSlug: string,
+  careSlug = "",
 ): GeneratedPage & { route: string } {
   const active = serviceSlug ? (serviceBySlug.get(serviceSlug) ?? null) : null;
   const pillar = active ? pillarBySlug.get(active.pillar) : null;
+  const care = careSlug
+    ? (careCategories.find((c) => c.slug === careSlug) ?? null)
+    : null;
+  const label = active?.name ?? care?.name ?? null;
 
   return {
     route: LOCATIONS_HREF,
-    title: active
-      ? `Locations offering ${active.name} - Wasatch Pediatrics`
+    title: label
+      ? `Locations offering ${label} - Wasatch Pediatrics`
       : "Locations - Wasatch Pediatrics",
     description: active
       ? `Which Wasatch Pediatrics offices offer ${active.name}${pillar ? `, part of ${pillar.name.toLowerCase()}` : ""} — with addresses, phone numbers and directions.`
-      : "All eight Wasatch Pediatrics offices on one map, with the services each one offers, addresses, phone numbers and directions.",
+      : care
+        ? `Which Wasatch Pediatrics offices offer ${care.name} — with addresses, phone numbers and directions.`
+        : "All eight Wasatch Pediatrics offices on one map, with the services each one offers, addresses, phone numbers and directions.",
     bodyClass: BODY_CLASS,
     menu: MENU,
     breadcrumbs: [{ name: "Locations" }],
-    content: renderLocationsIndex(active),
+    content: renderLocationsIndex(active, care?.slug ?? null),
   };
 }
 
