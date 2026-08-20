@@ -28,6 +28,7 @@ import {
   serviceRoutes,
 } from "./render/services.ts";
 import { serviceBySlug } from "./data/services.ts";
+import { LOCATIONS_HREF, locationsDocument } from "./render/locations.ts";
 import { buildId } from "./build.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -89,6 +90,22 @@ app.get("/services/:slug{/}", (request, response, next) => {
     return;
   }
   response.redirect(301, `/medical-care/${service.slug}/`);
+});
+
+/**
+ * The locations index. Its own route rather than an entry in `generated`
+ * because the page varies with `?service=`, which the map of static routes
+ * cannot express — the filtered view is a real page, not a client-side state.
+ */
+app.get("/locations{/}", (request, response) => {
+  if (request.path !== LOCATIONS_HREF) {
+    response.redirect(301, LOCATIONS_HREF);
+    return;
+  }
+
+  const service =
+    typeof request.query.service === "string" ? request.query.service : "";
+  response.type("html").send(renderGeneratedDocument(locationsDocument(service)));
 });
 
 app.get("/{*path}", (request, response, next) => {

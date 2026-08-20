@@ -170,7 +170,14 @@ function listPanel(item: NavItem, menu: MenuState): string {
 					${links}
 				</ul>
 			</div>
-		</div>`,
+		</div>${
+      item.panelFooter
+        ? `
+		<div class="mega-foot">
+			<a class="mega-cta" href="${item.panelFooter.href}">${esc(item.panelFooter.label)}<svg class="mega-cta-arrow" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3l5 5-5 5"></path></svg></a>
+		</div>`
+        : ""
+    }`,
   );
 }
 

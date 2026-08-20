@@ -641,6 +641,17 @@ export function servicesInPillar(pillarSlug: string): Service[] {
   return services.filter((service) => service.pillar === pillarSlug);
 }
 
+/**
+ * Which services an office offers, in registry order.
+ *
+ * The registry files locations under each service because that is how the live
+ * site's service copy reads; the map and the location pages need the question
+ * asked the other way round.
+ */
+export function servicesAtLocation(locationSlug: string): Service[] {
+  return services.filter((service) => service.locations.includes(locationSlug));
+}
+
 /** Human-readable office names, matching the location pages. */
 export const locationNames: Record<string, string> = {
   cottonwood: "Cottonwood",
