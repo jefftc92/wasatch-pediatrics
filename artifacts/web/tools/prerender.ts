@@ -53,6 +53,7 @@ import {
   renderPillarPage,
   serviceRoutes,
 } from "../src/render/services.ts";
+import { locationsDocument } from "../src/render/locations.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(here, "..");
@@ -180,6 +181,10 @@ for (const page of contentPages) {
     }),
   );
 }
+
+// The locations map. Only the unfiltered view: a static host ignores the query
+// string, and the script filters in the browser anyway.
+write("/locations/", renderGeneratedDocument(locationsDocument("")));
 
 write(
   "/providers/",

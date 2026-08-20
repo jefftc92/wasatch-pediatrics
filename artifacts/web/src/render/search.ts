@@ -1,5 +1,6 @@
 import { searchIndex, type SearchEntry } from "../data/searchIndex.ts";
 import { generatedSearchRoutes, serviceSearchEntries } from "./services.ts";
+import { locationsSearchEntry } from "./locations.ts";
 
 /**
  * The copied index plus the pages this project adds. Copied entries for routes
@@ -9,6 +10,7 @@ import { generatedSearchRoutes, serviceSearchEntries } from "./services.ts";
 export const fullSearchIndex: SearchEntry[] = [
   ...searchIndex.filter((entry) => !generatedSearchRoutes.has(entry.route)),
   ...serviceSearchEntries(),
+  locationsSearchEntry(),
 ];
 
 const MONTHS = [

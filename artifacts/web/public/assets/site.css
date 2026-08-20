@@ -1184,3 +1184,352 @@
     font-size: 14px;
   }
 }
+
+/* ------------------------------------------------------------ locations -- */
+
+/*
+ * The map is an enhancement and starts hidden, so a visitor without Leaflet
+ * gets the office list rather than an empty grey box. The script reveals it.
+ */
+.loc-map {
+  display: none;
+  height: 460px;
+  margin: 0 0 40px 0;
+  border-radius: 25px;
+  overflow: hidden;
+  background: #f4f4f4;
+  /*
+   * Leaflet stacks its panes from z-index 400 up, and neither this container
+   * nor .leaflet-container opens a stacking context on its own — so those
+   * numbers competed with the page's, and markers painted straight over the
+   * sticky nav bar. Positioning the container with a z-index of its own keeps
+   * the map's internal order inside the map.
+   */
+  position: relative;
+  z-index: 0;
+}
+
+.loc-map.is-ready {
+  display: block;
+}
+
+.loc-filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 0 0 18px 0;
+}
+
+.loc-filter-label {
+  font-size: 17px;
+  color: #636466;
+  margin: 0;
+}
+
+/* The arrow is drawn here rather than left to the platform, so the control
+   matches the rest of the page instead of each OS's own select. */
+.loc-filter-field {
+  position: relative;
+  display: inline-block;
+}
+
+.loc-filter-field:after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  width: 8px;
+  height: 8px;
+  margin-top: -6px;
+  border: solid #2b93d1;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
+.loc-filter-select {
+  appearance: none;
+  -webkit-appearance: none;
+  border: 2px solid #e4e4e4;
+  background: #ffffff;
+  color: #636466;
+  border-radius: 25px;
+  padding: 9px 48px 9px 22px;
+  font-size: 17px;
+  font-family: inherit;
+  cursor: pointer;
+  max-width: 100%;
+}
+
+.loc-filter-select:focus {
+  outline: none;
+  border-color: #2b93d1;
+}
+
+/* Only useful without the script, which filters on change instead. */
+.loc-filter-go {
+  font-size: 15px !important;
+  padding: 8px 24px !important;
+}
+
+.loc-count {
+  font-size: 17px;
+  color: #636466;
+  margin: 0 0 24px 0;
+}
+
+.loc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.loc-card {
+  background: #f4f4f4;
+  border-radius: 25px;
+  padding: 30px 30px 26px 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  transition: box-shadow 0.2s ease;
+}
+
+/* Where the map sends you when a pin is clicked. */
+.loc-hit.is-picked .loc-card {
+  box-shadow: 0 0 0 3px #2b93d1;
+}
+
+/* The theme underlines links by default, which turns a card carrying fifteen
+   service names into a thicket. Underline on hover instead. */
+.loc-card a,
+.loc-pop a {
+  text-decoration: none;
+}
+
+.loc-card a:hover,
+.loc-pop a:hover {
+  text-decoration: underline;
+}
+
+.loc-card-title {
+  font-size: 24px;
+  margin: 0 0 10px 0;
+}
+
+.loc-card-addr,
+.loc-card-tel {
+  font-size: 16px;
+  line-height: 24px;
+  color: #636466;
+  margin: 0 0 6px 0;
+}
+
+.loc-card-tel {
+  margin-bottom: 20px;
+}
+
+.loc-offers {
+  flex: 1 1 auto;
+}
+
+.loc-group + .loc-group {
+  margin-top: 16px;
+}
+
+.loc-group-head {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #8a8a8c;
+  margin: 0 0 6px 0;
+}
+
+.loc-group-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.loc-group-list li {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.loc-group-list a {
+  color: #636466;
+  font-weight: 400;
+}
+
+.loc-group-list a:hover {
+  color: #f58220;
+}
+
+/* The service you filtered by, called out in the office that offers it. */
+.loc-group-list li.is-match a {
+  color: #2b93d1;
+  font-weight: 700;
+}
+
+.loc-card-links {
+  margin: 22px 0 0 0;
+  font-size: 16px;
+}
+
+.loc-card-links a {
+  color: #2b93d1;
+}
+
+.loc-card-links a + a {
+  margin-left: 18px;
+  padding-left: 18px;
+  border-left: 1px solid #d9d9db;
+}
+
+.loc-empty {
+  font-size: 18px;
+  color: #636466;
+  margin: 30px 0 0 0;
+}
+
+/* ------------------------------------------------------------- map pins -- */
+
+/*
+ * One pin per office, never one per service: two services at one address would
+ * be two markers at identical coordinates, and no amount of nudging makes that
+ * readable. What an office offers lives inside its pin instead, and the filter
+ * decides which pins are answers.
+ */
+.loc-pin {
+  display: block;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #2b93d1;
+  border: 3px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(33, 33, 33, 0.4);
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    opacity 0.2s ease;
+}
+
+/* Offices in the valley sit as close as 4km, which is tens of pixels at a zoom
+   that fits Farmington and Park City in one frame. Raising the one you are
+   pointing at is what keeps a near-overlap readable. */
+.loc-marker.is-raised {
+  z-index: 1000 !important;
+}
+
+.loc-marker.is-raised .loc-pin {
+  transform: scale(1.25);
+}
+
+/* Still on the map, because "nowhere near you" is an answer, but plainly not
+   one of the results. */
+.loc-pin.is-off {
+  background: #b6b7b9;
+  opacity: 0.55;
+  transform: scale(0.72);
+}
+
+.loc-marker.is-raised .loc-pin.is-off {
+  transform: scale(0.9);
+}
+
+.loc-pop-name {
+  font-size: 19px;
+  font-weight: 700;
+  margin: 0 0 6px 0;
+}
+
+.loc-pop-name a {
+  color: #2b93d1;
+}
+
+.loc-pop p {
+  font-size: 15px;
+  line-height: 22px;
+  color: #636466;
+  margin: 0 0 6px 0;
+}
+
+.loc-pop-links {
+  margin-top: 10px !important;
+}
+
+.loc-pop-links a {
+  color: #2b93d1;
+  font-weight: 700;
+}
+
+.loc-pop-links a + a {
+  margin-left: 14px;
+}
+
+/* Leaflet ships its own type scale; this puts the popup back on the site's. */
+.leaflet-container {
+  font-family: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 15px;
+}
+
+.leaflet-popup-content {
+  margin: 16px 18px;
+  min-width: 200px;
+}
+
+@media (max-width: 767px) {
+  .loc-map {
+    height: 400px;
+    border-radius: 20px;
+    margin-bottom: 30px;
+  }
+
+  .loc-filter {
+    gap: 12px;
+  }
+
+  .loc-filter-label {
+    flex: 1 0 100%;
+  }
+
+  .loc-filter-field {
+    flex: 1 1 auto;
+  }
+
+  .loc-filter-select {
+    width: 100%;
+  }
+
+  .loc-list {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .loc-card {
+    padding: 26px 24px;
+    border-radius: 20px;
+  }
+
+  .loc-card-title {
+    font-size: 21px;
+  }
+
+  /*
+   * A phone fits the same 52km of valley into a third of the width, so the
+   * pins have to come down with it or Cottonwood and Salt Lake merge.
+   */
+  .loc-pin {
+    width: 18px;
+    height: 18px;
+  }
+}

@@ -35,6 +35,10 @@ A web project for Wasatch Pediatrics, wired to GitHub for version control.
   - `src/data/services.ts` — **hand-written**: the service registry (pillars, services,
     topics). The menu, the hub pages, the service and topic pages and their search
     entries are all built from it
+  - `src/data/offices.ts` — **hand-written**: the eight offices' addresses, phone
+    numbers and coordinates, transcribed from the location pages. Paired with the
+    registry's `locations` lists, this is everything `/locations/` draws
+  - `public/assets/leaflet/` — vendored Leaflet 1.9.4, fetched only by `/locations/`
   - `src/authored/` — **hand-written**: page bodies we wrote, plus the `<head>`/tail
     templates for generated pages
   - `public/assets/` — **hand-written**: this project's own CSS and JS, loaded after the
@@ -81,7 +85,7 @@ _Populate as you build — explicit user instructions worth remembering across s
 - `tools/sync-from-live.py` **empties `artifacts/web/src/content/` and `src/document/`
   on every run** and regenerates `src/data/{pages,providers,searchIndex,nav}.ts`. Never
   hand-edit those.
-- `src/data/services.ts`, `src/authored/` and `public/assets/` are hand-written and the
+- `src/data/{services,offices}.ts`, `src/authored/` and `public/assets/` are hand-written and the
   sync does not touch them. Editing them by hand is the intended way to change services,
   our copy, or our styling.
 - Analytics tags are stripped by the sync on purpose, so a copy never reports into

@@ -15,6 +15,8 @@ export type NavItem = {
   children?: NavItem[];
   /** Rendered as the services mega panel rather than a plain sub-menu. */
   mega?: boolean;
+  /** The way out of the panel, rendered as its footer link. */
+  panelFooter?: { label: string; href: string };
   /**
    * Rendered as a panel like the services one, with this as the group heading.
    * Set on the other dropdowns so all three menus look and behave alike.
@@ -44,6 +46,7 @@ export const mainNav: NavItem[] = [
     classes: `${PARENT} menu-item-110`,
     panelHeading: "Our offices",
     panelColumns: 3,
+    panelFooter: { label: "View all locations", href: "/locations/" },
     children: [
       {
         id: "292",
