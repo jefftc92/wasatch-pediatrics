@@ -157,6 +157,13 @@ function imagesFor(from) {
 }
 
 const pages = {};
+/**
+ * The dentistry site draws its icons from Phosphor (MIT) through astro-icon.
+ * Only the name survives the crossing; the thirty shapes actually used are
+ * vendored once into `public/assets/icons.svg` and referenced by id.
+ */
+const icon = (name) => (typeof name === 'string' && name.startsWith('ph:') ? name.slice(3) : '');
+
 for (const p of walk(ROOT)) {
   const rel = relative(ROOT, p);
   if (!/^(emergencies|pediatric-dentistry|orthodontics)(\.astro$|\/)/.test(rel)) continue;
@@ -170,8 +177,18 @@ for (const p of walk(ROOT)) {
     const pr = tagProps(src, 'MessageLeaf');
     page = {
       description: pr.description,
+      eyebrow: pr.heroEyebrow || '',
       lead: clean(pr.heroIntro),
-      benefits: (pr.benefits || []).map((b) => ({ title: b.title, text: clean(b.text) })),
+      benefits: (pr.benefits || []).map((b) => ({ icon: icon(b.icon), title: b.title, text: clean(b.text) })),
+      /*
+       * A few related links point at pages the dentistry site has and this one
+       * does not — its own financing and contact pages. `mapRoute` returns null
+       * for those and they are dropped rather than emitted as dead cards; this
+       * site's own footer and Contact Us cover the same ground.
+       */
+      related: (pr.related || [])
+        .map((r) => ({ name: r.name, href: mapRoute(r.href), blurb: clean(r.blurb || '') }))
+        .filter((r) => r.href),
       sceneAlt: (pr.sections || []).find((s) => s.imageAlt)?.imageAlt || '',
       sections: (pr.sections || []).map((s) => ({
         heading: s.heading,
@@ -192,8 +209,10 @@ for (const p of walk(ROOT)) {
       : [];
     page = {
       description: bl.description,
+      eyebrow: hero.eyebrow || '',
       lead: clean(hero.intro || ''),
-      benefits: (c.benefits || c.promises || []).map((b) => ({ title: b.title, text: clean(b.text) })),
+      benefits: (c.benefits || c.promises || []).map((b) => ({ icon: icon(b.icon), title: b.title, text: clean(b.text) })),
+      related: [],
       sections: [...prose, ...stepSection],
       reassurance: '',
       faqs: (c.faqs || []).map((f) => ({ q: f.q, a: clean(f.a) })),
@@ -209,6 +228,8 @@ for (const p of walk(ROOT)) {
   if (!page.reassurance) delete page.reassurance;
   if (!page.faqs.length) delete page.faqs;
   if (!page.benefits.length) delete page.benefits;
+  if (!page.related.length) delete page.related;
+  if (!page.eyebrow) delete page.eyebrow;
   pages[route] = page;
 }
 
@@ -256,11 +277,21 @@ export type DentalSection = {
 };
 
 /** The three things this page promises, shown above the copy. */
-export type DentalPromise = { title: string; text: string };
+export type DentalPromise = {
+  /** Symbol id in /assets/icons.svg, empty when the page named none. */
+  icon: string;
+  title: string;
+  text: string;
+};
+
+/** A sibling or nearby page, shown as a card at the foot of the copy. */
+export type DentalRelated = { name: string; href: string; blurb: string };
 
 export type DentalPage = {
   /** Meta description, replacing the standing one for this route. */
   description: string;
+  /** Sits above the title in the hero, naming the section this page is in. */
+  eyebrow?: string;
   /** The opening line, rendered as the page's lead. */
   lead: string;
   /** Photograph shown beside the lead. */
@@ -272,6 +303,7 @@ export type DentalPage = {
   sections: DentalSection[];
   reassurance?: string;
   faqs?: Array<{ q: string; a: string }>;
+  related?: DentalRelated[];
 };
 
 /** Keyed by this site's route, with the trailing slash. */
@@ -281,13 +313,14 @@ for (const route of Object.keys(pages).sort()) {
   const p = pages[route];
   lines.push(`  ${q(route)}: {`);
   lines.push(`    description: ${q(p.description)},`);
+  if (p.eyebrow) lines.push(`    eyebrow: ${q(p.eyebrow)},`);
   lines.push(`    lead: ${q(p.lead)},`);
   if (p.hero) lines.push(`    hero: ${q(p.hero)},`);
   if (p.scene) lines.push(`    scene: ${q(p.scene)},`);
   if (p.sceneAlt) lines.push(`    sceneAlt: ${q(p.sceneAlt)},`);
   if (p.benefits) {
     lines.push(`    promises: [`);
-    for (const b of p.benefits) lines.push(`      { title: ${q(b.title)}, text: ${q(b.text)} },`);
+    for (const b of p.benefits) lines.push(`      { icon: ${q(b.icon)}, title: ${q(b.title)}, text: ${q(b.text)} },`);
     lines.push(`    ],`);
   }
   lines.push(`    sections: [`);
@@ -302,6 +335,11 @@ for (const route of Object.keys(pages).sort()) {
   lines.push(`    ],`);
   if (p.reassurance) lines.push(`    reassurance: ${q(p.reassurance)},`);
   if (p.faqs) { lines.push(`    faqs: [`); for (const f of p.faqs) lines.push(`      { q: ${q(f.q)}, a: ${q(f.a)} },`); lines.push(`    ],`); }
+  if (p.related) {
+    lines.push(`    related: [`);
+    for (const r of p.related) lines.push(`      { name: ${q(r.name)}, href: ${q(r.href)}, blurb: ${q(r.blurb)} },`);
+    lines.push(`    ],`);
+  }
   lines.push(`  },`);
 }
 lines.push('};');
