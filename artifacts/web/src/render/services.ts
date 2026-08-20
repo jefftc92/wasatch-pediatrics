@@ -124,6 +124,49 @@ ${cards}
 }
 
 /** Links across to the other three pillars, on every hub and service page. */
+/**
+ * The pages alongside this one, as cards at the foot of the page.
+ *
+ * The strip above the title and the pills on the hero both did this job and
+ * both were wrong for it: a bar of small links between the nav and the page's
+ * own name reads as a third menu, and there is no room for one. Cards at the
+ * end are where somebody is when they have finished reading and want the next
+ * thing, which is when sideways movement is actually wanted.
+ */
+function siblingCards(
+  heading: string,
+  items: Array<{ name: string; href: string; blurb?: string }>,
+  currentHref: string,
+  bg = "graybg",
+): string {
+  const others = items.filter((item) => item.href !== currentHref);
+  if (others.length < 1) return "";
+
+  const cards = others
+    .map(
+      (item) => `<div class="col-lg-4 col-md-6">
+	<div class="svc-card">
+		<h2 class="svc-card-title"><a href="${item.href}">${escapeAttribute(item.name)}</a></h2>
+		${item.blurb ? `<p class="svc-card-blurb">${escapeAttribute(item.blurb)}</p>` : ""}
+	</div>
+</div>`,
+    )
+    .join("\n");
+
+  return `<div class="${bg} padme90 svc-index">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="svc-index-title">${escapeAttribute(heading)}</h2>
+			</div>
+		</div>
+		<div class="row">
+${cards}
+		</div>
+	</div>
+</div>`;
+}
+
 function otherPillars(current: string, bg = "graybg"): string {
   const links = pillars
     .filter((pillar) => pillar.slug !== current)
@@ -170,30 +213,8 @@ export function renderPillarPage(
 	</div>
 </div>`;
 
-  const nav = renderSectionNav(
-    { name: pillar.name, href: pillar.href },
-    [
-      {
-        items: servicesInPillar(pillar.slug).map((service) => ({
-          name: service.name,
-          href: serviceHref(service),
-        })),
-      },
-    ],
-    pillar.href,
-  );
 
-  /*
-   * Dentistry navigates by trail and by cards, all the way down — the masthead
-   * came off its service, topic and page levels because four levels could not
-   * fit in a bar. Leaving it on the pillar alone made the top of that tree look
-   * like a different site from everything under it, and stacked two menus and a
-   * title band before the page began. The service index below is the way in.
-   */
-  const masthead = pillar.slug === "dentistry" ? "" : nav;
-
-  return `${masthead}
-${opening}
+  return `${opening}
 ${renderServiceIndex(pillar, storedContent ? `Explore ${pillar.name}` : "What we offer")}
 ${otherPillars(pillar.slug)}`;
 }
@@ -267,31 +288,27 @@ export function renderServicePage(service: Service): string {
 </div>`
       : "";
 
-  // Sideways movement lives in the section nav now, so the old chip list of
-  // sibling services would just say the same thing twice.
-  const nav = renderSectionNav(
-    { name: pillar.name, href: pillar.href },
-    [
-      {
-        items: servicesInPillar(pillar.slug).map((other) => ({
-          name: other.name,
-          href: serviceHref(other),
-        })),
-      },
-      {
-        label: `In ${service.name}`,
-        items: (service.topics ?? []).map((topic) => ({
-          name: topic.name,
-          href: topicHref(service, topic),
-        })),
-      },
-    ],
-    serviceHref(service),
-  );
 
   // The body is white, so the sections after it alternate grey and white
   // rather than running together into one long grey block.
-  const sections = [topicSectionsFor, teamSection, otherPillarsSection]
+  const siblingSection = (bg: string) =>
+    siblingCards(
+      `More in ${pillar.name}`,
+      servicesInPillar(pillar.slug).map((other) => ({
+        name: other.name,
+        href: serviceHref(other),
+        blurb: other.blurb,
+      })),
+      serviceHref(service),
+      bg,
+    );
+
+  const sections = [
+    topicSectionsFor,
+    teamSection,
+    siblingSection,
+    otherPillarsSection,
+  ]
     .reduce<string[]>((out, build) => {
       const markup = build(out.length % 2 === 0 ? "graybg" : "whitebg");
       if (markup) out.push(markup);
@@ -299,7 +316,7 @@ export function renderServicePage(service: Service): string {
     }, [])
     .join("\n");
 
-  const head = `${nav}\n${heroSection(escapeAttribute(service.name), crumbs)}`;
+  const head = heroSection(escapeAttribute(service.name), crumbs);
 
   /*
    * A migrated service brings its own bands, and the topic shelf, the team and
@@ -312,14 +329,6 @@ export function renderServicePage(service: Service): string {
       dentalCrumbs(crumbs),
       { name: service.name, href: serviceHref(service) },
       pillar,
-      {
-        label: `More in ${pillar.name}`,
-        items: servicesInPillar(pillar.slug).map((other) => ({
-          name: other.name,
-          href: serviceHref(other),
-        })),
-      },
-      serviceHref(service),
     )}
 ${sections}`;
   }
@@ -355,85 +364,6 @@ export type SectionLink = { name: string; href: string };
  * sibling topics; on the deepest pages, the other pages in the same topic.
  * On a phone it scrolls sideways rather than wrapping into a wall of links.
  */
-/**
- * The bar under the header that carries sideways movement inside a service.
- *
- * It used to be a single strip of whatever siblings the current page had, which
- * broke in three ways at once: on a service page it offered the *pillar's* other
- * services rather than the service's own topics, so nine orthodontic treatments
- * were unreachable from the page they belong to; three levels down it listed
- * eight siblings in a track that needed 1333px and had 873px, so it became a
- * horizontal scroller on a desktop; and at no depth did it say where you were.
- *
- * It is now a masthead for the section: the service named once, in the display
- * face, and beneath it the topics — wrapping rather than scrolling, so nothing
- * is hidden off an edge. On a page below a topic, a second row carries that
- * topic's own pages. Two rows is the most it can ever be, and together they read
- * as the path you took.
- */
-export function renderSectionNav(
-  section: SectionLink,
-  rows: Array<{ label?: string; items: SectionLink[] }>,
-  currentHref: string,
-): string {
-  const visible = rows.filter((row) => row.items.length);
-  if (!visible.length) return "";
-
-  const row = (items: SectionLink[], level: string) => {
-    const links = items
-      .map((item) => {
-        // The row above the current page marks the branch it came down, so the
-        // two rows together read as the path rather than as two flat lists.
-        const state =
-          item.href === currentHref
-            ? ' class="secnav-current" aria-current="page"'
-            : currentHref.startsWith(item.href)
-              ? ' class="secnav-ancestor"'
-              : "";
-        return `<li><a href="${item.href}"${state}>${escapeAttribute(item.name)}</a></li>`;
-      })
-      .join("");
-    return `<ul class="secnav-list secnav-${level}">${links}</ul>`;
-  };
-
-  const lists = visible
-    .map((entry, index) =>
-      index === 0
-        ? `			${row(entry.items, "topics")}`
-        : `			<div class="secnav-sub">
-				${entry.label ? `<span class="secnav-sub-label">${escapeAttribute(entry.label)}</span>` : ""}
-				${row(entry.items, "items")}
-			</div>`,
-    )
-    .join("\n");
-
-  /*
-   * Collapsed on a phone, where showing everything ran to 384px — most of the
-   * screen before the page began.
-   *
-   * It ships open and script closes it on a phone, rather than shipping closed
-   * and being forced open by CSS on a desktop: a modern <details> hides its
-   * content through ::details-content, which `display` on the children cannot
-   * override, so the CSS-only version collapsed the bar at every width. This
-   * way the no-script rendering is the honest one — everything visible — and
-   * the collapse is the enhancement.
-   */
-  const count = visible.reduce((n, entry) => n + entry.items.length, 0);
-
-  return `<nav class="secnav" aria-label="${escapeAttribute(section.name)}">
-	<div class="container">
-		<div class="secnav-inner">
-			<a class="secnav-section lys" href="${section.href}">${escapeAttribute(section.name)}</a>
-			<details class="secnav-browse" open>
-				<summary class="secnav-summary">Browse this section<span class="secnav-count">${count}</span></summary>
-				<div class="secnav-panel">
-${lists}
-				</div>
-			</details>
-		</div>
-	</div>
-</nav>`;
-}
 
 /* ---------------------------------------------------------------- topics -- */
 
@@ -487,25 +417,6 @@ export function renderTopicPage(service: Service, topic: Topic): string {
   const pillar = pillarBySlug.get(service.pillar);
   if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
 
-  const nav = renderSectionNav(
-    { name: service.name, href: serviceHref(service) },
-    [
-      {
-        items: (service.topics ?? []).map((other) => ({
-          name: other.name,
-          href: topicHref(service, other),
-        })),
-      },
-      {
-        label: `In ${topic.name}`,
-        items: topic.items.map((other) => ({
-          name: other.name,
-          href: topicItemHref(service, topic, other),
-        })),
-      },
-    ],
-    topicHref(service, topic),
-  );
 
   const crumbs: Crumb[] = [
     { name: pillar.name, href: pillar.href },
@@ -540,7 +451,7 @@ ${topic.items
 </div>`
     : "";
 
-  const head = `${nav}\n${heroSection(escapeAttribute(topic.name), crumbs)}`;
+  const head = heroSection(escapeAttribute(topic.name), crumbs);
 
   /*
    * A migrated topic keeps its own bands and puts the list of pages under them,
@@ -553,17 +464,19 @@ ${topic.items
       dentalCrumbs(crumbs),
       { name: service.name, href: serviceHref(service) },
       pillar,
-      {
-        label: `More in ${service.name}`,
-        items: (service.topics ?? []).map((other) => ({
-          name: other.name,
-          href: topicHref(service, other),
-        })),
-      },
-      topicHref(service, topic),
     )}
 ${items}
-${otherPillars(pillar.slug, items ? "whitebg" : "graybg")}`;
+${siblingCards(
+  `More in ${service.name}`,
+  (service.topics ?? []).map((other) => ({
+    name: other.name,
+    href: topicHref(service, other),
+    blurb: other.blurb,
+  })),
+  topicHref(service, topic),
+  items ? "whitebg" : "graybg",
+)}
+${otherPillars(pillar.slug, "graybg")}`;
   }
 
   return `${head}
@@ -582,7 +495,17 @@ ${otherPillars(pillar.slug, items ? "whitebg" : "graybg")}`;
 	</div>
 </div>
 ${items}
-${otherPillars(pillar.slug, items ? "whitebg" : "graybg")}`;
+${siblingCards(
+  `More in ${service.name}`,
+  (service.topics ?? []).map((other) => ({
+    name: other.name,
+    href: topicHref(service, other),
+    blurb: other.blurb,
+  })),
+  topicHref(service, topic),
+  items ? "whitebg" : "graybg",
+)}
+${otherPillars(pillar.slug, "graybg")}`;
 }
 
 /** The deepest page: one question, answered. */
@@ -594,30 +517,6 @@ export function renderTopicItemPage(
   const pillar = pillarBySlug.get(service.pillar);
   if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
 
-  /*
-   * Three levels deep, so both rows earn their place: the first says which
-   * topic of the service you are inside, the second which of its pages.
-   */
-  const nav = renderSectionNav(
-    { name: service.name, href: serviceHref(service) },
-    [
-      {
-        items: (service.topics ?? []).map((other) => ({
-          name: other.name,
-          href: topicHref(service, other),
-        })),
-      },
-      {
-        label: `In ${topic.name}`,
-        items: topic.items.map((other) => ({
-          name: other.name,
-          href: topicItemHref(service, topic, other),
-        })),
-      },
-    ],
-    topicItemHref(service, topic, item),
-  );
-
   const crumbs: Crumb[] = [
     { name: pillar.name, href: pillar.href },
     { name: service.name, href: serviceHref(service) },
@@ -625,7 +524,7 @@ export function renderTopicItemPage(
     { name: item.name },
   ];
 
-  const head = `${nav}\n${heroSection(escapeAttribute(item.name), crumbs)}`;
+  const head = heroSection(escapeAttribute(item.name), crumbs);
   const migrated = dentalPage(topicItemHref(service, topic, item));
 
   if (migrated) {
@@ -635,16 +534,18 @@ export function renderTopicItemPage(
       dentalCrumbs(crumbs),
       { name: service.name, href: serviceHref(service) },
       pillar,
-      {
-        label: `More in ${topic.name}`,
-        items: topic.items.map((other) => ({
-          name: other.name,
-          href: topicItemHref(service, topic, other),
-        })),
-      },
-      topicItemHref(service, topic, item),
     )}
-${otherPillars(pillar.slug)}`;
+${siblingCards(
+  `More in ${topic.name}`,
+  topic.items.map((other) => ({
+    name: other.name,
+    href: topicItemHref(service, topic, other),
+    blurb: other.blurb,
+  })),
+  topicItemHref(service, topic, item),
+  "graybg",
+)}
+${otherPillars(pillar.slug, "whitebg")}`;
   }
 
   return `${head}
@@ -666,7 +567,17 @@ ${otherPillars(pillar.slug)}`;
 		</div>
 	</div>
 </div>
-${otherPillars(pillar.slug)}`;
+${siblingCards(
+  `More in ${topic.name}`,
+  topic.items.map((other) => ({
+    name: other.name,
+    href: topicItemHref(service, topic, other),
+    blurb: other.blurb,
+  })),
+  topicItemHref(service, topic, item),
+  "graybg",
+)}
+${otherPillars(pillar.slug, "whitebg")}`;
 }
 
 /* --------------------------------------------------- all services index -- */

@@ -105,51 +105,10 @@ function sectionTitle(text: string): string {
  * title has a guaranteed contrast to sit on whatever the picture underneath is
  * doing. Pages with no photograph get the wash alone and look deliberate.
  */
-export type DentalPeers = {
-  /** Names the set, e.g. "More in Orthodontics". */
-  label: string;
-  items: Array<{ name: string; href: string }>;
-};
-
-/**
- * The peer pages, in the hero.
- *
- * The hero used to carry a Schedule button, which said the same thing as the
- * green pill in the header and the whole blue band at the foot of the page —
- * three asks on one page, and the one in the hero was the least likely to be
- * the reason anybody was reading it.
- *
- * What the page actually needed there was the sideways move: this is where the
- * masthead's job goes. One row, the pages alongside this one, the current page
- * marked. On the wash they read as quiet ghost pills rather than as a second
- * navigation bar, and there is only ever one set — no page shows both its
- * siblings and its cousins.
- */
-function peerNav(peers: DentalPeers | undefined, currentHref: string): string {
-  if (!peers || peers.items.length < 2) return "";
-
-  const links = peers.items
-    .map((item) => {
-      const current =
-        item.href === currentHref
-          ? ' class="dent-hero-link is-here" aria-current="page"'
-          : ' class="dent-hero-link"';
-      return `<a href="${escapeAttribute(item.href)}"${current}>${escapeAttribute(item.name)}</a>`;
-    })
-    .join("\n\t\t\t");
-
-  return `		<p class="dent-hero-navlabel">${escapeAttribute(peers.label)}</p>
-		<nav class="dent-hero-nav" aria-label="${escapeAttribute(peers.label)}">
-			${links}
-		</nav>`;
-}
-
 function heroBand(
   page: DentalPage,
   title: string,
   service: { name: string; href: string },
-  peers: DentalPeers | undefined,
-  currentHref: string,
 ): string {
   const art = page.hero
     ? `<img class="dent-hero-img" src="${page.hero}" alt="" aria-hidden="true" width="1536" height="1024" loading="eager" decoding="async" />`
@@ -165,7 +124,7 @@ function heroBand(
 		${eyebrow}
 		<h1 class="dent-hero-title">${escapeAttribute(title)}</h1>
 		<p class="dent-hero-lead">${inline(page.lead)}</p>
-${peerNav(peers, currentHref) || `		<p class="dent-hero-act"><a class="btn dent-hero-ghost" href="${service.href}">All ${escapeAttribute(service.name)}</a></p>`}
+		<p class="dent-hero-act"><a class="btn dent-hero-ghost" href="${service.href}">All ${escapeAttribute(service.name)}</a></p>
 	</div>
 </div>`;
 }
@@ -433,8 +392,6 @@ export function renderDentalPage(
   crumbs: string,
   service: { name: string; href: string },
   pillar: { name: string; href: string },
-  peers?: DentalPeers,
-  currentHref = "",
 ): string {
   const parts = page.sections.map(section);
   const scene = sceneBand(page);
@@ -443,7 +400,7 @@ export function renderDentalPage(
 
   return [
     crumbs,
-    heroBand(page, title, service, peers, currentHref),
+    heroBand(page, title, service),
     promiseBand(page),
     ...parts,
     reassuranceBand(page),
