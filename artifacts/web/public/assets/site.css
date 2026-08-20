@@ -530,16 +530,6 @@
     background 0.2s ease;
 }
 
-/*
- * While the resting position is being read back. The button carries transitions
- * of its own, and measuring it mid-flight returns wherever it happens to be
- * rather than where it parks.
- */
-.ctadock.is-measuring .ctadock-btn,
-.ctadock.is-measuring .ctadock-label {
-  transition: none !important;
-}
-
 .ctadock-btn:hover {
   background: #f58220;
   color: #ffffff !important;
@@ -578,56 +568,6 @@
 @media (max-width: 767px) {
   .ctadock {
     display: flex;
-  }
-}
-
-@media (min-width: 768px) {
-  /*
-   * On a wide screen the header keeps its own pill — it is never hidden, it
-   * just scrolls away — so this is only ever the bubble. It carries no label,
-   * which is what makes the trip smooth: the button that used to travel was a
-   * pill plus an icon, wider than the header's pill, so arriving meant growing
-   * to fit the icon and then snapping narrower as the icon went away.
-   *
-   * Nothing about its size changes now. The whole animation is a transform,
-   * from the pill's place at the top of the page to the corner and back, which
-   * is the part that actually says the two are the same button.
-   */
-  .ctadock {
-    left: auto;
-    right: 24px;
-    bottom: 24px;
-  }
-
-  .ctadock.is-shown {
-    display: flex;
-  }
-
-  .ctadock-btn {
-    width: 56px;
-    padding: 0;
-    gap: 0;
-  }
-
-  .ctadock-label {
-    display: none;
-  }
-
-  /* Only while travelling, so hovering the parked bubble cannot animate it. */
-  .ctadock.is-flying .ctadock-btn {
-    transition:
-      transform 0.42s cubic-bezier(0.4, 0, 0.2, 1),
-      opacity 0.34s ease,
-      background 0.2s ease;
-  }
-
-  /*
-   * The far end of the trip: up at the pill, small enough to read as the pill's
-   * own icon and transparent, so it emerges from the header rather than sliding
-   * out of it whole. The transform that carries it there is measured in script.
-   */
-  .ctadock.is-at-pill .ctadock-btn {
-    opacity: 0;
   }
 }
 
