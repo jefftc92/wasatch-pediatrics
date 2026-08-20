@@ -60,6 +60,15 @@ export function providersForService(service: Service) {
   );
 }
 
+/**
+ * The breadcrumb trail for a migrated page, which carries it on its hero rather
+ * than in a strip above one. On these pages the trail is the whole of the
+ * upward navigation, so it is the one thing that has to be there.
+ */
+function dentalCrumbs(crumbs: Crumb[]): string {
+  return `\t\t${renderBreadcrumbs(crumbs)}`;
+}
+
 function heroSection(title: string, crumbs: Crumb[]): string {
   return `<div class="bluebg">
 	<div class="container">
@@ -281,8 +290,7 @@ export function renderServicePage(service: Service): string {
    * the other pillars follow them.
    */
   if (migrated) {
-    return `${head}
-${renderDentalPage(migrated, service.name, { name: service.name, href: serviceHref(service) }, pillar)}
+    return `${renderDentalPage(migrated, service.name, dentalCrumbs(crumbs), { name: service.name, href: serviceHref(service) }, pillar)}
 ${sections}`;
   }
 
@@ -509,8 +517,7 @@ ${topic.items
    * on grey so it reads as a shelf below the page rather than part of it.
    */
   if (migrated) {
-    return `${head}
-${renderDentalPage(migrated, topic.name, { name: service.name, href: serviceHref(service) }, pillar)}
+    return `${renderDentalPage(migrated, topic.name, dentalCrumbs(crumbs), { name: service.name, href: serviceHref(service) }, pillar)}
 ${items}
 ${otherPillars(pillar.slug, items ? "whitebg" : "graybg")}`;
   }
@@ -578,8 +585,7 @@ export function renderTopicItemPage(
   const migrated = dentalPage(topicItemHref(service, topic, item));
 
   if (migrated) {
-    return `${head}
-${renderDentalPage(migrated, item.name, { name: service.name, href: serviceHref(service) }, pillar)}
+    return `${renderDentalPage(migrated, item.name, dentalCrumbs(crumbs), { name: service.name, href: serviceHref(service) }, pillar)}
 ${otherPillars(pillar.slug)}`;
   }
 

@@ -1535,133 +1535,260 @@
 /*
  * The dentistry site's pages, in this site's clothes.
  *
- * Nothing here is a new design language. The bands, the display face on the
- * section headings, the white rounded cards on grey and the accordion are all
- * what the rest of the site is built from — the accordion is literally the
- * theme's, markup and script untouched. Only the pieces the theme has no
- * equivalent for (the numbered steps, the ruled callouts) are defined here, and
- * those are drawn in the brand's own colours.
+ * The shape is the one the dentistry site uses, because it suits the material:
+ * a photographic hero, then centred sections at a readable measure, each doing
+ * one job. What makes it this site is everything filling that shape — the brand
+ * palette, Montserrat, the theme's 20px card radius and pill buttons, the green
+ * schedule button, and the theme's own accordion for the questions.
+ *
+ * The display face (`lys`) is deliberately absent. It is drawn for six-word
+ * marketing lines, and asking it to carry "HOW TO SAVE A KNOCKED-OUT PERMANENT
+ * TOOTH" is what made the last pass hard to read.
  */
 
-.dent-band-title {
-  color: #636466;
-  font-size: 34px !important;
-  line-height: 40px !important;
-  margin: 0 0 18px 0;
+/* ------------------------------------------------------------ dent hero -- */
+
+/*
+ * The photograph carries the title. These pages meet a parent deciding what to
+ * do in the next ten minutes, and a picture of a child being looked after does
+ * more for that than a coloured rectangle.
+ *
+ * The wash sits over the photograph rather than beside it, so the type has a
+ * guaranteed ground whatever the picture underneath is doing — darkest at the
+ * left where the words are, clearing to the right so the photograph is still
+ * legible as a photograph.
+ */
+.dent-hero {
+  position: relative;
+  overflow: hidden;
+  background: #2b93d1;
 }
 
-.dent-lead-row {
-  --dent-gap: 40px;
-}
-
-.dent-lead {
-  font-size: 26px !important;
-  line-height: 34px !important;
-  font-weight: 400 !important;
-  color: #636466;
-  margin: 0;
-}
-
-.dent-hero-img,
-.dent-scene img {
+.dent-hero-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  height: auto;
-  border-radius: 25px;
-  display: block;
-}
-
-.dent-scene {
-  margin: 34px 0;
-}
-
-/* The promise cards: the white-on-grey card the dentistry pages already use. */
-.dent-promise {
-  background: #ffffff;
-  border-radius: 20px;
-  padding: 28px 30px;
   height: 100%;
-  margin: 15px 0;
+  object-fit: cover;
+  /*
+   * Centre, not a clever crop: these are sixty photographs with sixty
+   * compositions, and anything else loses the subject on some of them.
+   */
+  object-position: center;
+}
+
+.dent-hero-wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(24, 86, 125, 0.94) 0%,
+    rgba(30, 106, 152, 0.88) 38%,
+    rgba(43, 147, 209, 0.55) 72%,
+    rgba(43, 147, 209, 0.28) 100%
+  );
+}
+
+/* No photograph: the wash alone, so the page still looks deliberate. */
+.dent-hero-plain .dent-hero-wash {
+  background: linear-gradient(100deg, #2277ab 0%, #2b93d1 100%);
+}
+
+.dent-hero-inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 460px;
+  padding: 30px 0 44px 0;
+  max-width: 1140px;
+}
+
+/* The trail rides on the hero: on these pages it is the whole of the upward
+   navigation, so it has to be legible against the photograph. */
+.dent-hero-inner .crumbs,
+.dent-hero-inner .crumbs a {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+.dent-hero-inner .crumbs a:hover {
+  color: #ffffff !important;
+}
+
+.dent-hero-eyebrow {
+  margin: 18px 0 6px 0;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.dent-hero-title {
+  margin: 0;
+  max-width: 15em;
+  color: #ffffff;
+  font-size: 52px;
+  line-height: 1.08;
+  font-weight: 700;
+}
+
+.dent-hero-lead {
+  margin: 18px 0 0 0;
+  max-width: 34em;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.dent-hero-act {
+  margin: 28px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.dent-hero-act .btn {
+  font-size: 17px;
+  padding: 11px 26px;
+}
+
+/* The second action is the quiet one: an outline on the wash, not a second
+   solid pill competing with the green. */
+.dent-hero-ghost {
+  background: transparent;
+  color: #ffffff !important;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+}
+
+.dent-hero-ghost:hover {
+  background: #ffffff;
+  color: #2b93d1 !important;
+  border-color: #ffffff;
+}
+
+/* -------------------------------------------------------- dent promises -- */
+
+.dent-promises {
+  padding: 56px 0 20px 0;
+}
+
+.dent-promise {
+  height: 100%;
+  margin-bottom: 28px;
+  padding: 30px 28px;
+  background: #ffffff;
+  border: 1px solid #e8e8ea;
+  border-radius: 20px;
+}
+
+.dent-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: #eaf4fb;
+  color: #2b93d1;
+}
+
+.dent-icon svg {
+  width: 26px;
+  height: 26px;
 }
 
 .dent-promise-title {
-  color: #2b93d1;
-  font-size: 19px !important;
-  line-height: 25px !important;
-  font-weight: 700 !important;
   margin: 0 0 8px 0;
+  color: #2b93d1;
+  font-size: 19px;
+  font-weight: 700;
 }
 
 .dent-promise p {
-  font-size: 17px !important;
-  line-height: 25px !important;
   margin: 0;
-}
-
-/* .pagebody carries a 60px top margin for the layouts it was written for. */
-.dent-copy {
-  margin-top: 0 !important;
-}
-
-.dent-copy > *:first-child {
-  margin-top: 0;
-}
-
-.dent-copy .dent-band-title {
-  margin-top: 46px;
-}
-
-.dent-copy > .dent-band-title:first-child {
-  margin-top: 0;
-}
-
-.dent-steps {
-  counter-reset: dent-step;
-  list-style: none;
-  padding: 0;
-  margin: 0 0 8px 0;
-}
-
-.dent-steps li {
-  position: relative;
-  padding: 0 0 0 52px;
-  margin-bottom: 20px;
-}
-
-/* The number is the marker, so it can carry the brand blue and its own shape. */
-.dent-steps li:before {
-  counter-increment: dent-step;
-  content: counter(dent-step);
-  position: absolute;
-  left: 0;
-  top: 2px;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: #2b93d1;
-  color: #ffffff;
-  font-weight: 700;
+  color: #636466;
   font-size: 17px;
-  line-height: 34px;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------------- dent bands -- */
+
+.dent-band {
+  padding: 52px 0;
+}
+
+/*
+ * Two prose sections in a row are both white, so without this they read as one
+ * long stretch with a mysterious gap in it. A hairline at the seam does what
+ * the alternating grey does elsewhere, without turning every other paragraph
+ * into a different colour of page.
+ */
+.whitebg.dent-band + .whitebg.dent-band {
+  border-top: 1px solid #ececee;
+}
+
+/*
+ * Centred, brand blue, and spaced out — the section headings do the work the
+ * display face was doing badly. Uppercase with real letter-spacing reads as a
+ * heading at a glance without shouting at body size.
+ */
+.dent-band-title {
+  margin: 0 0 14px 0;
+  color: #2b93d1;
+  font-size: 27px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
   text-align: center;
 }
 
-.dent-step-title {
-  font-weight: 700;
-  display: block;
+.dent-band-title-left {
+  text-align: left;
 }
 
+.dent-prose p {
+  margin: 0 0 18px 0;
+  color: #636466;
+  font-size: 18px;
+  line-height: 1.62;
+}
+
+.dent-prose p:last-child {
+  margin-bottom: 0;
+}
+
+.dent-prose a {
+  color: #2b93d1;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.dent-prose a:hover {
+  color: #f58220;
+}
+
+/* --------------------------------------------------------- dent callout -- */
+
+/*
+ * Three tones, and the border is the whole signal: red to act now, blue worth
+ * knowing, green makes it easier. Tinted grounds rather than solid colour, so a
+ * callout inside a paragraph does not read as a different page.
+ */
 .dent-callout {
-  background: #f4f4f4;
+  margin: 26px 0 0 0;
+  padding: 20px 24px;
   border-left: 4px solid #2b93d1;
   border-radius: 0 12px 12px 0;
-  padding: 20px 24px;
-  margin: 26px 0;
+  background: #f2f8fc;
 }
 
 .dent-callout p {
   margin: 0;
-  font-size: 18px !important;
-  line-height: 27px !important;
+  font-size: 17px;
+  line-height: 1.55;
 }
 
 .dent-callout-title {
@@ -1669,65 +1796,295 @@
   margin-bottom: 6px !important;
 }
 
-/* Act now, worth knowing, makes it easier. */
 .dent-callout-alert {
-  border-left-color: #f58220;
+  border-left-color: #d0342c;
+  background: #fdf3f2;
+}
+
+.dent-callout-alert .dent-callout-title {
+  color: #b32a23;
 }
 
 .dent-callout-tip {
   border-left-color: #8dc63f;
+  background: #f5faed;
 }
 
-/* The one line the page wants you to leave with, so it gets the blue band. */
-.dent-reassurance {
-  color: #ffffff;
-  font-size: 28px !important;
-  line-height: 38px !important;
-  margin: 0;
+.dent-callout-tip .dent-callout-title {
+  color: #5d8a1f;
 }
+
+.dent-callout-info .dent-callout-title {
+  color: #2b93d1;
+}
+
+/* ----------------------------------------------------------- dent steps -- */
+
+/*
+ * Cards, not a list. These are read standing up with a hurt child in the room,
+ * so each step is a target the eye lands on rather than a line in a paragraph.
+ */
+.dent-step-row {
+  margin-top: 8px;
+}
+
+.dent-step {
+  height: 100%;
+  margin-bottom: 24px;
+  padding: 26px 24px;
+  background: #ffffff;
+  border-radius: 20px;
+}
+
+.dent-step-n {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 14px;
+  border-radius: 50%;
+  background: #2b93d1;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.dent-step-title {
+  margin: 0 0 6px 0;
+  color: #636466;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.dent-step p {
+  margin: 0;
+  color: #636466;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------------- dent scene -- */
+
+.dent-scene-band {
+  padding: 10px 0 62px 0;
+}
+
+.dent-scene {
+  margin: 0;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.dent-scene img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* ----------------------------------------------------------- dent quote -- */
+
+/*
+ * The reassurance was a solid blue band shouting a sentence meant to calm
+ * someone down. It is a pull quote now, which is what the words are doing.
+ */
+.dent-quote-band {
+  padding: 20px 0 66px 0;
+}
+
+.dent-quote {
+  position: relative;
+  margin: 0;
+  padding-top: 34px;
+  color: #4a4b4d;
+  font-size: 25px;
+  line-height: 1.45;
+  font-weight: 700;
+  text-align: center;
+}
+
+.dent-quote:before {
+  content: "\201C";
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #f58220;
+  font-size: 58px;
+  line-height: 1;
+}
+
+/* ------------------------------------------------------------- dent faq -- */
 
 .dent-faq {
-  margin: 10px 0 !important;
+  margin: 0 0 14px 0;
+  padding: 22px 26px;
+  border: 1px solid #e8e8ea;
+}
+
+.dent-faq .d-location-title {
+  font-size: 18px;
+  padding-right: 40px;
 }
 
 .dent-faq .cardcontent p {
   margin: 12px 0 0 0;
-  font-size: 18px !important;
-  line-height: 27px !important;
+  color: #636466;
+  font-size: 17px;
+  line-height: 1.55;
 }
 
-.dent-schedule-act {
-  text-align: right;
+/* ------------------------------------------------------------ dent next -- */
+
+/*
+ * Where to go next, as cards — the answer to navigating four levels of these
+ * pages. The trail on the hero says where you are; this says where you can go.
+ * A permanent bar of every sibling and cousin was two rows of small links
+ * before the title had been read.
+ */
+.dent-next {
+  display: block;
+  height: 100%;
+  margin-bottom: 24px;
+  padding: 22px 46px 22px 24px;
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e8e8ea;
+  border-radius: 20px;
+  text-decoration: none !important;
+  transition: border-color 0.18s ease;
 }
 
-.dent-schedule-links {
-  margin: 14px 0 0 0;
-  font-size: 16px !important;
+.dent-next:hover {
+  border-color: #2b93d1;
 }
+
+.dent-next:after {
+  content: "";
+  position: absolute;
+  top: 30px;
+  right: 24px;
+  width: 8px;
+  height: 8px;
+  border: solid #2b93d1;
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg);
+  transition: transform 0.18s ease;
+}
+
+.dent-next:hover:after {
+  transform: rotate(45deg) translate(3px, -3px);
+}
+
+.dent-next-name {
+  display: block;
+  color: #2b93d1;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.dent-next-blurb {
+  display: block;
+  margin-top: 4px;
+  color: #636466;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+/* ------------------------------------------------------------- dent cta -- */
+
+.dent-cta {
+  padding: 58px 0;
+  text-align: center;
+}
+
+.dent-cta-title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.dent-cta-text {
+  margin: 12px 0 0 0;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 18px;
+}
+
+.dent-cta-act {
+  margin: 24px 0 0 0;
+}
+
+.dent-cta-links {
+  margin: 16px 0 0 0;
+  font-size: 16px;
+}
+
+.dent-cta-links a {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.dent-cta-links a:hover {
+  color: #ffffff !important;
+}
+
+/* ------------------------------------------------------- dentistry small -- */
 
 @media (max-width: 991px) {
+  .dent-hero-title {
+    font-size: 38px;
+  }
+
+  .dent-hero-lead {
+    font-size: 18px;
+  }
+
   .dent-band-title {
-    font-size: 28px !important;
-    line-height: 34px !important;
+    font-size: 23px;
   }
 
-  .dent-lead {
-    font-size: 22px !important;
-    line-height: 30px !important;
+  .dent-quote {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 767px) {
+  .dent-hero-inner {
+    padding: 24px 0 40px 0;
   }
 
-  .dent-reassurance {
-    font-size: 23px !important;
-    line-height: 32px !important;
+  .dent-hero-title {
+    font-size: 30px;
   }
 
-  /* The photograph reads as an illustration of the text above it, not a banner. */
-  .dent-hero-img {
-    margin-top: 28px;
+  /* The wash goes flat below the fold width: there is no room for a photograph
+     to read beside the type, so it becomes ground rather than picture. */
+  .dent-hero-wash {
+    background: linear-gradient(
+      160deg,
+      rgba(24, 86, 125, 0.95) 0%,
+      rgba(30, 106, 152, 0.92) 100%
+    );
   }
 
-  .dent-schedule-act {
-    text-align: left;
-    margin-top: 22px;
+  .dent-hero-act .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .dent-band,
+  .dent-promises {
+    padding: 40px 0;
+  }
+
+  .dent-cta {
+    padding: 44px 0;
+  }
+
+  .dent-cta-title {
+    font-size: 26px;
   }
 }

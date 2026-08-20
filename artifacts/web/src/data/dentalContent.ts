@@ -31,11 +31,21 @@ export type DentalSection = {
 };
 
 /** The three things this page promises, shown above the copy. */
-export type DentalPromise = { title: string; text: string };
+export type DentalPromise = {
+  /** Symbol id in /assets/icons.svg, empty when the page named none. */
+  icon: string;
+  title: string;
+  text: string;
+};
+
+/** A sibling or nearby page, shown as a card at the foot of the copy. */
+export type DentalRelated = { name: string; href: string; blurb: string };
 
 export type DentalPage = {
   /** Meta description, replacing the standing one for this route. */
   description: string;
+  /** Sits above the title in the hero, naming the section this page is in. */
+  eyebrow?: string;
   /** The opening line, rendered as the page's lead. */
   lead: string;
   /** Photograph shown beside the lead. */
@@ -47,18 +57,20 @@ export type DentalPage = {
   sections: DentalSection[];
   reassurance?: string;
   faqs?: Array<{ q: string; a: string }>;
+  related?: DentalRelated[];
 };
 
 /** Keyed by this site's route, with the trailing slash. */
 export const dentalContent: Record<string, DentalPage> = {
   "/dentistry-orthodontics/dental-emergencies/": {
     description: "Knocked-out tooth, severe pain, swelling, or a broken bracket? Get same-day, after-hours, and teledentistry care in West Jordan, UT. Call (801) 676-3700 now.",
+    eyebrow: "Emergency Care",
     lead: "Dental emergencies don't wait for business hours, and neither do we. Call us and we'll get your child comfortable fast, with same-day, after-hours, and teledentistry care.",
     hero: "/assets/dentistry/emergencies/overview/hero.webp",
     promises: [
-      { title: "Seen the same day", text: "We keep room in the schedule for urgent visits, so call and we'll fit your child in." },
-      { title: "Help after hours too", text: "After-hours phone support and teledentistry, so you're never left guessing." },
-      { title: "Calm, kid-first care", text: "We get your child comfortable first, then fix the problem gently." },
+      { icon: "clock", title: "Seen the same day", text: "We keep room in the schedule for urgent visits, so call and we'll fit your child in." },
+      { icon: "phone", title: "Help after hours too", text: "After-hours phone support and teledentistry, so you're never left guessing." },
+      { icon: "heart", title: "Calm, kid-first care", text: "We get your child comfortable first, then fix the problem gently." },
     ],
     sections: [
       {
@@ -87,12 +99,13 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/dental-emergencies/dental-infection/": {
     description: "Dental infections like abscesses and facial swelling in children need urgent care. Same-day help in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Emergency Care",
     lead: "A dental infection won't clear on its own and can spread, so it needs prompt treatment. Call us and we'll get your child seen, comfortable, and truly better, the same day.",
     hero: "/assets/dentistry/emergencies/dental-infection/hero.webp",
     promises: [
-      { title: "Seen the same day", text: "An infection can't wait, so neither will your child." },
-      { title: "Relief from pain first", text: "We get your child comfortable, then clear the infection at its source." },
-      { title: "Treated completely", text: "We fix the cause, not just the symptoms, so it doesn't come back." },
+      { icon: "clock", title: "Seen the same day", text: "An infection can't wait, so neither will your child." },
+      { icon: "heart", title: "Relief from pain first", text: "We get your child comfortable, then clear the infection at its source." },
+      { icon: "shield-check", title: "Treated completely", text: "We fix the cause, not just the symptoms, so it doesn't come back." },
     ],
     sections: [
       {
@@ -111,12 +124,13 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/dental-emergencies/dental-infection/abscess/": {
     description: "A tooth abscess is a dental infection that needs urgent care. Recognize the signs and get same-day help for kids in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Dental Infection",
     lead: "A tooth abscess is a dental emergency, but you're not on your own. Call us and we'll get your child seen the same day, ease the pain fast, and treat the infection gently and completely.",
     hero: "/assets/dentistry/emergencies/dental-infection/abscess/hero.webp",
     promises: [
-      { title: "Seen the same day", text: "Call and we'll fit your child in quickly, because an abscess shouldn't wait." },
-      { title: "Relief from pain first", text: "Our first job is getting your child comfortable and out of pain." },
-      { title: "We treat the cause", text: "Then we clear the infection at its source, gently and completely." },
+      { icon: "clock", title: "Seen the same day", text: "Call and we'll fit your child in quickly, because an abscess shouldn't wait." },
+      { icon: "heart", title: "Relief from pain first", text: "Our first job is getting your child comfortable and out of pain." },
+      { icon: "shield-check", title: "We treat the cause", text: "Then we clear the infection at its source, gently and completely." },
     ],
     sections: [
       {
@@ -159,12 +173,13 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/dental-emergencies/dental-infection/facial-swelling/": {
     description: "Facial or jaw swelling from a dental infection in a child is urgent. Learn the warning signs and call (801) 676-3700 right away in West Jordan, UT.",
+    eyebrow: "Dental Infection",
     lead: "Swelling of the cheek, jaw, or gums along with a toothache usually means an infection that needs prompt care. Call us right away, and know the signs that make it a true emergency.",
     hero: "/assets/dentistry/emergencies/dental-infection/facial-swelling/hero.webp",
     promises: [
-      { title: "Seen right away", text: "Swelling with a toothache moves to the front of our schedule." },
-      { title: "We find the source", text: "We identify the tooth behind the swelling and treat it directly." },
-      { title: "Complete treatment", text: "Pressure relieved, infection cleared, and the tooth cared for." },
+      { icon: "clock", title: "Seen right away", text: "Swelling with a toothache moves to the front of our schedule." },
+      { icon: "magnifying-glass", title: "We find the source", text: "We identify the tooth behind the swelling and treat it directly." },
+      { icon: "shield-check", title: "Complete treatment", text: "Pressure relieved, infection cleared, and the tooth cared for." },
     ],
     sections: [
       {
@@ -205,15 +220,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Should I use heat or cold on the swelling?", a: "Use cold on the outside of the cheek, never heat. Heat can encourage an infection to spread. Then call us right away." },
       { q: "What usually causes the swelling?", a: "Most often a tooth abscess, an infection at the root of a tooth from an untreated cavity, crack, or injury. Treating that tooth is what resolves the swelling." },
     ],
+    related: [
+      { name: "Tooth Abscess", href: "/dentistry-orthodontics/dental-emergencies/dental-infection/abscess/", blurb: "The usual cause of swelling." },
+      { name: "Dental Antibiotics", href: "/dentistry-orthodontics/dental-emergencies/treatments/antibiotics/", blurb: "Help controlling infection." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+      { name: "All Emergencies", href: "/dentistry-orthodontics/dental-emergencies/", blurb: "Every emergency topic." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/dental-trauma/": {
     description: "Knocked-out, chipped, or broken teeth and dental injuries in children. Same-day emergency care in West Jordan, UT. Call (801) 676-3700 now.",
+    eyebrow: "Emergency Care",
     lead: "Falls, sports, and accidents happen. Whether a tooth is knocked out, chipped, or broken, quick action protects your child's smile, and we'll guide you through every step.",
     hero: "/assets/dentistry/emergencies/dental-trauma/hero.webp",
     promises: [
-      { title: "Seen the same day", text: "Injuries can't wait, so we hold time for them every day." },
-      { title: "First aid over the phone", text: "Call and we'll walk you through exactly what to do right now." },
-      { title: "Gentle with shaken kids", text: "We calm your child first, then check and repair the damage." },
+      { icon: "clock", title: "Seen the same day", text: "Injuries can't wait, so we hold time for them every day." },
+      { icon: "phone", title: "First aid over the phone", text: "Call and we'll walk you through exactly what to do right now." },
+      { icon: "heart", title: "Gentle with shaken kids", text: "We calm your child first, then check and repair the damage." },
     ],
     sections: [
       {
@@ -234,12 +256,13 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/dental-emergencies/dental-trauma/chipped-broken-tooth/": {
     description: "Chipped or broken a tooth? Learn the first steps and get same-day emergency dental care for kids in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Dental Trauma",
     lead: "A chipped or broken tooth ranges from a small rough edge to a painful break. Here's how to handle it, when it's urgent, and how we'll make the tooth whole again.",
     hero: "/assets/dentistry/emergencies/dental-trauma/chipped-broken-tooth/hero.webp",
     promises: [
-      { title: "Almost always fixable", text: "From smoothing an edge to a full crown, we can restore the tooth." },
-      { title: "Same-day when it's urgent", text: "Painful or deep breaks are seen right away." },
-      { title: "Comfort comes first", text: "We ease the pain, then repair the damage gently." },
+      { icon: "tooth", title: "Almost always fixable", text: "From smoothing an edge to a full crown, we can restore the tooth." },
+      { icon: "clock", title: "Same-day when it's urgent", text: "Painful or deep breaks are seen right away." },
+      { icon: "heart", title: "Comfort comes first", text: "We ease the pain, then repair the damage gently." },
     ],
     sections: [
       {
@@ -280,17 +303,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Should I save the broken piece?", a: "If you can find it, save it in milk or water and bring it in. In some cases we can use it, and it helps us assess the break." },
       { q: "What if the break is deep and painful?", a: "Call right away. A deep break can expose the nerve, and prompt treatment relieves the pain and saves the tooth." },
     ],
+    related: [
+      { name: "Knocked-Out Tooth", href: "/dentistry-orthodontics/dental-emergencies/dental-trauma/knocked-out-tooth/", blurb: "A true time-sensitive emergency." },
+      { name: "Emergency Crowns", href: "/dentistry-orthodontics/dental-emergencies/treatments/crowns/", blurb: "Restore a badly broken tooth." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+      { name: "Dental Injuries & Prevention", href: "/dentistry-orthodontics/dental-emergencies/dental-trauma/injuries-prevention/", blurb: "Prevent the next one." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/dental-trauma/injuries-prevention/": {
     description: "How to handle common childhood dental injuries and prevent them, including mouthguards for sports, in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Dental Trauma",
     lead: "From a busted lip to a loosened tooth, mouth injuries are part of childhood. Here's how to respond when one happens, and how to make the next one far less likely.",
     hero: "/assets/dentistry/emergencies/dental-trauma/injuries-prevention/hero.webp",
     scene: "/assets/dentistry/emergencies/dental-trauma/injuries-prevention/scene.webp",
     sceneAlt: "A bright, welcoming dental treatment room",
     promises: [
-      { title: "Know what to do", text: "Simple first aid handles most mouth injuries until we can look." },
-      { title: "Mouthguards work", text: "A well-fitted sports mouthguard is the best protection there is." },
-      { title: "We'll help you decide", text: "Not sure if it's serious? Call and we'll talk it through." },
+      { icon: "first-aid-kit", title: "Know what to do", text: "Simple first aid handles most mouth injuries until we can look." },
+      { icon: "shield-check", title: "Mouthguards work", text: "A well-fitted sports mouthguard is the best protection there is." },
+      { icon: "phone", title: "We'll help you decide", text: "Not sure if it's serious? Call and we'll talk it through." },
     ],
     sections: [
       {
@@ -331,15 +361,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "A tooth feels loose after a fall. Is that an emergency?", a: "It can be. A loosened or displaced tooth should be checked promptly so we can stabilize it and rule out hidden damage. Call us to be seen." },
       { q: "The lip is cut and swollen. What do I do?", a: "Gentle pressure with clean gauze for bleeding and a cold compress for swelling. Most lip cuts heal well, but call us if the bleeding won't stop or a tooth also took a hit." },
     ],
+    related: [
+      { name: "Knocked-Out Tooth", href: "/dentistry-orthodontics/dental-emergencies/dental-trauma/knocked-out-tooth/", blurb: "Act fast to save it." },
+      { name: "Chipped or Broken Tooth", href: "/dentistry-orthodontics/dental-emergencies/dental-trauma/chipped-broken-tooth/", blurb: "First steps after a break." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+      { name: "Routine Cleanings", href: "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/", blurb: "Ask about a mouthguard." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/dental-trauma/knocked-out-tooth/": {
     description: "A knocked-out permanent tooth is a true dental emergency. Learn the steps to take and call (801) 676-3700 right away in West Jordan, UT.",
+    eyebrow: "Dental Trauma",
     lead: "A knocked-out permanent tooth is a true emergency, and what you do in the first 30 to 60 minutes gives the best chance of saving it. Follow the steps below and call us immediately.",
     hero: "/assets/dentistry/emergencies/dental-trauma/knocked-out-tooth/hero.webp",
     promises: [
-      { title: "The first hour matters", text: "A permanent tooth has the best chance of being saved within 30 to 60 minutes." },
-      { title: "Keep it moist", text: "In the socket if you can, or in a cup of milk, never dry and never scrubbed." },
-      { title: "We'll guide you live", text: "Call and we'll walk you through it while you head in." },
+      { icon: "clock", title: "The first hour matters", text: "A permanent tooth has the best chance of being saved within 30 to 60 minutes." },
+      { icon: "drop", title: "Keep it moist", text: "In the socket if you can, or in a cup of milk, never dry and never scrubbed." },
+      { icon: "phone", title: "We'll guide you live", text: "Call and we'll walk you through it while you head in." },
     ],
     sections: [
       {
@@ -380,15 +417,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Should I reinsert a baby tooth?", a: "No. Reinserting a baby tooth can harm the permanent tooth developing underneath. Comfort your child and call us for guidance." },
       { q: "What if the tooth is dirty?", a: "Rinse it briefly with milk or water and do not scrub or dry it. Handle it only by the crown, never the root." },
     ],
+    related: [
+      { name: "Chipped or Broken Tooth", href: "/dentistry-orthodontics/dental-emergencies/dental-trauma/chipped-broken-tooth/", blurb: "Save the pieces and call." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+      { name: "Dental Injuries & Prevention", href: "/dentistry-orthodontics/dental-emergencies/dental-trauma/injuries-prevention/", blurb: "Protect your child's smile." },
+      { name: "All Emergencies", href: "/dentistry-orthodontics/dental-emergencies/", blurb: "Every emergency topic." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/orthodontic/": {
     description: "Broken bracket or poking wire? Get help for braces emergencies in West Jordan, UT, with simple fixes and same-day care. Call (801) 676-3700.",
+    eyebrow: "Emergency Care",
     lead: "Good news: most braces problems are minor and easy to manage at home until we can see you. Here's what to do for the common ones, and when to just come in.",
     hero: "/assets/dentistry/emergencies/orthodontic/hero.webp",
     promises: [
-      { title: "Usually not an emergency", text: "Most braces problems are easy to manage at home until we see you." },
-      { title: "Quick fixes by phone", text: "Call and we'll talk you through wax, wires, and what can wait." },
-      { title: "Fast repair visits", text: "Re-bonding a bracket or adjusting a wire is quick and easy." },
+      { icon: "smiley", title: "Usually not an emergency", text: "Most braces problems are easy to manage at home until we see you." },
+      { icon: "phone", title: "Quick fixes by phone", text: "Call and we'll talk you through wax, wires, and what can wait." },
+      { icon: "wrench", title: "Fast repair visits", text: "Re-bonding a bracket or adjusting a wire is quick and easy." },
     ],
     sections: [
       {
@@ -409,12 +453,13 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/dental-emergencies/orthodontic/broken-bracket/": {
     description: "A broken or loose braces bracket is rarely an emergency. Learn the simple steps to stay comfortable and get repair care in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Orthodontic Emergency",
     lead: "A bracket that comes loose or pops off is one of the most common braces mishaps, and it's usually not urgent. Here's how to stay comfortable until we repair it.",
     hero: "/assets/dentistry/emergencies/orthodontic/broken-bracket/hero.webp",
     promises: [
-      { title: "Usually not urgent", text: "A loose bracket can typically wait for a regular repair appointment." },
-      { title: "A quick fix", text: "Re-bonding a bracket is a fast, easy visit." },
-      { title: "Treatment stays on track", text: "Repaired promptly, one loose bracket rarely slows progress." },
+      { icon: "smiley", title: "Usually not urgent", text: "A loose bracket can typically wait for a regular repair appointment." },
+      { icon: "wrench", title: "A quick fix", text: "Re-bonding a bracket is a fast, easy visit." },
+      { icon: "shield-check", title: "Treatment stays on track", text: "Repaired promptly, one loose bracket rarely slows progress." },
     ],
     sections: [
       {
@@ -455,15 +500,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "My bracket is rubbing my cheek. What can I do?", a: "Cover the bracket or wire with orthodontic wax to stop the irritation, and rinse with warm saltwater if your cheek is sore. Then call us for a repair." },
       { q: "What if my child swallowed the bracket?", a: "A swallowed bracket usually passes without trouble, but call us, and seek medical care if there's any coughing or difficulty breathing." },
     ],
+    related: [
+      { name: "Poking Wire", href: "/dentistry-orthodontics/dental-emergencies/orthodontic/poking-wire/", blurb: "Ease an irritating wire." },
+      { name: "Braces", href: "/dentistry-orthodontics/orthodontics/braces/", blurb: "About your treatment." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "If it can't wait." },
+      { name: "All Emergencies", href: "/dentistry-orthodontics/dental-emergencies/", blurb: "Every emergency topic." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/orthodontic/poking-wire/": {
     description: "A poking braces wire is uncomfortable but easy to manage. Learn simple steps to stop the irritation and get help in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Orthodontic Emergency",
     lead: "A braces wire poking the cheek or gums is a common annoyance as teeth shift. Here's how to get comfortable in the next five minutes, and when to have us adjust it.",
     hero: "/assets/dentistry/emergencies/orthodontic/poking-wire/hero.webp",
     promises: [
-      { title: "Annoying, not alarming", text: "Wires shift as teeth move. It's normal and easy to fix." },
-      { title: "Instant relief with wax", text: "Orthodontic wax over the tip stops the poking right away." },
-      { title: "A quick adjustment", text: "We'll settle the wire properly at a short visit." },
+      { icon: "smiley", title: "Annoying, not alarming", text: "Wires shift as teeth move. It's normal and easy to fix." },
+      { icon: "drop", title: "Instant relief with wax", text: "Orthodontic wax over the tip stops the poking right away." },
+      { icon: "wrench", title: "A quick adjustment", text: "We'll settle the wire properly at a short visit." },
     ],
     sections: [
       {
@@ -503,17 +555,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Why is my wire poking now?", a: "Wires can shift as teeth move, or after a bracket loosens. It is normal and easy to fix. Wax solves it short term, and we will adjust it at your visit." },
       { q: "What if we're out of orthodontic wax?", a: "A small piece of sugar-free gum can work in a pinch, and we're happy to hand you more wax anytime. Just stop by." },
     ],
+    related: [
+      { name: "Broken Bracket", href: "/dentistry-orthodontics/dental-emergencies/orthodontic/broken-bracket/", blurb: "A loose or popped-off bracket." },
+      { name: "Braces", href: "/dentistry-orthodontics/orthodontics/braces/", blurb: "About your treatment." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "If it can't wait." },
+      { name: "All Emergencies", href: "/dentistry-orthodontics/dental-emergencies/", blurb: "Every emergency topic." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/same-day-appointments/": {
     description: "Same-day emergency dental appointments for children in West Jordan, UT. Toothaches, broken teeth, swelling, and more. Call (801) 676-3700 now.",
+    eyebrow: "Emergency Care",
     lead: "Dental problems don't wait, so neither do we. Call us and we'll do everything we can to see your child the same day, with after-hours support when the office is closed.",
     hero: "/assets/dentistry/emergencies/same-day-appointments/hero.webp",
     scene: "/assets/dentistry/emergencies/same-day-appointments/scene.webp",
     sceneAlt: "A treatment room ready for same-day care",
     promises: [
-      { title: "Time held for emergencies", text: "We reserve room in the schedule every day for urgent visits." },
-      { title: "Guidance the moment you call", text: "We'll give you first-aid steps for your child's exact situation." },
-      { title: "After-hours support", text: "Phone guidance and teledentistry when the office is closed." },
+      { icon: "clock", title: "Time held for emergencies", text: "We reserve room in the schedule every day for urgent visits." },
+      { icon: "phone", title: "Guidance the moment you call", text: "We'll give you first-aid steps for your child's exact situation." },
+      { icon: "moon", title: "After-hours support", text: "Phone guidance and teledentistry when the office is closed." },
     ],
     sections: [
       {
@@ -555,15 +614,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "What if it's after hours?", a: "We offer after-hours phone support to guide you, and teledentistry visits when appropriate, so you are never left without help." },
       { q: "Do you take new patients for emergencies?", a: "Yes. If your child is in pain, call us, whether or not you've been in before. We'll take care of them first and handle the paperwork after." },
     ],
+    related: [
+      { name: "Knocked-Out Tooth", href: "/dentistry-orthodontics/dental-emergencies/dental-trauma/knocked-out-tooth/", blurb: "Act fast to save the tooth." },
+      { name: "Toothache & Pain", href: "/dentistry-orthodontics/dental-emergencies/toothache/", blurb: "Relief for severe pain." },
+      { name: "After-Hours Care", href: "/dentistry-orthodontics/dental-emergencies/treatments/after-hours/", blurb: "Help outside office hours." },
+      { name: "Teledentistry", href: "/dentistry-orthodontics/dental-emergencies/treatments/teledentistry/", blurb: "Guidance from home." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/toothache/": {
     description: "Help for a child's toothache, sensitivity, cavity pain, or abscess in West Jordan, UT. Same-day relief. Call (801) 676-3700.",
+    eyebrow: "Emergency Care",
     lead: "A child's toothache is miserable for the whole family. We find the cause and bring fast relief, starting with the kind of pain your child is feeling.",
     hero: "/assets/dentistry/emergencies/toothache/hero.webp",
     promises: [
-      { title: "Same-day relief", text: "A hurting child gets priority. Call and we'll fit them in today." },
-      { title: "We find the real cause", text: "A gentle exam gets to the source, so the fix actually lasts." },
-      { title: "Comfort first, always", text: "We ease the pain before anything else, with sedation if it helps." },
+      { icon: "clock", title: "Same-day relief", text: "A hurting child gets priority. Call and we'll fit them in today." },
+      { icon: "magnifying-glass", title: "We find the real cause", text: "A gentle exam gets to the source, so the fix actually lasts." },
+      { icon: "heart", title: "Comfort first, always", text: "We ease the pain before anything else, with sedation if it helps." },
     ],
     sections: [
       {
@@ -584,14 +650,15 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/dental-emergencies/toothache/cavity-pain/": {
     description: "An aching tooth from a cavity won't heal on its own. Get gentle, same-day cavity care for kids in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Toothache & Pain",
     lead: "When a cavity reaches the sensitive inner layers of a tooth, it aches, and it won't heal on its own. Prompt, gentle care brings relief and keeps the fix small.",
     hero: "/assets/dentistry/emergencies/toothache/cavity-pain/hero.webp",
     scene: "/assets/dentistry/emergencies/toothache/cavity-pain/scene.webp",
     sceneAlt: "A calm treatment room ready for cavity care",
     promises: [
-      { title: "Same-day relief", text: "An aching cavity gets seen quickly, often the day you call." },
-      { title: "Gentle, natural repair", text: "Usually a tooth-colored filling that blends right in." },
-      { title: "Stops the spread", text: "Treating it now prevents a bigger repair later." },
+      { icon: "clock", title: "Same-day relief", text: "An aching cavity gets seen quickly, often the day you call." },
+      { icon: "tooth", title: "Gentle, natural repair", text: "Usually a tooth-colored filling that blends right in." },
+      { icon: "shield-check", title: "Stops the spread", text: "Treating it now prevents a bigger repair later." },
     ],
     sections: [
       {
@@ -631,17 +698,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Does fixing a cavity hurt?", a: "We numb the area so the visit is comfortable, and we offer sedation for anxious children. Most kids are surprised by how easy it is." },
       { q: "Does a cavity in a baby tooth still need treatment?", a: "Yes. Baby teeth guide the adult teeth and can develop painful infections just like permanent ones, so a hurting cavity should be treated either way." },
     ],
+    related: [
+      { name: "Tooth-Colored Fillings", href: "/dentistry-orthodontics/pediatric-dentistry/services/fillings/", blurb: "Gentle cavity treatment." },
+      { name: "Curodont", href: "/dentistry-orthodontics/pediatric-dentistry/services/curodont/", blurb: "Stop early cavities without drilling." },
+      { name: "Severe Tooth Pain", href: "/dentistry-orthodontics/dental-emergencies/toothache/severe-tooth-pain/", blurb: "When pain is intense." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/toothache/sensitivity/": {
     description: "Is your child's tooth sensitive to hot, cold, or sweet? Learn the causes and get gentle care in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Toothache & Pain",
     lead: "A quick zing with ice cream is common, but sensitivity that keeps coming back is a tooth trying to tell you something. Here's what causes it, and how we make it stop.",
     hero: "/assets/dentistry/emergencies/toothache/sensitivity/hero.webp",
     scene: "/assets/dentistry/emergencies/toothache/sensitivity/scene.webp",
     sceneAlt: "Gentle care for sensitive teeth",
     promises: [
-      { title: "We find the cause", text: "Cavity, worn enamel, or a small crack, the treatment follows the reason." },
-      { title: "Often an easy fix", text: "Many cases resolve with fluoride or a small filling." },
-      { title: "Gentle, kid-paced care", text: "A calm look, plain words, and no rushing." },
+      { icon: "magnifying-glass", title: "We find the cause", text: "Cavity, worn enamel, or a small crack, the treatment follows the reason." },
+      { icon: "drop", title: "Often an easy fix", text: "Many cases resolve with fluoride or a small filling." },
+      { icon: "heart", title: "Gentle, kid-paced care", text: "A calm look, plain words, and no rushing." },
     ],
     sections: [
       {
@@ -681,15 +755,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Can sensitive teeth be prevented?", a: "Gentle brushing, fluoride, and regular checkups go a long way. We can also apply treatments that strengthen enamel and reduce sensitivity." },
       { q: "Why does cold suddenly bother a new adult tooth?", a: "Newly erupted teeth are often sensitive at first and usually settle down. If it lingers or worsens, we're happy to take a look." },
     ],
+    related: [
+      { name: "Cavity Pain", href: "/dentistry-orthodontics/dental-emergencies/toothache/cavity-pain/", blurb: "When decay causes pain." },
+      { name: "Fluoride Treatments", href: "/dentistry-orthodontics/pediatric-dentistry/services/fluoride-treatments/", blurb: "Strengthen enamel." },
+      { name: "Severe Tooth Pain", href: "/dentistry-orthodontics/dental-emergencies/toothache/severe-tooth-pain/", blurb: "When it's more than a twinge." },
+      { name: "Routine Cleanings", href: "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/", blurb: "Catch issues early." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/toothache/severe-tooth-pain/": {
     description: "Severe, persistent tooth pain in a child needs prompt care. Learn what to do and get same-day relief in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Toothache & Pain",
     lead: "Strong, lingering tooth pain is your child's body asking for help. Here's how to ease it right now, and why a prompt visit is the only way to truly make it stop.",
     hero: "/assets/dentistry/emergencies/toothache/severe-tooth-pain/hero.webp",
     promises: [
-      { title: "Same-day relief", text: "A child in real pain gets priority in our schedule." },
-      { title: "We treat the source", text: "Severe pain has a cause, and fixing it is what ends the ache." },
-      { title: "Gentle, numb, calm", text: "Comfort comes first, with sedation available when it helps." },
+      { icon: "clock", title: "Same-day relief", text: "A child in real pain gets priority in our schedule." },
+      { icon: "magnifying-glass", title: "We treat the source", text: "Severe pain has a cause, and fixing it is what ends the ache." },
+      { icon: "heart", title: "Gentle, numb, calm", text: "Comfort comes first, with sedation available when it helps." },
     ],
     sections: [
       {
@@ -730,15 +811,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "The pain went away on its own. Are we okay?", a: "Not necessarily. Pain that stops can mean the nerve is dying, which still needs treatment. Please have the tooth checked." },
       { q: "What if the pain comes with swelling or fever?", a: "Call us right away. That combination can mean an infection is spreading and needs same-day care." },
     ],
+    related: [
+      { name: "Cavity Pain", href: "/dentistry-orthodontics/dental-emergencies/toothache/cavity-pain/", blurb: "Pain from decay." },
+      { name: "Tooth Abscess", href: "/dentistry-orthodontics/dental-emergencies/dental-infection/abscess/", blurb: "Infection that needs urgent care." },
+      { name: "Pulp Therapy", href: "/dentistry-orthodontics/pediatric-dentistry/services/pulp-therapy/", blurb: "Treat an affected nerve." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/treatments/": {
     description: "Same-day emergency dental treatments for kids in West Jordan, UT: fillings, crowns, extractions, pulp therapy, after-hours & teledentistry care. Call (801) 676-3700.",
+    eyebrow: "Emergency Care",
     lead: "When your child needs urgent care, we provide same-day treatment that relieves the pain and truly fixes the problem, gently, and all under one roof.",
     hero: "/assets/dentistry/emergencies/treatments/hero.webp",
     promises: [
-      { title: "Treated the same day", text: "Most emergency treatment happens the day you call, not next week." },
-      { title: "Comfort before anything", text: "We numb thoroughly and offer sedation, so relief comes first." },
-      { title: "The gentlest fix that lasts", text: "We always choose the least invasive treatment that truly solves it." },
+      { icon: "clock", title: "Treated the same day", text: "Most emergency treatment happens the day you call, not next week." },
+      { icon: "heart", title: "Comfort before anything", text: "We numb thoroughly and offer sedation, so relief comes first." },
+      { icon: "shield-check", title: "The gentlest fix that lasts", text: "We always choose the least invasive treatment that truly solves it." },
     ],
     sections: [
       {
@@ -758,12 +846,13 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/dental-emergencies/treatments/after-hours/": {
     description: "After-hours phone support for children's dental emergencies in West Jordan, UT. Get guidance tonight and a same-day visit when we reopen. Call (801) 676-3700.",
+    eyebrow: "Emergency Treatment",
     lead: "Dental emergencies don't wait for office hours. If your child is hurting tonight or over the weekend, our after-hours line will guide you to relief.",
     hero: "/assets/dentistry/emergencies/treatments/after-hours/hero.webp",
     promises: [
-      { title: "A real answer, tonight", text: "Call and follow the prompts for after-hours phone support." },
-      { title: "Comfort until morning", text: "We'll walk you through easing pain and protecting the tooth." },
-      { title: "First in when we open", text: "If it can wait until morning, your child is seen first thing." },
+      { icon: "phone", title: "A real answer, tonight", text: "Call and follow the prompts for after-hours phone support." },
+      { icon: "heart", title: "Comfort until morning", text: "We'll walk you through easing pain and protecting the tooth." },
+      { icon: "clock", title: "First in when we open", text: "If it can wait until morning, your child is seen first thing." },
     ],
     sections: [
       {
@@ -804,15 +893,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Should I go to the ER for a dental emergency?", a: "Go to the ER for uncontrolled bleeding, trouble breathing or swallowing, or a suspected broken jaw. For tooth and gum problems, call us and we'll see your child quickly." },
       { q: "Will my child be seen the next morning?", a: "We reserve time for emergencies, so a child who called overnight is a priority when we open. We'll set it up during your call." },
     ],
+    related: [
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+      { name: "Teledentistry", href: "/dentistry-orthodontics/dental-emergencies/treatments/teledentistry/", blurb: "Virtual guidance from home." },
+      { name: "Dental Trauma", href: "/dentistry-orthodontics/dental-emergencies/dental-trauma/", blurb: "Injuries to the teeth." },
+      { name: "All Emergencies", href: "/dentistry-orthodontics/dental-emergencies/", blurb: "Every emergency topic." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/treatments/antibiotics/": {
     description: "Antibiotics can help control a child's dental infection in West Jordan, UT, but the tooth still needs treatment. Learn when they're used. Call (801) 676-3700.",
+    eyebrow: "Emergency Treatment",
     lead: "Antibiotics can help control a spreading tooth infection, but they don't fix the tooth itself. Here's how we use them thoughtfully as part of safe emergency care.",
     hero: "/assets/dentistry/emergencies/treatments/antibiotics/hero.webp",
     promises: [
-      { title: "Controls the spread", text: "Antibiotics help slow a spreading infection, especially with swelling." },
-      { title: "The tooth still needs care", text: "Pulp therapy or extraction is what truly resolves the source." },
-      { title: "Prescribed thoughtfully", text: "Only when they genuinely help, and always with a treatment plan." },
+      { icon: "shield", title: "Controls the spread", text: "Antibiotics help slow a spreading infection, especially with swelling." },
+      { icon: "tooth", title: "The tooth still needs care", text: "Pulp therapy or extraction is what truly resolves the source." },
+      { icon: "heart", title: "Prescribed thoughtfully", text: "Only when they genuinely help, and always with a treatment plan." },
     ],
     sections: [
       {
@@ -853,15 +949,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Does every dental infection need antibiotics?", a: "Not always. We prescribe them when an infection is spreading or there's swelling or fever. The most important step is treating the tooth itself." },
       { q: "What if my child feels better halfway through the course?", a: "Finish it anyway, exactly as directed. Stopping early can let the infection rebound and makes antibiotics less effective in the future." },
     ],
+    related: [
+      { name: "Dental Infection", href: "/dentistry-orthodontics/dental-emergencies/dental-infection/", blurb: "Signs and what to do." },
+      { name: "Tooth Abscess", href: "/dentistry-orthodontics/dental-emergencies/dental-infection/abscess/", blurb: "A serious infection." },
+      { name: "Emergency Pulp Therapy", href: "/dentistry-orthodontics/dental-emergencies/treatments/pulp-therapy/", blurb: "Treats the source." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/treatments/crowns/": {
     description: "Same-day emergency crowns restore a badly broken or decayed tooth in children in West Jordan, UT. Gentle, durable repairs. Call (801) 676-3700.",
+    eyebrow: "Emergency Treatment",
     lead: "When a tooth is broken or decayed beyond a filling, a crown restores the whole tooth, often the same day, so your child can chew and smile comfortably again.",
     hero: "/assets/dentistry/emergencies/treatments/crowns/hero.webp",
     promises: [
-      { title: "Restores the whole tooth", text: "A durable cap rebuilds what a filling alone can't hold." },
-      { title: "Often same-day", text: "When possible, we assess and restore the tooth in one visit." },
-      { title: "Gentle and calm", text: "Thorough numbing and sedation options keep it easy." },
+      { icon: "crown", title: "Restores the whole tooth", text: "A durable cap rebuilds what a filling alone can't hold." },
+      { icon: "clock", title: "Often same-day", text: "When possible, we assess and restore the tooth in one visit." },
+      { icon: "heart", title: "Gentle and calm", text: "Thorough numbing and sedation options keep it easy." },
     ],
     sections: [
       {
@@ -901,15 +1004,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Can a crown be placed the same day?", a: "In many cases, yes. We will assess the tooth and, when possible, restore it in one visit to relieve pain and protect it." },
       { q: "Will the crown be comfortable?", a: "Yes. We shape and check the bite before you leave, and most kids adjust to a new crown within a day." },
     ],
+    related: [
+      { name: "Pediatric Crowns", href: "/dentistry-orthodontics/pediatric-dentistry/services/crowns/", blurb: "Routine crowns to protect a damaged tooth." },
+      { name: "Chipped or Broken Tooth", href: "/dentistry-orthodontics/dental-emergencies/dental-trauma/chipped-broken-tooth/", blurb: "First steps after a break." },
+      { name: "Emergency Pulp Therapy", href: "/dentistry-orthodontics/dental-emergencies/treatments/pulp-therapy/", blurb: "For an affected nerve." },
+      { name: "Emergency Extractions", href: "/dentistry-orthodontics/dental-emergencies/treatments/extractions/", blurb: "When a tooth can't be saved." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/treatments/extractions/": {
     description: "Gentle emergency tooth extractions for children in West Jordan, UT, when a tooth can't be saved. Comfortable, sedation-friendly care. Call (801) 676-3700.",
+    eyebrow: "Emergency Treatment",
     lead: "Sometimes the kindest way to relieve pain is to remove a tooth that can't be saved. When that's the answer, we make it calm, comfortable, and complete.",
     hero: "/assets/dentistry/emergencies/treatments/extractions/hero.webp",
     promises: [
-      { title: "Only when it's kindest", text: "We save the tooth whenever we can, and remove it only when we must." },
-      { title: "Ends the pain", text: "Removing a hopeless tooth brings fast, lasting relief." },
-      { title: "Sedation available", text: "Safe options keep anxious kids calm through the visit." },
+      { icon: "heart", title: "Only when it's kindest", text: "We save the tooth whenever we can, and remove it only when we must." },
+      { icon: "shield-check", title: "Ends the pain", text: "Removing a hopeless tooth brings fast, lasting relief." },
+      { icon: "moon", title: "Sedation available", text: "Safe options keep anxious kids calm through the visit." },
     ],
     sections: [
       {
@@ -949,15 +1060,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Will my child need anything after the tooth is out?", a: "If a baby tooth was removed early, a space maintainer can hold room for the adult tooth. We will let you know if one is recommended." },
       { q: "How fast does the pain go away?", a: "Most children feel dramatically better within a day, since the source of the pain is gone. We'll give you simple steps for a smooth recovery." },
     ],
+    related: [
+      { name: "Gentle Tooth Extractions", href: "/dentistry-orthodontics/pediatric-dentistry/services/extractions/", blurb: "Planned, gentle removal when a tooth can't be saved." },
+      { name: "Space Maintainers", href: "/dentistry-orthodontics/pediatric-dentistry/services/space-maintainers/", blurb: "Hold space for adult teeth." },
+      { name: "Tooth Abscess", href: "/dentistry-orthodontics/dental-emergencies/dental-infection/abscess/", blurb: "A common reason for removal." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable, anxiety-free care." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/treatments/fillings/": {
     description: "Same-day emergency fillings relieve a painful cavity in children in West Jordan, UT. Gentle, tooth-colored repairs. Call (801) 676-3700.",
+    eyebrow: "Emergency Treatment",
     lead: "When a cavity becomes painful, a same-day filling stops the ache and protects the tooth. One visit, one gentle repair, and your child is back to their day.",
     hero: "/assets/dentistry/emergencies/treatments/fillings/hero.webp",
     promises: [
-      { title: "Same-day relief", text: "Numb, clean, and fill, often in a single visit the day you call." },
-      { title: "Natural-looking repair", text: "A tooth-colored filling that blends right into the smile." },
-      { title: "Gentle and calm", text: "Thorough numbing and sedation options for anxious kids." },
+      { icon: "clock", title: "Same-day relief", text: "Numb, clean, and fill, often in a single visit the day you call." },
+      { icon: "tooth", title: "Natural-looking repair", text: "A tooth-colored filling that blends right into the smile." },
+      { icon: "heart", title: "Gentle and calm", text: "Thorough numbing and sedation options for anxious kids." },
     ],
     sections: [
       {
@@ -997,15 +1116,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Will my child be in pain during the filling?", a: "No. We numb the tooth first and keep the visit comfortable, with sedation available for anxious children." },
       { q: "What if the pain is severe or wakes my child at night?", a: "That can mean the decay is deep. Call us right away; we'll see your child quickly and treat whatever the tooth needs." },
     ],
+    related: [
+      { name: "Tooth-Colored Fillings", href: "/dentistry-orthodontics/pediatric-dentistry/services/fillings/", blurb: "Routine, natural-looking cavity repair." },
+      { name: "Cavity Pain", href: "/dentistry-orthodontics/dental-emergencies/toothache/cavity-pain/", blurb: "Why a cavity aches." },
+      { name: "Emergency Crowns", href: "/dentistry-orthodontics/dental-emergencies/treatments/crowns/", blurb: "For larger breaks." },
+      { name: "Emergency Pulp Therapy", href: "/dentistry-orthodontics/dental-emergencies/treatments/pulp-therapy/", blurb: "For deep decay." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/treatments/pulp-therapy/": {
     description: "Emergency pulp therapy (baby root canal) relieves deep tooth infection and nerve pain in children in West Jordan, UT. Gentle, tooth-saving care. Call (801) 676-3700.",
+    eyebrow: "Emergency Treatment",
     lead: "When decay or injury reaches the nerve, pulp therapy, sometimes called a baby root canal, relieves the pain fast and saves the tooth.",
     hero: "/assets/dentistry/emergencies/treatments/pulp-therapy/hero.webp",
     promises: [
-      { title: "Ends the deep ache", text: "Treating the infected nerve is what stops the throbbing." },
-      { title: "Saves the tooth", text: "The tooth stays, protecting the bite and the adult tooth below." },
-      { title: "Calm and numb", text: "Fully numbed, kid-paced, with sedation available." },
+      { icon: "heart", title: "Ends the deep ache", text: "Treating the infected nerve is what stops the throbbing." },
+      { icon: "tooth", title: "Saves the tooth", text: "The tooth stays, protecting the bite and the adult tooth below." },
+      { icon: "shield-check", title: "Calm and numb", text: "Fully numbed, kid-paced, with sedation available." },
     ],
     sections: [
       {
@@ -1045,15 +1172,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Will my child be in pain?", a: "No. We fully numb the tooth and keep the visit comfortable, with sedation available. Most children feel relief soon after the infected nerve tissue is treated." },
       { q: "Can we just use antibiotics instead?", a: "Antibiotics can calm a spreading infection, but they can't heal the nerve. The tooth itself needs treatment for the pain to truly stop." },
     ],
+    related: [
+      { name: "Pediatric Pulp Therapy", href: "/dentistry-orthodontics/pediatric-dentistry/services/pulp-therapy/", blurb: "Routine baby root canal to save a tooth." },
+      { name: "Tooth Abscess", href: "/dentistry-orthodontics/dental-emergencies/dental-infection/abscess/", blurb: "A sign the nerve is infected." },
+      { name: "Emergency Crowns", href: "/dentistry-orthodontics/dental-emergencies/treatments/crowns/", blurb: "Often paired with pulp therapy." },
+      { name: "Emergency Extractions", href: "/dentistry-orthodontics/dental-emergencies/treatments/extractions/", blurb: "When a tooth can't be saved." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent care today." },
+    ],
   },
   "/dentistry-orthodontics/dental-emergencies/treatments/teledentistry/": {
     description: "Virtual teledentistry visits help you handle a child's dental concern from home in West Jordan, UT. Get quick guidance and next steps. Call (801) 676-3700.",
+    eyebrow: "Emergency Treatment",
     lead: "Not sure if your child's dental problem can wait? A quick virtual visit lets us see what's going on and guide your next step, from the comfort of home.",
     hero: "/assets/dentistry/emergencies/treatments/teledentistry/hero.webp",
     promises: [
-      { title: "We can take a look now", text: "Show us the concern over video and get real answers fast." },
-      { title: "Reassurance from home", text: "Most worries resolve with guidance, no car ride required." },
-      { title: "Fast-tracked if needed", text: "If it needs hands-on care, we'll book the same-day visit right then." },
+      { icon: "video-camera", title: "We can take a look now", text: "Show us the concern over video and get real answers fast." },
+      { icon: "heart", title: "Reassurance from home", text: "Most worries resolve with guidance, no car ride required." },
+      { icon: "clock", title: "Fast-tracked if needed", text: "If it needs hands-on care, we'll book the same-day visit right then." },
     ],
     sections: [
       {
@@ -1093,16 +1228,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "How do I start a teledentistry visit?", a: "Call (801) 676-3700 and we'll set up a secure video visit and walk you through the simple steps." },
       { q: "Is a virtual visit good enough for a toothache?", a: "It's a great first step. We can often spot the likely cause on video, guide home care, and schedule in-person treatment at the right urgency." },
     ],
+    related: [
+      { name: "Toothache Relief", href: "/dentistry-orthodontics/dental-emergencies/toothache/", blurb: "Calm a hurting tooth." },
+      { name: "After-Hours Care", href: "/dentistry-orthodontics/dental-emergencies/treatments/after-hours/", blurb: "Help outside office hours." },
+      { name: "Same-Day Appointments", href: "/dentistry-orthodontics/dental-emergencies/same-day-appointments/", blurb: "Urgent in-office care." },
+      { name: "All Emergencies", href: "/dentistry-orthodontics/dental-emergencies/", blurb: "Every emergency topic." },
+    ],
   },
   "/dentistry-orthodontics/orthodontics/": {
     description: "Braces, clear aligners, retainers, and early treatment for children and adults in West Jordan, UT. Led by a board-certified orthodontist. Call (801) 676-3700.",
+    eyebrow: "Orthodontics",
     lead: "From a child's first orthodontic check-up to adult braces and clear aligners, board-certified orthodontist Dr. Wendy Chu builds confident, healthy smiles for every age, right here in West Jordan.",
     hero: "/assets/dentistry/orthodontics/overview/hero.webp",
     scene: "/assets/dentistry/orthodontics/overview/scene.webp",
     promises: [
-      { title: "Board-certified expertise", text: "Every treatment plan is led by board-certified orthodontist Dr. Wendy Chu." },
-      { title: "Every age, every smile", text: "From a child's first evaluation to adult braces and aligners, all in one office." },
-      { title: "Clear costs, flexible plans", text: "A complimentary consultation with straightforward pricing and financing." },
+      { icon: "medal", title: "Board-certified expertise", text: "Every treatment plan is led by board-certified orthodontist Dr. Wendy Chu." },
+      { icon: "users-three", title: "Every age, every smile", text: "From a child's first evaluation to adult braces and aligners, all in one office." },
+      { icon: "hand-coins", title: "Clear costs, flexible plans", text: "A complimentary consultation with straightforward pricing and financing." },
     ],
     sections: [
       {
@@ -1130,14 +1272,15 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/orthodontics/adult-aligners/": {
     description: "Straighten your smile discreetly with clear aligners for adults in West Jordan, UT. Removable, nearly invisible, with financing available. Call (801) 676-3700.",
+    eyebrow: "Orthodontics",
     lead: "Straighten your teeth without anyone noticing. Clear aligners are a discreet, comfortable, and removable way for adults to get the smile they've always wanted, on a schedule that fits real life.",
     hero: "/assets/dentistry/orthodontics/adult-aligners/hero.webp",
     scene: "/assets/dentistry/orthodontics/adult-aligners/scene.webp",
     sceneAlt: "A clear aligner tray and case",
     promises: [
-      { title: "Made for adult life", text: "Nearly invisible at meetings, dinners, and in every photo." },
-      { title: "Removable and easy", text: "Take them out to eat and brush; there are no wires or brackets." },
-      { title: "Honest guidance", text: "Dr. Wendy Chu will tell you plainly if aligners or braces fit your smile best." },
+      { icon: "user-focus", title: "Made for adult life", text: "Nearly invisible at meetings, dinners, and in every photo." },
+      { icon: "arrows-clockwise", title: "Removable and easy", text: "Take them out to eat and brush; there are no wires or brackets." },
+      { icon: "medal", title: "Honest guidance", text: "Dr. Wendy Chu will tell you plainly if aligners or braces fit your smile best." },
     ],
     sections: [
       {
@@ -1178,17 +1321,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Do aligners work as well as braces?", a: "For many cases, yes. For complex corrections, braces may be more efficient. Dr. Chu will give you an honest recommendation." },
       { q: "What do adult aligners cost?", a: "Cost depends on how much movement is needed. We offer orthodontic financing and will explain your options clearly at a complimentary consultation." },
     ],
+    related: [
+      { name: "Clear Aligners", href: "/dentistry-orthodontics/orthodontics/clear-aligners/", blurb: "Aligners for teens and adults." },
+      { name: "Adult Braces", href: "/dentistry-orthodontics/orthodontics/adult-braces/", blurb: "Effective treatment at any age." },
+      { name: "Retainers", href: "/dentistry-orthodontics/orthodontics/retainers/", blurb: "Keep your new smile." },
+    ],
   },
   "/dentistry-orthodontics/orthodontics/adult-braces/": {
     description: "It's never too late for a straighter smile. Adult braces, including clear options, in West Jordan, UT with Dr. Wendy Chu. Financing available. Call (801) 676-3700.",
+    eyebrow: "Orthodontics",
     lead: "A straighter, healthier smile is worth it at any age. Whether you never had braces or your teeth have shifted over the years, we treat adults every day, with options that fit a grown-up lifestyle and budget.",
     hero: "/assets/dentistry/orthodontics/adult-braces/hero.webp",
     scene: "/assets/dentistry/orthodontics/adult-braces/scene.webp",
     sceneAlt: "A dental model showing braces",
     promises: [
-      { title: "Never too late", text: "Teeth can be moved at any age, and more adults are doing it than ever." },
-      { title: "Discreet options", text: "Clear braces and clear aligners keep treatment subtle at work and in photos." },
-      { title: "Budget-friendly plans", text: "Flexible monthly financing makes adult treatment manageable." },
+      { icon: "user", title: "Never too late", text: "Teeth can be moved at any age, and more adults are doing it than ever." },
+      { icon: "circle-dashed", title: "Discreet options", text: "Clear braces and clear aligners keep treatment subtle at work and in photos." },
+      { icon: "hand-coins", title: "Budget-friendly plans", text: "Flexible monthly financing makes adult treatment manageable." },
     ],
     sections: [
       {
@@ -1228,16 +1377,22 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Will braces fit my work and social life?", a: "Yes. With clear braces and clear aligners, most people barely notice you are in treatment. We'll help you choose the most discreet effective option." },
       { q: "What does adult treatment cost?", a: "It depends on the correction needed. We offer flexible orthodontic financing and review your options and timeline clearly at a complimentary consultation." },
     ],
+    related: [
+      { name: "Adult Aligners", href: "/dentistry-orthodontics/orthodontics/adult-aligners/", blurb: "Clear aligners for grown-ups." },
+      { name: "Clear Braces", href: "/dentistry-orthodontics/orthodontics/clear-braces/", blurb: "Tooth-colored brackets." },
+      { name: "Retainers", href: "/dentistry-orthodontics/orthodontics/retainers/", blurb: "Keep your results for life." },
+    ],
   },
   "/dentistry-orthodontics/orthodontics/braces/": {
     description: "Metal and clear braces for children, teens, and adults in West Jordan, UT, led by board-certified orthodontist Dr. Wendy Chu. Flexible financing. Call (801) 676-3700.",
+    eyebrow: "Orthodontics",
     lead: "Straighter teeth, a healthier bite, and a smile your child is proud of, guided start to finish by board-certified orthodontist Dr. Wendy Chu, for families across West Jordan and South Jordan.",
     hero: "/assets/dentistry/orthodontics/braces/hero.webp",
     scene: "/assets/dentistry/orthodontics/braces/scene.webp",
     promises: [
-      { title: "A confident, healthy smile", text: "Straighter teeth are easier to keep clean and a balanced bite wears evenly, so the benefits reach well beyond looks." },
-      { title: "Care for every age", text: "We treat kids, teens, and adults, with options from classic braces to <a href='/dentistry-orthodontics/orthodontics/clear-aligners/'>clear aligners</a>." },
-      { title: "Board-certified expertise", text: "Every treatment is led by board-certified orthodontist Dr. Wendy Chu, right here at our Southpoint office." },
+      { icon: "smiley", title: "A confident, healthy smile", text: "Straighter teeth are easier to keep clean and a balanced bite wears evenly, so the benefits reach well beyond looks." },
+      { icon: "users-three", title: "Care for every age", text: "We treat kids, teens, and adults, with options from classic braces to <a href='/dentistry-orthodontics/orthodontics/clear-aligners/'>clear aligners</a>." },
+      { icon: "medal", title: "Board-certified expertise", text: "Every treatment is led by board-certified orthodontist Dr. Wendy Chu, right here at our Southpoint office." },
     ],
     sections: [
       {
@@ -1283,14 +1438,15 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/orthodontics/clear-aligners/": {
     description: "Clear aligners straighten teeth discreetly for teens and adults in West Jordan, UT, with board-certified orthodontist Dr. Wendy Chu. Financing available.",
+    eyebrow: "Orthodontics",
     lead: "Clear aligners straighten teeth with a series of nearly invisible, removable trays. No wires, no brackets, and no food restrictions, just steady progress most people never notice.",
     hero: "/assets/dentistry/orthodontics/clear-aligners/hero.webp",
     scene: "/assets/dentistry/orthodontics/clear-aligners/scene.webp",
     sceneAlt: "A clear aligner tray",
     promises: [
-      { title: "Nearly invisible", text: "See-through trays that most people never notice you're wearing." },
-      { title: "Removable freedom", text: "Take them out to eat, brush, and floss, with no food restrictions." },
-      { title: "Orthodontist-guided", text: "Every plan is designed and tracked by board-certified Dr. Wendy Chu." },
+      { icon: "sparkle", title: "Nearly invisible", text: "See-through trays that most people never notice you're wearing." },
+      { icon: "arrows-clockwise", title: "Removable freedom", text: "Take them out to eat, brush, and floss, with no food restrictions." },
+      { icon: "medal", title: "Orthodontist-guided", text: "Every plan is designed and tracked by board-certified Dr. Wendy Chu." },
     ],
     sections: [
       {
@@ -1333,17 +1489,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Can I still eat my favorite foods?", a: "Yes. Because aligners are removable, there are no food restrictions. Just take them out to eat and brush before putting them back in." },
       { q: "How much do clear aligners cost?", a: "Cost depends on how much movement is needed. We offer orthodontic financing and will go over your options up front at a complimentary consultation." },
     ],
+    related: [
+      { name: "Braces", href: "/dentistry-orthodontics/orthodontics/braces/", blurb: "Traditional metal or clear brackets." },
+      { name: "Adult Aligners", href: "/dentistry-orthodontics/orthodontics/adult-aligners/", blurb: "Clear aligners for grown-ups." },
+      { name: "Retainers", href: "/dentistry-orthodontics/orthodontics/retainers/", blurb: "Keep your new smile in place." },
+    ],
   },
   "/dentistry-orthodontics/orthodontics/clear-braces/": {
     description: "Clear ceramic braces straighten teeth with tooth-colored brackets that blend in, for teens and adults in West Jordan, UT. Financing available. Call (801) 676-3700.",
+    eyebrow: "Orthodontics",
     lead: "Clear braces straighten teeth just as effectively as metal, with tooth-colored ceramic brackets that blend right in. All the reliability of braces, with a far more discreet look.",
     hero: "/assets/dentistry/orthodontics/clear-braces/hero.webp",
     scene: "/assets/dentistry/orthodontics/clear-braces/scene.webp",
     sceneAlt: "A dental model showing clear ceramic braces",
     promises: [
-      { title: "Blends into your smile", text: "Tooth-colored ceramic brackets are far less noticeable than metal." },
-      { title: "Full braces reliability", text: "They handle the same wide range of corrections as metal braces." },
-      { title: "Expert-led treatment", text: "Board-certified Dr. Wendy Chu guides every step of your plan." },
+      { icon: "circle-dashed", title: "Blends into your smile", text: "Tooth-colored ceramic brackets are far less noticeable than metal." },
+      { icon: "shield-check", title: "Full braces reliability", text: "They handle the same wide range of corrections as metal braces." },
+      { icon: "medal", title: "Expert-led treatment", text: "Board-certified Dr. Wendy Chu guides every step of your plan." },
     ],
     sections: [
       {
@@ -1378,17 +1540,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Are clear braces as effective as metal?", a: "Yes. They move teeth just as well. The main difference is appearance, not performance." },
       { q: "How long does treatment take?", a: "Similar to metal braces, often one to three years depending on the correction. Dr. Chu will give you a clear timeline at your consultation." },
     ],
+    related: [
+      { name: "Braces", href: "/dentistry-orthodontics/orthodontics/braces/", blurb: "Traditional metal braces." },
+      { name: "Clear Aligners", href: "/dentistry-orthodontics/orthodontics/clear-aligners/", blurb: "Removable, nearly invisible trays." },
+      { name: "Adult Braces", href: "/dentistry-orthodontics/orthodontics/adult-braces/", blurb: "It's never too late." },
+    ],
   },
   "/dentistry-orthodontics/orthodontics/early-treatment/": {
     description: "Early orthodontic treatment guides a growing child's smile and can simplify later care. With board-certified Dr. Wendy Chu in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Orthodontics",
     lead: "Sometimes a little guidance early makes a big difference later. Early (Phase 1) treatment works with your child's natural growth to set up a healthier smile, and often a simpler path ahead.",
     hero: "/assets/dentistry/orthodontics/early-treatment/hero.webp",
     scene: "/assets/dentistry/orthodontics/early-treatment/scene.webp",
     sceneAlt: "A bright, kid-friendly orthodontic room",
     promises: [
-      { title: "Works with growth", text: "We guide the jaw while it's still developing, when change comes easiest." },
-      { title: "Simpler care later", text: "Early guidance can shorten, simplify, or sometimes prevent later braces." },
-      { title: "Only when it helps", text: "We recommend treatment only when it genuinely benefits your child." },
+      { icon: "tooth", title: "Works with growth", text: "We guide the jaw while it's still developing, when change comes easiest." },
+      { icon: "shield-check", title: "Simpler care later", text: "Early guidance can shorten, simplify, or sometimes prevent later braces." },
+      { icon: "heart", title: "Only when it helps", text: "We recommend treatment only when it genuinely benefits your child." },
     ],
     sections: [
       {
@@ -1429,17 +1597,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Will my child still need braces later?", a: "Sometimes. Early treatment can shorten or simplify a later phase, and in some cases it avoids more involved treatment altogether." },
       { q: "What if my child doesn't need treatment yet?", a: "Then we simply keep an eye on things at regular visits, at no pressure to you, and start only if and when it truly helps." },
     ],
+    related: [
+      { name: "Palatal Expansion", href: "/dentistry-orthodontics/orthodontics/palatal-expansion/", blurb: "Create room for crowded teeth." },
+      { name: "Braces", href: "/dentistry-orthodontics/orthodontics/braces/", blurb: "For the next phase if needed." },
+      { name: "Space Maintainers", href: "/dentistry-orthodontics/pediatric-dentistry/services/space-maintainers/", blurb: "Hold space for adult teeth." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "Start your child's care." },
+    ],
   },
   "/dentistry-orthodontics/orthodontics/palatal-expansion/": {
     description: "A palatal expander gently widens a child's upper jaw to fix crowding and crossbites in West Jordan, UT, with Dr. Wendy Chu. Call (801) 676-3700.",
+    eyebrow: "Orthodontics",
     lead: "A palatal expander gently widens the upper jaw while a child is still growing, creating room for crowded teeth and correcting bite problems before they get bigger.",
     hero: "/assets/dentistry/orthodontics/palatal-expansion/hero.webp",
     scene: "/assets/dentistry/orthodontics/palatal-expansion/scene.webp",
     sceneAlt: "A dental model of the upper arch",
     promises: [
-      { title: "Creates room naturally", text: "Gentle, gradual widening while the jaw is still developing." },
-      { title: "Prevents bigger work", text: "Fixing crowding and crossbites early can simplify or avoid later treatment." },
-      { title: "Kids adjust quickly", text: "Most children get used to their expander within a few days." },
+      { icon: "arrows-out-line-horizontal", title: "Creates room naturally", text: "Gentle, gradual widening while the jaw is still developing." },
+      { icon: "shield-check", title: "Prevents bigger work", text: "Fixing crowding and crossbites early can simplify or avoid later treatment." },
+      { icon: "smiley", title: "Kids adjust quickly", text: "Most children get used to their expander within a few days." },
     ],
     sections: [
       {
@@ -1480,17 +1655,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Does an expander hurt?", a: "There may be mild pressure during the first few days and after adjustments, but it should not be painful. Most kids adapt quickly." },
       { q: "Will my child talk or eat differently at first?", a: "There can be a short adjustment period for speech and eating, usually just a few days. Kids adapt remarkably fast." },
     ],
+    related: [
+      { name: "Early Treatment", href: "/dentistry-orthodontics/orthodontics/early-treatment/", blurb: "Phase 1 care for growing smiles." },
+      { name: "Braces", href: "/dentistry-orthodontics/orthodontics/braces/", blurb: "For the next phase if needed." },
+      { name: "Orthodontic Emergencies", href: "/dentistry-orthodontics/dental-emergencies/orthodontic/", blurb: "Appliance trouble?" },
+      { name: "Sleep Apnea & Sleep Problems", href: "/dentistry-orthodontics/orthodontics/sleep-apnea/", blurb: "Airway-focused care." },
+    ],
   },
   "/dentistry-orthodontics/orthodontics/retainers/": {
     description: "Retainers keep your new smile straight after braces or aligners. Custom retainers and replacements in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Orthodontics",
     lead: "Finishing braces or aligners is a big milestone, and a retainer is what keeps that hard-won smile in place. Custom-fit retainers, clear guidance, and fast replacements when life happens.",
     hero: "/assets/dentistry/orthodontics/retainers/hero.webp",
     scene: "/assets/dentistry/orthodontics/retainers/scene.webp",
     sceneAlt: "A clear retainer in its case",
     promises: [
-      { title: "Protects your results", text: "It holds teeth steady while bone and tissue settle around them." },
-      { title: "Fit to your lifestyle", text: "Clear, wire, or fixed behind the teeth, we'll match the right type to you." },
-      { title: "Fast replacements", text: "Lost or broken? We'll make a new one before teeth start to shift." },
+      { icon: "shield", title: "Protects your results", text: "It holds teeth steady while bone and tissue settle around them." },
+      { icon: "sparkle", title: "Fit to your lifestyle", text: "Clear, wire, or fixed behind the teeth, we'll match the right type to you." },
+      { icon: "arrows-clockwise", title: "Fast replacements", text: "Lost or broken? We'll make a new one before teeth start to shift." },
     ],
     sections: [
       {
@@ -1531,17 +1713,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Can you replace a lost retainer?", a: "Yes. We can make a new retainer to keep your smile on track. Reach out as soon as you notice it is lost or damaged." },
       { q: "How do I clean my retainer?", a: "Rinse it after wearing and clean it gently as directed. We'll show you exactly how to care for your specific type of retainer." },
     ],
+    related: [
+      { name: "Braces", href: "/dentistry-orthodontics/orthodontics/braces/", blurb: "Straighten before you retain." },
+      { name: "Clear Aligners", href: "/dentistry-orthodontics/orthodontics/clear-aligners/", blurb: "A discreet straightening option." },
+      { name: "Orthodontic Emergencies", href: "/dentistry-orthodontics/dental-emergencies/orthodontic/", blurb: "Broken or lost appliance?" },
+    ],
   },
   "/dentistry-orthodontics/orthodontics/sleep-apnea/": {
     description: "Orthodontic airway solutions for kids and adults with sleep apnea and disordered breathing in West Jordan, UT, with Dr. Wendy Chu. Call (801) 676-3700.",
+    eyebrow: "Orthodontics",
     lead: "Snoring, restless nights, and disrupted breathing can sometimes be related to the jaw and airway. Airway-focused orthodontic care may help children and adults breathe, and sleep, better.",
     hero: "/assets/dentistry/orthodontics/sleep-apnea/hero.webp",
     scene: "/assets/dentistry/orthodontics/sleep-apnea/scene.webp",
     sceneAlt: "A calm orthodontic consultation room",
     promises: [
-      { title: "Airway-aware care", text: "We look at how the jaws and bite may be affecting breathing during sleep." },
-      { title: "Growth-guided solutions", text: "Approaches like palatal expansion can support a healthier airway in kids." },
-      { title: "Team-based approach", text: "We coordinate with your physician or sleep specialist when it's appropriate." },
+      { icon: "moon", title: "Airway-aware care", text: "We look at how the jaws and bite may be affecting breathing during sleep." },
+      { icon: "tooth", title: "Growth-guided solutions", text: "Approaches like palatal expansion can support a healthier airway in kids." },
+      { icon: "heart", title: "Team-based approach", text: "We coordinate with your physician or sleep specialist when it's appropriate." },
     ],
     sections: [
       {
@@ -1583,16 +1771,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Should I mention my child's snoring at their visit?", a: "Yes, please do. Snoring, mouth breathing, and restless sleep are worth discussing so we can evaluate whether the jaw or airway may play a role." },
       { q: "At what age should airway concerns be evaluated?", a: "Early is best. An orthodontic evaluation around age 7 lets us look at jaw development while it's still easy to guide, though it's worth checking at any age." },
     ],
+    related: [
+      { name: "Palatal Expansion", href: "/dentistry-orthodontics/orthodontics/palatal-expansion/", blurb: "Widen a narrow upper jaw." },
+      { name: "Early Treatment", href: "/dentistry-orthodontics/orthodontics/early-treatment/", blurb: "Guide growth early." },
+      { name: "Braces", href: "/dentistry-orthodontics/orthodontics/braces/", blurb: "Correct the bite." },
+      { name: "Orthodontics", href: "/dentistry-orthodontics/orthodontics/", blurb: "All orthodontic services." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/": {
     description: "Gentle children's dentistry in West Jordan, UT: first visits, cleanings, sealants, fillings, and sedation in a brand-new, comfortable office. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "From the very first visit through every cleaning and check-up, our brand-new Southpoint office makes the dentist a place kids actually like, with calm, experienced, kid-first care.",
     hero: "/assets/dentistry/pediatric/overview/hero.webp",
     scene: "/assets/dentistry/pediatric/overview/scene.webp",
     promises: [
-      { title: "Kid-first, always", text: "Visits paced for your child, explained in words they understand." },
-      { title: "Prevention leads", text: "Cleanings, fluoride, and sealants stop most cavities before they start." },
-      { title: "Every child welcome", text: "Anxious kids and children with special healthcare needs thrive here." },
+      { icon: "smiley", title: "Kid-first, always", text: "Visits paced for your child, explained in words they understand." },
+      { icon: "sparkle", title: "Prevention leads", text: "Cleanings, fluoride, and sealants stop most cavities before they start." },
+      { icon: "heart", title: "Every child welcome", text: "Anxious kids and children with special healthcare needs thrive here." },
     ],
     sections: [
       {
@@ -1612,13 +1807,14 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/pediatric-dentistry/first-visit/": {
     description: "Know what to expect at your child's first dental visit in West Jordan, UT: the gentle exam, cleaning, and fluoride. Recommended by age 1. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "A great first visit sets the tone for a lifetime of healthy smiles. We keep it gentle, friendly, and completely pressure-free, from the exam to fluoride, so your child leaves comfortable and ready to come back.",
     hero: "/assets/dentistry/pediatric/first-visit/hero.webp",
     scene: "/assets/dentistry/pediatric/first-visit/scene.webp",
     promises: [
-      { title: "Gentle and pressure-free", text: "A friendly exam, a light cleaning, and fluoride, all at your child's own pace." },
-      { title: "Care that grows with them", text: "Dentistry and orthodontics under one roof, from the first tooth through <a href='/dentistry-orthodontics/orthodontics/'>braces</a>." },
-      { title: "Best by age one", text: "Starting early protects baby teeth and helps your child feel at home at the dentist." },
+      { icon: "smiley", title: "Gentle and pressure-free", text: "A friendly exam, a light cleaning, and fluoride, all at your child's own pace." },
+      { icon: "users-three", title: "Care that grows with them", text: "Dentistry and orthodontics under one roof, from the first tooth through <a href='/dentistry-orthodontics/orthodontics/'>braces</a>." },
+      { icon: "calendar", title: "Best by age one", text: "Starting early protects baby teeth and helps your child feel at home at the dentist." },
     ],
     sections: [
       {
@@ -1673,13 +1869,14 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/pediatric-dentistry/sedation/": {
     description: "Safe, gentle sedation dentistry for children in West Jordan, UT. Laughing gas, oral sedation, sleep dentistry, and general anesthesia for anxious kids. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "If the dentist makes your child anxious, safe sedation keeps them calm and comfortable, from light laughing gas to fully asleep care. We'll always start with the gentlest option that fits.",
     hero: "/assets/dentistry/pediatric/sedation/hero.webp",
     scene: "/assets/dentistry/pediatric/sedation/scene.webp",
     promises: [
-      { title: "Always the lightest option", text: "We recommend the gentlest sedation that still lets your child get great care." },
-      { title: "Safe and monitored", text: "Every plan starts with a health review, careful dosing, and monitoring throughout." },
-      { title: "Calm, positive visits", text: "Great for nervous kids, a strong gag reflex, or a lot of treatment in one visit." },
+      { icon: "heart", title: "Always the lightest option", text: "We recommend the gentlest sedation that still lets your child get great care." },
+      { icon: "shield-check", title: "Safe and monitored", text: "Every plan starts with a health review, careful dosing, and monitoring throughout." },
+      { icon: "smiley", title: "Calm, positive visits", text: "Great for nervous kids, a strong gag reflex, or a lot of treatment in one visit." },
     ],
     sections: [
       {
@@ -1714,14 +1911,15 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/pediatric-dentistry/sedation/general-anesthesia/": {
     description: "General anesthesia lets children sleep safely through extensive dental treatment in West Jordan, UT, with trained providers and full monitoring. Call (801) 676-3700.",
+    eyebrow: "Sedation Dentistry",
     lead: "When a child needs extensive treatment or can't be comfortable any other way, general anesthesia lets them sleep peacefully while we care for their smile, all in one visit, fully monitored and safe.",
     hero: "/assets/dentistry/pediatric/sedation/general-anesthesia/hero.webp",
     scene: "/assets/dentistry/pediatric/sedation/general-anesthesia/scene.webp",
     sceneAlt: "A caring team safely monitoring a child under general anesthesia",
     promises: [
-      { title: "Fully asleep, feels nothing", text: "Your child sleeps peacefully through treatment and wakes up when it's done." },
-      { title: "Anesthesia pro + monitoring", text: "Delivered by a trained anesthesia provider with continuous monitoring." },
-      { title: "All care in one visit", text: "We can complete a lot of careful dental work in a single, comfortable appointment." },
+      { icon: "moon", title: "Fully asleep, feels nothing", text: "Your child sleeps peacefully through treatment and wakes up when it's done." },
+      { icon: "shield-check", title: "Anesthesia pro + monitoring", text: "Delivered by a trained anesthesia provider with continuous monitoring." },
+      { icon: "tooth", title: "All care in one visit", text: "We can complete a lot of careful dental work in a single, comfortable appointment." },
     ],
     sections: [
       {
@@ -1763,17 +1961,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Who monitors my child during anesthesia?", a: "A trained anesthesia provider administers the anesthesia and continuously monitors your child's vital signs throughout the visit." },
       { q: "How long does recovery take?", a: "Most children are drowsy for the rest of the day and feel back to normal within a day. We'll give you detailed aftercare instructions." },
     ],
+    related: [
+      { name: "Oral Sedation", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/oral-sedation/", blurb: "A lighter, awake option." },
+      { name: "Sleep Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/sleep-dentistry/", blurb: "Sleeping through care." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Individualized support." },
+      { name: "Services & Treatments", href: "/dentistry-orthodontics/pediatric-dentistry/services/", blurb: "What we can treat in one visit." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/sedation/nitrous-oxide/": {
     description: "Nitrous oxide, or laughing gas, helps anxious children relax during dental visits in West Jordan, UT. Safe, gentle, and wears off fast. Call (801) 676-3700.",
+    eyebrow: "Sedation Dentistry",
     lead: "Laughing gas is the gentlest way to help a nervous child relax in the chair. It works within minutes, keeps your child awake and chatting, and wears off almost as fast, so they can often head right back to their day.",
     hero: "/assets/dentistry/pediatric/sedation/nitrous-oxide/hero.webp",
     scene: "/assets/dentistry/pediatric/sedation/nitrous-oxide/scene.webp",
     sceneAlt: "A small nasal mask delivering gentle laughing gas",
     promises: [
-      { title: "Gentle and fast-acting", text: "A few breaths of a sweet-smelling gas and the nervousness eases away." },
-      { title: "Awake the whole time", text: "Your child stays awake and able to talk with us, just calm and comfortable." },
-      { title: "Wears off in minutes", text: "A little pure oxygen and they're back to themselves, often the same day." },
+      { icon: "wind", title: "Gentle and fast-acting", text: "A few breaths of a sweet-smelling gas and the nervousness eases away." },
+      { icon: "smiley", title: "Awake the whole time", text: "Your child stays awake and able to talk with us, just calm and comfortable." },
+      { icon: "clock", title: "Wears off in minutes", text: "A little pure oxygen and they're back to themselves, often the same day." },
     ],
     sections: [
       {
@@ -1816,17 +2021,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Are there side effects?", a: "Side effects are rare and mild. Occasionally a child feels slightly nauseated, which is why we suggest a light meal first. Because the gas wears off in minutes, lingering effects are very uncommon." },
       { q: "At what age can a child use laughing gas?", a: "Nitrous oxide can be used for many young children, as long as they can breathe comfortably through the nose mask. We'll let you know if it's a good fit at your child's visit." },
     ],
+    related: [
+      { name: "Oral Sedation", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/oral-sedation/", blurb: "Relaxing medicine taken by mouth." },
+      { name: "Sleep Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/sleep-dentistry/", blurb: "Sleep comfortably through care." },
+      { name: "General Anesthesia", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/general-anesthesia/", blurb: "Fully asleep for complex treatment." },
+      { name: "Your Child's First Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "What to expect, start to finish." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/sedation/oral-sedation/": {
     description: "Oral sedation helps anxious children relax during dental treatment in West Jordan, UT. Safe, monitored, and gentle. Call (801) 676-3700 to learn more.",
+    eyebrow: "Sedation Dentistry",
     lead: "For a child who feels anxious in the chair, oral sedation is a gentle medicine by mouth that helps them relax and stay calm, while awake and safely monitored, so treatment feels easy and unhurried.",
     hero: "/assets/dentistry/pediatric/sedation/oral-sedation/hero.webp",
     scene: "/assets/dentistry/pediatric/sedation/oral-sedation/scene.webp",
     sceneAlt: "A small dose of oral sedative helping a child relax",
     promises: [
-      { title: "Simple medicine by mouth", text: "A prescribed dose taken a little before the visit, no needles to start." },
-      { title: "Relaxed but awake", text: "Your child feels calm and drowsy while staying able to respond." },
-      { title: "Carefully dosed & watched", text: "Tailored to your child's age and weight, with close monitoring throughout." },
+      { icon: "drop", title: "Simple medicine by mouth", text: "A prescribed dose taken a little before the visit, no needles to start." },
+      { icon: "smiley", title: "Relaxed but awake", text: "Your child feels calm and drowsy while staying able to respond." },
+      { icon: "shield-check", title: "Carefully dosed & watched", text: "Tailored to your child's age and weight, with close monitoring throughout." },
     ],
     sections: [
       {
@@ -1868,17 +2080,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "How long does oral sedation last?", a: "The relaxed, drowsy feeling can last a few hours after the visit, so plan a quiet rest of the day. We'll go over what to expect during recovery." },
       { q: "Can my child eat before oral sedation?", a: "We'll give you specific eating and drinking instructions to follow before the appointment for your child's safety. Please follow them closely." },
     ],
+    related: [
+      { name: "Nitrous Oxide", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/nitrous-oxide/", blurb: "A lighter, wears-off-fast option." },
+      { name: "General Anesthesia", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/general-anesthesia/", blurb: "For more extensive treatment." },
+      { name: "Sleep Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/sleep-dentistry/", blurb: "Sleeping through care comfortably." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Individualized, patient care." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/sedation/sleep-dentistry/": {
     description: "Sleep dentistry lets anxious children sleep comfortably through dental treatment in West Jordan, UT. Safe, monitored sedation tailored to your child. Call (801) 676-3700.",
+    eyebrow: "Sedation Dentistry",
     lead: "For a child who simply can't relax for treatment, sleep dentistry lets them rest comfortably while we care for their smile, with the lightest, safest approach that fits.",
     hero: "/assets/dentistry/pediatric/sedation/sleep-dentistry/hero.webp",
     scene: "/assets/dentistry/pediatric/sedation/sleep-dentistry/scene.webp",
     sceneAlt: "Peaceful, safe treatment while a child sleeps",
     promises: [
-      { title: "Rest through treatment", text: "Your child dozes or sleeps comfortably while we work, calm and stress-free." },
-      { title: "Tailored, lightest-first", text: "We match the approach to your child and always choose the gentlest that fits." },
-      { title: "Safe and monitored", text: "Delivered by trained professionals with careful monitoring throughout." },
+      { icon: "moon", title: "Rest through treatment", text: "Your child dozes or sleeps comfortably while we work, calm and stress-free." },
+      { icon: "heart", title: "Tailored, lightest-first", text: "We match the approach to your child and always choose the gentlest that fits." },
+      { icon: "shield-check", title: "Safe and monitored", text: "Delivered by trained professionals with careful monitoring throughout." },
     ],
     sections: [
       {
@@ -1914,16 +2133,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "How do you decide which option to use?", a: "We consider your child's age, anxiety level, health history, and how much treatment is needed, then recommend the lightest, safest option that works." },
       { q: "Is sleep dentistry only for kids with anxiety?", a: "No. It also helps very young children, those needing extensive treatment, and many children with special healthcare needs." },
     ],
+    related: [
+      { name: "Oral Sedation", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/oral-sedation/", blurb: "Relaxed and drowsy, awake." },
+      { name: "General Anesthesia", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/general-anesthesia/", blurb: "Fully asleep care." },
+      { name: "Nitrous Oxide", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/nitrous-oxide/", blurb: "The gentlest option." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Individualized support." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/": {
     description: "Cleanings, fluoride, sealants, tooth-colored fillings, crowns, pulp therapy, and more for kids in West Jordan, UT, at our Southpoint office. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "From routine cleanings to gentle restorative care, we offer a full range of kids' dental services under one welcoming roof, all with a calm, kid-first touch for families across West Jordan.",
     hero: "/assets/dentistry/pediatric/services/hero.webp",
     scene: "/assets/dentistry/pediatric/services/scene.webp",
     promises: [
-      { title: "Prevention first", text: "Cleanings, fluoride, and sealants stop most cavities before they ever start." },
-      { title: "Gentle treatment when needed", text: "Tooth-colored fillings, crowns, and more, always the gentlest option that works." },
-      { title: "Comfort at every step", text: "A kid-friendly pace, plain language, and sedation whenever it helps." },
+      { icon: "sparkle", title: "Prevention first", text: "Cleanings, fluoride, and sealants stop most cavities before they ever start." },
+      { icon: "tooth", title: "Gentle treatment when needed", text: "Tooth-colored fillings, crowns, and more, always the gentlest option that works." },
+      { icon: "heart", title: "Comfort at every step", text: "A kid-friendly pace, plain language, and sedation whenever it helps." },
     ],
     sections: [
       {
@@ -1950,14 +2176,15 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/crowns/": {
     description: "Durable pediatric crowns restore badly decayed or broken baby teeth. Gentle care for kids at our Southpoint office in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "When a tooth is too damaged for a filling, a pediatric crown restores it fully, so your child can chew and smile, and keep that tooth until it's ready to be replaced naturally.",
     hero: "/assets/dentistry/pediatric/services/crowns/hero.webp",
     scene: "/assets/dentistry/pediatric/services/crowns/scene.webp",
     sceneAlt: "A durable crown covering and protecting a child's molar",
     promises: [
-      { title: "Restores the whole tooth", text: "A durable cap rebuilds a tooth that a filling alone couldn't hold." },
-      { title: "Protects and lasts", text: "It holds up to everyday chewing and guards against pain and infection." },
-      { title: "Gentle, sedation-friendly", text: "We numb thoroughly and offer sedation for anxious kids." },
+      { icon: "crown", title: "Restores the whole tooth", text: "A durable cap rebuilds a tooth that a filling alone couldn't hold." },
+      { icon: "shield-check", title: "Protects and lasts", text: "It holds up to everyday chewing and guards against pain and infection." },
+      { icon: "heart", title: "Gentle, sedation-friendly", text: "We numb thoroughly and offer sedation for anxious kids." },
     ],
     sections: [
       {
@@ -1998,17 +2225,25 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Is getting a crown comfortable for my child?", a: "Yes. We numb the area and keep things calm, and we offer sedation options for children who feel anxious or need more involved treatment." },
       { q: "How long does a pediatric crown last?", a: "A well-placed crown typically lasts until the baby tooth falls out naturally, protecting the tooth the whole time." },
     ],
+    related: [
+      { name: "Emergency Crowns", href: "/dentistry-orthodontics/dental-emergencies/treatments/crowns/", blurb: "Broke a tooth? Urgent, same-day crown care." },
+      { name: "Pulp Therapy", href: "/dentistry-orthodontics/pediatric-dentistry/services/pulp-therapy/", blurb: "Treat an infected tooth nerve." },
+      { name: "Tooth-Colored Fillings", href: "/dentistry-orthodontics/pediatric-dentistry/services/fillings/", blurb: "For smaller cavities." },
+      { name: "Tooth Extractions", href: "/dentistry-orthodontics/pediatric-dentistry/services/extractions/", blurb: "When a tooth cannot be saved." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable, anxiety-free care." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/curodont/": {
     description: "Curodont stops early cavities in kids before they need a filling, with no drilling and no needles. Modern care at our Southpoint office in West Jordan, UT.",
+    eyebrow: "Children's Dentistry",
     lead: "Curodont is a modern, no-drill cavity treatment that can stop a cavity in its earliest stage and rebuild enamel, often before your child ever needs a filling. No drilling, no needles.",
     hero: "/assets/dentistry/pediatric/services/curodont/hero.webp",
     scene: "/assets/dentistry/pediatric/services/curodont/scene.webp",
     sceneAlt: "Curodont rebuilding early enamel with no drill and no needles",
     promises: [
-      { title: "No drill, no needles", text: "One of the gentlest ways to treat decay, completely painless." },
-      { title: "Rebuilds enamel", text: "It works with the tooth to strengthen weakened enamel from within." },
-      { title: "Great for anxious kids", text: "A welcome option for young children and nervous first-timers." },
+      { icon: "sparkle", title: "No drill, no needles", text: "One of the gentlest ways to treat decay, completely painless." },
+      { icon: "tooth", title: "Rebuilds enamel", text: "It works with the tooth to strengthen weakened enamel from within." },
+      { icon: "heart", title: "Great for anxious kids", text: "A welcome option for young children and nervous first-timers." },
     ],
     sections: [
       {
@@ -2048,17 +2283,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Is Curodont right for every cavity?", a: "It works best on cavities caught in their earliest stage. More advanced decay may still need a filling or crown, which we'll discuss with you." },
       { q: "Does Curodont hurt?", a: "No. There is no drilling and no needles. We simply apply it to the tooth, making it a great option for young or anxious children." },
     ],
+    related: [
+      { name: "Tooth-Colored Fillings", href: "/dentistry-orthodontics/pediatric-dentistry/services/fillings/", blurb: "For cavities past the early stage." },
+      { name: "Fluoride Treatments", href: "/dentistry-orthodontics/pediatric-dentistry/services/fluoride-treatments/", blurb: "Strengthen enamel." },
+      { name: "Routine Cleanings", href: "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/", blurb: "Catch decay early." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "Start your child's care." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/dental-sealants/": {
     description: "Dental sealants protect kids' molars from cavities with a quick, painless coating. Gentle care at our Southpoint office in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "Sealants add a protective shield to the chewing surfaces of your child's molars, right where cavities most often start. It's a quick, painless, and highly effective way to keep decay out.",
     hero: "/assets/dentistry/pediatric/services/dental-sealants/hero.webp",
     scene: "/assets/dentistry/pediatric/services/dental-sealants/scene.webp",
     sceneAlt: "A protective sealant being applied to a cavity-prone molar",
     promises: [
-      { title: "A shield on the molars", text: "We seal the deep grooves where most childhood cavities begin." },
-      { title: "No drilling, no numbing", text: "A comfortable coat that fits right into a regular checkup." },
-      { title: "Highly effective", text: "One of the best-proven ways to prevent decay in back teeth." },
+      { icon: "shield-check", title: "A shield on the molars", text: "We seal the deep grooves where most childhood cavities begin." },
+      { icon: "tooth", title: "No drilling, no numbing", text: "A comfortable coat that fits right into a regular checkup." },
+      { icon: "sparkle", title: "Highly effective", text: "One of the best-proven ways to prevent decay in back teeth." },
     ],
     sections: [
       {
@@ -2099,17 +2341,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Do sealants hurt to put on?", a: "Not at all. There is no drilling or numbing. We clean the tooth, paint on the sealant, and harden it with a light." },
       { q: "Are sealants only for kids?", a: "Sealants are most common for children and teens as their molars come in, but they can benefit some adults too." },
     ],
+    related: [
+      { name: "Fluoride Treatments", href: "/dentistry-orthodontics/pediatric-dentistry/services/fluoride-treatments/", blurb: "Strengthen enamel against decay." },
+      { name: "Routine Cleanings", href: "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/", blurb: "Six-month checkups and cleanings." },
+      { name: "Tooth-Colored Fillings", href: "/dentistry-orthodontics/pediatric-dentistry/services/fillings/", blurb: "If a cavity does form." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "New to our office?" },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/extractions/": {
     description: "Gentle pediatric tooth extractions when a tooth can't be saved: comfort-focused, sedation-friendly care at our Southpoint office in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "Sometimes a baby tooth is too damaged to save, or needs to come out to protect your child's developing smile. When an extraction is the right call, we make the experience calm and comfortable.",
     hero: "/assets/dentistry/pediatric/services/extractions/hero.webp",
     scene: "/assets/dentistry/pediatric/services/extractions/scene.webp",
     sceneAlt: "Calm, comfortable care during a gentle tooth extraction",
     promises: [
-      { title: "Calm and comfortable", text: "We numb thoroughly and keep your child relaxed the whole time." },
-      { title: "Only when needed", text: "We always try to save a tooth first, and remove one only if we must." },
-      { title: "Sedation available", text: "Safe options add extra comfort for anxious kids or bigger cases." },
+      { icon: "heart", title: "Calm and comfortable", text: "We numb thoroughly and keep your child relaxed the whole time." },
+      { icon: "shield-check", title: "Only when needed", text: "We always try to save a tooth first, and remove one only if we must." },
+      { icon: "moon", title: "Sedation available", text: "Safe options add extra comfort for anxious kids or bigger cases." },
     ],
     sections: [
       {
@@ -2150,16 +2399,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "What is recovery like?", a: "Most children recover quickly with simple aftercare. We'll give you clear instructions on eating, rinsing, and managing any soreness." },
       { q: "Will my child need anything after the tooth is removed?", a: "If a baby tooth comes out early, we may suggest a space maintainer to protect room for the permanent tooth." },
     ],
+    related: [
+      { name: "Emergency Extractions", href: "/dentistry-orthodontics/dental-emergencies/treatments/extractions/", blurb: "Urgent removal after an injury or severe pain." },
+      { name: "Space Maintainers", href: "/dentistry-orthodontics/pediatric-dentistry/services/space-maintainers/", blurb: "Hold space for adult teeth." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable, anxiety-free care." },
+      { name: "Emergency Care", href: "/dentistry-orthodontics/dental-emergencies/", blurb: "Same-day help for urgent issues." },
+      { name: "Pulp Therapy", href: "/dentistry-orthodontics/pediatric-dentistry/services/pulp-therapy/", blurb: "Saving a tooth when possible." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/fillings/": {
     description: "Gentle, mercury-free tooth-colored fillings for children in West Jordan, UT. Natural-looking cavity care for baby and adult teeth. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "A cavity is no big deal here. We fix it gently and mercury-free, with a tooth-colored filling that blends right into your child's smile, and a visit they actually leave happy.",
     hero: "/assets/dentistry/pediatric/services/fillings/hero.webp",
     scene: "/assets/dentistry/pediatric/services/fillings/scene.webp",
     promises: [
-      { title: "Looks completely natural", text: "Tooth-colored composite is shaded to match, so the repair simply disappears into your child's smile." },
-      { title: "Gentle and painless", text: "We numb the tooth first and move at your child's pace, with <a href='/dentistry-orthodontics/pediatric-dentistry/sedation/'>laughing gas</a> available any time it helps." },
-      { title: "Safe and mercury-free", text: "A modern, trusted material we're glad to place on growing teeth, with no metal and no mercury." },
+      { icon: "sparkle", title: "Looks completely natural", text: "Tooth-colored composite is shaded to match, so the repair simply disappears into your child's smile." },
+      { icon: "heart", title: "Gentle and painless", text: "We numb the tooth first and move at your child's pace, with <a href='/dentistry-orthodontics/pediatric-dentistry/sedation/'>laughing gas</a> available any time it helps." },
+      { icon: "shield-check", title: "Safe and mercury-free", text: "A modern, trusted material we're glad to place on growing teeth, with no metal and no mercury." },
     ],
     sections: [
       {
@@ -2205,14 +2462,15 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/fluoride-treatments/": {
     description: "Professional fluoride treatments help prevent cavities in kids. Quick, painless, and gentle at our Southpoint office in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "A quick, painless fluoride treatment is one of the simplest ways to protect your child's teeth from cavities. Here's how it works, and why it gives young enamel a boost that toothpaste alone can't.",
     hero: "/assets/dentistry/pediatric/services/fluoride-treatments/hero.webp",
     scene: "/assets/dentistry/pediatric/services/fluoride-treatments/scene.webp",
     sceneAlt: "A dentist brushing on a quick, painless fluoride varnish",
     promises: [
-      { title: "Quick and painless", text: "A pleasant-tasting coat that takes about a minute to apply." },
-      { title: "Stronger enamel", text: "It helps developing teeth resist the acids that cause cavities." },
-      { title: "Right back to your day", text: "Your child can usually eat and drink shortly afterward." },
+      { icon: "drop", title: "Quick and painless", text: "A pleasant-tasting coat that takes about a minute to apply." },
+      { icon: "shield-check", title: "Stronger enamel", text: "It helps developing teeth resist the acids that cause cavities." },
+      { icon: "clock", title: "Right back to your day", text: "Your child can usually eat and drink shortly afterward." },
     ],
     sections: [
       {
@@ -2252,17 +2510,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "How long does a fluoride treatment take?", a: "Only a minute or two. We brush or paint it on after a cleaning, and your child can usually eat and drink shortly afterward." },
       { q: "How often should my child get fluoride?", a: "Typically at each six-month checkup, though children at higher risk for cavities may benefit from more frequent application." },
     ],
+    related: [
+      { name: "Routine Cleanings", href: "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/", blurb: "Keep teeth healthy every six months." },
+      { name: "Dental Sealants", href: "/dentistry-orthodontics/pediatric-dentistry/services/dental-sealants/", blurb: "Extra protection for molars." },
+      { name: "Curodont", href: "/dentistry-orthodontics/pediatric-dentistry/services/curodont/", blurb: "Stop early cavities without a filling." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "Start your child's care." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/pulp-therapy/": {
     description: "Pulp therapy saves infected or badly decayed baby teeth and relieves tooth pain in kids. Gentle care in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "Often called a baby root canal, pulp therapy treats the inside of an infected tooth when decay or injury reaches the nerve, relieving your child's pain and saving the tooth.",
     hero: "/assets/dentistry/pediatric/services/pulp-therapy/hero.webp",
     scene: "/assets/dentistry/pediatric/services/pulp-therapy/scene.webp",
     sceneAlt: "A gentle baby root canal soothing and saving a tooth",
     promises: [
-      { title: "Relieves pain gently", text: "It treats the source of the ache so your child feels better fast." },
-      { title: "Saves the tooth", text: "Keeping the tooth protects the bite and holds space for the adult tooth." },
-      { title: "Fully numbed & calm", text: "Most kids are surprised by how comfortable it is, with sedation available." },
+      { icon: "heart", title: "Relieves pain gently", text: "It treats the source of the ache so your child feels better fast." },
+      { icon: "tooth", title: "Saves the tooth", text: "Keeping the tooth protects the bite and holds space for the adult tooth." },
+      { icon: "shield-check", title: "Fully numbed & calm", text: "Most kids are surprised by how comfortable it is, with sedation available." },
     ],
     sections: [
       {
@@ -2303,17 +2568,25 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Will my child be in pain during the procedure?", a: "No. We fully numb the tooth, and most children are surprised by how comfortable it is. Sedation is available for added comfort." },
       { q: "How will I know if my child needs pulp therapy?", a: "Ongoing tooth pain, sensitivity to temperature, or swelling can be signs. We'll examine the tooth and recommend the gentlest effective treatment." },
     ],
+    related: [
+      { name: "Emergency Pulp Therapy", href: "/dentistry-orthodontics/dental-emergencies/treatments/pulp-therapy/", blurb: "Urgent nerve care for a painful tooth." },
+      { name: "Pediatric Crowns", href: "/dentistry-orthodontics/pediatric-dentistry/services/crowns/", blurb: "Protect the treated tooth." },
+      { name: "Toothache & Pain", href: "/dentistry-orthodontics/dental-emergencies/toothache/", blurb: "Relief for tooth pain." },
+      { name: "Tooth Extractions", href: "/dentistry-orthodontics/pediatric-dentistry/services/extractions/", blurb: "If a tooth cannot be saved." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Calm, comfortable treatment." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/": {
     description: "Gentle routine dental cleanings for children in West Jordan, UT: plaque removal, polishing, and decay checks every six months. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "Regular cleanings keep your child's smile healthy and catch small problems before they grow. A kids' cleaning and checkup with us is gentle, unhurried, and something they won't dread next time.",
     hero: "/assets/dentistry/pediatric/services/routine-cleanings/hero.webp",
     scene: "/assets/dentistry/pediatric/services/routine-cleanings/scene.webp",
     sceneAlt: "Polishing a child's teeth until they sparkle at a routine cleaning",
     promises: [
-      { title: "Gentle and thorough", text: "We lift away plaque and polish at a pace that keeps your child relaxed." },
-      { title: "Catches problems early", text: "We check every tooth so small issues stay small and easy to treat." },
-      { title: "Every six months", text: "A simple rhythm that keeps cavities and gum irritation away." },
+      { icon: "sparkle", title: "Gentle and thorough", text: "We lift away plaque and polish at a pace that keeps your child relaxed." },
+      { icon: "shield-check", title: "Catches problems early", text: "We check every tooth so small issues stay small and easy to treat." },
+      { icon: "calendar", title: "Every six months", text: "A simple rhythm that keeps cavities and gum irritation away." },
     ],
     sections: [
       {
@@ -2355,17 +2628,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "At what age should cleanings start?", a: "Around age one, or within six months of the first tooth. Starting early keeps baby teeth healthy and helps your child get comfortable with the dentist." },
       { q: "What if my child is nervous about a cleaning?", a: "We're used to nervous first-timers. We explain everything in simple terms, keep things calm, and offer extra support when needed." },
     ],
+    related: [
+      { name: "Fluoride Treatments", href: "/dentistry-orthodontics/pediatric-dentistry/services/fluoride-treatments/", blurb: "Strengthen enamel and prevent cavities." },
+      { name: "Dental Sealants", href: "/dentistry-orthodontics/pediatric-dentistry/services/dental-sealants/", blurb: "Protect molars from decay." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "What to expect for new patients." },
+      { name: "Tooth-Colored Fillings", href: "/dentistry-orthodontics/pediatric-dentistry/services/fillings/", blurb: "Gentle cavity treatment." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/services/space-maintainers/": {
     description: "Space maintainers hold room for adult teeth after a baby tooth is lost early. Gentle pediatric care in West Jordan, UT. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "When a baby tooth is lost too early, a space maintainer holds the gap open so the adult tooth has room to come in straight, often reducing or simplifying the need for braces later.",
     hero: "/assets/dentistry/pediatric/services/space-maintainers/hero.webp",
     scene: "/assets/dentistry/pediatric/services/space-maintainers/scene.webp",
     sceneAlt: "A space maintainer keeping the gap open for the incoming tooth",
     promises: [
-      { title: "Holds room for the adult tooth", text: "It keeps neighboring teeth from drifting into the gap." },
-      { title: "Custom and comfortable", text: "Most kids adjust within a day or two and soon forget it's there." },
-      { title: "Fewer problems later", text: "Protecting the space now can simplify future orthodontic care." },
+      { icon: "tooth", title: "Holds room for the adult tooth", text: "It keeps neighboring teeth from drifting into the gap." },
+      { icon: "smiley", title: "Custom and comfortable", text: "Most kids adjust within a day or two and soon forget it's there." },
+      { icon: "shield-check", title: "Fewer problems later", text: "Protecting the space now can simplify future orthodontic care." },
     ],
     sections: [
       {
@@ -2405,16 +2685,23 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Is a space maintainer uncomfortable?", a: "Most children adjust within a day or two and soon forget it is there. It is custom-fit for comfort." },
       { q: "How long does my child wear it?", a: "Until the permanent tooth is ready to come in. We monitor it at regular checkups and remove it at the right time." },
     ],
+    related: [
+      { name: "Tooth Extractions", href: "/dentistry-orthodontics/pediatric-dentistry/services/extractions/", blurb: "When a tooth must be removed." },
+      { name: "Orthodontics", href: "/dentistry-orthodontics/orthodontics/", blurb: "Braces and aligners for kids." },
+      { name: "Routine Cleanings", href: "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/", blurb: "Ongoing checkups." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "Start your child's care." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/special-needs/": {
     description: "Compassionate special needs dental care for children in West Jordan, UT. A patient, sensory-aware team with sedation for every child. Call (801) 676-3700.",
+    eyebrow: "Children's Dentistry",
     lead: "Every child deserves gentle, judgment-free dental care. Our sensory-friendly team takes extra time, adapts to your child, and partners with you to make each visit a success.",
     hero: "/assets/dentistry/pediatric/special-needs/hero.webp",
     scene: "/assets/dentistry/pediatric/special-needs/scene.webp",
     promises: [
-      { title: "Care built around your child", text: "We adapt the pace, the space, and the plan to whatever works best for them." },
-      { title: "Sensory-friendly and calm", text: "Dimmer lights, lower noise, a clear tell-show-do pace, and no rushing." },
-      { title: "Sedation whenever it helps", text: "Safe options, including general anesthesia, when they make care easier." },
+      { icon: "heart", title: "Care built around your child", text: "We adapt the pace, the space, and the plan to whatever works best for them." },
+      { icon: "sparkle", title: "Sensory-friendly and calm", text: "Dimmer lights, lower noise, a clear tell-show-do pace, and no rushing." },
+      { icon: "shield-check", title: "Sedation whenever it helps", text: "Safe options, including general anesthesia, when they make care easier." },
     ],
     sections: [
       {
@@ -2441,14 +2728,15 @@ export const dentalContent: Record<string, DentalPage> = {
   },
   "/dentistry-orthodontics/pediatric-dentistry/special-needs/adhd/": {
     description: "Calm, engaging dental care for children with ADHD in West Jordan, UT. Short, positive visits and sedation options when needed. Call (801) 676-3700.",
+    eyebrow: "Special Needs Care",
     lead: "Sitting still in the dental chair can be a real challenge. We keep visits short, positive, and engaging so children with ADHD can succeed.",
     hero: "/assets/dentistry/pediatric/special-needs/adhd/hero.webp",
     scene: "/assets/dentistry/pediatric/special-needs/adhd/scene.webp",
     sceneAlt: "Short, engaging steps that keep an active child comfortable",
     promises: [
-      { title: "Short and positive", text: "Efficient, upbeat visits broken into manageable, easy steps." },
-      { title: "Engaging and clear", text: "A friendly pace and clear direction that help your child stay with us." },
-      { title: "Sedation if it helps", text: "Safe options for longer treatment when staying still is too much." },
+      { icon: "heart", title: "Short and positive", text: "Efficient, upbeat visits broken into manageable, easy steps." },
+      { icon: "sparkle", title: "Engaging and clear", text: "A friendly pace and clear direction that help your child stay with us." },
+      { icon: "shield-check", title: "Sedation if it helps", text: "Safe options for longer treatment when staying still is too much." },
     ],
     sections: [
       {
@@ -2487,17 +2775,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "What if my child cannot sit still?", a: "We keep visits short and engaging, and we're patient. For longer treatment, sedation options can help your child relax and stay comfortable." },
       { q: "Does the timing of the appointment matter?", a: "It can. Many families find a morning visit works best. Tell us what time of day your child tends to do well and we'll try to accommodate it." },
     ],
+    related: [
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable options." },
+      { name: "Routine Cleanings", href: "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/", blurb: "Short, familiar visits." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "What to expect." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Care for every child." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/special-needs/autism-spectrum-disorder/": {
     description: "Gentle, autism-friendly dental care for children in West Jordan, UT: predictable, sensory-aware visits and sedation for kids on the spectrum. Call (801) 676-3700.",
+    eyebrow: "Special Needs Care",
     lead: "The sights, sounds, and routine of a dental visit can be a lot for a child on the autism spectrum. As a sensory-friendly autism dentist, we adapt to your child so their care feels calm and predictable.",
     hero: "/assets/dentistry/pediatric/special-needs/autism-spectrum-disorder/hero.webp",
     scene: "/assets/dentistry/pediatric/special-needs/autism-spectrum-disorder/scene.webp",
     sceneAlt: "Sensory-friendly, predictable care with headphones and a visual schedule",
     promises: [
-      { title: "Predictable and calm", text: "A steady routine and clear, simple words, so nothing feels like a surprise." },
-      { title: "Sensory-friendly", text: "Dimmer lights, lower noise, and a tell-show-do pace built around your child." },
-      { title: "Sedation if it helps", text: "Safe options, including general anesthesia, when staying still is too much." },
+      { icon: "heart", title: "Predictable and calm", text: "A steady routine and clear, simple words, so nothing feels like a surprise." },
+      { icon: "sparkle", title: "Sensory-friendly", text: "Dimmer lights, lower noise, and a tell-show-do pace built around your child." },
+      { icon: "shield-check", title: "Sedation if it helps", text: "Safe options, including general anesthesia, when staying still is too much." },
     ],
     sections: [
       {
@@ -2538,17 +2833,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Can we visit the office before the first appointment?", a: "Yes. A short, low-pressure visit to meet the team and see the space can make the real appointment far easier. Just ask when you book." },
       { q: "What can I do to prepare my child?", a: "Tell us your child's triggers and comforts ahead of time, bring a favorite comfort item, and let us know the words or routines that work best at home." },
     ],
+    related: [
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Calm, comfortable options." },
+      { name: "Intellectual Disabilities", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/intellectual-disabilities/", blurb: "Clear, patient communication." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "What to expect." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Care for every child." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/special-needs/cerebral-palsy/": {
     description: "Gentle, patient dental care for children with cerebral palsy in West Jordan, UT. Comfortable positioning and sedation options. Call (801) 676-3700.",
+    eyebrow: "Special Needs Care",
     lead: "Children with cerebral palsy deserve calm, unhurried dental care that adapts to their needs. Our gentle special needs team takes the time to get every visit right.",
     hero: "/assets/dentistry/pediatric/special-needs/cerebral-palsy/hero.webp",
     scene: "/assets/dentistry/pediatric/special-needs/cerebral-palsy/scene.webp",
     sceneAlt: "Cushioned, supportive positioning for a comfortable visit",
     promises: [
-      { title: "Gentle and adaptable", text: "We adapt positioning and pace to your child's movement and comfort." },
-      { title: "Supportive and secure", text: "Positioning aids and patient hands help your child feel safe throughout." },
-      { title: "Sedation if it helps", text: "Safe options let us provide thorough care gently when needed." },
+      { icon: "heart", title: "Gentle and adaptable", text: "We adapt positioning and pace to your child's movement and comfort." },
+      { icon: "sparkle", title: "Supportive and secure", text: "Positioning aids and patient hands help your child feel safe throughout." },
+      { icon: "shield-check", title: "Sedation if it helps", text: "Safe options let us provide thorough care gently when needed." },
     ],
     sections: [
       {
@@ -2587,17 +2889,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "How do you position my child comfortably?", a: "We use supportive positioning and adapt to what is most comfortable and secure for your child. Your guidance about what works at home helps us a great deal." },
       { q: "Can sedation help my child relax?", a: "Yes. We offer safe sedation options, including general anesthesia when appropriate, so treatment can be completed comfortably." },
     ],
+    related: [
+      { name: "Physical Disabilities", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/physical-disabilities/", blurb: "Accessible, accommodating care." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable options." },
+      { name: "Routine Cleanings", href: "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/", blurb: "Prevention that protects." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Care for every child." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/special-needs/down-syndrome/": {
     description: "Caring, individualized dental care for children with Down syndrome in West Jordan, UT. Patient visits and sedation options. Call (801) 676-3700.",
+    eyebrow: "Special Needs Care",
     lead: "Children with Down syndrome benefit from a warm, patient dental team that knows their unique needs. We provide gentle, individualized care every visit.",
     hero: "/assets/dentistry/pediatric/special-needs/down-syndrome/hero.webp",
     scene: "/assets/dentistry/pediatric/special-needs/down-syndrome/scene.webp",
     sceneAlt: "Gentle, unhurried care for a child with Down syndrome",
     promises: [
-      { title: "Warm and individualized", text: "We build trust through familiarity, simple communication, and encouragement." },
-      { title: "Development watched closely", text: "We monitor gum health, tooth eruption, and the bite as your child grows." },
-      { title: "Sedation if it helps", text: "Safe options keep care comfortable for anxious or extensive visits." },
+      { icon: "heart", title: "Warm and individualized", text: "We build trust through familiarity, simple communication, and encouragement." },
+      { icon: "sparkle", title: "Development watched closely", text: "We monitor gum health, tooth eruption, and the bite as your child grows." },
+      { icon: "shield-check", title: "Sedation if it helps", text: "Safe options keep care comfortable for anxious or extensive visits." },
     ],
     sections: [
       {
@@ -2636,17 +2945,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "How often should my child be seen?", a: "Most children do best with a checkup and cleaning every six months, though we may suggest more frequent visits to monitor gum health and tooth development." },
       { q: "Do you offer orthodontics too?", a: "Yes. Because we provide dentistry and orthodontics under one roof, we can monitor your child's bite and bring in our orthodontist when treatment makes sense." },
     ],
+    related: [
+      { name: "Orthodontics", href: "/dentistry-orthodontics/orthodontics/", blurb: "Braces and aligners under one roof." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable options." },
+      { name: "Routine Cleanings", href: "/dentistry-orthodontics/pediatric-dentistry/services/routine-cleanings/", blurb: "Six-month checkups." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Care for every child." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/special-needs/hearing-loss/": {
     description: "Patient, visual-first dental care for deaf and hard-of-hearing children in West Jordan, UT. Clear communication and gentle visits. Call (801) 676-3700.",
+    eyebrow: "Special Needs Care",
     lead: "Great dental care doesn't depend on hearing. As a deaf-friendly dental office, we communicate clearly and visually so deaf and hard-of-hearing children feel informed and at ease.",
     hero: "/assets/dentistry/pediatric/special-needs/hearing-loss/hero.webp",
     scene: "/assets/dentistry/pediatric/special-needs/hearing-loss/scene.webp",
     sceneAlt: "Signing and picture cards making a visit clear and comfortable",
     promises: [
-      { title: "Visual-first communication", text: "We face your child, use gestures, and show each step before we do it." },
-      { title: "Calm and unstartling", text: "We focus on what your child can see and feel, with plenty of reassurance." },
-      { title: "Sedation if it helps", text: "Safe options are available when a procedure is hard to tolerate." },
+      { icon: "heart", title: "Visual-first communication", text: "We face your child, use gestures, and show each step before we do it." },
+      { icon: "sparkle", title: "Calm and unstartling", text: "We focus on what your child can see and feel, with plenty of reassurance." },
+      { icon: "shield-check", title: "Sedation if it helps", text: "Safe options are available when a procedure is hard to tolerate." },
     ],
     sections: [
       {
@@ -2685,17 +3001,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Can we bring an interpreter?", a: "Absolutely. We welcome interpreters and will work with whatever communication method helps your child understand and feel comfortable." },
       { q: "How do you explain treatment without sound?", a: "We use a tell-show-do approach, showing each tool and demonstrating gently before we begin, so your child always knows what is coming next." },
     ],
+    related: [
+      { name: "Vision Impairment & Blindness", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/vision-impairment/", blurb: "Narrated, tell-show-do care." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable options." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "What to expect." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Care for every child." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/special-needs/intellectual-disabilities/": {
     description: "Patient, clear-communication dental care for children with intellectual disabilities in West Jordan, UT. Sedation options available. Call (801) 676-3700.",
+    eyebrow: "Special Needs Care",
     lead: "Clear communication and a patient pace make all the difference. We adapt every visit so your child understands what's happening and feels at ease.",
     hero: "/assets/dentistry/pediatric/special-needs/intellectual-disabilities/hero.webp",
     scene: "/assets/dentistry/pediatric/special-needs/intellectual-disabilities/scene.webp",
     sceneAlt: "Simple, reassuring show-and-tell that builds a child's trust",
     promises: [
-      { title: "Patient and unhurried", text: "We give your child time to process and never rush a step." },
-      { title: "Clear communication", text: "Simple words and a tell-show-do approach, so each step feels predictable." },
-      { title: "Sedation if it helps", text: "Safe options let us complete care comfortably when a procedure is hard to tolerate." },
+      { icon: "heart", title: "Patient and unhurried", text: "We give your child time to process and never rush a step." },
+      { icon: "sparkle", title: "Clear communication", text: "Simple words and a tell-show-do approach, so each step feels predictable." },
+      { icon: "shield-check", title: "Sedation if it helps", text: "Safe options let us complete care comfortably when a procedure is hard to tolerate." },
     ],
     sections: [
       {
@@ -2734,17 +3057,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "How do you help my child understand the visit?", a: "We explain everything in simple terms and show each tool before we use it, so there are no surprises. Short, repeated visits build familiarity and trust." },
       { q: "What should I share before the appointment?", a: "Let us know how your child communicates best, what soothes them, and any triggers to avoid, so we can shape the visit around them." },
     ],
+    related: [
+      { name: "Autism Spectrum Disorder", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/autism-spectrum-disorder/", blurb: "Predictable, sensory-aware care." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable options." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "What to expect." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Care for every child." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/special-needs/physical-disabilities/": {
     description: "Accessible, accommodating dental care for children with physical disabilities in West Jordan, UT. Wheelchair-friendly and patient. Call (801) 676-3700.",
+    eyebrow: "Special Needs Care",
     lead: "A child's physical needs should never get in the way of a healthy smile. Our brand-new, wheelchair-accessible Southpoint office is built to welcome and accommodate every family.",
     hero: "/assets/dentistry/pediatric/special-needs/physical-disabilities/hero.webp",
     scene: "/assets/dentistry/pediatric/special-needs/physical-disabilities/scene.webp",
     sceneAlt: "Accessible care with gentle support for children with physical disabilities",
     promises: [
-      { title: "Accessible and accommodating", text: "A wheelchair-friendly office and a team happy to adapt how and where we work." },
-      { title: "Comfortable positioning", text: "Supportive aids and the right position, taken slowly and at your child's pace." },
-      { title: "Sedation if it helps", text: "Safe options when holding a position or staying still is difficult." },
+      { icon: "heart", title: "Accessible and accommodating", text: "A wheelchair-friendly office and a team happy to adapt how and where we work." },
+      { icon: "sparkle", title: "Comfortable positioning", text: "Supportive aids and the right position, taken slowly and at your child's pace." },
+      { icon: "shield-check", title: "Sedation if it helps", text: "Safe options when holding a position or staying still is difficult." },
     ],
     sections: [
       {
@@ -2783,17 +3113,24 @@ export const dentalContent: Record<string, DentalPage> = {
       { q: "Is your office wheelchair accessible?", a: "Yes. Our brand-new Southpoint office is easy to access, and our team will help find the most comfortable way to provide your child's care." },
       { q: "Can my child be treated in their wheelchair?", a: "Often, yes. We adapt to what is safest and most comfortable for your child, and we'll discuss the best approach with you beforehand." },
     ],
+    related: [
+      { name: "Cerebral Palsy", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/cerebral-palsy/", blurb: "Gentle, patient care." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable options." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Care for every child." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "What to expect." },
+    ],
   },
   "/dentistry-orthodontics/pediatric-dentistry/special-needs/vision-impairment/": {
     description: "Gentle, narrated dental care for blind and visually impaired children in West Jordan, UT. A tell-and-touch approach that builds trust. Call (801) 676-3700.",
+    eyebrow: "Special Needs Care",
     lead: "When a child can't rely on sight, words and touch build trust. We narrate every step so your child always knows what comes next.",
     hero: "/assets/dentistry/pediatric/special-needs/vision-impairment/hero.webp",
     scene: "/assets/dentistry/pediatric/special-needs/vision-impairment/scene.webp",
     sceneAlt: "Touch-and-tell guidance helping a child with low vision feel at ease",
     promises: [
-      { title: "Narrated, tell-and-touch", text: "We describe each step and let your child feel a tool when it helps." },
-      { title: "Predictable and steady", text: "A familiar routine and a calm, reassuring voice each and every visit." },
-      { title: "Sedation if it helps", text: "Safe options keep your child comfortable when treatment is hard to tolerate." },
+      { icon: "heart", title: "Narrated, tell-and-touch", text: "We describe each step and let your child feel a tool when it helps." },
+      { icon: "sparkle", title: "Predictable and steady", text: "A familiar routine and a calm, reassuring voice each and every visit." },
+      { icon: "shield-check", title: "Sedation if it helps", text: "Safe options keep your child comfortable when treatment is hard to tolerate." },
     ],
     sections: [
       {
@@ -2831,6 +3168,12 @@ export const dentalContent: Record<string, DentalPage> = {
     faqs: [
       { q: "How do you help my child feel comfortable?", a: "We narrate every step before it happens and let your child touch tools when it helps, so nothing is a surprise. A familiar routine each visit builds trust." },
       { q: "What should I tell you beforehand?", a: "Share how your child likes to communicate, what reassures them, and any sensitivities, so we can tailor the visit to them." },
+    ],
+    related: [
+      { name: "Hearing Loss & Deafness", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/hearing-loss/", blurb: "Visual, patient communication." },
+      { name: "Sedation Dentistry", href: "/dentistry-orthodontics/pediatric-dentistry/sedation/", blurb: "Comfortable options." },
+      { name: "First Dental Visit", href: "/dentistry-orthodontics/pediatric-dentistry/first-visit/", blurb: "What to expect." },
+      { name: "Special Needs Care", href: "/dentistry-orthodontics/pediatric-dentistry/special-needs/", blurb: "Care for every child." },
     ],
   },
 };
