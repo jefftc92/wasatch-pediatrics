@@ -35,7 +35,7 @@ import {
 } from "../data/services.ts";
 import { providers } from "../data/providers.ts";
 import { PILLAR_MENU_IDS } from "./header.ts";
-import { dentalFaqSchema, dentalPage, renderDentalBody } from "./dental.ts";
+import { dentalFaqSchema, dentalPage, renderDentalPage } from "./dental.ts";
 import type { GeneratedPage } from "./generated.ts";
 import type { SearchEntry } from "../data/searchIndex.ts";
 import {
@@ -156,10 +156,14 @@ export function renderPillarPage(
 
   const nav = renderSectionNav(
     { name: pillar.name, href: pillar.href },
-    servicesInPillar(pillar.slug).map((service) => ({
-      name: service.name,
-      href: serviceHref(service),
-    })),
+    [
+      {
+        items: servicesInPillar(pillar.slug).map((service) => ({
+          name: service.name,
+          href: serviceHref(service),
+        })),
+      },
+    ],
     pillar.href,
   );
 
@@ -210,12 +214,10 @@ export function renderServicePage(service: Service): string {
   // paragraph above it; the rest would only be repeating themselves. Copy
   // migrated from the dentistry site carries its own lead and wins over both.
   const migrated = dentalPage(serviceHref(service));
-  const body = migrated
-    ? renderDentalBody(migrated)
-    : service.bodyFile
-      ? `<p class="svc-lead">${escapeAttribute(service.description)}</p>
+  const body = service.bodyFile
+    ? `<p class="svc-lead">${escapeAttribute(service.description)}</p>
 					${authoredBody(service.bodyFile)}`
-      : `<p>${escapeAttribute(service.intro ?? service.blurb)}</p>`;
+    : `<p>${escapeAttribute(service.intro ?? service.blurb)}</p>`;
 
   const team = providersForService(service);
   const shown = team.slice(0, 8);
@@ -244,10 +246,21 @@ export function renderServicePage(service: Service): string {
   // sibling services would just say the same thing twice.
   const nav = renderSectionNav(
     { name: pillar.name, href: pillar.href },
-    servicesInPillar(pillar.slug).map((other) => ({
-      name: other.name,
-      href: serviceHref(other),
-    })),
+    [
+      {
+        items: servicesInPillar(pillar.slug).map((other) => ({
+          name: other.name,
+          href: serviceHref(other),
+        })),
+      },
+      {
+        label: `In ${service.name}`,
+        items: (service.topics ?? []).map((topic) => ({
+          name: topic.name,
+          href: topicHref(service, topic),
+        })),
+      },
+    ],
     serviceHref(service),
   );
 
@@ -261,8 +274,19 @@ export function renderServicePage(service: Service): string {
     }, [])
     .join("\n");
 
-  return `${nav}
-${heroSection(escapeAttribute(service.name), crumbs)}
+  const head = `${nav}\n${heroSection(escapeAttribute(service.name), crumbs)}`;
+
+  /*
+   * A migrated service brings its own bands, and the topic shelf, the team and
+   * the other pillars follow them.
+   */
+  if (migrated) {
+    return `${head}
+${renderDentalPage(migrated, service.name, { name: service.name, href: serviceHref(service) }, pillar)}
+${sections}`;
+  }
+
+  return `${head}
 <div class="whitebg padme90 svc-body">
 	<div class="container">
 		<div class="row">
@@ -293,28 +317,81 @@ export type SectionLink = { name: string; href: string };
  * sibling topics; on the deepest pages, the other pages in the same topic.
  * On a phone it scrolls sideways rather than wrapping into a wall of links.
  */
+/**
+ * The bar under the header that carries sideways movement inside a service.
+ *
+ * It used to be a single strip of whatever siblings the current page had, which
+ * broke in three ways at once: on a service page it offered the *pillar's* other
+ * services rather than the service's own topics, so nine orthodontic treatments
+ * were unreachable from the page they belong to; three levels down it listed
+ * eight siblings in a track that needed 1333px and had 873px, so it became a
+ * horizontal scroller on a desktop; and at no depth did it say where you were.
+ *
+ * It is now a masthead for the section: the service named once, in the display
+ * face, and beneath it the topics — wrapping rather than scrolling, so nothing
+ * is hidden off an edge. On a page below a topic, a second row carries that
+ * topic's own pages. Two rows is the most it can ever be, and together they read
+ * as the path you took.
+ */
 export function renderSectionNav(
-  parent: SectionLink,
-  items: SectionLink[],
+  section: SectionLink,
+  rows: Array<{ label?: string; items: SectionLink[] }>,
   currentHref: string,
 ): string {
-  if (!items.length) return "";
+  const visible = rows.filter((row) => row.items.length);
+  if (!visible.length) return "";
 
-  const links = items
-    .map((item) => {
-      const current =
-        item.href === currentHref
-          ? ' class="secnav-current" aria-current="page"'
-          : "";
-      return `<li><a href="${item.href}"${current}>${escapeAttribute(item.name)}</a></li>`;
-    })
-    .join("");
+  const row = (items: SectionLink[], level: string) => {
+    const links = items
+      .map((item) => {
+        // The row above the current page marks the branch it came down, so the
+        // two rows together read as the path rather than as two flat lists.
+        const state =
+          item.href === currentHref
+            ? ' class="secnav-current" aria-current="page"'
+            : currentHref.startsWith(item.href)
+              ? ' class="secnav-ancestor"'
+              : "";
+        return `<li><a href="${item.href}"${state}>${escapeAttribute(item.name)}</a></li>`;
+      })
+      .join("");
+    return `<ul class="secnav-list secnav-${level}">${links}</ul>`;
+  };
 
-  return `<nav class="secnav" aria-label="${escapeAttribute(parent.name)}">
+  const lists = visible
+    .map((entry, index) =>
+      index === 0
+        ? `			${row(entry.items, "topics")}`
+        : `			<div class="secnav-sub">
+				${entry.label ? `<span class="secnav-sub-label">${escapeAttribute(entry.label)}</span>` : ""}
+				${row(entry.items, "items")}
+			</div>`,
+    )
+    .join("\n");
+
+  /*
+   * Collapsed on a phone, where showing everything ran to 384px — most of the
+   * screen before the page began.
+   *
+   * It ships open and script closes it on a phone, rather than shipping closed
+   * and being forced open by CSS on a desktop: a modern <details> hides its
+   * content through ::details-content, which `display` on the children cannot
+   * override, so the CSS-only version collapsed the bar at every width. This
+   * way the no-script rendering is the honest one — everything visible — and
+   * the collapse is the enhancement.
+   */
+  const count = visible.reduce((n, entry) => n + entry.items.length, 0);
+
+  return `<nav class="secnav" aria-label="${escapeAttribute(section.name)}">
 	<div class="container">
 		<div class="secnav-inner">
-			<a class="secnav-parent" href="${parent.href}">${escapeAttribute(parent.name)}</a>
-			<ul class="secnav-list">${links}</ul>
+			<a class="secnav-section lys" href="${section.href}">${escapeAttribute(section.name)}</a>
+			<details class="secnav-browse" open>
+				<summary class="secnav-summary">Browse this section<span class="secnav-count">${count}</span></summary>
+				<div class="secnav-panel">
+${lists}
+				</div>
+			</details>
 		</div>
 	</div>
 </nav>`;
@@ -374,10 +451,21 @@ export function renderTopicPage(service: Service, topic: Topic): string {
 
   const nav = renderSectionNav(
     { name: service.name, href: serviceHref(service) },
-    (service.topics ?? []).map((other) => ({
-      name: other.name,
-      href: topicHref(service, other),
-    })),
+    [
+      {
+        items: (service.topics ?? []).map((other) => ({
+          name: other.name,
+          href: topicHref(service, other),
+        })),
+      },
+      {
+        label: `In ${topic.name}`,
+        items: topic.items.map((other) => ({
+          name: other.name,
+          href: topicItemHref(service, topic, other),
+        })),
+      },
+    ],
     topicHref(service, topic),
   );
 
@@ -414,14 +502,26 @@ ${topic.items
 </div>`
     : "";
 
-  return `${nav}
-${heroSection(escapeAttribute(topic.name), crumbs)}
+  const head = `${nav}\n${heroSection(escapeAttribute(topic.name), crumbs)}`;
+
+  /*
+   * A migrated topic keeps its own bands and puts the list of pages under them,
+   * on grey so it reads as a shelf below the page rather than part of it.
+   */
+  if (migrated) {
+    return `${head}
+${renderDentalPage(migrated, topic.name, { name: service.name, href: serviceHref(service) }, pillar)}
+${items}
+${otherPillars(pillar.slug, items ? "whitebg" : "graybg")}`;
+  }
+
+  return `${head}
 <div class="whitebg padme90 svc-body">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8">
 				<div class="pagebody" style="margin-top:0px">
-					${migrated ? renderDentalBody(migrated) : `<p>${escapeAttribute(topic.intro)}</p>`}
+					<p>${escapeAttribute(topic.intro)}</p>
 				</div>
 			</div>
 			<div class="col-lg-4">
@@ -443,12 +543,27 @@ export function renderTopicItemPage(
   const pillar = pillarBySlug.get(service.pillar);
   if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
 
+  /*
+   * Three levels deep, so both rows earn their place: the first says which
+   * topic of the service you are inside, the second which of its pages.
+   */
   const nav = renderSectionNav(
-    { name: topic.name, href: topicHref(service, topic) },
-    topic.items.map((other) => ({
-      name: other.name,
-      href: topicItemHref(service, topic, other),
-    })),
+    { name: service.name, href: serviceHref(service) },
+    [
+      {
+        items: (service.topics ?? []).map((other) => ({
+          name: other.name,
+          href: topicHref(service, other),
+        })),
+      },
+      {
+        label: `In ${topic.name}`,
+        items: topic.items.map((other) => ({
+          name: other.name,
+          href: topicItemHref(service, topic, other),
+        })),
+      },
+    ],
     topicItemHref(service, topic, item),
   );
 
@@ -459,24 +574,26 @@ export function renderTopicItemPage(
     { name: item.name },
   ];
 
+  const head = `${nav}\n${heroSection(escapeAttribute(item.name), crumbs)}`;
   const migrated = dentalPage(topicItemHref(service, topic, item));
 
-  return `${nav}
-${heroSection(escapeAttribute(item.name), crumbs)}
+  if (migrated) {
+    return `${head}
+${renderDentalPage(migrated, item.name, { name: service.name, href: serviceHref(service) }, pillar)}
+${otherPillars(pillar.slug)}`;
+  }
+
+  return `${head}
 <div class="whitebg padme90 svc-body">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8">
 				<div class="pagebody" style="margin-top:0px">
-					${
-            migrated
-              ? renderDentalBody(migrated)
-              : `<p class="svc-lead">${escapeAttribute(item.blurb)}</p>
+					<p class="svc-lead">${escapeAttribute(item.blurb)}</p>
 					<p class="svc-pending">This page is waiting on the practice's own words. The
 					copy for it already exists on the dentistry site and is queued for
 					migration — the page, its place in the menu and its links are in
-					place so the copy can drop straight in.</p>`
-          }
+					place so the copy can drop straight in.</p>
 				</div>
 			</div>
 			<div class="col-lg-4">
