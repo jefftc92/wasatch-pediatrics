@@ -455,6 +455,152 @@ export const services: Service[] = [
     providerCategory: "41",
     intro:
       "Complete dental care for children from the first tooth through adolescence: first visits and exams, cleanings and preventive care, fillings and crowns, wisdom teeth removal, and sedation options for children who need them.",
+    topics: [
+      {
+        slug: "first-visit",
+        name: "First Dental Visit",
+        blurb: "What the first appointment looks like.",
+        description:
+          "Know what to expect at your child's first dental visit in West Jordan, UT: the gentle exam, cleaning, and fluoride. Recommended by age 1. Call (801) 676-3700.",
+        intro: "What the first appointment looks like.",
+        items: [],
+      },
+      {
+        slug: "services",
+        name: "Treatments & Services",
+        blurb: "Cleanings through crowns, under one roof.",
+        description:
+          "Cleanings, fluoride, sealants, tooth-colored fillings, crowns, pulp therapy, and more for kids in West Jordan, UT, at our Southpoint office. Call (801) 676-3700.",
+        intro: "Cleanings through crowns, under one roof.",
+        items: [
+          {
+            slug: "routine-cleanings",
+            name: "Routine Cleanings",
+            blurb: "Plaque removal, polishing, and decay checks every six months.",
+          },
+          {
+            slug: "fluoride-treatments",
+            name: "Fluoride Treatments",
+            blurb: "A quick, painless coat that strengthens enamel.",
+          },
+          {
+            slug: "dental-sealants",
+            name: "Dental Sealants",
+            blurb: "A protective shield on cavity-prone molars.",
+          },
+          {
+            slug: "fillings",
+            name: "Tooth-Coloured Fillings",
+            blurb: "Natural-looking, mercury-free cavity repair.",
+          },
+          {
+            slug: "crowns",
+            name: "Pediatric Crowns",
+            blurb: "Full protection for a badly damaged tooth.",
+          },
+          {
+            slug: "pulp-therapy",
+            name: "Pulp Therapy",
+            blurb: "A gentle baby root canal that saves an infected tooth.",
+          },
+          {
+            slug: "space-maintainers",
+            name: "Space Maintainers",
+            blurb: "Holds room for the adult tooth after an early loss.",
+          },
+          {
+            slug: "extractions",
+            name: "Tooth Extractions",
+            blurb: "Calm, comfortable removal when a tooth can't be saved.",
+          },
+          {
+            slug: "curodont",
+            name: "Curodont",
+            blurb: "Stops an early cavity with no drill and no needles.",
+          },
+        ],
+      },
+      {
+        slug: "sedation",
+        name: "Sedation & Comfort",
+        blurb: "Four levels, matched to the child and the treatment.",
+        description:
+          "Safe, gentle sedation dentistry for children in West Jordan, UT. Laughing gas, oral sedation, sleep dentistry, and general anesthesia for anxious kids. Call (801) 676-3700.",
+        intro: "Four levels, matched to the child and the treatment.",
+        items: [
+          {
+            slug: "nitrous-oxide",
+            name: "Nitrous Oxide",
+            blurb: "The gentlest option.",
+          },
+          {
+            slug: "oral-sedation",
+            name: "Oral Sedation",
+            blurb: "Relaxed but awake.",
+          },
+          {
+            slug: "sleep-dentistry",
+            name: "Sleep Dentistry",
+            blurb: "Sleep through care.",
+          },
+          {
+            slug: "general-anesthesia",
+            name: "General Anesthesia",
+            blurb: "Fully asleep, fully monitored.",
+          },
+        ],
+      },
+      {
+        slug: "special-needs",
+        name: "Special Needs Dentistry",
+        blurb: "Visits built around how your child experiences them.",
+        description:
+          "Compassionate special needs dental care for children in West Jordan, UT. A patient, sensory-aware team with sedation for every child. Call (801) 676-3700.",
+        intro: "Visits built around how your child experiences them.",
+        items: [
+          {
+            slug: "autism-spectrum-disorder",
+            name: "Autism Spectrum Disorder",
+            blurb: "Predictable, sensory-aware visits.",
+          },
+          {
+            slug: "adhd",
+            name: "ADHD",
+            blurb: "Calm visits that hold attention.",
+          },
+          {
+            slug: "cerebral-palsy",
+            name: "Cerebral Palsy",
+            blurb: "Gentle, patient treatment.",
+          },
+          {
+            slug: "down-syndrome",
+            name: "Down Syndrome",
+            blurb: "Caring, individualised dentistry.",
+          },
+          {
+            slug: "intellectual-disabilities",
+            name: "Intellectual Disabilities",
+            blurb: "Clear, comfortable communication.",
+          },
+          {
+            slug: "physical-disabilities",
+            name: "Physical Disabilities",
+            blurb: "Accessible, accommodating care.",
+          },
+          {
+            slug: "hearing-loss",
+            name: "Hearing Loss & Deafness",
+            blurb: "Visual, patient communication.",
+          },
+          {
+            slug: "vision-impairment",
+            name: "Vision Impairment & Blindness",
+            blurb: "Tell-show-do, narrated care.",
+          },
+        ],
+      },
+    ],
   },
   {
     slug: "orthodontics",
@@ -467,6 +613,89 @@ export const services: Service[] = [
     providerCategory: "41",
     intro:
       "Our board-certified pediatric orthodontist provides traditional braces and Invisalign, early intervention treatment, and free consultations — with after-hours phone support when something breaks.",
+    topics: [
+      {
+        slug: "braces",
+        name: "Braces",
+        blurb: "Dependable straightening for kids, teens and adults.",
+        description:
+          "Metal and clear braces for children, teens, and adults in West Jordan, UT, led by board-certified orthodontist Dr. Wendy Chu. Flexible financing. Call (801) 676-3700.",
+        intro: "Dependable straightening for kids, teens and adults.",
+        items: [],
+      },
+      {
+        slug: "clear-aligners",
+        name: "Clear Aligners",
+        blurb: "Nearly invisible, removable trays.",
+        description:
+          "Clear aligners straighten teeth discreetly for teens and adults in West Jordan, UT, with board-certified orthodontist Dr. Wendy Chu. Financing available.",
+        intro: "Nearly invisible, removable trays.",
+        items: [],
+      },
+      {
+        slug: "clear-braces",
+        name: "Clear Braces",
+        blurb: "Tooth-coloured brackets that blend in.",
+        description:
+          "Clear ceramic braces straighten teeth with tooth-colored brackets that blend in, for teens and adults in West Jordan, UT. Financing available. Call (801) 676-3700.",
+        intro: "Tooth-coloured brackets that blend in.",
+        items: [],
+      },
+      {
+        slug: "early-treatment",
+        name: "Early Treatment",
+        blurb: "Phase 1 guidance for growing smiles.",
+        description:
+          "Early orthodontic treatment guides a growing child's smile and can simplify later care. With board-certified Dr. Wendy Chu in West Jordan, UT. Call (801) 676-3700.",
+        intro: "Phase 1 guidance for growing smiles.",
+        items: [],
+      },
+      {
+        slug: "palatal-expansion",
+        name: "Palatal Expansion",
+        blurb: "Room for crowded teeth while the jaw grows.",
+        description:
+          "A palatal expander gently widens a child's upper jaw to fix crowding and crossbites in West Jordan, UT, with Dr. Wendy Chu. Call (801) 676-3700.",
+        intro: "Room for crowded teeth while the jaw grows.",
+        items: [],
+      },
+      {
+        slug: "retainers",
+        name: "Retainers",
+        blurb: "Keeps a new smile in place for life.",
+        description:
+          "Retainers keep your new smile straight after braces or aligners. Custom retainers and replacements in West Jordan, UT. Call (801) 676-3700.",
+        intro: "Keeps a new smile in place for life.",
+        items: [],
+      },
+      {
+        slug: "adult-braces",
+        name: "Adult Braces",
+        blurb: "It's never too late for a straighter smile.",
+        description:
+          "It's never too late for a straighter smile. Adult braces, including clear options, in West Jordan, UT with Dr. Wendy Chu. Financing available. Call (801) 676-3700.",
+        intro: "It's never too late for a straighter smile.",
+        items: [],
+      },
+      {
+        slug: "adult-aligners",
+        name: "Adult Aligners",
+        blurb: "Discreet aligners built for grown-up life.",
+        description:
+          "Straighten your smile discreetly with clear aligners for adults in West Jordan, UT. Removable, nearly invisible, with financing available. Call (801) 676-3700.",
+        intro: "Discreet aligners built for grown-up life.",
+        items: [],
+      },
+      {
+        slug: "sleep-apnea",
+        name: "Sleep Apnea & Sleep Problems",
+        blurb: "Airway-focused care for better sleep.",
+        description:
+          "Orthodontic airway solutions for kids and adults with sleep apnea and disordered breathing in West Jordan, UT, with Dr. Wendy Chu. Call (801) 676-3700.",
+        intro: "Airway-focused care for better sleep.",
+        items: [],
+      },
+    ],
   },
   {
     slug: "dental-emergencies",
@@ -623,6 +852,11 @@ export const services: Service[] = [
             slug: "antibiotics",
             name: "Dental Antibiotics",
             blurb: "When they help, and when they do not.",
+          },
+          {
+            slug: "teledentistry",
+            name: "Teledentistry",
+            blurb: "A video look before you drive in.",
           },
         ],
       },

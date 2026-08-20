@@ -1463,3 +1463,135 @@
     height: 18px;
   }
 }
+
+/* -------------------------------------------------- migrated dentistry -- */
+
+/*
+ * The dentistry site's pages, in this site's clothes.
+ *
+ * Nothing here is new design language: the promise cards are the grey
+ * `.svc-card` panel at the same radius, the callouts are `.svc-pending`'s
+ * ruled note in the three brand colours, and everything else is the prose the
+ * theme already sets. The point of the migration was the words, not the look
+ * they arrived in.
+ */
+
+.dent-promises {
+  margin: 0 0 34px 0;
+}
+
+.dent-promise {
+  background: #f4f4f4;
+  border-radius: 25px;
+  padding: 24px 26px;
+  height: 100%;
+  margin-bottom: 24px;
+}
+
+.dent-promise-title {
+  font-size: 17px !important;
+  line-height: 23px !important;
+  font-weight: 700 !important;
+  color: #2b93d1;
+  margin: 0 0 6px 0;
+}
+
+.dent-promise p {
+  font-size: 16px !important;
+  line-height: 24px !important;
+  margin: 0;
+}
+
+.dent-heading {
+  font-size: 26px !important;
+  line-height: 32px !important;
+  color: #2b93d1;
+  margin: 34px 0 14px 0;
+}
+
+.dent-steps {
+  counter-reset: dent-step;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 8px 0;
+}
+
+.dent-steps li {
+  position: relative;
+  padding: 0 0 0 44px;
+  margin-bottom: 16px;
+}
+
+/* The number is the marker, so it can carry the brand blue and its own shape. */
+.dent-steps li:before {
+  counter-increment: dent-step;
+  content: counter(dent-step);
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #2b93d1;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 30px;
+  text-align: center;
+}
+
+.dent-step-title {
+  font-weight: 700;
+  display: block;
+}
+
+.dent-callout {
+  background: #f4f4f4;
+  border-left: 4px solid #2b93d1;
+  border-radius: 0 12px 12px 0;
+  padding: 16px 20px;
+  margin: 0 0 22px 0;
+}
+
+.dent-callout p {
+  margin: 0;
+  font-size: 16px !important;
+  line-height: 24px !important;
+}
+
+.dent-callout-title {
+  font-weight: 700 !important;
+  margin-bottom: 4px !important;
+}
+
+/* Act now, worth knowing, makes it easier. */
+.dent-callout-alert {
+  border-left-color: #f58220;
+}
+
+.dent-callout-tip {
+  border-left-color: #8dc63f;
+}
+
+.dent-reassurance {
+  border-top: 1px solid #e4e4e4;
+  padding-top: 20px;
+  margin-top: 30px;
+  font-style: italic;
+  color: #636466;
+}
+
+.dent-faq {
+  margin-bottom: 20px;
+}
+
+.dent-faq-q {
+  font-size: 18px !important;
+  line-height: 25px !important;
+  font-weight: 700 !important;
+  margin: 0 0 4px 0;
+}
+
+.dent-faq p {
+  margin: 0;
+}
