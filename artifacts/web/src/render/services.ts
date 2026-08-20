@@ -306,7 +306,21 @@ export function renderServicePage(service: Service): string {
    * the other pillars follow them.
    */
   if (migrated) {
-    return `${renderDentalPage(migrated, service.name, dentalCrumbs(crumbs), { name: service.name, href: serviceHref(service) }, pillar)}
+    return `${renderDentalPage(
+      migrated,
+      service.name,
+      dentalCrumbs(crumbs),
+      { name: service.name, href: serviceHref(service) },
+      pillar,
+      {
+        label: `More in ${pillar.name}`,
+        items: servicesInPillar(pillar.slug).map((other) => ({
+          name: other.name,
+          href: serviceHref(other),
+        })),
+      },
+      serviceHref(service),
+    )}
 ${sections}`;
   }
 
@@ -533,7 +547,21 @@ ${topic.items
    * on grey so it reads as a shelf below the page rather than part of it.
    */
   if (migrated) {
-    return `${renderDentalPage(migrated, topic.name, dentalCrumbs(crumbs), { name: service.name, href: serviceHref(service) }, pillar)}
+    return `${renderDentalPage(
+      migrated,
+      topic.name,
+      dentalCrumbs(crumbs),
+      { name: service.name, href: serviceHref(service) },
+      pillar,
+      {
+        label: `More in ${service.name}`,
+        items: (service.topics ?? []).map((other) => ({
+          name: other.name,
+          href: topicHref(service, other),
+        })),
+      },
+      topicHref(service, topic),
+    )}
 ${items}
 ${otherPillars(pillar.slug, items ? "whitebg" : "graybg")}`;
   }
@@ -601,7 +629,21 @@ export function renderTopicItemPage(
   const migrated = dentalPage(topicItemHref(service, topic, item));
 
   if (migrated) {
-    return `${renderDentalPage(migrated, item.name, dentalCrumbs(crumbs), { name: service.name, href: serviceHref(service) }, pillar)}
+    return `${renderDentalPage(
+      migrated,
+      item.name,
+      dentalCrumbs(crumbs),
+      { name: service.name, href: serviceHref(service) },
+      pillar,
+      {
+        label: `More in ${topic.name}`,
+        items: topic.items.map((other) => ({
+          name: other.name,
+          href: topicItemHref(service, topic, other),
+        })),
+      },
+      topicItemHref(service, topic, item),
+    )}
 ${otherPillars(pillar.slug)}`;
   }
 

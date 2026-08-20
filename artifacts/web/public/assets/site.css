@@ -1671,6 +1671,59 @@
   gap: 12px;
 }
 
+/*
+ * The peer pages, in the hero, where the Schedule button used to be. That
+ * button said the same thing as the green pill in the header and the whole
+ * blue band at the foot of the page; the sideways move is what the page
+ * actually needed here, and it is where the section masthead's job went.
+ *
+ * Ghost pills on the wash: present enough to use, quiet enough that the title
+ * and the lead are still what you read first.
+ */
+.dent-hero-navlabel {
+  margin: 30px 0 10px 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.dent-hero-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: 52em;
+}
+
+.dent-hero-link {
+  display: inline-block;
+  padding: 7px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 20px;
+  color: #ffffff !important;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.3;
+  text-decoration: none !important;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.dent-hero-link:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.85);
+}
+
+/* Where you are, so the row reads as a place rather than a list of exits. */
+.dent-hero-link.is-here {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #1f6f9e !important;
+  font-weight: 700;
+}
+
 .dent-hero-act .btn {
   font-size: 17px;
   padding: 11px 26px;
@@ -2096,6 +2149,15 @@
   .dent-hero-act .btn {
     width: 100%;
     text-align: center;
+  }
+
+  .dent-hero-navlabel {
+    margin-top: 22px;
+  }
+
+  .dent-hero-link {
+    font-size: 14px;
+    padding: 8px 14px;
   }
 
   .dent-band,
