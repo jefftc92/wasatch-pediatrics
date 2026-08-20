@@ -108,7 +108,6 @@ function sectionTitle(text: string): string {
 function heroBand(
   page: DentalPage,
   title: string,
-  crumbs: string,
   service: { name: string; href: string },
 ): string {
   const art = page.hero
@@ -122,7 +121,6 @@ function heroBand(
 	${art}
 	<div class="dent-hero-wash"></div>
 	<div class="container dent-hero-inner">
-${crumbs}
 		${eyebrow}
 		<h1 class="dent-hero-title">${escapeAttribute(title)}</h1>
 		<p class="dent-hero-lead">${inline(page.lead)}</p>
@@ -384,8 +382,9 @@ function scheduleBand(
 
 /**
  * The whole page, hero included — a migrated page owns its own top, because the
- * photograph is the point of it. The caller passes the breadcrumb trail in so
- * it can sit on the hero rather than above it in a strip of its own.
+ * photograph is the point of it. The trail comes in from the caller as its own
+ * band and goes above the hero: on the photograph it had to be read against
+ * whatever the picture was doing behind it.
  *
  * The scene photograph goes in after the first section, far enough down to
  * break the page up rather than sitting under the hero.
@@ -403,7 +402,8 @@ export function renderDentalPage(
   else if (scene) parts.push(scene);
 
   return [
-    heroBand(page, title, crumbs, service),
+    crumbs,
+    heroBand(page, title, service),
     promiseBand(page),
     ...parts,
     reassuranceBand(page),

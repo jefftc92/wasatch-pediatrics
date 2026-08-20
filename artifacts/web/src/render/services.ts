@@ -61,12 +61,19 @@ export function providersForService(service: Service) {
 }
 
 /**
- * The breadcrumb trail for a migrated page, which carries it on its hero rather
- * than in a strip above one. On these pages the trail is the whole of the
- * upward navigation, so it is the one thing that has to be there.
+ * The breadcrumb trail for a migrated page.
+ *
+ * It sat on the hero photograph and had to be read against whatever the picture
+ * was doing there. It is the whole of the upward navigation on these pages, so
+ * it gets its own quiet strip above the hero instead, where it reads the same
+ * way on every page and in the same place as everywhere else on the site.
  */
 function dentalCrumbs(crumbs: Crumb[]): string {
-  return `\t\t${renderBreadcrumbs(crumbs)}`;
+  return `<div class="whitebg dent-trail">
+	<div class="container">
+		${renderBreadcrumbs(crumbs)}
+	</div>
+</div>`;
 }
 
 function heroSection(title: string, crumbs: Crumb[]): string {
@@ -176,7 +183,16 @@ export function renderPillarPage(
     pillar.href,
   );
 
-  return `${nav}
+  /*
+   * Dentistry navigates by trail and by cards, all the way down — the masthead
+   * came off its service, topic and page levels because four levels could not
+   * fit in a bar. Leaving it on the pillar alone made the top of that tree look
+   * like a different site from everything under it, and stacked two menus and a
+   * title band before the page began. The service index below is the way in.
+   */
+  const masthead = pillar.slug === "dentistry" ? "" : nav;
+
+  return `${masthead}
 ${opening}
 ${renderServiceIndex(pillar, storedContent ? `Explore ${pillar.name}` : "What we offer")}
 ${otherPillars(pillar.slug)}`;

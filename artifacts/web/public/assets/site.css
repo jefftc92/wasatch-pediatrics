@@ -1594,29 +1594,52 @@
   background: linear-gradient(100deg, #2277ab 0%, #2b93d1 100%);
 }
 
+/*
+ * The trail's own strip, above the photograph rather than on it.
+ *
+ * Everything about `.crumbs` is drawn for the blue hero it normally sits in —
+ * white links, white separators, and 22px of padding to clear the band's top
+ * edge. On white that is an invisible trail in a tall empty strip, so all of it
+ * is restated for this ground.
+ */
+.dent-trail {
+  padding: 13px 0;
+  border-bottom: 1px solid #ececee;
+}
+
+.dent-trail .crumbs {
+  margin: 0;
+  padding-top: 0;
+}
+
+.dent-trail .crumbs li {
+  color: #636466;
+}
+
+.dent-trail .crumbs li + li:before {
+  color: #b6b7b9;
+}
+
+.dent-trail .crumbs a {
+  color: #2b93d1;
+}
+
+.dent-trail .crumbs a:hover {
+  color: #f58220;
+}
+
 .dent-hero-inner {
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 460px;
-  padding: 30px 0 44px 0;
+  min-height: 420px;
+  padding: 44px 0;
   max-width: 1140px;
 }
 
-/* The trail rides on the hero: on these pages it is the whole of the upward
-   navigation, so it has to be legible against the photograph. */
-.dent-hero-inner .crumbs,
-.dent-hero-inner .crumbs a {
-  color: rgba(255, 255, 255, 0.82) !important;
-}
-
-.dent-hero-inner .crumbs a:hover {
-  color: #ffffff !important;
-}
-
 .dent-hero-eyebrow {
-  margin: 18px 0 6px 0;
+  margin: 0 0 6px 0;
   color: rgba(255, 255, 255, 0.85);
   font-size: 14px;
   font-weight: 700;
