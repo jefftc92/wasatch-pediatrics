@@ -219,10 +219,13 @@
    */
   var PIN_W = 34;
   var PIN_H = 44;
-  var BADGE = 16;
+  var BADGE = 20;
   var BADGE_GAP = 2;
   var BAR_PAD = 3;
   var BAR_GAP = 3;
+  /* Outline on the bar. Zoomed out the close offices overlap, and without an
+     edge two white bars on top of each other read as one wide bar. */
+  var BAR_EDGE = 1.5;
 
   function barWidth(n) {
     return n * BADGE + (n - 1) * BADGE_GAP + BAR_PAD * 2;
@@ -232,8 +235,9 @@
     var n = Math.max(icons.length, 1);
     var bw = barWidth(n);
     var bh = BADGE + BAR_PAD * 2;
-    var w = Math.max(bw, PIN_W);
-    var h = bh + BAR_GAP + PIN_H;
+    var box = pinSize(icons.length);
+    var w = box.w;
+    var h = box.h;
     var midX = w / 2;
     var o = dim ? 0.45 : 1;
 
@@ -245,10 +249,10 @@
         '<rect x="' + x.toFixed(1) + '" y="' + BAR_PAD + '" width="' + BADGE +
         '" height="' + BADGE + '" rx="4" fill="' + colors[i] + '"/>';
       if (path) {
-        /* 256-unit artwork scaled into an 11px square, centred in the badge. */
-        var s = 11 / 256;
-        var ox = x + (BADGE - 11) / 2;
-        var oy = BAR_PAD + (BADGE - 11) / 2;
+        /* 256-unit artwork scaled into a 14px square, centred in the badge. */
+        var s = 14 / 256;
+        var ox = x + (BADGE - 14) / 2;
+        var oy = BAR_PAD + (BADGE - 14) / 2;
         badges +=
           '<g transform="translate(' + ox.toFixed(1) + ' ' + oy.toFixed(1) +
           ') scale(' + s.toFixed(5) + ')"><path fill="#ffffff" d="' + path + '"/></g>';
@@ -256,8 +260,11 @@
     }
 
     var bar = icons.length
-      ? '<rect x="' + (midX - bw / 2).toFixed(1) + '" y="0" width="' + bw +
-        '" height="' + bh + '" rx="6" fill="#ffffff"/>' + badges
+      ? '<rect x="' + (midX - bw / 2 + BAR_EDGE / 2).toFixed(1) + '" y="' +
+        (BAR_EDGE / 2).toFixed(1) + '" width="' + (bw - BAR_EDGE).toFixed(1) +
+        '" height="' + (bh - BAR_EDGE).toFixed(1) +
+        '" rx="6" fill="#ffffff" stroke="#5f666c" stroke-width="' + BAR_EDGE +
+        '"/>' + badges
       : "";
 
     var pinTop = bh + BAR_GAP;
@@ -273,17 +280,21 @@
     );
   }
 
-  /** Where the point of the teardrop sits inside the image. */
-  function pinAnchor(n) {
-    return { x: Math.max(barWidth(Math.max(n, 1)), PIN_W) / 2, y: pinHeight(n) };
-  }
-
-  function pinHeight() {
-    return BADGE + BAR_PAD * 2 + BAR_GAP + PIN_H;
-  }
-
+  /**
+   * The image box, and where the point of the teardrop sits inside it. One
+   * definition, so the drawing, the scaled size and the anchor cannot drift
+   * apart — if they do, the pin lands somewhere other than the office.
+   */
   function pinSize(n) {
-    return { w: Math.max(barWidth(Math.max(n, 1)), PIN_W), h: pinHeight() };
+    return {
+      w: Math.max(barWidth(Math.max(n, 1)), PIN_W) + BAR_EDGE,
+      h: BADGE + BAR_PAD * 2 + BAR_GAP + PIN_H,
+    };
+  }
+
+  function pinAnchor(n) {
+    var box = pinSize(n);
+    return { x: box.w / 2, y: box.h };
   }
 
   function pinUrl(icons, colors, dim) {
