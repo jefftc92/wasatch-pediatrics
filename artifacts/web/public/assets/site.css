@@ -1219,12 +1219,100 @@
 .loc-card {
   background: #f4f4f4;
   border-radius: 25px;
-  padding: 30px 30px 26px 30px;
   height: 100%;
   display: flex;
   flex-direction: column;
   outline: none;
+  overflow: hidden;
   transition: box-shadow 0.2s ease;
+}
+
+/*
+ * The office card, led by a photograph of the building.
+ *
+ * The photographs are the ones the live site's own location pages already
+ * carry, so the card shows the place you will actually walk into rather than a
+ * stock interior. They were shot as 1000x400 headers, so a 5:2 crop is their
+ * own proportion and nothing important is cut off.
+ */
+.loc-card-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 5 / 2;
+  overflow: hidden;
+  background: #e4e8ea;
+}
+
+.loc-card-photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.loc-card:hover .loc-card-photo img {
+  transform: scale(1.04);
+}
+
+/* The padding the card used to carry itself, now that the photo is flush. */
+.loc-card-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 22px 26px 24px 26px;
+}
+
+/*
+ * The full list, folded away. Eight cards each carrying a four-part directory
+ * of services made this page a wall of links, and the chips above already say
+ * which kinds of care are here. A <details>, so every link is still in the
+ * markup for a crawler whether or not anyone opens it.
+ */
+.loc-offers {
+  margin: 2px 0 16px 0;
+}
+
+.loc-offers > summary {
+  cursor: pointer;
+  color: #2b93d1;
+  font-size: 15px;
+  list-style: none;
+}
+
+.loc-offers > summary::-webkit-details-marker {
+  display: none;
+}
+
+.loc-offers > summary:before {
+  content: "+";
+  display: inline-block;
+  width: 16px;
+  font-weight: 700;
+}
+
+.loc-offers[open] > summary:before {
+  content: "\2013";
+}
+
+.loc-offer-list {
+  list-style: none;
+  margin: 10px 0 0 0;
+  padding: 0 0 0 16px;
+}
+
+.loc-offer-list li {
+  padding: 3px 0;
+}
+
+.loc-offer-list a {
+  color: #636466;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.loc-offer-list a:hover {
+  color: #f58220 !important;
 }
 
 /* Where the map sends you when a pin is clicked. */

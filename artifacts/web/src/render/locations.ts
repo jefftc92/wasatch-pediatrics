@@ -81,38 +81,27 @@ function heroSection(title: string, crumbs: Crumb[]): string {
 }
 
 /**
- * What an office offers, grouped under the pillar each service belongs to.
+ * What an office offers, as one wrapped run of links.
  *
- * The grouping is the "care types" half of the question: four headings tell you
- * at a glance whether an office does behavioural health at all, and the links
- * under each tell you exactly which parts of it.
+ * It used to be four headed groups, one per pillar, which is how a service
+ * page lists them — but eight of those stacked down a page made every card
+ * around 740px tall, so the map's own answer was buried under a directory.
+ * The chips above already say which kinds of care are here; this is the
+ * detail, and it only has to be scannable and linked.
  */
 function offersMarkup(offered: Service[]): string {
-  return pillars
-    .map((pillar) => {
-      const mine = offered.filter((service) => service.pillar === pillar.slug);
-      if (!mine.length) return "";
-
-      const links = mine
-        .map(
-          (service) =>
-            `<li data-service="${service.slug}"><a href="${serviceHref(service)}">${escapeAttribute(service.name)}</a></li>`,
-        )
-        .join("");
-
-      return `<div class="loc-group" data-pillar="${pillar.slug}">
-					<p class="loc-group-head">${escapeAttribute(pillar.name)}</p>
-					<ul class="loc-group-list">${links}</ul>
-				</div>`;
-    })
-    .filter(Boolean)
-    .join("\n\t\t\t\t\t");
+  const links = offered
+    .map(
+      (service) =>
+        `<li data-service="${service.slug}"><a href="${serviceHref(service)}">${escapeAttribute(service.name)}</a></li>`,
+    )
+    .join("");
+  return `<ul class="loc-offer-list">${links}</ul>`;
 }
 
 /**
- * The office's care categories as a row of chips, in the pin's own colours —
- * so a pin on the map and a card in the list are recognisably the same office
- * without having to read either.
+ * The office's care types as chips, in the pin's own colours — so a pin on the
+ * map and a card in the list are recognisably the same office.
  */
 function categoryChips(locationSlug: string): string {
   const chips = categoriesAtLocation(locationSlug)
@@ -129,21 +118,26 @@ function officeCard(office: Office, matches: boolean): string {
   const offered = servicesAtLocation(office.slug);
   const offers = offered.map((service) => service.slug).join(" ");
   const suite = office.suite ? `${escapeAttribute(office.suite)}<br />` : "";
-
   const cares = categoriesAtLocation(office.slug)
     .map((c) => c.slug)
     .join(" ");
 
   return `<li class="loc-hit" data-office="${office.slug}" data-services="${offers}" data-cares="${cares}"${matches ? "" : " hidden"}>
 	<article class="loc-card" id="office-${office.slug}" tabindex="-1">
-		<h2 class="loc-card-title"><a href="${locationHref(office.slug)}">${escapeAttribute(name)}</a></h2>
-		<p class="loc-card-addr">${escapeAttribute(office.street)}<br />${suite}${escapeAttribute(office.city)}, ${office.state} ${office.zip}</p>
-		<p class="loc-card-tel"><a href="tel:${office.phone}">${formatPhone(office.phone)}</a></p>
-		${categoryChips(office.slug)}
-		<div class="loc-offers">
-			${offersMarkup(offered)}
+		<a class="loc-card-photo" href="${locationHref(office.slug)}" tabindex="-1" aria-hidden="true">
+			<img src="${escapeAttribute(office.photo)}" alt="" loading="lazy" width="1000" height="400" />
+		</a>
+		<div class="loc-card-body">
+			<h2 class="loc-card-title"><a href="${locationHref(office.slug)}">${escapeAttribute(name)}</a></h2>
+			<p class="loc-card-addr">${escapeAttribute(office.street)}<br />${suite}${escapeAttribute(office.city)}, ${office.state} ${office.zip}</p>
+			<p class="loc-card-tel"><a href="tel:${office.phone}">${formatPhone(office.phone)}</a></p>
+			${categoryChips(office.slug)}
+			<details class="loc-offers">
+				<summary>All ${offered.length} services here</summary>
+				${offersMarkup(offered)}
+			</details>
+			<p class="loc-card-links"><a href="${locationHref(office.slug)}">Office details</a><a href="${directionsHref(office)}" rel="noopener" target="_blank">Directions</a></p>
 		</div>
-		<p class="loc-card-links"><a href="${locationHref(office.slug)}">Office details</a><a href="${directionsHref(office)}" rel="noopener" target="_blank">Directions</a></p>
 	</article>
 </li>`;
 }
