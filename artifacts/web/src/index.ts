@@ -24,6 +24,7 @@ import { renderSearchResults, searchSite } from "./render/search.ts";
 import { renderGeneratedDocument } from "./render/generated.ts";
 import {
   pillarByContentSlug,
+  pillarSection,
   renderPillarPage,
   serviceRoutes,
 } from "./render/services.ts";
@@ -234,6 +235,7 @@ app.get("/{*path}", (request, response, next) => {
       bodyClass: page.bodyClass,
       menu: { classes: page.menuClasses, currentIds: page.menuCurrentIds },
       content,
+      section: pillar ? pillarSection(pillar) : undefined,
     }),
   );
 });
