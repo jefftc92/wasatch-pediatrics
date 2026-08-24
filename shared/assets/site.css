@@ -2580,3 +2580,482 @@
     font-size: 26px;
   }
 }
+
+
+/* ========================================================= section chrome == */
+
+/*
+ * On a page inside a pillar the global nav steps back and the section takes the
+ * main bar. The chrome then says which part of the practice you are in, rather
+ * than making you read the breadcrumb to find out.
+ *
+ * The markup is the header's own; only the arrangement changes, so a page
+ * outside a section is untouched.
+ */
+@media (min-width: 992px) {
+  /* Logo, the quietened global nav, and the tools — one row. */
+  .secheadrow {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 14px 0;
+  }
+
+  /*
+   * Everything in this row has to fit across the container: at its full size
+   * the logo alone is 458px and left the nav 91px to live in. Smaller here,
+   * because the section bar beneath it is now the loudest thing on the page.
+   */
+  #header.has-section #logo {
+    position: static;
+    margin: 0 !important;
+    flex: 0 0 auto;
+  }
+
+  #header.has-section #logo img {
+    height: 36px;
+    width: auto;
+  }
+
+  #header.has-section .header-cta {
+    font-size: 11px;
+    padding: 8px 14px;
+    letter-spacing: 0;
+  }
+
+  /*
+   * The social links come off this row. It has to hold the logo, seven nav
+   * items and the tools inside 1116px, and with them there the nav had 339px
+   * for 456px of links — `justify-content: flex-end` then overflowed it
+   * leftward and painted the links across the logo. Both are in the footer.
+   */
+  #header.has-section #navbuttons li {
+    display: none;
+  }
+
+  /* A last guard: the nav can never paint outside its own share of the row. */
+  .secheadnav {
+    overflow: hidden;
+  }
+
+  .secheadnav {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  #header.has-section .mainnav {
+    gap: 17px;
+    justify-content: flex-end;
+    width: 100%;
+    flex-wrap: nowrap;
+  }
+
+  #header.has-section .mainnav > li {
+    flex: 0 0 auto;
+  }
+
+  #header.has-section .mainnav > li > a {
+    font-size: 13px;
+    color: #8a8a8c;
+    padding: 6px 0;
+    white-space: nowrap;
+  }
+
+  #header.has-section .mainnav > li > a:hover {
+    color: #2b93d1;
+  }
+
+  /*
+   * The demoted row has no room for the mega panels, and the section bar is
+   * the navigation on these pages — Services is still one click away.
+   */
+  #header.has-section .mainnav > li > .sub-menu,
+  #header.has-section .navtoggle {
+    display: none !important;
+  }
+
+  #header.has-section .mainnav > li.menu-item-has-children > a:after,
+  #header.has-section .mainnav > li > a:before {
+    display: none;
+  }
+
+  /*
+   * The theme positions both of these absolutely and gives the wrap the full
+   * container width. In a flex row that left it 1116px wide and squeezed the
+   * nav beside it to nothing, while the tools floated out of flow over the
+   * section bar. Both go back into the flow at their content width.
+   */
+  #header.has-section #topmenuwrap {
+    position: static;
+    flex: 0 0 auto;
+    width: auto;
+  }
+
+  #header.has-section #topmenu {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: auto;
+    top: auto;
+    right: auto;
+  }
+
+  #header.has-section #navbuttons {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+  }
+
+  /*
+   * The theme's search field is sized for the absolutely-positioned slot it
+   * normally sits in; dropped into a flex row it took 1287px and pushed the
+   * page 7px wider than the window. It opens on click, as it does elsewhere.
+   */
+  #header.has-section #searchformwrap {
+    position: relative;
+    width: 34px;
+  }
+
+  #header.has-section #searchformwrap .searchwrap {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;
+    overflow: hidden;
+  }
+
+  #header.has-section #searchformwrap .navsearch {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  #header.has-section #searchformwrap .searchbutton {
+    position: static;
+  }
+
+  #header.has-section {
+    margin-bottom: 0;
+  }
+}
+
+/*
+ * Between 992 and 1199 the container is 960px, not 1140 — the logo, seven nav
+ * items and the tools need about 1140 between them, so they cannot share a
+ * line. The nav takes one of its own rather than being clipped or painted over
+ * the logo, which is what happened when it was squeezed.
+ */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .secheadrow {
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 8px;
+  }
+
+  .secheadnav {
+    flex: 1 0 100%;
+    order: 3;
+    overflow: visible;
+  }
+
+  #header.has-section .mainnav {
+    justify-content: flex-start;
+    padding-top: 4px;
+    border-top: 1px solid #f0f0f1;
+  }
+}
+
+/* The bar itself. */
+#secbar {
+  background: #2b93d1;
+}
+
+.secbar-in {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+}
+
+.secbar-name {
+  display: flex;
+  align-items: center;
+  padding-right: 26px;
+  color: #ffffff !important;
+  font-size: 21px;
+  text-decoration: none !important;
+  border-right: 1px solid rgba(255, 255, 255, 0.28);
+  white-space: nowrap;
+}
+
+.secbar-list {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.secbar-item {
+  position: relative;
+}
+
+.secbar-item > a {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  height: 100%;
+  padding: 17px 0;
+  border-bottom: 3px solid transparent;
+  color: #ffffff !important;
+  font-size: 17px;
+  font-weight: 400 !important;
+  line-height: 1.2;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+
+.secbar-item.has-fly > a:after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border: solid rgba(255, 255, 255, 0.85);
+  border-width: 0 2px 2px 0;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.secbar-item.on > a,
+.secbar-item:hover > a {
+  border-bottom-color: #ffffff;
+  font-weight: 700 !important;
+}
+
+/* The two panels: the service's topics, and the pages of the one you point at. */
+.secfly {
+  display: none;
+  position: absolute;
+  z-index: 40;
+  left: -18px;
+  top: 100%;
+  border-radius: 0 0 14px 14px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(33, 33, 33, 0.24);
+}
+
+.secbar-item.has-fly:hover .secfly,
+.secbar-item.has-fly:focus-within .secfly {
+  display: flex;
+}
+
+.secfly-topics {
+  width: 250px;
+  flex: 0 0 auto;
+  list-style: none;
+  margin: 0;
+  padding: 14px 0;
+  background: #ffffff;
+}
+
+.secfly-topics a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 22px;
+  color: #636466 !important;
+  font-size: 15px;
+  font-weight: 400 !important;
+  text-decoration: none !important;
+}
+
+.secfly-topics a:after {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border: solid #c3c7cb;
+  border-width: 2px 2px 0 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.secfly-topics li.on a {
+  color: #2b93d1 !important;
+  font-weight: 700 !important;
+}
+
+.secfly-topics li.on a:after {
+  opacity: 1;
+  border-color: #2b93d1;
+}
+
+.secfly-right {
+  width: 430px;
+  flex: 0 0 auto;
+  background: #eef6fc;
+  padding: 18px 26px 22px 26px;
+}
+
+.secfly-head {
+  margin: 0 0 10px 0;
+  color: #8a8a8c;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+}
+
+.secfly-pages ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  column-count: 2;
+  column-gap: 24px;
+}
+
+.secfly-pages li {
+  break-inside: avoid;
+}
+
+.secfly-pages a {
+  display: block;
+  padding: 6px 0;
+  color: #46484b !important;
+  font-size: 15px;
+  font-weight: 400 !important;
+  text-decoration: none !important;
+}
+
+.secfly-pages a:hover {
+  color: #2b93d1 !important;
+}
+
+.secfly-none {
+  margin: 0;
+  color: #8a8a8c;
+  font-size: 14px;
+}
+
+/* "More" carries only names, so it needs one panel rather than two. */
+.secfly-plain {
+  border-radius: 0 0 14px 14px;
+}
+
+.secfly-plain .secfly-topics {
+  width: 260px;
+}
+
+/* The trail, in its own strip under the bar. */
+#seccrumbs {
+  background: #f4f4f4;
+  border-bottom: 1px solid #e8e8ea;
+  padding: 11px 0;
+}
+
+#seccrumbs .crumbs {
+  padding-top: 0;
+}
+
+#seccrumbs .crumbs li {
+  color: #636466;
+}
+
+#seccrumbs .crumbs li + li:before {
+  color: #b6b7b9;
+}
+
+#seccrumbs .crumbs a {
+  color: #2b93d1;
+}
+
+#seccrumbs .crumbs a:hover {
+  color: #f58220;
+}
+
+.secbar-toggle {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  /* Below the section layout the header is the theme's own again. */
+  .secheadrow {
+    display: block;
+  }
+
+  /*
+   * No room for a bar of services or a hover flyout on a phone, so the section
+   * name stays and the rest folds behind a toggle. The flyouts collapse with
+   * it — their topics and pages are on the service's own page, which is one tap
+   * from here.
+   */
+  .secbar-in {
+    display: block;
+    padding: 12px 0;
+  }
+
+  .secbar-name {
+    border-right: 0;
+    padding: 4px 0;
+    font-size: 19px;
+  }
+
+  .secbar-toggle {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 11px 14px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    background: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 15px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .secbar-toggle:after {
+    content: "";
+    float: right;
+    width: 8px;
+    height: 8px;
+    margin-top: 5px;
+    border: solid #ffffff;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    transition: transform 0.18s ease;
+  }
+
+  .secbar-toggle[aria-expanded="true"]:after {
+    transform: translateY(3px) rotate(-135deg);
+  }
+
+  .secbar-list {
+    display: none;
+    margin-top: 6px;
+    gap: 0;
+  }
+
+  .secbar-list.is-open {
+    display: block;
+  }
+
+  .secbar-item > a {
+    padding: 11px 2px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  }
+
+  .secbar-item.on > a {
+    border-bottom-color: #ffffff;
+  }
+
+  .secbar-item.has-fly > a:after,
+  .secfly {
+    display: none !important;
+  }
+}
