@@ -104,11 +104,16 @@ function sectionTitle(text: string): string {
  * The wash is brand blue over the photograph rather than beside it, so the
  * title has a guaranteed contrast to sit on whatever the picture underneath is
  * doing. Pages with no photograph get the wash alone and look deliberate.
+ *
+ * The trail goes inside the band, above the eyebrow. It is the same wash the
+ * title sits on, so it reads on any photograph, and it costs the page no
+ * vertical space of its own.
  */
 function heroBand(
   page: DentalPage,
   title: string,
   service: { name: string; href: string },
+  crumbs = "",
 ): string {
   const art = page.hero
     ? `<img class="dent-hero-img" src="${page.hero}" alt="" aria-hidden="true" width="1536" height="1024" loading="eager" decoding="async" />`
@@ -121,6 +126,7 @@ function heroBand(
 	${art}
 	<div class="dent-hero-wash"></div>
 	<div class="container dent-hero-inner">
+		${crumbs}
 		${eyebrow}
 		<h1 class="dent-hero-title">${escapeAttribute(title)}</h1>
 		<p class="dent-hero-lead">${inline(page.lead)}</p>
@@ -406,8 +412,7 @@ export function renderDentalPage(
   else if (scene) parts.push(scene);
 
   return [
-    crumbs,
-    heroBand(page, title, service),
+    heroBand(page, title, service, crumbs),
     navSection,
     promiseBand(page),
     ...parts,

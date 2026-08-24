@@ -37,6 +37,11 @@ export type Pillar = {
   /** Opening paragraph on the hub page. */
   intro: string;
   /**
+   * The photograph behind the page's title. A pillar without one falls back to
+   * the plain brand band, which is what every one of these pages used to be.
+   */
+  hero?: string;
+  /**
    * Pillars whose landing page is a page copied from the live site. Those keep
    * their own markup and get a generated index of their services appended;
    * pillars without one get a fully generated hub.
@@ -76,6 +81,8 @@ export type Service = {
   blurb: string;
   /** Meta description for the service page. */
   description: string;
+  /** The photograph behind the page's title. See `Pillar.hero`. */
+  hero?: string;
   /** Location slugs, transcribed from the live location pages. */
   locations: string[];
   /**
@@ -104,6 +111,7 @@ export type Service = {
 export const pillars: Pillar[] = [
   {
     slug: "medical-care",
+    hero: "/wp-content/uploads/2022/09/WAS21-0020_Website_Header_Careers_Mobile_1000x400_v2.jpg",
     name: "Medical Care",
     href: "/medical-care/",
     blurb: "Checkups, sick visits, immunizations and after-hours care.",
@@ -115,6 +123,7 @@ export const pillars: Pillar[] = [
   },
   {
     slug: "behavioral-health",
+    hero: "/wp-content/uploads/2022/09/WAS21-0020_Website_Behavioral-Health_v5.jpg",
     name: "Behavioral Health",
     href: "/behavioral-health/",
     blurb: "Therapy, psychiatry and testing, alongside your pediatrician.",
@@ -126,6 +135,7 @@ export const pillars: Pillar[] = [
   },
   {
     slug: "nutrition",
+    hero: "/wp-content/uploads/2023/10/WAS23-0042_Blog-Content_Sports-Nutrition_Blog-Image_1024x1024_v1.jpg",
     name: "Nutrition & Lactation",
     href: "/nutrition/",
     blurb: "Dietitian consultations, lactation support and parent classes.",
@@ -137,6 +147,7 @@ export const pillars: Pillar[] = [
   },
   {
     slug: "dentistry",
+    hero: "/wp-content/uploads/2026/03/WAS26-0105_Website_Banner_Dentist-Opening_1000x500_v1_MOBILE.jpg",
     name: "Dentistry & Orthodontics",
     href: "/dentistry-orthodontics/",
     blurb: "Pediatric dentistry, braces and dental emergencies.",
@@ -155,6 +166,7 @@ export const services: Service[] = [
   // ------------------------------------------------------------ medical care
   {
     slug: "well-child",
+    hero: "/wp-content/uploads/2022/05/WAS21-0020_Website_Header_New-Patients_Mobile_1000x400_v1-1.jpg",
     icon: "stethoscope",
     popular: true,
     name: "Well Child Checkups",
@@ -177,6 +189,7 @@ export const services: Service[] = [
   },
   {
     slug: "sick-visits",
+    hero: "/wp-content/uploads/2025/10/WAS25-0078_Website_Homepage-Header_Same-Day-Sick-Visits_1000x550_Mobile_v1.jpg",
     icon: "bandaids",
     popular: true,
     name: "Same-Day Sick Visits",
@@ -199,6 +212,7 @@ export const services: Service[] = [
   },
   {
     slug: "after-hours-care",
+    hero: "/wp-content/uploads/2025/03/WAS25-0082_Blog-Posts_Pertussis_Blog-Image_1024x1024_v1.jpg",
     icon: "moon",
     popular: true,
     name: "After Hours Care",
@@ -220,6 +234,7 @@ export const services: Service[] = [
   },
   {
     slug: "immunizations",
+    hero: "/wp-content/uploads/2026/01/WAS26-0105_Website_Banner_Vaccine_1000x550_Mobile_v1.jpg",
     icon: "shield-check",
     popular: true,
     name: "Immunizations",
@@ -241,6 +256,7 @@ export const services: Service[] = [
   },
   {
     slug: "newborn-hospital-care",
+    hero: "/wp-content/uploads/2024/04/WAS24-0059_Blog-Content_Postpartum-Depression_Blog-Image-1_1024x1024_v1.jpg",
     icon: "baby",
     name: "Newborn Hospital Care",
     pillar: "medical-care",
@@ -261,6 +277,7 @@ export const services: Service[] = [
   },
   {
     slug: "lab-tests-screenings",
+    hero: "/wp-content/uploads/2024/03/WAS24-0059_Blog-Content_Brain-Injury_Blog-Image_1024x1024_v1.jpg",
     icon: "magnifying-glass",
     name: "Lab Tests & Screenings",
     pillar: "medical-care",
@@ -281,6 +298,7 @@ export const services: Service[] = [
   },
   {
     slug: "ear-piercing",
+    hero: "/wp-content/uploads/2025/03/WAS25-0078_Website_Homepage-Header_Baby-Flu-Shot_1000x550_Mobile_v2.png",
     icon: "sparkle",
     name: "Ear Piercing",
     pillar: "medical-care",
@@ -293,6 +311,7 @@ export const services: Service[] = [
   },
   {
     slug: "medical-home-coordination",
+    hero: "/wp-content/uploads/2025/05/rormobile.jpg",
     icon: "users-three",
     name: "Medical Home Coordination",
     pillar: "medical-care",
@@ -313,6 +332,7 @@ export const services: Service[] = [
   },
   {
     slug: "in-office-procedures",
+    hero: "/wp-content/uploads/2026/03/WAS26-0111_Blog-Posts_Preventing-Sports-Injuries_1024x1024_v1.jpg",
     icon: "wrench",
     name: "In-Office Procedures",
     pillar: "medical-care",
@@ -327,6 +347,7 @@ export const services: Service[] = [
   // ------------------------------------------------------- behavioral health
   {
     slug: "behavioral-consultation",
+    hero: "/wp-content/uploads/2025/10/WAS25-0082_Blog-Posts_Bullying-Prevention_Blog-Image_1024x1024_v1.jpg",
     icon: "user-focus",
     name: "Consultation & Screening",
     pillar: "behavioral-health",
@@ -348,6 +369,7 @@ export const services: Service[] = [
   },
   {
     slug: "therapy",
+    hero: "/wp-content/uploads/2023/12/WAS23-0042_Blog-Content_SAD_Blog-Image_1024x1024_v1.jpg",
     icon: "heart",
     popular: true,
     name: "Therapy",
@@ -370,6 +392,7 @@ export const services: Service[] = [
   },
   {
     slug: "psychiatry",
+    hero: "/wp-content/uploads/2024/02/emojis.jpg",
     icon: "shield",
     name: "Medication Management",
     pillar: "behavioral-health",
@@ -391,6 +414,7 @@ export const services: Service[] = [
   },
   {
     slug: "autism-testing",
+    hero: "/wp-content/uploads/2025/10/WAS25-0078_Website_Homepage-Header_Understanding-Autism_1000x550_Mobile_v1.jpg",
     icon: "user",
     name: "Psychological & Autism Testing",
     pillar: "behavioral-health",
@@ -406,6 +430,7 @@ export const services: Service[] = [
   // -------------------------------------------------------------- nutrition
   {
     slug: "dietitian",
+    hero: "/wp-content/uploads/2023/11/WAS23-0042_Blog-Content_Young-Athletes_Blog-Image_1024x1024_v1.jpg",
     icon: "drop",
     name: "Dietitian Consultation",
     pillar: "nutrition",
@@ -428,6 +453,7 @@ export const services: Service[] = [
   },
   {
     slug: "lactation-consultation",
+    hero: "/wp-content/uploads/2024/08/breastfeeding.jpg",
     icon: "baby",
     name: "Lactation Consultation",
     pillar: "nutrition",
@@ -447,6 +473,7 @@ export const services: Service[] = [
   },
   {
     slug: "community-classes",
+    hero: "/wp-content/uploads/2023/05/gardening.jpg",
     icon: "users-three",
     name: "Community Classes",
     pillar: "nutrition",
