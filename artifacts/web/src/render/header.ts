@@ -201,18 +201,154 @@ function menuItem(item: NavItem, menu: MenuState): string {
  * The site header. Identical on every page apart from the menu's current-page
  * classes, which WordPress varies per route.
  */
-export function renderHeader(menu: MenuState = NO_MENU_STATE): string {
-  return `	<section class="page-load"></section>
-	<header id="header">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					<div id="logo">
-						<a href="/"><img src="/wp-content/themes/wasatch/images/wasatchlogo.svg" alt="Wasatch Pediatrics"></a>
-					</div>
-					<div id="topmenuwrap">
-						<div id="topmenu">
-							<a class="btn green header-cta" href="/contact-us/"><span class="header-cta-full">Schedule An Appointment</span><span class="header-cta-short">Schedule</span></a>
+/**
+ * A section's own navigation, when a page belongs to one.
+ *
+ * On these pages the global nav steps back to a quiet row beside the logo and
+ * the section takes the main bar, named on its left — so the whole chrome says
+ * which part of the practice you are in rather than making you read the
+ * breadcrumb to find out. The pattern is the one large content sites use when a
+ * section is deep enough to be its own site.
+ */
+export type SectionNav = {
+  name: string;
+  href: string;
+  items: SectionItem[];
+  /** Rendered in the strip under the bar, so a page need not repeat them. */
+  crumbs: Array<{ name: string; href?: string }>;
+};
+
+export type SectionItem = {
+  name: string;
+  href: string;
+  current?: boolean;
+  /** Topics, and the pages under each, for the flyout's two panels. */
+  groups?: Array<{
+    name: string;
+    href: string;
+    pages: Array<{ name: string; href: string }>;
+  }>;
+};
+
+/**
+ * How many services stand in the bar before the rest fold into "More".
+ *
+ * Measured rather than guessed: at 1280 the container is 1140px, and the
+ * section name plus Overview leaves about 830px — four services at their
+ * average width. Three of the four pillars have three or four services and fit
+ * whole; medical care has nine and would need 1869px.
+ */
+const BAR_LIMIT = 5;
+
+function flyout(item: SectionItem): string {
+  const groups = item.groups ?? [];
+  if (!groups.length) return "";
+
+  /*
+   * Open on the first topic that has pages. Several sections begin with a
+   * single-page topic — First Dental Visit, Same-Day Appointments — and
+   * starting there left the right panel empty on the way in.
+   */
+  const first = Math.max(
+    groups.findIndex((group) => group.pages.length),
+    0,
+  );
+
+  const left = groups
+    .map(
+      (group, index) =>
+        `<li${index === first ? ' class="on"' : ""}><a href="${group.href}" data-group="${index}">${esc(group.name)}</a></li>`,
+    )
+    .join("");
+
+  const right = groups
+    .map((group, index) => {
+      const pages = group.pages
+        .map(
+          (page) => `<li><a href="${page.href}">${esc(page.name)}</a></li>`,
+        )
+        .join("");
+      return `<div class="secfly-pages" data-group="${index}"${index === first ? "" : " hidden"}>
+							<p class="secfly-head">In ${esc(group.name)}</p>
+							${pages ? `<ul>${pages}</ul>` : `<p class="secfly-none">One page, and you are on the way to it.</p>`}
+						</div>`;
+    })
+    .join("\n");
+
+  return `<div class="secfly">
+						<ul class="secfly-topics">${left}</ul>
+						<div class="secfly-right" data-first="${first}">
+${right}
+						</div>
+					</div>`;
+}
+
+function sectionItem(item: SectionItem): string {
+  const classes = [
+    "secbar-item",
+    item.groups?.length ? "has-fly" : "",
+    item.current ? "on" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+  return `<li class="${classes}"><a href="${item.href}">${esc(item.name)}</a>${flyout(item)}</li>`;
+}
+
+function sectionBar(section: SectionNav): string {
+  const shown =
+    section.items.length > BAR_LIMIT
+      ? section.items.slice(0, BAR_LIMIT - 1)
+      : section.items;
+  const rest =
+    section.items.length > BAR_LIMIT ? section.items.slice(BAR_LIMIT - 1) : [];
+
+  const more = rest.length
+    ? `<li class="secbar-item has-fly secbar-more"><a href="${section.href}">More</a><div class="secfly secfly-plain">
+						<ul class="secfly-topics">${rest
+              .map(
+                (item) =>
+                  `<li${item.current ? ' class="on"' : ""}><a href="${item.href}">${esc(item.name)}</a></li>`,
+              )
+              .join("")}</ul>
+					</div></li>`
+    : "";
+
+  const crumbs = section.crumbs
+    .map((crumb) =>
+      crumb.href
+        ? `<li><a href="${crumb.href}">${esc(crumb.name)}</a></li>`
+        : `<li>${esc(crumb.name)}</li>`,
+    )
+    .join("");
+
+  return `		<div id="secbar">
+			<div class="container">
+				<div class="secbar-in">
+					<a class="secbar-name lys" href="${section.href}">${esc(section.name)}</a>
+					<button class="secbar-toggle" type="button" aria-expanded="false" aria-controls="secbar-list">In this section</button>
+					<ul class="secbar-list" id="secbar-list">
+						<li class="secbar-item${section.crumbs.length === 1 ? " on" : ""}"><a href="${section.href}">Overview</a></li>
+						${shown.map(sectionItem).join("\n\t\t\t\t\t\t")}
+						${more}
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="seccrumbs">
+			<div class="container">
+				<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li>${crumbs}</ol></nav>
+			</div>
+		</div>`;
+}
+
+function globalNav(menu: MenuState): string {
+  return `<div class="menu-main-nav-container"><ul id="menu-main-nav" class="mainnav">${mainNav
+    .map((item) => menuItem(item, menu))
+    .join("\n")}</ul></div>`;
+}
+
+function headerTools(): string {
+  return `<a class="btn green header-cta" href="/contact-us/"><span class="header-cta-full">Schedule An Appointment</span><span class="header-cta-short">Schedule</span></a>
 							<ul  class="desktop" id="navbuttons">
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/fb.svg" alt="Facebook Icon" /></a></li>
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/ig.svg" alt="Instagram Icon" /></a></li>
@@ -225,7 +361,67 @@ export function renderHeader(menu: MenuState = NO_MENU_STATE): string {
 								<span></span>
 								<span></span>
 								<span></span>
+							</div>`;
+}
+
+const LOGO = `<div id="logo">
+						<a href="/"><img src="/wp-content/themes/wasatch/images/wasatchlogo.svg" alt="Wasatch Pediatrics"></a>
+					</div>`;
+
+const DOCK = `	<div class="ctadock">
+		<a class="ctadock-btn" href="/contact-us/" aria-label="Schedule an appointment">
+			<svg class="ctadock-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M8 3v4M16 3v4M3 10h18"></path></svg>
+			<span class="ctadock-label">Schedule An Appointment</span>
+		</a>
+	</div>`;
+
+export function renderHeader(
+  menu: MenuState = NO_MENU_STATE,
+  section?: SectionNav,
+): string {
+  /*
+   * Inside a section the global nav moves into the logo row, so the section can
+   * have the main bar to itself. It is the same markup either way — moving it
+   * with CSS was not an option, because in the default header it lives in
+   * `#graynav`, which is a sibling of the logo's container rather than in it.
+   */
+  if (section) {
+    return `	<section class="page-load"></section>
+	<header id="header" class="has-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="secheadrow">
+						${LOGO}
+						<div class="secheadnav">
+							${globalNav(menu)}
+						</div>
+						<div id="topmenuwrap">
+							<div id="topmenu">
+							${headerTools()}
 							</div>
+						</div>
+					</div>
+					<div id="mobilesearch" class="mobile">
+						${searchForm()}
+					</div>
+				</div>
+			</div>
+		</div>
+${sectionBar(section)}
+	</header>
+${DOCK}`;
+  }
+
+  return `	<section class="page-load"></section>
+	<header id="header">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					${LOGO}
+					<div id="topmenuwrap">
+						<div id="topmenu">
+							${headerTools()}
 						</div>
 					</div>
 				</div>
@@ -239,18 +435,11 @@ export function renderHeader(menu: MenuState = NO_MENU_STATE): string {
 							${searchForm()}
 						</div>
 						<div id="navwrap">
-							<div class="menu-main-nav-container"><ul id="menu-main-nav" class="mainnav">${mainNav
-                .map((item) => menuItem(item, menu))
-                .join("\n")}</ul></div>						</div>
+							${globalNav(menu)}						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</header>
-	<div class="ctadock">
-		<a class="ctadock-btn" href="/contact-us/" aria-label="Schedule an appointment">
-			<svg class="ctadock-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="3"></rect><path d="M8 3v4M16 3v4M3 10h18"></path></svg>
-			<span class="ctadock-label">Schedule An Appointment</span>
-		</a>
-	</div>`;
+${DOCK}`;
 }

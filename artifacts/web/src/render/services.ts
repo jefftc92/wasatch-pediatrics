@@ -34,7 +34,7 @@ import {
   type TopicItem,
 } from "../data/services.ts";
 import { providers } from "../data/providers.ts";
-import { PILLAR_MENU_IDS } from "./header.ts";
+import { PILLAR_MENU_IDS, type SectionNav } from "./header.ts";
 import { dentalFaqSchema, dentalPage, renderDentalPage } from "./dental.ts";
 import type { GeneratedPage } from "./generated.ts";
 import type { SearchEntry } from "../data/searchIndex.ts";
@@ -68,20 +68,21 @@ export function providersForService(service: Service) {
  * it gets its own quiet strip above the hero instead, where it reads the same
  * way on every page and in the same place as everywhere else on the site.
  */
-function dentalCrumbs(crumbs: Crumb[]): string {
-  return `<div class="whitebg dent-trail">
-	<div class="container">
-		${renderBreadcrumbs(crumbs)}
-	</div>
-</div>`;
+function dentalCrumbs(_crumbs: Crumb[]): string {
+  /* The section bar's own strip carries the trail on these pages now. */
+  return "";
 }
 
-function heroSection(title: string, crumbs: Crumb[]): string {
+/*
+ * Every page in a pillar carries the section bar, and the trail lives in the
+ * strip beneath it — so the hero no longer repeats it. `crumbs` is still taken
+ * because the caller builds it for the section descriptor anyway.
+ */
+function heroSection(title: string, _crumbs: Crumb[]): string {
   return `<div class="bluebg">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				${renderBreadcrumbs(crumbs)}
 				<h1 class="interiorpagetitle">${title}</h1>
 			</div>
 		</div>
@@ -254,6 +255,39 @@ function otherPillars(current: string, bg = "graybg"): string {
 		</div>
 	</div>
 </div>`;
+}
+
+/**
+ * The section descriptor for any page inside a pillar.
+ *
+ * Every level of the tree builds the same bar — the pillar named on the left,
+ * its services across it, and the topics of whichever service you point at in
+ * the flyout — so the chrome does not change shape as you go deeper. What
+ * changes is which item is marked and what the breadcrumb strip says.
+ */
+function sectionFor(
+  pillar: Pillar,
+  crumbs: Crumb[],
+  currentService?: Service,
+): SectionNav {
+  return {
+    name: pillar.name,
+    href: pillar.href,
+    crumbs,
+    items: servicesInPillar(pillar.slug).map((service) => ({
+      name: service.name,
+      href: serviceHref(service),
+      current: service.slug === currentService?.slug,
+      groups: (service.topics ?? []).map((topic) => ({
+        name: topic.name,
+        href: topicHref(service, topic),
+        pages: topic.items.map((item) => ({
+          name: item.name,
+          href: topicItemHref(service, topic, item),
+        })),
+      })),
+    })),
+  };
 }
 
 /**
@@ -787,6 +821,11 @@ function menuState(pillarSlug: string) {
 export const generatedPillars = pillars.filter((pillar) => !pillar.contentSlug);
 
 /** Pillars that append their index to a page copied from the live site. */
+/** The section bar for a pillar whose landing page is a copied content page. */
+export function pillarSection(pillar: Pillar): SectionNav {
+  return sectionFor(pillar, [{ name: pillar.name }]);
+}
+
 export const pillarByContentSlug = new Map(
   pillars
     .filter((pillar) => pillar.contentSlug)
@@ -804,6 +843,7 @@ export function pillarDocument(
     menu: menuState(pillar.slug),
     breadcrumbs: [{ name: pillar.name }],
     content: renderPillarPage(pillar),
+    section: sectionFor(pillar, [{ name: pillar.name }]),
   };
 }
 
@@ -824,6 +864,11 @@ export function serviceDocument(
       { name: service.name },
     ],
     content: renderServicePage(service),
+    section: sectionFor(
+      pillar,
+      [{ name: pillar.name, href: pillar.href }, { name: service.name }],
+      service,
+    ),
     ...migratedMeta(serviceHref(service)),
   };
 }
@@ -848,6 +893,15 @@ export function topicDocument(
       { name: topic.name },
     ],
     content: renderTopicPage(service, topic),
+    section: sectionFor(
+      pillar,
+      [
+        { name: pillar.name, href: pillar.href },
+        { name: service.name, href: serviceHref(service) },
+        { name: topic.name },
+      ],
+      service,
+    ),
     ...migratedMeta(topicHref(service, topic)),
   };
 }
@@ -873,6 +927,16 @@ export function topicItemDocument(
       { name: item.name },
     ],
     content: renderTopicItemPage(service, topic, item),
+    section: sectionFor(
+      pillar,
+      [
+        { name: pillar.name, href: pillar.href },
+        { name: service.name, href: serviceHref(service) },
+        { name: topic.name, href: topicHref(service, topic) },
+        { name: item.name },
+      ],
+      service,
+    ),
     ...migratedMeta(topicItemHref(service, topic, item)),
   };
 }

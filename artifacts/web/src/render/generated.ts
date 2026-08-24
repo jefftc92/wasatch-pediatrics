@@ -15,7 +15,11 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { renderFooter } from "./footer.ts";
-import { renderHeader, type MenuState } from "./header.ts";
+import {
+  renderHeader,
+  type MenuState,
+  type SectionNav,
+} from "./header.ts";
 import { buildMeta, siteAssets } from "../build.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
@@ -58,6 +62,12 @@ export type GeneratedPage = {
   menu: MenuState;
   /** Home is implied; pass the rest of the trail, ending with this page. */
   breadcrumbs: Crumb[];
+  /**
+   * The section this page belongs to. When present the global nav steps back
+   * to a row beside the logo and the section takes the main bar, with the
+   * breadcrumb trail in a strip beneath it.
+   */
+  section?: SectionNav;
   content: string;
   /** Extra nodes for the JSON-LD graph, e.g. the FAQPage a migrated page earns. */
   extraSchema?: object[];
@@ -118,7 +128,7 @@ ${head}
 ${buildMeta}
 </head>
 <body class="${page.bodyClass}">
-${renderHeader(page.menu)}
+${renderHeader(page.menu, page.section)}
 ${page.content}
 ${renderFooter()}
 ${readOnce("tail.html")}

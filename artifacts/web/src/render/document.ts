@@ -1,7 +1,11 @@
 import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
-import { renderHeader, type MenuState } from "./header.ts";
+import {
+  renderHeader,
+  type MenuState,
+  type SectionNav,
+} from "./header.ts";
 import { buildMeta, siteAssets } from "../build.ts";
 import { renderFooter } from "./footer.ts";
 
@@ -45,6 +49,12 @@ export type DocumentOptions = {
   menu: MenuState;
   /** Markup that sits between the header and the footer. */
   content: string;
+  /**
+   * The section this page belongs to, for the two pillars whose landing page is
+   * copied from the live site — they are served through here rather than as
+   * generated pages, and should carry the same chrome as the rest of the tree.
+   */
+  section?: SectionNav;
 };
 
 /**
@@ -65,6 +75,7 @@ export function renderDocument({
   bodyClass,
   menu,
   content,
+  section,
 }: DocumentOptions): string {
   return `<!doctype html>
 <html lang="en-US">
@@ -73,7 +84,7 @@ ${documentHead(slug)}
 ${SITE_ASSETS}
 </head>
 <body class="${bodyClass}">
-${renderHeader(menu)}
+${renderHeader(menu, section)}
 ${content}
 ${renderFooter()}
 ${documentTail(slug)}

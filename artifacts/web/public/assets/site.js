@@ -736,6 +736,63 @@
     });
   }
 
+  /* ------------------------------------------------------ section chrome -- */
+
+  /*
+   * The section bar folds behind a toggle on a phone, where there is no room
+   * for a row of services and no hover to open a flyout.
+   */
+  var secToggle = document.querySelector(".secbar-toggle");
+  var secList = document.getElementById("secbar-list");
+
+  if (secToggle && secList) {
+    secToggle.addEventListener("click", function () {
+      var open = secList.classList.toggle("is-open");
+      secToggle.setAttribute("aria-expanded", String(open));
+    });
+  }
+
+  /*
+   * The flyout's two panels. Pointing at a topic on the left swaps the pages
+   * shown on the right; the topic's own name is still a link to it, so the
+   * pointer never has to land somewhere that does nothing.
+   */
+  document.querySelectorAll(".secbar-item.has-fly").forEach(function (item) {
+    var topics = item.querySelectorAll(".secfly-topics a[data-group]");
+    var panes = item.querySelectorAll(".secfly-pages[data-group]");
+    if (!topics.length) return;
+
+    var show = function (index) {
+      topics.forEach(function (link) {
+        link.parentElement.classList.toggle(
+          "on",
+          link.getAttribute("data-group") === index,
+        );
+      });
+      panes.forEach(function (pane) {
+        pane.hidden = pane.getAttribute("data-group") !== index;
+      });
+    };
+
+    topics.forEach(function (link) {
+      var index = link.getAttribute("data-group");
+      link.addEventListener("mouseenter", function () {
+        show(index);
+      });
+      link.addEventListener("focus", function () {
+        show(index);
+      });
+    });
+
+    /* Leaving the flyout puts it back to the topic it opens on, so it always
+       opens the same way rather than wherever the pointer last left it. */
+    var right = item.querySelector(".secfly-right");
+    var first = (right && right.getAttribute("data-first")) || "0";
+    item.addEventListener("mouseleave", function () {
+      show(first);
+    });
+  });
+
   /* ------------------------------------------------------- service tiles -- */
 
   /*

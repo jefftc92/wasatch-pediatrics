@@ -50,6 +50,7 @@ import { fullSearchIndex, renderSearchResults } from "../src/render/search.ts";
 import { renderGeneratedDocument } from "../src/render/generated.ts";
 import {
   pillarByContentSlug,
+  pillarSection,
   renderPillarPage,
   serviceRoutes,
 } from "../src/render/services.ts";
@@ -179,6 +180,7 @@ for (const page of contentPages) {
       bodyClass: page.bodyClass,
       menu: { classes: page.menuClasses, currentIds: page.menuCurrentIds },
       content,
+      section: pillar ? pillarSection(pillar) : undefined,
     }),
   );
 }
