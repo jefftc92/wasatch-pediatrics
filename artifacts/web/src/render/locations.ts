@@ -7,11 +7,13 @@
  * office at once, and lets you narrow to the one service you actually need.
  *
  * The map is an enhancement, not the page. Every office, its address, its phone
- * number and its full list of services are in the HTML whether or not Leaflet
- * loads, and the filter is a real form that round-trips through the server, so
- * `?service=therapy` is a page a crawler can read and a visitor can link to.
- * The script upgrades that in place: it draws the map, and it filters without
- * the reload.
+ * number and its full list of services are in the HTML whether or not Google
+ * Maps loads, and the care key's rows are real links, so `?care=dentistry` is a
+ * page a crawler can read and a visitor can link to. The script upgrades that in
+ * place: it draws the map, and it filters without the reload.
+ *
+ * `?service=` still renders — it is a finer cut than the key offers and any link
+ * to one should keep working — but nothing on the page produces one any more.
  */
 
 import {
@@ -142,33 +144,6 @@ function officeCard(office: Office, matches: boolean): string {
 </li>`;
 }
 
-/** The one control: every service, grouped under its pillar. */
-function filterControl(active: Service | null): string {
-  const groups = pillars
-    .map((pillar) => {
-      const options = services
-        .filter((service) => service.pillar === pillar.slug)
-        .map(
-          (service) =>
-            `<option value="${service.slug}"${active?.slug === service.slug ? " selected" : ""}>${escapeAttribute(service.name)}</option>`,
-        )
-        .join("");
-      return `<optgroup label="${escapeAttribute(pillar.name)}">${options}</optgroup>`;
-    })
-    .join("");
-
-  return `<form class="loc-filter" method="get" action="${LOCATIONS_HREF}">
-					<label class="loc-filter-label" for="loc-service">Show offices offering</label>
-					<span class="loc-filter-field">
-						<select class="loc-filter-select" id="loc-service" name="service">
-							<option value=""${active ? "" : " selected"}>All services</option>
-							${groups}
-						</select>
-					</span>
-					<button class="btn blue loc-filter-go" type="submit">Show offices</button>
-				</form>`;
-}
-
 function countLine(
   shown: number,
   active: Service | null,
@@ -258,10 +233,7 @@ export function renderLocationsIndex(
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<div class="loc-controls">
-					${filterControl(active)}
-					<p class="loc-count" role="status">${countLine(shown.length, active, activeCare)}</p>
-				</div>
+				<p class="loc-count" role="status">${countLine(shown.length, active, activeCare)}</p>
 				<div class="loc-mapwrap">
 					<div class="loc-map${googleMapsKey ? "" : " is-off"}" id="loc-map" data-active="${active?.slug ?? ""}" data-care="${activeCare ?? ""}" data-maps-key="${escapeAttribute(googleMapsKey)}" data-maps-id="${escapeAttribute(googleMapsId)}" data-offices="${escapeAttribute(JSON.stringify(pins))}">
 						${googleMapsKey ? "" : `<p class="loc-map-off">The map needs a Google Maps key to draw. Every office is listed below with its address, phone number and everything it offers.</p>`}

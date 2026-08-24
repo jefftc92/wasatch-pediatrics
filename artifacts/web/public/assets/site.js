@@ -402,7 +402,6 @@
     var cards = document.querySelectorAll(".loc-hit");
     var count = document.querySelector(".loc-count");
     var emptyNote = document.querySelector(".loc-empty");
-    var select = document.getElementById("loc-service");
     var keyBox = document.querySelector(".loc-key");
     var keyBtns = Array.prototype.slice.call(
       document.querySelectorAll(".loc-key-btn"),
@@ -574,15 +573,20 @@
       });
       if (keyBox) keyBox.classList.toggle("has-choice", Boolean(careSlug));
 
-      if (serviceSlug && select && select.selectedOptions[0]) {
-        label = select.selectedOptions[0].text;
-      } else if (careSlug) {
+      if (careSlug) {
         var chosen = document.querySelector('.loc-key-btn[data-care="' + careSlug + '"]');
         if (chosen) label = chosen.textContent.trim();
       }
 
       if (emptyNote) emptyNote.hidden = shown > 0;
-      if (count) {
+
+      /*
+       * Nothing on the page can set a service any more, so the only way one
+       * arrives is in the URL — and then the server has already written the
+       * count line naming it. Rewriting it here would need the service's name,
+       * which the page no longer carries anywhere.
+       */
+      if (count && !serviceSlug) {
         count.textContent = !label
           ? "All eight offices."
           : shown === 0
@@ -604,28 +608,11 @@
       window.history.replaceState({}, "", url);
     }
 
-    if (select) {
-      var form = select.closest("form");
-      if (form) {
-        var go = form.querySelector(".loc-filter-go");
-        if (go) go.hidden = true;
-        form.addEventListener("submit", function (event) {
-          event.preventDefault();
-        });
-      }
-      select.addEventListener("change", function () {
-        care = "";
-        apply(select.value, "");
-        remember(select.value, "");
-      });
-    }
-
     keyBtns.forEach(function (btn) {
       btn.addEventListener("click", function (event) {
         event.preventDefault();
         var wanted = btn.getAttribute("data-care");
         care = care === wanted ? "" : wanted;
-        if (select) select.value = "";
         apply("", care);
         remember("", care);
       });

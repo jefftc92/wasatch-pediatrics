@@ -1141,66 +1141,6 @@
   height: auto;
 }
 
-.loc-filter {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin: 0 0 18px 0;
-}
-
-.loc-filter-label {
-  font-size: 17px;
-  color: #636466;
-  margin: 0;
-}
-
-/* The arrow is drawn here rather than left to the platform, so the control
-   matches the rest of the page instead of each OS's own select. */
-.loc-filter-field {
-  position: relative;
-  display: inline-block;
-}
-
-.loc-filter-field:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  width: 8px;
-  height: 8px;
-  margin-top: -6px;
-  border: solid #2b93d1;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
-  pointer-events: none;
-}
-
-.loc-filter-select {
-  appearance: none;
-  -webkit-appearance: none;
-  border: 2px solid #e4e4e4;
-  background: #ffffff;
-  color: #636466;
-  border-radius: 25px;
-  padding: 9px 48px 9px 22px;
-  font-size: 17px;
-  font-family: inherit;
-  cursor: pointer;
-  max-width: 100%;
-}
-
-.loc-filter-select:focus {
-  outline: none;
-  border-color: #2b93d1;
-}
-
-/* Only useful without the script, which filters on change instead. */
-.loc-filter-go {
-  font-size: 15px !important;
-  padding: 8px 24px !important;
-}
-
 .loc-count {
   font-size: 17px;
   color: #636466;
@@ -1529,29 +1469,6 @@
 }
 
 /*
- * The filter and the count on one line. They are one thought — what you asked
- * for, and how many offices answer — and stacking them put 115px between the
- * question and the map.
- */
-.loc-controls {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px 20px;
-  margin: 0 0 22px 0;
-}
-
-.loc-controls .loc-filter {
-  margin: 0;
-}
-
-.loc-controls .loc-count {
-  margin: 0;
-  color: #8a8a8c;
-  font-size: 16px;
-}
-
-/*
  * The key floats over the map's top-left corner, the way a printed map's key
  * sits inside its frame — it is about what is on the map, so it belongs on it
  * rather than beside it in a column of its own.
@@ -1737,22 +1654,6 @@
   .loc-key-btn {
     width: auto;
     border: 1px solid #e4e4e6;
-  }
-
-  .loc-filter {
-    gap: 12px;
-  }
-
-  .loc-filter-label {
-    flex: 1 0 100%;
-  }
-
-  .loc-filter-field {
-    flex: 1 1 auto;
-  }
-
-  .loc-filter-select {
-    width: 100%;
   }
 
   .loc-list {
