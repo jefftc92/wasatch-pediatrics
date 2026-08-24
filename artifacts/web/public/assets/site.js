@@ -145,23 +145,61 @@
   /* --------------------------------------------------- mobile dropdowns -- */
 
   /*
-   * The theme opens each dropdown independently on a phone, so tapping three of
-   * them leaves three open and the menu runs for several screens. Make them
-   * behave as an accordion: opening one closes the rest.
+   * The main nav on a phone.
    *
-   * This binds before jQuery's ready callback does, so it runs first on each
-   * tap — the siblings are closed, then the theme toggles the one you tapped.
-   * Closing uses the theme's own slideUp so the motion matches.
+   * The theme makes the whole row a toggle and calls preventDefault on the
+   * anchor, so tapping Services expanded it and went nowhere — /services/,
+   * /locations/ and /resources/ could not be reached from the menu at all. It
+   * also opens each one independently, so three taps left three panels open and
+   * the menu ran for several screens.
+   *
+   * Both are replaced here: the label is a link again, the caret beside it is
+   * what opens the panel, and opening one closes the rest.
+   *
+   * The theme binds its handlers in a jQuery ready callback. This file is in
+   * the head and the theme's is at the foot, so this registers first and runs
+   * first on each tap — stopImmediatePropagation is what keeps the theme's
+   * version from running afterwards and undoing it.
    */
   if (window.jQuery) {
     var $ = window.jQuery;
-    $(".mainnav > li.menu-item-has-children").on("click", function () {
-      if (!mobile.matches) return;
-      var self = this;
-      $(".mainnav > li.menu-item-has-children").each(function () {
-        if (this === self || !$(this).hasClass("open")) return;
+    var parents = ".mainnav > li.menu-item-has-children";
+
+    var closeNav = function (except) {
+      $(parents).each(function () {
+        if (this === except || !$(this).hasClass("open")) return;
         $(this).removeClass("open").children(".sub-menu").slideUp("fast");
+        $(this).children(".navtoggle").attr("aria-expanded", "false");
       });
+    };
+
+    /* The label navigates. Nothing else may claim the tap. */
+    $(parents + " > a").on("click", function (event) {
+      if (!mobile.matches) return;
+      event.stopImmediatePropagation();
+    });
+
+    /* The caret opens, and closes whatever else was open. */
+    $(parents + " > .navtoggle").on("click", function (event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      var li = $(this).parent();
+      var open = li.hasClass("open");
+      closeNav(li[0]);
+      li.toggleClass("open", !open);
+      li.children(".sub-menu").slideToggle("fast");
+      $(this).attr("aria-expanded", String(!open));
+    });
+
+    /*
+     * The theme's row handler still fires for taps that are neither — the gap
+     * beside the label. Left alone it would toggle without the caret agreeing,
+     * so it is stopped and the accordion rule applied in its place.
+     */
+    $(parents).on("click", function (event) {
+      if (!mobile.matches) return;
+      if ($(event.target).closest("a, .navtoggle, .sub-menu").length) return;
+      event.stopImmediatePropagation();
     });
   }
 
@@ -756,6 +794,26 @@
       closeTiles(null);
       var caret = open.querySelector(".svc-tile-more");
       if (caret) caret.focus();
+    });
+  }
+
+  /*
+   * The rows inside a panel. A topic with pages under it folds them out in
+   * place, so a page is reachable without leaving the pillar — the name still
+   * goes to the topic, and the count beside it is what opens the fold.
+   *
+   * Several can be open at once here: they are a list, not a set of tabs, and
+   * closing one to open another would hide something you were comparing.
+   */
+  var panelToggles = document.querySelectorAll(".svc-panel-toggle");
+
+  if (panelToggles.length) {
+    panelToggles.forEach(function (toggle) {
+      toggle.addEventListener("click", function () {
+        var row = toggle.closest(".svc-panel-row");
+        var open = row.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", String(open));
+      });
     });
   }
 

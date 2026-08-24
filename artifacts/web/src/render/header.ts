@@ -86,7 +86,7 @@ function pillarLink(pillar: Pillar, menu: MenuState): string {
  * fight it. On a phone the groups stack, each keeping its heading.
  */
 function panel(item: NavItem, classes: string, body: string): string {
-  return `<li id="menu-item-${item.id}" class="${classes} mega"><a href="${item.href}">${item.label}</a>
+  return `<li id="menu-item-${item.id}" class="${classes} mega"><a href="${item.href}">${item.label}</a><button class="navtoggle" type="button" aria-expanded="false"><span class="navtoggle-label">Show what is under ${item.label}</span></button>
 <ul class="sub-menu megamenu">
 <li class="megamenu-inner">
 	<div class="container">
