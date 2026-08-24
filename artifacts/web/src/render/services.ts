@@ -140,31 +140,26 @@ export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
       }
 
       /*
-       * A topic with pages under it becomes a headed column; a topic that is
-       * itself the end of the line becomes a plain link. Orthodontics is all
-       * of the second kind, Pediatric Dentistry all of the first.
+       * Topics only. Listing every page beneath them as well put twenty-one
+       * links in one panel for Pediatric Dentistry, which is a menu rather
+       * than a shortcut — this is a short list of where to go next, and the
+       * page itself is one step on from there.
        */
-      const columns = topics
+      const entries = topics
         .map((topic) => {
-          const href = topicHref(service, topic);
-          if (!topic.items.length) {
-            return `<li class="svc-panel-col svc-panel-leaf"><a class="svc-panel-head" href="${href}">${escapeAttribute(topic.name)}</a></li>`;
-          }
-          const pages = topic.items
-            .map(
-              (item) =>
-                `<li><a href="${topicItemHref(service, topic, item)}">${escapeAttribute(item.name)}</a></li>`,
-            )
-            .join("");
-          return `<li class="svc-panel-col"><a class="svc-panel-head" href="${href}">${escapeAttribute(topic.name)}</a><ul class="svc-panel-pages">${pages}</ul></li>`;
+          const count = topic.items.length;
+          const tail = count
+            ? `<span class="svc-panel-count">${count}</span>`
+            : "";
+          return `<li><a href="${topicHref(service, topic)}">${escapeAttribute(topic.name)}${tail}</a></li>`;
         })
         .join("");
 
       return `<div class="svc-tile-wrap">
 			${link}
 			<button class="svc-tile-more" type="button" aria-expanded="false" aria-controls="${panelId}"><span class="svc-tile-more-label">What&#8217;s under ${escapeAttribute(service.name)}</span></button>
-			<div class="svc-tile-panel" id="${panelId}">
-				<ul class="svc-panel-cols">${columns}</ul>
+			<div class="svc-tile-panel${topics.length > 6 ? " svc-tile-panel-wide" : ""}" id="${panelId}">
+				<ul class="svc-panel-list">${entries}</ul>
 				<p class="svc-panel-all"><a href="${serviceHref(service)}">All ${escapeAttribute(service.name)}</a></p>
 			</div>
 		</div>`;
