@@ -118,71 +118,22 @@ function serviceCard(service: Service): string {
  *
  * The symbols are the service's own, and only have to be distinct inside one
  * pillar, since no page shows two pillars' tiles.
+ *
+ * They carried a dropdown of their own for a while, so a deep page was one
+ * click from here rather than three. The section bar's flyout does that from
+ * every page in the pillar, not just this one, so the tiles are links again.
  */
 export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
   const tiles = servicesInPillar(pillar.slug)
     .map((service) => {
-      const topics = service.topics ?? [];
-      const panelId = `svc-panel-${service.slug}`;
-
-      const link = `<a class="svc-tile" href="${serviceHref(service)}">
+      return `<div class="svc-tile-wrap">
+			<a class="svc-tile" href="${serviceHref(service)}">
 				<span class="svc-tile-ico"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${service.icon ?? "circle-dashed"}"></use></svg></span>
 				<span class="svc-tile-text">
 					<span class="svc-tile-name">${escapeAttribute(service.name)}</span>
 					<span class="svc-tile-sub">${escapeAttribute(service.blurb)}</span>
 				</span>
-			</a>`;
-
-      /* A service with nothing under it is only ever a link. */
-      if (!topics.length) {
-        return `<div class="svc-tile-wrap">
-			<div class="svc-tile-head">${link}</div>
-		</div>`;
-      }
-
-      /*
-       * Topics only. Listing every page beneath them as well put twenty-one
-       * links in one panel for Pediatric Dentistry, which is a menu rather
-       * than a shortcut — this is a short list of where to go next, and the
-       * page itself is one step on from there.
-       */
-      const entries = topics
-        .map((topic) => {
-          const href = topicHref(service, topic);
-          /* A topic with nothing under it is one row and one link. */
-          if (!topic.items.length) {
-            return `<li class="svc-panel-row"><a class="svc-panel-link" href="${href}">${escapeAttribute(topic.name)}</a></li>`;
-          }
-
-          const pages = topic.items
-            .map(
-              (item) =>
-                `<li><a href="${topicItemHref(service, topic, item)}">${escapeAttribute(item.name)}</a></li>`,
-            )
-            .join("");
-
-          /*
-           * A topic with pages folds them away behind its own toggle. The name
-           * stays a link to the topic, so the row does both jobs: go there, or
-           * open it and go straight to one of its pages.
-           */
-          return `<li class="svc-panel-row">
-						<a class="svc-panel-link" href="${href}">${escapeAttribute(topic.name)}</a>
-						<button class="svc-panel-toggle" type="button" aria-expanded="false"><span class="svc-panel-count">${topic.items.length}</span><span class="svc-tile-more-label">Show what is under ${escapeAttribute(topic.name)}</span></button>
-						<ul class="svc-panel-sub">${pages}</ul>
-					</li>`;
-        })
-        .join("");
-
-      return `<div class="svc-tile-wrap">
-			<div class="svc-tile-head">
-			${link}
-			<button class="svc-tile-more" type="button" aria-expanded="false" aria-controls="${panelId}"><span class="svc-tile-more-label">What&#8217;s under ${escapeAttribute(service.name)}</span></button>
-			</div>
-			<div class="svc-tile-panel${topics.length > 6 ? " svc-tile-panel-wide" : ""}" id="${panelId}">
-				<ul class="svc-panel-list">${entries}</ul>
-				<p class="svc-panel-all"><a href="${serviceHref(service)}">All ${escapeAttribute(service.name)}</a></p>
-			</div>
+			</a>
 		</div>`;
     })
     .join("\n\t\t");
