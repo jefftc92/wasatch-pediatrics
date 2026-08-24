@@ -223,18 +223,19 @@
   var BADGE_GAP = 2;
   var BAR_PAD = 3;
   var BAR_GAP = 3;
-  /* Outline on the bar. Where two offices are close their bars still overlap,
-     and without an edge two white boxes on top of each other read as one. */
-  var BAR_EDGE = 1.5;
+  /* A hairline round the bar, enough to seat it on the map without reading as
+     a drawn-on border. Zoomed in the bars do not overlap, so it only has to
+     separate white from a pale basemap. */
+  var BAR_EDGE = 1;
+  var BAR_EDGE_COLOR = "#c8cdd2";
   /*
    * The zoom at which the bars appear.
    *
    * Cottonwood and Salt Lake are 4.4km apart, which is 19px at zoom 9 and 38px
-   * at zoom 10 — closer than two three-badge bars are wide, so zoomed out they
-   * pile into each other however they are drawn. At zoom 11 they are 76px
-   * apart and no pair on the map overlaps any more, so that is where the bars
-   * are worth showing. Below it every office is a plain teardrop and the key
-   * and the cards carry what is on offer.
+   * at zoom 10 — closer than two three-badge bars are wide. At zoom 11 they are
+   * 76px apart and no pair on the map overlaps, so that is where the bars are
+   * worth showing. Below it the same care types divide the pin's own head
+   * instead, which costs no more room than the pin already takes.
    */
   var BAR_ZOOM = 11;
 
@@ -242,15 +243,55 @@
     return n * BADGE + (n - 1) * BADGE_GAP + BAR_PAD * 2;
   }
 
-  function pinSvg(icons, colors, dim) {
+  /** The teardrop's outline, on a 40x52 grid. */
+  var DROP =
+    "M20 51C20 51 35 32.5 35 20A15 15 0 0 0 5 20C5 32.5 20 51 20 51Z";
+
+  /**
+   * Zoomed out: the care types divide the pin's own head.
+   *
+   * Nothing sits above the pin at this zoom, so two close offices overlap by
+   * only as much as two 40px teardrops do rather than by the width of two
+   * bars. The white ring around the head is what keeps them apart where they
+   * do touch.
+   */
+  function wheelSvg(colors, dim) {
+    var n = colors.length || 1;
+    var r = 15;
+    var seg = "";
+
+    if (n === 1) {
+      seg = '<circle cx="20" cy="20" r="' + r + '" fill="' +
+        (colors[0] || "#2b93d1") + '"/>';
+    } else {
+      for (var i = 0; i < n; i++) {
+        var a0 = (Math.PI * 2 * i) / n - Math.PI / 2;
+        var a1 = (Math.PI * 2 * (i + 1)) / n - Math.PI / 2;
+        seg +=
+          '<path d="M20 20 L' + (20 + r * Math.cos(a0)).toFixed(2) + " " +
+          (20 + r * Math.sin(a0)).toFixed(2) + " A" + r + " " + r + " 0 " +
+          (a1 - a0 > Math.PI ? 1 : 0) + " 1 " +
+          (20 + r * Math.cos(a1)).toFixed(2) + " " +
+          (20 + r * Math.sin(a1)).toFixed(2) + ' Z" fill="' + colors[i] + '"/>';
+      }
+    }
+
+    return (
+      '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="52" viewBox="0 0 40 52">' +
+      '<g opacity="' + (dim ? 0.45 : 1) + '">' +
+      '<path d="' + DROP + '" fill="#ffffff"/>' + seg +
+      '<circle cx="20" cy="20" r="' + r + '" fill="none" stroke="#ffffff" stroke-width="3"/>' +
+      "</g></svg>"
+    );
+  }
+
+  /** Zoomed in: the key's badges on a bar above the pin. */
+  function barSvg(icons, colors, dim) {
     var n = Math.max(icons.length, 1);
     var bw = barWidth(n);
     var bh = BADGE + BAR_PAD * 2;
-    var box = pinSize(icons.length);
-    var w = box.w;
-    var h = box.h;
-    var midX = w / 2;
-    var o = dim ? 0.45 : 1;
+    var box = pinSize(icons.length, true);
+    var midX = box.w / 2;
 
     var badges = "";
     for (var i = 0; i < icons.length; i++) {
@@ -262,33 +303,35 @@
       if (path) {
         /* 256-unit artwork scaled into a 14px square, centred in the badge. */
         var s = 14 / 256;
-        var ox = x + (BADGE - 14) / 2;
-        var oy = BAR_PAD + (BADGE - 14) / 2;
         badges +=
-          '<g transform="translate(' + ox.toFixed(1) + ' ' + oy.toFixed(1) +
-          ') scale(' + s.toFixed(5) + ')"><path fill="#ffffff" d="' + path + '"/></g>';
+          '<g transform="translate(' + (x + (BADGE - 14) / 2).toFixed(1) + " " +
+          (BAR_PAD + (BADGE - 14) / 2).toFixed(1) + ') scale(' + s.toFixed(5) +
+          ')"><path fill="#ffffff" d="' + path + '"/></g>';
       }
     }
 
-    var bar = icons.length
-      ? '<rect x="' + (midX - bw / 2 + BAR_EDGE / 2).toFixed(1) + '" y="' +
-        (BAR_EDGE / 2).toFixed(1) + '" width="' + (bw - BAR_EDGE).toFixed(1) +
-        '" height="' + (bh - BAR_EDGE).toFixed(1) +
-        '" rx="6" fill="#ffffff" stroke="#5f666c" stroke-width="' + BAR_EDGE +
-        '"/>' + badges
-      : "";
+    var bar =
+      '<rect x="' + (midX - bw / 2 + BAR_EDGE / 2).toFixed(1) + '" y="' +
+      (BAR_EDGE / 2).toFixed(1) + '" width="' + (bw - BAR_EDGE).toFixed(1) +
+      '" height="' + (bh - BAR_EDGE).toFixed(1) +
+      '" rx="6" fill="#ffffff" stroke="' + BAR_EDGE_COLOR + '" stroke-width="' +
+      BAR_EDGE + '"/>' + badges;
 
-    var pinTop = icons.length ? bh + BAR_GAP : 0;
     return (
-      '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h +
-      '" viewBox="0 0 ' + w + " " + h + '">' +
-      '<g opacity="' + o + '">' + bar +
-      '<g transform="translate(' + (midX - PIN_W / 2).toFixed(1) + " " + pinTop + ')">' +
+      '<svg xmlns="http://www.w3.org/2000/svg" width="' + box.w + '" height="' +
+      box.h + '" viewBox="0 0 ' + box.w + " " + box.h + '">' +
+      '<g opacity="' + (dim ? 0.45 : 1) + '">' + bar +
+      '<g transform="translate(' + (midX - PIN_W / 2).toFixed(1) + " " +
+      (bh + BAR_GAP) + ')">' +
       '<svg width="' + PIN_W + '" height="' + PIN_H + '" viewBox="0 0 40 52">' +
-      '<path d="M20 51C20 51 35 32.5 35 20A15 15 0 0 0 5 20C5 32.5 20 51 20 51Z" fill="#2b93d1" stroke="#ffffff" stroke-width="2.5"/>' +
+      '<path d="' + DROP + '" fill="#2b93d1" stroke="#ffffff" stroke-width="2.5"/>' +
       '<circle cx="20" cy="19" r="5.5" fill="#ffffff" opacity="0.92"/>' +
       "</svg></g></g></svg>"
     );
+  }
+
+  function pinSvg(icons, colors, dim, withBar) {
+    return withBar ? barSvg(icons, colors, dim) : wheelSvg(colors, dim);
   }
 
   /**
@@ -296,23 +339,23 @@
    * definition, so the drawing, the scaled size and the anchor cannot drift
    * apart — if they do, the pin lands somewhere other than the office.
    */
-  function pinSize(n) {
-    if (!n) return { w: PIN_W, h: PIN_H };
+  function pinSize(n, withBar) {
+    if (!withBar) return { w: 40, h: 52 };
     return {
-      w: Math.max(barWidth(n), PIN_W) + BAR_EDGE,
+      w: Math.max(barWidth(Math.max(n, 1)), PIN_W) + BAR_EDGE,
       h: BADGE + BAR_PAD * 2 + BAR_GAP + PIN_H,
     };
   }
 
-  function pinAnchor(n) {
-    var box = pinSize(n);
+  function pinAnchor(n, withBar) {
+    var box = pinSize(n, withBar);
     return { x: box.w / 2, y: box.h };
   }
 
-  function pinUrl(icons, colors, dim) {
+  function pinUrl(icons, colors, dim, withBar) {
     return (
       "data:image/svg+xml;charset=UTF-8," +
-      encodeURIComponent(pinSvg(icons, colors, dim))
+      encodeURIComponent(pinSvg(icons, colors, dim, withBar))
     );
   }
 
@@ -410,10 +453,9 @@
       var position = { lat: office.lat, lng: office.lng };
 
       if (Advanced) {
-        var icons = shownIcons(office);
-        var box = pinSize(icons.length);
+        var box = pinSize(office.icons.length, bars);
         var img = document.createElement("img");
-        img.src = pinUrl(icons, office.colors, false);
+        img.src = pinUrl(office.icons, office.colors, false, bars);
         img.width = box.w;
         img.height = box.h;
         img.alt = "";
@@ -433,18 +475,12 @@
       });
     }
 
-    /* What the pin is drawn from right now: the bar only above BAR_ZOOM. */
-    function shownIcons(office) {
-      return bars ? office.icons : [];
-    }
-
     /* The image, its drawn size and where its point sits, for a classic Marker. */
     function markerIcon(office, dim) {
-      var icons = shownIcons(office);
-      var box = pinSize(icons.length);
-      var at = pinAnchor(icons.length);
+      var box = pinSize(office.icons.length, bars);
+      var at = pinAnchor(office.icons.length, bars);
       return {
-        url: pinUrl(icons, office.colors, dim),
+        url: pinUrl(office.icons, office.colors, dim, bars),
         scaledSize: new google.maps.Size(box.w, box.h),
         anchor: new google.maps.Point(at.x, at.y),
       };
@@ -452,10 +488,9 @@
 
     function setDim(office, marker, dim) {
       if (Advanced) {
-        var icons = shownIcons(office);
-        var box = pinSize(icons.length);
+        var box = pinSize(office.icons.length, bars);
         if (marker.content) {
-          marker.content.src = pinUrl(icons, office.colors, dim);
+          marker.content.src = pinUrl(office.icons, office.colors, dim, bars);
           marker.content.width = box.w;
           marker.content.height = box.h;
         }

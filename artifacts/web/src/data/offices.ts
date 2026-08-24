@@ -23,6 +23,12 @@ export type Office = {
   zip: string;
   /** Digits only, for the tel: link. */
   phone: string;
+  /**
+   * The office building, as photographed for the live site's own location
+   * page — these are the header images those pages already carry, so no new
+   * asset was introduced and none of them is a stock photograph.
+   */
+  photo: string;
   lat: number;
   lng: number;
 };
@@ -35,6 +41,7 @@ export const offices: Office[] = [
     state: "UT",
     zip: "84107",
     phone: "8017478700",
+    photo: "/wp-content/uploads/2022/04/WAS24-0068_Cottonwood_Moving-Header_Mobile_1000x400_v3.jpg",
     lat: 40.653893,
     lng: -111.902052,
   },
@@ -46,6 +53,7 @@ export const offices: Office[] = [
     state: "UT",
     zip: "84020",
     phone: "8015233001",
+    photo: "/wp-content/uploads/2022/04/Draper-Header_Mobile-1000x400-1.jpg",
     lat: 40.524187,
     lng: -111.889879,
   },
@@ -57,6 +65,7 @@ export const offices: Office[] = [
     state: "UT",
     zip: "84025",
     phone: "8019399111",
+    photo: "/wp-content/uploads/2022/04/Farmington-Header_Mobile-1000x400-1.jpg",
     lat: 40.991764,
     lng: -111.900474,
   },
@@ -68,6 +77,7 @@ export const offices: Office[] = [
     state: "UT",
     zip: "84010",
     phone: "8012952888",
+    photo: "/wp-content/uploads/2022/04/Grow-Up-Great-Header_Mobile-1000x400-1.jpg",
     lat: 40.886571,
     lng: -111.869210,
   },
@@ -79,6 +89,7 @@ export const offices: Office[] = [
     state: "UT",
     zip: "84106",
     phone: "8012648686",
+    photo: "/wp-content/uploads/2022/04/mobile.png",
     lat: 40.687668,
     lng: -111.875289,
   },
@@ -90,6 +101,7 @@ export const offices: Office[] = [
     state: "UT",
     zip: "84088",
     phone: "8015651162",
+    photo: "/wp-content/uploads/2022/04/Southpoint-Header_Mobile-1000x400-1.jpg",
     lat: 40.586281,
     lng: -111.927903,
   },
@@ -101,6 +113,7 @@ export const offices: Office[] = [
     state: "UT",
     zip: "84060",
     phone: "4356550926",
+    photo: "/wp-content/uploads/2022/04/Summit-Header_Mobile-1000x400-1.jpg",
     lat: 40.685849,
     lng: -111.467122,
   },
@@ -112,6 +125,7 @@ export const offices: Office[] = [
     state: "UT",
     zip: "84121",
     phone: "8019421800",
+    photo: "/wp-content/uploads/2022/04/willowcreekmobile.jpg",
     lat: 40.621649,
     lng: -111.837205,
   },
