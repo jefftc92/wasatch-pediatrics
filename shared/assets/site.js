@@ -223,9 +223,20 @@
   var BADGE_GAP = 2;
   var BAR_PAD = 3;
   var BAR_GAP = 3;
-  /* Outline on the bar. Zoomed out the close offices overlap, and without an
-     edge two white bars on top of each other read as one wide bar. */
+  /* Outline on the bar. Where two offices are close their bars still overlap,
+     and without an edge two white boxes on top of each other read as one. */
   var BAR_EDGE = 1.5;
+  /*
+   * The zoom at which the bars appear.
+   *
+   * Cottonwood and Salt Lake are 4.4km apart, which is 19px at zoom 9 and 38px
+   * at zoom 10 — closer than two three-badge bars are wide, so zoomed out they
+   * pile into each other however they are drawn. At zoom 11 they are 76px
+   * apart and no pair on the map overlaps any more, so that is where the bars
+   * are worth showing. Below it every office is a plain teardrop and the key
+   * and the cards carry what is on offer.
+   */
+  var BAR_ZOOM = 11;
 
   function barWidth(n) {
     return n * BADGE + (n - 1) * BADGE_GAP + BAR_PAD * 2;
@@ -267,7 +278,7 @@
         '"/>' + badges
       : "";
 
-    var pinTop = bh + BAR_GAP;
+    var pinTop = icons.length ? bh + BAR_GAP : 0;
     return (
       '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h +
       '" viewBox="0 0 ' + w + " " + h + '">' +
@@ -286,8 +297,9 @@
    * apart — if they do, the pin lands somewhere other than the office.
    */
   function pinSize(n) {
+    if (!n) return { w: PIN_W, h: PIN_H };
     return {
-      w: Math.max(barWidth(Math.max(n, 1)), PIN_W) + BAR_EDGE,
+      w: Math.max(barWidth(n), PIN_W) + BAR_EDGE,
       h: BADGE + BAR_PAD * 2 + BAR_GAP + PIN_H,
     };
   }
@@ -378,6 +390,10 @@
     var bounds = new google.maps.LatLngBounds();
     var info = new google.maps.InfoWindow();
     var markers = {};
+    /* Whether the bars are currently drawn, and which pins are faded, so a
+       redraw after a zoom keeps the filter's answer rather than resetting it. */
+    var bars = false;
+    var faded = {};
 
     /*
      * AdvancedMarkerElement is the supported marker and needs a Map ID; the
@@ -394,9 +410,10 @@
       var position = { lat: office.lat, lng: office.lng };
 
       if (Advanced) {
-        var box = pinSize(office.icons.length);
+        var icons = shownIcons(office);
+        var box = pinSize(icons.length);
         var img = document.createElement("img");
-        img.src = pinUrl(office.icons, office.colors, false);
+        img.src = pinUrl(icons, office.colors, false);
         img.width = box.w;
         img.height = box.h;
         img.alt = "";
@@ -416,12 +433,18 @@
       });
     }
 
+    /* What the pin is drawn from right now: the bar only above BAR_ZOOM. */
+    function shownIcons(office) {
+      return bars ? office.icons : [];
+    }
+
     /* The image, its drawn size and where its point sits, for a classic Marker. */
     function markerIcon(office, dim) {
-      var box = pinSize(office.icons.length);
-      var at = pinAnchor(office.icons.length);
+      var icons = shownIcons(office);
+      var box = pinSize(icons.length);
+      var at = pinAnchor(icons.length);
       return {
-        url: pinUrl(office.icons, office.colors, dim),
+        url: pinUrl(icons, office.colors, dim),
         scaledSize: new google.maps.Size(box.w, box.h),
         anchor: new google.maps.Point(at.x, at.y),
       };
@@ -429,14 +452,19 @@
 
     function setDim(office, marker, dim) {
       if (Advanced) {
+        var icons = shownIcons(office);
+        var box = pinSize(icons.length);
         if (marker.content) {
-          marker.content.src = pinUrl(office.icons, office.colors, dim);
+          marker.content.src = pinUrl(icons, office.colors, dim);
+          marker.content.width = box.w;
+          marker.content.height = box.h;
         }
         marker.zIndex = dim ? 1 : 2;
       } else {
         marker.setIcon(markerIcon(office, dim));
         marker.setZIndex(dim ? 1 : 2);
       }
+      faded[office.slug] = dim;
     }
 
     offices.forEach(function (office) {
@@ -455,7 +483,25 @@
     /* Eight offices across fifty kilometres can fit tighter than is useful. */
     google.maps.event.addListenerOnce(map, "idle", function () {
       if (map.getZoom() > 11) map.setZoom(11);
+      /* Whatever zoom the fit settled on, the pins have to match it. */
+      syncBars();
     });
+
+    /*
+     * The bars come and go with the zoom. Redrawing eight markers is cheap but
+     * not free, so it only happens on the zoom levels where the answer changes
+     * — not on every wheel notch.
+     */
+    function syncBars() {
+      var want = map.getZoom() >= BAR_ZOOM;
+      if (want === bars) return;
+      bars = want;
+      offices.forEach(function (office) {
+        setDim(office, markers[office.slug], Boolean(faded[office.slug]));
+      });
+    }
+
+    map.addListener("zoom_changed", syncBars);
 
     /*
      * One filter, asked two ways. The select names a single service; the key
