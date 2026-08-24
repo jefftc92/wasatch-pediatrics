@@ -822,6 +822,21 @@
   gap: 14px;
 }
 
+/*
+ * A tile with depth under it opens a panel, so a page three levels down is one
+ * click from the pillar rather than three. The tile stays a link to the
+ * service; the caret beside it is what opens the panel, so clicking the name
+ * still does the obvious thing.
+ *
+ * The panel is in the markup whether or not it is open — it is a list of real
+ * links, and a crawler should see them.
+ */
+.svc-tile-wrap {
+  position: relative;
+}
+
+
+
 .svc-tile {
   display: flex;
   align-items: center;
@@ -875,9 +890,180 @@
   line-height: 1.35;
 }
 
+/* The caret. Sits on the tile's right edge, its own target, not the link's. */
+.svc-tile-more {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  color: #8a8a8c;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.svc-tile-more:before {
+  content: "";
+  display: block;
+  width: 9px;
+  height: 9px;
+  margin: 0 auto;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform 0.18s ease;
+}
+
+.svc-tile-more:hover,
+.svc-tile-more:focus-visible {
+  background: #eef6fc;
+  color: #2b93d1;
+}
+
+.svc-tile-more-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.svc-tile-wrap:hover .svc-tile-more:before,
+.svc-tile-wrap.is-open .svc-tile-more:before {
+  transform: translateY(1px) rotate(-135deg);
+}
+
+/*
+ * The panel spans the whole row rather than the tile's own column, because a
+ * service's topics need more width than a third of the container — Pediatric
+ * Dentistry has four of them and twenty-one pages beneath.
+ */
+/*
+ * A short list of where to go next, sized to its own tile. Listing every page
+ * under every topic as well came to twenty-one links for Pediatric Dentistry,
+ * which is a menu rather than a shortcut.
+ */
+.svc-tile-panel {
+  display: none;
+  position: absolute;
+  z-index: 20;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  padding: 10px 10px 6px 10px;
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(33, 33, 33, 0.18);
+}
+
+/* Nine topics in one column is a long drop; two columns keeps it in view. */
+.svc-tile-panel-wide .svc-panel-list {
+  column-count: 2;
+  column-gap: 14px;
+}
+
+.svc-tile-wrap.is-open .svc-tile-panel {
+  display: block;
+}
+
+.svc-panel-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.svc-panel-list li {
+  break-inside: avoid;
+}
+
+.svc-panel-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 9px;
+  color: #636466 !important;
+  font-size: 15px;
+  font-weight: 400 !important;
+  line-height: 1.25;
+  text-decoration: none !important;
+}
+
+.svc-panel-list a:hover {
+  background: #eef6fc;
+  color: #1f6f9e !important;
+}
+
+/* How many pages are inside, so the list says what it costs to go there. */
+.svc-panel-count {
+  flex: 0 0 auto;
+  min-width: 20px;
+  padding: 1px 6px;
+  border-radius: 9px;
+  background: #eef0f1;
+  color: #8a8a8c;
+  font-size: 12px;
+  text-align: center;
+}
+
+.svc-panel-list a:hover .svc-panel-count {
+  background: #ffffff;
+  color: #2b93d1;
+}
+
+.svc-panel-all {
+  margin: 6px 0 0 0;
+  padding: 10px 12px 4px 12px;
+  border-top: 1px solid #ececee;
+}
+
+.svc-panel-all a {
+  color: #2b93d1;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none !important;
+}
+
+@media (min-width: 992px) {
+  /*
+   * On a pointer, hovering the tile is enough; the caret is for taps and keys.
+   *
+   * Deliberately not :focus-within. Clicking the caret to close leaves focus on
+   * it, and :focus-within would reopen the panel on the spot — so the caret
+   * could never close anything, and a panel closed that way sat open beside
+   * whichever tile was hovered next. The caret's own click state is the only
+   * thing that decides, and a keyboard reaches the links through it.
+   */
+  .svc-tile-wrap:hover .svc-tile-panel {
+    display: block;
+  }
+
+}
+
 @media (max-width: 991px) {
   .svc-tiles .container {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Nothing to span on a narrow screen, so it opens under its own tile. */
+  .svc-tile-panel {
+    position: static;
+    margin-top: 8px;
+    box-shadow: none;
+    border: 1px solid #e4e4e6;
+  }
+
+  .svc-tile-panel-wide .svc-panel-list {
+    column-count: 1;
   }
 }
 
@@ -1139,66 +1325,6 @@
 .loc-map.is-off {
   display: block;
   height: auto;
-}
-
-.loc-filter {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin: 0 0 18px 0;
-}
-
-.loc-filter-label {
-  font-size: 17px;
-  color: #636466;
-  margin: 0;
-}
-
-/* The arrow is drawn here rather than left to the platform, so the control
-   matches the rest of the page instead of each OS's own select. */
-.loc-filter-field {
-  position: relative;
-  display: inline-block;
-}
-
-.loc-filter-field:after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  right: 20px;
-  width: 8px;
-  height: 8px;
-  margin-top: -6px;
-  border: solid #2b93d1;
-  border-width: 0 3px 3px 0;
-  transform: rotate(45deg);
-  pointer-events: none;
-}
-
-.loc-filter-select {
-  appearance: none;
-  -webkit-appearance: none;
-  border: 2px solid #e4e4e4;
-  background: #ffffff;
-  color: #636466;
-  border-radius: 25px;
-  padding: 9px 48px 9px 22px;
-  font-size: 17px;
-  font-family: inherit;
-  cursor: pointer;
-  max-width: 100%;
-}
-
-.loc-filter-select:focus {
-  outline: none;
-  border-color: #2b93d1;
-}
-
-/* Only useful without the script, which filters on change instead. */
-.loc-filter-go {
-  font-size: 15px !important;
-  padding: 8px 24px !important;
 }
 
 .loc-count {
@@ -1529,29 +1655,6 @@
 }
 
 /*
- * The filter and the count on one line. They are one thought — what you asked
- * for, and how many offices answer — and stacking them put 115px between the
- * question and the map.
- */
-.loc-controls {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px 20px;
-  margin: 0 0 22px 0;
-}
-
-.loc-controls .loc-filter {
-  margin: 0;
-}
-
-.loc-controls .loc-count {
-  margin: 0;
-  color: #8a8a8c;
-  font-size: 16px;
-}
-
-/*
  * The key floats over the map's top-left corner, the way a printed map's key
  * sits inside its frame — it is about what is on the map, so it belongs on it
  * rather than beside it in a column of its own.
@@ -1737,22 +1840,6 @@
   .loc-key-btn {
     width: auto;
     border: 1px solid #e4e4e6;
-  }
-
-  .loc-filter {
-    gap: 12px;
-  }
-
-  .loc-filter-label {
-    flex: 1 0 100%;
-  }
-
-  .loc-filter-field {
-    flex: 1 1 auto;
-  }
-
-  .loc-filter-select {
-    width: 100%;
   }
 
   .loc-list {

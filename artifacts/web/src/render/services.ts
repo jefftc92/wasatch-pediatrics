@@ -120,15 +120,50 @@ function serviceCard(service: Service): string {
  */
 export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
   const tiles = servicesInPillar(pillar.slug)
-    .map(
-      (service) => `<a class="svc-tile" href="${serviceHref(service)}">
-			<span class="svc-tile-ico"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${service.icon ?? "circle-dashed"}"></use></svg></span>
-			<span class="svc-tile-text">
-				<span class="svc-tile-name">${escapeAttribute(service.name)}</span>
-				<span class="svc-tile-sub">${escapeAttribute(service.blurb)}</span>
-			</span>
-		</a>`,
-    )
+    .map((service) => {
+      const topics = service.topics ?? [];
+      const panelId = `svc-panel-${service.slug}`;
+
+      const link = `<a class="svc-tile" href="${serviceHref(service)}">
+				<span class="svc-tile-ico"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${service.icon ?? "circle-dashed"}"></use></svg></span>
+				<span class="svc-tile-text">
+					<span class="svc-tile-name">${escapeAttribute(service.name)}</span>
+					<span class="svc-tile-sub">${escapeAttribute(service.blurb)}</span>
+				</span>
+			</a>`;
+
+      /* A service with nothing under it is only ever a link. */
+      if (!topics.length) {
+        return `<div class="svc-tile-wrap">
+			${link}
+		</div>`;
+      }
+
+      /*
+       * Topics only. Listing every page beneath them as well put twenty-one
+       * links in one panel for Pediatric Dentistry, which is a menu rather
+       * than a shortcut — this is a short list of where to go next, and the
+       * page itself is one step on from there.
+       */
+      const entries = topics
+        .map((topic) => {
+          const count = topic.items.length;
+          const tail = count
+            ? `<span class="svc-panel-count">${count}</span>`
+            : "";
+          return `<li><a href="${topicHref(service, topic)}">${escapeAttribute(topic.name)}${tail}</a></li>`;
+        })
+        .join("");
+
+      return `<div class="svc-tile-wrap">
+			${link}
+			<button class="svc-tile-more" type="button" aria-expanded="false" aria-controls="${panelId}"><span class="svc-tile-more-label">What&#8217;s under ${escapeAttribute(service.name)}</span></button>
+			<div class="svc-tile-panel${topics.length > 6 ? " svc-tile-panel-wide" : ""}" id="${panelId}">
+				<ul class="svc-panel-list">${entries}</ul>
+				<p class="svc-panel-all"><a href="${serviceHref(service)}">All ${escapeAttribute(service.name)}</a></p>
+			</div>
+		</div>`;
+    })
     .join("\n\t\t");
 
   return `<div class="graybg svc-tiles">
@@ -136,8 +171,7 @@ export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
 		${tiles}
 	</div>
 </div>`;
-}
-/** Links across to the other three pillars, on every hub and service page. */
+}/** Links across to the other three pillars, on every hub and service page. */
 /**
  * The pages alongside this one, as cards at the foot of the page.
  *

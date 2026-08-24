@@ -402,7 +402,6 @@
     var cards = document.querySelectorAll(".loc-hit");
     var count = document.querySelector(".loc-count");
     var emptyNote = document.querySelector(".loc-empty");
-    var select = document.getElementById("loc-service");
     var keyBox = document.querySelector(".loc-key");
     var keyBtns = Array.prototype.slice.call(
       document.querySelectorAll(".loc-key-btn"),
@@ -574,15 +573,20 @@
       });
       if (keyBox) keyBox.classList.toggle("has-choice", Boolean(careSlug));
 
-      if (serviceSlug && select && select.selectedOptions[0]) {
-        label = select.selectedOptions[0].text;
-      } else if (careSlug) {
+      if (careSlug) {
         var chosen = document.querySelector('.loc-key-btn[data-care="' + careSlug + '"]');
         if (chosen) label = chosen.textContent.trim();
       }
 
       if (emptyNote) emptyNote.hidden = shown > 0;
-      if (count) {
+
+      /*
+       * Nothing on the page can set a service any more, so the only way one
+       * arrives is in the URL — and then the server has already written the
+       * count line naming it. Rewriting it here would need the service's name,
+       * which the page no longer carries anywhere.
+       */
+      if (count && !serviceSlug) {
         count.textContent = !label
           ? "All eight offices."
           : shown === 0
@@ -604,28 +608,11 @@
       window.history.replaceState({}, "", url);
     }
 
-    if (select) {
-      var form = select.closest("form");
-      if (form) {
-        var go = form.querySelector(".loc-filter-go");
-        if (go) go.hidden = true;
-        form.addEventListener("submit", function (event) {
-          event.preventDefault();
-        });
-      }
-      select.addEventListener("change", function () {
-        care = "";
-        apply(select.value, "");
-        remember(select.value, "");
-      });
-    }
-
     keyBtns.forEach(function (btn) {
       btn.addEventListener("click", function (event) {
         event.preventDefault();
         var wanted = btn.getAttribute("data-care");
         care = care === wanted ? "" : wanted;
-        if (select) select.value = "";
         apply("", care);
         remember("", care);
       });
@@ -708,6 +695,67 @@
           },
         );
       });
+    });
+  }
+
+  /* ------------------------------------------------------- service tiles -- */
+
+  /*
+   * The panels under the pillar's service tiles.
+   *
+   * On a pointer the panel opens on hover, which CSS does on its own; this is
+   * for the caret — taps, and keyboards. Both paths set the same class, so the
+   * two never disagree about what is open.
+   *
+   * Only one at a time: three panels overlapping each other in the same strip
+   * would be unreadable, and on a wide screen they occupy the same space.
+   */
+  var tileCarets = document.querySelectorAll(".svc-tile-more");
+
+  if (tileCarets.length) {
+    var closeTiles = function (except) {
+      tileCarets.forEach(function (caret) {
+        var wrap = caret.closest(".svc-tile-wrap");
+        if (wrap === except) return;
+        wrap.classList.remove("is-open");
+        caret.setAttribute("aria-expanded", "false");
+      });
+    };
+
+    tileCarets.forEach(function (caret) {
+      caret.addEventListener("click", function () {
+        var wrap = caret.closest(".svc-tile-wrap");
+        var open = wrap.classList.contains("is-open");
+        closeTiles(wrap);
+        wrap.classList.toggle("is-open", !open);
+        caret.setAttribute("aria-expanded", String(!open));
+      });
+    });
+
+    /*
+     * Hover is CSS and the caret is a class, so without this a panel opened by
+     * the caret stays open while you hover a different tile and two of them
+     * occupy the same strip at once. Pointing at a tile closes whatever the
+     * caret left open.
+     */
+    tileCarets.forEach(function (caret) {
+      var wrap = caret.closest(".svc-tile-wrap");
+      wrap.addEventListener("mouseenter", function () {
+        closeTiles(wrap);
+      });
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest(".svc-tile-wrap")) closeTiles(null);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape") return;
+      var open = document.querySelector(".svc-tile-wrap.is-open");
+      if (!open) return;
+      closeTiles(null);
+      var caret = open.querySelector(".svc-tile-more");
+      if (caret) caret.focus();
     });
   }
 
