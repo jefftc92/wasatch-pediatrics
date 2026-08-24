@@ -106,23 +106,37 @@ function serviceCard(service: Service): string {
 }
 
 /** The card grid of everything in a pillar. */
-export function renderServiceIndex(pillar: Pillar, heading: string): string {
-  const cards = servicesInPillar(pillar.slug).map(serviceCard).join("\n");
+/**
+ * A pillar's services, as tiles directly under the hero.
+ *
+ * They used to be full cards — heading, blurb paragraph, office count and a
+ * Learn more button each — sitting below a long page. That is a lot of
+ * furniture for what is really the section's menu, and it put the way into the
+ * section below the fold. These are menu items: symbol, name, one short line,
+ * nothing to press. The whole tile is the link.
+ *
+ * The symbols are the service's own, and only have to be distinct inside one
+ * pillar, since no page shows two pillars' tiles.
+ */
+export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
+  const tiles = servicesInPillar(pillar.slug)
+    .map(
+      (service) => `<a class="svc-tile" href="${serviceHref(service)}">
+			<span class="svc-tile-ico"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${service.icon ?? "circle-dashed"}"></use></svg></span>
+			<span class="svc-tile-text">
+				<span class="svc-tile-name">${escapeAttribute(service.name)}</span>
+				<span class="svc-tile-sub">${escapeAttribute(service.blurb)}</span>
+			</span>
+		</a>`,
+    )
+    .join("\n\t\t");
 
-  return `<div class="whitebg padme90 svc-index">
+  return `<div class="graybg svc-tiles">
 	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h2 class="svc-index-title">${heading}</h2>
-			</div>
-		</div>
-		<div class="row">
-${cards}
-		</div>
+		${tiles}
 	</div>
 </div>`;
 }
-
 /** Links across to the other three pillars, on every hub and service page. */
 /**
  * The pages alongside this one, as cards at the foot of the page.
@@ -214,9 +228,45 @@ export function renderPillarPage(
 </div>`;
 
 
-  return `${opening}
-${renderServiceIndex(pillar, storedContent ? `Explore ${pillar.name}` : "What we offer")}
+  /*
+   * The tiles go above the page's own copy, not below it. On dentistry the
+   * stored landing page runs to nearly 3000px, so the section's menu was
+   * effectively at the bottom — the way in has to come before the reading.
+   */
+  const [hero, body] = splitAfterHero(opening);
+
+  return `${hero}
+${renderServiceIndex(pillar)}
+${body}
 ${otherPillars(pillar.slug)}`;
+}
+
+/**
+ * Splits a pillar's opening markup just after its hero band, so the tiles can go
+ * between the title and the page's own copy.
+ *
+ * Both kinds of pillar page start with a `.bluebg` block — a stored landing page
+ * because that is how the live site builds one, a generated pillar because
+ * `heroSection` does. What follows it differs (`<br>` on the stored ones, a
+ * `<div>` on the generated ones), so the split counts div tags to find where the
+ * band actually closes rather than matching whatever comes next.
+ */
+function splitAfterHero(markup: string): [string, string] {
+  const open = markup.indexOf('<div class="bluebg"');
+  if (open === -1) return [markup, ""];
+
+  const tag = /<div\b|<\/div>/g;
+  tag.lastIndex = open;
+  let depth = 0;
+  let match: RegExpExecArray | null;
+  while ((match = tag.exec(markup))) {
+    depth += match[0] === "</div>" ? -1 : 1;
+    if (depth === 0) {
+      const end = match.index + match[0].length;
+      return [markup.slice(0, end), markup.slice(end)];
+    }
+  }
+  return [markup, ""];
 }
 
 function locationList(service: Service, pillar: Pillar): string {

@@ -806,6 +806,88 @@
 }
 
 /*
+ * A pillar's services, as tiles directly under the hero.
+ *
+ * Menu items rather than cards: symbol, name, one line, nothing to press. The
+ * whole tile is the link, and the row sits flush under the title band so the
+ * way into the section is the first thing below it.
+ */
+.svc-tiles {
+  padding: 24px 0 26px 0;
+}
+
+.svc-tiles .container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.svc-tile {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 15px 18px;
+  background: #ffffff;
+  border-radius: 14px;
+  text-decoration: none !important;
+  transition: box-shadow 0.15s ease;
+}
+
+.svc-tile:hover {
+  box-shadow: 0 3px 14px rgba(33, 33, 33, 0.14);
+}
+
+.svc-tile-ico {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #2b93d1;
+  color: #ffffff;
+}
+
+.svc-tile-ico svg {
+  width: 24px;
+  height: 24px;
+}
+
+.svc-tile-text {
+  min-width: 0;
+}
+
+.svc-tile-name {
+  display: block;
+  color: #2b93d1;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.svc-tile-sub {
+  display: block;
+  margin-top: 3px;
+  color: #8a8a8c;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.35;
+}
+
+@media (max-width: 991px) {
+  .svc-tiles .container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .svc-tiles .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/*
  * `.svc-card` and `.graybg` are both #F4F4F4, so a card grid on a grey band was
  * invisible — the cards read as loose text. Rather than thread band colours
  * through every caller, a card on grey turns white. Either way it is a card.

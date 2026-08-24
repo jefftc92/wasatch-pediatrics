@@ -224,6 +224,8 @@ export function renderLocationsIndex(
     colors: categoriesAtLocation(office.slug).map((c) => c.color),
     categories: categoriesAtLocation(office.slug).map((c) => c.name),
     cares: categoriesAtLocation(office.slug).map((c) => c.slug),
+    /* Symbol names, so the pin draws the key's own badges. */
+    icons: categoriesAtLocation(office.slug).map((c) => c.icon),
   }));
 
   /*
