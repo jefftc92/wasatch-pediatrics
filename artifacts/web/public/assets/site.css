@@ -215,6 +215,11 @@
     left: -16px;
   }
 
+  /* Desktop has its own dropdowns; the caret is a mobile affordance only. */
+  .navtoggle {
+    display: none;
+  }
+
   /*
    * Tabbing to a menu item opens its panel and holds it open while focus is
    * anywhere inside, so the panel is reachable without a mouse.
@@ -662,6 +667,56 @@
     padding: 14px 0 !important;
   }
 
+  /*
+   * A caret of its own on each parent, so the label can do what a link does.
+   *
+   * The theme's mobile handler makes the whole row a toggle and calls
+   * preventDefault on the anchor, so tapping Services expanded it and went
+   * nowhere — there was no way to reach /services/ from the menu at all. The
+   * label navigates now and this opens the panel.
+   */
+  .navtoggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 52px;
+    height: 50px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+
+  .navtoggle:before {
+    content: "";
+    display: block;
+    width: 10px;
+    height: 10px;
+    margin: 0 auto;
+    border: solid #2b93d1;
+    border-width: 0 3px 3px 0;
+    transform: translateY(-3px) rotate(45deg);
+    transition: transform 0.18s ease;
+  }
+
+  .mainnav > li.open > .navtoggle:before {
+    transform: translateY(2px) rotate(-135deg);
+  }
+
+  .navtoggle-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
+  /* The label must not run under the caret. */
+  .mainnav > li.menu-item-has-children > a {
+    padding-right: 56px;
+  }
+
   /* Extends the burger's hit area without moving the bars inside it. */
   #mobileburger:after {
     content: "";
@@ -842,6 +897,11 @@
   align-items: center;
   gap: 14px;
   padding: 15px 18px;
+}
+
+/* Room for the caret, so the blurb never runs underneath it. */
+.svc-tile-head:has(.svc-tile-more) .svc-tile {
+  padding-right: 52px;
   background: #ffffff;
   border-radius: 14px;
   text-decoration: none !important;
@@ -890,6 +950,16 @@
   line-height: 1.35;
 }
 
+/*
+ * The tile and its caret share a box, so the caret centres on the tile rather
+ * than on the wrap — with the panel open the wrap is several hundred pixels
+ * tall, and the caret drifted into the middle of the open list and sat on top
+ * of the words.
+ */
+.svc-tile-head {
+  position: relative;
+}
+
 /* The caret. Sits on the tile's right edge, its own target, not the link's. */
 .svc-tile-more {
   position: absolute;
@@ -936,7 +1006,7 @@
   white-space: nowrap;
 }
 
-.svc-tile-wrap:hover .svc-tile-more:before,
+.svc-tile-head:hover .svc-tile-more:before,
 .svc-tile-wrap.is-open .svc-tile-more:before {
   transform: translateY(1px) rotate(-135deg);
 }
@@ -964,7 +1034,8 @@
   box-shadow: 0 8px 22px rgba(33, 33, 33, 0.18);
 }
 
-/* Nine topics in one column is a long drop; two columns keeps it in view. */
+/* Nine topics in one column is a long drop; two columns keeps it in view.
+   Only the wide panel has them, and only that one has no foldable rows. */
 .svc-tile-panel-wide .svc-panel-list {
   column-count: 2;
   column-gap: 14px;
@@ -984,12 +1055,19 @@
   break-inside: avoid;
 }
 
-.svc-panel-list a {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
+/*
+ * A row is the topic's own link, and — when it has pages — a toggle beside it
+ * that folds them out. The name always goes to the topic; the count beside it
+ * opens what is inside without leaving the page.
+ */
+.svc-panel-row {
+  position: relative;
+}
+
+.svc-panel-link {
+  display: block;
   padding: 8px 12px;
+  padding-right: 46px;
   border-radius: 9px;
   color: #636466 !important;
   font-size: 15px;
@@ -998,26 +1076,81 @@
   text-decoration: none !important;
 }
 
-.svc-panel-list a:hover {
+.svc-panel-link:hover {
   background: #eef6fc;
   color: #1f6f9e !important;
 }
 
-/* How many pages are inside, so the list says what it costs to go there. */
+.svc-panel-toggle {
+  position: absolute;
+  top: 3px;
+  right: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 7px;
+  border: 0;
+  border-radius: 8px;
+  background: none;
+  cursor: pointer;
+}
+
+.svc-panel-toggle:hover,
+.svc-panel-toggle:focus-visible {
+  background: #eef6fc;
+}
+
+.svc-panel-toggle:after {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border: solid #a8adb2;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.18s ease;
+}
+
+.svc-panel-row.is-open .svc-panel-toggle:after {
+  transform: translateY(1px) rotate(-135deg);
+}
+
+/* How many pages are inside, so the row says what it costs to open it. */
 .svc-panel-count {
-  flex: 0 0 auto;
-  min-width: 20px;
-  padding: 1px 6px;
+  min-width: 19px;
+  padding: 1px 5px;
   border-radius: 9px;
   background: #eef0f1;
   color: #8a8a8c;
   font-size: 12px;
+  line-height: 1.5;
   text-align: center;
 }
 
-.svc-panel-list a:hover .svc-panel-count {
-  background: #ffffff;
-  color: #2b93d1;
+.svc-panel-sub {
+  display: none;
+  list-style: none;
+  margin: 2px 0 6px 0;
+  padding: 0 0 0 12px;
+  border-left: 2px solid #e4ecf2;
+}
+
+.svc-panel-row.is-open .svc-panel-sub {
+  display: block;
+}
+
+.svc-panel-sub a {
+  display: block;
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: #7a7c7f;
+  font-size: 14px;
+  font-weight: 400;
+  text-decoration: none !important;
+}
+
+.svc-panel-sub a:hover {
+  background: #eef6fc;
+  color: #1f6f9e;
 }
 
 .svc-panel-all {

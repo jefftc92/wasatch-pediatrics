@@ -135,7 +135,7 @@ export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
       /* A service with nothing under it is only ever a link. */
       if (!topics.length) {
         return `<div class="svc-tile-wrap">
-			${link}
+			<div class="svc-tile-head">${link}</div>
 		</div>`;
       }
 
@@ -147,17 +147,37 @@ export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
        */
       const entries = topics
         .map((topic) => {
-          const count = topic.items.length;
-          const tail = count
-            ? `<span class="svc-panel-count">${count}</span>`
-            : "";
-          return `<li><a href="${topicHref(service, topic)}">${escapeAttribute(topic.name)}${tail}</a></li>`;
+          const href = topicHref(service, topic);
+          /* A topic with nothing under it is one row and one link. */
+          if (!topic.items.length) {
+            return `<li class="svc-panel-row"><a class="svc-panel-link" href="${href}">${escapeAttribute(topic.name)}</a></li>`;
+          }
+
+          const pages = topic.items
+            .map(
+              (item) =>
+                `<li><a href="${topicItemHref(service, topic, item)}">${escapeAttribute(item.name)}</a></li>`,
+            )
+            .join("");
+
+          /*
+           * A topic with pages folds them away behind its own toggle. The name
+           * stays a link to the topic, so the row does both jobs: go there, or
+           * open it and go straight to one of its pages.
+           */
+          return `<li class="svc-panel-row">
+						<a class="svc-panel-link" href="${href}">${escapeAttribute(topic.name)}</a>
+						<button class="svc-panel-toggle" type="button" aria-expanded="false"><span class="svc-panel-count">${topic.items.length}</span><span class="svc-tile-more-label">Show what is under ${escapeAttribute(topic.name)}</span></button>
+						<ul class="svc-panel-sub">${pages}</ul>
+					</li>`;
         })
         .join("");
 
       return `<div class="svc-tile-wrap">
+			<div class="svc-tile-head">
 			${link}
 			<button class="svc-tile-more" type="button" aria-expanded="false" aria-controls="${panelId}"><span class="svc-tile-more-label">What&#8217;s under ${escapeAttribute(service.name)}</span></button>
+			</div>
 			<div class="svc-tile-panel${topics.length > 6 ? " svc-tile-panel-wide" : ""}" id="${panelId}">
 				<ul class="svc-panel-list">${entries}</ul>
 				<p class="svc-panel-all"><a href="${serviceHref(service)}">All ${escapeAttribute(service.name)}</a></p>
