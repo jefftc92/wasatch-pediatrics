@@ -78,6 +78,11 @@ export type Service = {
   description: string;
   /** Location slugs, transcribed from the live location pages. */
   locations: string[];
+  /**
+   * Symbol for the service's tile on its pillar page, from /assets/icons.svg.
+   * Only has to be distinct within a pillar — no page shows two pillars' tiles.
+   */
+  icon?: string;
   /** Category id in the provider filter, when providers map to this service. */
   providerCategory?: string;
   /** File in `src/authored/`, when the practice's own copy exists. */
@@ -150,6 +155,7 @@ export const services: Service[] = [
   // ------------------------------------------------------------ medical care
   {
     slug: "well-child",
+    icon: "stethoscope",
     popular: true,
     name: "Well Child Checkups",
     pillar: "medical-care",
@@ -171,6 +177,7 @@ export const services: Service[] = [
   },
   {
     slug: "sick-visits",
+    icon: "bandaids",
     popular: true,
     name: "Same-Day Sick Visits",
     pillar: "medical-care",
@@ -192,6 +199,7 @@ export const services: Service[] = [
   },
   {
     slug: "after-hours-care",
+    icon: "moon",
     popular: true,
     name: "After Hours Care",
     pillar: "medical-care",
@@ -212,6 +220,7 @@ export const services: Service[] = [
   },
   {
     slug: "immunizations",
+    icon: "shield-check",
     popular: true,
     name: "Immunizations",
     pillar: "medical-care",
@@ -232,6 +241,7 @@ export const services: Service[] = [
   },
   {
     slug: "newborn-hospital-care",
+    icon: "baby",
     name: "Newborn Hospital Care",
     pillar: "medical-care",
     blurb: "Your pediatrician sees your baby at the hospital.",
@@ -251,6 +261,7 @@ export const services: Service[] = [
   },
   {
     slug: "lab-tests-screenings",
+    icon: "magnifying-glass",
     name: "Lab Tests & Screenings",
     pillar: "medical-care",
     blurb: "In-office testing, so most results come back the same visit.",
@@ -270,6 +281,7 @@ export const services: Service[] = [
   },
   {
     slug: "ear-piercing",
+    icon: "sparkle",
     name: "Ear Piercing",
     pillar: "medical-care",
     blurb: "Done in a medical office, by clinical staff.",
@@ -281,6 +293,7 @@ export const services: Service[] = [
   },
   {
     slug: "medical-home-coordination",
+    icon: "users-three",
     name: "Medical Home Coordination",
     pillar: "medical-care",
     blurb: "One team coordinating specialists, records and care plans.",
@@ -300,6 +313,7 @@ export const services: Service[] = [
   },
   {
     slug: "in-office-procedures",
+    icon: "wrench",
     name: "In-Office Procedures",
     pillar: "medical-care",
     blurb: "Laceration repair, Nexplanon, Accutane and asthma testing.",
@@ -313,6 +327,7 @@ export const services: Service[] = [
   // ------------------------------------------------------- behavioral health
   {
     slug: "behavioral-consultation",
+    icon: "user-focus",
     name: "Consultation & Screening",
     pillar: "behavioral-health",
     blurb: "Assessment, treatment planning and referrals.",
@@ -333,6 +348,7 @@ export const services: Service[] = [
   },
   {
     slug: "therapy",
+    icon: "heart",
     popular: true,
     name: "Therapy",
     pillar: "behavioral-health",
@@ -354,6 +370,7 @@ export const services: Service[] = [
   },
   {
     slug: "psychiatry",
+    icon: "shield",
     name: "Medication Management",
     pillar: "behavioral-health",
     blurb: "Psychiatric assessment and medication management.",
@@ -374,6 +391,7 @@ export const services: Service[] = [
   },
   {
     slug: "autism-testing",
+    icon: "user",
     name: "Psychological & Autism Testing",
     pillar: "behavioral-health",
     blurb: "Formal evaluation and diagnosis, at our Summit office.",
@@ -388,6 +406,7 @@ export const services: Service[] = [
   // -------------------------------------------------------------- nutrition
   {
     slug: "dietitian",
+    icon: "drop",
     name: "Dietitian Consultation",
     pillar: "nutrition",
     blurb: "Registered dietitian support for feeding, growth and sports.",
@@ -409,6 +428,7 @@ export const services: Service[] = [
   },
   {
     slug: "lactation-consultation",
+    icon: "baby",
     name: "Lactation Consultation",
     pillar: "nutrition",
     blurb: "Feeding support for newborns and their parents.",
@@ -427,6 +447,7 @@ export const services: Service[] = [
   },
   {
     slug: "community-classes",
+    icon: "users-three",
     name: "Community Classes",
     pillar: "nutrition",
     blurb: "Education classes for parents, run at our offices.",
@@ -446,6 +467,7 @@ export const services: Service[] = [
   // -------------------------------------------------------------- dentistry
   {
     slug: "pediatric-dentistry",
+    icon: "tooth",
     name: "Pediatric Dentistry",
     pillar: "dentistry",
     blurb: "First visits, cleanings, fillings and sedation options.",
@@ -604,6 +626,7 @@ export const services: Service[] = [
   },
   {
     slug: "orthodontics",
+    icon: "smiley",
     name: "Orthodontics",
     pillar: "dentistry",
     blurb: "Braces and clear aligners for children and teens.",
@@ -699,6 +722,7 @@ export const services: Service[] = [
   },
   {
     slug: "dental-emergencies",
+    icon: "first-aid-kit",
     popular: true,
     name: "Dental Emergencies",
     pillar: "dentistry",

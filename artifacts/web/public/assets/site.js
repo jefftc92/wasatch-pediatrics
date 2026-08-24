@@ -189,51 +189,107 @@
    */
   var mapEl = document.getElementById("loc-map");
 
-  var PIN_R = 15;
-  var PIN_CX = 20;
-  var PIN_CY = 20;
-
-  /**
-   * The pin, as SVG. `colors` is one entry per care category the office has, in
-   * legend order; `dim` is the filtered-out state.
+  /*
+   * The four care-type symbols, as raw path data.
+   *
+   * A marker is a single image, so the sprite at /assets/icons.svg cannot be
+   * referenced from inside one — an external `use` does not resolve in a data
+   * URI. These are the same four paths that sprite holds, on the same 256 grid,
+   * copied in by tools/build-icons.mjs so they cannot drift from the key.
    */
-  function pinSvg(colors, dim) {
-    var n = colors.length || 1;
-    var seg = "";
+  var CARE_ICON = {
+      "stethoscope": "M220 160a12 12 0 1 1-12-12a12 12 0 0 1 12 12m-4.55 39.29A48.08 48.08 0 0 1 168 240h-24a48.05 48.05 0 0 1-48-48v-40.51A64 64 0 0 1 40 88V40a8 8 0 0 1 8-8h24a8 8 0 0 1 0 16H56v40a48 48 0 0 0 48.64 48c26.11-.34 47.36-22.25 47.36-48.83V48h-16a8 8 0 0 1 0-16h24a8 8 0 0 1 8 8v47.17c0 32.84-24.53 60.29-56 64.31V192a32 32 0 0 0 32 32h24a32.06 32.06 0 0 0 31.22-25a40 40 0 1 1 16.23.27ZM232 160a24 24 0 1 0-24 24a24 24 0 0 0 24-24",
+      "heart": "M178 40c-20.65 0-38.73 8.88-50 23.89C116.73 48.88 98.65 40 78 40a62.07 62.07 0 0 0-62 62c0 70 103.79 126.66 108.21 129a8 8 0 0 0 7.58 0C136.21 228.66 240 172 240 102a62.07 62.07 0 0 0-62-62m-50 174.8c-18.26-10.64-96-59.11-96-112.8a46.06 46.06 0 0 1 46-46c19.45 0 35.78 10.36 42.6 27a8 8 0 0 0 14.8 0c6.82-16.67 23.15-27 42.6-27a46.06 46.06 0 0 1 46 46c0 53.61-77.76 102.15-96 112.8",
+      "baby": "M92 140a12 12 0 1 1 12-12a12 12 0 0 1-12 12m72-24a12 12 0 1 0 12 12a12 12 0 0 0-12-12m-12.27 45.23a45 45 0 0 1-47.46 0a8 8 0 0 0-8.54 13.54a61 61 0 0 0 64.54 0a8 8 0 0 0-8.54-13.54M232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88.11 88.11 0 0 0-84.09-87.91C120.32 56.38 120 71.88 120 72a8 8 0 0 0 16 0a8 8 0 0 1 16 0a24 24 0 0 1-48 0c0-.73.13-14.3 8.46-30.63A88 88 0 1 0 216 128",
+      "tooth": "M171 71.42L149.54 80L171 88.57a8 8 0 1 1-6 14.85l-37-14.81l-37 14.81a8 8 0 1 1-6-14.85L106.46 80L85 71.42a8 8 0 1 1 6-14.85l37 14.81l37-14.81a8 8 0 1 1 6 14.85m53 8.33c0 42.72-8 75.4-14.69 95.28c-8.73 25.8-20.63 45.49-32.65 54a15.69 15.69 0 0 1-15.95 1.41a16.09 16.09 0 0 1-9.18-13.36c-.85-11.5-5.05-49.08-23.53-49.08s-22.68 37.59-23.53 49.11a16.09 16.09 0 0 1-16 14.9a15.67 15.67 0 0 1-9.13-2.95c-12-8.53-23.92-28.22-32.65-54C40 155.15 32 122.47 32 79.75A56 56 0 0 1 88 24h80a56 56 0 0 1 56 55.75m-16 0A40 40 0 0 0 168 40H88a40 40 0 0 0-40 39.76c0 40.55 7.51 71.4 13.85 90.14c11.05 32.66 23 43.37 26.61 46C91.57 174.67 105.59 152 128 152s36.45 22.71 39.49 63.94c3.6-2.59 15.57-13.26 26.66-46c6.34-18.78 13.85-49.63 13.85-90.18Z"
+  };
 
-    if (n === 1) {
-      seg =
-        '<circle cx="' + PIN_CX + '" cy="' + PIN_CY + '" r="' + PIN_R +
-        '" fill="' + (colors[0] || "#2b93d1") + '"/>';
-    } else {
-      for (var i = 0; i < n; i++) {
-        var a0 = (Math.PI * 2 * i) / n - Math.PI / 2;
-        var a1 = (Math.PI * 2 * (i + 1)) / n - Math.PI / 2;
-        var x0 = PIN_CX + PIN_R * Math.cos(a0);
-        var y0 = PIN_CY + PIN_R * Math.sin(a0);
-        var x1 = PIN_CX + PIN_R * Math.cos(a1);
-        var y1 = PIN_CY + PIN_R * Math.sin(a1);
-        seg +=
-          '<path d="M' + PIN_CX + " " + PIN_CY + " L" + x0.toFixed(2) + " " + y0.toFixed(2) +
-          " A" + PIN_R + " " + PIN_R + " 0 " + (a1 - a0 > Math.PI ? 1 : 0) + " 1 " +
-          x1.toFixed(2) + " " + y1.toFixed(2) + ' Z" fill="' + colors[i] + '"/>';
+  /*
+   * The pin.
+   *
+   * A teardrop for where the office is, and above it a small white bar holding
+   * one badge per kind of care it gives — the same badges, the same colours and
+   * the same order as the key on the map. Four segments of a pie all looked
+   * alike once you were past two; four little symbols in a row do not, and they
+   * say what they mean without the key having to be consulted.
+   *
+   * It is one SVG rather than a pin plus an overlay because a marker is a
+   * single image. The whole thing is anchored at the point of the teardrop, so
+   * the bar rides above the place rather than covering it.
+   */
+  var PIN_W = 34;
+  var PIN_H = 44;
+  var BADGE = 16;
+  var BADGE_GAP = 2;
+  var BAR_PAD = 3;
+  var BAR_GAP = 3;
+
+  function barWidth(n) {
+    return n * BADGE + (n - 1) * BADGE_GAP + BAR_PAD * 2;
+  }
+
+  function pinSvg(icons, colors, dim) {
+    var n = Math.max(icons.length, 1);
+    var bw = barWidth(n);
+    var bh = BADGE + BAR_PAD * 2;
+    var w = Math.max(bw, PIN_W);
+    var h = bh + BAR_GAP + PIN_H;
+    var midX = w / 2;
+    var o = dim ? 0.45 : 1;
+
+    var badges = "";
+    for (var i = 0; i < icons.length; i++) {
+      var x = midX - bw / 2 + BAR_PAD + i * (BADGE + BADGE_GAP);
+      var path = CARE_ICON[icons[i]];
+      badges +=
+        '<rect x="' + x.toFixed(1) + '" y="' + BAR_PAD + '" width="' + BADGE +
+        '" height="' + BADGE + '" rx="4" fill="' + colors[i] + '"/>';
+      if (path) {
+        /* 256-unit artwork scaled into an 11px square, centred in the badge. */
+        var s = 11 / 256;
+        var ox = x + (BADGE - 11) / 2;
+        var oy = BAR_PAD + (BADGE - 11) / 2;
+        badges +=
+          '<g transform="translate(' + ox.toFixed(1) + ' ' + oy.toFixed(1) +
+          ') scale(' + s.toFixed(5) + ')"><path fill="#ffffff" d="' + path + '"/></g>';
       }
     }
 
+    var bar = icons.length
+      ? '<rect x="' + (midX - bw / 2).toFixed(1) + '" y="0" width="' + bw +
+        '" height="' + bh + '" rx="6" fill="#ffffff"/>' + badges
+      : "";
+
+    var pinTop = bh + BAR_GAP;
     return (
-      '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="52" viewBox="0 0 40 52">' +
-      '<path d="M20 51C20 51 35 32.5 35 20A15 15 0 0 0 5 20C5 32.5 20 51 20 51Z" fill="#ffffff"' +
-      (dim ? ' opacity="0.55"' : "") + "/>" +
-      "<g" + (dim ? ' opacity="0.45"' : "") + ">" + seg + "</g>" +
-      '<circle cx="' + PIN_CX + '" cy="' + PIN_CY + '" r="' + PIN_R +
-      '" fill="none" stroke="#ffffff" stroke-width="3"' + (dim ? ' opacity="0.7"' : "") + "/>" +
-      "</svg>"
+      '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h +
+      '" viewBox="0 0 ' + w + " " + h + '">' +
+      '<g opacity="' + o + '">' + bar +
+      '<g transform="translate(' + (midX - PIN_W / 2).toFixed(1) + " " + pinTop + ')">' +
+      '<svg width="' + PIN_W + '" height="' + PIN_H + '" viewBox="0 0 40 52">' +
+      '<path d="M20 51C20 51 35 32.5 35 20A15 15 0 0 0 5 20C5 32.5 20 51 20 51Z" fill="#2b93d1" stroke="#ffffff" stroke-width="2.5"/>' +
+      '<circle cx="20" cy="19" r="5.5" fill="#ffffff" opacity="0.92"/>' +
+      "</svg></g></g></svg>"
     );
   }
 
-  function pinUrl(colors, dim) {
+  /** Where the point of the teardrop sits inside the image. */
+  function pinAnchor(n) {
+    return { x: Math.max(barWidth(Math.max(n, 1)), PIN_W) / 2, y: pinHeight(n) };
+  }
+
+  function pinHeight() {
+    return BADGE + BAR_PAD * 2 + BAR_GAP + PIN_H;
+  }
+
+  function pinSize(n) {
+    return { w: Math.max(barWidth(Math.max(n, 1)), PIN_W), h: pinHeight() };
+  }
+
+  function pinUrl(icons, colors, dim) {
     return (
-      "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(pinSvg(colors, dim))
+      "data:image/svg+xml;charset=UTF-8," +
+      encodeURIComponent(pinSvg(icons, colors, dim))
     );
   }
 
@@ -327,10 +383,11 @@
       var position = { lat: office.lat, lng: office.lng };
 
       if (Advanced) {
+        var box = pinSize(office.icons.length);
         var img = document.createElement("img");
-        img.src = pinUrl(office.colors, false);
-        img.width = 40;
-        img.height = 52;
+        img.src = pinUrl(office.icons, office.colors, false);
+        img.width = box.w;
+        img.height = box.h;
         img.alt = "";
         return new Advanced({
           map: map,
@@ -344,25 +401,29 @@
         map: map,
         position: position,
         title: office.name,
-        icon: {
-          url: pinUrl(office.colors, false),
-          scaledSize: new google.maps.Size(40, 52),
-          anchor: new google.maps.Point(20, 51),
-        },
+        icon: markerIcon(office, false),
       });
     }
 
+    /* The image, its drawn size and where its point sits, for a classic Marker. */
+    function markerIcon(office, dim) {
+      var box = pinSize(office.icons.length);
+      var at = pinAnchor(office.icons.length);
+      return {
+        url: pinUrl(office.icons, office.colors, dim),
+        scaledSize: new google.maps.Size(box.w, box.h),
+        anchor: new google.maps.Point(at.x, at.y),
+      };
+    }
+
     function setDim(office, marker, dim) {
-      var url = pinUrl(office.colors, dim);
       if (Advanced) {
-        if (marker.content) marker.content.src = url;
+        if (marker.content) {
+          marker.content.src = pinUrl(office.icons, office.colors, dim);
+        }
         marker.zIndex = dim ? 1 : 2;
       } else {
-        marker.setIcon({
-          url: url,
-          scaledSize: new google.maps.Size(40, 52),
-          anchor: new google.maps.Point(20, 51),
-        });
+        marker.setIcon(markerIcon(office, dim));
         marker.setZIndex(dim ? 1 : 2);
       }
     }
