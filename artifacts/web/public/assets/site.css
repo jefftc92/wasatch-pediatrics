@@ -878,30 +878,19 @@
 }
 
 /*
- * A tile with depth under it opens a panel, so a page three levels down is one
- * click from the pillar rather than three. The tile stays a link to the
- * service; the caret beside it is what opens the panel, so clicking the name
- * still does the obvious thing.
- *
- * The panel is in the markup whether or not it is open — it is a list of real
- * links, and a crawler should see them.
+ * A tile is the whole link. It carried a dropdown of its own for a while, to
+ * put a deep page one click from the pillar; the section bar's flyout does
+ * that from every page in the pillar now, so the tile is a link again.
  */
 .svc-tile-wrap {
   position: relative;
 }
-
-
 
 .svc-tile {
   display: flex;
   align-items: center;
   gap: 14px;
   padding: 15px 18px;
-}
-
-/* Room for the caret, so the blurb never runs underneath it. */
-.svc-tile-head:has(.svc-tile-more) .svc-tile {
-  padding-right: 52px;
   background: #ffffff;
   border-radius: 14px;
   text-decoration: none !important;
@@ -950,253 +939,9 @@
   line-height: 1.35;
 }
 
-/*
- * The tile and its caret share a box, so the caret centres on the tile rather
- * than on the wrap — with the panel open the wrap is several hundred pixels
- * tall, and the caret drifted into the middle of the open list and sat on top
- * of the words.
- */
-.svc-tile-head {
-  position: relative;
-}
-
-/* The caret. Sits on the tile's right edge, its own target, not the link's. */
-.svc-tile-more {
-  position: absolute;
-  top: 50%;
-  right: 10px;
-  transform: translateY(-50%);
-  width: 34px;
-  height: 34px;
-  padding: 0;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  color: #8a8a8c;
-  cursor: pointer;
-  transition:
-    background 0.15s ease,
-    color 0.15s ease;
-}
-
-.svc-tile-more:before {
-  content: "";
-  display: block;
-  width: 9px;
-  height: 9px;
-  margin: 0 auto;
-  border: solid currentColor;
-  border-width: 0 2px 2px 0;
-  transform: translateY(-3px) rotate(45deg);
-  transition: transform 0.18s ease;
-}
-
-.svc-tile-more:hover,
-.svc-tile-more:focus-visible {
-  background: #eef6fc;
-  color: #2b93d1;
-}
-
-.svc-tile-more-label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
-.svc-tile-head:hover .svc-tile-more:before,
-.svc-tile-wrap.is-open .svc-tile-more:before {
-  transform: translateY(1px) rotate(-135deg);
-}
-
-/*
- * The panel spans the whole row rather than the tile's own column, because a
- * service's topics need more width than a third of the container — Pediatric
- * Dentistry has four of them and twenty-one pages beneath.
- */
-/*
- * A short list of where to go next, sized to its own tile. Listing every page
- * under every topic as well came to twenty-one links for Pediatric Dentistry,
- * which is a menu rather than a shortcut.
- */
-.svc-tile-panel {
-  display: none;
-  position: absolute;
-  z-index: 20;
-  left: 0;
-  right: 0;
-  top: calc(100% + 6px);
-  padding: 10px 10px 6px 10px;
-  background: #ffffff;
-  border-radius: 14px;
-  box-shadow: 0 8px 22px rgba(33, 33, 33, 0.18);
-}
-
-/* Nine topics in one column is a long drop; two columns keeps it in view.
-   Only the wide panel has them, and only that one has no foldable rows. */
-.svc-tile-panel-wide .svc-panel-list {
-  column-count: 2;
-  column-gap: 14px;
-}
-
-.svc-tile-wrap.is-open .svc-tile-panel {
-  display: block;
-}
-
-.svc-panel-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.svc-panel-list li {
-  break-inside: avoid;
-}
-
-/*
- * A row is the topic's own link, and — when it has pages — a toggle beside it
- * that folds them out. The name always goes to the topic; the count beside it
- * opens what is inside without leaving the page.
- */
-.svc-panel-row {
-  position: relative;
-}
-
-.svc-panel-link {
-  display: block;
-  padding: 8px 12px;
-  padding-right: 46px;
-  border-radius: 9px;
-  color: #636466 !important;
-  font-size: 15px;
-  font-weight: 400 !important;
-  line-height: 1.25;
-  text-decoration: none !important;
-}
-
-.svc-panel-link:hover {
-  background: #eef6fc;
-  color: #1f6f9e !important;
-}
-
-.svc-panel-toggle {
-  position: absolute;
-  top: 3px;
-  right: 4px;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px 7px;
-  border: 0;
-  border-radius: 8px;
-  background: none;
-  cursor: pointer;
-}
-
-.svc-panel-toggle:hover,
-.svc-panel-toggle:focus-visible {
-  background: #eef6fc;
-}
-
-.svc-panel-toggle:after {
-  content: "";
-  width: 7px;
-  height: 7px;
-  border: solid #a8adb2;
-  border-width: 0 2px 2px 0;
-  transform: translateY(-2px) rotate(45deg);
-  transition: transform 0.18s ease;
-}
-
-.svc-panel-row.is-open .svc-panel-toggle:after {
-  transform: translateY(1px) rotate(-135deg);
-}
-
-/* How many pages are inside, so the row says what it costs to open it. */
-.svc-panel-count {
-  min-width: 19px;
-  padding: 1px 5px;
-  border-radius: 9px;
-  background: #eef0f1;
-  color: #8a8a8c;
-  font-size: 12px;
-  line-height: 1.5;
-  text-align: center;
-}
-
-.svc-panel-sub {
-  display: none;
-  list-style: none;
-  margin: 2px 0 6px 0;
-  padding: 0 0 0 12px;
-  border-left: 2px solid #e4ecf2;
-}
-
-.svc-panel-row.is-open .svc-panel-sub {
-  display: block;
-}
-
-.svc-panel-sub a {
-  display: block;
-  padding: 6px 10px;
-  border-radius: 8px;
-  color: #7a7c7f;
-  font-size: 14px;
-  font-weight: 400;
-  text-decoration: none !important;
-}
-
-.svc-panel-sub a:hover {
-  background: #eef6fc;
-  color: #1f6f9e;
-}
-
-.svc-panel-all {
-  margin: 6px 0 0 0;
-  padding: 10px 12px 4px 12px;
-  border-top: 1px solid #ececee;
-}
-
-.svc-panel-all a {
-  color: #2b93d1;
-  font-size: 15px;
-  font-weight: 700;
-  text-decoration: none !important;
-}
-
-@media (min-width: 992px) {
-  /*
-   * On a pointer, hovering the tile is enough; the caret is for taps and keys.
-   *
-   * Deliberately not :focus-within. Clicking the caret to close leaves focus on
-   * it, and :focus-within would reopen the panel on the spot — so the caret
-   * could never close anything, and a panel closed that way sat open beside
-   * whichever tile was hovered next. The caret's own click state is the only
-   * thing that decides, and a keyboard reaches the links through it.
-   */
-  .svc-tile-wrap:hover .svc-tile-panel {
-    display: block;
-  }
-
-}
-
 @media (max-width: 991px) {
   .svc-tiles .container {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  /* Nothing to span on a narrow screen, so it opens under its own tile. */
-  .svc-tile-panel {
-    position: static;
-    margin-top: 8px;
-    box-shadow: none;
-    border: 1px solid #e4e4e6;
-  }
-
-  .svc-tile-panel-wide .svc-panel-list {
-    column-count: 1;
   }
 }
 
@@ -2618,9 +2363,15 @@
   }
 
   #header.has-section .header-cta {
-    font-size: 11px;
-    padding: 8px 14px;
+    font-size: 13px !important;
+    padding: 7px 18px !important;
     letter-spacing: 0;
+    margin-right: 0;
+  }
+
+  /* The theme indents this list for the slot it normally sits in. */
+  #header.has-section #navbuttons {
+    padding-left: 0 !important;
   }
 
   /*
@@ -2655,7 +2406,7 @@
   }
 
   #header.has-section .mainnav > li > a {
-    font-size: 13px;
+    font-size: 14px;
     color: #8a8a8c;
     padding: 6px 0;
     white-space: nowrap;
@@ -2786,6 +2537,13 @@
   align-items: center;
   padding-right: 26px;
   color: #ffffff !important;
+  /*
+   * Montserrat, not the display face. LemonYellowSun is the brand's headline
+   * type and set the pillar name in the same voice as the logo two lines
+   * above it, so the bar read as a second masthead rather than as navigation.
+   */
+  font-family: montserrat, Arial, sans-serif;
+  font-weight: 400;
   font-size: 21px;
   text-decoration: none !important;
   border-right: 1px solid rgba(255, 255, 255, 0.28);

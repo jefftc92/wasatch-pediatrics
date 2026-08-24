@@ -324,7 +324,7 @@ function sectionBar(section: SectionNav): string {
   return `		<div id="secbar">
 			<div class="container">
 				<div class="secbar-in">
-					<a class="secbar-name lys" href="${section.href}">${esc(section.name)}</a>
+					<a class="secbar-name" href="${section.href}">${esc(section.name)}</a>
 					<button class="secbar-toggle" type="button" aria-expanded="false" aria-controls="secbar-list">In this section</button>
 					<ul class="secbar-list" id="secbar-list">
 						<li class="secbar-item${section.crumbs.length === 1 ? " on" : ""}"><a href="${section.href}">Overview</a></li>
