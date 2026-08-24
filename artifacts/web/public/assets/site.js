@@ -698,6 +698,67 @@
     });
   }
 
+  /* ------------------------------------------------------- service tiles -- */
+
+  /*
+   * The panels under the pillar's service tiles.
+   *
+   * On a pointer the panel opens on hover, which CSS does on its own; this is
+   * for the caret — taps, and keyboards. Both paths set the same class, so the
+   * two never disagree about what is open.
+   *
+   * Only one at a time: three panels overlapping each other in the same strip
+   * would be unreadable, and on a wide screen they occupy the same space.
+   */
+  var tileCarets = document.querySelectorAll(".svc-tile-more");
+
+  if (tileCarets.length) {
+    var closeTiles = function (except) {
+      tileCarets.forEach(function (caret) {
+        var wrap = caret.closest(".svc-tile-wrap");
+        if (wrap === except) return;
+        wrap.classList.remove("is-open");
+        caret.setAttribute("aria-expanded", "false");
+      });
+    };
+
+    tileCarets.forEach(function (caret) {
+      caret.addEventListener("click", function () {
+        var wrap = caret.closest(".svc-tile-wrap");
+        var open = wrap.classList.contains("is-open");
+        closeTiles(wrap);
+        wrap.classList.toggle("is-open", !open);
+        caret.setAttribute("aria-expanded", String(!open));
+      });
+    });
+
+    /*
+     * Hover is CSS and the caret is a class, so without this a panel opened by
+     * the caret stays open while you hover a different tile and two of them
+     * occupy the same strip at once. Pointing at a tile closes whatever the
+     * caret left open.
+     */
+    tileCarets.forEach(function (caret) {
+      var wrap = caret.closest(".svc-tile-wrap");
+      wrap.addEventListener("mouseenter", function () {
+        closeTiles(wrap);
+      });
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!event.target.closest(".svc-tile-wrap")) closeTiles(null);
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key !== "Escape") return;
+      var open = document.querySelector(".svc-tile-wrap.is-open");
+      if (!open) return;
+      closeTiles(null);
+      var caret = open.querySelector(".svc-tile-more");
+      if (caret) caret.focus();
+    });
+  }
+
   /* ----------------------------------------------------- service filter -- */
 
   var chips = document.querySelectorAll(".svc-chip");

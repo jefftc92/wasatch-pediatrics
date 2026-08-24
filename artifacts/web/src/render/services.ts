@@ -120,15 +120,55 @@ function serviceCard(service: Service): string {
  */
 export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
   const tiles = servicesInPillar(pillar.slug)
-    .map(
-      (service) => `<a class="svc-tile" href="${serviceHref(service)}">
-			<span class="svc-tile-ico"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${service.icon ?? "circle-dashed"}"></use></svg></span>
-			<span class="svc-tile-text">
-				<span class="svc-tile-name">${escapeAttribute(service.name)}</span>
-				<span class="svc-tile-sub">${escapeAttribute(service.blurb)}</span>
-			</span>
-		</a>`,
-    )
+    .map((service) => {
+      const topics = service.topics ?? [];
+      const panelId = `svc-panel-${service.slug}`;
+
+      const link = `<a class="svc-tile" href="${serviceHref(service)}">
+				<span class="svc-tile-ico"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${service.icon ?? "circle-dashed"}"></use></svg></span>
+				<span class="svc-tile-text">
+					<span class="svc-tile-name">${escapeAttribute(service.name)}</span>
+					<span class="svc-tile-sub">${escapeAttribute(service.blurb)}</span>
+				</span>
+			</a>`;
+
+      /* A service with nothing under it is only ever a link. */
+      if (!topics.length) {
+        return `<div class="svc-tile-wrap">
+			${link}
+		</div>`;
+      }
+
+      /*
+       * A topic with pages under it becomes a headed column; a topic that is
+       * itself the end of the line becomes a plain link. Orthodontics is all
+       * of the second kind, Pediatric Dentistry all of the first.
+       */
+      const columns = topics
+        .map((topic) => {
+          const href = topicHref(service, topic);
+          if (!topic.items.length) {
+            return `<li class="svc-panel-col svc-panel-leaf"><a class="svc-panel-head" href="${href}">${escapeAttribute(topic.name)}</a></li>`;
+          }
+          const pages = topic.items
+            .map(
+              (item) =>
+                `<li><a href="${topicItemHref(service, topic, item)}">${escapeAttribute(item.name)}</a></li>`,
+            )
+            .join("");
+          return `<li class="svc-panel-col"><a class="svc-panel-head" href="${href}">${escapeAttribute(topic.name)}</a><ul class="svc-panel-pages">${pages}</ul></li>`;
+        })
+        .join("");
+
+      return `<div class="svc-tile-wrap">
+			${link}
+			<button class="svc-tile-more" type="button" aria-expanded="false" aria-controls="${panelId}"><span class="svc-tile-more-label">What&#8217;s under ${escapeAttribute(service.name)}</span></button>
+			<div class="svc-tile-panel" id="${panelId}">
+				<ul class="svc-panel-cols">${columns}</ul>
+				<p class="svc-panel-all"><a href="${serviceHref(service)}">All ${escapeAttribute(service.name)}</a></p>
+			</div>
+		</div>`;
+    })
     .join("\n\t\t");
 
   return `<div class="graybg svc-tiles">
@@ -136,8 +176,7 @@ export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
 		${tiles}
 	</div>
 </div>`;
-}
-/** Links across to the other three pillars, on every hub and service page. */
+}/** Links across to the other three pillars, on every hub and service page. */
 /**
  * The pages alongside this one, as cards at the foot of the page.
  *
