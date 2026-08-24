@@ -303,10 +303,20 @@ export function renderServicePage(service: Service): string {
       bg,
     );
 
+  /*
+   * The way on goes directly under the hero rather than at the foot. On a
+   * service that is its own topics if it has any, and the pillar's other
+   * services if it does not — one set, whichever is the level below where you
+   * are standing. The rest of the page follows it.
+   */
+  const hasTopics = Boolean(service.topics?.length);
+  const navSection = hasTopics
+    ? topicSectionsFor("whitebg")
+    : siblingSection("whitebg");
+
   const sections = [
-    topicSectionsFor,
+    ...(hasTopics ? [siblingSection] : []),
     teamSection,
-    siblingSection,
     otherPillarsSection,
   ]
     .reduce<string[]>((out, build) => {
@@ -329,11 +339,13 @@ export function renderServicePage(service: Service): string {
       dentalCrumbs(crumbs),
       { name: service.name, href: serviceHref(service) },
       pillar,
+      navSection,
     )}
 ${sections}`;
   }
 
   return `${head}
+${navSection}
 <div class="whitebg padme90 svc-body">
 	<div class="container">
 		<div class="row">
@@ -427,7 +439,7 @@ export function renderTopicPage(service: Service, topic: Topic): string {
   const migrated = dentalPage(topicHref(service, topic));
 
   const items = topic.items.length
-    ? `<div class="graybg padme90 svc-index">
+    ? `<div class="whitebg padme90 svc-index">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -451,6 +463,32 @@ ${topic.items
 </div>`
     : "";
 
+  const navSection = topic.items.length
+    ? items
+    : siblingCards(
+        `More in ${service.name}`,
+        (service.topics ?? []).map((other) => ({
+          name: other.name,
+          href: topicHref(service, other),
+          blurb: other.blurb,
+        })),
+        topicHref(service, topic),
+        "whitebg",
+      );
+
+  const tail = topic.items.length
+    ? siblingCards(
+        `More in ${service.name}`,
+        (service.topics ?? []).map((other) => ({
+          name: other.name,
+          href: topicHref(service, other),
+          blurb: other.blurb,
+        })),
+        topicHref(service, topic),
+        "graybg",
+      )
+    : "";
+
   const head = heroSection(escapeAttribute(topic.name), crumbs);
 
   /*
@@ -464,22 +502,14 @@ ${topic.items
       dentalCrumbs(crumbs),
       { name: service.name, href: serviceHref(service) },
       pillar,
+      navSection,
     )}
-${items}
-${siblingCards(
-  `More in ${service.name}`,
-  (service.topics ?? []).map((other) => ({
-    name: other.name,
-    href: topicHref(service, other),
-    blurb: other.blurb,
-  })),
-  topicHref(service, topic),
-  items ? "whitebg" : "graybg",
-)}
-${otherPillars(pillar.slug, "graybg")}`;
+${tail}
+${otherPillars(pillar.slug, tail ? "whitebg" : "graybg")}`;
   }
 
   return `${head}
+${navSection}
 <div class="whitebg padme90 svc-body">
 	<div class="container">
 		<div class="row">
@@ -494,18 +524,8 @@ ${otherPillars(pillar.slug, "graybg")}`;
 		</div>
 	</div>
 </div>
-${items}
-${siblingCards(
-  `More in ${service.name}`,
-  (service.topics ?? []).map((other) => ({
-    name: other.name,
-    href: topicHref(service, other),
-    blurb: other.blurb,
-  })),
-  topicHref(service, topic),
-  items ? "whitebg" : "graybg",
-)}
-${otherPillars(pillar.slug, "graybg")}`;
+${tail}
+${otherPillars(pillar.slug, tail ? "whitebg" : "graybg")}`;
 }
 
 /** The deepest page: one question, answered. */
@@ -516,6 +536,17 @@ export function renderTopicItemPage(
 ): string {
   const pillar = pillarBySlug.get(service.pillar);
   if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
+
+  const navSection = siblingCards(
+    `More in ${topic.name}`,
+    topic.items.map((other) => ({
+      name: other.name,
+      href: topicItemHref(service, topic, other),
+      blurb: other.blurb,
+    })),
+    topicItemHref(service, topic, item),
+    "whitebg",
+  );
 
   const crumbs: Crumb[] = [
     { name: pillar.name, href: pillar.href },
@@ -534,21 +565,13 @@ export function renderTopicItemPage(
       dentalCrumbs(crumbs),
       { name: service.name, href: serviceHref(service) },
       pillar,
+      navSection,
     )}
-${siblingCards(
-  `More in ${topic.name}`,
-  topic.items.map((other) => ({
-    name: other.name,
-    href: topicItemHref(service, topic, other),
-    blurb: other.blurb,
-  })),
-  topicItemHref(service, topic, item),
-  "graybg",
-)}
-${otherPillars(pillar.slug, "whitebg")}`;
+${otherPillars(pillar.slug, "graybg")}`;
   }
 
   return `${head}
+${navSection}
 <div class="whitebg padme90 svc-body">
 	<div class="container">
 		<div class="row">
@@ -567,17 +590,7 @@ ${otherPillars(pillar.slug, "whitebg")}`;
 		</div>
 	</div>
 </div>
-${siblingCards(
-  `More in ${topic.name}`,
-  topic.items.map((other) => ({
-    name: other.name,
-    href: topicItemHref(service, topic, other),
-    blurb: other.blurb,
-  })),
-  topicItemHref(service, topic, item),
-  "graybg",
-)}
-${otherPillars(pillar.slug, "whitebg")}`;
+${otherPillars(pillar.slug, "graybg")}`;
 }
 
 /* --------------------------------------------------- all services index -- */
