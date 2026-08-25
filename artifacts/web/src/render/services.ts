@@ -34,6 +34,12 @@ import {
   type TopicItem,
 } from "../data/services.ts";
 import { providers } from "../data/providers.ts";
+import {
+  directionsHref,
+  formatPhone,
+  offices,
+  type Office,
+} from "../data/offices.ts";
 import { PILLAR_MENU_IDS, type SectionNav } from "./header.ts";
 import { dentalFaqSchema, dentalPage, renderDentalPage } from "./dental.ts";
 import type { GeneratedPage } from "./generated.ts";
@@ -252,6 +258,19 @@ export function renderPillarPage(
     storedContent === undefined ? "" : withoutTitleBand(storedContent);
 
   /*
+   * Grey and white alternate from whatever the body left behind, so two
+   * sections never run together into one long band of the same colour. A
+   * stored page ends on white; a hub with no body starts from the hero.
+   */
+  const sections = [pillarOffices, pillarTeam, (p: Pillar, bg: string) => otherPillars(p.slug, bg)]
+    .reduce<string[]>((out, build) => {
+      const markup = build(pillar, out.length % 2 === 0 ? "graybg" : "whitebg");
+      if (markup) out.push(markup);
+      return out;
+    }, [])
+    .join("\n");
+
+  /*
    * No index of the pillar's services here. The hub carried one as a grid of
    * tiles directly under the hero, which was the way in before the section bar
    * existed; the bar now names the same services in the same order on this page
@@ -259,7 +278,7 @@ export function renderPillarPage(
    */
   return `${pillarHero(pillar, crumbs)}
 ${body}
-${otherPillars(pillar.slug)}`;
+${sections}`;
 }
 
 /** The hub's own hero: the pillar's photograph, name and opening line. */
@@ -275,6 +294,97 @@ function pillarHero(pillar: Pillar, crumbs: Crumb[]): string {
      */
     lead: pillar.intro,
   });
+}
+
+/**
+ * The offices where a pillar's care is offered.
+ *
+ * A hub had nothing under its hero once the tile grid came out, and what it was
+ * missing was never a second copy of the menu — it was the two questions the
+ * bar cannot answer: where this care happens, and who gives it. Both are read
+ * from the registry, so an office that gains a service appears here with
+ * nothing else edited.
+ *
+ * The cards are the ones the locations page uses, without its filter
+ * scaffolding. A pillar documented at a single office says nothing: dentistry
+ * is all at Southpoint and points its own location link back at this page.
+ */
+function pillarOffices(pillar: Pillar, bg: string): string {
+  const here = new Set(
+    servicesInPillar(pillar.slug).flatMap((service) => service.locations),
+  );
+  if (here.size < 2) return "";
+
+  const card = (office: Office): string => {
+    const name = locationNames[office.slug] ?? office.slug;
+    const href = pillar.locationsHref ?? locationHref(office.slug);
+    const suite = office.suite ? `${escapeAttribute(office.suite)}<br />` : "";
+    return `<li>
+		<article class="loc-card">
+			<a class="loc-card-photo" href="${href}" tabindex="-1" aria-hidden="true">
+				<img src="${escapeAttribute(office.photo)}" alt="" loading="lazy" width="1000" height="400" />
+			</a>
+			<div class="loc-card-body">
+				<h3 class="loc-card-title"><a href="${href}">${escapeAttribute(name)}</a></h3>
+				<p class="loc-card-addr">${escapeAttribute(office.street)}<br />${suite}${escapeAttribute(office.city)}, ${office.state} ${office.zip}</p>
+				<p class="loc-card-tel"><a href="tel:${office.phone}">${formatPhone(office.phone)}</a></p>
+				<p class="loc-card-links"><a href="${href}">Office details</a><a href="${directionsHref(office)}" rel="noopener" target="_blank">Directions</a></p>
+			</div>
+		</article>
+	</li>`;
+  };
+
+  const cards = offices
+    .filter((office) => here.has(office.slug))
+    .map(card)
+    .join("\n");
+
+  const all = offices.length;
+  const note =
+    here.size === all
+      ? `All ${all} offices offer ${escapeAttribute(pillar.name.toLowerCase())}.`
+      : `${here.size} of our ${all} offices offer ${escapeAttribute(pillar.name.toLowerCase())}.`;
+
+  return `<div class="${bg} padme90 svc-where">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="svc-index-title">Where you can get this care</h2>
+				<p class="svc-where-note">${note}</p>
+			</div>
+		</div>
+		<ul class="loc-list">
+${cards}
+		</ul>
+	</div>
+</div>`;
+}
+
+/** Everyone who provides any of a pillar's services, deduplicated. */
+function pillarTeam(pillar: Pillar, bg: string): string {
+  const seen = new Set<string>();
+  const team = servicesInPillar(pillar.slug)
+    .flatMap(providersForService)
+    .filter((provider) => !seen.has(provider.slug) && seen.add(provider.slug));
+
+  if (!team.length) return "";
+  const shown = team.slice(0, 8);
+
+  return `<div class="${bg} padme90 svc-team">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="svc-index-title">Who provides this care</h2>
+			</div>
+		</div>
+		<div class="row">${shown.map(renderProviderCard).join("")}</div>
+		<div class="row">
+			<div class="col-12 svc-team-more">
+				<a class="btn blue" href="/providers/">See all providers</a>
+			</div>
+		</div>
+	</div>
+</div>`;
 }
 
 /**

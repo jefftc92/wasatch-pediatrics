@@ -876,11 +876,23 @@
 }
 
 /*
+ * The line under "Where you can get this care". It answers the question the
+ * grid below it raises — whether this is all of the offices or some of them —
+ * so it sits with the heading rather than above the first card.
+ */
+.svc-where-note {
+  margin: -18px 0 30px 0;
+  color: #636466;
+  font-size: 18px;
+}
+
+/*
  * `.svc-card` and `.graybg` are both #F4F4F4, so a card grid on a grey band was
  * invisible — the cards read as loose text. Rather than thread band colours
  * through every caller, a card on grey turns white. Either way it is a card.
  */
-.graybg .svc-card {
+.graybg .svc-card,
+.graybg .loc-card {
   background: #ffffff;
 }
 
