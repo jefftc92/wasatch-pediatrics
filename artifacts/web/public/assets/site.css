@@ -826,18 +826,34 @@
 }
 
 /*
- * Inside a hero band the trail is the first line of the block, not a strip of
- * its own: the flex column below it already spaces the eyebrow and the title,
- * and `.crumbs` has 22px of its own padding for the band it used to clear.
+ * Inside a hero band the trail sits at the very top of the band, not in the
+ * middle of it.
+ *
+ * It used to be the first line of the centred block, a few pixels above the
+ * eyebrow — close enough to the title to read as the first line of the page
+ * rather than as the way back out of it. Pinned to the top edge it is chrome
+ * again, and the title keeps the middle of the band to itself.
  */
 .hero-crumbs {
+  position: absolute;
+  top: 18px;
+  left: 0;
+  right: 0;
   padding-top: 0;
-  margin: 0 0 16px 0;
+  margin: 0;
 }
 
 .hero-crumbs li {
-  font-size: 15px;
-  color: rgba(255, 255, 255, 0.88);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.hero-crumbs li + li:before {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.hero-crumbs a {
+  color: rgba(255, 255, 255, 0.92);
 }
 
 /* -------------------------------------------------- pillar and service -- */
@@ -1750,7 +1766,8 @@
   flex-direction: column;
   justify-content: center;
   min-height: 420px;
-  padding: 44px 0;
+  /* Top padding clears the trail pinned above it. */
+  padding: 62px 0 44px 0;
   max-width: 1140px;
 }
 
@@ -2193,7 +2210,32 @@
 
 @media (max-width: 767px) {
   .dent-hero-inner {
-    padding: 24px 0 40px 0;
+    /* Still clearing the pinned trail, on a band with less height to spare. */
+    padding: 52px 0 40px 0;
+  }
+
+  .hero-crumbs {
+    top: 14px;
+  }
+
+  /*
+   * Five levels wrapped to four rows on a phone and, being pinned, ran into
+   * the eyebrow underneath. The last two are what orientation actually needs —
+   * where you are and what it is part of — and the leading ellipsis stands in
+   * for the rest. Every level is still a link in the markup.
+   */
+  .hero-crumbs li {
+    display: none;
+    font-size: 13px;
+  }
+
+  .hero-crumbs li:nth-last-child(-n + 2) {
+    display: inline;
+  }
+
+  .hero-crumbs li + li:nth-last-child(2):before {
+    content: "…\00a0›";
+    padding-left: 0;
   }
 
   .dent-hero-title {

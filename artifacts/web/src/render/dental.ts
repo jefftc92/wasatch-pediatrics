@@ -413,15 +413,25 @@ export function renderDentalPage(
   /** What sits beside this page, after it rather than before it. */
   tailSection = "",
 ): string {
+  /*
+   * The page opens on what it is about, not on why we are good at it.
+   *
+   * The three promise cards used to sit between the hero and the first word of
+   * the article — "Gentle and thorough", "Catches problems early" — which is
+   * the practice talking about itself to someone who came to find out what a
+   * cleaning involves. They answer the question after it has been asked, so
+   * they follow the first section instead, and the photograph follows them.
+   */
   const parts = page.sections.map(section);
+  const promises = promiseBand(page);
   const scene = sceneBand(page);
-  if (scene && parts.length > 1) parts.splice(1, 0, scene);
-  else if (scene) parts.push(scene);
+
+  if (promises) parts.splice(1, 0, promises);
+  if (scene) parts.splice(promises ? 2 : 1, 0, scene);
 
   return [
     heroBand(page, title, service, crumbs),
     navSection,
-    promiseBand(page),
     ...parts,
     reassuranceBand(page),
     faqBand(page),
