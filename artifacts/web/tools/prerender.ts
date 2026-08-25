@@ -56,6 +56,7 @@ import {
 } from "../src/render/services.ts";
 import { locationsDocument } from "../src/render/locations.ts";
 import { resourcesDocument } from "../src/render/resources.ts";
+import { robotsTxt, sitemapXml } from "../src/render/sitemap.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(here, "..");
@@ -288,6 +289,16 @@ writeFileSync(join(out, "__build"), buildId);
 
 // Pages would otherwise run the output through Jekyll and drop wp-* folders.
 writeFileSync(join(out, ".nojekyll"), "");
+
+/*
+ * The two files a crawler looks for first. Only on a build served from the
+ * domain root: a preview under a base path would otherwise publish a sitemap
+ * claiming the production origin for pages that are not there.
+ */
+if (!base) {
+  writeFileSync(join(out, "sitemap.xml"), sitemapXml());
+  writeFileSync(join(out, "robots.txt"), robotsTxt());
+}
 
 console.log(
   `wrote ${

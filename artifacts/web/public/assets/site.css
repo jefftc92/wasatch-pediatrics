@@ -1869,6 +1869,23 @@
   line-height: 1.5;
 }
 
+/*
+ * The line under the symptom checker. It says why the tool is embedded rather
+ * than written into the page, and carries the link that has to work when a
+ * third-party frame does not — a blocked frame is otherwise a blank rectangle
+ * with nothing to click.
+ */
+.sc-note {
+  margin: 18px 0 0 0;
+  color: #8a8a8c;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.sc-note a {
+  color: #2b93d1;
+}
+
 /* ----------------------------------------------------------- dent bands -- */
 
 .dent-band {
@@ -1876,13 +1893,30 @@
 }
 
 /*
- * Two prose sections in a row are both white, so without this they read as one
- * long stretch with a mysterious gap in it. A hairline at the seam does what
- * the alternating grey does elsewhere, without turning every other paragraph
- * into a different colour of page.
+ * Two white sections in a row read as one long stretch with a mysterious gap in
+ * it. A hairline at the seam does what the alternating grey does elsewhere,
+ * without turning every other paragraph into a different colour of page.
+ *
+ * Every white band counts, not just two prose ones. The rule used to be written
+ * `.dent-band + .dent-band`, which held only while prose bands were adjacent —
+ * moving the promise cards and the photograph into the middle of the sequence
+ * left three seams on a page with no divider at all.
  */
-.whitebg.dent-band + .whitebg.dent-band {
-  border-top: 1px solid #ececee;
+.whitebg:is(
+    .dent-band,
+    .dent-promises,
+    .dent-scene-band,
+    .dent-quote-band,
+    .svc-index
+  )
+  + .whitebg:is(
+    .dent-band,
+    .dent-promises,
+    .dent-scene-band,
+    .dent-quote-band,
+    .svc-index
+  ) {
+  border-top: 1px solid rgba(43, 147, 209, 0.22);
 }
 
 /*
@@ -1895,6 +1929,26 @@
  * card grids, "Where to go next", "Other ways we help" — started at the
  * container's left edge. Two alignments on one page read as two pages.
  */
+/*
+ * A section opens with a short orange rule.
+ *
+ * A grey hairline at the seam is the same neutral divider the rest of the site
+ * uses between anything and anything, so it separated the bands without saying
+ * a new topic had started. This does: it is brand colour, it sits with the
+ * heading rather than at the edge of the band, and it lands on the same left
+ * edge as everything else. Orange rather than blue, so it reads as a mark
+ * beside the heading instead of more heading.
+ */
+.dent-band-title:before {
+  content: "";
+  display: block;
+  width: 54px;
+  height: 4px;
+  margin: 0 0 18px 0;
+  border-radius: 2px;
+  background: #f58220;
+}
+
 .dent-band-title {
   margin: 0 0 14px 0;
   color: #2b93d1;

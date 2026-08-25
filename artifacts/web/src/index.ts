@@ -32,6 +32,7 @@ import { serviceBySlug } from "./data/services.ts";
 import { LOCATIONS_HREF, locationsDocument } from "./render/locations.ts";
 import { RESOURCES_HREF, resourcesDocument } from "./render/resources.ts";
 import { buildId } from "./build.ts";
+import { robotsTxt, sitemapXml } from "./render/sitemap.ts";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const PUBLIC = join(here, "..", "public");
@@ -139,6 +140,14 @@ app.get("/{*path}", (request, response, next) => {
 });
 
 /** Which commit is serving. See src/build.ts. */
+app.get("/sitemap.xml", (_request, response) => {
+  response.type("application/xml").send(sitemapXml());
+});
+
+app.get("/robots.txt", (_request, response) => {
+  response.type("text/plain").send(robotsTxt());
+});
+
 app.get("/__build", (_request, response) => {
   response.type("text").send(buildId);
 });
