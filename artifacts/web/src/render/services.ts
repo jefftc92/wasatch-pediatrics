@@ -139,44 +139,7 @@ function serviceCard(service: Service): string {
 </div>`;
 }
 
-/** The card grid of everything in a pillar. */
-/**
- * A pillar's services, as tiles directly under the hero.
- *
- * They used to be full cards — heading, blurb paragraph, office count and a
- * Learn more button each — sitting below a long page. That is a lot of
- * furniture for what is really the section's menu, and it put the way into the
- * section below the fold. These are menu items: symbol, name, one short line,
- * nothing to press. The whole tile is the link.
- *
- * The symbols are the service's own, and only have to be distinct inside one
- * pillar, since no page shows two pillars' tiles.
- *
- * They carried a dropdown of their own for a while, so a deep page was one
- * click from here rather than three. The section bar's flyout does that from
- * every page in the pillar, not just this one, so the tiles are links again.
- */
-export function renderServiceIndex(pillar: Pillar, _heading?: string): string {
-  const tiles = servicesInPillar(pillar.slug)
-    .map((service) => {
-      return `<div class="svc-tile-wrap">
-			<a class="svc-tile" href="${serviceHref(service)}">
-				<span class="svc-tile-ico"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${service.icon ?? "circle-dashed"}"></use></svg></span>
-				<span class="svc-tile-text">
-					<span class="svc-tile-name">${escapeAttribute(service.name)}</span>
-					<span class="svc-tile-sub">${escapeAttribute(service.blurb)}</span>
-				</span>
-			</a>
-		</div>`;
-    })
-    .join("\n\t\t");
-
-  return `<div class="graybg svc-tiles">
-	<div class="container">
-		${tiles}
-	</div>
-</div>`;
-}/** Links across to the other three pillars, on every hub and service page. */
+/** Links across to the other three pillars, on every hub and service page. */
 /**
  * The pages alongside this one, as cards at the foot of the page.
  *
@@ -300,12 +263,12 @@ export function renderPillarPage(
       : withoutTitleBand(storedContent);
 
   /*
-   * The tiles go above the page's own copy, not below it. On dentistry the
-   * stored landing page runs to nearly 3000px, so the section's menu was
-   * effectively at the bottom — the way in has to come before the reading.
+   * No index of the pillar's services here. The hub carried one as a grid of
+   * tiles directly under the hero, which was the way in before the section bar
+   * existed; the bar now names the same services in the same order on this page
+   * and on every page below it, so the grid was the second copy.
    */
   return `${pillarHero(pillar, crumbs)}
-${renderServiceIndex(pillar)}
 ${body}
 ${otherPillars(pillar.slug)}`;
 }
