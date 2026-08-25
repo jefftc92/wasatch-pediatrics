@@ -313,14 +313,6 @@ function sectionBar(section: SectionNav): string {
 					</div></li>`
     : "";
 
-  const crumbs = section.crumbs
-    .map((crumb) =>
-      crumb.href
-        ? `<li><a href="${crumb.href}">${esc(crumb.name)}</a></li>`
-        : `<li>${esc(crumb.name)}</li>`,
-    )
-    .join("");
-
   return `		<div id="secbar">
 			<div class="container">
 				<div class="secbar-in">
@@ -332,11 +324,6 @@ function sectionBar(section: SectionNav): string {
 						${more}
 					</ul>
 				</div>
-			</div>
-		</div>
-		<div id="seccrumbs">
-			<div class="container">
-				<nav class="crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li>${crumbs}</ol></nav>
 			</div>
 		</div>`;
 }
@@ -384,6 +371,12 @@ export function renderHeader(
    * have the main bar to itself. It is the same markup either way — moving it
    * with CSS was not an option, because in the default header it lives in
    * `#graynav`, which is a sibling of the logo's container rather than in it.
+   *
+   * It keeps its `#graynav` and `#navwrap` wrappers even so. The theme hides
+   * the nav on a phone with `#graynav { display: none }` and the burger
+   * slide-toggles that same element, so a section header without one showed
+   * the whole menu open and unstyled with no way to close it. The wrappers are
+   * flattened at 992 and up, where this row lays itself out.
    */
   if (section) {
     return `	<section class="page-load"></section>
@@ -393,17 +386,19 @@ export function renderHeader(
 				<div class="col-12">
 					<div class="secheadrow">
 						${LOGO}
-						<div class="secheadnav">
-							${globalNav(menu)}
+						<div id="graynav" class="secheadnav">
+							<div id="mobilesearch" class="mobile">
+								${searchForm()}
+							</div>
+							<div id="navwrap">
+								${globalNav(menu)}
+							</div>
 						</div>
 						<div id="topmenuwrap">
 							<div id="topmenu">
 							${headerTools()}
 							</div>
 						</div>
-					</div>
-					<div id="mobilesearch" class="mobile">
-						${searchForm()}
 					</div>
 				</div>
 			</div>

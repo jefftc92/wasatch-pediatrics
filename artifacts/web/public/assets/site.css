@@ -825,6 +825,21 @@
   text-decoration: underline;
 }
 
+/*
+ * Inside a hero band the trail is the first line of the block, not a strip of
+ * its own: the flex column below it already spaces the eyebrow and the title,
+ * and `.crumbs` has 22px of its own padding for the band it used to clear.
+ */
+.hero-crumbs {
+  padding-top: 0;
+  margin: 0 0 16px 0;
+}
+
+.hero-crumbs li {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
 /* -------------------------------------------------- pillar and service -- */
 
 .svc-intro {
@@ -1808,40 +1823,6 @@
   background: linear-gradient(100deg, #2277ab 0%, #2b93d1 100%);
 }
 
-/*
- * The trail's own strip, above the photograph rather than on it.
- *
- * Everything about `.crumbs` is drawn for the blue hero it normally sits in —
- * white links, white separators, and 22px of padding to clear the band's top
- * edge. On white that is an invisible trail in a tall empty strip, so all of it
- * is restated for this ground.
- */
-.dent-trail {
-  padding: 13px 0;
-  border-bottom: 1px solid #ececee;
-}
-
-.dent-trail .crumbs {
-  margin: 0;
-  padding-top: 0;
-}
-
-.dent-trail .crumbs li {
-  color: #636466;
-}
-
-.dent-trail .crumbs li + li:before {
-  color: #b6b7b9;
-}
-
-.dent-trail .crumbs a {
-  color: #2b93d1;
-}
-
-.dent-trail .crumbs a:hover {
-  color: #f58220;
-}
-
 .dent-hero-inner {
   position: relative;
   display: flex;
@@ -2299,11 +2280,18 @@
 
   /* The wash goes flat below the fold width: there is no room for a photograph
      to read beside the type, so it becomes ground rather than picture. */
+  /*
+   * On a phone the band is barely wider than the text, so the desktop wash's
+   * clear end never arrives and the photograph was invisible — which is the
+   * flat blue rectangle these bands exist to stop being. Lighter, and angled
+   * so the heaviest part is still under the title.
+   */
   .dent-hero-wash {
     background: linear-gradient(
-      160deg,
-      rgba(24, 86, 125, 0.95) 0%,
-      rgba(30, 106, 152, 0.92) 100%
+      165deg,
+      rgba(24, 86, 125, 0.92) 0%,
+      rgba(28, 99, 143, 0.84) 45%,
+      rgba(38, 130, 185, 0.68) 100%
     );
   }
 
@@ -2384,14 +2372,26 @@
     display: none;
   }
 
-  /* A last guard: the nav can never paint outside its own share of the row. */
-  .secheadnav {
-    overflow: hidden;
-  }
-
-  .secheadnav {
+  /*
+   * `#graynav` and `#navwrap` come along only so the phone keeps the theme's
+   * own hide-and-burger behaviour. Above 991 they are flattened to nothing but
+   * a flex cell, and `overflow: hidden` is the last guard that the nav can
+   * never paint outside its own share of the row.
+   */
+  #header.has-section #graynav {
     flex: 1 1 auto;
     min-width: 0;
+    overflow: hidden;
+    position: static;
+    width: auto;
+    background: none;
+    box-shadow: none;
+    z-index: auto;
+  }
+
+  #header.has-section #navwrap {
+    height: auto;
+    padding: 0;
   }
 
   #header.has-section .mainnav {
@@ -2708,33 +2708,6 @@
   width: 260px;
 }
 
-/* The trail, in its own strip under the bar. */
-#seccrumbs {
-  background: #f4f4f4;
-  border-bottom: 1px solid #e8e8ea;
-  padding: 11px 0;
-}
-
-#seccrumbs .crumbs {
-  padding-top: 0;
-}
-
-#seccrumbs .crumbs li {
-  color: #636466;
-}
-
-#seccrumbs .crumbs li + li:before {
-  color: #b6b7b9;
-}
-
-#seccrumbs .crumbs a {
-  color: #2b93d1;
-}
-
-#seccrumbs .crumbs a:hover {
-  color: #f58220;
-}
-
 .secbar-toggle {
   display: none;
 }
@@ -2743,6 +2716,17 @@
   /* Below the section layout the header is the theme's own again. */
   .secheadrow {
     display: block;
+  }
+
+  /*
+   * The theme leaves `#graynav` absolutely positioned, which is right where it
+   * sits by default — a sibling after the logo's container, so it drops below
+   * it. Nested inside the row here, that same rule put the opened menu on top
+   * of the logo and the burger, with no way to tap it shut. It flows instead.
+   */
+  #header.has-section #graynav {
+    position: static;
+    box-shadow: none;
   }
 
   /*

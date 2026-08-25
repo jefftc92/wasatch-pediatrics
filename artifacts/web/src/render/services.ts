@@ -61,31 +61,64 @@ export function providersForService(service: Service) {
 }
 
 /**
- * The breadcrumb trail for a migrated page.
+ * The breadcrumb trail, as it appears inside a hero band.
  *
- * It sat on the hero photograph and had to be read against whatever the picture
- * was doing there. It is the whole of the upward navigation on these pages, so
- * it gets its own quiet strip above the hero instead, where it reads the same
- * way on every page and in the same place as everywhere else on the site.
+ * It had a strip of its own under the section bar for a while. That strip cost
+ * every page 50px of chrome to say something the hero could carry for nothing,
+ * and it pushed the photograph further down the page. Here it sits on the same
+ * wash the title does, so it reads against any picture underneath.
  */
-function dentalCrumbs(_crumbs: Crumb[]): string {
-  /* The section bar's own strip carries the trail on these pages now. */
-  return "";
+function heroCrumbs(crumbs: Crumb[]): string {
+  const items = crumbs
+    .map((crumb) =>
+      crumb.href
+        ? `<li><a href="${crumb.href}">${escapeAttribute(crumb.name)}</a></li>`
+        : `<li>${escapeAttribute(crumb.name)}</li>`,
+    )
+    .join("");
+
+  return `<nav class="crumbs hero-crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li>${items}</ol></nav>`;
 }
 
-/*
- * Every page in a pillar carries the section bar, and the trail lives in the
- * strip beneath it — so the hero no longer repeats it. `crumbs` is still taken
- * because the caller builds it for the section descriptor anyway.
+function dentalCrumbs(crumbs: Crumb[]): string {
+  return heroCrumbs(crumbs);
+}
+
+/**
+ * The band a page's title sits in.
+ *
+ * It was a flat blue rectangle, which is what the theme does for every interior
+ * page. On a service that is the one place a picture earns its keep: these are
+ * pages about being looked after, and the migrated dentistry pages had proved
+ * the pattern already — so this is the same band they use, with the service's
+ * own photograph behind it.
+ *
+ * A page with no photograph gets `.dent-hero-plain`, which is the wash alone —
+ * near enough to the old blue rectangle that nothing regresses.
  */
-function heroSection(title: string, _crumbs: Crumb[]): string {
-  return `<div class="bluebg">
-	<div class="container">
-		<div class="row">
-			<div class="col-12">
-				<h1 class="interiorpagetitle">${title}</h1>
-			</div>
-		</div>
+function heroSection(
+  title: string,
+  crumbs: Crumb[],
+  art?: { hero?: string; eyebrow?: string; lead?: string },
+): string {
+  const image = art?.hero
+    ? `<img class="dent-hero-img" src="${art.hero}" alt="" aria-hidden="true" loading="eager" decoding="async" />`
+    : "";
+  const eyebrow = art?.eyebrow
+    ? `<p class="dent-hero-eyebrow">${escapeAttribute(art.eyebrow)}</p>`
+    : "";
+  const lead = art?.lead
+    ? `<p class="dent-hero-lead">${escapeAttribute(art.lead)}</p>`
+    : "";
+
+  return `<div class="dent-hero${art?.hero ? "" : " dent-hero-plain"}">
+	${image}
+	<div class="dent-hero-wash"></div>
+	<div class="container dent-hero-inner">
+		${heroCrumbs(crumbs)}
+		${eyebrow}
+		<h1 class="dent-hero-title">${title}</h1>
+		${lead}
 	</div>
 </div>`;
 }
@@ -251,10 +284,9 @@ export function renderPillarPage(
 ): string {
   const crumbs: Crumb[] = [{ name: pillar.name }];
 
-  const opening =
-    storedContent ??
-    `${heroSection(escapeAttribute(pillar.name), crumbs)}
-<div class="whitebg svc-intro">
+  const body =
+    storedContent === undefined
+      ? `<div class="whitebg svc-intro">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9">
@@ -264,35 +296,44 @@ export function renderPillarPage(
 			</div>
 		</div>
 	</div>
-</div>`;
-
+</div>`
+      : withoutTitleBand(storedContent);
 
   /*
    * The tiles go above the page's own copy, not below it. On dentistry the
    * stored landing page runs to nearly 3000px, so the section's menu was
    * effectively at the bottom — the way in has to come before the reading.
    */
-  const [hero, body] = splitAfterHero(opening);
-
-  return `${hero}
+  return `${pillarHero(pillar, crumbs)}
 ${renderServiceIndex(pillar)}
 ${body}
 ${otherPillars(pillar.slug)}`;
 }
 
+/** The hub's own hero: the pillar's photograph, name and opening line. */
+function pillarHero(pillar: Pillar, crumbs: Crumb[]): string {
+  return heroSection(escapeAttribute(pillar.name), crumbs, {
+    hero: pillar.hero,
+    eyebrow: "Services",
+    lead: pillar.blurb,
+  });
+}
+
 /**
- * Splits a pillar's opening markup just after its hero band, so the tiles can go
- * between the title and the page's own copy.
+ * A stored landing page with its `.bluebg` title band removed.
  *
- * Both kinds of pillar page start with a `.bluebg` block — a stored landing page
- * because that is how the live site builds one, a generated pillar because
- * `heroSection` does. What follows it differs (`<br>` on the stored ones, a
- * `<div>` on the generated ones), so the split counts div tags to find where the
- * band actually closes rather than matching whatever comes next.
+ * Both kinds of pillar page used to start with one — a stored page because that
+ * is how the live site builds a title, a generated one because `heroSection`
+ * did. The hub now draws its own photographic band, so the stored rectangle
+ * would be a second title above the page's copy.
+ *
+ * The band is found by counting div tags rather than by matching whatever
+ * follows it, which differs between the stored pages. A page without one is
+ * returned untouched.
  */
-function splitAfterHero(markup: string): [string, string] {
+function withoutTitleBand(markup: string): string {
   const open = markup.indexOf('<div class="bluebg"');
-  if (open === -1) return [markup, ""];
+  if (open === -1) return markup;
 
   const tag = /<div\b|<\/div>/g;
   tag.lastIndex = open;
@@ -301,11 +342,10 @@ function splitAfterHero(markup: string): [string, string] {
   while ((match = tag.exec(markup))) {
     depth += match[0] === "</div>" ? -1 : 1;
     if (depth === 0) {
-      const end = match.index + match[0].length;
-      return [markup.slice(0, end), markup.slice(end)];
+      return markup.slice(0, open) + markup.slice(match.index + match[0].length);
     }
   }
-  return [markup, ""];
+  return markup;
 }
 
 function locationList(service: Service, pillar: Pillar): string {
@@ -415,7 +455,11 @@ export function renderServicePage(service: Service): string {
     }, [])
     .join("\n");
 
-  const head = heroSection(escapeAttribute(service.name), crumbs);
+  const head = heroSection(escapeAttribute(service.name), crumbs, {
+    hero: service.hero ?? pillar.hero,
+    eyebrow: pillar.name,
+    lead: service.blurb,
+  });
 
   /*
    * A migrated service brings its own bands, and the topic shelf, the team and
@@ -578,7 +622,11 @@ ${topic.items
       )
     : "";
 
-  const head = heroSection(escapeAttribute(topic.name), crumbs);
+  const head = heroSection(escapeAttribute(topic.name), crumbs, {
+    hero: service.hero ?? pillar.hero,
+    eyebrow: service.name,
+    lead: topic.blurb,
+  });
 
   /*
    * A migrated topic keeps its own bands and puts the list of pages under them,
@@ -644,7 +692,11 @@ export function renderTopicItemPage(
     { name: item.name },
   ];
 
-  const head = heroSection(escapeAttribute(item.name), crumbs);
+  const head = heroSection(escapeAttribute(item.name), crumbs, {
+    hero: service.hero ?? pillar.hero,
+    eyebrow: topic.name,
+    lead: item.blurb,
+  });
   const migrated = dentalPage(topicItemHref(service, topic, item));
 
   if (migrated) {
@@ -719,7 +771,11 @@ export function renderAllServices(): string {
     })
     .join("\n");
 
-  return `${heroSection("Services", [{ name: "Services" }])}
+  return `${heroSection("Services", [{ name: "Services" }], {
+    hero: "/wp-content/uploads/2022/05/WAS21-0020_Website_Header_New-Patients_v1.jpg",
+    eyebrow: "Wasatch Pediatrics",
+    lead: "Medical, behavioral, nutrition and dental care for children, from newborn through the teenage years.",
+  })}
 <div class="whitebg svc-intro">
 	<div class="container">
 		<div class="row">
