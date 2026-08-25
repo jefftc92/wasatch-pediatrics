@@ -1869,6 +1869,23 @@
   line-height: 1.5;
 }
 
+/*
+ * The line under the symptom checker. It says why the tool is embedded rather
+ * than written into the page, and carries the link that has to work when a
+ * third-party frame does not — a blocked frame is otherwise a blank rectangle
+ * with nothing to click.
+ */
+.sc-note {
+  margin: 18px 0 0 0;
+  color: #8a8a8c;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.sc-note a {
+  color: #2b93d1;
+}
+
 /* ----------------------------------------------------------- dent bands -- */
 
 .dent-band {
