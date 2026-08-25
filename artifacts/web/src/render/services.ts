@@ -247,20 +247,9 @@ export function renderPillarPage(
 ): string {
   const crumbs: Crumb[] = [{ name: pillar.name }];
 
+  /* The intro is in the hero, so a hub with no page of its own has no body. */
   const body =
-    storedContent === undefined
-      ? `<div class="whitebg svc-intro">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-9">
-				<div class="pagebody">
-					<p>${escapeAttribute(pillar.intro)}</p>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>`
-      : withoutTitleBand(storedContent);
+    storedContent === undefined ? "" : withoutTitleBand(storedContent);
 
   /*
    * No index of the pillar's services here. The hub carried one as a grid of
@@ -278,7 +267,13 @@ function pillarHero(pillar: Pillar, crumbs: Crumb[]): string {
   return heroSection(escapeAttribute(pillar.name), crumbs, {
     hero: pillar.hero,
     eyebrow: "Services",
-    lead: pillar.blurb,
+    /*
+     * The opening paragraph, not the one-line blurb. The blurb is a menu line
+     * and already appears on the cards that point here; the intro is what the
+     * page has to say for itself, and it was sitting under the hero as a
+     * headingless paragraph with nothing to attach it to.
+     */
+    lead: pillar.intro,
   });
 }
 
