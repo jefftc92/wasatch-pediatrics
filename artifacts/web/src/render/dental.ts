@@ -218,7 +218,7 @@ function prose(part: DentalSection, note: DentalCallout | null): string {
     .join("\n					");
   if (!body && !note) return "";
 
-  return `		<div class="row justify-content-center">
+  return `		<div class="row">
 			<div class="col-lg-8">
 				<div class="dent-prose">
 					${body}
@@ -244,7 +244,7 @@ function section(part: DentalSection): string {
 
   return `<div class="${hasSteps ? "graybg" : "whitebg"} dent-band">
 	<div class="container">
-		<div class="row justify-content-center">
+		<div class="row">
 			<div class="col-lg-9">
 				<h2 class="dent-band-title">${inline(part.heading)}</h2>
 			</div>
@@ -279,7 +279,7 @@ function reassuranceBand(page: DentalPage): string {
 
   return `<div class="whitebg dent-quote-band">
 	<div class="container">
-		<div class="row justify-content-center">
+		<div class="row">
 			<div class="col-lg-8">
 				<blockquote class="dent-quote">${inline(page.reassurance)}</blockquote>
 			</div>
@@ -308,12 +308,12 @@ function faqBand(page: DentalPage): string {
 
   return `<div class="graybg dent-band">
 	<div class="container">
-		<div class="row justify-content-center">
+		<div class="row">
 			<div class="col-lg-9">
 				<h2 class="dent-band-title">Common questions</h2>
 			</div>
 		</div>
-		<div class="row justify-content-center">
+		<div class="row">
 ${cards}
 		</div>
 	</div>
@@ -349,7 +349,7 @@ function relatedBand(page: DentalPage): string {
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="dent-band-title dent-band-title-left">Where to go next</h2>
+				<h2 class="dent-band-title">Where to go next</h2>
 			</div>
 		</div>
 		<div class="row">
@@ -369,7 +369,7 @@ function scheduleBand(
 ): string {
   return `<div class="bluebg dent-cta">
 	<div class="container">
-		<div class="row justify-content-center">
+		<div class="row">
 			<div class="col-lg-8">
 				<h2 class="dent-cta-title">Need to be seen?</h2>
 				<p class="dent-cta-text">Call your office first — most ${escapeAttribute(serviceName.toLowerCase())} are seen the same day.</p>
@@ -399,26 +399,44 @@ export function renderDentalPage(
   service: { name: string; href: string },
   pillar: { name: string; href: string },
   /**
-   * The card grid naming what sits under or beside this page. It goes directly
-   * under the hero rather than at the foot: it is the way on, and a way on that
-   * only appears after the whole article has been read is one most people never
-   * find.
+   * A card grid of what sits *under* this page — its topics, or the pages in
+   * this topic. That is a way down, so it goes directly under the hero: a way
+   * on that only appears after the whole article has been read is one most
+   * people never find.
+   *
+   * Sideways movement is not the same thing and does not belong here. A grid of
+   * the eight other treatments put 868px of cards between the hero and the
+   * first sentence of the page you had just chosen to read; it belongs in
+   * `tailSection`, and the section bar carries it from every page besides.
    */
   navSection = "",
+  /** What sits beside this page, after it rather than before it. */
+  tailSection = "",
 ): string {
+  /*
+   * The page opens on what it is about, not on why we are good at it.
+   *
+   * The three promise cards used to sit between the hero and the first word of
+   * the article — "Gentle and thorough", "Catches problems early" — which is
+   * the practice talking about itself to someone who came to find out what a
+   * cleaning involves. They answer the question after it has been asked, so
+   * they follow the first section instead, and the photograph follows them.
+   */
   const parts = page.sections.map(section);
+  const promises = promiseBand(page);
   const scene = sceneBand(page);
-  if (scene && parts.length > 1) parts.splice(1, 0, scene);
-  else if (scene) parts.push(scene);
+
+  if (promises) parts.splice(1, 0, promises);
+  if (scene) parts.splice(promises ? 2 : 1, 0, scene);
 
   return [
     heroBand(page, title, service, crumbs),
     navSection,
-    promiseBand(page),
     ...parts,
     reassuranceBand(page),
     faqBand(page),
     relatedBand(page),
+    tailSection,
     scheduleBand(service.name, service.href, pillar.name, pillar.href),
   ]
     .filter(Boolean)
