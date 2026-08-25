@@ -1876,12 +1876,29 @@
 }
 
 /*
- * Two prose sections in a row are both white, so without this they read as one
- * long stretch with a mysterious gap in it. A hairline at the seam does what
- * the alternating grey does elsewhere, without turning every other paragraph
- * into a different colour of page.
+ * Two white sections in a row read as one long stretch with a mysterious gap in
+ * it. A hairline at the seam does what the alternating grey does elsewhere,
+ * without turning every other paragraph into a different colour of page.
+ *
+ * Every white band counts, not just two prose ones. The rule used to be written
+ * `.dent-band + .dent-band`, which held only while prose bands were adjacent —
+ * moving the promise cards and the photograph into the middle of the sequence
+ * left three seams on a page with no divider at all.
  */
-.whitebg.dent-band + .whitebg.dent-band {
+.whitebg:is(
+    .dent-band,
+    .dent-promises,
+    .dent-scene-band,
+    .dent-quote-band,
+    .svc-index
+  )
+  + .whitebg:is(
+    .dent-band,
+    .dent-promises,
+    .dent-scene-band,
+    .dent-quote-band,
+    .svc-index
+  ) {
   border-top: 1px solid #ececee;
 }
 
