@@ -123,7 +123,7 @@ export const pillars: Pillar[] = [
   },
   {
     slug: "behavioral-health",
-    hero: "/wp-content/uploads/2022/09/WAS21-0020_Website_Behavioral-Health_v5.jpg",
+    hero: "/wp-content/uploads/2025/12/WAS25-0082_Blog-Posts_Social-Media_Blog-Image_1024x1024_v1.jpg",
     name: "Behavioral Health",
     href: "/behavioral-health/",
     blurb: "Therapy, psychiatry and testing, alongside your pediatrician.",
