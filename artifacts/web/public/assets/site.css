@@ -2474,6 +2474,8 @@
 .secbar-list {
   display: flex;
   align-items: stretch;
+  /* Never two rows: what does not fit is folded into More, not wrapped. */
+  flex-wrap: nowrap;
   gap: 30px;
   list-style: none;
   margin: 0;

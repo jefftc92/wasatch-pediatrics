@@ -753,6 +753,99 @@
   }
 
   /*
+   * How many of a section's services the bar can actually show.
+   *
+   * The server folds to three, which is what fits in the narrowest container
+   * the bar appears in. That is a floor, not the answer: at 1200 and up there
+   * is room for five or six, and the container width is not something the
+   * server can know. So measure the row and pull items back out of More while
+   * they fit, then again whenever the window changes size.
+   *
+   * A promoted item is a plain link. Only dentistry's services carry a flyout
+   * and dentistry has three of them, so nothing that folds has one to lose.
+   */
+  var secBar = document.querySelector("#secbar");
+  var secMore = secBar && secBar.querySelector(".secbar-more");
+
+  if (secBar && secMore && secList) {
+    var secBox = secBar.querySelector(".container");
+    var secName = secBar.querySelector(".secbar-name");
+    var secStash = secMore.querySelector(".secfly-topics");
+    var secFirst = secList.firstElementChild;
+
+    /* One ordered list of everything between Overview and More. */
+    var secAll = [];
+    secList.querySelectorAll(".secbar-item").forEach(function (item) {
+      if (item !== secFirst && item !== secMore) secAll.push(item);
+    });
+    secStash.querySelectorAll("a").forEach(function (link) {
+      var item = document.createElement("li");
+      /*
+       * Carry the current-page state across. Without it an item the server had
+       * already folded came back as an ordinary link, and the guard below could
+       * not tell it was the page you were standing on — so it folded it again.
+       */
+      var here = link.parentElement.classList.contains("on");
+      item.className = here ? "secbar-item on" : "secbar-item";
+      item.appendChild(link.cloneNode(true));
+      secAll.push(item);
+    });
+
+    var secWidth = function () {
+      var used = secName.offsetWidth + 30;
+      Array.prototype.forEach.call(secList.children, function (item) {
+        used += item.offsetWidth + 30;
+      });
+      return used;
+    };
+
+    var secReflow = function () {
+      /* Everything back in, then take the tail out again until the row fits. */
+      secAll.forEach(function (item) {
+        secList.insertBefore(item, secMore);
+      });
+      secStash.textContent = "";
+      secMore.hidden = true;
+
+      /* Below 992 the bar is a dropdown, and the whole list belongs in it. */
+      if (window.innerWidth < 992) return;
+
+      /*
+       * `secAll` keeps the true order and is never reordered, so every reflow
+       * starts from the same bar rather than from the last one's leftovers.
+       */
+      var shown = secAll.slice();
+      while (shown.length && secWidth() > secBox.clientWidth) {
+        /*
+         * Never fold the page you are on — it is the one item the bar exists to
+         * point at. Walk back past it and fold the one before instead.
+         */
+        var at = shown.length - 1;
+        while (at >= 0 && shown[at].classList.contains("on")) at--;
+        if (at < 0) break;
+
+        var item = shown[at];
+        shown.splice(at, 1);
+        secMore.hidden = false;
+        var out = document.createElement("li");
+        if (item.classList.contains("on")) out.className = "on";
+        out.appendChild(item.querySelector("a").cloneNode(true));
+        secList.removeChild(item);
+        /* Folded from the end backwards, so prepending keeps them in order. */
+        secStash.insertBefore(out, secStash.firstChild);
+      }
+    };
+
+    secReflow();
+
+    var secTimer;
+    window.addEventListener("resize", function () {
+      clearTimeout(secTimer);
+      secTimer = setTimeout(secReflow, 120);
+    });
+  }
+
+  /*
    * The flyout's two panels. Pointing at a topic on the left swaps the pages
    * shown on the right; the topic's own name is still a link to it, so the
    * pointer never has to land somewhere that does nothing.
