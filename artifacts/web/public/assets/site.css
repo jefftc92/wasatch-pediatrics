@@ -1869,9 +1869,14 @@
 }
 
 /*
- * Centred, brand blue, and spaced out — the section headings do the work the
- * display face was doing badly. Uppercase with real letter-spacing reads as a
- * heading at a glance without shouting at body size.
+ * Brand blue and spaced out — the section headings do the work the display face
+ * was doing badly. Uppercase with real letter-spacing reads as a heading at a
+ * glance without shouting at body size.
+ *
+ * Left, not centred. Centred headings over a centred column made the article a
+ * narrow ribbon down the middle of the page while everything around it — the
+ * card grids, "Where to go next", "Other ways we help" — started at the
+ * container's left edge. Two alignments on one page read as two pages.
  */
 .dent-band-title {
   margin: 0 0 14px 0;
@@ -1881,10 +1886,6 @@
   font-weight: 700;
   letter-spacing: 0.5px;
   text-transform: uppercase;
-  text-align: center;
-}
-
-.dent-band-title-left {
   text-align: left;
 }
 

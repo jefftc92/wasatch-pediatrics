@@ -507,9 +507,14 @@ export function renderServicePage(service: Service): string {
    * are standing. The rest of the page follows it.
    */
   const hasTopics = Boolean(service.topics?.length);
-  const navSection = hasTopics
-    ? topicSectionsFor("whitebg")
-    : siblingSection("whitebg");
+  const navSection = hasTopics ? topicSectionsFor("whitebg") : "";
+  /*
+   * A page's siblings are sideways movement, so they follow the page instead of
+   * standing in front of it — and a migrated page that curates its own "Where
+   * to go next" already does this job by hand, better.
+   */
+  const tailSection = (bg: string) =>
+    hasTopics || migrated?.related?.length ? "" : siblingSection(bg);
 
   const sections = [
     ...(hasTopics ? [siblingSection] : []),
@@ -541,6 +546,7 @@ export function renderServicePage(service: Service): string {
       { name: service.name, href: serviceHref(service) },
       pillar,
       navSection,
+      tailSection("whitebg"),
     )}
 ${sections}`;
   }
@@ -561,6 +567,7 @@ ${navSection}
 		</div>
 	</div>
 </div>
+${tailSection("graybg")}
 ${sections}`;
 }
 
@@ -664,31 +671,27 @@ ${topic.items
 </div>`
     : "";
 
-  const navSection = topic.items.length
-    ? items
-    : siblingCards(
-        `More in ${service.name}`,
-        (service.topics ?? []).map((other) => ({
-          name: other.name,
-          href: topicHref(service, other),
-          blurb: other.blurb,
-        })),
-        topicHref(service, topic),
-        "whitebg",
-      );
+  const siblings = (bg: string) =>
+    siblingCards(
+      `More in ${service.name}`,
+      (service.topics ?? []).map((other) => ({
+        name: other.name,
+        href: topicHref(service, other),
+        blurb: other.blurb,
+      })),
+      topicHref(service, topic),
+      bg,
+    );
 
-  const tail = topic.items.length
-    ? siblingCards(
-        `More in ${service.name}`,
-        (service.topics ?? []).map((other) => ({
-          name: other.name,
-          href: topicHref(service, other),
-          blurb: other.blurb,
-        })),
-        topicHref(service, topic),
-        "graybg",
-      )
-    : "";
+  /*
+   * A topic with pages under it leads with them — that is the way down. A topic
+   * with none is a leaf, and its siblings are sideways movement, so they follow
+   * the page rather than standing in front of it. A migrated page that curates
+   * its own "Where to go next" needs neither.
+   */
+  const navSection = topic.items.length ? items : "";
+  const tail = (bg: string) =>
+    topic.items.length || !migrated?.related?.length ? siblings(bg) : "";
 
   const head = heroSection(escapeAttribute(topic.name), crumbs, {
     hero: service.hero ?? pillar.hero,
@@ -708,9 +711,9 @@ ${topic.items
       { name: service.name, href: serviceHref(service) },
       pillar,
       navSection,
+      tail("whitebg"),
     )}
-${tail}
-${otherPillars(pillar.slug, tail ? "whitebg" : "graybg")}`;
+${otherPillars(pillar.slug, "graybg")}`;
   }
 
   return `${head}
@@ -729,8 +732,8 @@ ${navSection}
 		</div>
 	</div>
 </div>
-${tail}
-${otherPillars(pillar.slug, tail ? "whitebg" : "graybg")}`;
+${tail("graybg")}
+${otherPillars(pillar.slug, "whitebg")}`;
 }
 
 /** The deepest page: one question, answered. */
@@ -741,17 +744,6 @@ export function renderTopicItemPage(
 ): string {
   const pillar = pillarBySlug.get(service.pillar);
   if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
-
-  const navSection = siblingCards(
-    `More in ${topic.name}`,
-    topic.items.map((other) => ({
-      name: other.name,
-      href: topicItemHref(service, topic, other),
-      blurb: other.blurb,
-    })),
-    topicItemHref(service, topic, item),
-    "whitebg",
-  );
 
   const crumbs: Crumb[] = [
     { name: pillar.name, href: pillar.href },
@@ -767,6 +759,25 @@ export function renderTopicItemPage(
   });
   const migrated = dentalPage(topicItemHref(service, topic, item));
 
+  /*
+   * The deepest page has nothing under it, so it has no way down to lead with.
+   * Its siblings follow it, and a page that curates its own "Where to go next"
+   * has already done that better by hand.
+   */
+  const tailSection = (bg: string) =>
+    migrated?.related?.length
+      ? ""
+      : siblingCards(
+          `More in ${topic.name}`,
+          topic.items.map((other) => ({
+            name: other.name,
+            href: topicItemHref(service, topic, other),
+            blurb: other.blurb,
+          })),
+          topicItemHref(service, topic, item),
+          bg,
+        );
+
   if (migrated) {
     return `${renderDentalPage(
       migrated,
@@ -774,13 +785,13 @@ export function renderTopicItemPage(
       dentalCrumbs(crumbs),
       { name: service.name, href: serviceHref(service) },
       pillar,
-      navSection,
+      "",
+      tailSection("whitebg"),
     )}
 ${otherPillars(pillar.slug, "graybg")}`;
   }
 
   return `${head}
-${navSection}
 <div class="whitebg padme90 svc-body">
 	<div class="container">
 		<div class="row">
@@ -799,7 +810,8 @@ ${navSection}
 		</div>
 	</div>
 </div>
-${otherPillars(pillar.slug, "graybg")}`;
+${tailSection("graybg")}
+${otherPillars(pillar.slug, "whitebg")}`;
 }
 
 /* --------------------------------------------------- all services index -- */
