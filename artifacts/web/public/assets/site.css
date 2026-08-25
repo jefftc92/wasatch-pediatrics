@@ -1870,6 +1870,36 @@
 }
 
 /*
+ * The symptom checker's frame.
+ *
+ * The tool is one long page — a body diagram, then every body part's symptom
+ * list one after another. Measured against a local mirror it runs to 5515px at
+ * every width from 768 up and 913px below that, where it switches to a compact
+ * layout of its own.
+ *
+ * The embed gave it 1200px and `scrolling="no"`, so a visitor saw the diagram,
+ * the "Skin Symptoms" heading and nothing else: the four hundred symptoms below
+ * the cut were unreachable rather than merely out of view. Letting it scroll is
+ * the fix, and it is the only one that cannot go stale — the tool posts no
+ * height to its parent, so nothing here can know how tall it really is, and a
+ * frame that is too short now shows a scrollbar instead of a guillotine.
+ *
+ * The height is therefore a window, not a fit. Tall enough for the diagram and
+ * the first symptoms under it, and no taller: the tool's own layout grows to
+ * fill whatever it is given, so a very tall frame makes a very long page rather
+ * than a complete one.
+ */
+.sc-frame {
+  height: 1500px;
+}
+
+@media (max-width: 767px) {
+  .sc-frame {
+    height: 1000px;
+  }
+}
+
+/*
  * The line under the symptom checker. It says why the tool is embedded rather
  * than written into the page, and carries the link that has to work when a
  * third-party frame does not — a blocked frame is otherwise a blank rectangle
