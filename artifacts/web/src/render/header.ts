@@ -380,10 +380,14 @@ export function renderHeader(
   section?: SectionNav,
 ): string {
   /*
-   * Inside a section the global nav moves into the logo row, so the section can
-   * have the main bar to itself. It is the same markup either way — moving it
-   * with CSS was not an option, because in the default header it lives in
-   * `#graynav`, which is a sibling of the logo's container rather than in it.
+   * Inside a section the global nav moves up into the logo row and sits above
+   * the schedule button, so the full-width bar below can carry the section
+   * instead. Between a home page and a service page the bar under the logo
+   * changes colour and contents; nothing else about the header moves.
+   *
+   * It is the same markup either way — doing it in CSS alone was not an
+   * option, because in the default header the nav lives in `#graynav`, which
+   * is a sibling of the logo's container rather than in it.
    *
    * It keeps its `#graynav` and `#navwrap` wrappers even so. The theme hides
    * the nav on a phone with `#graynav { display: none }` and the burger
@@ -399,17 +403,19 @@ export function renderHeader(
 				<div class="col-12">
 					<div class="secheadrow">
 						${LOGO}
-						<div id="graynav" class="secheadnav">
-							<div id="mobilesearch" class="mobile">
-								${searchForm()}
+						<div class="secheadstack">
+							<div id="graynav" class="secheadnav">
+								<div id="mobilesearch" class="mobile">
+									${searchForm()}
+								</div>
+								<div id="navwrap">
+									${globalNav(menu)}
+								</div>
 							</div>
-							<div id="navwrap">
-								${globalNav(menu)}
-							</div>
-						</div>
-						<div id="topmenuwrap">
-							<div id="topmenu">
-							${headerTools()}
+							<div id="topmenuwrap">
+								<div id="topmenu">
+								${headerTools()}
+								</div>
 							</div>
 						</div>
 					</div>

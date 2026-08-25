@@ -2374,62 +2374,40 @@
  * outside a section is untouched.
  */
 @media (min-width: 992px) {
-  /* Logo, the quietened global nav, and the tools — one row. */
+  /*
+   * Logo on the left; on the right the global nav sits above the schedule
+   * button. Stacking them is what buys the room: side by side, the logo at its
+   * full 458px left the nav 91px to live in, so it had to shrink to 14px and
+   * drop the social icons. In a column the nav has the whole right-hand side
+   * and keeps the size and the items it has on every other page.
+   */
   .secheadrow {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 30px;
-    padding: 14px 0;
+    padding: 12px 0 14px 0;
   }
 
-  /*
-   * Everything in this row has to fit across the container: at its full size
-   * the logo alone is 458px and left the nav 91px to live in. Smaller here,
-   * because the section bar beneath it is now the loudest thing on the page.
-   */
+  .secheadstack {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 6px;
+    min-width: 0;
+  }
+
   #header.has-section #logo {
     position: static;
     margin: 0 !important;
     flex: 0 0 auto;
   }
 
-  #header.has-section #logo img {
-    height: 36px;
-    width: auto;
-  }
-
-  #header.has-section .header-cta {
-    font-size: 13px !important;
-    padding: 7px 18px !important;
-    letter-spacing: 0;
-    margin-right: 0;
-  }
-
-  /* The theme indents this list for the slot it normally sits in. */
-  #header.has-section #navbuttons {
-    padding-left: 0 !important;
-  }
-
   /*
-   * The social links come off this row. It has to hold the logo, seven nav
-   * items and the tools inside 1116px, and with them there the nav had 339px
-   * for 456px of links — `justify-content: flex-end` then overflowed it
-   * leftward and painted the links across the logo. Both are in the footer.
-   */
-  #header.has-section #navbuttons li {
-    display: none;
-  }
-
-  /*
-   * `#graynav` and `#navwrap` come along only so the phone keeps the theme's
-   * own hide-and-burger behaviour. Above 991 they are flattened to nothing but
-   * a flex cell, and `overflow: hidden` is the last guard that the nav can
-   * never paint outside its own share of the row.
+   * `#graynav` and `#navwrap` come along so the phone keeps the theme's own
+   * hide-and-burger behaviour. Above 991 they are flattened to nothing.
    */
   #header.has-section #graynav {
-    flex: 1 1 auto;
-    min-width: 0;
-    overflow: hidden;
     position: static;
     width: auto;
     background: none;
@@ -2443,10 +2421,19 @@
   }
 
   #header.has-section .mainnav {
-    gap: 17px;
+    gap: 24px;
     justify-content: flex-end;
-    width: 100%;
+    width: auto;
     flex-wrap: nowrap;
+  }
+
+  /*
+   * The theme sets 23px for the full-width grey bar, where seven items have
+   * the whole page. Sharing a row with a 458px logo they need 781px at that
+   * size and run over it, so they take the size the tools beside them use.
+   */
+  #header.has-section .mainnav > li > a {
+    font-size: 16px;
   }
 
   #header.has-section .mainnav > li {
@@ -2454,19 +2441,14 @@
   }
 
   #header.has-section .mainnav > li > a {
-    font-size: 14px;
-    color: #8a8a8c;
-    padding: 6px 0;
+    padding: 2px 0;
     white-space: nowrap;
   }
 
-  #header.has-section .mainnav > li > a:hover {
-    color: #2b93d1;
-  }
-
   /*
-   * The demoted row has no room for the mega panels, and the section bar is
-   * the navigation on these pages — Services is still one click away.
+   * The mega panels stay behind. They are drawn for a full-width grey bar and
+   * would come out of a row that is half the page wide; the section bar below
+   * is the navigation on these pages, and Services is one click away.
    */
   #header.has-section .mainnav > li > .sub-menu,
   #header.has-section .navtoggle {
@@ -2480,9 +2462,8 @@
 
   /*
    * The theme positions both of these absolutely and gives the wrap the full
-   * container width. In a flex row that left it 1116px wide and squeezed the
-   * nav beside it to nothing, while the tools floated out of flow over the
-   * section bar. Both go back into the flow at their content width.
+   * container width, which in a flex row squeezed the nav beside it to nothing
+   * and floated the tools over the section bar. Both go back into the flow.
    */
   #header.has-section #topmenuwrap {
     position: static;
@@ -2544,28 +2525,23 @@
 }
 
 /*
- * Between 992 and 1199 the container is 960px, not 1140 — the logo, seven nav
- * items and the tools need about 1140 between them, so they cannot share a
- * line. The nav takes one of its own rather than being clipped or painted over
- * the logo, which is what happened when it was squeezed.
+ * Between 992 and 1199 the container is 960px, not 1140. The logo at its full
+ * 458px plus the nav's 573px needs 1061 there, so the logo comes down and the
+ * nav closes up — enough to keep both on the row rather than sending the nav
+ * to a line of its own, which is the arrangement this replaced.
  */
 @media (min-width: 992px) and (max-width: 1199px) {
-  .secheadrow {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding-bottom: 8px;
-  }
-
-  .secheadnav {
-    flex: 1 0 100%;
-    order: 3;
-    overflow: visible;
+  #header.has-section #logo img {
+    width: 380px;
+    height: auto;
   }
 
   #header.has-section .mainnav {
-    justify-content: flex-start;
-    padding-top: 4px;
-    border-top: 1px solid #f0f0f1;
+    gap: 18px;
+  }
+
+  #header.has-section .mainnav > li > a {
+    font-size: 15px;
   }
 }
 
