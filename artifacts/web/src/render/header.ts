@@ -238,7 +238,20 @@ export type SectionItem = {
  * average width. Three of the four pillars have three or four services and fit
  * whole; medical care has nine and would need 1869px.
  */
-const BAR_LIMIT = 5;
+/*
+ * How many services the bar renders inline before folding the rest into More.
+ *
+ * Three, because that is what fits without wrapping in the narrowest container
+ * the bar appears in — 960px, between 992 and 1199 — with the longest section
+ * name beside it. Behavioral Health needed 1093px for its five items and wrapped
+ * onto a second line there, which read as a mistake rather than as a menu.
+ *
+ * It is a floor, not the final count: site.js measures the row once the page is
+ * up and pulls items back out of More while they fit, so a wide window shows
+ * everything. Folding here rather than only in the browser means the bar is
+ * never wrong on the first frame, and is still usable with no script at all.
+ */
+const BAR_LIMIT = 3;
 
 function flyout(item: SectionItem): string {
   const groups = item.groups ?? [];
