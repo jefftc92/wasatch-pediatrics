@@ -1258,7 +1258,7 @@ export const dentalContent: Record<string, DentalPage> = {
         heading: "How to get started",
         body: [
           "It begins with a complimentary consultation. Dr. Chu examines the teeth and bite, takes images, and walks you through your options, timing, and cost in plain language, with no pressure and no obligation.",
-          "If treatment makes sense now, we'll map out the plan and flexible <a href=\"/about/financing\">monthly financing</a>. If it's smarter to wait, we'll simply keep an eye on things at regular visits and start when the timing is right.",
+          "If treatment makes sense now, we'll map out the plan and flexible monthly financing. If it's smarter to wait, we'll simply keep an eye on things at regular visits and start when the timing is right.",
           "There's no such thing as too old, or too early to check, for a great smile. We'll meet you exactly where you are.",
         ],
       },
@@ -1530,7 +1530,7 @@ export const dentalContent: Record<string, DentalPage> = {
       {
         heading: "Who They're For, and What They Cost",
         body: [
-          "Clear braces suit teens and adults who want effective treatment with a subtle look, including corrections too complex for aligners. Cost is often comparable to metal braces, with a small premium for the ceramic brackets, and we offer <a href='/about/financing'>orthodontic financing</a> to keep monthly payments manageable.",
+          "Clear braces suit teens and adults who want effective treatment with a subtle look, including corrections too complex for aligners. Cost is often comparable to metal braces, with a small premium for the ceramic brackets, and we offer orthodontic financing to keep monthly payments manageable.",
         ],
       },
     ],
