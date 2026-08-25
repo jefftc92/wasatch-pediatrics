@@ -546,7 +546,7 @@ export function renderServicePage(service: Service): string {
       { name: service.name, href: serviceHref(service) },
       pillar,
       navSection,
-      tailSection("whitebg"),
+      tailSection("{{bg}}"),
     )}
 ${sections}`;
   }
@@ -711,7 +711,7 @@ ${topic.items
       { name: service.name, href: serviceHref(service) },
       pillar,
       navSection,
-      tail("whitebg"),
+      tail("{{bg}}"),
     )}
 ${otherPillars(pillar.slug, "graybg")}`;
   }
@@ -786,7 +786,7 @@ export function renderTopicItemPage(
       { name: service.name, href: serviceHref(service) },
       pillar,
       "",
-      tailSection("whitebg"),
+      tailSection("{{bg}}"),
     )}
 ${otherPillars(pillar.slug, "graybg")}`;
   }

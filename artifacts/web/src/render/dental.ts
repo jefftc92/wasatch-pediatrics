@@ -157,7 +157,7 @@ function promiseBand(page: DentalPage): string {
     )
     .join("\n");
 
-  return `<div class="whitebg dent-promises">
+  return `<div class="{{bg}} dent-promises">
 	<div class="container">
 		<div class="row">
 ${cards}
@@ -242,7 +242,7 @@ function section(part: DentalSection): string {
     ? [prose(part, null), steps(part), prose({ heading: "" }, note)]
     : [prose(part, note)];
 
-  return `<div class="${hasSteps ? "graybg" : "whitebg"} dent-band">
+  return `<div class="{{bg}} dent-band">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9">
@@ -258,7 +258,7 @@ ${inner.filter(Boolean).join("\n")}
 function sceneBand(page: DentalPage): string {
   if (!page.scene) return "";
 
-  return `<div class="whitebg dent-scene-band">
+  return `<div class="{{bg}} dent-scene-band">
 	<div class="container">
 		<figure class="dent-scene">
 			<img src="${page.scene}" alt="${escapeAttribute(page.sceneAlt || "")}" width="1536" height="1024" loading="lazy" decoding="async" />
@@ -277,7 +277,7 @@ function sceneBand(page: DentalPage): string {
 function reassuranceBand(page: DentalPage): string {
   if (!page.reassurance) return "";
 
-  return `<div class="whitebg dent-quote-band">
+  return `<div class="{{bg}} dent-quote-band">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-8">
@@ -306,7 +306,7 @@ function faqBand(page: DentalPage): string {
     )
     .join("\n");
 
-  return `<div class="graybg dent-band">
+  return `<div class="{{bg}} dent-band">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9">
@@ -345,7 +345,7 @@ function relatedBand(page: DentalPage): string {
     )
     .join("\n");
 
-  return `<div class="whitebg dent-band">
+  return `<div class="{{bg}} dent-band">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -431,16 +431,54 @@ export function renderDentalPage(
 
   return [
     heroBand(page, title, service, crumbs),
-    navSection,
-    ...parts,
-    reassuranceBand(page),
-    faqBand(page),
-    relatedBand(page),
-    tailSection,
+    ...alternate([
+      navSection,
+      ...parts,
+      reassuranceBand(page),
+      faqBand(page),
+      relatedBand(page),
+      tailSection,
+    ]),
     scheduleBand(service.name, service.href, pillar.name, pillar.href),
   ]
     .filter(Boolean)
     .join("\n");
+}
+
+/**
+ * Grey and white, one after the other, all the way down the page.
+ *
+ * Each band used to choose its own ground from what it contained — steps went
+ * grey, prose went white, the photograph and the promise cards were always
+ * white. That is not a rhythm, it is a coincidence, and it left three sections
+ * in a row on the same white with only a hairline between them to say a new
+ * topic had started. A band's tone is its position now, so the join is a change
+ * of ground rather than a line the eye has to look for.
+ *
+ * The band writes `{{bg}}` where its class goes and this fills it in. The
+ * schedule CTA is not in the list: it is blue wherever it lands.
+ */
+function alternate(bands: string[]): string[] {
+  /* Starts white: the band under the hero should not repeat the grey nav. */
+  let grey = true;
+
+  return bands.map((band) => {
+    if (!band) return band;
+
+    /*
+     * A band that already names its ground keeps it and sets the rhythm from
+     * there — the card grids come from services.ts, which builds them for
+     * generated pages too and cannot know what they will sit next to here.
+     */
+    if (!band.includes("{{bg}}")) {
+      const stated = /class="(?:[^"]*\s)?(whitebg|graybg)\b/.exec(band);
+      if (stated) grey = stated[1] === "graybg";
+      return band;
+    }
+
+    grey = !grey;
+    return band.replaceAll("{{bg}}", grey ? "graybg" : "whitebg");
+  });
 }
 
 /**
