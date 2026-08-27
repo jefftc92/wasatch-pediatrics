@@ -818,8 +818,19 @@
  * the exercise is that moving between them should not feel like a different
  * site.
  */
+/* The anchor is inline, so its box was 20px tall around a 39px logo. */
+#logo a {
+  display: block;
+}
+
 .mainnav > li > a {
   font-size: 16px;
+  /*
+   * The theme tightens the menu by half a pixel, which is right for the 23px
+   * it was set at and wrong at 16 — at this size it just makes the words look
+   * squeezed. Seven items lose 24px of width by it, which is not worth having.
+   */
+  letter-spacing: normal;
 }
 
 #navwrap {
@@ -2471,7 +2482,7 @@
   }
 
   .mainnav {
-    gap: 26px;
+    gap: 22px;
     justify-content: flex-end;
     width: auto;
     flex-wrap: nowrap;
@@ -2515,7 +2526,27 @@
    */
   #searchformwrap {
     position: relative;
-    width: 34px;
+    width: 40px;
+  }
+
+  /*
+   * The magnifier was a 24px glyph standing beside two 35px badges, which read
+   * as an afterthought rather than a third tool, and gave it a 24x31 target to
+   * hit. A bare glyph looks smaller than a filled badge at the same measure,
+   * so it is 28 with a 40px box around it.
+   */
+  #searchformwrap .searchbutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+
+  #searchformwrap .searchbutton img {
+    width: 28px;
+    height: 28px;
   }
 
   #searchformwrap .searchwrap {
@@ -2552,7 +2583,7 @@
  */
 @media (min-width: 992px) and (max-width: 1199px) {
   .mainnav {
-    gap: 20px;
+    gap: 18px;
   }
 
   /*
@@ -2621,7 +2652,12 @@
   padding: 17px 0;
   border-bottom: 3px solid transparent;
   color: #ffffff !important;
-  font-size: 17px;
+  /*
+   * The same size as the menu above it. They were 17 and 16, which is not a
+   * hierarchy, it is a pixel out. The section's name carries the emphasis at
+   * 21px; its services are peers of the menu, so they are set like it.
+   */
+  font-size: 16px;
   font-weight: 400 !important;
   line-height: 1.2;
   text-decoration: none !important;
@@ -2769,6 +2805,30 @@
   /* Below 992 the header stacks: logo, burger, and the menu when it opens. */
   .secheadrow {
     display: block;
+  }
+
+  /*
+   * Touch targets. The burger was 45x32, the section's Menu pill 90x36 and its
+   * links 43 tall — all just under the 44px a fingertip needs, and all of them
+   * the only way to reach what they open.
+   */
+  #mobileburger {
+    height: 44px;
+    margin-top: 0;
+  }
+
+  .secbar-toggle {
+    min-height: 44px;
+  }
+
+  .secbar-item > a {
+    min-height: 44px;
+  }
+
+  .secbar-name {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
   }
 
   /*
