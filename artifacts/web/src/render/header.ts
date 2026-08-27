@@ -330,7 +330,7 @@ function sectionBar(section: SectionNav): string {
 			<div class="container">
 				<div class="secbar-in">
 					<a class="secbar-name" href="${section.href}">${esc(section.name)}</a>
-					<button class="secbar-toggle" type="button" aria-expanded="false" aria-controls="secbar-list">In this section</button>
+					<button class="secbar-toggle" type="button" aria-expanded="false" aria-controls="secbar-list"><span class="secbar-toggle-label">Menu</span></button>
 					<ul class="secbar-list" id="secbar-list">
 						<li class="secbar-item${section.crumbs.length === 1 ? " on" : ""}"><a href="${section.href}">Overview</a></li>
 						${shown.map(sectionItem).join("\n\t\t\t\t\t\t")}
@@ -380,14 +380,20 @@ export function renderHeader(
   section?: SectionNav,
 ): string {
   /*
-   * Inside a section the global nav moves up into the logo row and sits above
-   * the schedule button, so the full-width bar below can carry the section
-   * instead. Between a home page and a service page the bar under the logo
-   * changes colour and contents; nothing else about the header moves.
+   * Inside a section the global nav moves above the logo row, so it sits over
+   * the schedule button rather than under it, and the full-width bar below
+   * carries the section instead of the menu.
    *
-   * It is the same markup either way — doing it in CSS alone was not an
-   * option, because in the default header the nav lives in `#graynav`, which
-   * is a sibling of the logo's container rather than in it.
+   * The nav keeps `#graynav` and its own full-width row. It has to: at the
+   * size it is on every other page the seven items are 781px wide, and beside
+   * a 458px logo inside a 1140px container they do not fit — which is why an
+   * earlier attempt at this had to shrink them, and shrinking is the one thing
+   * that makes the menu look like a different menu. On its own line it has the
+   * whole container and changes nothing but its position.
+   *
+   * The reordering is CSS; the markup is the default header's, so the phone
+   * keeps the theme's own hide-and-burger behaviour with the menu still
+   * arriving below the logo rather than above it.
    *
    * It keeps its `#graynav` and `#navwrap` wrappers even so. The theme hides
    * the nav on a phone with `#graynav { display: none }` and the burger
@@ -403,20 +409,24 @@ export function renderHeader(
 				<div class="col-12">
 					<div class="secheadrow">
 						${LOGO}
-						<div class="secheadstack">
-							<div id="graynav" class="secheadnav">
-								<div id="mobilesearch" class="mobile">
-									${searchForm()}
-								</div>
-								<div id="navwrap">
-									${globalNav(menu)}
-								</div>
+						<div id="topmenuwrap">
+							<div id="topmenu">
+							${headerTools()}
 							</div>
-							<div id="topmenuwrap">
-								<div id="topmenu">
-								${headerTools()}
-								</div>
-							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="graynav" class="secheadnav">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div id="mobilesearch" class="mobile">
+							${searchForm()}
+						</div>
+						<div id="navwrap">
+							${globalNav(menu)}
 						</div>
 					</div>
 				</div>

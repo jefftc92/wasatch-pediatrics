@@ -791,6 +791,42 @@
   font-style: italic;
 }
 
+/*
+ * The dentistry landing page's tab strip is `display: inline-flex` with fixed
+ * width tabs, 1090px of them. Above 1200 the container is 1140 and it fits;
+ * between 992 and 1199 the container is 960 and it ran 130px past the window.
+ * The theme stacks it below 992 but leaves that band alone. It wraps instead.
+ */
+@media (max-width: 1199px) {
+  #tabnav {
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+  }
+}
+
+/* ------------------------------------------------------------ main nav -- */
+
+/*
+ * The menu bar, thinner — on every page.
+ *
+ * The theme sets it at 23px in a 60px bar, which is fine when it is the only
+ * bar on the page. A service page has two: the menu and the section beneath
+ * it, and at the theme's size those two plus the logo row came to 231px of
+ * chrome before the page began. Thinner here rather than only in a section, so
+ * the menu is the same on a home page and a service page — the whole point of
+ * the exercise is that moving between them should not feel like a different
+ * site.
+ */
+.mainnav > li > a {
+  font-size: 16px;
+}
+
+#navwrap {
+  height: auto;
+  padding: 11px 0;
+}
+
 /* ---------------------------------------------------------- breadcrumbs -- */
 
 .crumbs {
@@ -2375,26 +2411,44 @@
  */
 @media (min-width: 992px) {
   /*
-   * Logo on the left; on the right the global nav sits above the schedule
-   * button. Stacking them is what buys the room: side by side, the logo at its
-   * full 458px left the nav 91px to live in, so it had to shrink to 14px and
-   * drop the social icons. In a column the nav has the whole right-hand side
-   * and keeps the size and the items it has on every other page.
+   * The nav takes a row of its own above the logo, at the size and spacing it
+   * has on every other page. `order` does the moving, so the markup stays the
+   * default header's and a phone still gets the menu below the logo when the
+   * burger opens it.
    */
+  #header.has-section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+
+  #header.has-section #graynav {
+    order: -1;
+    position: static;
+    width: auto;
+    /* The menu bar's colour is the one thing that says you are in a section. */
+    background-color: #f1f7fb;
+    box-shadow: inset 0 -1px 0 #dceaf4;
+    z-index: auto;
+  }
+
+  #header.has-section #navwrap {
+    height: auto;
+    padding: 10px 0;
+  }
+
+  #header.has-section .mainnav {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  /* Logo on the left, tools on the right, as on every other page. */
   .secheadrow {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
-    padding: 12px 0 14px 0;
-  }
-
-  .secheadstack {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 6px;
-    min-width: 0;
+    padding: 14px 0 16px 0;
   }
 
   #header.has-section #logo {
@@ -2404,66 +2458,9 @@
   }
 
   /*
-   * `#graynav` and `#navwrap` come along so the phone keeps the theme's own
-   * hide-and-burger behaviour. Above 991 they are flattened to nothing.
-   */
-  #header.has-section #graynav {
-    position: static;
-    width: auto;
-    background: none;
-    box-shadow: none;
-    z-index: auto;
-  }
-
-  #header.has-section #navwrap {
-    height: auto;
-    padding: 0;
-  }
-
-  #header.has-section .mainnav {
-    gap: 24px;
-    justify-content: flex-end;
-    width: auto;
-    flex-wrap: nowrap;
-  }
-
-  /*
-   * The theme sets 23px for the full-width grey bar, where seven items have
-   * the whole page. Sharing a row with a 458px logo they need 781px at that
-   * size and run over it, so they take the size the tools beside them use.
-   */
-  #header.has-section .mainnav > li > a {
-    font-size: 16px;
-  }
-
-  #header.has-section .mainnav > li {
-    flex: 0 0 auto;
-  }
-
-  #header.has-section .mainnav > li > a {
-    padding: 2px 0;
-    white-space: nowrap;
-  }
-
-  /*
-   * The mega panels stay behind. They are drawn for a full-width grey bar and
-   * would come out of a row that is half the page wide; the section bar below
-   * is the navigation on these pages, and Services is one click away.
-   */
-  #header.has-section .mainnav > li > .sub-menu,
-  #header.has-section .navtoggle {
-    display: none !important;
-  }
-
-  #header.has-section .mainnav > li.menu-item-has-children > a:after,
-  #header.has-section .mainnav > li > a:before {
-    display: none;
-  }
-
-  /*
    * The theme positions both of these absolutely and gives the wrap the full
-   * container width, which in a flex row squeezed the nav beside it to nothing
-   * and floated the tools over the section bar. Both go back into the flow.
+   * container width, which in a flex row squeezed everything beside it and
+   * floated the tools over the bar below. Both go back into the flow.
    */
   #header.has-section #topmenuwrap {
     position: static;
@@ -2486,13 +2483,17 @@
     align-items: center;
     gap: 10px;
     margin: 0;
-    padding: 0;
+    padding-left: 0 !important;
+  }
+
+  #header.has-section .header-cta {
+    margin-right: 0;
   }
 
   /*
    * The theme's search field is sized for the absolutely-positioned slot it
    * normally sits in; dropped into a flex row it took 1287px and pushed the
-   * page 7px wider than the window. It opens on click, as it does elsewhere.
+   * page wider than the window. It opens on click, as it does elsewhere.
    */
   #header.has-section #searchformwrap {
     position: relative;
@@ -2518,30 +2519,17 @@
   #header.has-section #searchformwrap .searchbutton {
     position: static;
   }
-
-  #header.has-section {
-    margin-bottom: 0;
-  }
 }
 
 /*
- * Between 992 and 1199 the container is 960px, not 1140. The logo at its full
- * 458px plus the nav's 573px needs 1061 there, so the logo comes down and the
- * nav closes up — enough to keep both on the row rather than sending the nav
- * to a line of its own, which is the arrangement this replaced.
+ * Between 992 and 1199 the container is 960px rather than 1140, and the logo at
+ * its full 458px plus the tools' 493px runs 17px past it. The logo comes down;
+ * the menu is on its own line above and is not affected.
  */
 @media (min-width: 992px) and (max-width: 1199px) {
   #header.has-section #logo img {
     width: 380px;
     height: auto;
-  }
-
-  #header.has-section .mainnav {
-    gap: 18px;
-  }
-
-  #header.has-section .mainnav > li > a {
-    font-size: 15px;
   }
 }
 
@@ -2738,6 +2726,10 @@
   display: none;
 }
 
+.secbar-toggle-label {
+  display: inline;
+}
+
 @media (max-width: 991px) {
   /* Below the section layout the header is the theme's own again. */
   .secheadrow {
@@ -2757,42 +2749,48 @@
 
   /*
    * No room for a bar of services or a hover flyout on a phone, so the section
-   * name stays and the rest folds behind a toggle. The flyouts collapse with
-   * it — their topics and pages are on the service's own page, which is one tap
-   * from here.
+   * keeps its name and folds the rest behind a control beside it — the name on
+   * the left, a Menu pill on the right, one line. It used to be a full-width
+   * field under the name, which took two lines to say the same thing and read
+   * as a form control rather than a menu.
    */
   .secbar-in {
-    display: block;
-    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 10px 0;
   }
 
   .secbar-name {
     border-right: 0;
     padding: 4px 0;
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .secbar-toggle {
-    display: block;
-    width: 100%;
-    margin-top: 8px;
-    padding: 11px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    background: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
     color: #ffffff;
     font-family: inherit;
     font-size: 15px;
-    text-align: left;
+    font-weight: 700;
+    line-height: 1.2;
     cursor: pointer;
   }
 
   .secbar-toggle:after {
     content: "";
-    float: right;
     width: 8px;
     height: 8px;
-    margin-top: 5px;
+    margin-top: -3px;
     border: solid #ffffff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
@@ -2800,12 +2798,14 @@
   }
 
   .secbar-toggle[aria-expanded="true"]:after {
-    transform: translateY(3px) rotate(-135deg);
+    margin-top: 3px;
+    transform: rotate(-135deg);
   }
 
   .secbar-list {
     display: none;
-    margin-top: 6px;
+    flex: 1 0 100%;
+    margin-top: 10px;
     gap: 0;
   }
 
