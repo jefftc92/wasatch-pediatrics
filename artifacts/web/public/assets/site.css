@@ -131,7 +131,15 @@
   transform: translateX(3px);
 }
 
-@media (min-width: 768px) {
+/*
+ * The desktop dropdowns. At 1200, with the burger, because everything in
+ * here is about a menu bar: the mega panels, their hit areas, and the caret
+ * suppression that told the mobile accordion to stay out of the way. Starting
+ * at the theme's 768 meant the accordion was suppressed everywhere between 768
+ * and 1199 while the burger was the only menu there — so Locations, Services
+ * and Resources could not be opened at all in that whole band.
+ */
+@media (min-width: 1200px) {
   /* Static, so the panel positions against #graynav and can span the page. */
   .mainnav > li.mega {
     position: static;
@@ -243,6 +251,17 @@
    */
   .mainnav > li.mega:focus-within > .sub-menu.megamenu {
     display: block;
+  }
+
+  /*
+   * ...but not while the pointer is somewhere else in the bar. Focus opens a
+   * panel and holds it; hover opens another. With both rules live and nothing
+   * between them, a focused item and a hovered item were open at once, one
+   * printed over the other — and the focused one stayed there over the page as
+   * it scrolled, because nothing had told it to close.
+   */
+  .mainnav:hover > li.mega:focus-within:not(:hover) > .sub-menu.megamenu {
+    display: none;
   }
 
   .megamenu > li {
@@ -576,7 +595,7 @@
   opacity: 0;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1199px) {
   .ctadock {
     display: flex;
   }
@@ -585,26 +604,18 @@
 /* --------------------------------------------------------- sticky chrome -- */
 
 /*
- * The theme positions #graynav absolutely under the logo, so the nav scrolls
- * away with the page and there is no way back to it without scrolling to the
- * top. Pin it instead.
+ * Nothing pins on a wide screen.
  *
- * On a wide screen only the grey bar pins: site.js adds .is-stuck once the page
- * has scrolled past it. The space it occupied is already reserved by the
- * header's 60px bottom margin, so nothing jumps when it switches to fixed.
+ * `#graynav` used to be a full-width grey bar under the logo, and pinning that
+ * on scroll made sense. It is the menu sitting beside the logo now, so pinning
+ * it left seven bare links floating over the page with no ground under them.
+ * The rule and the script that drove it are both gone.
  *
- * On a phone #graynav is hidden until the burger opens, so the whole header
- * sticks instead — that keeps the burger, the logo and the search within reach.
+ * Below 1200 the whole header sticks, which is a different thing: it is a
+ * complete band, and it keeps the burger and the search within reach on a
+ * screen where they are the only way to navigate.
  */
-@media (min-width: 768px) {
-  #graynav.is-stuck {
-    position: fixed;
-    top: 0;
-    z-index: 200;
-  }
-}
-
-@media (max-width: 767px) {
+@media (max-width: 1199px) {
   #header {
     position: sticky;
     top: 0;
