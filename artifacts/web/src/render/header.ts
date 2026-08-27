@@ -341,28 +341,55 @@ function sectionBar(section: SectionNav): string {
 		</div>`;
 }
 
+/*
+ * Paying a bill and booking, at the foot of the menu — on a phone only.
+ *
+ * On a desktop they are in the header itself: the strip carries Pay Bill and
+ * the row ends with the appointment button. A phone has neither of those
+ * places to put them, so they join the menu they would otherwise be missing
+ * from. Hidden above 1050, where the header shows them properly.
+ */
+const MENU_ACTIONS = `<li class="menu-item nav-action"><a href="https://wasatchpeds.goredde.com/" target="_blank" rel="noopener">Pay Bill</a></li>
+<li class="menu-item nav-action nav-action-book"><a href="/contact-us/">Schedule Appointment</a></li>`;
+
 function globalNav(menu: MenuState): string {
   return `<div class="menu-main-nav-container"><ul id="menu-main-nav" class="mainnav">${mainNav
     .map((item) => menuItem(item, menu))
-    .join("\n")}</ul></div>`;
+    .join("\n")}
+${MENU_ACTIONS}</ul></div>`;
 }
 
-function headerTools(): string {
-  return `<a class="btn green header-cta" href="/contact-us/"><span class="header-cta-full">Schedule An Appointment</span><span class="header-cta-short">Schedule</span></a>
+/*
+ * The utility strip: paying a bill, search and the social links, right-aligned
+ * on a shallow grey band. Paying a bill is the errand people arrive with
+ * rather than something they browse to, and it is only here — it used to be a
+ * main menu item as well, and one link in two places is one more thing to keep
+ * in step.
+ *
+ * A phone has no strip. The search glass moves up beside the burger, the
+ * social links come off entirely, and Pay Bill joins the menu.
+ */
+function utilityTools(): string {
+  return `<a class="utility-link" href="https://wasatchpeds.goredde.com/" target="_blank" rel="noopener">Pay Bill</a>
+							<div id="searchformwrap" title="Search">
+								<span class="searchlabel" aria-hidden="true">Search</span>
+								${searchForm()}
+							</div>
 							<ul  class="desktop" id="navbuttons">
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/fb.svg" alt="Facebook Icon" /></a></li>
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/ig.svg" alt="Instagram Icon" /></a></li>
-								<div id="searchformwrap" title="Search">
-									${searchForm()}
-								</div>
-							</ul>
-							<div id="mobileburger">
-								<span></span>
-								<span></span>
-								<span></span>
-								<span></span>
-							</div>`;
+							</ul>`;
 }
+
+/* The one action, at the end of the row the menu is in: logo, menu, book. */
+const HEADER_CTA = `<a class="btn green header-cta" href="/contact-us/">Schedule Appointment</a>`;
+
+const BURGER = `<div id="mobileburger">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>`;
 
 const LOGO = `<div id="logo">
 						<a href="/"><img src="/wp-content/themes/wasatch/images/wasatchlogo.svg" alt="Wasatch Pediatrics"></a>
@@ -394,12 +421,12 @@ export function renderHeader(
 			<div class="row">
 				<div class="col-12">
 					<div class="secheadrow">
-						${LOGO}
 						<div id="topmenuwrap">
 							<div id="topmenu">
-							${headerTools()}
+							${utilityTools()}
 							</div>
 						</div>
+						${LOGO}
 						<div id="graynav">
 							<div id="mobilesearch" class="mobile">
 								${searchForm()}
@@ -408,6 +435,8 @@ export function renderHeader(
 								${globalNav(menu)}
 							</div>
 						</div>
+						${HEADER_CTA}
+						${BURGER}
 					</div>
 				</div>
 			</div>

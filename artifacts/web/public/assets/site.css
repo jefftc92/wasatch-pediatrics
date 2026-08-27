@@ -2436,25 +2436,41 @@
 /* -------------------------------------------------------- header shell -- */
 
 /*
- * One container for the whole header, and a fluid one.
- *
- * Bootstrap's container steps — 960, 1140, 1320 — meant the gutters got
- * *smaller* as the window got bigger: 70px of air at 1100 and 30px at 1200,
- * which is why the header looked roomy at one width and cramped at a wider
- * one. This is one width that grows with the window and stops at 1320, with
- * gutters that grow with it instead of collapsing.
- *
- * The row and column paddings inside it are zeroed so the menu, the tools and
- * the section bar all start and end on the same two lines. They were 10px out
- * from each other, which is what made the tools look like they had been placed
- * independently of the nav.
+ * The strip's own type: quiet, small caps, and the same for both items in it.
+ * `#topmenu a` in the theme sets 17px/600 for the slot these used to sit in,
+ * which is a whole size and weight above the search label beside it — so the
+ * two words in one strip did not look like they belonged together.
+ */
+#topmenu .utility-link,
+.searchlabel {
+  color: #636466;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+#topmenu .utility-link:hover {
+  color: #2b93d1;
+}
+
+
+
+/*
+ * One container for all three bands: the utility strip, the primary row and
+ * the section bar. Bootstrap's stepped container used to govern them, so the
+ * gutters got smaller as the window got bigger — 70px of air at 1100 and 30px
+ * at 1200. This grows with the window and stops at 1440.
  */
 #header > .container,
 #secbar > .container {
-  width: 100%;
-  max-width: 1320px;
+  width: calc(100% - 80px);
+  max-width: 1440px;
   margin-inline: auto;
-  padding-inline: clamp(20px, 3.2vw, 56px);
+  padding-inline: 0;
 }
 
 #header .row,
@@ -2469,92 +2485,170 @@
   padding-right: 0;
 }
 
-@media (min-width: 1101px) {
+@media (max-width: 600px) {
+  #header > .container,
+  #secbar > .container {
+    width: calc(100% - 32px);
+  }
+}
+
+@media (min-width: 1200px) {
   /*
-   * Tools on their own quiet line, then the logo with the menu beside it.
+   * The primary row reads left to right: logo, menu, book an appointment. The
+   * utility strip spans the same three columns above it, right-aligned.
    *
-   * A grid, because the three have to share one row element for the phone's
-   * sake and the desktop wants them on two lines. Right-aligned as a group
-   * rather than spread across the bar: seven words at even intervals across
-   * 1140px read as seven separate things, not as one menu.
+   * Fixed heights rather than padding, so the header's depth is a known
+   * number — 32 + 80, and 44 more when a section bar is showing. It used to
+   * scale with the viewport, which is why it looked enormous on a small
+   * desktop and tiny on a large one.
    */
   #header {
     position: relative;
     z-index: 60;
-    /*
-     * The tools get a band of their own rather than floating at the top of the
-     * white. It is painted here, on the header, because that is the only
-     * element in the header that is already full width — the row itself lives
-     * inside the container and a background on it would stop at the gutters.
-     * The stop and the grid row are the same variable so they cannot drift.
-     */
-    /*
-     * Proportions taken from intermountainhealthcare.org, measured from their
-     * stylesheet rather than by eye: their logo renders 157x48 in a row with
-     * 16px of air above and below it, their utility strip is a .5em block, and
-     * the gap from logo to menu is 40px. Ours are the same rhythm at our type
-     * size — their menu is 14px against a 48px logo, so ours at 17px carries a
-     * 58px one.
-     *
-     * The strip is 56 rather than their 40 because what sits in it differs:
-     * theirs is 24px of text links, ours is a 40px button. The same 8px of air
-     * around the content, more content.
-     */
-    --toolsband: 56px;
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
-    background: linear-gradient(
-      #eceded 0 var(--toolsband),
-      #ffffff var(--toolsband)
-    );
+    background: linear-gradient(#f0f1f2 0 32px, #ffffff 32px);
   }
 
   .secheadrow {
-    /*
-     * The mega panels hang off this row, so it is their containing block — and
-     * it has to out-stack the section bar and the hero, which come after it in
-     * the flow and would otherwise paint over an open panel.
-     */
     position: relative;
     z-index: 3;
     display: grid;
-    grid-template-columns: auto 1fr;
-    grid-template-rows: var(--toolsband) auto;
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: 32px 80px;
     grid-template-areas:
-      "tools tools"
-      "logo  nav";
+      "util util util"
+      "logo nav  cta";
     align-items: center;
-    column-gap: 40px;
-    padding: 0;
-  }
-
-  #logo {
-    grid-area: logo;
-    position: static;
-    /* The air above and below the logo is what sets this row's height. */
-    margin: 16px 0 !important;
-  }
-
-  /*
-   * Smaller than the theme's 458px, so the menu beside it can be larger. The
-   * logo reads at any size; the menu is seven words that have to be legible.
-   */
-  #logo img {
-    width: 300px;
-    height: auto;
+    column-gap: clamp(24px, 3vw, 56px);
   }
 
   #topmenuwrap {
-    grid-area: tools;
+    grid-area: util;
     justify-self: end;
     position: static;
     width: auto;
   }
 
+  #topmenu {
+    position: static;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: auto;
+    top: auto;
+    right: auto;
+  }
+
+  #navbuttons {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding-left: 0 !important;
+  }
+
+  #navbuttons li img {
+    width: 18px;
+    height: 18px;
+  }
+
+  /*
+   * The theme's search field is sized for the absolutely positioned slot it
+   * normally sits in; in a flex row it took 1287px and pushed the page wider
+   * than the window. Its 47px left margin is what set the magnifier apart from
+   * the social links, so the row's gap spaces it like everything else.
+   */
+  /*
+   * The strip reads as words rather than as three bare glyphs, so the search
+   * carries its name. The field still opens on click over the top of it.
+   */
+  #searchformwrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    margin: 0;
+  }
+
+  #searchformwrap .searchlabel {
+    display: inline;
+  }
+
+  /*
+   * The theme takes the form out of the flow (`position: absolute; right: 0`)
+   * for the slot it normally sits in, which put the magnifier on top of the
+   * label instead of beside it.
+   */
+  #searchformwrap .mainsearch {
+    position: static;
+    flex: 0 0 auto;
+  }
+
+  #searchformwrap .searchwrap {
+    position: static;
+    width: 44px;
+    overflow: hidden;
+  }
+
+  #searchformwrap .navsearch {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  #searchformwrap .searchbutton {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    padding: 0;
+  }
+
+  /* The glass matches the social badges beside it and sits a step above the
+     13px words, rather than a step above the menu underneath them. */
+  #searchformwrap .searchbutton img {
+    width: 18px;
+    height: 18px;
+  }
+
+  #searchformwrap .searchwrap {
+    width: 18px;
+  }
+
+  /* ---- the primary row ---- */
+
+  #logo {
+    grid-area: logo;
+    position: static;
+    margin: 0 !important;
+  }
+
+  /*
+   * A fixed size, not a fraction of the viewport. The logo and the menu used
+   * to shrink together as the window narrowed, which made a small desktop look
+   * like a scaled-down large one; the empty space either side should change
+   * instead. 280 rather than the 175 a compact mark would take, because this
+   * lockup carries the wordmark and "ALL BETTER" and is 5.15 times as wide as
+   * it is tall — at 175 the second line of the wordmark stops being readable.
+   */
+  #logo img {
+    width: 280px;
+    height: auto;
+  }
+
+  #logo a {
+    display: block;
+  }
+
   #graynav {
     grid-area: nav;
-    justify-self: end;
+    justify-self: start;
     position: static;
     width: auto;
     background: none;
@@ -2568,127 +2662,116 @@
   }
 
   .mainnav {
-    gap: 22px;
-    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     width: auto;
     flex-wrap: nowrap;
+    gap: clamp(18px, 1.8vw, 32px);
   }
 
   .mainnav > li {
     flex: 0 0 auto;
-    /*
-     * The theme puts a 10px right margin on every item, which is spacing the
-     * `gap` above already provides — and on the last item it is 10px of air
-     * inside the nav's right edge, so the menu stopped 10px short of the tools
-     * above it. That is the whole of the misalignment between the two rows.
-     */
-    margin-right: 0;
+    margin: 0;
   }
 
-  /* The theme adds it back on the last item specifically — the one item where
-     it does the damage, by holding the menu 10px inside its own right edge. */
+  /* The theme keeps a 10px right margin on the last item, which held the menu
+     inside its own right edge and threw the rows out of line with each other. */
   .mainnav > li:last-child {
     margin-right: 0;
   }
 
-  /* The section's colour lives on its own bar; the menu row stays white. */
+  .mainnav > li > a {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1;
+    letter-spacing: normal;
+    white-space: nowrap;
+    padding: 4px 0;
+  }
+
+  .header-cta {
+    grid-area: cta;
+    justify-self: end;
+    margin: 0 !important;
+    padding: 14px 22px !important;
+    border-radius: 8px;
+    font-size: 14px !important;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  #mobileburger {
+    display: none !important;
+  }
+
+  /* Pay Bill is in the strip and booking is the button; neither belongs in the
+     menu at a width where the header has room to show them. */
+  .nav-action {
+    display: none !important;
+  }
+
+  /* The mega panels hang off this row, so they open below the whole of it. */
+  .mainnav > li.mega > .sub-menu.megamenu {
+    top: 100%;
+  }
+
+  /* ---- the section bar ---- */
+
   #header.has-section #secbar {
     position: relative;
     z-index: 2;
     box-shadow: 0 8px 16px rgba(33, 33, 33, 0.1);
   }
 
-  #topmenu {
-    position: static;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    width: auto;
-    top: auto;
-    right: auto;
+  /* `#secbar` on the front, because the base rules for these come later in
+     the file and would otherwise win on order at equal specificity. */
+  #secbar .secbar-in {
+    min-height: 44px;
   }
 
-  #navbuttons {
-    display: flex !important;
-    align-items: center;
-    gap: 10px;
-    margin: 0;
-    padding-left: 0 !important;
+  #secbar .secbar-item > a {
+    padding: 10px 0;
+    font-size: 15px;
+    line-height: 1.2;
   }
 
-  .header-cta {
-    margin-right: 0;
-  }
-
-  /*
-   * The theme's search field is sized for the absolutely-positioned slot it
-   * normally sits in; dropped into a flex row it took 1287px and pushed the
-   * page wider than the window. It opens on click, as it does elsewhere.
-   */
-  #searchformwrap {
-    position: relative;
-    width: 40px;
-    /*
-     * The theme pushes it 47px clear of the social links, for the absolutely
-     * positioned slot it normally sits in. In this row that is what made the
-     * magnifier look like it had been placed on its own; the row's gap spaces
-     * it like everything else.
-     */
-    margin: 0;
-  }
-
-  /*
-   * The magnifier was a 24px glyph standing beside two 35px badges, which read
-   * as an afterthought rather than a third tool, and gave it a 24x31 target to
-   * hit. A bare glyph looks smaller than a filled badge at the same measure,
-   * so it is 28 with a 40px box around it.
-   */
-  #searchformwrap .searchbutton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    padding: 0;
-  }
-
-  #searchformwrap .searchbutton img {
-    width: 28px;
-    height: 28px;
-  }
-
-  #searchformwrap .searchwrap {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 34px;
-    overflow: hidden;
-  }
-
-  #searchformwrap .navsearch {
-    width: 0;
-    min-width: 0;
-    padding: 0;
-    border: 0;
-  }
-
-  #searchformwrap .searchbutton {
-    position: static;
+  #secbar .secbar-name {
+    padding-right: 22px;
+    font-size: 17px;
+    line-height: 1.2;
   }
 }
 
 /*
- * Between 992 and 1199 the container is 960px rather than 1140, and the logo at
- * its full 458px plus the tools' 493px runs 17px past it. The logo comes down;
- * the menu is on its own line above and is not affected.
+ * A smaller desktop tightens rather than scales. The menu closes up and the
+ * action shortens to one word; the logo comes down a step. Everything else —
+ * the heights, the container, the typography's relationship to itself — is
+ * the same as it is at any larger width.
  */
-/*
- * Between 992 and 1199 the container is 960px. The seven items are 452px of
- * words; with the logo and the gap between them that leaves 587px, so the
- * spacing closes up rather than the items sliding back over the logo — which
- * is what `justify-content: flex-end` does when it runs out of room.
- */
+@media (min-width: 1200px) and (max-width: 1349px) {
+  #logo img {
+    width: 240px;
+  }
+
+  .mainnav {
+    gap: 20px;
+  }
+
+  .mainnav > li > a {
+    font-size: 14px;
+  }
+
+  .header-cta-full {
+    display: none;
+  }
+
+  .header-cta-short {
+    display: inline;
+  }
+}
+
 /* The bar itself. */
 #secbar {
   background: #2b93d1;
@@ -2891,18 +2974,180 @@
   display: inline;
 }
 
+/* The utility strip and its label are desktop-only; a phone has the burger. */
+.searchlabel {
+  display: none;
+}
+
 /*
- * The menu becomes a burger at 1100 rather than at the theme's 767.
+ * The menu becomes a burger at 1199 rather than at the theme's 767.
  *
- * Seven items need about 650px beside a logo and the tools. Above 1100 there
- * is room for that and a hundred to spare; below it the only way to keep them
- * on the line is to make them smaller, and a menu that shrinks until it is
- * unreadable is worse than one behind a button. The rules here are the ones
- * the theme applies at 767, started earlier.
+ * Below 1200 there is no longer room for six items, a 240px logo and a button
+ * that says what it does: at 1051 the three of them came to 1051px inside a
+ * 971px container, and the logo was being squeezed to 201px to make it fit.
+ * Shrinking the logo and the type until they fit is worse than a button, so
+ * the button is where it switches. The rules here are the ones the theme
+ * applies at 767, started earlier.
  */
-@media (max-width: 1100px) {
-  #mobileburger {
+@media (max-width: 1199px) {
+  /*
+   * The header is a flex row here: the utility strip on its own line, then the
+   * logo with the action and the burger opposite it. It used to fall back to
+   * block layout, which left the schedule button adrift above the logo with
+   * nothing aligning it to anything.
+   */
+  .secheadrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 0 0 14px 0;
+  }
+
+  /*
+   * No strip here. `display: contents` dissolves the two wrappers so the search
+   * glass becomes a child of the row itself and can sit beside the burger,
+   * which is the only way to move it there without moving it in the markup.
+   */
+  #topmenuwrap,
+  #topmenu {
+    display: contents;
+  }
+
+  /* The social links come off a phone; they are in the footer. */
+  #navbuttons {
+    display: none !important;
+  }
+
+  #searchformwrap {
+    order: 2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: auto;
+    /* Pushes itself and the burger together against the right edge, rather
+       than letting `space-between` strand it in the middle of the row. */
+    margin: 0 0 0 auto;
+  }
+
+  /* A glass on its own next to the burger; the word would only crowd it. */
+  #searchformwrap .searchlabel {
+    display: none;
+  }
+
+  .utility-link {
+    display: none;
+  }
+
+  /* Booking is at the foot of the menu here, not in the row. */
+  .header-cta {
+    display: none !important;
+  }
+
+  #searchformwrap .mainsearch {
+    position: static;
+    flex: 0 0 auto;
+  }
+
+  #searchformwrap .searchwrap {
+    position: static;
+    width: 44px;
+    overflow: hidden;
+  }
+
+  #searchformwrap .navsearch {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  /*
+   * A 20px glass next to a 45x44 burger read as a detail rather than as the
+   * other control. It is 26px in a 44px target, which is the same height the
+   * burger has and near enough its weight.
+   */
+  #searchformwrap .searchbutton {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+  }
+
+  #searchformwrap .searchbutton img {
+    width: 26px;
+    height: 26px;
+  }
+
+  #logo {
+    order: 1;
+    position: static;
+    /* The theme floats it, which pulls it out of the row. */
+    float: none !important;
+    margin: 0 !important;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  #logo img {
+    width: clamp(180px, 34vw, 250px);
+    height: auto;
+  }
+
+  #logo a {
     display: block;
+  }
+
+  /* Action then burger, in that order, opposite the logo. */
+  #mobileburger {
+    order: 3;
+    /* The theme floats it, which takes it out of the row it should sit in. */
+    float: none !important;
+    margin: 0 0 0 18px;
+    display: block;
+    height: 44px;
+  }
+
+  #graynav {
+    order: 4;
+    flex: 1 0 100%;
+  }
+
+  /*
+   * The two actions at the foot of the menu. Booking is the one thing on the
+   * list anyone is looking for in a hurry, so it carries the brand green; Pay
+   * Bill sits above it as an ordinary link with a rule to separate the two
+   * from the pages above them.
+   */
+  .nav-action {
+    display: block;
+  }
+
+  .mainnav > li.nav-action:first-of-type,
+  .nav-action + .nav-action {
+    margin-top: 0;
+  }
+
+  .mainnav > li.nav-action > a {
+    display: inline-block;
+    padding: 10px 0;
+    font-weight: 600;
+  }
+
+  .mainnav > li.nav-action-book > a {
+    padding: 13px 26px;
+    border-radius: 8px;
+    background: #8dc63f;
+    color: #ffffff !important;
+    font-weight: 700;
+  }
+
+  .mainnav > li.nav-action-book > a:hover {
+    background: #7cb135;
   }
 
   #graynav {
@@ -2935,15 +3180,6 @@
    * moving them globally would take content with them.
    */
   #header #mobilesearch {
-    display: block;
-  }
-
-  #header #navbuttons.desktop {
-    display: none !important;
-  }
-
-  /* Below 1101 the header stacks: logo, burger, and the menu when it opens. */
-  .secheadrow {
     display: block;
   }
 
