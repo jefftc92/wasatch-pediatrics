@@ -2435,8 +2435,13 @@
  */
 /* -------------------------------------------------------- header shell -- */
 
-/* The strip's own type: quiet, small caps, the same at every width. */
-.utility-link,
+/*
+ * The strip's own type: quiet, small caps, and the same for both items in it.
+ * `#topmenu a` in the theme sets 17px/600 for the slot these used to sit in,
+ * which is a whole size and weight above the search label beside it — so the
+ * two words in one strip did not look like they belonged together.
+ */
+#topmenu .utility-link,
 .searchlabel {
   color: #636466;
   font-size: 13px;
@@ -2448,7 +2453,7 @@
   white-space: nowrap;
 }
 
-.utility-link:hover {
+#topmenu .utility-link:hover {
   color: #2b93d1;
 }
 
@@ -2545,8 +2550,8 @@
   }
 
   #navbuttons li img {
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
   }
 
   /*
@@ -2584,7 +2589,7 @@
 
   #searchformwrap .searchwrap {
     position: static;
-    width: 22px;
+    width: 44px;
     overflow: hidden;
   }
 
@@ -2600,14 +2605,20 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     padding: 0;
   }
 
+  /* The glass matches the social badges beside it and sits a step above the
+     13px words, rather than a step above the menu underneath them. */
   #searchformwrap .searchbutton img {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
+  }
+
+  #searchformwrap .searchwrap {
+    width: 18px;
   }
 
   /* ---- the primary row ---- */
@@ -3041,7 +3052,7 @@
 
   #searchformwrap .searchwrap {
     position: static;
-    width: 22px;
+    width: 44px;
     overflow: hidden;
   }
 
@@ -3052,19 +3063,24 @@
     border: 0;
   }
 
+  /*
+   * A 20px glass next to a 45x44 burger read as a detail rather than as the
+   * other control. It is 26px in a 44px target, which is the same height the
+   * burger has and near enough its weight.
+   */
   #searchformwrap .searchbutton {
     position: static;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    width: 44px;
+    height: 44px;
     padding: 0;
   }
 
   #searchformwrap .searchbutton img {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
   }
 
   #logo {
