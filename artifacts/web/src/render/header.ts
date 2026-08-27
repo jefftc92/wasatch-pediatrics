@@ -380,30 +380,21 @@ export function renderHeader(
   section?: SectionNav,
 ): string {
   /*
-   * Inside a section the global nav moves above the logo row, so it sits over
-   * the schedule button rather than under it, and the full-width bar below
-   * carries the section instead of the menu.
+   * One header, on every page.
    *
-   * The nav keeps `#graynav` and its own full-width row. It has to: at the
-   * size it is on every other page the seven items are 781px wide, and beside
-   * a 458px logo inside a 1140px container they do not fit — which is why an
-   * earlier attempt at this had to shrink them, and shrinking is the one thing
-   * that makes the menu look like a different menu. On its own line it has the
-   * whole container and changes nothing but its position.
+   * It used to be two arrangements: the menu under the logo on an ordinary
+   * page and above it inside a section, which made the one thing a reader
+   * tracks between pages the one thing that moved. Now the markup is the same
+   * everywhere and a section adds exactly two things — a tint on the menu bar
+   * and the section bar beneath it.
    *
-   * The reordering is CSS; the markup is the default header's, so the phone
-   * keeps the theme's own hide-and-burger behaviour with the menu still
-   * arriving below the logo rather than above it.
-   *
-   * It keeps its `#graynav` and `#navwrap` wrappers even so. The theme hides
-   * the nav on a phone with `#graynav { display: none }` and the burger
-   * slide-toggles that same element, so a section header without one showed
-   * the whole menu open and unstyled with no way to close it. The wrappers are
-   * flattened at 992 and up, where this row lays itself out.
+   * `#graynav` keeps its own full-width row because it has to: at any size
+   * worth reading, seven items beside a 458px logo and the tools do not fit
+   * 1140px. CSS lifts it above the logo row on a desktop and leaves it below
+   * on a phone, where the burger expects to push it down.
    */
-  if (section) {
-    return `	<section class="page-load"></section>
-	<header id="header" class="has-section">
+  return `	<section class="page-load"></section>
+	<header id="header"${section ? ' class="has-section"' : ""}>
 		<div class="container">
 			<div class="row">
 				<div class="col-12">
@@ -418,7 +409,7 @@ export function renderHeader(
 				</div>
 			</div>
 		</div>
-		<div id="graynav" class="secheadnav">
+		<div id="graynav">
 			<div class="container">
 				<div class="row">
 					<div class="col-12">
@@ -432,38 +423,6 @@ export function renderHeader(
 				</div>
 			</div>
 		</div>
-${sectionBar(section)}
-	</header>
-${DOCK}`;
-  }
-
-  return `	<section class="page-load"></section>
-	<header id="header">
-		<div class="container">
-			<div class="row">
-				<div class="col-12">
-					${LOGO}
-					<div id="topmenuwrap">
-						<div id="topmenu">
-							${headerTools()}
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="graynav">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div id="mobilesearch" class="mobile">
-							${searchForm()}
-						</div>
-						<div id="navwrap">
-							${globalNav(menu)}						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
+${section ? sectionBar(section) : ""}	</header>
 ${DOCK}`;
 }

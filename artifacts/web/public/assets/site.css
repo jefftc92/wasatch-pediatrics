@@ -827,6 +827,13 @@
   padding: 11px 0;
 }
 
+@media (min-width: 992px) {
+  .mainnav {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
 /* ---------------------------------------------------------- breadcrumbs -- */
 
 .crumbs {
@@ -2411,35 +2418,35 @@
  */
 @media (min-width: 992px) {
   /*
-   * The nav takes a row of its own above the logo, at the size and spacing it
-   * has on every other page. `order` does the moving, so the markup stays the
-   * default header's and a phone still gets the menu below the logo when the
-   * burger opens it.
+   * The menu takes a row of its own above the logo — on every page, not only
+   * in a section. It used to sit under the logo on a home page and over it on
+   * a service page, so the one thing a reader tracks between pages was the one
+   * thing that moved.
+   *
+   * `order` does it, so the markup stays the theme's and a phone still gets
+   * the menu below the logo when the burger opens it.
    */
-  #header.has-section {
+  #header {
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
   }
 
-  #header.has-section #graynav {
+  #graynav {
     order: -1;
-    position: static;
+    /* Relative rather than the theme's absolute: the bar is in the flow at the
+       top of the header now, and the mega panels hang off it. */
+    position: relative;
     width: auto;
-    /* The menu bar's colour is the one thing that says you are in a section. */
+    z-index: 60;
+  }
+
+  /* The only difference a section makes to this bar is its colour. */
+  #header.has-section #graynav {
     background-color: #f1f7fb;
-    box-shadow: inset 0 -1px 0 #dceaf4;
-    z-index: auto;
-  }
-
-  #header.has-section #navwrap {
-    height: auto;
-    padding: 10px 0;
-  }
-
-  #header.has-section .mainnav {
-    justify-content: space-between;
-    width: 100%;
+    box-shadow:
+      inset 0 -1px 0 #dceaf4,
+      0 8px 16px rgba(33, 33, 33, 0.1);
   }
 
   /* Logo on the left, tools on the right, as on every other page. */
@@ -2451,7 +2458,7 @@
     padding: 14px 0 16px 0;
   }
 
-  #header.has-section #logo {
+  #logo {
     position: static;
     margin: 0 !important;
     flex: 0 0 auto;
@@ -2462,13 +2469,13 @@
    * container width, which in a flex row squeezed everything beside it and
    * floated the tools over the bar below. Both go back into the flow.
    */
-  #header.has-section #topmenuwrap {
+  #topmenuwrap {
     position: static;
     flex: 0 0 auto;
     width: auto;
   }
 
-  #header.has-section #topmenu {
+  #topmenu {
     position: static;
     display: flex;
     align-items: center;
@@ -2478,7 +2485,7 @@
     right: auto;
   }
 
-  #header.has-section #navbuttons {
+  #navbuttons {
     display: flex !important;
     align-items: center;
     gap: 10px;
@@ -2486,7 +2493,7 @@
     padding-left: 0 !important;
   }
 
-  #header.has-section .header-cta {
+  .header-cta {
     margin-right: 0;
   }
 
@@ -2495,12 +2502,12 @@
    * normally sits in; dropped into a flex row it took 1287px and pushed the
    * page wider than the window. It opens on click, as it does elsewhere.
    */
-  #header.has-section #searchformwrap {
+  #searchformwrap {
     position: relative;
     width: 34px;
   }
 
-  #header.has-section #searchformwrap .searchwrap {
+  #searchformwrap .searchwrap {
     position: absolute;
     right: 0;
     top: 50%;
@@ -2509,14 +2516,14 @@
     overflow: hidden;
   }
 
-  #header.has-section #searchformwrap .navsearch {
+  #searchformwrap .navsearch {
     width: 0;
     min-width: 0;
     padding: 0;
     border: 0;
   }
 
-  #header.has-section #searchformwrap .searchbutton {
+  #searchformwrap .searchbutton {
     position: static;
   }
 }
@@ -2527,7 +2534,7 @@
  * the menu is on its own line above and is not affected.
  */
 @media (min-width: 992px) and (max-width: 1199px) {
-  #header.has-section #logo img {
+  #logo img {
     width: 380px;
     height: auto;
   }
