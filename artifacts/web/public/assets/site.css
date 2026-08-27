@@ -2535,12 +2535,21 @@
     position: static;
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 20px;
     width: auto;
     top: auto;
     right: auto;
   }
 
+  /*
+   * The strip's rhythm: 20px between the things in it, 8px between the search
+   * label and its glass because those two are one control, and 12px between
+   * the social links because those two are a pair.
+   *
+   * It read 18, 8, 22, 24 — the pair the loosest of the lot — because the
+   * theme pads the social items unevenly, `0 4px` on one and `0 0 0 8px` on
+   * the other, for the slot they used to sit in.
+   */
   #navbuttons {
     display: flex !important;
     align-items: center;
@@ -2550,6 +2559,13 @@
   }
 
   #navbuttons li {
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
+    margin: 0;
+  }
+
+  #navbuttons li a {
     display: flex;
     align-items: center;
   }
@@ -2618,11 +2634,17 @@
     padding: 0;
   }
 
-  /* One step above the 13px words beside them and below the 15px menu under
-     them, which is the order the three are meant to be read in. */
+  /*
+   * One step above the 13px words beside them and below the 15px menu under
+   * them, which is the order the three are meant to be read in.
+   *
+   * `height: auto`, because the magnifier's artwork is 24x25 and a square box
+   * squashed it by four per cent against the two social marks, which are
+   * square.
+   */
   #searchformwrap .searchbutton img {
     width: 16px;
-    height: 16px;
+    height: auto;
   }
 
   /* ---- the primary row ---- */
