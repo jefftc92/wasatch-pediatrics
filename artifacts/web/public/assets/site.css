@@ -138,6 +138,12 @@
   }
 
   .mainnav > li.mega > .sub-menu.megamenu {
+    /*
+     * Below the whole header row, not below the menu item. The menu shares a
+     * row with the logo now, so a panel that opens from the item's own baseline
+     * comes out across the middle of the logo.
+     */
+    top: 100%;
     left: 0;
     right: 0;
     width: auto;
@@ -2437,6 +2443,8 @@
    * 1140px read as seven separate things, not as one menu.
    */
   #header {
+    position: relative;
+    z-index: 60;
     /*
      * The tools get a band of their own rather than floating at the top of the
      * white. It is painted here, on the header, because that is the only
@@ -2444,7 +2452,19 @@
      * inside the container and a background on it would stop at the gutters.
      * The stop and the grid row are the same variable so they cannot drift.
      */
-    --toolsband: 60px;
+    /*
+     * Proportions taken from intermountainhealthcare.org, measured from their
+     * stylesheet rather than by eye: their logo renders 157x48 in a row with
+     * 16px of air above and below it, their utility strip is a .5em block, and
+     * the gap from logo to menu is 40px. Ours are the same rhythm at our type
+     * size — their menu is 14px against a 48px logo, so ours at 17px carries a
+     * 58px one.
+     *
+     * The strip is 56 rather than their 40 because what sits in it differs:
+     * theirs is 24px of text links, ours is a 40px button. The same 8px of air
+     * around the content, more content.
+     */
+    --toolsband: 56px;
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
@@ -2455,6 +2475,13 @@
   }
 
   .secheadrow {
+    /*
+     * The mega panels hang off this row, so it is their containing block — and
+     * it has to out-stack the section bar and the hero, which come after it in
+     * the flow and would otherwise paint over an open panel.
+     */
+    position: relative;
+    z-index: 3;
     display: grid;
     grid-template-columns: auto 1fr;
     grid-template-rows: var(--toolsband) auto;
@@ -2462,14 +2489,15 @@
       "tools tools"
       "logo  nav";
     align-items: center;
-    column-gap: 30px;
-    padding: 0 0 16px 0;
+    column-gap: 40px;
+    padding: 0;
   }
 
   #logo {
     grid-area: logo;
     position: static;
-    margin: 0 !important;
+    /* The air above and below the logo is what sets this row's height. */
+    margin: 16px 0 !important;
   }
 
   /*
@@ -2477,7 +2505,7 @@
    * logo reads at any size; the menu is seven words that have to be legible.
    */
   #logo img {
-    width: 400px;
+    width: 300px;
     height: auto;
   }
 
@@ -2516,6 +2544,8 @@
 
   /* The section's colour lives on its own bar; the menu row stays white. */
   #header.has-section #secbar {
+    position: relative;
+    z-index: 2;
     box-shadow: 0 8px 16px rgba(33, 33, 33, 0.1);
   }
 
@@ -2616,7 +2646,7 @@
    * viewport.
    */
   #logo img {
-    width: 270px;
+    width: 240px;
   }
 }
 
@@ -2670,7 +2700,7 @@
   align-items: center;
   gap: 7px;
   height: 100%;
-  padding: 17px 0;
+  padding: 14px 0;
   border-bottom: 3px solid transparent;
   color: #ffffff !important;
   /*
