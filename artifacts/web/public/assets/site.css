@@ -824,11 +824,11 @@
 }
 
 .mainnav > li > a {
-  font-size: 16px;
+  font-size: 17px;
   /*
    * The theme tightens the menu by half a pixel, which is right for the 23px
-   * it was set at and wrong at 16 — at this size it just makes the words look
-   * squeezed. Seven items lose 24px of width by it, which is not worth having.
+   * it was set at and wrong at this size — it just makes the words look
+   * squeezed, and costs seven items 24px of width.
    */
   letter-spacing: normal;
 }
@@ -2437,26 +2437,48 @@
    * 1140px read as seven separate things, not as one menu.
    */
   #header {
+    /*
+     * The tools get a band of their own rather than floating at the top of the
+     * white. It is painted here, on the header, because that is the only
+     * element in the header that is already full width — the row itself lives
+     * inside the container and a background on it would stop at the gutters.
+     * The stop and the grid row are the same variable so they cannot drift.
+     */
+    --toolsband: 60px;
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
+    background: linear-gradient(
+      #eceded 0 var(--toolsband),
+      #ffffff var(--toolsband)
+    );
   }
 
   .secheadrow {
     display: grid;
     grid-template-columns: auto 1fr;
+    grid-template-rows: var(--toolsband) auto;
     grid-template-areas:
       "tools tools"
       "logo  nav";
     align-items: center;
     column-gap: 30px;
-    padding: 8px 0 14px 0;
+    padding: 0 0 16px 0;
   }
 
   #logo {
     grid-area: logo;
     position: static;
     margin: 0 !important;
+  }
+
+  /*
+   * Smaller than the theme's 458px, so the menu beside it can be larger. The
+   * logo reads at any size; the menu is seven words that have to be legible.
+   */
+  #logo img {
+    width: 400px;
+    height: auto;
   }
 
   #topmenuwrap {
@@ -2594,8 +2616,7 @@
    * viewport.
    */
   #logo img {
-    width: 300px;
-    height: auto;
+    width: 270px;
   }
 }
 
@@ -2657,7 +2678,7 @@
    * hierarchy, it is a pixel out. The section's name carries the emphasis at
    * 21px; its services are peers of the menu, so they are set like it.
    */
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 400 !important;
   line-height: 1.2;
   text-decoration: none !important;
