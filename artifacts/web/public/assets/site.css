@@ -2519,7 +2519,12 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
-    background: linear-gradient(#f0f1f2 0 32px, #ffffff 32px);
+    /* The strip's height, and the stop the grid row below reads from it. */
+    --toolsband: 34px;
+    background: linear-gradient(
+      #f0f1f2 0 var(--toolsband),
+      #ffffff var(--toolsband)
+    );
   }
 
   .secheadrow {
@@ -2527,7 +2532,7 @@
     z-index: 3;
     display: grid;
     grid-template-columns: auto 1fr auto;
-    grid-template-rows: 32px 80px;
+    grid-template-rows: var(--toolsband) 80px;
     grid-template-areas:
       "util util util"
       "logo nav  cta";
@@ -2542,14 +2547,34 @@
     width: auto;
   }
 
+  /*
+   * `line-height: 1`, so the strip is as tall as what is in it.
+   *
+   * The theme's 18px type gives every child a 27px line box whether or not
+   * there is 27px of anything in it, which left 2.5px of air top and bottom
+   * inside a 32px band. Nothing was clipped, but 13px words and 16px marks
+   * filling a band to its edges read as though they were.
+   */
   #topmenu {
     position: static;
     display: flex;
     align-items: center;
     gap: 20px;
     width: auto;
+    height: 100%;
+    line-height: 1;
     top: auto;
     right: auto;
+  }
+
+  #topmenu .utility-link,
+  #topmenu .searchlabel,
+  #topmenu #navbuttons,
+  #topmenu #navbuttons li,
+  #topmenu #navbuttons li a,
+  #topmenu .mainsearch,
+  #topmenu .searchwrap {
+    line-height: 1;
   }
 
   /*
