@@ -2487,7 +2487,7 @@
   }
 }
 
-@media (min-width: 1051px) {
+@media (min-width: 1200px) {
   /*
    * The primary row reads left to right: logo, menu, book an appointment. The
    * utility strip spans the same three columns above it, right-aligned.
@@ -2695,6 +2695,12 @@
     display: none !important;
   }
 
+  /* Pay Bill is in the strip and booking is the button; neither belongs in the
+     menu at a width where the header has room to show them. */
+  .nav-action {
+    display: none !important;
+  }
+
   /* The mega panels hang off this row, so they open below the whole of it. */
   .mainnav > li.mega > .sub-menu.megamenu {
     top: 100%;
@@ -2733,7 +2739,7 @@
  * the heights, the container, the typography's relationship to itself — is
  * the same as it is at any larger width.
  */
-@media (min-width: 1051px) and (max-width: 1349px) {
+@media (min-width: 1200px) and (max-width: 1349px) {
   #logo img {
     width: 240px;
   }
@@ -2963,15 +2969,16 @@
 }
 
 /*
- * The menu becomes a burger at 1050 rather than at the theme's 767.
+ * The menu becomes a burger at 1199 rather than at the theme's 767.
  *
- * Between 768 and 1050 the theme was showing a horizontal menu that simply got
- * tighter as the window narrowed. Below 1051 there is no longer room for seven
- * items, a 240px logo and the action on one line, and a menu that shrinks
- * until it is unreadable is worse than one behind a button. The rules here are
- * the ones the theme applies at 767, started earlier.
+ * Below 1200 there is no longer room for six items, a 240px logo and a button
+ * that says what it does: at 1051 the three of them came to 1051px inside a
+ * 971px container, and the logo was being squeezed to 201px to make it fit.
+ * Shrinking the logo and the type until they fit is worse than a button, so
+ * the button is where it switches. The rules here are the ones the theme
+ * applies at 767, started earlier.
  */
-@media (max-width: 1050px) {
+@media (max-width: 1199px) {
   /*
    * The header is a flex row here: the utility strip on its own line, then the
    * logo with the action and the burger opposite it. It used to fall back to
@@ -2987,49 +2994,44 @@
     padding: 0 0 14px 0;
   }
 
-  #topmenuwrap {
-    order: 0;
-    flex: 1 0 100%;
-    position: static;
-    width: auto;
-  }
-
+  /*
+   * No strip here. `display: contents` dissolves the two wrappers so the search
+   * glass becomes a child of the row itself and can sit beside the burger,
+   * which is the only way to move it there without moving it in the markup.
+   */
+  #topmenuwrap,
   #topmenu {
-    position: static;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 16px;
-    width: auto;
-    height: 40px;
-    top: auto;
-    right: auto;
+    display: contents;
   }
 
+  /* The social links come off a phone; they are in the footer. */
   #navbuttons {
-    display: flex !important;
-    align-items: center;
-    gap: 12px;
-    margin: 0;
-    padding-left: 0 !important;
-  }
-
-  #navbuttons li img {
-    width: 22px;
-    height: 22px;
+    display: none !important;
   }
 
   #searchformwrap {
+    order: 2;
     position: relative;
     display: flex;
     align-items: center;
-    gap: 8px;
     width: auto;
-    margin: 0;
+    /* Pushes itself and the burger together against the right edge, rather
+       than letting `space-between` strand it in the middle of the row. */
+    margin: 0 0 0 auto;
   }
 
+  /* A glass on its own next to the burger; the word would only crowd it. */
   #searchformwrap .searchlabel {
-    display: inline;
+    display: none;
+  }
+
+  .utility-link {
+    display: none;
+  }
+
+  /* Booking is at the foot of the menu here, not in the row. */
+  .header-cta {
+    display: none !important;
   }
 
   #searchformwrap .mainsearch {
@@ -3085,22 +3087,11 @@
   }
 
   /* Action then burger, in that order, opposite the logo. */
-  .header-cta {
-    order: 2;
-    margin: 0 0 0 auto !important;
-    padding: 11px 18px !important;
-    border-radius: 8px;
-    font-size: 13px !important;
-    font-weight: 700;
-    line-height: 1;
-    white-space: nowrap;
-  }
-
   #mobileburger {
     order: 3;
     /* The theme floats it, which takes it out of the row it should sit in. */
     float: none !important;
-    margin: 0;
+    margin: 0 0 0 18px;
     display: block;
     height: 44px;
   }
@@ -3108,6 +3099,39 @@
   #graynav {
     order: 4;
     flex: 1 0 100%;
+  }
+
+  /*
+   * The two actions at the foot of the menu. Booking is the one thing on the
+   * list anyone is looking for in a hurry, so it carries the brand green; Pay
+   * Bill sits above it as an ordinary link with a rule to separate the two
+   * from the pages above them.
+   */
+  .nav-action {
+    display: block;
+  }
+
+  .mainnav > li.nav-action:first-of-type,
+  .nav-action + .nav-action {
+    margin-top: 0;
+  }
+
+  .mainnav > li.nav-action > a {
+    display: inline-block;
+    padding: 10px 0;
+    font-weight: 600;
+  }
+
+  .mainnav > li.nav-action-book > a {
+    padding: 13px 26px;
+    border-radius: 8px;
+    background: #8dc63f;
+    color: #ffffff !important;
+    font-weight: 700;
+  }
+
+  .mainnav > li.nav-action-book > a:hover {
+    background: #7cb135;
   }
 
   #graynav {
