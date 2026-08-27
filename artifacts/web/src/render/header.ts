@@ -348,18 +348,21 @@ function globalNav(menu: MenuState): string {
 }
 
 /*
- * The utility strip: search and the social links, right-aligned on a shallow
- * grey band. Bill Pay is not repeated here — it is a main menu item, and one
- * link in two places is one more thing to keep in step.
+ * The utility strip: paying a bill, search and the social links, right-aligned
+ * on a shallow grey band, at every width including a phone. Paying a bill is
+ * the errand people arrive with rather than something they browse to. It is
+ * only here — it used to be a main menu item as well, and one link in two
+ * places is one more thing to keep in step.
  */
 function utilityTools(): string {
-  return `<ul  class="desktop" id="navbuttons">
+  return `<a class="utility-link" href="https://wasatchpeds.goredde.com/" target="_blank" rel="noopener">Pay Bill</a>
+							<div id="searchformwrap" title="Search">
+								<span class="searchlabel" aria-hidden="true">Search</span>
+								${searchForm()}
+							</div>
+							<ul  class="desktop" id="navbuttons">
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/fb.svg" alt="Facebook Icon" /></a></li>
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/ig.svg" alt="Instagram Icon" /></a></li>
-								<div id="searchformwrap" title="Search">
-									<span class="searchlabel" aria-hidden="true">Search</span>
-									${searchForm()}
-								</div>
 							</ul>`;
 }
 

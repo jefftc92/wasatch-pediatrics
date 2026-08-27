@@ -2435,6 +2435,25 @@
  */
 /* -------------------------------------------------------- header shell -- */
 
+/* The strip's own type: quiet, small caps, the same at every width. */
+.utility-link,
+.searchlabel {
+  color: #636466;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  line-height: 1;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.utility-link:hover {
+  color: #2b93d1;
+}
+
+
+
 /*
  * One container for all three bands: the utility strip, the primary row and
  * the section bar. Bootstrap's stepped container used to govern them, so the
@@ -2551,11 +2570,6 @@
 
   #searchformwrap .searchlabel {
     display: inline;
-    color: #636466;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.6px;
-    text-transform: uppercase;
   }
 
   /*
@@ -2958,8 +2972,142 @@
  * the ones the theme applies at 767, started earlier.
  */
 @media (max-width: 1050px) {
-  #mobileburger {
+  /*
+   * The header is a flex row here: the utility strip on its own line, then the
+   * logo with the action and the burger opposite it. It used to fall back to
+   * block layout, which left the schedule button adrift above the logo with
+   * nothing aligning it to anything.
+   */
+  .secheadrow {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 0 0 14px 0;
+  }
+
+  #topmenuwrap {
+    order: 0;
+    flex: 1 0 100%;
+    position: static;
+    width: auto;
+  }
+
+  #topmenu {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    width: auto;
+    height: 40px;
+    top: auto;
+    right: auto;
+  }
+
+  #navbuttons {
+    display: flex !important;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    padding-left: 0 !important;
+  }
+
+  #navbuttons li img {
+    width: 22px;
+    height: 22px;
+  }
+
+  #searchformwrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: auto;
+    margin: 0;
+  }
+
+  #searchformwrap .searchlabel {
+    display: inline;
+  }
+
+  #searchformwrap .mainsearch {
+    position: static;
+    flex: 0 0 auto;
+  }
+
+  #searchformwrap .searchwrap {
+    position: static;
+    width: 22px;
+    overflow: hidden;
+  }
+
+  #searchformwrap .navsearch {
+    width: 0;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  #searchformwrap .searchbutton {
+    position: static;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    padding: 0;
+  }
+
+  #searchformwrap .searchbutton img {
+    width: 20px;
+    height: 20px;
+  }
+
+  #logo {
+    order: 1;
+    position: static;
+    /* The theme floats it, which pulls it out of the row. */
+    float: none !important;
+    margin: 0 !important;
+    flex: 0 1 auto;
+    min-width: 0;
+  }
+
+  #logo img {
+    width: clamp(180px, 34vw, 250px);
+    height: auto;
+  }
+
+  #logo a {
     display: block;
+  }
+
+  /* Action then burger, in that order, opposite the logo. */
+  .header-cta {
+    order: 2;
+    margin: 0 0 0 auto !important;
+    padding: 11px 18px !important;
+    border-radius: 8px;
+    font-size: 13px !important;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  #mobileburger {
+    order: 3;
+    /* The theme floats it, which takes it out of the row it should sit in. */
+    float: none !important;
+    margin: 0;
+    display: block;
+    height: 44px;
+  }
+
+  #graynav {
+    order: 4;
+    flex: 1 0 100%;
   }
 
   #graynav {
@@ -2992,15 +3140,6 @@
    * moving them globally would take content with them.
    */
   #header #mobilesearch {
-    display: block;
-  }
-
-  #header #navbuttons.desktop {
-    display: none !important;
-  }
-
-  /* Below 1101 the header stacks: logo, burger, and the menu when it opens. */
-  .secheadrow {
     display: block;
   }
 

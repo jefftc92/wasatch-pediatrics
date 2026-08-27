@@ -163,13 +163,6 @@ export const mainNav: NavItem[] = [
     classes: `${CUSTOM} menu-item-112`,
   },
   {
-    id: "113",
-    label: "Bill Pay",
-    href: "https://wasatchpeds.goredde.com/",
-    classes: `${CUSTOM} menu-item-113`,
-    external: true,
-  },
-  {
     id: "295",
     label: "Contact Us",
     href: "/contact-us/",
