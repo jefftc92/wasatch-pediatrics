@@ -380,18 +380,13 @@ export function renderHeader(
   section?: SectionNav,
 ): string {
   /*
-   * One header, on every page.
+   * One header, on every page: the tools on a quiet line of their own, then
+   * the logo with the menu beside it, then the section bar when there is one.
    *
-   * It used to be two arrangements: the menu under the logo on an ordinary
-   * page and above it inside a section, which made the one thing a reader
-   * tracks between pages the one thing that moved. Now the markup is the same
-   * everywhere and a section adds exactly two things — a tint on the menu bar
-   * and the section bar beneath it.
-   *
-   * `#graynav` keeps its own full-width row because it has to: at any size
-   * worth reading, seven items beside a 458px logo and the tools do not fit
-   * 1140px. CSS lifts it above the logo row on a desktop and leaves it below
-   * on a phone, where the burger expects to push it down.
+   * All three live in the same row element so that a phone can lay them out
+   * the way the theme expects — logo, burger, and the menu below when the
+   * burger opens it. A desktop turns that row into a grid and puts the tools
+   * above the other two.
    */
   return `	<section class="page-load"></section>
 	<header id="header"${section ? ' class="has-section"' : ""}>
@@ -405,19 +400,13 @@ export function renderHeader(
 							${headerTools()}
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div id="graynav">
-			<div class="container">
-				<div class="row">
-					<div class="col-12">
-						<div id="mobilesearch" class="mobile">
-							${searchForm()}
-						</div>
-						<div id="navwrap">
-							${globalNav(menu)}
+						<div id="graynav">
+							<div id="mobilesearch" class="mobile">
+								${searchForm()}
+							</div>
+							<div id="navwrap">
+								${globalNav(menu)}
+							</div>
 						</div>
 					</div>
 				</div>

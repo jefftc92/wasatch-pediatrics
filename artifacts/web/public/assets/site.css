@@ -2418,13 +2418,12 @@
  */
 @media (min-width: 992px) {
   /*
-   * The menu takes a row of its own above the logo — on every page, not only
-   * in a section. It used to sit under the logo on a home page and over it on
-   * a service page, so the one thing a reader tracks between pages was the one
-   * thing that moved.
+   * Tools on their own quiet line, then the logo with the menu beside it.
    *
-   * `order` does it, so the markup stays the theme's and a phone still gets
-   * the menu below the logo when the burger opens it.
+   * A grid, because the three have to share one row element for the phone's
+   * sake and the desktop wants them on two lines. Right-aligned as a group
+   * rather than spread across the bar: seven words at even intervals across
+   * 1140px read as seven separate things, not as one menu.
    */
   #header {
     display: flex;
@@ -2432,47 +2431,59 @@
     margin-bottom: 0;
   }
 
-  #graynav {
-    order: -1;
-    /* Relative rather than the theme's absolute: the bar is in the flow at the
-       top of the header now, and the mega panels hang off it. */
-    position: relative;
-    width: auto;
-    z-index: 60;
-  }
-
-  /* The only difference a section makes to this bar is its colour. */
-  #header.has-section #graynav {
-    background-color: #f1f7fb;
-    box-shadow:
-      inset 0 -1px 0 #dceaf4,
-      0 8px 16px rgba(33, 33, 33, 0.1);
-  }
-
-  /* Logo on the left, tools on the right, as on every other page. */
   .secheadrow {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "tools tools"
+      "logo  nav";
     align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-    padding: 14px 0 16px 0;
+    column-gap: 30px;
+    padding: 8px 0 14px 0;
   }
 
   #logo {
+    grid-area: logo;
     position: static;
     margin: 0 !important;
+  }
+
+  #topmenuwrap {
+    grid-area: tools;
+    justify-self: end;
+    position: static;
+    width: auto;
+  }
+
+  #graynav {
+    grid-area: nav;
+    justify-self: end;
+    position: static;
+    width: auto;
+    background: none;
+    box-shadow: none;
+    z-index: auto;
+  }
+
+  #navwrap {
+    height: auto;
+    padding: 0;
+  }
+
+  .mainnav {
+    gap: 26px;
+    justify-content: flex-end;
+    width: auto;
+    flex-wrap: nowrap;
+  }
+
+  .mainnav > li {
     flex: 0 0 auto;
   }
 
-  /*
-   * The theme positions both of these absolutely and gives the wrap the full
-   * container width, which in a flex row squeezed everything beside it and
-   * floated the tools over the bar below. Both go back into the flow.
-   */
-  #topmenuwrap {
-    position: static;
-    flex: 0 0 auto;
-    width: auto;
+  /* The section's colour lives on its own bar; the menu row stays white. */
+  #header.has-section #secbar {
+    box-shadow: 0 8px 16px rgba(33, 33, 33, 0.1);
   }
 
   #topmenu {
@@ -2533,9 +2544,26 @@
  * its full 458px plus the tools' 493px runs 17px past it. The logo comes down;
  * the menu is on its own line above and is not affected.
  */
+/*
+ * Between 992 and 1199 the container is 960px. The seven items are 452px of
+ * words; with the logo and the gap between them that leaves 587px, so the
+ * spacing closes up rather than the items sliding back over the logo — which
+ * is what `justify-content: flex-end` does when it runs out of room.
+ */
 @media (min-width: 992px) and (max-width: 1199px) {
+  .mainnav {
+    gap: 20px;
+  }
+
+  /*
+   * Closing the spacing is not enough on its own: the seven items are 452px of
+   * words and the theme's logo is 415px there, which leaves them 503px. The
+   * logo comes down instead of the menu, because the menu has to look the same
+   * at a given width on every page and the logo already resizes with the
+   * viewport.
+   */
   #logo img {
-    width: 380px;
+    width: 300px;
     height: auto;
   }
 }
@@ -2738,7 +2766,7 @@
 }
 
 @media (max-width: 991px) {
-  /* Below the section layout the header is the theme's own again. */
+  /* Below 992 the header stacks: logo, burger, and the menu when it opens. */
   .secheadrow {
     display: block;
   }
@@ -2746,10 +2774,10 @@
   /*
    * The theme leaves `#graynav` absolutely positioned, which is right where it
    * sits by default — a sibling after the logo's container, so it drops below
-   * it. Nested inside the row here, that same rule put the opened menu on top
-   * of the logo and the burger, with no way to tap it shut. It flows instead.
+   * it. Inside the row here, that same rule put the opened menu on top of the
+   * logo and the burger, with no way to tap it shut. It flows instead.
    */
-  #header.has-section #graynav {
+  #graynav {
     position: static;
     box-shadow: none;
   }
