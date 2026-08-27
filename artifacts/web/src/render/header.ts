@@ -347,22 +347,31 @@ function globalNav(menu: MenuState): string {
     .join("\n")}</ul></div>`;
 }
 
-function headerTools(): string {
-  return `<a class="btn green header-cta" href="/contact-us/"><span class="header-cta-full">Schedule An Appointment</span><span class="header-cta-short">Schedule</span></a>
-							<ul  class="desktop" id="navbuttons">
+/*
+ * The utility strip: search and the social links, right-aligned on a shallow
+ * grey band. Bill Pay is not repeated here — it is a main menu item, and one
+ * link in two places is one more thing to keep in step.
+ */
+function utilityTools(): string {
+  return `<ul  class="desktop" id="navbuttons">
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/fb.svg" alt="Facebook Icon" /></a></li>
 								<li><a href="/contact-us"><img src="/wp-content/themes/wasatch/images/ig.svg" alt="Instagram Icon" /></a></li>
 								<div id="searchformwrap" title="Search">
+									<span class="searchlabel" aria-hidden="true">Search</span>
 									${searchForm()}
 								</div>
-							</ul>
-							<div id="mobileburger">
-								<span></span>
-								<span></span>
-								<span></span>
-								<span></span>
-							</div>`;
+							</ul>`;
 }
+
+/* The one action, at the end of the row the menu is in: logo, menu, book. */
+const HEADER_CTA = `<a class="btn green header-cta" href="/contact-us/"><span class="header-cta-full">Schedule An Appointment</span><span class="header-cta-short">Schedule</span></a>`;
+
+const BURGER = `<div id="mobileburger">
+							<span></span>
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>`;
 
 const LOGO = `<div id="logo">
 						<a href="/"><img src="/wp-content/themes/wasatch/images/wasatchlogo.svg" alt="Wasatch Pediatrics"></a>
@@ -394,12 +403,12 @@ export function renderHeader(
 			<div class="row">
 				<div class="col-12">
 					<div class="secheadrow">
-						${LOGO}
 						<div id="topmenuwrap">
 							<div id="topmenu">
-							${headerTools()}
+							${utilityTools()}
 							</div>
 						</div>
+						${LOGO}
 						<div id="graynav">
 							<div id="mobilesearch" class="mobile">
 								${searchForm()}
@@ -408,6 +417,8 @@ export function renderHeader(
 								${globalNav(menu)}
 							</div>
 						</div>
+						${HEADER_CTA}
+						${BURGER}
 					</div>
 				</div>
 			</div>
