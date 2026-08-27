@@ -739,6 +739,40 @@
   /* ------------------------------------------------------ section chrome -- */
 
   /*
+   * The menu the burger opens, after the window has been resized past it.
+   *
+   * The theme opens and closes it with jQuery's `slideToggle`, which finishes
+   * by writing `style="display: none"` onto `#graynav`. That inline value
+   * outranks every stylesheet, so opening the menu on a phone and closing it
+   * again left the whole desktop menu invisible the moment the window was
+   * widened past 1199 — nothing in CSS could bring it back.
+   *
+   * Clearing the inline value on the way past the breakpoint hands it back to
+   * the stylesheet. Below the breakpoint it is left alone, because that is
+   * where the theme's own open and close still need it.
+   */
+  var graynav = document.getElementById("graynav");
+
+  if (graynav) {
+    var wasDesktop = window.innerWidth >= 1200;
+    var resizeTimer;
+
+    window.addEventListener("resize", function () {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(function () {
+        var isDesktop = window.innerWidth >= 1200;
+        if (isDesktop === wasDesktop) return;
+        wasDesktop = isDesktop;
+        if (isDesktop) {
+          graynav.style.removeProperty("display");
+          var burger = document.getElementById("mobileburger");
+          if (burger) burger.classList.remove("open");
+        }
+      }, 120);
+    });
+  }
+
+  /*
    * The section bar folds behind a toggle on a phone, where there is no room
    * for a row of services and no hover to open a flyout.
    */
