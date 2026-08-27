@@ -2433,7 +2433,43 @@
  * The markup is the header's own; only the arrangement changes, so a page
  * outside a section is untouched.
  */
-@media (min-width: 992px) {
+/* -------------------------------------------------------- header shell -- */
+
+/*
+ * One container for the whole header, and a fluid one.
+ *
+ * Bootstrap's container steps — 960, 1140, 1320 — meant the gutters got
+ * *smaller* as the window got bigger: 70px of air at 1100 and 30px at 1200,
+ * which is why the header looked roomy at one width and cramped at a wider
+ * one. This is one width that grows with the window and stops at 1320, with
+ * gutters that grow with it instead of collapsing.
+ *
+ * The row and column paddings inside it are zeroed so the menu, the tools and
+ * the section bar all start and end on the same two lines. They were 10px out
+ * from each other, which is what made the tools look like they had been placed
+ * independently of the nav.
+ */
+#header > .container,
+#secbar > .container {
+  width: 100%;
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: clamp(20px, 3.2vw, 56px);
+}
+
+#header .row,
+#secbar .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#header .col-12,
+#secbar .col-12 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+@media (min-width: 1101px) {
   /*
    * Tools on their own quiet line, then the logo with the menu beside it.
    *
@@ -2540,6 +2576,19 @@
 
   .mainnav > li {
     flex: 0 0 auto;
+    /*
+     * The theme puts a 10px right margin on every item, which is spacing the
+     * `gap` above already provides — and on the last item it is 10px of air
+     * inside the nav's right edge, so the menu stopped 10px short of the tools
+     * above it. That is the whole of the misalignment between the two rows.
+     */
+    margin-right: 0;
+  }
+
+  /* The theme adds it back on the last item specifically — the one item where
+     it does the damage, by holding the menu 10px inside its own right edge. */
+  .mainnav > li:last-child {
+    margin-right: 0;
   }
 
   /* The section's colour lives on its own bar; the menu row stays white. */
@@ -2579,6 +2628,13 @@
   #searchformwrap {
     position: relative;
     width: 40px;
+    /*
+     * The theme pushes it 47px clear of the social links, for the absolutely
+     * positioned slot it normally sits in. In this row that is what made the
+     * magnifier look like it had been placed on its own; the row's gap spaces
+     * it like everything else.
+     */
+    margin: 0;
   }
 
   /*
@@ -2633,23 +2689,6 @@
  * spacing closes up rather than the items sliding back over the logo — which
  * is what `justify-content: flex-end` does when it runs out of room.
  */
-@media (min-width: 992px) and (max-width: 1199px) {
-  .mainnav {
-    gap: 18px;
-  }
-
-  /*
-   * Closing the spacing is not enough on its own: the seven items are 452px of
-   * words and the theme's logo is 415px there, which leaves them 503px. The
-   * logo comes down instead of the menu, because the menu has to look the same
-   * at a given width on every page and the logo already resizes with the
-   * viewport.
-   */
-  #logo img {
-    width: 240px;
-  }
-}
-
 /* The bar itself. */
 #secbar {
   background: #2b93d1;
@@ -2852,8 +2891,58 @@
   display: inline;
 }
 
-@media (max-width: 991px) {
-  /* Below 992 the header stacks: logo, burger, and the menu when it opens. */
+/*
+ * The menu becomes a burger at 1100 rather than at the theme's 767.
+ *
+ * Seven items need about 650px beside a logo and the tools. Above 1100 there
+ * is room for that and a hundred to spare; below it the only way to keep them
+ * on the line is to make them smaller, and a menu that shrinks until it is
+ * unreadable is worse than one behind a button. The rules here are the ones
+ * the theme applies at 767, started earlier.
+ */
+@media (max-width: 1100px) {
+  #mobileburger {
+    display: block;
+  }
+
+  #graynav {
+    display: none;
+  }
+
+  .mainnav {
+    display: block;
+  }
+
+  .mainnav > li {
+    flex: none;
+    margin: 10px 0;
+  }
+
+  .mainnav > li > .sub-menu {
+    position: relative;
+    display: none;
+    left: 0;
+  }
+
+  #navwrap {
+    height: auto;
+    padding: 10px 0;
+  }
+
+  /*
+   * The header's own copies of the theme's `.mobile` / `.desktop` helpers.
+   * Scoped, because those two classes are used for hero art elsewhere and
+   * moving them globally would take content with them.
+   */
+  #header #mobilesearch {
+    display: block;
+  }
+
+  #header #navbuttons.desktop {
+    display: none !important;
+  }
+
+  /* Below 1101 the header stacks: logo, burger, and the menu when it opens. */
   .secheadrow {
     display: block;
   }
