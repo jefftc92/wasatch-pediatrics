@@ -2549,6 +2549,11 @@
     padding-left: 0 !important;
   }
 
+  #navbuttons li {
+    display: flex;
+    align-items: center;
+  }
+
   #navbuttons li img {
     width: 16px;
     height: 16px;
@@ -2581,15 +2586,18 @@
    * The theme takes the form out of the flow (`position: absolute; right: 0`)
    * for the slot it normally sits in, which put the magnifier on top of the
    * label instead of beside it.
+   *
+   * Both wrappers centre what is inside them. `.searchwrap` is as tall as the
+   * strip and its button was a static child at the top of it, so the glass sat
+   * 5.5px above the line the words beside it are on.
    */
-  #searchformwrap .mainsearch {
-    position: static;
-    flex: 0 0 auto;
-  }
-
+  #searchformwrap .mainsearch,
   #searchformwrap .searchwrap {
     position: static;
-    width: 44px;
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    width: 16px;
     overflow: hidden;
   }
 
@@ -2615,10 +2623,6 @@
   #searchformwrap .searchbutton img {
     width: 16px;
     height: 16px;
-  }
-
-  #searchformwrap .searchwrap {
-    width: 16px;
   }
 
   /* ---- the primary row ---- */
