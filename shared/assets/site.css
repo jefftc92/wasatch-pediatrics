@@ -2535,12 +2535,21 @@
     position: static;
     display: flex;
     align-items: center;
-    gap: 18px;
+    gap: 20px;
     width: auto;
     top: auto;
     right: auto;
   }
 
+  /*
+   * The strip's rhythm: 20px between the things in it, 8px between the search
+   * label and its glass because those two are one control, and 12px between
+   * the social links because those two are a pair.
+   *
+   * It read 18, 8, 22, 24 — the pair the loosest of the lot — because the
+   * theme pads the social items unevenly, `0 4px` on one and `0 0 0 8px` on
+   * the other, for the slot they used to sit in.
+   */
   #navbuttons {
     display: flex !important;
     align-items: center;
@@ -2549,9 +2558,21 @@
     padding-left: 0 !important;
   }
 
+  #navbuttons li {
+    display: flex;
+    align-items: center;
+    padding: 0 !important;
+    margin: 0;
+  }
+
+  #navbuttons li a {
+    display: flex;
+    align-items: center;
+  }
+
   #navbuttons li img {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
   }
 
   /*
@@ -2581,15 +2602,18 @@
    * The theme takes the form out of the flow (`position: absolute; right: 0`)
    * for the slot it normally sits in, which put the magnifier on top of the
    * label instead of beside it.
+   *
+   * Both wrappers centre what is inside them. `.searchwrap` is as tall as the
+   * strip and its button was a static child at the top of it, so the glass sat
+   * 5.5px above the line the words beside it are on.
    */
-  #searchformwrap .mainsearch {
-    position: static;
-    flex: 0 0 auto;
-  }
-
+  #searchformwrap .mainsearch,
   #searchformwrap .searchwrap {
     position: static;
-    width: 44px;
+    display: flex;
+    align-items: center;
+    flex: 0 0 auto;
+    width: 16px;
     overflow: hidden;
   }
 
@@ -2605,20 +2629,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     padding: 0;
   }
 
-  /* The glass matches the social badges beside it and sits a step above the
-     13px words, rather than a step above the menu underneath them. */
+  /*
+   * One step above the 13px words beside them and below the 15px menu under
+   * them, which is the order the three are meant to be read in.
+   *
+   * `height: auto`, because the magnifier's artwork is 24x25 and a square box
+   * squashed it by four per cent against the two social marks, which are
+   * square.
+   */
   #searchformwrap .searchbutton img {
-    width: 18px;
-    height: 18px;
-  }
-
-  #searchformwrap .searchwrap {
-    width: 18px;
+    width: 16px;
+    height: auto;
   }
 
   /* ---- the primary row ---- */
@@ -2688,6 +2714,18 @@
     letter-spacing: normal;
     white-space: nowrap;
     padding: 4px 0;
+  }
+
+  /*
+   * The theme's caret is a 3px chevron drawn for a 23px menu. Beside 15px type
+   * it is heavier than the word it belongs to, which is why the three items
+   * that have one looked bigger than the four that do not.
+   */
+  .mainnav > li.menu-item-has-children > a:after {
+    border-width: 0 2px 2px 0;
+    padding: 2.5px;
+    right: -7px;
+    top: -2px;
   }
 
   .header-cta {
@@ -3103,18 +3141,83 @@
   }
 
   /* Action then burger, in that order, opposite the logo. */
+  /*
+   * The burger and its X, at the size of the glass beside them.
+   *
+   * The theme draws 45x5 bars, and rotating two of those 45deg makes an X
+   * whose bounding box is 35x35 — bigger than the 44px control holding it and
+   * more than twice the weight of everything else in the row. 26x3 bars give
+   * an X of about 20px, which is what the glass is.
+   */
   #mobileburger {
     order: 3;
     /* The theme floats it, which takes it out of the row it should sit in. */
     float: none !important;
-    margin: 0 0 0 18px;
+    margin: 0 0 0 10px;
     display: block;
+    width: 44px;
     height: 44px;
+  }
+
+  #mobileburger span {
+    width: 26px;
+    height: 3px;
+    left: 9px;
+    border-radius: 3px;
+  }
+
+  #mobileburger span:first-child {
+    top: 14px;
+  }
+
+  #mobileburger span:nth-child(2),
+  #mobileburger span:nth-child(3) {
+    top: 20.5px;
+  }
+
+  #mobileburger span:nth-child(4) {
+    top: 27px;
+  }
+
+  #mobileburger.open span:first-child,
+  #mobileburger.open span:nth-child(4) {
+    width: 0;
+    left: 22px;
+    top: 20.5px;
   }
 
   #graynav {
     order: 4;
     flex: 1 0 100%;
+  }
+
+  /*
+   * One caret per row. The theme prints its own chevron after the label and
+   * this menu also has a toggle button at the far right of the row, so every
+   * parent had two — one that does nothing and one that opens the panel.
+   */
+  .mainnav > li.menu-item-has-children > a:after {
+    display: none;
+  }
+
+  /* Rows at a readable rhythm rather than 124px apart. */
+  .mainnav > li {
+    margin: 0;
+  }
+
+  .mainnav > li > a,
+  .mainnav > li.menu-item-has-children > a {
+    display: block;
+    padding: 12px 0;
+    font-size: 17px;
+    /* The theme bolds a parent, so the three items with a panel under them
+       read heavier than the four without. They are all one weight here. */
+    font-weight: 500;
+  }
+
+  /* Room for the toggle button, which sits over the right of the row. */
+  .mainnav > li.menu-item-has-children > a {
+    padding-right: 56px;
   }
 
   /*
@@ -3134,8 +3237,8 @@
 
   .mainnav > li.nav-action > a {
     display: inline-block;
-    padding: 10px 0;
-    font-weight: 600;
+    padding: 12px 0;
+    font-weight: 500;
   }
 
   .mainnav > li.nav-action-book > a {
@@ -3160,7 +3263,6 @@
 
   .mainnav > li {
     flex: none;
-    margin: 10px 0;
   }
 
   .mainnav > li > .sub-menu {
