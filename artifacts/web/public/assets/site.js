@@ -6,8 +6,14 @@
 (function () {
   "use strict";
 
-  var wide = window.matchMedia("(min-width: 768px)");
-  var mobile = window.matchMedia("(max-width: 767px)");
+  /*
+   * The header's own breakpoint. The menu becomes a burger at 1199, so
+   * everything that behaves one way with a menu bar and another with a burger
+   * turns here — not at the theme's 768, which is where these used to be and
+   * which left the dropdowns unopenable everywhere between the two.
+   */
+  var wide = window.matchMedia("(min-width: 1200px)");
+  var mobile = window.matchMedia("(max-width: 1199px)");
 
   /* ------------------------------------------------------- section nav -- */
 
@@ -28,37 +34,6 @@
         list.scrollLeft = left - (list.clientWidth - current.offsetWidth) / 2;
       }
     }
-  }
-
-  /* ------------------------------------------------------- sticky navbar -- */
-
-  /*
-   * Pin the grey nav bar once the page scrolls past it. The theme positions it
-   * absolutely, which cannot stick on its own, and the space it leaves behind
-   * is already reserved by the header's bottom margin — so switching to fixed
-   * moves nothing. Mobile is handled in CSS, where the whole header sticks.
-   */
-  var graynav = document.getElementById("graynav");
-  if (graynav) {
-    var pinAt = 0;
-    var measure = function () {
-      graynav.classList.remove("is-stuck");
-      pinAt = graynav.getBoundingClientRect().top + window.scrollY;
-    };
-    var sync = function () {
-      if (!wide.matches) {
-        graynav.classList.remove("is-stuck");
-        return;
-      }
-      graynav.classList.toggle("is-stuck", window.scrollY > pinAt);
-    };
-    measure();
-    sync();
-    window.addEventListener("scroll", sync, { passive: true });
-    window.addEventListener("resize", function () {
-      measure();
-      sync();
-    });
   }
 
   /* ------------------------------------------------- floating schedule -- */
@@ -168,7 +143,7 @@
     var closeNav = function (except) {
       $(parents).each(function () {
         if (this === except || !$(this).hasClass("open")) return;
-        $(this).removeClass("open").children(".sub-menu").slideUp("fast");
+        $(this).removeClass("open").children(".sub-menu").stop(true, true).slideUp("fast");
         $(this).children(".navtoggle").attr("aria-expanded", "false");
       });
     };
@@ -179,16 +154,26 @@
       event.stopImmediatePropagation();
     });
 
-    /* The caret opens, and closes whatever else was open. */
+    /*
+     * The caret opens, and closes whatever else was open.
+     *
+     * `slideDown` and `slideUp` by name rather than `slideToggle`, because
+     * that asks jQuery whether the panel is visible and jQuery answered wrong
+     * between 768 and 1199 — it closed a panel that CSS had never opened, so
+     * the caret appeared to do nothing there. The class says what the state
+     * is; the animation follows it rather than guessing at it.
+     */
     $(parents + " > .navtoggle").on("click", function (event) {
       event.preventDefault();
       event.stopImmediatePropagation();
       var li = $(this).parent();
-      var open = li.hasClass("open");
+      var willOpen = !li.hasClass("open");
       closeNav(li[0]);
-      li.toggleClass("open", !open);
-      li.children(".sub-menu").slideToggle("fast");
-      $(this).attr("aria-expanded", String(!open));
+      li.toggleClass("open", willOpen);
+      var sub = li.children(".sub-menu").stop(true, true);
+      if (willOpen) sub.slideDown("fast");
+      else sub.slideUp("fast");
+      $(this).attr("aria-expanded", String(willOpen));
     });
 
     /*

@@ -342,15 +342,14 @@ function sectionBar(section: SectionNav): string {
 }
 
 /*
- * Paying a bill and booking, at the foot of the menu — on a phone only.
+ * Paying a bill, at the foot of the menu — below 1200 only.
  *
- * On a desktop they are in the header itself: the strip carries Pay Bill and
- * the row ends with the appointment button. A phone has neither of those
- * places to put them, so they join the menu they would otherwise be missing
- * from. Hidden above 1050, where the header shows them properly.
+ * On a wider screen the strip carries it; a burger has no strip, so it joins
+ * the menu it would otherwise be missing from. Booking does not need the same
+ * treatment: the docked button is on screen at every scroll position, so a
+ * second copy in the menu is one more thing saying the same thing.
  */
-const MENU_ACTIONS = `<li class="menu-item nav-action"><a href="https://wasatchpeds.goredde.com/" target="_blank" rel="noopener">Pay Bill</a></li>
-<li class="menu-item nav-action nav-action-book"><a href="/contact-us/">Schedule Appointment</a></li>`;
+const MENU_ACTIONS = `<li class="menu-item nav-action"><a href="https://wasatchpeds.goredde.com/" target="_blank" rel="noopener">Pay Bill</a></li>`;
 
 function globalNav(menu: MenuState): string {
   return `<div class="menu-main-nav-container"><ul id="menu-main-nav" class="mainnav">${mainNav
