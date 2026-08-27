@@ -138,6 +138,12 @@
   }
 
   .mainnav > li.mega > .sub-menu.megamenu {
+    /*
+     * Below the whole header row, not below the menu item. The menu shares a
+     * row with the logo now, so a panel that opens from the item's own baseline
+     * comes out across the middle of the logo.
+     */
+    top: 100%;
     left: 0;
     right: 0;
     width: auto;
@@ -789,6 +795,60 @@
   font-size: 16px !important;
   line-height: 24px !important;
   font-style: italic;
+}
+
+/*
+ * The dentistry landing page's tab strip is `display: inline-flex` with fixed
+ * width tabs, 1090px of them. Above 1200 the container is 1140 and it fits;
+ * between 992 and 1199 the container is 960 and it ran 130px past the window.
+ * The theme stacks it below 992 but leaves that band alone. It wraps instead.
+ */
+@media (max-width: 1199px) {
+  #tabnav {
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+  }
+}
+
+/* ------------------------------------------------------------ main nav -- */
+
+/*
+ * The menu bar, thinner — on every page.
+ *
+ * The theme sets it at 23px in a 60px bar, which is fine when it is the only
+ * bar on the page. A service page has two: the menu and the section beneath
+ * it, and at the theme's size those two plus the logo row came to 231px of
+ * chrome before the page began. Thinner here rather than only in a section, so
+ * the menu is the same on a home page and a service page — the whole point of
+ * the exercise is that moving between them should not feel like a different
+ * site.
+ */
+/* The anchor is inline, so its box was 20px tall around a 39px logo. */
+#logo a {
+  display: block;
+}
+
+.mainnav > li > a {
+  font-size: 17px;
+  /*
+   * The theme tightens the menu by half a pixel, which is right for the 23px
+   * it was set at and wrong at this size — it just makes the words look
+   * squeezed, and costs seven items 24px of width.
+   */
+  letter-spacing: normal;
+}
+
+#navwrap {
+  height: auto;
+  padding: 11px 0;
+}
+
+@media (min-width: 992px) {
+  .mainnav {
+    justify-content: space-between;
+    width: 100%;
+  }
 }
 
 /* ---------------------------------------------------------- breadcrumbs -- */
@@ -1870,6 +1930,36 @@
 }
 
 /*
+ * The symptom checker's frame.
+ *
+ * The tool is one long page — a body diagram, then every body part's symptom
+ * list one after another. Measured against a local mirror it runs to 5515px at
+ * every width from 768 up and 913px below that, where it switches to a compact
+ * layout of its own.
+ *
+ * The embed gave it 1200px and `scrolling="no"`, so a visitor saw the diagram,
+ * the "Skin Symptoms" heading and nothing else: the four hundred symptoms below
+ * the cut were unreachable rather than merely out of view. Letting it scroll is
+ * the fix, and it is the only one that cannot go stale — the tool posts no
+ * height to its parent, so nothing here can know how tall it really is, and a
+ * frame that is too short now shows a scrollbar instead of a guillotine.
+ *
+ * The height is therefore a window, not a fit. Tall enough for the diagram and
+ * the first symptoms under it, and no taller: the tool's own layout grows to
+ * fill whatever it is given, so a very tall frame makes a very long page rather
+ * than a complete one.
+ */
+.sc-frame {
+  height: 1500px;
+}
+
+@media (max-width: 767px) {
+  .sc-frame {
+    height: 1000px;
+  }
+}
+
+/*
  * The line under the symptom checker. It says why the tool is embedded rather
  * than written into the page, and carries the link that has to work when a
  * third-party frame does not — a blocked frame is otherwise a blank rectangle
@@ -2344,62 +2434,91 @@
  * outside a section is untouched.
  */
 @media (min-width: 992px) {
-  /* Logo, the quietened global nav, and the tools — one row. */
-  .secheadrow {
+  /*
+   * Tools on their own quiet line, then the logo with the menu beside it.
+   *
+   * A grid, because the three have to share one row element for the phone's
+   * sake and the desktop wants them on two lines. Right-aligned as a group
+   * rather than spread across the bar: seven words at even intervals across
+   * 1140px read as seven separate things, not as one menu.
+   */
+  #header {
+    position: relative;
+    z-index: 60;
+    /*
+     * The tools get a band of their own rather than floating at the top of the
+     * white. It is painted here, on the header, because that is the only
+     * element in the header that is already full width — the row itself lives
+     * inside the container and a background on it would stop at the gutters.
+     * The stop and the grid row are the same variable so they cannot drift.
+     */
+    /*
+     * Proportions taken from intermountainhealthcare.org, measured from their
+     * stylesheet rather than by eye: their logo renders 157x48 in a row with
+     * 16px of air above and below it, their utility strip is a .5em block, and
+     * the gap from logo to menu is 40px. Ours are the same rhythm at our type
+     * size — their menu is 14px against a 48px logo, so ours at 17px carries a
+     * 58px one.
+     *
+     * The strip is 56 rather than their 40 because what sits in it differs:
+     * theirs is 24px of text links, ours is a 40px button. The same 8px of air
+     * around the content, more content.
+     */
+    --toolsband: 56px;
     display: flex;
+    flex-direction: column;
+    margin-bottom: 0;
+    background: linear-gradient(
+      #eceded 0 var(--toolsband),
+      #ffffff var(--toolsband)
+    );
+  }
+
+  .secheadrow {
+    /*
+     * The mega panels hang off this row, so it is their containing block — and
+     * it has to out-stack the section bar and the hero, which come after it in
+     * the flow and would otherwise paint over an open panel.
+     */
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: var(--toolsband) auto;
+    grid-template-areas:
+      "tools tools"
+      "logo  nav";
     align-items: center;
-    gap: 30px;
-    padding: 14px 0;
+    column-gap: 40px;
+    padding: 0;
+  }
+
+  #logo {
+    grid-area: logo;
+    position: static;
+    /* The air above and below the logo is what sets this row's height. */
+    margin: 16px 0 !important;
   }
 
   /*
-   * Everything in this row has to fit across the container: at its full size
-   * the logo alone is 458px and left the nav 91px to live in. Smaller here,
-   * because the section bar beneath it is now the loudest thing on the page.
+   * Smaller than the theme's 458px, so the menu beside it can be larger. The
+   * logo reads at any size; the menu is seven words that have to be legible.
    */
-  #header.has-section #logo {
-    position: static;
-    margin: 0 !important;
-    flex: 0 0 auto;
+  #logo img {
+    width: 300px;
+    height: auto;
   }
 
-  #header.has-section #logo img {
-    height: 36px;
+  #topmenuwrap {
+    grid-area: tools;
+    justify-self: end;
+    position: static;
     width: auto;
   }
 
-  #header.has-section .header-cta {
-    font-size: 13px !important;
-    padding: 7px 18px !important;
-    letter-spacing: 0;
-    margin-right: 0;
-  }
-
-  /* The theme indents this list for the slot it normally sits in. */
-  #header.has-section #navbuttons {
-    padding-left: 0 !important;
-  }
-
-  /*
-   * The social links come off this row. It has to hold the logo, seven nav
-   * items and the tools inside 1116px, and with them there the nav had 339px
-   * for 456px of links — `justify-content: flex-end` then overflowed it
-   * leftward and painted the links across the logo. Both are in the footer.
-   */
-  #header.has-section #navbuttons li {
-    display: none;
-  }
-
-  /*
-   * `#graynav` and `#navwrap` come along only so the phone keeps the theme's
-   * own hide-and-burger behaviour. Above 991 they are flattened to nothing but
-   * a flex cell, and `overflow: hidden` is the last guard that the nav can
-   * never paint outside its own share of the row.
-   */
-  #header.has-section #graynav {
-    flex: 1 1 auto;
-    min-width: 0;
-    overflow: hidden;
+  #graynav {
+    grid-area: nav;
+    justify-self: end;
     position: static;
     width: auto;
     background: none;
@@ -2407,60 +2526,30 @@
     z-index: auto;
   }
 
-  #header.has-section #navwrap {
+  #navwrap {
     height: auto;
     padding: 0;
   }
 
-  #header.has-section .mainnav {
-    gap: 17px;
+  .mainnav {
+    gap: 22px;
     justify-content: flex-end;
-    width: 100%;
+    width: auto;
     flex-wrap: nowrap;
   }
 
-  #header.has-section .mainnav > li {
+  .mainnav > li {
     flex: 0 0 auto;
   }
 
-  #header.has-section .mainnav > li > a {
-    font-size: 14px;
-    color: #8a8a8c;
-    padding: 6px 0;
-    white-space: nowrap;
+  /* The section's colour lives on its own bar; the menu row stays white. */
+  #header.has-section #secbar {
+    position: relative;
+    z-index: 2;
+    box-shadow: 0 8px 16px rgba(33, 33, 33, 0.1);
   }
 
-  #header.has-section .mainnav > li > a:hover {
-    color: #2b93d1;
-  }
-
-  /*
-   * The demoted row has no room for the mega panels, and the section bar is
-   * the navigation on these pages — Services is still one click away.
-   */
-  #header.has-section .mainnav > li > .sub-menu,
-  #header.has-section .navtoggle {
-    display: none !important;
-  }
-
-  #header.has-section .mainnav > li.menu-item-has-children > a:after,
-  #header.has-section .mainnav > li > a:before {
-    display: none;
-  }
-
-  /*
-   * The theme positions both of these absolutely and gives the wrap the full
-   * container width. In a flex row that left it 1116px wide and squeezed the
-   * nav beside it to nothing, while the tools floated out of flow over the
-   * section bar. Both go back into the flow at their content width.
-   */
-  #header.has-section #topmenuwrap {
-    position: static;
-    flex: 0 0 auto;
-    width: auto;
-  }
-
-  #header.has-section #topmenu {
+  #topmenu {
     position: static;
     display: flex;
     align-items: center;
@@ -2470,25 +2559,49 @@
     right: auto;
   }
 
-  #header.has-section #navbuttons {
+  #navbuttons {
     display: flex !important;
     align-items: center;
     gap: 10px;
     margin: 0;
-    padding: 0;
+    padding-left: 0 !important;
+  }
+
+  .header-cta {
+    margin-right: 0;
   }
 
   /*
    * The theme's search field is sized for the absolutely-positioned slot it
    * normally sits in; dropped into a flex row it took 1287px and pushed the
-   * page 7px wider than the window. It opens on click, as it does elsewhere.
+   * page wider than the window. It opens on click, as it does elsewhere.
    */
-  #header.has-section #searchformwrap {
+  #searchformwrap {
     position: relative;
-    width: 34px;
+    width: 40px;
   }
 
-  #header.has-section #searchformwrap .searchwrap {
+  /*
+   * The magnifier was a 24px glyph standing beside two 35px badges, which read
+   * as an afterthought rather than a third tool, and gave it a 24x31 target to
+   * hit. A bare glyph looks smaller than a filled badge at the same measure,
+   * so it is 28 with a 40px box around it.
+   */
+  #searchformwrap .searchbutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+
+  #searchformwrap .searchbutton img {
+    width: 28px;
+    height: 28px;
+  }
+
+  #searchformwrap .searchwrap {
     position: absolute;
     right: 0;
     top: 50%;
@@ -2497,45 +2610,43 @@
     overflow: hidden;
   }
 
-  #header.has-section #searchformwrap .navsearch {
+  #searchformwrap .navsearch {
     width: 0;
     min-width: 0;
     padding: 0;
     border: 0;
   }
 
-  #header.has-section #searchformwrap .searchbutton {
+  #searchformwrap .searchbutton {
     position: static;
-  }
-
-  #header.has-section {
-    margin-bottom: 0;
   }
 }
 
 /*
- * Between 992 and 1199 the container is 960px, not 1140 — the logo, seven nav
- * items and the tools need about 1140 between them, so they cannot share a
- * line. The nav takes one of its own rather than being clipped or painted over
- * the logo, which is what happened when it was squeezed.
+ * Between 992 and 1199 the container is 960px rather than 1140, and the logo at
+ * its full 458px plus the tools' 493px runs 17px past it. The logo comes down;
+ * the menu is on its own line above and is not affected.
+ */
+/*
+ * Between 992 and 1199 the container is 960px. The seven items are 452px of
+ * words; with the logo and the gap between them that leaves 587px, so the
+ * spacing closes up rather than the items sliding back over the logo — which
+ * is what `justify-content: flex-end` does when it runs out of room.
  */
 @media (min-width: 992px) and (max-width: 1199px) {
-  .secheadrow {
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding-bottom: 8px;
+  .mainnav {
+    gap: 18px;
   }
 
-  .secheadnav {
-    flex: 1 0 100%;
-    order: 3;
-    overflow: visible;
-  }
-
-  #header.has-section .mainnav {
-    justify-content: flex-start;
-    padding-top: 4px;
-    border-top: 1px solid #f0f0f1;
+  /*
+   * Closing the spacing is not enough on its own: the seven items are 452px of
+   * words and the theme's logo is 415px there, which leaves them 503px. The
+   * logo comes down instead of the menu, because the menu has to look the same
+   * at a given width on every page and the logo already resizes with the
+   * viewport.
+   */
+  #logo img {
+    width: 240px;
   }
 }
 
@@ -2589,9 +2700,14 @@
   align-items: center;
   gap: 7px;
   height: 100%;
-  padding: 17px 0;
+  padding: 14px 0;
   border-bottom: 3px solid transparent;
   color: #ffffff !important;
+  /*
+   * The same size as the menu above it. They were 17 and 16, which is not a
+   * hierarchy, it is a pixel out. The section's name carries the emphasis at
+   * 21px; its services are peers of the menu, so they are set like it.
+   */
   font-size: 17px;
   font-weight: 400 !important;
   line-height: 1.2;
@@ -2732,61 +2848,95 @@
   display: none;
 }
 
+.secbar-toggle-label {
+  display: inline;
+}
+
 @media (max-width: 991px) {
-  /* Below the section layout the header is the theme's own again. */
+  /* Below 992 the header stacks: logo, burger, and the menu when it opens. */
   .secheadrow {
     display: block;
   }
 
   /*
+   * Touch targets. The burger was 45x32, the section's Menu pill 90x36 and its
+   * links 43 tall — all just under the 44px a fingertip needs, and all of them
+   * the only way to reach what they open.
+   */
+  #mobileburger {
+    height: 44px;
+    margin-top: 0;
+  }
+
+  .secbar-toggle {
+    min-height: 44px;
+  }
+
+  .secbar-item > a {
+    min-height: 44px;
+  }
+
+  .secbar-name {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  /*
    * The theme leaves `#graynav` absolutely positioned, which is right where it
    * sits by default — a sibling after the logo's container, so it drops below
-   * it. Nested inside the row here, that same rule put the opened menu on top
-   * of the logo and the burger, with no way to tap it shut. It flows instead.
+   * it. Inside the row here, that same rule put the opened menu on top of the
+   * logo and the burger, with no way to tap it shut. It flows instead.
    */
-  #header.has-section #graynav {
+  #graynav {
     position: static;
     box-shadow: none;
   }
 
   /*
    * No room for a bar of services or a hover flyout on a phone, so the section
-   * name stays and the rest folds behind a toggle. The flyouts collapse with
-   * it — their topics and pages are on the service's own page, which is one tap
-   * from here.
+   * keeps its name and folds the rest behind a control beside it — the name on
+   * the left, a Menu pill on the right, one line. It used to be a full-width
+   * field under the name, which took two lines to say the same thing and read
+   * as a form control rather than a menu.
    */
   .secbar-in {
-    display: block;
-    padding: 12px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    flex-wrap: wrap;
+    padding: 10px 0;
   }
 
   .secbar-name {
     border-right: 0;
     padding: 4px 0;
-    font-size: 19px;
+    font-size: 18px;
   }
 
   .secbar-toggle {
-    display: block;
-    width: 100%;
-    margin-top: 8px;
-    padding: 11px 14px;
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    border-radius: 10px;
-    background: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    flex: 0 0 auto;
+    padding: 8px 16px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
     color: #ffffff;
     font-family: inherit;
     font-size: 15px;
-    text-align: left;
+    font-weight: 700;
+    line-height: 1.2;
     cursor: pointer;
   }
 
   .secbar-toggle:after {
     content: "";
-    float: right;
     width: 8px;
     height: 8px;
-    margin-top: 5px;
+    margin-top: -3px;
     border: solid #ffffff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
@@ -2794,12 +2944,14 @@
   }
 
   .secbar-toggle[aria-expanded="true"]:after {
-    transform: translateY(3px) rotate(-135deg);
+    margin-top: 3px;
+    transform: rotate(-135deg);
   }
 
   .secbar-list {
     display: none;
-    margin-top: 6px;
+    flex: 1 0 100%;
+    margin-top: 10px;
     gap: 0;
   }
 
