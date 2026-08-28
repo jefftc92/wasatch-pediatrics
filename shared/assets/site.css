@@ -646,8 +646,34 @@
    */
   #graynav {
     max-height: calc(100vh - 143px);
+    /*
+     * Both axes, deliberately. Setting only `overflow-y` leaves `overflow-x`
+     * computing to `auto` rather than staying `visible`, so the moment the
+     * menu grew tall enough for a vertical scrollbar, that bar took 14px out
+     * of the client width and the fixed-width rows inside no longer fitted —
+     * producing a horizontal scrollbar underneath the vertical one. Nothing in
+     * this menu is ever meant to scroll sideways.
+     */
+    overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    /* A hairline rather than a trough, on the browsers that draw one at all. */
+    scrollbar-width: thin;
+    scrollbar-color: #c3c7cb transparent;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  #graynav::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  #graynav::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background: #c3c7cb;
+  }
+
+  #graynav::-webkit-scrollbar-track {
+    background: transparent;
   }
 
   /*
@@ -905,12 +931,20 @@
  * rather than as the way back out of it. Pinned to the top edge it is chrome
  * again, and the title keeps the middle of the band to itself.
  */
+/*
+ * Pinned to the hero's padding box, which is where an absolutely positioned
+ * child measures `left: 0` from — outside the gutter, not inside it. Every
+ * other line in the hero sits on the container's gutter, so the trail has to
+ * carry the same one itself or it starts at the window's edge while the title
+ * under it starts 12px in.
+ */
 .hero-crumbs {
   position: absolute;
   top: 18px;
   left: 0;
   right: 0;
   padding-top: 0;
+  padding-inline: var(--bs-gutter-x, 0.75rem);
   margin: 0;
 }
 
@@ -1831,6 +1865,16 @@
   background: linear-gradient(100deg, #2277ab 0%, #2b93d1 100%);
 }
 
+/*
+ * The shorthand here used to end `... 0` on the sides, which quietly cancelled
+ * the gutter `.container` gives every other band on the page. Above 576px the
+ * container's max-width keeps the text off the edge anyway, so nothing showed;
+ * on a phone the container is the full width of the window and the trail, the
+ * eyebrow, the title and the lead all ran flush into both edges.
+ *
+ * The gutter is Bootstrap's own variable rather than a number, so the hero
+ * lines up with the bands under it instead of tracking them by coincidence.
+ */
 .dent-hero-inner {
   position: relative;
   display: flex;
@@ -1838,7 +1882,7 @@
   justify-content: center;
   min-height: 420px;
   /* Top padding clears the trail pinned above it. */
-  padding: 62px 0 44px 0;
+  padding: 62px var(--bs-gutter-x, 0.75rem) 44px;
   max-width: 1140px;
 }
 
@@ -2366,7 +2410,7 @@
 @media (max-width: 767px) {
   .dent-hero-inner {
     /* Still clearing the pinned trail, on a band with less height to spare. */
-    padding: 52px 0 40px 0;
+    padding: 52px var(--bs-gutter-x, 0.75rem) 40px;
   }
 
   .hero-crumbs {
@@ -2522,13 +2566,14 @@
     /*
      * The strip's height, and the stop the grid row below reads from it.
      *
-     * 42px rather than the 34 it was: the band carries a rule at each end of
-     * the search now, and a divider needs room above and below it or it reads
-     * as a crack rather than as punctuation. The hairline at the bottom is the
-     * same idea one level up — it separates the strip from the white row
+     * 36px. It was 34, went to 42 when the dividers arrived, and 42 was too
+     * much band for 13px words — the rules need room above and below them, but
+     * 11px of air each side of a 20px rule turns a utility strip into a
+     * section. 36 leaves 8px, which reads as punctuation rather than padding.
+     * The hairline at the bottom separates the strip from the white row
      * instead of leaving the two greys to meet edge to edge.
      */
-    --toolsband: 42px;
+    --toolsband: 36px;
     background:
       linear-gradient(#dfe2e5 0 1px, transparent 1px) 0 calc(var(--toolsband) - 1px) / 100% 1px no-repeat,
       linear-gradient(
@@ -3408,13 +3453,24 @@
     border-radius: 3px;
   }
 
+  /*
+   * Whole pixels, so the three bars are the same bar three times.
+   *
+   * The middle pair sat at 20.5px, which is where a 3px bar has to start to be
+   * centred in a 44px box — and which no screen can draw. At 1x the browser
+   * spread it over rows 20 to 24 at half opacity each end, so the middle bar
+   * came out lighter and thicker than the two crisp ones above and below it,
+   * and the gaps either side of it looked unequal. 13/20/27 puts every bar on
+   * a pixel with 4px of air between them, at the cost of half a pixel of
+   * centring nobody can see.
+   */
   #mobileburger span:first-child {
-    top: 14px;
+    top: 13px;
   }
 
   #mobileburger span:nth-child(2),
   #mobileburger span:nth-child(3) {
-    top: 20.5px;
+    top: 20px;
   }
 
   #mobileburger span:nth-child(4) {
@@ -3434,6 +3490,39 @@
   }
 
   /*
+   * The caret's focus ring.
+   *
+   * It is a button with no border of its own, so the browser drew its default
+   * one — a hard black rectangle around a 52px box, which is the loudest thing
+   * on the screen the moment anybody taps it. Same shape, in brand blue, drawn
+   * only for keyboard focus so a tap does not summon it at all.
+   */
+  .navtoggle:focus {
+    outline: none;
+  }
+
+  .navtoggle:focus-visible {
+    outline: 2px solid #2b93d1;
+    outline-offset: -4px;
+    border-radius: 6px;
+  }
+
+  /*
+   * "Popular services" comes off the burger menu.
+   *
+   * On the desktop panel it is a second column beside "Browse by care", and
+   * two columns of shortcuts are worth the room. Stacked into a phone menu it
+   * is not a column any more, it is eight more rows between the four pillars
+   * and everything below Services — the same links a reader has just been
+   * offered, in a longer list they now have to scroll past. The panel keeps
+   * "Browse by care" and its "View all services" foot, which is the way to all
+   * of them anyway.
+   */
+  .mega-popular {
+    display: none;
+  }
+
+  /*
    * One caret per row. The theme prints its own chevron after the label and
    * this menu also has a toggle button at the far right of the row, so every
    * parent had two — one that does nothing and one that opens the panel.
@@ -3445,6 +3534,16 @@
   /* Rows at a readable rhythm rather than 124px apart. */
   .mainnav > li {
     margin: 0;
+  }
+
+  /*
+   * A parent's label stops before its caret. The rows are full width and the
+   * caret is a 52px button sitting on top of the right-hand end of one, so a
+   * long label ran under it — "Dentistry & Orthodontics" reached the button
+   * and kept going.
+   */
+  .mainnav > li.menu-item-has-children > a {
+    padding-right: 58px;
   }
 
   .mainnav > li > a,
@@ -3601,19 +3700,30 @@
     cursor: pointer;
   }
 
+  /*
+   * `margin-top` is doing optical centring, not layout.
+   *
+   * The mark is a square with two borders rotated 45 degrees, so its ink is
+   * the lower half of its box: the apex lands at the bottom edge and the arms
+   * end level with the middle. Centred as a box it therefore reads low.
+   * Measured against the label beside it, the ink sat 2.25px below the centre
+   * of "Menu" — enough to look like a mistake without looking like anything in
+   * particular. -5px puts the two within a quarter of a pixel.
+   */
   .secbar-toggle:after {
     content: "";
     width: 8px;
     height: 8px;
-    margin-top: -3px;
+    margin-top: -6px;
     border: solid #ffffff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
     transition: transform 0.18s ease;
   }
 
+  /* Flipped, the ink is the upper half, so the correction flips with it. */
   .secbar-toggle[aria-expanded="true"]:after {
-    margin-top: 3px;
+    margin-top: 0;
     transform: rotate(-135deg);
   }
 
@@ -3732,9 +3842,20 @@
   }
 }
 
+/*
+ * The rows are a tap target, not just a line of text. At 20px tall in a
+ * multi-column list they were the smallest thing on a phone anybody is
+ * expected to hit accurately; the padding takes them to 36px without changing
+ * the rhythm of the list, since the margin comes off by the same amount.
+ */
 .area-group li {
-  margin-bottom: 8px;
+  margin-bottom: 0;
   break-inside: avoid;
+}
+
+.area-group li a {
+  display: block;
+  padding: 8px 0;
 }
 
 .area-group a,
