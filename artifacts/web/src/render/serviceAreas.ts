@@ -80,23 +80,30 @@ export function areaCopy(
 /* ------------------------------------------------------------ headings -- */
 
 /**
- * The heading for each section, with the city in it.
+ * The heading for each section.
  *
- * They are questions because the copy answers questions, and a heading that
- * asks one is the only kind a reader can skim and still know what they are
- * about to get. The city appears in three of the six rather than all of them:
- * repeating it in every heading reads as machinery, and the two that matter
- * most for someone comparing offices are the last two.
+ * A parent's question, in a parent's words, addressed to us — "What do you
+ * check during a well-child visit?" rather than "What a visit covers". A
+ * heading that asks something is the only kind a reader can skim and still know
+ * what they are about to get, and phrasing it the way somebody would type it
+ * into a search box costs nothing.
+ *
+ * The city appears in three of the six. Putting it in all of them reads as
+ * machinery; the three it belongs in are the ones whose answer genuinely
+ * changes from one city to the next.
  */
-function headings(service: Service, area: ServiceArea): Record<keyof AreaCopy & ("what"|"who"|"why"|"when"|"how"|"where"), string> {
-  const lower = service.name.toLowerCase();
+function headings(
+  service: Service,
+  area: ServiceArea,
+): Record<"what" | "who" | "why" | "when" | "how" | "where", string> {
+  const visit = service.visitNoun ?? service.name.toLowerCase().replace(/s$/, "");
   return {
-    what: `What does a ${lower.replace(/s$/, "")} cover?`,
+    what: `What do you check during a ${visit}?`,
     who: "Who will my child see?",
-    why: `Why do these visits matter for ${area.name} families?`,
-    when: "When should we come in?",
-    how: `How do we book from ${area.name}?`,
-    where: `Where do we go, and which office?`,
+    why: `Why do these visits matter for families in ${area.name}?`,
+    when: "When should my child come in?",
+    how: `How do I book a visit from ${area.name}?`,
+    where: `Which office is closest to ${area.name}?`,
   };
 }
 

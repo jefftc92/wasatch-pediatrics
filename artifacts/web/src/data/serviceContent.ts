@@ -23,7 +23,7 @@ export const serviceContent: Record<string, DentalPage> = {
     description:
       "Well child checkups at Wasatch Pediatrics: what happens at a visit, who you will see, the recommended schedule from newborn to 21, and how to book at eight offices along the Wasatch Front.",
     eyebrow: "Medical Care",
-    lead: "A well child checkup is the visit we make time for when nothing is wrong — so that we know your child before anything is.",
+    lead: "A well-child visit is the appointment we make time for when nothing is wrong, so that we know your child before anything is.",
     hero: "/wp-content/uploads/2022/05/WAS21-0020_Website_Header_New-Patients_Mobile_1000x400_v1-1.jpg",
     promises: [
       {
@@ -44,84 +44,84 @@ export const serviceContent: Record<string, DentalPage> = {
     ],
     sections: [
       {
-        heading: "What is a well child checkup?",
+        heading: "What is a well-child visit?",
         body: [
-          "A well child checkup is a scheduled visit we do when your child is healthy. Nobody is sick, nothing hurts, and that is the point: it is the one appointment built around looking at the whole child rather than at a single complaint.",
-          "In a single visit we measure growth and plot it against your child's own history, check the body head to toe, screen vision, hearing, development and — as children get older — mood and mental health, bring immunizations up to date, and talk through whatever you have been wondering about since the last time. We can sign school, sports, camp and mission forms while you are in the room.",
-          "It is also the visit where nothing dramatic usually happens, and that is a good outcome. Most of what we do is confirm that a child is on their own track. The value is in having a record of that track, so the year something moves off it, we notice quickly.",
+          "A well-child visit is an appointment we schedule while your child is healthy. Nobody is sick and nothing hurts, and that is the point: it is the one visit built around looking at your whole child rather than at a single complaint.",
+          "In about half an hour we check growth against your child's own history, examine them from head to toe, and test vision and hearing. We complete developmental screening in the early years and mental health screening in the later ones, bring immunizations up to date, and answer whatever you have been wondering about since the last visit. We can also sign school, sports, camp, and mission forms while you are in the room.",
+          "Usually nothing dramatic happens, and that is a good outcome. Most of what we do is confirm that your child is on their own track. The value is in having a record of that track, so that the year something moves off it, we notice quickly.",
         ],
       },
       {
-        heading: "Who will we see at a checkup?",
+        heading: "Who will my child see?",
         body: [
-          "You will see your own pediatrician or advanced practice provider — the same person, visit after visit, whenever the schedule allows it. Continuity is not a nicety here. A provider who saw your child at two months has a memory of them that no chart summarises, and that memory is what turns a borderline measurement into either reassurance or a referral.",
-          "Your provider leads the team. If your child needs a dietitian, a lactation consultant, a therapist, a psychologist for testing, or a specialist outside the practice, we make that connection from the checkup and stay involved afterwards rather than handing you a phone number.",
-          "You are on that team too, and you are the member who has all the information. What you have noticed at home between visits is usually the most useful thing said in the room.",
+          "Your child sees their own pediatrician or advanced practice provider — the same person, visit after visit, whenever the schedule allows it. A provider who examined your child at two months remembers things no chart summarises, and that memory is what turns a borderline measurement into either reassurance or a plan.",
+          "That provider leads the team. If your child needs a dietitian, a lactation consultant, a therapist, a psychologist for testing, or a specialist outside the practice, we make the connection during the visit and stay involved afterwards rather than handing you a phone number.",
+          "You are on that team too, and you have information none of us do. What you have noticed at home between visits is usually the most useful thing said in the room.",
         ],
       },
       {
-        heading: "Why do checkups matter when my child is well?",
+        heading: "Why do these visits matter when my child is well?",
         body: [
-          "Checkups matter precisely because your child is well. Almost everything we screen for at these visits — a growth curve flattening, a hearing loss behind delayed speech, scoliosis, high blood pressure, anaemia, anxiety, a developmental difference — arrives quietly and is easiest to treat before anyone at home has a reason to worry.",
-          "They are also how vaccines actually happen. Immunization schedules are built around checkup ages, so a family who keeps their visits stays protected without ever thinking about it, and a family who skips a year usually finds out at a school deadline.",
+          "They matter because your child is well. Almost everything we screen for arrives quietly and is easiest to treat before anyone at home has a reason to worry: a growth curve that has flattened, hearing loss behind delayed speech, curvature of the spine, high blood pressure, anaemia, anxiety, or a developmental difference.",
+          "These visits are also how vaccines actually happen. The immunization schedule is built around well-child ages, so a family who keeps their appointments stays protected without ever thinking about it. A family who skips a year usually finds out at a school deadline.",
           "And they build the relationship. A teenager will tell a doctor they have known since kindergarten things they will not tell a stranger in an urgent care room. Fourteen years of ordinary visits is what buys that conversation.",
         ],
       },
       {
         heading: "When should my child come in?",
         body: [
-          "Come in on the schedule below, which follows the American Academy of Pediatrics recommendations. Visits are frequent in the first two years because that is when growth and development move fastest, then settle into once a year for life.",
-          "Checkups are also when we handle school, sports, camp and mission physicals. If your child needs a form signed this year, book the annual checkup rather than a separate physical and you will get both in one visit.",
+          "Come in on the schedule below, which follows the American Academy of Pediatrics recommendations. Visits are frequent in the first two years, because that is when growth and development move fastest, and then settle into once a year.",
+          "We also handle school, sports, camp, and mission physicals at these visits. If your child needs a form signed this year, book the annual well-child visit rather than a separate physical and you will get both.",
         ],
         steps: [
-          { title: "Newborn", text: "In the first days after you come home, and again at two weeks." },
-          { title: "First year", text: "At 1, 2, 4, 6 and 9 months, then the first-birthday visit at 12 months." },
-          { title: "Toddler", text: "At 15, 18, 24 and 30 months, as walking, talking and eating all change." },
+          { title: "Newborn", text: "Within days of coming home, and again at two weeks." },
+          { title: "First year", text: "At 1, 2, 4, 6, and 9 months, then the first-birthday visit at 12 months." },
+          { title: "Toddler", text: "At 15, 18, 24, and 30 months, as walking, talking, and eating all change." },
           { title: "Age 3 to 21", text: "Once a year, every year, including the teenage visits." },
         ],
       },
       {
-        heading: "How does the visit actually go?",
+        heading: "How does a visit go?",
         body: [
-          "You will be in and out in around half an hour, and it goes the same way every time. Our staff weighs and measures your child and takes their vitals, then your provider goes through the exam, the screenings due at that age, and the questions you brought. Vaccines come last, so that nothing frightening happens before the part where your child has to hold still.",
-          "Bring anything that helps us: your child's shot record if you are new to us, forms that need signing, and a written list of the things you meant to ask. Almost every parent forgets one, and the written list is the only reliable fix.",
-          "Before you leave, we book the next checkup. It takes twenty seconds at the desk and it is the single thing that most reliably keeps a family on schedule.",
+          "You will be in and out in around half an hour, and it goes the same way every time. Our staff weighs and measures your child and takes their vitals. Your provider then works through the exam, the screenings due at that age, and the questions you brought. We give vaccines last, so that nothing frightening happens before the part where your child has to hold still.",
+          "Bring anything that helps us: your child's immunization record if you are new to us, forms that need signing, and a written list of the things you meant to ask. Almost every parent forgets one, and a written list is the only reliable fix.",
+          "Before you leave, we book the next visit. It takes twenty seconds at the front desk and it is the single thing that most reliably keeps a family on schedule.",
         ],
       },
       {
-        heading: "Where can we come for a checkup?",
+        heading: "Where can we go?",
         body: [
-          "You can come to any of our eight offices — Murray, Salt Lake, Willow Creek, Draper, West Jordan, Bountiful, Farmington and Park City — and most families pick the one that is easiest on a weekday morning rather than the one nearest their house.",
+          "Come to any of our eight offices — Murray, Salt Lake, Willow Creek, Draper, West Jordan, Bountiful, Farmington, and Park City. Most families pick the one that is easiest on a weekday morning rather than the one nearest their house.",
           "If you are deciding between two, the pages below work through it city by city: which offices are closest, roughly how long the drive takes, and what to weigh when the nearest office and the most convenient office are not the same one.",
         ],
       },
     ],
     reassurance:
-      "If it has been three years since the last checkup, book anyway. We would far rather catch up with your child than count the visits you missed.",
+      "If it has been three years since the last visit, book anyway. We are far more interested in catching up with your child than in counting the visits you missed.",
     faqs: [
       {
-        q: "How long does a well child checkup take?",
-        a: "Plan on about 30 minutes in the office, a little longer for newborns and for teenage visits, where there is more to talk through.",
+        q: "How long does a well-child visit take?",
+        a: "Plan on about 30 minutes. Newborn visits and teenage visits often run a little longer, because there is more to talk through.",
       },
       {
         q: "Does a checkup count as preventive care on my insurance?",
-        a: "Well child visits are covered as preventive care by most plans, often with no copay. Vaccines given at the visit are usually covered the same way. Anything we treat as a separate problem during the visit may be billed separately, and we will tell you in the room if that is happening.",
+        a: "Most plans cover well-child visits as preventive care, often with no copay. Vaccines given at the visit are usually covered the same way. Anything we treat as a separate problem during the visit may be billed separately, and we will tell you in the room if that is happening.",
       },
       {
         q: "Can I get a school or sports physical at the same visit?",
-        a: "Yes. School, sports, camp and mission forms are all part of the annual checkup. Bring the paperwork with you and we will complete it while you are here.",
+        a: "Yes. We complete school, sports, camp, and mission forms as part of the annual visit. Bring the paperwork and we will fill it in while you are here.",
       },
       {
-        q: "What if my child is due for a checkup but also has a cold?",
-        a: "Call us. A mild cold usually does not stop a checkup, but if your child is genuinely unwell we would rather see them as a sick visit and do the checkup properly once they are better.",
+        q: "What if my child is due for a visit but has a cold?",
+        a: "Call us. A mild cold usually does not stop a well-child visit, but if your child is genuinely unwell we would rather see them as a sick visit and do the full check once they are better.",
       },
       {
         q: "My child is behind on vaccines. Is it too late?",
-        a: "No. There is a catch-up schedule for every vaccine, and we will build one at the visit. Being behind is common and it is fixable.",
+        a: "No. There is a catch-up schedule for every vaccine and we will build one at the visit. Being behind is common, and it is fixable.",
       },
       {
-        q: "Do you see teenagers for checkups?",
-        a: "Through age 21. The teenage visits cover mental health, sport, sleep, and time alone with the provider if your teenager wants it.",
+        q: "Do you see teenagers?",
+        a: "We see children through age 21. The teenage visits cover mental health, sport, and sleep, and include time alone with the provider if your teenager wants it.",
       },
     ],
   },
