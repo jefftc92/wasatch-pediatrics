@@ -42,6 +42,16 @@ import {
 } from "../data/offices.ts";
 import { PILLAR_MENU_IDS, type SectionNav } from "./header.ts";
 import { dentalFaqSchema, dentalPage, renderDentalPage } from "./dental.ts";
+import {
+  areaCopy,
+  areaHref,
+  areaIndexBand,
+  areaSearchText,
+  areaTitle,
+  areasForService,
+  renderAreaPage,
+} from "./serviceAreas.ts";
+import { type ServiceArea } from "../data/serviceAreas.ts";
 import type { GeneratedPage } from "./generated.ts";
 import type { SearchEntry } from "../data/searchIndex.ts";
 import {
@@ -546,7 +556,14 @@ export function renderServicePage(service: Service): string {
       { name: service.name, href: serviceHref(service) },
       pillar,
       navSection,
-      tailSection("{{bg}}"),
+      /*
+       * The city index belongs with the article, not after it. The closing
+       * call is blue and reads as the end of the page, and an "Areas we serve"
+       * grid on the far side of it is a section nobody scrolls to — while
+       * directly under the page's own "where" section it is the list that
+       * section just promised.
+       */
+      [areaIndexBand(service, "{{bg}}"), tailSection("{{bg}}")],
     )}
 ${sections}`;
   }
@@ -711,7 +728,7 @@ ${topic.items
       { name: service.name, href: serviceHref(service) },
       pillar,
       navSection,
-      tail("{{bg}}"),
+      [tail("{{bg}}")],
     )}
 ${otherPillars(pillar.slug, "graybg")}`;
   }
@@ -786,7 +803,7 @@ export function renderTopicItemPage(
       { name: service.name, href: serviceHref(service) },
       pillar,
       "",
-      tailSection("{{bg}}"),
+      [tailSection("{{bg}}")],
     )}
 ${otherPillars(pillar.slug, "graybg")}`;
   }
@@ -1048,6 +1065,38 @@ function migratedMeta(
   };
 }
 
+/**
+ * A service in one city. The trail is the service's own with the city added,
+ * and the section bar is the service's, so a reader who lands here from search
+ * gets the same way back up as everybody else.
+ */
+export function areaDocument(
+  service: Service,
+  area: ServiceArea,
+): GeneratedPage & { route: string } {
+  const pillar = pillarBySlug.get(service.pillar);
+  if (!pillar) throw new Error(`unknown pillar: ${service.pillar}`);
+  const copy = areaCopy(service, area);
+  if (!copy) throw new Error(`no copy for ${service.slug}/${area.slug}`);
+
+  const crumbs: Crumb[] = [
+    { name: pillar.name, href: pillar.href },
+    { name: service.name, href: serviceHref(service) },
+    { name: `${area.name}, ${area.state}` },
+  ];
+
+  return {
+    route: areaHref(service, area),
+    title: `${areaTitle(service, area)} - Wasatch Pediatrics`,
+    description: copy.description,
+    bodyClass: BODY_CLASS,
+    menu: menuState(service.pillar),
+    breadcrumbs: crumbs,
+    content: renderAreaPage(service, area, pillar, dentalCrumbs(crumbs)),
+    section: sectionFor(pillar, crumbs, service),
+  };
+}
+
 export function allServicesDocument(): GeneratedPage & { route: string } {
   return {
     route: ALL_SERVICES_HREF,
@@ -1076,6 +1125,9 @@ export function serviceRoutes(): Array<GeneratedPage & { route: string }> {
       for (const item of topic.items) {
         deep.push(topicItemDocument(service, topic, item));
       }
+    }
+    for (const area of areasForService(service)) {
+      deep.push(areaDocument(service, area));
     }
   }
 
@@ -1139,11 +1191,25 @@ export function serviceSearchEntries(): SearchEntry[] {
       entry(
         serviceHref(service),
         service.name,
-        service.description,
-        `${service.bodyFile ? authoredBody(service.bodyFile) : (service.intro ?? "")} ${service.locations
-          .map((slug) => locationNames[slug] ?? slug)
-          .join(" ")}`,
+        dentalPage(serviceHref(service))?.description ?? service.description,
+        `${searchText(
+          serviceHref(service),
+          service.bodyFile ? authoredBody(service.bodyFile) : (service.intro ?? ""),
+        )} ${service.locations.map((slug) => locationNames[slug] ?? slug).join(" ")}`,
       ),
+    ),
+    ...services.flatMap((service) =>
+      areasForService(service).map((area) => {
+        const copy = areaCopy(service, area)!;
+        return entry(
+          areaHref(service, area),
+          areaTitle(service, area),
+          copy.description,
+          `${areaSearchText(copy)} ${area.county} ${area.offices
+            .map((office) => locationNames[office.slug] ?? office.slug)
+            .join(" ")}`,
+        );
+      }),
     ),
     /*
      * The pages below a service. These carry most of the dentistry copy, and

@@ -3436,3 +3436,140 @@
     display: none !important;
   }
 }
+
+/* ---------------------------------------------------------- service areas -- */
+
+/*
+ * The two bands the city pages add: the index on the service page, and the
+ * office comparison that closes each city page.
+ *
+ * Both reuse `.svc-index` and `.svc-card`, so the ground, the radius and the
+ * card behaviour on grey are already handled and nothing here restates them.
+ * What is left is the small amount these bands do differently — a lead line
+ * under the index heading, a drive time that has to read as the most important
+ * thing on an office card, and two link lists that are navigation rather than
+ * prose.
+ */
+
+.area-index-lead {
+  margin: -18px 0 30px 0;
+  color: #636466;
+  font-size: 18px;
+  max-width: 46em;
+}
+
+.area-group-title {
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #636466;
+  margin: 0 0 12px 0;
+}
+
+/*
+ * Each region runs the full width and flows into columns, so seventeen cities
+ * are four short columns rather than one long ribbon. The count steps down with
+ * the viewport; on a phone a second column would leave orphaned single words.
+ */
+.area-group {
+  list-style: none;
+  margin: 0 0 34px 0;
+  padding: 0;
+  columns: 4;
+  column-gap: 30px;
+}
+
+@media (max-width: 991px) {
+  .area-group {
+    columns: 3;
+  }
+}
+
+@media (max-width: 767px) {
+  .area-group {
+    columns: 2;
+  }
+}
+
+.area-group li {
+  margin-bottom: 8px;
+  break-inside: avoid;
+}
+
+.area-group a,
+.area-nearby a {
+  color: #2b93d1;
+  text-decoration: none;
+  font-size: 18px;
+}
+
+.area-group a:hover,
+.area-nearby a:hover {
+  color: #f58220;
+  text-decoration: underline;
+}
+
+@media (max-width: 575px) {
+  .area-group {
+    columns: 1;
+  }
+}
+
+/* The drive time is what the reader came for, so it outranks the address. */
+.area-office-drive {
+  font-size: 20px !important;
+  line-height: 28px !important;
+  font-weight: 600;
+  color: #2b93d1;
+  margin: 0 0 10px 0;
+}
+
+.area-office-tag {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+  padding: 3px 12px 4px 12px;
+  border-radius: 999px;
+  background: #8dc63f;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.area-office-act {
+  margin: auto 0 0 0;
+}
+
+.area-office-act a {
+  color: #2b93d1;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.area-office-act a:hover {
+  color: #f58220;
+}
+
+.area-nearby-title {
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #636466;
+  margin: 14px 0 12px 0;
+}
+
+/*
+ * The neighbouring cities read as a row of links rather than a list, because
+ * they are a footnote to the office cards above them and a stack of twelve
+ * bullets would outweigh the thing they follow.
+ */
+.area-nearby {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+}
