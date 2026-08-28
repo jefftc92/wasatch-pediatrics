@@ -188,6 +188,85 @@
     });
   }
 
+  /* -------------------------------------------------- header search ---- */
+
+  /*
+   * Opening and closing the site search.
+   *
+   * The field never appeared, and not because nothing was listening. The
+   * theme's script adds `.open` to the input on click, and the theme's
+   * stylesheet widens `.searchwrap input.open` to 415px. What it cannot do is
+   * widen the *wrapper*: this header clips it to the width of the glass, so
+   * the field opened to 415px inside a 16px window and stayed invisible.
+   *
+   * The state therefore goes on the wrapper, which is the input's ancestor and
+   * so out of reach of any rule keyed on the input. Driving it from here
+   * rather than from `:has()` also gets the close button working at every
+   * width: the theme's handler is gated above 767px, which left the burger
+   * band with a glass that could open a field it could never close.
+   */
+  var searchWrap = document.getElementById("searchformwrap");
+
+  if (searchWrap) {
+    var searchField = searchWrap.querySelector(".navsearch");
+
+    function openSearch() {
+      searchWrap.classList.add("is-open");
+      if (searchField) {
+        searchField.setAttribute("placeholder", "Search");
+        searchField.focus();
+      }
+    }
+
+    function closeSearch() {
+      searchWrap.classList.remove("is-open");
+      if (searchField) {
+        searchField.value = "";
+        searchField.setAttribute("placeholder", "");
+        /* The theme's handler leaves `.open` behind at widths it ignores. */
+        searchField.classList.remove("open");
+      }
+    }
+
+    /*
+     * The glass is the submit button, so it has two jobs. Closed, it opens the
+     * field and must not submit; open with something typed in it, it submits
+     * as a search button should.
+     */
+    searchWrap.addEventListener("click", function (event) {
+      if (event.target.closest(".searchclose")) {
+        event.preventDefault();
+        closeSearch();
+        return;
+      }
+      if (!event.target.closest(".searchbutton")) return;
+      if (!searchWrap.classList.contains("is-open")) {
+        event.preventDefault();
+        openSearch();
+      } else if (searchField && !searchField.value.trim()) {
+        event.preventDefault();
+        closeSearch();
+      }
+    });
+
+    /* Escape closes it, and so does clicking anywhere else on the page. */
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && searchWrap.classList.contains("is-open")) {
+        closeSearch();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (
+        searchWrap.classList.contains("is-open") &&
+        !searchWrap.contains(event.target) &&
+        (!searchField || !searchField.value.trim())
+      ) {
+        closeSearch();
+      }
+    });
+  }
+
   /* ----------------------------------------------------------- map ------ */
 
   /*
