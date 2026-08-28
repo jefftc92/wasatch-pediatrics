@@ -3515,6 +3515,82 @@
   }
 }
 
+/*
+ * The map above the office cards.
+ *
+ * Shorter than the locations map, because it is answering a narrower question
+ * — one city and up to three offices, not the whole Wasatch Front — and it
+ * sits inside a band that continues underneath it rather than being the band.
+ * The stacking context is the same defensive measure the locations map needs:
+ * a map draws a deep stack of its own panes, and without one those z-indexes
+ * compete with the sticky header's.
+ */
+.area-mapwrap {
+  margin: 0 0 34px 0;
+}
+
+.area-map {
+  display: block;
+  height: 420px;
+  border-radius: 25px;
+  overflow: hidden;
+  background: #f4f4f4;
+  position: relative;
+  z-index: 0;
+}
+
+/* No key configured, or the maps host never answered: sized to the message. */
+.area-map.is-off {
+  height: auto;
+}
+
+.area-map-off {
+  margin: 0;
+  padding: 36px 32px;
+  color: #636466;
+  font-size: 17px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .area-map {
+    height: 320px;
+  }
+}
+
+/* The info window. Google supplies the box; these are the words inside it. */
+.area-pop {
+  font-family: inherit;
+  min-width: 190px;
+}
+
+.area-pop p {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 21px;
+  color: #636466;
+}
+
+.area-pop-name {
+  font-size: 17px !important;
+  font-weight: 600;
+  color: #2b93d1 !important;
+}
+
+.area-pop-drive {
+  font-weight: 600;
+  color: #2b93d1 !important;
+}
+
+.area-pop a {
+  color: #2b93d1;
+  text-decoration: none;
+}
+
+.area-pop a:hover {
+  text-decoration: underline;
+}
+
 /* The drive time is what the reader came for, so it outranks the address. */
 .area-office-drive {
   font-size: 20px !important;
@@ -3522,6 +3598,26 @@
   font-weight: 600;
   color: #2b93d1;
   margin: 0 0 10px 0;
+}
+
+/*
+ * The pin's number, on the card. Same blue as the teardrop on the map, sized
+ * to sit with the title rather than compete with it.
+ */
+.area-office-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: #2b93d1;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: 2px;
 }
 
 .area-office-tag {
