@@ -107,6 +107,15 @@ export type Service = {
   /** Groups of pages below this service. See Topic. */
   topics?: Topic[];
   /**
+   * What one visit is called, mid-sentence, by a parent.
+   *
+   * The service name is a plural product label — "Well Child Checkups" — and
+   * headings need the singular thing a person would actually say or type:
+   * "What do you check during a well-child visit?". Derived from the name when
+   * this is not set, which is right for most services and wrong for this one.
+   */
+  visitNoun?: string;
+  /**
    * Give this service a page for each city in `serviceAreas.ts`, at
    * /<pillar>/<service>/<city>/. Only set it where the copy has actually been
    * written — a city page with nothing city-specific to say is worse than no
@@ -199,6 +208,7 @@ export const services: Service[] = [
      * changes: the route, the hero and the office list are still this entry's.
      */
     serviceAreas: true,
+    visitNoun: "well-child visit",
   },
   {
     slug: "sick-visits",

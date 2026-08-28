@@ -2590,7 +2590,17 @@
     display: flex !important;
     align-items: center;
     gap: 12px;
-    margin: 0;
+    /*
+     * The pair sits a little further from the search than the strip's own
+     * rhythm would put it. Everything here is centred on the same line — the
+     * words, the glass and both discs all measure to the same midpoint — so
+     * the misalignment people see is not one. It comes from reading two filled
+     * circles as though they belonged to the run of line art and words beside
+     * them: a disc has no baseline and no flat edge to line up against, so the
+     * eye looks for an alignment that discs cannot have. Spacing them as their
+     * own group stops the comparison, which is what the illusion needs.
+     */
+    margin: 0 0 0 10px;
     padding-left: 0 !important;
   }
 
@@ -2606,9 +2616,25 @@
     align-items: center;
   }
 
+  /*
+   * 22px, not the 16px the magnifier takes.
+   *
+   * The two marks are not the same species as the glass. The glass is line
+   * art: at 16px, 16px of it is ink. Facebook and Instagram are filled discs
+   * with the logo knocked out in white, so at 16px the part anybody actually
+   * recognises — the f, the camera — is about half that, and the pair read as
+   * much smaller than the glass beside them even though every box in the strip
+   * measures the same.
+   *
+   * Sizing the disc to the glass is therefore the wrong comparison. Sizing the
+   * mark inside the disc to the glass is the right one, and 20px is where the
+   * knocked-out marks carry about as much ink as the 16px glass does. 22 and 24
+   * were both tried: by 22 the discs are the loudest thing in a strip whose
+   * type is 13px, which trades one imbalance for another.
+   */
   #navbuttons li img {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
   }
 
   /*
@@ -2681,6 +2707,62 @@
   #searchformwrap .searchbutton img {
     width: 16px;
     height: auto;
+  }
+
+  /*
+   * The field, once the glass has been clicked.
+   *
+   * The theme does widen the input — `.searchwrap input.open` takes it to
+   * 415px — but the wrapper around it is clipped to the width of the glass,
+   * so the field grew inside a 16px window and nobody ever saw it. Opening has
+   * to change the wrapper, and 415px is far more than this strip has to give.
+   *
+   * So: the wrapper gives the input room, the width comes from here rather
+   * than from the theme, and the word "Search" steps aside because the field
+   * says the same thing better.
+   *
+   * The strip is right-aligned, so the field grows leftward into the space
+   * above the menu and nothing below it moves.
+   */
+  #searchformwrap.is-open .searchlabel {
+    display: none;
+  }
+
+  #searchformwrap.is-open .mainsearch,
+  #searchformwrap.is-open .searchwrap {
+    width: 260px;
+    overflow: visible;
+    gap: 6px;
+  }
+
+  /*
+   * `top: 1px; right: -7px` comes from the theme, which nudged the field into
+   * the absolutely positioned slot it used to sit in. In a flex row that is
+   * just a field sitting a pixel below everything beside it.
+   */
+  #searchformwrap.is-open .navsearch {
+    order: 1;
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    height: 24px;
+    padding: 0 10px;
+    top: 0;
+    right: 0;
+    border: 1px solid #c9ced3;
+    border-radius: 12px;
+    background: #ffffff;
+    font-size: 13px;
+    color: #4a4b4d;
+  }
+
+  #searchformwrap.is-open .navsearch:focus {
+    outline: none;
+    border-color: #2b93d1;
+  }
+
+  #searchformwrap.is-open .searchbutton {
+    order: 3;
   }
 
   /* ---- the primary row ---- */
@@ -3157,6 +3239,70 @@
     height: 26px;
   }
 
+  /*
+   * Open, the search takes a line of its own.
+   *
+   * The row already wraps, so `flex-basis: 100%` drops the field under the
+   * logo and the burger rather than squeezing it into the ~150px left beside
+   * them on a phone. Nothing is positioned absolutely and nothing else in the
+   * row has to move.
+   */
+  #searchformwrap.is-open {
+    /* After the burger, which is `order: 3` — at the same order the search
+       would come first on DOM order and push the burger onto the next line. */
+    order: 4;
+    flex: 1 0 100%;
+    margin: 0;
+  }
+
+  /*
+   * Both wrappers have to become flex rows here. Only the desktop block gives
+   * them `display: flex`; at these widths they are still blocks, and a block
+   * wrapper stacked the close button, the field and the glass down the left
+   * edge of the row instead of laying them out along it.
+   */
+  #searchformwrap.is-open .mainsearch,
+  #searchformwrap.is-open .searchwrap {
+    display: flex;
+    align-items: center;
+    flex: 1 1 auto;
+    width: 100%;
+    overflow: visible;
+    gap: 8px;
+  }
+
+  #searchformwrap.is-open .navsearch {
+    order: 1;
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 0;
+    height: 40px;
+    padding: 0 14px;
+    top: 0;
+    right: 0;
+    border: 1px solid #c9ced3;
+    border-radius: 20px;
+    background: #ffffff;
+    font-size: 16px;
+    color: #4a4b4d;
+  }
+
+  #searchformwrap.is-open .navsearch:focus {
+    outline: none;
+    border-color: #2b93d1;
+  }
+
+  #searchformwrap.is-open .searchbutton {
+    order: 3;
+    width: 40px;
+    height: 40px;
+  }
+
+  #searchformwrap.is-open .searchbutton img {
+    width: 22px;
+    height: 22px;
+  }
+
   #logo {
     order: 1;
     position: static;
@@ -3437,6 +3583,41 @@
   }
 }
 
+/*
+ * The search's close button.
+ *
+ * The theme positions it absolutely at `left: -18px` for a slot this header no
+ * longer has, and hides it with `display: none` — then its script fades it in
+ * with an inline `display: block` at widths above 767 only. Inline styles
+ * outrank stylesheets, so the visibility has to be forced from the open state
+ * to work at every width, which is the one place `!important` earns itself
+ * here.
+ */
+#searchformwrap .searchclose {
+  order: 2;
+}
+
+#searchformwrap.is-open .searchclose {
+  display: flex !important;
+  position: static;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  left: auto;
+  top: auto;
+  border-radius: 50%;
+  color: #636466;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+#searchformwrap.is-open .searchclose:hover {
+  background: #e6e8ea;
+  color: #2b93d1;
+}
+
 /* ---------------------------------------------------------- service areas -- */
 
 /*
@@ -3515,6 +3696,82 @@
   }
 }
 
+/*
+ * The map above the office cards.
+ *
+ * Shorter than the locations map, because it is answering a narrower question
+ * — one city and up to three offices, not the whole Wasatch Front — and it
+ * sits inside a band that continues underneath it rather than being the band.
+ * The stacking context is the same defensive measure the locations map needs:
+ * a map draws a deep stack of its own panes, and without one those z-indexes
+ * compete with the sticky header's.
+ */
+.area-mapwrap {
+  margin: 0 0 34px 0;
+}
+
+.area-map {
+  display: block;
+  height: 420px;
+  border-radius: 25px;
+  overflow: hidden;
+  background: #f4f4f4;
+  position: relative;
+  z-index: 0;
+}
+
+/* No key configured, or the maps host never answered: sized to the message. */
+.area-map.is-off {
+  height: auto;
+}
+
+.area-map-off {
+  margin: 0;
+  padding: 36px 32px;
+  color: #636466;
+  font-size: 17px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .area-map {
+    height: 320px;
+  }
+}
+
+/* The info window. Google supplies the box; these are the words inside it. */
+.area-pop {
+  font-family: inherit;
+  min-width: 190px;
+}
+
+.area-pop p {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  line-height: 21px;
+  color: #636466;
+}
+
+.area-pop-name {
+  font-size: 17px !important;
+  font-weight: 600;
+  color: #2b93d1 !important;
+}
+
+.area-pop-drive {
+  font-weight: 600;
+  color: #2b93d1 !important;
+}
+
+.area-pop a {
+  color: #2b93d1;
+  text-decoration: none;
+}
+
+.area-pop a:hover {
+  text-decoration: underline;
+}
+
 /* The drive time is what the reader came for, so it outranks the address. */
 .area-office-drive {
   font-size: 20px !important;
@@ -3522,6 +3779,26 @@
   font-weight: 600;
   color: #2b93d1;
   margin: 0 0 10px 0;
+}
+
+/*
+ * The pin's number, on the card. Same blue as the teardrop on the map, sized
+ * to sit with the title rather than compete with it.
+ */
+.area-office-rank {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  margin-right: 10px;
+  border-radius: 50%;
+  background: #2b93d1;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1;
+  vertical-align: 2px;
 }
 
 .area-office-tag {

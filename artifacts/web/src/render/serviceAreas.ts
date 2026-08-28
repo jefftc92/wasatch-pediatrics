@@ -26,10 +26,12 @@
  * them.
  */
 
+import { googleMapsId, googleMapsKey } from "../build.ts";
 import { areaContent, type AreaCopy } from "../data/areaContent.ts";
-import { offices } from "../data/offices.ts";
+import { formatAddress, offices } from "../data/offices.ts";
 import {
   serviceAreas,
+  type AreaOffice,
   type ServiceArea,
 } from "../data/serviceAreas.ts";
 import {
@@ -78,24 +80,93 @@ export function areaCopy(
 /* ------------------------------------------------------------ headings -- */
 
 /**
- * The heading for each section, with the city in it.
+ * The heading for each section.
  *
- * They are questions because the copy answers questions, and a heading that
- * asks one is the only kind a reader can skim and still know what they are
- * about to get. The city appears in three of the six rather than all of them:
- * repeating it in every heading reads as machinery, and the two that matter
- * most for someone comparing offices are the last two.
+ * A parent's question, in a parent's words, addressed to us — "What do you
+ * check during a well-child visit?" rather than "What a visit covers". A
+ * heading that asks something is the only kind a reader can skim and still know
+ * what they are about to get, and phrasing it the way somebody would type it
+ * into a search box costs nothing.
+ *
+ * The city appears in three of the six. Putting it in all of them reads as
+ * machinery; the three it belongs in are the ones whose answer genuinely
+ * changes from one city to the next.
  */
-function headings(service: Service, area: ServiceArea): Record<keyof AreaCopy & ("what"|"who"|"why"|"when"|"how"|"where"), string> {
-  const lower = service.name.toLowerCase();
+function headings(
+  service: Service,
+  area: ServiceArea,
+): Record<"what" | "who" | "why" | "when" | "how" | "where", string> {
+  const visit = service.visitNoun ?? service.name.toLowerCase().replace(/s$/, "");
   return {
-    what: `What does a ${lower.replace(/s$/, "")} cover?`,
+    what: `What do you check during a ${visit}?`,
     who: "Who will my child see?",
-    why: `Why do these visits matter for ${area.name} families?`,
-    when: "When should we come in?",
-    how: `How do we book from ${area.name}?`,
-    where: `Where do we go, and which office?`,
+    why: `Why do these visits matter for families in ${area.name}?`,
+    when: "When should my child come in?",
+    how: `How do I book a visit from ${area.name}?`,
+    where: `Which office is closest to ${area.name}?`,
   };
+}
+
+/* ------------------------------------------------------------------ map -- */
+
+/**
+ * Which offices go on the map: every one within twelve miles, at least one and
+ * at most three.
+ *
+ * The page's copy and the map answer different questions, so they are allowed
+ * to carry different numbers of offices. The copy can usefully name a fallback
+ * thirty miles away — from Kamas, an office in the valley is worth knowing
+ * about even though nobody drives it for a checkup. A map cannot: plotting that
+ * pin zooms the view out until Kamas and Park City are the same dot, and the
+ * one thing the map is for — showing how near the near office is — is lost.
+ *
+ * Twelve miles is where that starts to happen along this valley. The floor of
+ * one keeps a map on the pages where nothing else is close.
+ */
+export function plottedOffices(area: ServiceArea): AreaOffice[] {
+  const near = area.offices.filter((office) => office.miles <= 12);
+  return (near.length ? near : area.offices.slice(0, 1)).slice(0, 3);
+}
+
+/**
+ * The map band: the city, and the offices worth driving to from it.
+ *
+ * It sits directly above the office cards, which carry the same offices as
+ * text — addresses, drive times, phone numbers. That is deliberate. The map is
+ * an enhancement and never the only copy of anything, so a reader with no
+ * JavaScript, no Google Maps key, or a blocked maps host still has every
+ * answer the band exists to give.
+ */
+function mapBand(area: ServiceArea, plotted: AreaOffice[]): string {
+  const pins = plotted.map((entry) => {
+    const office = officeBySlug.get(entry.slug)!;
+    return {
+      slug: office.slug,
+      name: `${locationNames[office.slug] ?? office.slug} office`,
+      lat: office.lat,
+      lng: office.lng,
+      address: formatAddress(office),
+      phoneText: formatPhone(office.phone),
+      phone: office.phone,
+      href: `/locations/${office.slug}/`,
+      drive: entry.drive,
+      here: area.officeInTown === office.slug,
+    };
+  });
+
+  const data = {
+    city: { name: `${area.name}, ${area.state}`, lat: area.lat, lng: area.lng },
+    offices: pins,
+  };
+
+  const off = googleMapsKey
+    ? ""
+    : `<p class="area-map-off">The map needs a Google Maps key to draw. Every office below has its address, its drive time from ${escapeAttribute(area.name)} and a phone number.</p>`;
+
+  return `		<div class="area-mapwrap">
+			<div class="area-map${googleMapsKey ? "" : " is-off"}" id="area-map" data-maps-key="${escapeAttribute(googleMapsKey)}" data-maps-id="${escapeAttribute(googleMapsId)}" data-area="${escapeAttribute(JSON.stringify(data))}">${off}</div>
+		</div>
+`;
 }
 
 /* -------------------------------------------------------------- offices -- */
@@ -110,8 +181,14 @@ function headings(service: Service, area: ServiceArea): Record<keyof AreaCopy & 
  * as a single decision.
  */
 function officeBand(service: Service, area: ServiceArea): string {
+  const plotted = plottedOffices(area);
+  /* Three offices need thirds of the row; two are better as halves. */
+  const span = area.offices.length > 2 ? "col-lg-4 col-md-6" : "col-lg-6";
+
+  const plottedSlugs = new Set(plotted.map((office) => office.slug));
+
   const cards = area.offices
-    .map((entry) => {
+    .map((entry, index) => {
       const office = officeBySlug.get(entry.slug);
       if (!office) return "";
       /*
@@ -123,10 +200,19 @@ function officeBand(service: Service, area: ServiceArea): string {
       const name = `${locationNames[entry.slug] ?? entry.slug} office`;
       const here = area.officeInTown === entry.slug;
       const street = [office.street, office.suite].filter(Boolean).join(", ");
+      /*
+       * The number the pin carries, on the card that describes it. Only the
+       * offices actually on the map get one — a card for an office too far to
+       * plot has no pin to match, and a number pointing at nothing is worse
+       * than no number.
+       */
+      const rank = plottedSlugs.has(entry.slug)
+        ? `<span class="area-office-rank" aria-hidden="true">${index + 1}</span>`
+        : "";
 
-      return `			<div class="col-lg-6">
+      return `			<div class="${span}">
 				<div class="svc-card area-office">
-					<h3 class="svc-card-title"><a href="/locations/${entry.slug}/">${escapeAttribute(name)}</a>${here ? ' <span class="area-office-tag">In town</span>' : ""}</h3>
+					<h3 class="svc-card-title">${rank}<a href="/locations/${entry.slug}/">${escapeAttribute(name)}</a>${here ? ' <span class="area-office-tag">In town</span>' : ""}</h3>
 					<p class="area-office-drive">${escapeAttribute(entry.drive)} from ${escapeAttribute(area.name)}</p>
 					<p class="svc-card-blurb">${escapeAttribute(entry.landmark.charAt(0).toUpperCase() + entry.landmark.slice(1))}.</p>
 					<p class="svc-card-where">${escapeAttribute(street)}, ${escapeAttribute(office.city)}, ${office.state} ${office.zip}</p>
@@ -159,7 +245,7 @@ function officeBand(service: Service, area: ServiceArea): string {
 		<div class="row">
 			<div class="col-12">
 				<h2 class="svc-index-title">Getting there from ${escapeAttribute(area.name)}</h2>
-			</div>
+${mapBand(area, plotted)}			</div>
 		</div>
 		<div class="row">
 ${cards}

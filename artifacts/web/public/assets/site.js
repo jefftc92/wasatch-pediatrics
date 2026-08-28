@@ -188,6 +188,85 @@
     });
   }
 
+  /* -------------------------------------------------- header search ---- */
+
+  /*
+   * Opening and closing the site search.
+   *
+   * The field never appeared, and not because nothing was listening. The
+   * theme's script adds `.open` to the input on click, and the theme's
+   * stylesheet widens `.searchwrap input.open` to 415px. What it cannot do is
+   * widen the *wrapper*: this header clips it to the width of the glass, so
+   * the field opened to 415px inside a 16px window and stayed invisible.
+   *
+   * The state therefore goes on the wrapper, which is the input's ancestor and
+   * so out of reach of any rule keyed on the input. Driving it from here
+   * rather than from `:has()` also gets the close button working at every
+   * width: the theme's handler is gated above 767px, which left the burger
+   * band with a glass that could open a field it could never close.
+   */
+  var searchWrap = document.getElementById("searchformwrap");
+
+  if (searchWrap) {
+    var searchField = searchWrap.querySelector(".navsearch");
+
+    function openSearch() {
+      searchWrap.classList.add("is-open");
+      if (searchField) {
+        searchField.setAttribute("placeholder", "Search");
+        searchField.focus();
+      }
+    }
+
+    function closeSearch() {
+      searchWrap.classList.remove("is-open");
+      if (searchField) {
+        searchField.value = "";
+        searchField.setAttribute("placeholder", "");
+        /* The theme's handler leaves `.open` behind at widths it ignores. */
+        searchField.classList.remove("open");
+      }
+    }
+
+    /*
+     * The glass is the submit button, so it has two jobs. Closed, it opens the
+     * field and must not submit; open with something typed in it, it submits
+     * as a search button should.
+     */
+    searchWrap.addEventListener("click", function (event) {
+      if (event.target.closest(".searchclose")) {
+        event.preventDefault();
+        closeSearch();
+        return;
+      }
+      if (!event.target.closest(".searchbutton")) return;
+      if (!searchWrap.classList.contains("is-open")) {
+        event.preventDefault();
+        openSearch();
+      } else if (searchField && !searchField.value.trim()) {
+        event.preventDefault();
+        closeSearch();
+      }
+    });
+
+    /* Escape closes it, and so does clicking anywhere else on the page. */
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape" && searchWrap.classList.contains("is-open")) {
+        closeSearch();
+      }
+    });
+
+    document.addEventListener("click", function (event) {
+      if (
+        searchWrap.classList.contains("is-open") &&
+        !searchWrap.contains(event.target) &&
+        (!searchField || !searchField.value.trim())
+      ) {
+        closeSearch();
+      }
+    });
+  }
+
   /* ----------------------------------------------------------- map ------ */
 
   /*
@@ -715,6 +794,166 @@
             mapEl.classList.add("is-off");
             mapEl.innerHTML =
               '<p class="loc-map-off">The map could not load just now. Every office is listed below with its address, phone number and everything it offers.</p>';
+          },
+        );
+      });
+    });
+  }
+
+  /* -------------------------------------------------------- area map ---- */
+
+  /*
+   * The map on a service-area page.
+   *
+   * A different question from the locations map, so a different map. That one
+   * asks "where are all eight offices, and which do the thing I need" and earns
+   * a legend, a filter and pins that carry a whole service list. This one asks
+   * "I am in Cottonwood Heights — how near is near", and the honest answer is
+   * one dot for the reader's city and one pin per office worth driving to, with
+   * the view fitted to exactly those.
+   *
+   * Which offices those are is decided on the server (`plottedOffices`), so the
+   * map and the cards underneath it never disagree about what is nearby.
+   *
+   * Same billing discipline as the locations map: Dynamic Maps is billed per
+   * `new google.maps.Map()`, so the map is not created until the page has
+   * loaded and the band has been scrolled to. Everything it draws is already
+   * in the cards below it, so a reader who never scrolls that far loses
+   * nothing.
+   */
+  var areaEl = document.getElementById("area-map");
+
+  /* The city: a ring rather than a teardrop, because it is a place the reader
+     already is, not a destination we are sending them to. */
+  function cityDotUrl() {
+    var svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">' +
+      '<circle cx="13" cy="13" r="11" fill="#ffffff"/>' +
+      '<circle cx="13" cy="13" r="9" fill="none" stroke="#f58220" stroke-width="4"/>' +
+      "</svg>";
+    return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+  }
+
+  /* An office: the same teardrop the locations map uses, in brand blue, with
+     its rank in the list so the pin and the card can be read together. */
+  function officePinUrl(n) {
+    var svg =
+      '<svg xmlns="http://www.w3.org/2000/svg" width="34" height="44" viewBox="0 0 40 52">' +
+      '<path d="M20 51C20 51 35 32.5 35 20A15 15 0 0 0 5 20C5 32.5 20 51 20 51Z" fill="#2b93d1" stroke="#ffffff" stroke-width="2"/>' +
+      '<text x="20" y="26" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" ' +
+      'font-size="18" font-weight="700" fill="#ffffff">' + n + "</text>" +
+      "</svg>";
+    return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+  }
+
+  function initAreaMap(el) {
+    var data = JSON.parse(el.getAttribute("data-area"));
+    var mapId = el.getAttribute("data-maps-id") || "";
+
+    var opts = {
+      mapTypeControl: false,
+      streetViewControl: false,
+      fullscreenControl: true,
+      zoomControl: true,
+      gestureHandling: "greedy",
+      restriction: {
+        latLngBounds: { north: 42.2, south: 39.4, west: -113.2, east: -110.2 },
+        strictBounds: false,
+      },
+    };
+    if (mapId) opts.mapId = mapId;
+
+    var map = new google.maps.Map(el, opts);
+    var bounds = new google.maps.LatLngBounds();
+    var info = new google.maps.InfoWindow();
+    var Advanced =
+      mapId && google.maps.marker && google.maps.marker.AdvancedMarkerElement
+        ? google.maps.marker.AdvancedMarkerElement
+        : null;
+
+    function place(position, url, w, h, anchorY, title, html) {
+      var marker;
+      if (Advanced) {
+        var img = document.createElement("img");
+        img.src = url;
+        img.width = w;
+        img.height = h;
+        img.alt = "";
+        marker = new Advanced({ map: map, position: position, title: title, content: img });
+      } else {
+        marker = new google.maps.Marker({
+          map: map,
+          position: position,
+          title: title,
+          icon: {
+            url: url,
+            scaledSize: new google.maps.Size(w, h),
+            anchor: new google.maps.Point(w / 2, anchorY),
+          },
+        });
+      }
+      if (html) {
+        marker.addListener("click", function () {
+          info.setContent(html);
+          info.open({ map: map, anchor: marker });
+        });
+      }
+      bounds.extend(position);
+      return marker;
+    }
+
+    place(
+      { lat: data.city.lat, lng: data.city.lng },
+      cityDotUrl(),
+      26,
+      26,
+      13,
+      data.city.name,
+      '<div class="area-pop"><p class="area-pop-name">' + data.city.name + "</p>" +
+        '<p class="area-pop-line">You are here</p></div>',
+    );
+
+    data.offices.forEach(function (office, i) {
+      place(
+        { lat: office.lat, lng: office.lng },
+        officePinUrl(i + 1),
+        34,
+        44,
+        44,
+        office.name,
+        '<div class="area-pop"><p class="area-pop-name">' +
+          '<a href="' + office.href + '">' + office.name + "</a></p>" +
+          '<p class="area-pop-drive">' + office.drive + " from " + data.city.name.split(",")[0] + "</p>" +
+          '<p class="area-pop-line">' + office.address + "</p>" +
+          '<p class="area-pop-line"><a href="tel:' + office.phone + '">' + office.phoneText + "</a></p></div>",
+      );
+    });
+
+    /*
+     * Fit to everything, then back off if the fit is too tight. A city with an
+     * office in it — Bountiful is 0.6 miles from ours — otherwise fits to a
+     * span of a few hundred metres and lands on a street map with no context,
+     * where the useful fact is "it is in your town" rather than "here is the
+     * junction".
+     */
+    map.fitBounds(bounds, 60);
+    google.maps.event.addListenerOnce(map, "idle", function () {
+      if (map.getZoom() > 14) map.setZoom(14);
+    });
+  }
+
+  if (areaEl && areaEl.getAttribute("data-maps-key")) {
+    whenLoaded(function () {
+      whenSeen(areaEl, function () {
+        loadGoogleMaps(
+          areaEl.getAttribute("data-maps-key"),
+          function () {
+            initAreaMap(areaEl);
+          },
+          function () {
+            areaEl.classList.add("is-off");
+            areaEl.innerHTML =
+              '<p class="area-map-off">The map could not load just now. Every office below has its address, its drive time and a phone number.</p>';
           },
         );
       });
