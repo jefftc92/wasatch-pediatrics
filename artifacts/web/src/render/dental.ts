@@ -41,10 +41,20 @@ import {
   type DentalPage,
   type DentalSection,
 } from "../data/dentalContent.ts";
+import { serviceContent } from "../data/serviceContent.ts";
 import { escapeAttribute } from "./generated.ts";
 
+/**
+ * Long-form copy for a route, wherever it was written.
+ *
+ * Two maps feed this: the dentistry import, and the pages the practice writes
+ * itself in `serviceContent.ts`. They share a shape and a renderer, so a page
+ * does not have to be dentistry to get the band layout — it only has to have
+ * copy worth laying out. The hand-written map is consulted first, so a route
+ * can be taken over by hand without editing the generated file.
+ */
 export function dentalPage(route: string): DentalPage | undefined {
-  return dentalContent[route];
+  return serviceContent[route] ?? dentalContent[route];
 }
 
 /**
@@ -410,8 +420,16 @@ export function renderDentalPage(
    * `tailSection`, and the section bar carries it from every page besides.
    */
   navSection = "",
-  /** What sits beside this page, after it rather than before it. */
-  tailSection = "",
+  /**
+   * What sits beside this page, after it rather than before it.
+   *
+   * A list rather than one string because more than one band can belong here —
+   * the city pages and the sibling grid both follow the article — and they have
+   * to alternate against each other. Joined into a single string they would
+   * have shared one ground, since `alternate` fills every `{{bg}}` in a band
+   * with the same class.
+   */
+  tailSections: string[] = [],
 ): string {
   /*
    * The page opens on what it is about, not on why we are good at it.
@@ -437,7 +455,7 @@ export function renderDentalPage(
       reassuranceBand(page),
       faqBand(page),
       relatedBand(page),
-      tailSection,
+      ...tailSections,
     ]),
     scheduleBand(service.name, service.href, pillar.name, pillar.href),
   ]

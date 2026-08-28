@@ -106,6 +106,13 @@ export type Service = {
   popular?: boolean;
   /** Groups of pages below this service. See Topic. */
   topics?: Topic[];
+  /**
+   * Give this service a page for each city in `serviceAreas.ts`, at
+   * /<pillar>/<service>/<city>/. Only set it where the copy has actually been
+   * written — a city page with nothing city-specific to say is worse than no
+   * page at all, and `areaContent.ts` is what decides whether one gets built.
+   */
+  serviceAreas?: boolean;
 };
 
 export const pillars: Pillar[] = [
@@ -185,7 +192,13 @@ export const services: Service[] = [
       "willow-creek",
     ],
     providerCategory: "12",
-    bodyFile: "well-child",
+    /*
+     * The copy for this page lives in `serviceContent.ts` as structured
+     * sections rather than in `src/authored/` as a slab of HTML, because it is
+     * rendered in the band layout the dentistry pages use. Nothing else here
+     * changes: the route, the hero and the office list are still this entry's.
+     */
+    serviceAreas: true,
   },
   {
     slug: "sick-visits",
