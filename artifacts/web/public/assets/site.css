@@ -2519,12 +2519,22 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 0;
-    /* The strip's height, and the stop the grid row below reads from it. */
-    --toolsband: 34px;
-    background: linear-gradient(
-      #f0f1f2 0 var(--toolsband),
-      #ffffff var(--toolsband)
-    );
+    /*
+     * The strip's height, and the stop the grid row below reads from it.
+     *
+     * 42px rather than the 34 it was: the band carries a rule at each end of
+     * the search now, and a divider needs room above and below it or it reads
+     * as a crack rather than as punctuation. The hairline at the bottom is the
+     * same idea one level up — it separates the strip from the white row
+     * instead of leaving the two greys to meet edge to edge.
+     */
+    --toolsband: 42px;
+    background:
+      linear-gradient(#dfe2e5 0 1px, transparent 1px) 0 calc(var(--toolsband) - 1px) / 100% 1px no-repeat,
+      linear-gradient(
+        #f4f5f6 0 var(--toolsband),
+        #ffffff var(--toolsband)
+      );
   }
 
   .secheadrow {
@@ -2589,7 +2599,12 @@
   #navbuttons {
     display: flex !important;
     align-items: center;
-    gap: 12px;
+    /*
+     * 18px, not the 12 the pair had when they were the tail of an unbroken
+     * row. With a rule in front of them they are a group of their own, and two
+     * marks 12px apart inside their own compartment read as one smudge.
+     */
+    gap: 18px;
     /*
      * The pair sits a little further from the search than the strip's own
      * rhythm would put it. Everything here is centred on the same line — the
@@ -2656,8 +2671,53 @@
     margin: 0;
   }
 
+  /*
+   * No word beside the glass.
+   *
+   * It was there because three bare glyphs in a row read as decoration rather
+   * than as controls. The rules do that job better: they group the strip into
+   * pay / search / follow, which is what the word was standing in for, and a
+   * magnifier needs no label the way an unlabelled disc does.
+   */
   #searchformwrap .searchlabel {
-    display: inline;
+    display: none;
+  }
+
+  /*
+   * The rules between the three groups.
+   *
+   * Each is the first flex item of the group that follows it, so the space to
+   * its left is `#topmenu`'s own 20px gap. The space to its right has to be
+   * built from that group's internal gap plus this margin — 8px inside the
+   * search, 12px between the social pair — which is why the two margins differ
+   * and both come to 20.
+   */
+  #topmenu #searchformwrap::before,
+  #topmenu #navbuttons::before {
+    content: "";
+    flex: 0 0 auto;
+    align-self: center;
+    width: 1px;
+    height: 20px;
+    background: #d3d7db;
+  }
+
+  #topmenu #searchformwrap::before {
+    margin-right: 12px;
+  }
+
+  #topmenu #navbuttons::before {
+    margin-right: 8px;
+  }
+
+  /* The rule already separates the pair; the extra nudge would double it. */
+  #topmenu #navbuttons {
+    margin-left: 0;
+  }
+
+  /* Open, the field replaces the whole group — the rule would crowd it. */
+  #searchformwrap.is-open::before {
+    display: none;
   }
 
   /*
