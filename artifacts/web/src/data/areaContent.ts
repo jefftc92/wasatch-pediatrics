@@ -101,6 +101,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Where Millcreek families go is 3838 South 700 East, Suite 200 — close enough that many of you pass it already. From Millcreek Common it is about seven to nine minutes south on 900 East and over to 3900 South.",
         "If you are in the eastern part of Millcreek up toward the canyon, our Cottonwood office on 5400 South is about ten to thirteen minutes and is often the faster drive, because you can drop onto I-15 at 3300 South and come off at 5300 South rather than crossing town on surface streets.",
         "For most of Millcreek the Salt Lake office wins on every measure and there is no real decision to make. It is worth knowing the second option exists mainly for the days when the appointment you want is not available where you expected it.",
+        "Willow Creek, down Highland Drive past Fort Union, is the third within reach at about twelve to sixteen minutes. It is the one to ask for if you live at the south-eastern edge of Millcreek, up toward the canyon roads, where it is no further than Cottonwood and considerably easier to park at.",
       ],
     },
     holladay: {
@@ -131,6 +132,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Where Holladay families go is either our Salt Lake office at 3838 South 700 East or our Willow Creek office at 7138 South Highland Drive, and the two are within a few minutes of each other from most of the city.",
         "From Holladay Village, Salt Lake is about eight to eleven minutes — west on Murray Holladay Road, then north on 700 East. Willow Creek is about nine to twelve, straight south on Highland Drive past Fort Union. Neither drive involves a freeway, which in this part of the valley is an advantage in the morning.",
         "Choose by direction of travel rather than by the clock. If your day carries on north or west — downtown, the university, the airport — take Salt Lake. If it carries on south or up a canyon, take Willow Creek. If it makes no difference, book whichever has your own provider that week.",
+        "Cottonwood, on 5400 South in Murray, is the third at about eleven to fifteen minutes. It rarely wins on distance from Holladay, but it is our largest office and has the widest appointment book of the three, so it is worth naming when what you need is a particular week rather than a particular building.",
       ],
     },
     "cottonwood-heights": {
@@ -161,6 +163,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Where you go from Cottonwood Heights is our Willow Creek office at 7138 South Highland Drive, just north of Fort Union Boulevard. From the mouth of Big Cottonwood Canyon it is about five to seven minutes down Fort Union and onto Highland Drive, and from most addresses in the city it is under ten.",
         "The second option is our Cottonwood office at 301 West 5400 South in Murray, about thirteen to seventeen minutes away — west on Fort Union to I-215, then north and off at 5300 South. It is a longer trip, but it is nearly all freeway, so it is more predictable in bad weather than the surface route.",
         "For almost every family here, Willow Creek is the answer: it is closer, it is on the side of the valley you already live on, and it is the office your neighbours use. Cottonwood is worth considering in two cases — if you work west or downtown and would rather drive against the traffic, or if the appointment you need is available there sooner. In winter, when Fort Union backs up with canyon traffic on a powder morning, the I-215 route to Cottonwood can genuinely be the faster of the two.",
+        "There is a third within reach: our Salt Lake office at 3838 South 700 East, about fourteen to eighteen minutes straight north on Highland Drive. It is the one to take when the same trip includes a drop-off at the university or anything else on the east bench.",
       ],
     },
     midvale: {
@@ -191,6 +194,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Where Midvale families go is usually our Southpoint office at 9071 South 1300 West in West Jordan — about seven to ten minutes, west on 7200 South and then down I-15 to the 9000 South exit. It sits right by the freeway, so the drive is short and predictable.",
         "Our Cottonwood office at 301 West 5400 South in Murray is the other option, about nine to twelve minutes north on State Street from Fort Union. It is barely further, and for anyone in eastern Midvale it is often closer.",
         "The honest way to choose is by which side of State Street you live on. West of it, Southpoint and the freeway; east of it, Cottonwood on the surface streets. If you commute north in the morning, Cottonwood keeps you pointed the right way; if you commute south or west, Southpoint does.",
+        "Willow Creek on Highland Drive is the third, about nine to thirteen minutes east along Fort Union. From the eastern edge of Midvale it is the shortest of the three, and it is the only one you can reach without touching a freeway at all.",
       ],
     },
     sandy: {
@@ -221,6 +225,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Where Sandy families go is either our Draper office at 114 East 12450 South or our Willow Creek office at 7138 South Highland Drive, and from the middle of the city they are within a minute or two of each other.",
         "Draper is about ten to thirteen minutes: south on I-15 from South Towne and off at the 12300 South exit, one turn from the freeway. Willow Creek is about ten to fourteen minutes north on Highland Drive to Fort Union, on surface streets the whole way.",
         "So choose on conditions rather than distance. Draper is the better bet in winter and in bad weather because the drive is nearly all freeway and gets cleared first. Willow Creek is better in the afternoon rush, when I-15 southbound through Sandy is the worst road in the valley and Highland Drive is moving fine. If you live west of State Street, take Draper; east of 1300 East, take Willow Creek; in between, take whichever has the appointment you want.",
+        "Southpoint in West Jordan is the third option, about twelve to sixteen minutes west on 9000 South across I-15. Remember it if you live west of State Street, or if your morning carries on toward the west side anyway — it is the one drive of the three that goes against the commute.",
       ],
     },
     draper: {
@@ -251,6 +256,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Where you go is 114 East 12450 South, Suite 100 — take the 12300 South exit off I-15 and you are effectively there. From Draper Peaks or the Corner Canyon side of town it is about five minutes; from anywhere in the city it is under ten.",
         "If Draper is full or your provider is working elsewhere that week, our Southpoint office at 9071 South 1300 West is about twelve to sixteen minutes north on I-15 to the 9000 South exit — the same freeway, three exits up.",
         "There is not much of a decision here. Draper is your office, and the only reason to look north is timing. Families at the south end of the city, near the point of the mountain, sometimes find Southpoint no worse in the morning because they are driving against the commute rather than into it.",
+        "Willow Creek at 7138 South Highland Drive is the furthest of the three at about fifteen to twenty minutes, north on I-15 and east at 7200 South. It is the one Draper families pick when they would rather be on the east bench than beside the freeway.",
       ],
     },
     "south-jordan": {
@@ -461,6 +467,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Where West Valley families go is either our Cottonwood office at 301 West 5400 South in Murray or our Salt Lake office at 3838 South 700 East. Cottonwood is about fourteen to nineteen minutes — south on Redwood Road from Valley Fair, then east on 5400 South. Salt Lake is about fifteen to twenty-one — east on 3500 South, onto I-15 and south one exit.",
         "The city is big enough that the answer changes depending on where in it you live. South of 3500 South — Hunter, Granger, the area toward Taylorsville — Cottonwood is closer and the drive is all surface streets. North of 3500 South, and especially near the Maverik Center, the Salt Lake office is the shorter trip and the freeway leg makes it more predictable.",
         "If it is genuinely even, take Cottonwood. It has more appointment slots, more parking, and the 5400 South approach avoids the I-15 merge that makes the other drive unreliable between half seven and nine.",
+        "Southpoint at 9071 South 1300 West is the third, about seventeen to twenty-two minutes south on Bangerter Highway and east on 9000 South. From the southern edge of the city, down around 6200 South, it is closer than either of the other two.",
       ],
     },
     kearns: {
@@ -491,6 +498,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Where Kearns families go is our Cottonwood office at 301 West 5400 South in Murray. From the Utah Olympic Oval it is about thirteen to eighteen minutes, east on 5400 South the entire way — no freeway, no navigation, one road.",
         "Our Southpoint office at 9071 South 1300 West in West Jordan is about fifteen to nineteen minutes: south on 5600 West from around Kearns High, then east on 9000 South.",
         "Cottonwood is the simpler drive and the one most families here use, particularly with small children, because a single straight road is easier than a route with turns in it. Southpoint is the better choice from the south end of Kearns, below 6200 South, where you are already closer to 9000 South than to 5400 — and it is the better choice any morning when 5400 South is backed up at Redwood Road, which happens often enough to be worth having a second option.",
+        "Our Salt Lake office at 3838 South 700 East is a third possibility, about sixteen to twenty-one minutes east to I-215 and north to the 3900 South exit. It is worth the extra few minutes only when your day already takes you to that side of the valley.",
       ],
     },
     "salt-lake-city": {
