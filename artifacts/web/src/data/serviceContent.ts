@@ -54,7 +54,7 @@ export const serviceContent: Record<string, DentalPage> = {
       {
         heading: "Who will my child see?",
         body: [
-          "Your child sees their own pediatrician or advanced practice provider — the same person, visit after visit, whenever the schedule allows it. A provider who examined your child at two months remembers things no chart summarises, and that memory is what turns a borderline measurement into either reassurance or a plan.",
+          "Your child will see a pediatrician or advanced practice provider, and we keep it the same person visit after visit wherever the schedule allows. A provider who examined your child at two months remembers things no chart summarises, and that memory is what turns a borderline measurement into either reassurance or a plan.",
           "That provider leads the team. If your child needs a dietitian, a lactation consultant, a therapist, a psychologist for testing, or a specialist outside the practice, we make the connection during the visit and stay involved afterwards rather than handing you a phone number.",
           "You are on that team too, and you have information none of us do. What you have noticed at home between visits is usually the most useful thing said in the room.",
         ],

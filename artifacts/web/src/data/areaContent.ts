@@ -67,8 +67,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We can also complete school, sports, camp, and mission forms during the same appointment, so you do not need a second visit when Murray School District asks for one.",
       ],
       who: [
-        "Your child sees their own pediatrician or advanced practice provider, and we keep that pairing steady from year to year. A provider who has followed your child since infancy can tell the difference between a change and a normal variation; someone reading the chart for the first time cannot.",
-        "If your child needs a dietitian, a therapist, or a specialist outside our practice, we arrange it during the visit and follow up at the next one.",
+        "Many of the families we see in Murray have been with the same provider since a newborn visit, and we work hard to keep it that way. Your child will see a pediatrician or advanced practice provider, and the same one from year to year wherever the schedule allows.",
+        "That history is what turns a borderline measurement into either reassurance or a plan. If your child needs a dietitian, a therapist or a specialist outside our practice, we arrange it during the visit and follow up at the next one.",
       ],
       why: [
         "We look for problems that give no warning. At these visits we catch growth that has quietly flattened, hearing loss behind slow speech, curvature of the spine during a growth spurt, blood pressure that is too high for a teenager, and low mood in a child who is still doing well at school.",
@@ -83,9 +83,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring your child's immunization record if you are new to us, any forms that need signing, and a written list of questions. Most parents think of one on the drive home otherwise.",
       ],
       where: [
-        "Come to 301 West 5400 South, just west of State Street. The drive takes about five minutes from Murray Park and only a little longer from Fashion Place Mall. You can park at the door, which matters more than it sounds when you are carrying an infant seat and holding a toddler's hand.",
-        "Our Salt Lake office at 3838 South 700 East is about eight minutes from most of Murray. Go north on State Street, then east on 3900 South. If your morning already takes you toward Millcreek or the university, it can be the easier of the two even though it is farther away.",
-        "Choose by traffic rather than by distance. Cottonwood is the simpler drive from anywhere west of State Street. Salt Lake works better from east Murray, because you skip the State Street lights entirely.",
+        "Come to 301 West 5400 South, just west of State Street. From Murray Park the drive takes about five minutes, and from Fashion Place Mall only a little longer. There is parking at the door, which matters more than it sounds when you are carrying an infant seat and holding a toddler's hand.",
+        "Mornings are the easiest time to get in and out again. 5400 South is busy on either side of the school run, so the first appointment of the day usually means no wait at either end of the trip.",
       ],
     },
     millcreek: {
@@ -97,8 +96,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Very little of it is dramatic, and that is the point. We are building a careful record of a healthy child so that the year something changes, we can see it against everything that came before.",
       ],
       who: [
-        "One pediatrician or advanced practice provider follows your child, and they work here in Millcreek. We protect that pairing because the provider who examined your baby at four months is the one who will notice at four years that something is different.",
-        "That provider also stays in charge of everything else. We make referrals to our dietitians, our behavioral health team, or a specialist elsewhere from the visit itself, and we follow up at the next one.",
+        "The provider who examines your baby at four months is the one who will notice at four years that something is different. That is why a pediatrician or advanced practice provider takes the visit and why we try hard to make it the same person each time.",
+        "They stay in charge of everything else too. Referrals to our dietitians, our behavioral health team or a specialist elsewhere are made from the visit itself, and we follow them up next time you are in.",
       ],
       why: [
         "Screening only works on a well child, which is why we ask you to come when nothing is wrong. Once a problem is obvious it no longer needs finding, and by then we have usually lost the easiest chance to treat it.",
@@ -128,8 +127,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We give you the results in the room, in plain language, with the growth chart on the screen so you can see the line rather than be told about it.",
       ],
       who: [
-        "Your child's own provider leads the visit, and we work hard to keep it the same person. Families in Holladay often stay with us from a first baby through a last teenager, and by then that provider knows your family well enough to tell a bad month from a real change.",
-        "Behind them sit our dietitians, lactation consultants, therapists, and psychologists. You reach all of them through your provider rather than through a referral you have to chase yourself.",
+        "Families in Holladay often stay with us from a first baby through a last teenager, and by then a provider knows a family well enough to tell a bad month from a real change. One of our pediatricians or advanced practice providers takes the visit, and we hold that steady across the years.",
+        "Behind them sit our dietitians, lactation consultants, therapists and psychologists. You reach all of them through the visit rather than through a referral you have to chase yourself.",
       ],
       why: [
         "These visits are where we catch the quiet things. We find vision problems a child has simply adapted to, heart murmurs worth a second listen, iron deficiency in a picky eater, and low mood in a teenager who is still getting good grades.",
@@ -159,8 +158,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring up old injuries even if they seemed minor. We would rather talk about a head knock, a sore back, or a joint that keeps complaining during a routine visit than meet it for the first time in an urgent one.",
       ],
       who: [
-        "The same provider looks after your child at Willow Creek every time, and keeping that constant matters here for a specific reason. An active child accumulates a history of strains and knocks, and one provider who has watched that build reads it very differently from one seeing it fresh.",
-        "When something needs more than we can give — sports medicine, orthopaedics, a psychologist for testing — we make the referral and the follow-up comes back to us.",
+        "An active child accumulates a history of strains and knocks, and someone who has watched that build reads it very differently from someone seeing it fresh. Your child will see a pediatrician or advanced practice provider at Willow Creek, and the same one each visit wherever we can manage it.",
+        "When a problem needs more than we can give — sports medicine, orthopaedics, a psychologist for testing — we make the referral and the follow-up comes back to us.",
       ],
       why: [
         "Fitness hides a great deal, and active children are the ones whose parents most often assume everything is fine. We regularly find high blood pressure, growth that has stalled, disordered eating in an athlete, or an early spinal curve in a twelve-year-old who skis beautifully.",
@@ -190,7 +189,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We do not rush it. Most of what we find at these visits, we find because there was time to ask a second question.",
       ],
       who: [
-        "You will work with one assigned pediatrician or advanced practice provider, at whichever of the offices you choose. We keep families with the same provider between visits because the alternative — a different clinician every year — throws away the one thing that makes a growth chart useful.",
+        "A different clinician every year throws away the one thing that makes a growth chart useful, so we keep families with the same pediatrician or advanced practice provider between visits.",
         "That provider also coordinates the rest: our dietitians, our behavioral health team, and specialists outside the practice.",
       ],
       why: [
@@ -221,7 +220,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We sign school, sports, and camp forms at the same appointment, so one visit covers both the medicine and the paperwork.",
       ],
       who: [
-        "The provider your child knows takes the visit, at whichever office you choose. That relationship is the reason a teenager answers a question honestly at seventeen — they have been answering the same person's questions since they were four.",
+        "A teenager answers a question honestly at seventeen because they have been answering the same person's questions since they were four. Keeping your child with one pediatrician or advanced practice provider is how that happens.",
         "When a growing athlete needs a referral, we make the connection and stay in the loop rather than handing the problem off.",
       ],
       why: [
@@ -252,8 +251,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "If you are new to Draper — and many families here are — we also take a full history at the first visit, so the chart we build is yours rather than a summary of somebody else's records.",
       ],
       who: [
-        "You will work with one pediatrician or advanced practice provider here in Draper, visit after visit. In a city that has grown this fast, a provider who has followed one child for years is genuinely scarce and worth holding on to.",
-        "That provider coordinates whatever else is needed, from our dietitians and behavioral health team to specialists elsewhere.",
+        "In a city that has grown this fast, a clinician who has followed one child for years is genuinely scarce and worth holding on to. Your child will see one of the pediatricians or advanced practice providers here in Draper, visit after visit.",
+        "They coordinate whatever else is needed, from our dietitians and behavioral health team to specialists elsewhere.",
       ],
       why: [
         "We are looking for what nobody has noticed: growth that has flattened, hearing loss behind slow speech, a curving spine, high blood pressure, or anxiety in a child who is doing well at school.",
@@ -268,10 +267,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring the immunization record if you are new, forms that need signing, and your questions written down.",
       ],
       where: [
-        "Come to 114 East 12450 South, Suite 100. Take the 12300 South exit off I-15 and you are effectively there. From Draper Peaks or the Corner Canyon side of town it is about five minutes, and from anywhere in the city it is under ten.",
-        "If we are full here, or your provider is working elsewhere that week, our Southpoint office at 9071 South 1300 West is about twelve to sixteen minutes north on I-15 to the 9000 South exit — the same freeway, three exits up.",
-        "Willow Creek at 7138 South Highland Drive is the farthest of the three at about fifteen to twenty minutes, north on I-15 and east at 7200 South. Families pick it when they would rather be on the east bench than beside the freeway.",
-        "There is not much of a decision here. Draper is your office, and the only reason to look north is timing. If you live at the south end of the city, near the point of the mountain, Southpoint is often no worse in the morning because you are driving against the commute rather than into it.",
+        "Come to 114 East 12450 South, Suite 100. Take the 12300 South exit off I-15 and you are effectively there — about five minutes from Draper Peaks or the Corner Canyon side of town, and under ten from anywhere in the city.",
+        "Being one turn off the freeway makes this office unusually easy to fit into a working day. A lunchtime appointment costs you the visit and very little else, which is worth knowing if taking a whole morning off is difficult.",
       ],
     },
     "south-jordan": {
@@ -283,8 +280,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We also answer the questions that come with a first baby: whether they are eating enough, waking too often, or behind where a cousin was at the same age.",
       ],
       who: [
-        "We pair you with one provider at the newborn visit and keep it that way. With babies that matters more than at any other age, because so much of the assessment is comparison — this child against how this child looked six weeks ago.",
-        "Our lactation consultants and dietitians work behind that same provider, so a feeding problem you raise at a well-child visit gets handled inside the practice.",
+        "With babies, continuity matters more than at any other age, because so much of the assessment is comparison — this child against how this child looked six weeks ago. One pediatrician or advanced practice provider looks after your baby from the newborn visit onward.",
+        "Our lactation consultants and dietitians work alongside them, so a feeding problem raised at a well-child visit gets handled inside the practice.",
       ],
       why: [
         "The early years are when growth and development move fastest and when finding something early changes the outcome most. Hip dysplasia, a heart murmur, hearing loss, or a feeding problem quietly costing weight are all ordinary findings at a routine visit and difficult ones later.",
@@ -313,8 +310,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We complete Jordan District school forms at the same appointment. Bring the paperwork and it goes home signed.",
       ],
       who: [
-        "The pediatrician or advanced practice provider you are assigned here at Southpoint sees your child every time. This is a large office serving a large city, and keeping families with one provider is how we stop it feeling like one.",
-        "Everything else runs through that provider too: dietitians, lactation support, behavioral health, and referrals out of the practice.",
+        "Southpoint is a large office serving a large city, and keeping families with the same pediatrician or advanced practice provider is how we stop it feeling like one.",
+        "Everything else runs through that provider: dietitians, lactation support, behavioral health, and referrals out of the practice.",
       ],
       why: [
         "Most of what we find has no symptoms yet: vision problems a child has adapted around, anaemia in a picky eater, blood pressure that should not be that high at fourteen, or a mood that has been sliding since autumn.",
@@ -329,9 +326,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring the immunization record if you are new to us, any forms, and a written list of questions.",
       ],
       where: [
-        "Come to 9071 South 1300 West, Suite 301, a couple of minutes off the 9000 South exit on I-15. From Jordan Landing the drive takes about six to nine minutes, straight east on 9000 South.",
-        "If you live at the north end of the city, near 7000 South, our Cottonwood office at 301 West 5400 South in Murray is about twelve to sixteen minutes: east to I-15 and north to the 5300 South exit.",
-        "For nearly everyone in West Jordan, Southpoint is the office and there is no decision to make. The exception is the north-east corner of the city, where Cottonwood is close enough that whichever has the earlier appointment is the right answer.",
+        "Come to 9071 South 1300 West, Suite 301, a couple of minutes off the 9000 South exit on I-15. From Jordan Landing the drive is about six to nine minutes, straight east on 9000 South.",
+        "This is one of our larger offices, so there are more appointment times here than at most — worth remembering when what you need is a particular week rather than a particular morning.",
       ],
     },
     riverton: {
@@ -343,7 +339,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "With older children we spend part of the visit on the things a busy family never gets to: sleep, screens, food, and how school is actually going as opposed to how the grades look.",
       ],
       who: [
-        "One provider follows your child, and we keep that pairing steady. A child seen by the same person since infancy has a chart that means something; a child seen by whoever was free has a stack of unrelated snapshots.",
+        "Whoever your child sees the first time is who they will see after that, wherever the schedule allows. A child seen by the same person since infancy has a chart that means something; a child seen by whoever was free has a stack of unrelated snapshots.",
         "Anything beyond the visit — a dietitian, a therapist, a specialist referral — we arrange, and it comes back to us afterwards.",
       ],
       why: [
@@ -373,7 +369,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "If more than one of your children is due, tell us when you book. We would far rather see three siblings in one morning than have you make the drive three times.",
       ],
       who: [
-        "You will see the same pediatrician or advanced practice provider each time you come. For a family who comes in less often because of the distance, that continuity does more work than usual — the provider is holding the thread between appointments that are farther apart.",
+        "You will see the same pediatrician or advanced practice provider each time you come. For a family who visits less often because of the distance, that continuity does more work than usual — the provider is holding the thread between appointments that are farther apart.",
         "We handle the referrals too, so seeing a specialist does not turn into a second set of phone calls from you.",
       ],
       why: [
@@ -403,8 +399,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Because families here are split between two school districts, we are used to completing whichever form your child's school actually wants. Bring it and we will do it in the room.",
       ],
       who: [
-        "We keep your child with one provider, visit after visit. That is what makes a growth chart mean something rather than being a series of numbers taken by different people.",
-        "The same provider arranges anything further — our dietitians, our behavioral health team, or a specialist outside the practice — and follows it up at the next visit.",
+        "One clinician looks after your child, visit after visit. That is what makes a growth chart mean something, rather than a series of numbers taken by different people.",
+        "They also arrange anything further — our dietitians, our behavioral health team, or a specialist outside the practice — and follow it up at the next visit.",
       ],
       why: [
         "Being well is the condition screening depends on. Once a problem is obvious it does not need finding; the point of these visits is the year before that.",
@@ -433,8 +429,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We handle Granite District school and sports forms at the same visit. There is no need to book a separate physical.",
       ],
       who: [
-        "Your child is assigned a pediatrician or advanced practice provider at Cottonwood and stays with them year after year, wherever we can manage it.",
-        "That provider is the hub. Referrals to our dietitians, lactation consultants, and behavioral health team, or to a specialist elsewhere, all start and finish with them.",
+        "Your child will see a pediatrician or advanced practice provider at our Cottonwood office, and the same one year after year wherever we can manage it.",
+        "That provider is the hub. Referrals to our dietitians, lactation consultants and behavioral health team, or to a specialist elsewhere, all start and finish with them.",
       ],
       why: [
         "We are aiming at what has no symptoms: low iron, hearing loss, blood pressure that is too high for a fourteen-year-old, a vision problem your child has quietly worked around, or a mood that has been sliding.",
@@ -463,7 +459,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "If English is not the language you would rather have that conversation in, tell us when you book. We can arrange interpretation in advance far more easily than we can work around it in the room.",
       ],
       who: [
-        "Whichever office you choose, your child keeps the same provider across visits.",
+        "Care comes from a pediatrician or advanced practice provider who stays the same across visits. If English is not the language you would rather have that conversation in, tell us when you book and we will arrange interpretation in advance.",
         "We arrange everything else too — dietitians, lactation support, behavioral health, referrals outside the practice — rather than leaving it for you to chase.",
       ],
       why: [
@@ -494,8 +490,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "It is one appointment rather than several. The physical, the vaccines, and the school form all happen in the same half hour.",
       ],
       who: [
-        "The same pediatrician or advanced practice provider at Cottonwood sees your child year after year, so that somebody is genuinely following your child rather than reading a file.",
-        "If they need a dietitian, a therapist, or a specialist elsewhere, we make the arrangement and stay involved.",
+        "The same clinician sees your child year after year, so that somebody is genuinely following them rather than reading a file.",
+        "If they need a dietitian, a therapist or a specialist elsewhere, we make the arrangement and stay involved.",
       ],
       why: [
         "We are looking for the things you would not bring a child in for: anaemia, hearing loss, high blood pressure, or a growth curve that has quietly flattened.",
@@ -525,8 +521,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We complete school and sports forms at the same visit, so there is no separate physical to arrange.",
       ],
       who: [
-        "We assign your child a pediatrician or advanced practice provider and then protect that pairing. In a city where families move between neighbourhoods often, the constant is the provider rather than the address.",
-        "That provider coordinates the rest — our dietitians, our lactation consultants, our behavioral health team, and specialists outside the practice.",
+        "In a city where families move between neighbourhoods often, the constant worth keeping is the person who knows your child. A pediatrician or advanced practice provider takes the visit, and we protect that continuity.",
+        "They coordinate the rest: our dietitians, our lactation consultants, our behavioral health team, and specialists outside the practice.",
       ],
       why: [
         "We find things nobody was looking for: hearing loss behind slow speech, iron deficiency, a spine curving during a growth spurt, blood pressure that should not be that high, or depression in a teenager whose grades are still fine.",
@@ -541,9 +537,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring the immunization record if you are new to us, forms that need signing, and your questions on paper.",
       ],
       where: [
-        "Come to 3838 South 700 East, Suite 200. From downtown, take I-15 south to the 3900 South exit and then head east — about twelve to eighteen minutes depending on the hour.",
-        "Our Cottonwood office at 301 West 5400 South in Murray takes about fifteen to twenty-one minutes and is the closer of the two if you live in the south of the city. From Sugar House Park it is straight south on 1300 East and west on 5400 South.",
-        "For the Avenues, downtown, Rose Park, and the university, Salt Lake is your office, and the freeway leg makes it quicker than the map suggests. South of about 3300 South the two are close enough that whichever has your provider that week should decide. If you travel by transit rather than car, take Salt Lake — it is a much shorter walk from a bus route.",
+        "Come to 3838 South 700 East, Suite 200. From downtown, take I-15 south to the 3900 South exit and head east — about twelve to eighteen minutes depending on the hour.",
+        "If you travel by transit rather than by car, this is the easiest of our offices to reach. It is a short walk from the bus routes along 3900 South, and for anyone driving, the freeway leg makes the trip quicker than the map suggests.",
       ],
     },
     "south-salt-lake": {
@@ -555,8 +550,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "It is a planned half hour rather than a reaction to something, which is why it is the visit where the useful conversations actually happen.",
       ],
       who: [
-        "Your child sees the same provider visit after visit. That is not administrative tidiness — it is what lets a clinician say with confidence that a change is a change rather than a normal variation.",
-        "The rest of the practice sits behind them: dietitians, lactation support, therapists, and psychologists, all reachable through the visit.",
+        "Seeing the same clinician every visit is not administrative tidiness. It is what lets someone say with confidence that a change is a change rather than a normal variation.",
+        "The rest of the practice sits behind them: dietitians, lactation support, therapists and psychologists, all reachable through the visit.",
       ],
       why: [
         "A short drive is the difference between a family who keeps every appointment and one who keeps most of them, and keeping every one is what makes the record worth having.",
@@ -586,8 +581,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We sign Davis District school and sports forms at the same visit, so the paperwork and the medicine happen together.",
       ],
       who: [
-        "The provider assigned to your child at Grow Up Great is the one who sees them every year.",
-        "That provider coordinates anything else your child needs — our dietitians, our behavioral health team, or a specialist outside the practice — rather than handing you a list to work through.",
+        "A pediatrician or advanced practice provider at Grow Up Great looks after your child, and the same one from year to year.",
+        "They coordinate anything else your child needs — our dietitians, our behavioral health team, or a specialist outside the practice — rather than handing you a list to work through.",
       ],
       why: [
         "What we find has usually not shown itself yet — hearing loss sitting behind slow speech, a growth curve that has flattened, low iron, blood pressure that is too high for a teenager, or anxiety in a child who is coping well on the surface.",
@@ -616,8 +611,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Nothing is squeezed. The half hour exists so that the second and third question get asked, which is usually where the useful ones are.",
       ],
       who: [
-        "You see the same provider every time your child comes in. A clinician who has watched a child for six years reads a growth chart differently from one seeing it for the first time.",
-        "They run everything else too: referrals to our dietitians, lactation consultants, or behavioral health team, and to specialists outside the practice.",
+        "A clinician who has watched a child for six years reads a growth chart differently from one seeing it for the first time, so we keep your child with one of ours.",
+        "They run everything else too: referrals to our dietitians, lactation consultants or behavioral health team, and to specialists outside the practice.",
       ],
       why: [
         "These visits are aimed at silence. Vision that has slowly worsened, hearing loss, anaemia in a fussy eater, and a curving spine during a growth spurt all arrive without a symptom that would send a family to the doctor.",
@@ -646,8 +641,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We also sign school, sports, camp, and mission forms at the same appointment, so you do not need a separate visit for paperwork.",
       ],
       who: [
-        "Your child keeps the same pediatrician or advanced practice provider year after year. Many families in Bountiful have stayed with the same provider across two or three children, and that accumulated familiarity is a real clinical asset rather than a nicety.",
-        "Anything beyond the visit runs through them: dietitians, lactation support, therapists, psychologists doing testing, and referrals outside the practice.",
+        "Many Bountiful families have stayed with the same provider across two or three children. Your child will see a pediatrician or advanced practice provider at Grow Up Great, year after year.",
+        "That accumulated familiarity is a real clinical asset rather than a nicety. Anything beyond the visit runs through them: dietitians, lactation support, therapists, psychologists doing testing, and referrals outside the practice.",
       ],
       why: [
         "Nearly everything we catch here is asymptomatic — a murmur worth a second listen, low iron, hearing loss, a spine starting to curve, or a low mood that has not yet become a crisis.",
@@ -663,8 +658,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       where: [
         "Come to 620 Medical Drive, Suite 100 — the hospital street off 500 South, about four minutes from most of Bountiful, with parking at the door.",
-        "Our Farmington office at 491 West Bourne Circle is about twelve to sixteen minutes north on I-15 to the Park Lane exit, and it is the sensible fallback when we cannot fit you in here.",
-        "For Bountiful there is no decision worth making. Grow Up Great is in your city, it is the office your neighbours use, and every route to it is short. Farmington matters only for timing — if you need to be seen sooner, or you work north and would rather stop on the way than turn around.",
+        "Being minutes away makes a short-notice cancellation slot practical rather than theoretical, so it is always worth asking whether we have one this week.",
       ],
     },
     centerville: {
@@ -676,8 +670,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We sign Davis District forms at the annual visit, which for most families is the practical reason the appointment gets made at all.",
       ],
       who: [
-        "Your child keeps one provider, at whichever of the two offices suits you. Being between offices does not mean being between providers: the pairing stays the same and the chart follows the child.",
-        "That provider arranges anything further — dietitians, lactation consultants, behavioral health, or a specialist elsewhere.",
+        "The chart follows the child, and so does the person reading it — a pediatrician or advanced practice provider who stays the same across visits.",
+        "They arrange anything further: dietitians, lactation consultants, behavioral health, or a specialist elsewhere.",
       ],
       why: [
         "Nothing else is designed for a well child, which makes this the only appointment that finds problems before they declare themselves.",
@@ -706,8 +700,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "School, sports, camp, and mission forms are part of the same visit. Bring them and they go home signed.",
       ],
       who: [
-        "Your child stays with one pediatrician or advanced practice provider here in Farmington across the years, so that somebody is genuinely watching rather than reading a file.",
-        "The rest of the practice sits behind them — dietitians, lactation consultants, therapists, and psychologists — reachable through the visit rather than through a separate process.",
+        "One of the pediatricians or advanced practice providers here in Farmington sees your child, and we hold that steady across the years, so that somebody is genuinely watching rather than reading a file.",
+        "The rest of the practice sits behind them — dietitians, lactation consultants, therapists and psychologists — reachable through the visit rather than through a separate process.",
       ],
       why: [
         "What we find is usually quiet: a flattening growth curve, hearing loss behind slow speech, high blood pressure at fourteen, iron deficiency, a curving spine, or low mood in a child who is still functioning well.",
@@ -723,8 +717,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       where: [
         "Come to 491 West Bourne Circle, Suite 1, just off Park Lane behind Station Park — about four to six minutes from most of Farmington, and a straight run from the FrontRunner station if you are coming by train.",
-        "Our Grow Up Great office at 620 Medical Drive in Bountiful is about twelve to sixteen minutes south on I-15, off at 500 South.",
-        "Farmington is your office and there is not much to weigh. Call Bountiful when you need an appointment sooner than we can offer here, or when your day is heading south anyway — the freeway run is quick outside the rush, and it is the same practice, the same records, and often the same provider.",
+        "Being off Park Lane makes this office unusually easy to fold into an errand. The visit does not have to be the only reason you are out of the house.",
       ],
     },
     kaysville: {
@@ -736,8 +729,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "One appointment covers all of it, including the school and sports forms, which is the difference between a morning out and two.",
       ],
       who: [
-        "The same provider at our Farmington office takes every one of your child's visits. Continuity is what turns a chart into a story rather than a set of numbers.",
-        "That provider also arranges a dietitian, a therapist, or a referral outside the practice, and follows it up next time you are in.",
+        "Continuity is what turns a chart into a story rather than a set of numbers, so your child sees the same pediatrician or advanced practice provider from visit to visit.",
+        "They also arrange a dietitian, a therapist or a referral outside the practice, and follow it up next time you are in.",
       ],
       why: [
         "The findings here are ones nobody has noticed: anaemia, hearing loss, a spine beginning to curve, blood pressure that is too high, or a mood that has been slipping since autumn.",
@@ -766,7 +759,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Because the drive is longer than most of our families make, we would rather you brought every question you have than saved some for a phone call.",
       ],
       who: [
-        "We keep your child with one pediatrician or advanced practice provider at Farmington, so the relationship survives the gaps between visits.",
+        "One provider across the years is what lets the relationship survive the gaps between visits, and from Layton those gaps are longer than most.",
         "We also coordinate anything further — our dietitians, our behavioral health team, or a specialist elsewhere — so a referral does not become a second project for you.",
       ],
       why: [
@@ -797,7 +790,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Tell us about any concussion, even an old one. We keep that history in one place so that somebody is still looking at it in three years.",
       ],
       who: [
-        "One provider here at Summit follows your child. In a town this size that continuity is easy to take for granted and hard to replace — your provider will have watched the same child ski, grow, get hurt, and recover across several years.",
+        "In a town this size, a provider who has watched the same child ski, grow, get hurt and recover is easy to take for granted and hard to replace. Your child sees a pediatrician or advanced practice provider here at Summit, across the years rather than one winter at a time.",
         "When something needs more than a well-child visit — imaging, sports medicine, a psychologist for testing — we arrange it and follow it up.",
       ],
       why: [
@@ -813,9 +806,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring the immunization record if you are new to us, school or team forms, and a note of any injuries from the winter — including the ones that never quite justified a visit at the time.",
       ],
       where: [
-        "Come to 750 Round Valley Drive, Suite 102, at Quinn's Junction beside the hospital where SR-248 meets US-40. From Old Town the drive takes about eight to twelve minutes; from Kimball Junction it is closer to twenty, and the whole way is on roads that get cleared early.",
-        "The nearest office off the mountain is Willow Creek at 7138 South Highland Drive, about thirty-five to forty-five minutes down Parley's Canyon on I-80 and then south on I-215.",
-        "For a well-child visit, use Summit. It is your office, and there is no reason to drive a canyon for a routine appointment. Willow Creek is worth knowing about for a different reason: if you work down in the valley, an appointment near the end of your day there can be easier than a mid-morning one up here. Check the canyon before you commit to that drive either way.",
+        "Come to 750 Round Valley Drive, Suite 102, at Quinn's Junction beside the hospital where SR-248 meets US-40. From Old Town the drive takes about eight to twelve minutes; from Kimball Junction it is closer to twenty.",
+        "The whole route is on roads that get cleared early, which matters more here than anywhere else we see families. In winter, a first-thing appointment is the one most likely to go to plan.",
       ],
     },
     "heber-city": {
@@ -827,8 +819,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "If more than one of your children is due, tell us when you book and we will put them together.",
       ],
       who: [
-        "The same pediatrician or advanced practice provider at Summit sees your child every time. For families who come from farther away and therefore see us less often, that continuity carries more weight, not less.",
-        "That provider also arranges anything beyond the visit and follows it up the next time you are in.",
+        "For families who come from farther away and therefore see us less often, continuity carries more weight, not less. One pediatrician or advanced practice provider sees your child at every visit.",
+        "They also arrange anything beyond the visit and follow it up the next time you are in.",
       ],
       why: [
         "This appointment is built to find what has no symptoms, and a family who lives farther from care has fewer incidental chances to be seen.",
@@ -857,7 +849,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "For families in the Kamas Valley we also use the visit to cover the practical things that come with living farther out — what to do about an injury at the weekend, when a fever is worth the drive, and what we can handle over the phone.",
       ],
       who: [
-        "We keep your child with one provider at Summit, visit after visit. Distance makes continuity more valuable, not less: the provider is holding the thread across appointments that are farther apart than most families'.",
+        "Distance makes continuity matter more, not less: the person seeing your child is holding the thread across appointments that are farther apart than most families'. That is one pediatrician or advanced practice provider at Summit, visit after visit.",
         "We arrange anything further and follow it up rather than leaving it with you.",
       ],
       why: [

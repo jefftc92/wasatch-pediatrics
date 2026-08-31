@@ -86,7 +86,6 @@ export const serviceAreas: ServiceArea[] = [
     officeInTown: "cottonwood",
     offices: [
       { slug: "cottonwood", miles: 1.2, drive: "about 5 minutes", landmark: "from Murray Park, straight up State Street to 5400 South" },
-      { slug: "salt-lake", miles: 1.6, drive: "about 8 minutes", landmark: "from Fashion Place Mall, north on State Street then east on 3900 South" },
     ],
   },
   {
@@ -170,8 +169,6 @@ export const serviceAreas: ServiceArea[] = [
     officeInTown: "draper",
     offices: [
       { slug: "draper", miles: 1.4, drive: "about 5 minutes", landmark: "one turn off the 12300 South exit on I-15" },
-      { slug: "southpoint", miles: 5.4, drive: "about 12 to 16 minutes", landmark: "from Draper Peaks, north on I-15 to the 9000 South exit" },
-      { slug: "willow-creek", miles: 6.8, drive: "about 15 to 20 minutes", landmark: "from Draper Peaks, north on I-15 to 7200 South and east to Highland Drive" },
     ],
   },
   {
@@ -198,7 +195,6 @@ export const serviceAreas: ServiceArea[] = [
     officeInTown: "southpoint",
     offices: [
       { slug: "southpoint", miles: 1.7, drive: "about 6 to 9 minutes", landmark: "from Jordan Landing, east on 9000 South almost to I-15" },
-      { slug: "cottonwood", miles: 3.6, drive: "about 12 to 16 minutes", landmark: "from 7000 South, east to I-15 and north to the 5300 South exit" },
     ],
   },
   {
@@ -292,7 +288,6 @@ export const serviceAreas: ServiceArea[] = [
     officeInTown: "salt-lake",
     offices: [
       { slug: "salt-lake", miles: 5.1, drive: "about 12 to 18 minutes", landmark: "from downtown, south on I-15 to the 3900 South exit then east" },
-      { slug: "cottonwood", miles: 7.4, drive: "about 15 to 21 minutes", landmark: "from Sugar House Park, south on 1300 East then west on 5400 South" },
     ],
   },
   {
@@ -346,7 +341,6 @@ export const serviceAreas: ServiceArea[] = [
     officeInTown: "grow-up-great",
     offices: [
       { slug: "grow-up-great", miles: 0.6, drive: "about 4 minutes", landmark: "on Medical Drive, the hospital street off 500 South" },
-      { slug: "farmington", miles: 7.1, drive: "about 12 to 16 minutes", landmark: "from 500 South, north on I-15 to the Park Lane exit" },
     ],
   },
   {
@@ -373,7 +367,6 @@ export const serviceAreas: ServiceArea[] = [
     officeInTown: "farmington",
     offices: [
       { slug: "farmington", miles: 1.0, drive: "about 4 to 6 minutes", landmark: "just off Park Lane behind Station Park" },
-      { slug: "grow-up-great", miles: 6.6, drive: "about 12 to 16 minutes", landmark: "from Station Park, south on I-15 to the 500 South exit in Bountiful" },
     ],
   },
   {
@@ -414,7 +407,6 @@ export const serviceAreas: ServiceArea[] = [
     officeInTown: "summit",
     offices: [
       { slug: "summit", miles: 3.2, drive: "about 8 to 12 minutes", landmark: "at Quinn's Junction, next to the hospital where SR-248 meets US-40" },
-      { slug: "willow-creek", miles: 17.9, drive: "about 35 to 45 minutes", landmark: "down Parley's Canyon on I-80, then south on I-215 to Fort Union" },
     ],
   },
   {
