@@ -3858,15 +3858,13 @@
   padding: 8px 0;
 }
 
-.area-group a,
-.area-nearby a {
+.area-group a {
   color: #2b93d1;
   text-decoration: none;
   font-size: 18px;
 }
 
-.area-group a:hover,
-.area-nearby a:hover {
+.area-group a:hover {
   color: #f58220;
   text-decoration: underline;
 }
@@ -4090,49 +4088,16 @@
   color: #f58220;
 }
 
-.area-nearby-title {
-  font-size: 17px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #636466;
-  margin: 14px 0 12px 0;
-}
-
 /*
- * The neighbouring cities, in columns like the index on the service page.
- *
- * They were a wrapped row, which suited a footnote of four or five but not the
- * sixteen a Salt Lake County page carries: a run-on row gives the eye no
- * column to travel down, so finding your own town meant reading all of them.
- * Same treatment as `.area-group`, one step narrower, because this list sits
- * under the office cards rather than standing on its own.
+ * The city the reader is already on, shown among its neighbours rather than
+ * missing from them. A link to the page you are standing on is a dead end, so
+ * it is the one entry that is not one — same weight as the rest so the list
+ * still reads evenly, in the body grey rather than the link blue.
  */
-.area-nearby {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  columns: 4;
-  column-gap: 30px;
-}
-
-.area-nearby li {
-  margin-bottom: 8px;
-  break-inside: avoid;
-}
-
-.area-nearby li a {
+.area-group-here {
   display: block;
-  padding: 4px 0;
-}
-
-@media (max-width: 991px) {
-  .area-nearby {
-    columns: 3;
-  }
-}
-
-@media (max-width: 767px) {
-  .area-nearby {
-    columns: 2;
-  }
+  padding: 8px 0;
+  color: #636466;
+  font-size: 18px;
+  font-weight: 600;
 }
