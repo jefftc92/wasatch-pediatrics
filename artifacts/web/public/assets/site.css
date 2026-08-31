@@ -3953,6 +3953,86 @@
   text-decoration: underline;
 }
 
+/*
+ * The provider grid.
+ *
+ * Faces, because "who would we see" is answered by a face and a name far
+ * faster than by a list. Four across on a desktop, three on a tablet and two
+ * on a phone — small enough that an office with nine providers is still one
+ * glance rather than a scroll.
+ */
+.area-doc-office {
+  font-size: 17px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #636466;
+  margin: 10px 0 18px 0;
+}
+
+.area-doc-count {
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  color: #8a8a8c;
+  margin-left: 10px;
+}
+
+.area-doc-row {
+  margin-bottom: 16px;
+}
+
+.area-doc {
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  margin-bottom: 28px;
+}
+
+.area-doc-photo {
+  display: block;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto 12px auto;
+  width: 118px;
+  height: 118px;
+  background: #e8eaec;
+}
+
+.area-doc-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.area-doc-name {
+  display: block;
+  color: #2b93d1;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 22px;
+}
+
+.area-doc-cred {
+  display: block;
+  color: #8a8a8c;
+  font-size: 14px;
+  line-height: 20px;
+  margin-top: 2px;
+}
+
+.area-doc:hover .area-doc-name {
+  color: #f58220;
+  text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+  .area-doc-photo {
+    width: 96px;
+    height: 96px;
+  }
+}
+
 /* The drive time is what the reader came for, so it outranks the address. */
 .area-office-drive {
   font-size: 20px !important;

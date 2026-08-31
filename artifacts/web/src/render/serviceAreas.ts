@@ -28,6 +28,7 @@
 
 import { googleMapsId, googleMapsKey } from "../build.ts";
 import { areaContent, type AreaCopy } from "../data/areaContent.ts";
+import { providers, type Provider } from "../data/providers.ts";
 import { formatAddress, offices } from "../data/offices.ts";
 import {
   serviceAreas,
@@ -35,6 +36,7 @@ import {
   type ServiceArea,
 } from "../data/serviceAreas.ts";
 import {
+  locationIds,
   locationNames,
   pillarBySlug,
   type Pillar,
@@ -167,6 +169,91 @@ function mapBand(area: ServiceArea, plotted: AreaOffice[]): string {
 			<div class="area-map${googleMapsKey ? "" : " is-off"}" id="area-map" data-maps-key="${escapeAttribute(googleMapsKey)}" data-maps-id="${escapeAttribute(googleMapsId)}" data-area="${escapeAttribute(JSON.stringify(data))}">${off}</div>
 		</div>
 `;
+}
+
+/* ------------------------------------------------------------ providers -- */
+
+/**
+ * The pediatricians and advanced practice providers at one office.
+ *
+ * This list is exactly as accurate as the practice's own category data: a
+ * provider appears here because they are tagged into category 12, and the
+ * band above claims only that they are based at that office, not what they
+ * do there. If somebody is in the wrong category on /providers/, they will be
+ * in the wrong place here too, and fixing it there fixes it here.
+ *
+ * Category 12 is the general-pediatrics list; the therapists, dietitians and
+ * dental providers are in their own categories and do not belong on a page
+ * about checkups. Read from the provider data at build time, so an arrival or
+ * a departure reaches these pages the moment it reaches /providers/ and there
+ * is no second list of names to keep in step.
+ */
+export function pediatriciansAt(officeSlug: string): Provider[] {
+  const id = locationIds[officeSlug];
+  if (!id) return [];
+  return providers.filter(
+    (provider) =>
+      provider.locationIds.includes(id) && provider.categoryIds.includes("12"),
+  );
+}
+
+/**
+ * Who your child could see, office by office.
+ *
+ * This is the question the copy above it cannot answer and the one a parent
+ * choosing between two offices actually has. It also does something the prose
+ * cannot: a Sandy page listing Draper's and Willow Creek's providers and a
+ * Herriman page listing Southpoint's are different pages by construction,
+ * rather than by how carefully they were written.
+ */
+function providerBand(area: ServiceArea, plotted: AreaOffice[]): string {
+  const groups = plotted
+    .map((entry) => {
+      const team = pediatriciansAt(entry.slug);
+      if (!team.length) return "";
+      const name = locationNames[entry.slug] ?? entry.slug;
+      const cards = team
+        .map(
+          (provider) => `				<div class="col-lg-3 col-md-4 col-6">
+					<a class="area-doc" href="/providers/${provider.slug}/">
+						<span class="area-doc-photo"><img src="${provider.image}" alt="" loading="lazy" width="300" height="300" /></span>
+						<span class="area-doc-name">${escapeAttribute(provider.displayName || provider.name)}</span>
+						<span class="area-doc-cred">${escapeAttribute(provider.credentials)}</span>
+					</a>
+				</div>`,
+        )
+        .join("\n");
+
+      return `		<div class="row">
+			<div class="col-12">
+				<h3 class="area-doc-office">${escapeAttribute(name)} office <span class="area-doc-count">${team.length} provider${team.length === 1 ? "" : "s"}</span></h3>
+			</div>
+		</div>
+		<div class="row area-doc-row">
+${cards}
+		</div>`;
+    })
+    .filter(Boolean)
+    .join("\n");
+
+  if (!groups) return "";
+
+  const heading =
+    plotted.length > 1
+      ? `Who your child could see near ${escapeAttribute(area.name)}`
+      : `Who your child could see in ${escapeAttribute(area.name)}`;
+
+  return `<div class="{{bg}} padme90 svc-index area-docs">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="svc-index-title">${heading}</h2>
+				<p class="area-index-lead">The pediatricians and advanced practice providers based at the ${plotted.length > 1 ? "offices" : "office"} below. Tap a name for their background, training and the ages they see.</p>
+			</div>
+		</div>
+${groups}
+	</div>
+</div>`;
 }
 
 /* -------------------------------------------------------------- offices -- */
@@ -307,7 +394,7 @@ export function renderAreaPage(
     { name: service.name, href: `${pillar.href}${service.slug}/` },
     pillar,
     "",
-    [officeBand(service, area)],
+    [providerBand(area, plottedOffices(area)), officeBand(service, area)],
   );
 }
 
@@ -371,6 +458,86 @@ ${groups}
 		</div>
 	</div>
 </div>`;
+}
+
+/* ----------------------------------------------------------- structured -- */
+
+/**
+ * `MedicalClinic` for each office on the page, and `Physician` for each
+ * provider listed under it.
+ *
+ * The page already says all of this in words; the mark-up says it in the form
+ * a search engine can act on, which for a local query is the difference
+ * between being read and being understood. The two are generated from the same
+ * data as the visible cards, so they cannot drift apart: an office that is not
+ * plotted contributes no clinic node, and a provider who is not shown
+ * contributes no physician node.
+ *
+ * `areaServed` is the city the page is about, which is the one claim here that
+ * the offices themselves do not make.
+ */
+export function areaSchema(
+  service: Service,
+  area: ServiceArea,
+  siteUrl: string,
+): object[] {
+  const nodes: object[] = [];
+
+  for (const entry of plottedOffices(area)) {
+    const office = officeBySlug.get(entry.slug);
+    if (!office) continue;
+    const clinicId = `${siteUrl}/locations/${office.slug}/#clinic`;
+    const team = pediatriciansAt(office.slug);
+
+    nodes.push({
+      "@type": "MedicalClinic",
+      "@id": clinicId,
+      name: `Wasatch Pediatrics — ${locationNames[office.slug] ?? office.slug}`,
+      url: `${siteUrl}/locations/${office.slug}/`,
+      telephone: `+1-${office.phone.slice(0, 3)}-${office.phone.slice(3, 6)}-${office.phone.slice(6)}`,
+      medicalSpecialty: "Pediatric",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: [office.street, office.suite].filter(Boolean).join(", "),
+        addressLocality: office.city,
+        addressRegion: office.state,
+        postalCode: office.zip,
+        addressCountry: "US",
+      },
+      geo: { "@type": "GeoCoordinates", latitude: office.lat, longitude: office.lng },
+      areaServed: {
+        "@type": "City",
+        name: area.name,
+        containedInPlace: { "@type": "AdministrativeArea", name: `${area.county}, ${area.state}` },
+      },
+      availableService: {
+        "@type": "MedicalProcedure",
+        name: service.name,
+        url: siteUrl + `${pillarBySlug.get(service.pillar)?.href ?? "/"}${service.slug}/`,
+      },
+      ...(team.length
+        ? {
+            employee: team.map((provider) => ({
+              "@id": `${siteUrl}/providers/${provider.slug}/#physician`,
+            })),
+          }
+        : {}),
+    });
+
+    for (const provider of team) {
+      nodes.push({
+        "@type": "Physician",
+        "@id": `${siteUrl}/providers/${provider.slug}/#physician`,
+        name: provider.displayName || provider.name,
+        url: `${siteUrl}/providers/${provider.slug}/`,
+        ...(provider.image ? { image: siteUrl + provider.image } : {}),
+        medicalSpecialty: "Pediatric",
+        worksFor: { "@id": clinicId },
+      });
+    }
+  }
+
+  return nodes;
 }
 
 /** Everything a city page contributes to the site search. */

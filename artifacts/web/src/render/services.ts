@@ -45,6 +45,7 @@ import { dentalFaqSchema, dentalPage, renderDentalPage } from "./dental.ts";
 import {
   areaCopy,
   areaHref,
+  areaSchema,
   areaIndexBand,
   areaSearchText,
   areaTitle,
@@ -59,6 +60,7 @@ import {
   escapeAttribute,
   renderBreadcrumbs,
   type Crumb,
+  SITE,
 } from "./generated.ts";
 import { renderProviderCard } from "./providers.ts";
 
@@ -1094,6 +1096,7 @@ export function areaDocument(
     breadcrumbs: crumbs,
     content: renderAreaPage(service, area, pillar, dentalCrumbs(crumbs)),
     section: sectionFor(pillar, crumbs, service),
+    extraSchema: areaSchema(service, area, SITE),
   };
 }
 

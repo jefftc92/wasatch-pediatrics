@@ -83,9 +83,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring your child's immunization record if you are new to us, any forms that need signing, and a written list of questions. Most parents think of one on the drive home otherwise.",
       ],
       where: [
-        "Come to 301 West 5400 South, just west of State Street. The drive takes about five minutes from Murray Park and only a little longer from Fashion Place Mall. You can park at the door, which matters more than it sounds when you are carrying an infant seat and holding a toddler's hand.",
-        "Our Salt Lake office at 3838 South 700 East is about eight minutes from most of Murray. Go north on State Street, then east on 3900 South. If your morning already takes you toward Millcreek or the university, it can be the easier of the two even though it is farther away.",
-        "Choose by traffic rather than by distance. Cottonwood is the simpler drive from anywhere west of State Street. Salt Lake works better from east Murray, because you skip the State Street lights entirely.",
+        "Come to 301 West 5400 South, just west of State Street. From Murray Park the drive takes about five minutes, and from Fashion Place Mall only a little longer. There is parking at the door, which matters more than it sounds when you are carrying an infant seat and holding a toddler's hand.",
+        "Mornings are the easiest time to get in and out again. 5400 South is busy on either side of the school run, so the first appointment of the day usually means no wait at either end of the trip.",
       ],
     },
     millcreek: {
@@ -268,10 +267,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring the immunization record if you are new, forms that need signing, and your questions written down.",
       ],
       where: [
-        "Come to 114 East 12450 South, Suite 100. Take the 12300 South exit off I-15 and you are effectively there. From Draper Peaks or the Corner Canyon side of town it is about five minutes, and from anywhere in the city it is under ten.",
-        "If we are full here, or your provider is working elsewhere that week, our Southpoint office at 9071 South 1300 West is about twelve to sixteen minutes north on I-15 to the 9000 South exit — the same freeway, three exits up.",
-        "Willow Creek at 7138 South Highland Drive is the farthest of the three at about fifteen to twenty minutes, north on I-15 and east at 7200 South. Families pick it when they would rather be on the east bench than beside the freeway.",
-        "There is not much of a decision here. Draper is your office, and the only reason to look north is timing. If you live at the south end of the city, near the point of the mountain, Southpoint is often no worse in the morning because you are driving against the commute rather than into it.",
+        "Come to 114 East 12450 South, Suite 100. Take the 12300 South exit off I-15 and you are effectively there — about five minutes from Draper Peaks or the Corner Canyon side of town, and under ten from anywhere in the city.",
+        "Being one turn off the freeway makes this office unusually easy to fit into a working day. A lunchtime appointment costs you the visit and very little else, which is worth knowing if taking a whole morning off is difficult.",
       ],
     },
     "south-jordan": {
@@ -329,9 +326,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring the immunization record if you are new to us, any forms, and a written list of questions.",
       ],
       where: [
-        "Come to 9071 South 1300 West, Suite 301, a couple of minutes off the 9000 South exit on I-15. From Jordan Landing the drive takes about six to nine minutes, straight east on 9000 South.",
-        "If you live at the north end of the city, near 7000 South, our Cottonwood office at 301 West 5400 South in Murray is about twelve to sixteen minutes: east to I-15 and north to the 5300 South exit.",
-        "For nearly everyone in West Jordan, Southpoint is the office and there is no decision to make. The exception is the north-east corner of the city, where Cottonwood is close enough that whichever has the earlier appointment is the right answer.",
+        "Come to 9071 South 1300 West, Suite 301, a couple of minutes off the 9000 South exit on I-15. From Jordan Landing the drive is about six to nine minutes, straight east on 9000 South.",
+        "This is one of our larger offices, so there are more appointment times here than at most — worth remembering when what you need is a particular week rather than a particular morning.",
       ],
     },
     riverton: {
@@ -541,9 +537,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring the immunization record if you are new to us, forms that need signing, and your questions on paper.",
       ],
       where: [
-        "Come to 3838 South 700 East, Suite 200. From downtown, take I-15 south to the 3900 South exit and then head east — about twelve to eighteen minutes depending on the hour.",
-        "Our Cottonwood office at 301 West 5400 South in Murray takes about fifteen to twenty-one minutes and is the closer of the two if you live in the south of the city. From Sugar House Park it is straight south on 1300 East and west on 5400 South.",
-        "For the Avenues, downtown, Rose Park, and the university, Salt Lake is your office, and the freeway leg makes it quicker than the map suggests. South of about 3300 South the two are close enough that whichever has your provider that week should decide. If you travel by transit rather than car, take Salt Lake — it is a much shorter walk from a bus route.",
+        "Come to 3838 South 700 East, Suite 200. From downtown, take I-15 south to the 3900 South exit and head east — about twelve to eighteen minutes depending on the hour.",
+        "If you travel by transit rather than by car, this is the easiest of our offices to reach. It is a short walk from the bus routes along 3900 South, and for anyone driving, the freeway leg makes the trip quicker than the map suggests.",
       ],
     },
     "south-salt-lake": {
@@ -663,8 +658,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       where: [
         "Come to 620 Medical Drive, Suite 100 — the hospital street off 500 South, about four minutes from most of Bountiful, with parking at the door.",
-        "Our Farmington office at 491 West Bourne Circle is about twelve to sixteen minutes north on I-15 to the Park Lane exit, and it is the sensible fallback when we cannot fit you in here.",
-        "For Bountiful there is no decision worth making. Grow Up Great is in your city, it is the office your neighbours use, and every route to it is short. Farmington matters only for timing — if you need to be seen sooner, or you work north and would rather stop on the way than turn around.",
+        "Being minutes away makes a short-notice cancellation slot practical rather than theoretical, so it is always worth asking whether we have one this week.",
       ],
     },
     centerville: {
@@ -723,8 +717,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       where: [
         "Come to 491 West Bourne Circle, Suite 1, just off Park Lane behind Station Park — about four to six minutes from most of Farmington, and a straight run from the FrontRunner station if you are coming by train.",
-        "Our Grow Up Great office at 620 Medical Drive in Bountiful is about twelve to sixteen minutes south on I-15, off at 500 South.",
-        "Farmington is your office and there is not much to weigh. Call Bountiful when you need an appointment sooner than we can offer here, or when your day is heading south anyway — the freeway run is quick outside the rush, and it is the same practice, the same records, and often the same provider.",
+        "Being off Park Lane makes this office unusually easy to fold into an errand. The visit does not have to be the only reason you are out of the house.",
       ],
     },
     kaysville: {
@@ -813,9 +806,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring the immunization record if you are new to us, school or team forms, and a note of any injuries from the winter — including the ones that never quite justified a visit at the time.",
       ],
       where: [
-        "Come to 750 Round Valley Drive, Suite 102, at Quinn's Junction beside the hospital where SR-248 meets US-40. From Old Town the drive takes about eight to twelve minutes; from Kimball Junction it is closer to twenty, and the whole way is on roads that get cleared early.",
-        "The nearest office off the mountain is Willow Creek at 7138 South Highland Drive, about thirty-five to forty-five minutes down Parley's Canyon on I-80 and then south on I-215.",
-        "For a well-child visit, use Summit. It is your office, and there is no reason to drive a canyon for a routine appointment. Willow Creek is worth knowing about for a different reason: if you work down in the valley, an appointment near the end of your day there can be easier than a mid-morning one up here. Check the canyon before you commit to that drive either way.",
+        "Come to 750 Round Valley Drive, Suite 102, at Quinn's Junction beside the hospital where SR-248 meets US-40. From Old Town the drive takes about eight to twelve minutes; from Kimball Junction it is closer to twenty.",
+        "The whole route is on roads that get cleared early, which matters more here than anywhere else we see families. In winter, a first-thing appointment is the one most likely to go to plan.",
       ],
     },
     "heber-city": {
