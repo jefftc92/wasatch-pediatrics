@@ -238,17 +238,20 @@ ${cards}
 
   if (!groups) return "";
 
-  const heading =
-    plotted.length > 1
-      ? `Who your child could see near ${escapeAttribute(area.name)}`
-      : `Who your child could see in ${escapeAttribute(area.name)}`;
+  /*
+   * "Who your child could see" read as though the practice does the choosing.
+   * It does not: a family picks who they want, and the whole point of putting
+   * faces on the page is to let them. The heading says so, and carries the
+   * city beside the word somebody would have typed to get here.
+   */
+  const heading = `Choose a pediatrician ${plotted.length > 1 ? "near" : "in"} ${escapeAttribute(area.name)}`;
 
   return `<div class="{{bg}} padme90 svc-index area-docs">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<h2 class="svc-index-title">${heading}</h2>
-				<p class="area-index-lead">The pediatricians and advanced practice providers based at the ${plotted.length > 1 ? "offices" : "office"} below. Tap a name for their background, training and the ages they see.</p>
+				<p class="area-index-lead">You choose who your child sees. These are the pediatricians and advanced practice providers based at the ${plotted.length > 1 ? "offices" : "office"} below — tap a name for their background, training and the ages they see.</p>
 			</div>
 		</div>
 ${groups}
