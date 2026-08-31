@@ -2477,7 +2477,6 @@
   }
 }
 
-
 /* ========================================================= section chrome == */
 
 /*
@@ -2511,7 +2510,6 @@
 #topmenu .utility-link:hover {
   color: #2b93d1;
 }
-
 
 
 /*
@@ -4074,30 +4072,44 @@
   text-transform: uppercase;
 }
 
+/*
+ * The card used to end on a bare telephone number — a fact, not a thing you
+ * can do. Somebody comparing two offices wants to act on the one they pick:
+ * navigate to it, ring it, or read its hours. Three links, stacked so each is
+ * its own tap target rather than a row of small ones side by side, and the
+ * first is the one a phone can act on immediately.
+ */
+.area-office-team {
+  font-size: 15px !important;
+  line-height: 22px !important;
+  color: #636466;
+  margin: 0 0 16px 0;
+}
+
 .area-office-act {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
   margin: auto 0 0 0;
 }
 
 .area-office-act a {
   color: #2b93d1;
   font-weight: 600;
+  font-size: 17px;
   text-decoration: none;
+  padding: 6px 0;
 }
 
 .area-office-act a:hover {
   color: #f58220;
+  text-decoration: underline;
 }
 
-/*
- * The city the reader is already on, shown among its neighbours rather than
- * missing from them. A link to the page you are standing on is a dead end, so
- * it is the one entry that is not one — same weight as the rest so the list
- * still reads evenly, in the body grey rather than the link blue.
- */
-.area-group-here {
-  display: block;
-  padding: 8px 0;
-  color: #636466;
-  font-size: 18px;
-  font-weight: 600;
+/* The two that are not the primary action read a step quieter. */
+.area-office-act .area-office-more {
+  font-size: 15px;
+  font-weight: 500;
 }
+
