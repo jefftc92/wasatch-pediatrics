@@ -313,34 +313,6 @@ function officeBand(service: Service, area: ServiceArea): string {
     .filter(Boolean)
     .join("\n");
 
-  /*
-   * Alphabetical, and in columns.
-   *
-   * `serviceAreas` is ordered by geography, which is right for the file and
-   * wrong for a reader: sixteen city names in an order only the map explains
-   * read as a pile rather than a list, and there is no way to tell whether
-   * yours is in it without reading all sixteen. Alphabetical is the order
-   * somebody scanning for their own town can predict, and columns let them see
-   * the whole set at once instead of following a run-on row.
-   */
-  const neighbours = areasForService(service)
-    .filter((other) => other.slug !== area.slug && other.region === area.region)
-    .sort((a, b) => a.name.localeCompare(b.name, "en"))
-    .map(
-      (other) =>
-        `<li><a href="${areaHref(service, other)}">${escapeAttribute(other.name)}</a></li>`,
-    )
-    .join("");
-
-  const nearby = neighbours
-    ? `		<div class="row">
-			<div class="col-12">
-				<h3 class="area-nearby-title">${escapeAttribute(service.name)} elsewhere in ${escapeAttribute(area.region)}</h3>
-				<ul class="area-nearby">${neighbours}</ul>
-			</div>
-		</div>`
-    : "";
-
   return `<div class="{{bg}} padme90 svc-index area-offices">
 	<div class="container">
 		<div class="row">
@@ -351,7 +323,7 @@ ${mapBand(area, plotted)}			</div>
 		<div class="row">
 ${cards}
 		</div>
-${nearby}	</div>
+	</div>
 </div>`;
 }
 
@@ -408,7 +380,11 @@ export function renderAreaPage(
     { name: service.name, href: `${pillar.href}${service.slug}/` },
     pillar,
     "",
-    [providerBand(area, plottedOffices(area)), officeBand(service, area)],
+    [
+      providerBand(area, plottedOffices(area)),
+      officeBand(service, area),
+      areaIndexBand(service, "{{bg}}", area),
+    ],
   );
 }
 
@@ -421,7 +397,12 @@ export function renderAreaPage(
  * is a Davis County choice or a Salt Lake County choice, and a single
  * alphabetical list of twenty-seven cities hides that.
  */
-export function areaIndexBand(service: Service, bg: string): string {
+export function areaIndexBand(
+  service: Service,
+  bg: string,
+  /** The page's own city, shown in place rather than linked. */
+  current?: ServiceArea,
+): string {
   const areas = areasForService(service);
   if (!areas.length) return "";
 
@@ -444,11 +425,20 @@ export function areaIndexBand(service: Service, bg: string): string {
    */
   const groups = names
     .map((region) => {
+      /*
+       * Alphabetical inside each region. The registry is ordered by geography,
+       * which is right for the file and wrong for a list somebody is scanning
+       * for their own town: seventeen names in an order only the map explains
+       * give the eye nothing to predict.
+       */
       const links = byRegion
         .get(region)!
-        .map(
-          (area) =>
-            `<li><a href="${areaHref(service, area)}">${escapeAttribute(area.name)}</a></li>`,
+        .slice()
+        .sort((a, b) => a.name.localeCompare(b.name, "en"))
+        .map((area) =>
+          area.slug === current?.slug
+            ? `<li><span class="area-group-here">${escapeAttribute(area.name)}</span></li>`
+            : `<li><a href="${areaHref(service, area)}">${escapeAttribute(area.name)}</a></li>`,
         )
         .join("");
 
@@ -464,7 +454,7 @@ export function areaIndexBand(service: Service, bg: string): string {
 		<div class="row">
 			<div class="col-12">
 				<h2 class="svc-index-title">Areas we serve</h2>
-				<p class="area-index-lead">Which office is closest, how long the drive takes, and what to weigh when two are close — city by city.</p>
+				<p class="area-index-lead">${current ? `Every city we see families from, ${escapeAttribute(current.name)} included` : "Which office is closest, how long the drive takes, and what to weigh when two are close"} — city by city.</p>
 			</div>
 		</div>
 		<div class="row">
