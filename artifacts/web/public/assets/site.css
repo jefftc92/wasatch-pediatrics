@@ -2004,13 +2004,28 @@
  * fill whatever it is given, so a very tall frame makes a very long page rather
  * than a complete one.
  */
+/*
+ * A fixed height, because there is no other kind available.
+ *
+ * The tool is on healthychildren.org, so the frame is cross-origin: this page
+ * cannot read its content height and the AAP does not post one out, which
+ * leaves a number chosen in advance. 1500px fitted the tool's opening screen
+ * and cut off the deeper ones — pick a symptom and the list of questions runs
+ * past the bottom edge with no way to reach it.
+ *
+ * Sized for the tallest state rather than the first now, and `scrolling` is
+ * left alone so the frame keeps its own scrollbar if the AAP ever exceeds even
+ * this. The note underneath carries a link to the tool on their own site,
+ * which is the only reliable escape when an embed misbehaves.
+ */
 .sc-frame {
-  height: 1500px;
+  height: 2200px;
+  max-height: none;
 }
 
 @media (max-width: 767px) {
   .sc-frame {
-    height: 1000px;
+    height: 1900px;
   }
 }
 
@@ -2022,6 +2037,9 @@
  */
 .sc-note {
   margin: 18px 0 0 0;
+  padding: 14px 18px;
+  border-left: 3px solid #2b93d1;
+  background: #f4f5f6;
   color: #8a8a8c;
   font-size: 15px;
   line-height: 1.55;
