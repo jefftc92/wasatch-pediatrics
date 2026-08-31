@@ -226,7 +226,7 @@ function providerBand(area: ServiceArea, plotted: AreaOffice[]): string {
 
       return `		<div class="row">
 			<div class="col-12">
-				<h3 class="area-doc-office">${escapeAttribute(name)} office <span class="area-doc-count">${team.length} provider${team.length === 1 ? "" : "s"}</span></h3>
+				<h3 class="area-doc-office" id="providers-${entry.slug}">${escapeAttribute(name)} office <span class="area-doc-count">${team.length} provider${team.length === 1 ? "" : "s"}</span></h3>
 			</div>
 		</div>
 		<div class="row area-doc-row">
@@ -272,8 +272,18 @@ ${groups}
  */
 function officeBand(service: Service, area: ServiceArea): string {
   const plotted = plottedOffices(area);
-  /* Three offices need thirds of the row; two are better as halves. */
-  const span = area.offices.length > 2 ? "col-lg-4 col-md-6" : "col-lg-6";
+  /*
+   * Three offices need thirds of the row, two are better as halves, and one
+   * gets the whole row laid out sideways — a lone half-width card left the
+   * right half of the band empty, which on the pages with a single office read
+   * as something missing rather than as a card.
+   */
+  const only = area.offices.length === 1;
+  const span = only
+    ? "col-12"
+    : area.offices.length > 2
+      ? "col-lg-4 col-md-6"
+      : "col-lg-6";
 
   const plottedSlugs = new Set(plotted.map((office) => office.slug));
 
@@ -297,22 +307,44 @@ function officeBand(service: Service, area: ServiceArea): string {
        * than no number.
        */
       const team = pediatriciansAt(entry.slug).length;
-      const rank = plottedSlugs.has(entry.slug)
-        ? `<span class="area-office-rank" aria-hidden="true">${index + 1}</span>`
-        : "";
+      /*
+       * Two offices have to earn the number. A card for an office too far to
+       * plot has no pin to match, and on a page with a single office the "1"
+       * numbers a set of one — nothing to be first of, beside a map pin nobody
+       * has to tell apart from another.
+       */
+      const rank =
+        plotted.length > 1 && plottedSlugs.has(entry.slug)
+          ? `<span class="area-office-rank" aria-hidden="true">${index + 1}</span>`
+          : "";
 
       return `			<div class="${span}">
-				<div class="svc-card area-office">
+				<div class="svc-card area-office${only ? " area-office-wide" : ""}">
+					<span class="area-office-photo"><img src="${office.photo}" alt="" loading="lazy" width="1000" height="400" /></span>
+					<div class="area-office-body">
 					<h3 class="svc-card-title">${rank}<a href="/locations/${entry.slug}/">${escapeAttribute(name)}</a>${here ? ' <span class="area-office-tag">In town</span>' : ""}</h3>
-					<p class="area-office-drive">${escapeAttribute(entry.drive)} from ${escapeAttribute(area.name)}</p>
+					<p class="area-office-drive">${here ? `In ${escapeAttribute(area.name)} — ${escapeAttribute(entry.drive)} from most of the city` : `${escapeAttribute(entry.drive)} from ${escapeAttribute(area.name)}`}</p>
 					<p class="svc-card-blurb">${escapeAttribute(entry.landmark.charAt(0).toUpperCase() + entry.landmark.slice(1))}.</p>
 					<p class="svc-card-where">${escapeAttribute(street)}, ${escapeAttribute(office.city)}, ${office.state} ${office.zip}</p>
-					${team ? `<p class="area-office-team">${team} pediatrician${team === 1 ? "" : "s"} and advanced practice provider${team === 1 ? "" : "s"}</p>` : ""}
+					${
+            /*
+             * The link goes to this office's group in the grid above, so it
+             * only exists when there is one — the grid shows the offices on the
+             * map, and a card for an office too far to plot would otherwise
+             * offer a jump to an anchor the page does not contain.
+             */
+            team
+              ? plottedSlugs.has(entry.slug)
+                ? `<p class="area-office-team"><a href="#providers-${entry.slug}">Meet the ${team} provider${team === 1 ? "" : "s"} here</a></p>`
+                : `<p class="area-office-team area-office-team-plain">${team} pediatrician${team === 1 ? "" : "s"} and advanced practice provider${team === 1 ? "" : "s"}</p>`
+              : ""
+          }
 					<p class="area-office-act">
 						<a class="area-office-go" href="${directionsHref(office)}" target="_blank" rel="noopener">Get directions</a>
 						<a class="area-office-tel" href="tel:${office.phone}">Call ${formatPhone(office.phone)}</a>
 						<a class="area-office-more" href="/locations/${entry.slug}/">Office details, hours and services</a>
 					</p>
+					</div>
 				</div>
 			</div>`;
     })
