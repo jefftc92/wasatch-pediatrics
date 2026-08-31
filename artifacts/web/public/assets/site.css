@@ -4099,15 +4099,40 @@
 }
 
 /*
- * The neighbouring cities read as a row of links rather than a list, because
- * they are a footnote to the office cards above them and a stack of twelve
- * bullets would outweigh the thing they follow.
+ * The neighbouring cities, in columns like the index on the service page.
+ *
+ * They were a wrapped row, which suited a footnote of four or five but not the
+ * sixteen a Salt Lake County page carries: a run-on row gives the eye no
+ * column to travel down, so finding your own town meant reading all of them.
+ * Same treatment as `.area-group`, one step narrower, because this list sits
+ * under the office cards rather than standing on its own.
  */
 .area-nearby {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 22px;
+  columns: 4;
+  column-gap: 30px;
+}
+
+.area-nearby li {
+  margin-bottom: 8px;
+  break-inside: avoid;
+}
+
+.area-nearby li a {
+  display: block;
+  padding: 4px 0;
+}
+
+@media (max-width: 991px) {
+  .area-nearby {
+    columns: 3;
+  }
+}
+
+@media (max-width: 767px) {
+  .area-nearby {
+    columns: 2;
+  }
 }
