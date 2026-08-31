@@ -54,6 +54,7 @@ import {
   renderPillarPage,
   serviceRoutes,
 } from "../src/render/services.ts";
+import { symptomIndexList, symptomRoutes } from "../src/render/symptoms.ts";
 import { locationsDocument } from "../src/render/locations.ts";
 import { resourcesDocument } from "../src/render/resources.ts";
 import { robotsTxt, sitemapXml } from "../src/render/sitemap.ts";
@@ -157,7 +158,7 @@ if (assetsOnly) {
 
 // The pillar hubs and service pages this project adds. Written first so the
 // generated /services/ hub wins over the copied page it replaces.
-const generated = serviceRoutes();
+const generated = [...serviceRoutes(), ...symptomRoutes()];
 const generatedRoutes = new Set(generated.map((page) => page.route));
 
 for (const page of generated) {
@@ -172,7 +173,9 @@ for (const page of contentPages) {
   const pillar = pillarByContentSlug.get(page.slug);
   const content = pillar
     ? renderPillarPage(pillar, pageContent(page.slug))
-    : pageContent(page.slug);
+    /* The symptom index is generated, so the stored page carries a token for
+       it rather than a list that would go stale the moment one is added. */
+    : pageContent(page.slug).replace("{{SYMPTOM_LIST}}", symptomIndexList());
 
   write(
     page.route,

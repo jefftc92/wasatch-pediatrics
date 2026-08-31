@@ -28,6 +28,7 @@ import {
   renderPillarPage,
   serviceRoutes,
 } from "./render/services.ts";
+import { symptomIndexList, symptomRoutes } from "./render/symptoms.ts";
 import { serviceBySlug } from "./data/services.ts";
 import { LOCATIONS_HREF, locationsDocument } from "./render/locations.ts";
 import { RESOURCES_HREF, resourcesDocument } from "./render/resources.ts";
@@ -78,7 +79,9 @@ app.post("/wp-admin/admin-ajax.php", (request, response) => {
  * four medical service pages below it.
  */
 const generated = new Map(
-  serviceRoutes().map((page) => [page.route, page] as const),
+  [...serviceRoutes(), ...symptomRoutes()].map(
+    (page) => [page.route, page] as const,
+  ),
 );
 
 /**
@@ -236,7 +239,9 @@ app.get("/{*path}", (request, response, next) => {
   const pillar = pillarByContentSlug.get(page.slug);
   const content = pillar
     ? renderPillarPage(pillar, pageContent(page.slug))
-    : pageContent(page.slug);
+    /* The symptom index is generated, so the stored page carries a token for
+       it rather than a list that would go stale the moment one is added. */
+    : pageContent(page.slug).replace("{{SYMPTOM_LIST}}", symptomIndexList());
 
   response.type("html").send(
     renderDocument({
