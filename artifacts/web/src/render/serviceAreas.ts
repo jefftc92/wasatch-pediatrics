@@ -313,8 +313,19 @@ function officeBand(service: Service, area: ServiceArea): string {
     .filter(Boolean)
     .join("\n");
 
+  /*
+   * Alphabetical, and in columns.
+   *
+   * `serviceAreas` is ordered by geography, which is right for the file and
+   * wrong for a reader: sixteen city names in an order only the map explains
+   * read as a pile rather than a list, and there is no way to tell whether
+   * yours is in it without reading all sixteen. Alphabetical is the order
+   * somebody scanning for their own town can predict, and columns let them see
+   * the whole set at once instead of following a run-on row.
+   */
   const neighbours = areasForService(service)
     .filter((other) => other.slug !== area.slug && other.region === area.region)
+    .sort((a, b) => a.name.localeCompare(b.name, "en"))
     .map(
       (other) =>
         `<li><a href="${areaHref(service, other)}">${escapeAttribute(other.name)}</a></li>`,
