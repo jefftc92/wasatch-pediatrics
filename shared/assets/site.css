@@ -4079,11 +4079,98 @@
  * its own tap target rather than a row of small ones side by side, and the
  * first is the one a phone can act on immediately.
  */
+/*
+ * One office, laid out sideways.
+ *
+ * A single card at half width leaves the other half of the band empty, which
+ * reads as a column that failed to load rather than as a deliberate stop. Full
+ * width with the photograph beside the facts uses the room and keeps the card
+ * about the height it would have been. Below 768 it stacks back to the
+ * portrait arrangement, where a side-by-side split gives each half too little.
+ */
+/*
+ * The card's facts, as their own column.
+ *
+ * `.svc-card` is a flex column and `.area-office-act` uses `margin-top: auto`
+ * to sit on the floor, so the actions line up across a row of cards whatever
+ * length the addresses run to. Wrapping the facts to put a photograph beside
+ * them broke that chain: the wrapper became the flex child, and the actions
+ * inside it had nothing to push against. Making the wrapper a column that
+ * grows restores it, at every width rather than only where the photo is beside
+ * the text.
+ */
+.area-office-body {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+}
+
+@media (min-width: 768px) {
+  .area-office-wide {
+    flex-direction: row;
+    align-items: stretch;
+    gap: 30px;
+  }
+
+  .area-office-wide .area-office-photo {
+    flex: 0 0 40%;
+    margin: -32px 0 -30px -30px;
+    border-radius: 25px 0 0 25px;
+    aspect-ratio: auto;
+  }
+
+}
+
+/*
+ * The building, so you know what you are looking for when you pull up.
+ *
+ * Every office has one photographed for its own location page and none of them
+ * had been used anywhere else. It sits above the name rather than beside it
+ * because the card is narrow at three across, and it is cropped short so the
+ * facts below it still start high enough to be read without scrolling.
+ */
+.area-office-photo {
+  display: block;
+  margin: -32px -30px 20px -30px;
+  border-radius: 25px 25px 0 0;
+  overflow: hidden;
+  background: #e8eaec;
+  aspect-ratio: 5 / 2;
+}
+
+.area-office-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/*
+ * The provider count, as a way into the grid above rather than a verdict on
+ * the office. "2 pediatricians" standing on its own invites the question of
+ * whether two is enough; "Meet the 2 providers here" is an offer, and it is
+ * the same number either way.
+ */
 .area-office-team {
   font-size: 15px !important;
   line-height: 22px !important;
-  color: #636466;
   margin: 0 0 16px 0;
+}
+
+.area-office-team a {
+  color: #2b93d1;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.area-office-team a:hover {
+  color: #f58220;
+  text-decoration: underline;
+}
+
+/* No grid to jump to, so it stays a fact rather than pretending to be a link. */
+.area-office-team-plain {
+  color: #636466;
 }
 
 .area-office-act {
