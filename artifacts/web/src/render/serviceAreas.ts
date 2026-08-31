@@ -29,7 +29,7 @@
 import { googleMapsId, googleMapsKey } from "../build.ts";
 import { areaContent, type AreaCopy } from "../data/areaContent.ts";
 import { providers, type Provider } from "../data/providers.ts";
-import { formatAddress, offices } from "../data/offices.ts";
+import { directionsHref, formatAddress, offices } from "../data/offices.ts";
 import {
   serviceAreas,
   type AreaOffice,
@@ -296,6 +296,7 @@ function officeBand(service: Service, area: ServiceArea): string {
        * plot has no pin to match, and a number pointing at nothing is worse
        * than no number.
        */
+      const team = pediatriciansAt(entry.slug).length;
       const rank = plottedSlugs.has(entry.slug)
         ? `<span class="area-office-rank" aria-hidden="true">${index + 1}</span>`
         : "";
@@ -306,7 +307,12 @@ function officeBand(service: Service, area: ServiceArea): string {
 					<p class="area-office-drive">${escapeAttribute(entry.drive)} from ${escapeAttribute(area.name)}</p>
 					<p class="svc-card-blurb">${escapeAttribute(entry.landmark.charAt(0).toUpperCase() + entry.landmark.slice(1))}.</p>
 					<p class="svc-card-where">${escapeAttribute(street)}, ${escapeAttribute(office.city)}, ${office.state} ${office.zip}</p>
-					<p class="area-office-act"><a href="tel:${office.phone}">${formatPhone(office.phone)}</a></p>
+					${team ? `<p class="area-office-team">${team} pediatrician${team === 1 ? "" : "s"} and advanced practice provider${team === 1 ? "" : "s"}</p>` : ""}
+					<p class="area-office-act">
+						<a class="area-office-go" href="${directionsHref(office)}" target="_blank" rel="noopener">Get directions</a>
+						<a class="area-office-tel" href="tel:${office.phone}">Call ${formatPhone(office.phone)}</a>
+						<a class="area-office-more" href="/locations/${entry.slug}/">Office details, hours and services</a>
+					</p>
 				</div>
 			</div>`;
     })
@@ -383,7 +389,7 @@ export function renderAreaPage(
     [
       providerBand(area, plottedOffices(area)),
       officeBand(service, area),
-      areaIndexBand(service, "{{bg}}", area),
+      areaIndexBand(service, "{{bg}}"),
     ],
   );
 }
@@ -397,12 +403,7 @@ export function renderAreaPage(
  * is a Davis County choice or a Salt Lake County choice, and a single
  * alphabetical list of twenty-seven cities hides that.
  */
-export function areaIndexBand(
-  service: Service,
-  bg: string,
-  /** The page's own city, shown in place rather than linked. */
-  current?: ServiceArea,
-): string {
+export function areaIndexBand(service: Service, bg: string): string {
   const areas = areasForService(service);
   if (!areas.length) return "";
 
@@ -426,19 +427,16 @@ export function areaIndexBand(
   const groups = names
     .map((region) => {
       /*
-       * Alphabetical inside each region. The registry is ordered by geography,
-       * which is right for the file and wrong for a list somebody is scanning
-       * for their own town: seventeen names in an order only the map explains
-       * give the eye nothing to predict.
+       * The registry's own order, which runs north to south down the valley
+       * and then out to the mountains. Alphabetical was tried and rejected:
+       * within a county the geographic run is how somebody who knows the area
+       * reads it, and it keeps the two pages carrying this band identical.
        */
       const links = byRegion
         .get(region)!
-        .slice()
-        .sort((a, b) => a.name.localeCompare(b.name, "en"))
-        .map((area) =>
-          area.slug === current?.slug
-            ? `<li><span class="area-group-here">${escapeAttribute(area.name)}</span></li>`
-            : `<li><a href="${areaHref(service, area)}">${escapeAttribute(area.name)}</a></li>`,
+        .map(
+          (area) =>
+            `<li><a href="${areaHref(service, area)}">${escapeAttribute(area.name)}</a></li>`,
         )
         .join("");
 
@@ -454,7 +452,7 @@ export function areaIndexBand(
 		<div class="row">
 			<div class="col-12">
 				<h2 class="svc-index-title">Areas we serve</h2>
-				<p class="area-index-lead">${current ? `Every city we see families from, ${escapeAttribute(current.name)} included` : "Which office is closest, how long the drive takes, and what to weigh when two are close"} — city by city.</p>
+				<p class="area-index-lead">Which office is closest, how long the drive takes, and what to weigh when two are close — city by city.</p>
 			</div>
 		</div>
 		<div class="row">
