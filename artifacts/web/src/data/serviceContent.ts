@@ -105,7 +105,7 @@ export const serviceContent: Record<string, DentalPage> = {
       },
       {
         q: "Does a checkup count as preventive care on my insurance?",
-        a: "Most plans cover well-child visits as preventive care, often with no copay. Vaccines given at the visit are usually covered the same way. Anything we treat as a separate problem during the visit may be billed separately, and we will tell you in the room if that is happening.",
+        a: "We bill well-child visits as preventive care, and the vaccines given at them the same way. What your plan actually pays is a question for your insurer — we participate with most health insurance plans and networks, but coverage and copays vary, so it is worth a call before you come. If we treat a separate problem during the visit, that part may be billed differently, and we will tell you in the room if that is happening.",
       },
       {
         q: "Can I get a school or sports physical at the same visit?",
