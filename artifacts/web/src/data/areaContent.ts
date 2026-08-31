@@ -68,7 +68,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       who: [
         "Many of the families we see in Murray have been with the same provider since a newborn visit, and we work hard to keep it that way. Your child will see a pediatrician or advanced practice provider, and the same one from year to year wherever the schedule allows.",
-        "That history is what turns a borderline measurement into either reassurance or a plan. If your child needs a dietitian, a therapist or a specialist outside our practice, we arrange it during the visit and follow up at the next one.",
+        "That history is what turns a borderline measurement into either reassurance or a plan. If your child needs a dietitian, a therapist or a specialist outside our practice, your provider can coordinate it from the visit.",
       ],
       why: [
         "We look for problems that give no warning. At these visits we catch growth that has quietly flattened, hearing loss behind slow speech, curvature of the spine during a growth spurt, blood pressure that is too high for a teenager, and low mood in a child who is still doing well at school.",
@@ -83,7 +83,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Bring your child's immunization record if you are new to us, any forms that need signing, and a written list of questions. Most parents think of one on the drive home otherwise.",
       ],
       where: [
-        "Come to 301 West 5400 South, just west of State Street. From Murray Park the drive takes about five minutes, and from Fashion Place Mall only a little longer. There is parking at the door, which matters more than it sounds when you are carrying an infant seat and holding a toddler's hand.",
+        "Come to 301 West 5400 South, just west of State Street. From Murray Park the drive takes about five minutes, and from Fashion Place Mall only a little longer.",
         "Mornings are the easiest time to get in and out again. 5400 South is busy on either side of the school run, so the first appointment of the day usually means no wait at either end of the trip.",
       ],
     },
@@ -97,7 +97,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       who: [
         "The provider who examines your baby at four months is the one who will notice at four years that something is different. That is why a pediatrician or advanced practice provider takes the visit and why we try hard to make it the same person each time.",
-        "They stay in charge of everything else too. Referrals to our dietitians, our behavioral health team or a specialist elsewhere are made from the visit itself, and we follow them up next time you are in.",
+        "They lead the rest of the care too. Where a dietitian, our behavioral health team or a specialist elsewhere would help, your provider can set that up from the visit itself.",
       ],
       why: [
         "Screening only works on a well child, which is why we ask you to come when nothing is wrong. Once a problem is obvious it no longer needs finding, and by then we have usually lost the easiest chance to treat it.",
@@ -108,7 +108,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Please do not skip the 30-month visit. Families often do, because a two-and-a-half-year-old seems past the fragile stage, but speech and social development have moved a long way since the two-year visit and this is where we check them.",
       ],
       how: [
-        "Call our Salt Lake office or request a visit online. Tell us if you are a new family — we give new patients a longer appointment so there is room to take a proper history rather than rushing it.",
+        "Call our Salt Lake office or request a visit online, and say if you are a new family when you book. A first visit has a history to take as well as an examination, and it helps us to know that in advance.",
         "Bring the immunization record, any school forms, and your questions written down. Half of what parents most want to ask surfaces in the car on the way home.",
       ],
       where: [
@@ -232,7 +232,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "If your child plays for Alta, Jordan, or Hillcrest, book the annual visit in spring. In August every family in the district wants the same appointment and the same signature.",
       ],
       how: [
-        "Call either office or request a visit online, and say which location suits you. You are not restricted to one, and for a well-child visit we can usually place you wherever your provider is working that week.",
+        "Call either office or request a visit online, and say which location suits you. Ask which office your provider is working from that week — it is worth knowing before you pick a time.",
         "Bring the immunization record, any forms, and a list. If your teenager has questions of their own, tell them beforehand that they can ask privately.",
       ],
       where: [
@@ -289,7 +289,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       when: [
         "Come in within days of coming home, at two weeks, then at 1, 2, 4, 6, 9, and 12 months, then 15, 18, 24, and 30 months. After that it is once a year to twenty-one.",
-        "If more than one of your children is due, ask us to stack the appointments. We can usually see siblings back to back, which turns three trips into one.",
+        "If more than one of your children is due, ask whether they can be seen on the same morning. When it works, it turns three trips into one.",
       ],
       how: [
         "Book by phone or through the website. New parents can be seen at either office and do not have to decide which one is theirs — the chart follows the child, not the building.",
@@ -298,7 +298,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       where: [
         "Most families here come to our Southpoint office at 9071 South 1300 West in West Jordan. From Daybreak the drive takes about six to nine minutes: east on 10400 South, north on Bangerter, then east on 9000 South.",
         "Our Draper office at 114 East 12450 South is about ten to thirteen minutes from the east side of the city, south on I-15 and off at 12300 South.",
-        "Bangerter Highway is roughly the dividing line. West of it — Daybreak and the west bench — Southpoint is clearly closer and the drive avoids the freeway entirely, which is easier with a car full of small children. East of it, the two are close enough that the appointment time should decide. If you are coming with a newborn in winter, take Southpoint: less freeway, fewer merges, and you can park at the door.",
+        "Bangerter Highway is roughly the dividing line. West of it — Daybreak and the west bench — Southpoint is clearly closer and the drive avoids the freeway entirely, which is easier with a car full of small children. East of it, the two are close enough that the appointment time should decide. If you are coming with a newborn in winter, take Southpoint: less freeway and fewer merges.",
       ],
     },
     "west-jordan": {
@@ -400,7 +400,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       who: [
         "One clinician looks after your child, visit after visit. That is what makes a growth chart mean something, rather than a series of numbers taken by different people.",
-        "They also arrange anything further — our dietitians, our behavioral health team, or a specialist outside the practice — and follow it up at the next visit.",
+        "Where more is needed, the same provider can coordinate it — our dietitians, our behavioral health team, or a specialist outside the practice.",
       ],
       why: [
         "Being well is the condition screening depends on. Once a problem is obvious it does not need finding; the point of these visits is the year before that.",
@@ -456,15 +456,15 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       lead: "West Valley is the largest city we serve without an office of its own, and three of ours sit within about twenty minutes.",
       what: [
         "One appointment covers everything preventive. We check growth, examine your child fully, test vision and hearing, work through the screening questionnaires due at that age, review immunizations, and have a real conversation about how your child is doing.",
-        "If English is not the language you would rather have that conversation in, tell us when you book. We can arrange interpretation in advance far more easily than we can work around it in the room.",
+        "If English is not the language you would rather have that conversation in, it is worth reading the provider profiles before you choose one. Each says which languages are spoken in that provider's office.",
       ],
       who: [
-        "Care comes from a pediatrician or advanced practice provider who stays the same across visits. If English is not the language you would rather have that conversation in, tell us when you book and we will arrange interpretation in advance.",
+        "Care comes from a pediatrician or advanced practice provider who stays the same across visits, and in a city this size that choice is worth making deliberately — the profiles say what each provider trained in and what languages are spoken in their office.",
         "We arrange everything else too — dietitians, lactation support, behavioral health, referrals outside the practice — rather than leaving it for you to chase.",
       ],
       why: [
         "These visits are the only structured chance we get to find what nobody has noticed. In a city with as many young families as this one, what we most often catch is hearing and vision problems, iron deficiency, and vaccine gaps that would otherwise surface at a school registration desk.",
-        "They are also cheaper than the alternative in every sense. Most plans cover preventive visits with no copay; the illnesses they head off are not covered that way.",
+        "They are also the cheapest appointment to make and the most expensive one to skip. We bill well-child visits as preventive care; what your own plan pays is worth a call to your insurer before you come.",
       ],
       when: [
         "Follow the standard schedule — newborn, two weeks, 1, 2, 4, 6, 9, 12, 15, 18, 24, and 30 months, then once a year from three to twenty-one.",
@@ -538,7 +538,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       where: [
         "Come to 3838 South 700 East, Suite 200. From downtown, take I-15 south to the 3900 South exit and head east — about twelve to eighteen minutes depending on the hour.",
-        "If you travel by transit rather than by car, this is the easiest of our offices to reach. It is a short walk from the bus routes along 3900 South, and for anyone driving, the freeway leg makes the trip quicker than the map suggests.",
+        "The freeway leg makes the trip quicker than the map suggests, and 3900 South is a straight run east once you are off it.",
       ],
     },
     "south-salt-lake": {
@@ -562,7 +562,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "If your child is behind, come anyway. There is a catch-up schedule for every vaccine and we will build one at the visit.",
       ],
       how: [
-        "A phone call or an online request is all it takes. Being this close to the office makes a same-week cancellation slot genuinely usable, so it is worth asking whether we have one.",
+        "A phone call or an online request is all it takes. Being this close to the office makes a same-week opening genuinely usable, so it is worth asking whether anything has come up.",
         "Bring the immunization record if you are new, any forms, and your list.",
       ],
       where: [
@@ -616,14 +616,14 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       why: [
         "These visits are aimed at silence. Vision that has slowly worsened, hearing loss, anaemia in a fussy eater, and a curving spine during a growth spurt all arrive without a symptom that would send a family to the doctor.",
-        "For most insurance plans they are also preventive care with no copay, which makes them the least expensive appointment your child will have all year.",
+        "We bill them as preventive care, and we participate with most health insurance plans and networks. What that means for you depends on your plan, so it is worth asking your insurer what a well-child visit costs you.",
       ],
       when: [
         "Come in by age: newborn and two weeks, then 1, 2, 4, 6, 9, 12, 15, 18, 24, and 30 months, then once a year from three to twenty-one.",
         "The annual visit is the school and sports physical. There is no reason to book both, and spring is easier than August for either.",
       ],
       how: [
-        "Ring us or ask for a visit online. If you have more than one child due, ask to see them back to back — with a seven-minute drive, one trip is genuinely one trip.",
+        "Ring us or ask for a visit online. If you have more than one child due, ask whether they can come the same morning — with a seven-minute drive, one trip is genuinely one trip.",
         "Bring immunization records if you are transferring in, the forms, and a list of questions.",
       ],
       where: [
@@ -653,12 +653,12 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "The 30-month visit and the teenage visits are the two families skip most often, and both are among the most useful — one for speech and social development, the other for mental health.",
       ],
       how: [
-        "Call us, request a visit online, or book at the front desk before you leave. Being minutes away makes a short-notice cancellation slot practical, so it is always worth asking.",
+        "Call us, request a visit online, or ask at the front desk on your way out. Being minutes away makes a short-notice opening practical to take, so it is always worth asking whether one has come up.",
         "Bring the immunization record if you are new to us, any forms, and your questions written down.",
       ],
       where: [
-        "Come to 620 Medical Drive, Suite 100 — the hospital street off 500 South, about four minutes from most of Bountiful, with parking at the door.",
-        "Being minutes away makes a short-notice cancellation slot practical rather than theoretical, so it is always worth asking whether we have one this week.",
+        "Come to 620 Medical Drive, Suite 100 — the hospital street off 500 South, about four minutes from most of Bountiful.",
+        "Being minutes away makes a short-notice opening practical rather than theoretical, so it is always worth asking whether anything has come up this week.",
       ],
     },
     centerville: {
@@ -730,7 +730,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       who: [
         "Continuity is what turns a chart into a story rather than a set of numbers, so your child sees the same pediatrician or advanced practice provider from visit to visit.",
-        "They also arrange a dietitian, a therapist or a referral outside the practice, and follow it up next time you are in.",
+        "If a dietitian, a therapist or a specialist outside the practice would help, your provider can arrange it from the visit.",
       ],
       why: [
         "The findings here are ones nobody has noticed: anaemia, hearing loss, a spine beginning to curve, blood pressure that is too high, or a mood that has been slipping since autumn.",
@@ -771,7 +771,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Book farther ahead than you think you need to. Picking the time rather than taking the next one going is what makes a twelve-minute drive worth doing.",
       ],
       how: [
-        "Call our Farmington office or request a visit online, and ask us to stack siblings into one morning if more than one is due.",
+        "Call our Farmington office or request a visit online, and ask whether siblings can come the same morning if more than one is due.",
         "Bring immunization records if you are transferring in, any forms, and your list of questions.",
       ],
       where: [
@@ -791,7 +791,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       who: [
         "In a town this size your provider ends up knowing your child outside the exam room as well as in it — the same clinician who has watched them ski, grow, get hurt and recover. Your child sees a pediatrician or advanced practice provider here at Summit across the years, not one winter at a time.",
-        "When something needs more than a well-child visit — imaging, sports medicine, a psychologist for testing — we arrange it and follow it up.",
+        "When something needs more than a well-child visit — imaging, sports medicine, a psychologist for testing — your provider can point you at it and stay involved.",
       ],
       why: [
         "Fitness is an excellent disguise. A child who skis all winter and rides all summer can be anaemic, under-fuelled, sleeping badly, or quietly anxious, and none of it will show on the hill.",
@@ -820,7 +820,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       who: [
         "For families who come from farther away and therefore see us less often, continuity carries more weight, not less. One pediatrician or advanced practice provider sees your child at every visit.",
-        "They also arrange anything beyond the visit and follow it up the next time you are in.",
+        "Anything beyond the visit — a dietitian, our behavioral health team, a specialist elsewhere — can be coordinated by the same provider.",
       ],
       why: [
         "This appointment is built to find what has no symptoms, and a family who lives farther from care has fewer incidental chances to be seen.",
@@ -850,7 +850,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       who: [
         "Distance makes continuity matter more, not less: the person seeing your child is holding the thread across appointments that are farther apart than most families'. That is one pediatrician or advanced practice provider at Summit, visit after visit.",
-        "We arrange anything further and follow it up rather than leaving it with you.",
+        "Where something further is needed, your provider can coordinate it rather than leaving you to start again.",
       ],
       why: [
         "These visits find what nobody would drive twenty minutes to report — slow speech masking a hearing loss, a growth curve flattening, low iron, a spine starting to curve, or a teenager who has quietly stopped enjoying anything.",
