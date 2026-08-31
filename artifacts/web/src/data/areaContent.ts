@@ -251,7 +251,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "If you are new to Draper — and many families here are — we also take a full history at the first visit, so the chart we build is yours rather than a summary of somebody else's records.",
       ],
       who: [
-        "In a city that has grown this fast, a clinician who has followed one child for years is genuinely scarce and worth holding on to. Your child will see one of the pediatricians or advanced practice providers here in Draper, visit after visit.",
+        "Draper has grown quickly, and a lot of the families we see here are new to the area, so many of these relationships start from scratch. Your child will see one of the pediatricians or advanced practice providers here in Draper, and the same one each visit — which is how a new chart turns into a history worth reading.",
         "They coordinate whatever else is needed, from our dietitians and behavioral health team to specialists elsewhere.",
       ],
       why: [
@@ -381,7 +381,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Book the first appointment of the morning. Mountain View Corridor and Bangerter both move well before eight and neither does at half past.",
       ],
       how: [
-        "Book by phone or online, and do it farther ahead than a closer family would. A specific early appointment with your own provider is what makes this trip workable; whatever is left at short notice usually is not.",
+        "Book by phone or online, and do it farther ahead than a closer family would. Choosing the appointment rather than taking the next one going is what makes a twenty-minute drive worth doing.",
         "Bring the immunization record, any forms, and your list — and ask about anything at all while you are in the room, because a phone call afterwards is a poor substitute.",
       ],
       where: [
@@ -768,7 +768,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       when: [
         "The schedule is newborn, two weeks, then 1, 2, 4, 6, 9, 12, 15, 18, 24, and 30 months, and then one visit a year from three to twenty-one.",
-        "Book farther ahead than you think you need to. A specific time with your own provider is what makes a twelve-minute drive worth doing; whatever is left at short notice usually is not.",
+        "Book farther ahead than you think you need to. Picking the time rather than taking the next one going is what makes a twelve-minute drive worth doing.",
       ],
       how: [
         "Call our Farmington office or request a visit online, and ask us to stack siblings into one morning if more than one is due.",
@@ -790,7 +790,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Tell us about any concussion, even an old one. We keep that history in one place so that somebody is still looking at it in three years.",
       ],
       who: [
-        "In a town this size, a provider who has watched the same child ski, grow, get hurt and recover is easy to take for granted and hard to replace. Your child sees a pediatrician or advanced practice provider here at Summit, across the years rather than one winter at a time.",
+        "In a town this size your provider ends up knowing your child outside the exam room as well as in it — the same clinician who has watched them ski, grow, get hurt and recover. Your child sees a pediatrician or advanced practice provider here at Summit across the years, not one winter at a time.",
         "When something needs more than a well-child visit — imaging, sports medicine, a psychologist for testing — we arrange it and follow it up.",
       ],
       why: [
