@@ -4298,3 +4298,43 @@
 .sc-index .area-group {
   margin-bottom: 0;
 }
+
+/*
+ * The line above everything else on a symptom page.
+ *
+ * The emergency guidance used to sit below a 2200px frame, which on the one
+ * page somebody opens at two in the morning is the worst place for it. It is
+ * the first thing under the title now, in a band of its own so the eye finds
+ * it without reading — and phrased so it is as true on the teething page as on
+ * the head injury one, since it appears on all of them.
+ *
+ * Orange rather than red: this is a signpost, not an alarm, and a red bar
+ * across the top of a page about a cough frightens more people than it helps.
+ */
+.sym-alert {
+  background: #fff4e8;
+  border-top: 3px solid #f58220;
+  border-bottom: 1px solid #f3dcc4;
+  padding: 18px 0;
+}
+
+.sym-alert p {
+  margin: 0;
+  font-size: 17px;
+  line-height: 26px;
+  color: #6b4a24;
+  max-width: 70em;
+}
+
+.sym-alert strong {
+  color: #8a4b12;
+}
+
+/* The line introducing the tool — what it does, not why it is embedded. */
+.sym-tool-lead {
+  margin: -18px 0 26px 0;
+  color: #636466;
+  font-size: 18px;
+  line-height: 28px;
+  max-width: 58em;
+}
