@@ -2004,13 +2004,28 @@
  * fill whatever it is given, so a very tall frame makes a very long page rather
  * than a complete one.
  */
+/*
+ * A fixed height, because there is no other kind available.
+ *
+ * The tool is on healthychildren.org, so the frame is cross-origin: this page
+ * cannot read its content height and the AAP does not post one out, which
+ * leaves a number chosen in advance. 1500px fitted the tool's opening screen
+ * and cut off the deeper ones — pick a symptom and the list of questions runs
+ * past the bottom edge with no way to reach it.
+ *
+ * Sized for the tallest state rather than the first now, and `scrolling` is
+ * left alone so the frame keeps its own scrollbar if the AAP ever exceeds even
+ * this. The note underneath carries a link to the tool on their own site,
+ * which is the only reliable escape when an embed misbehaves.
+ */
 .sc-frame {
-  height: 1500px;
+  height: 2200px;
+  max-height: none;
 }
 
 @media (max-width: 767px) {
   .sc-frame {
-    height: 1000px;
+    height: 1900px;
   }
 }
 
@@ -2022,6 +2037,9 @@
  */
 .sc-note {
   margin: 18px 0 0 0;
+  padding: 14px 18px;
+  border-left: 3px solid #2b93d1;
+  background: #f4f5f6;
   color: #8a8a8c;
   font-size: 15px;
   line-height: 1.55;
@@ -4200,3 +4218,83 @@
   font-weight: 500;
 }
 
+
+/* -------------------------------------------------------------- symptoms -- */
+
+/*
+ * A symptom page is three things in a row: what we say it is, the AAP's own
+ * questions, and where to take it. Most of what it needs is already here —
+ * `.dent-hero` for the title band, `.svc-index` for the bands, `.area-group`
+ * for the list of other symptoms — so this is only what those do not cover.
+ */
+
+/*
+ * The frame is the tallest thing on the site by a wide margin, and it sits in
+ * a band with a heading above it and a note below. Without a little air it
+ * reads as though the note belongs to the frame's last question rather than to
+ * the frame.
+ */
+.sym-tool .sc-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  margin-top: 8px;
+  background: #ffffff;
+  border-radius: 25px;
+}
+
+.sym-tool .sc-note {
+  margin-top: 20px;
+}
+
+/*
+ * The routing list, on the symptom pages and on the checker page itself. Each
+ * line is a decision, so the bold opening is the case and the rest is what to
+ * do about it — a stack of short paragraphs rather than a bulleted sentence.
+ */
+.sc-routes {
+  list-style: none;
+  margin: 0 0 24px 0;
+  padding: 0;
+  max-width: 62em;
+}
+
+.sc-routes li {
+  position: relative;
+  margin-bottom: 14px;
+  padding: 0 0 0 20px;
+  font-size: 18px;
+  line-height: 28px;
+  color: #4a4b4d;
+}
+
+.sc-routes li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 11px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2b93d1;
+}
+
+.sc-routes strong {
+  color: #2b2c2e;
+}
+
+/* The reassurance under the routing, which is the point of the whole page. */
+.sc-trust {
+  max-width: 62em;
+  font-size: 18px;
+  line-height: 28px;
+  color: #636466;
+  font-style: italic;
+  margin: 0 0 26px 0;
+}
+
+/* The index of symptom pages on the checker page, in the same columns the
+   service-area index uses so the two read as one pattern. */
+.sc-index .area-group {
+  margin-bottom: 0;
+}

@@ -12,6 +12,7 @@ import { contentPages } from "../data/pages.ts";
 import { providers } from "../data/providers.ts";
 import { SITE } from "./generated.ts";
 import { serviceRoutes } from "./services.ts";
+import { symptomRoutes } from "./symptoms.ts";
 import { LOCATIONS_HREF } from "./locations.ts";
 import { RESOURCES_HREF } from "./resources.ts";
 
@@ -33,7 +34,7 @@ export function siteRoutes(): string[] {
   };
 
   add("/");
-  for (const page of serviceRoutes()) add(page.route);
+  for (const page of [...serviceRoutes(), ...symptomRoutes()]) add(page.route);
   add(LOCATIONS_HREF);
   add(RESOURCES_HREF);
   add("/providers/");
