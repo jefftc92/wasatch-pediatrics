@@ -72,7 +72,7 @@ function heroBand(symptom: Symptom): string {
 		<nav class="crumbs hero-crumbs" aria-label="Breadcrumb"><ol>${trail}</ol></nav>
 		<p class="dent-hero-eyebrow">Symptom Checker</p>
 		<h1 class="dent-hero-title">${escapeAttribute(symptom.title)}</h1>
-		<p class="dent-hero-lead">${escapeAttribute(symptom.description.split(/(?<=[.?!])\s/)[0])}</p>
+		<p class="dent-hero-lead">${escapeAttribute(symptom.lead)}</p>
 		<p class="dent-hero-act"><a class="btn dent-hero-ghost" href="${CHECKER}">All symptoms</a></p>
 	</div>
 </div>`;
@@ -92,10 +92,16 @@ function renderSymptomPage(symptom: Symptom): string {
     .join("");
 
   return `${heroBand(symptom)}
+<div class="sym-alert">
+	<div class="container">
+		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt — call 911 now.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
+	</div>
+</div>
 <div class="whitebg padme90 sym-intro">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9">
+				<h2 class="dent-band-title">${escapeAttribute(introHeading(symptom))}</h2>
 				<div class="pagebody" style="margin-top:0px">
 ${intro}
 				</div>
@@ -107,10 +113,10 @@ ${intro}
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="svc-index-title">What the American Academy of Pediatrics advises</h2>
-				<p class="area-index-lead">These questions are the AAP's own and they keep them current, which is why they are shown here rather than copied. Work through them for an answer about ${escapeAttribute(symptom.title.replace(/ in .*$/, "").toLowerCase())}.</p>
+				<h2 class="dent-band-title">Should my child be seen?</h2>
+				<p class="sym-tool-lead">Answer these and you will get a straight recommendation — care at home, an appointment, or urgent care. They are written and kept current by the American Academy of Pediatrics.</p>
 				<iframe title="${escapeAttribute(symptom.title)} — Symptom Checker, from the American Academy of Pediatrics" class="sc-frame" src="${escapeAttribute(aapFrameUrl(symptom))}" width="800" height="2200" loading="lazy"></iframe>
-				<p class="sc-note">Published and kept current by the <a href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">American Academy of Pediatrics</a>. If it will not load, or a list runs past the bottom of the frame, <a href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">open it on their site</a> — and call us either way if you are worried.</p>
+				<p class="sc-note">From the <a href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">American Academy of Pediatrics</a>. If it will not load, or the questions run past the bottom, <a href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">open it on their site</a>.</p>
 			</div>
 		</div>
 	</div>
@@ -119,12 +125,11 @@ ${intro}
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="svc-index-title">What to do next</h2>
+				<h2 class="dent-band-title">Getting your child seen</h2>
 				<ul class="sc-routes">
-					<li><strong>An emergency</strong> — trouble breathing, unresponsiveness, a seizure, or a serious injury. Call 911 or go to the nearest emergency room. Do not wait for a call back.</li>
-					<li><strong>You want to talk to someone now</strong> — we run a 24/7 on-call nurse and physician line. Call your office&#8217;s main number at any hour and you will reach it.</li>
-					<li><strong>Your child needs to be seen today</strong> — our offices hold <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</li>
-					<li><strong>It is an evening, a weekend or a holiday</strong> — most of our offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>, by appointment rather than walk-in, with hours that differ by office.</li>
+					<li><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number — nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.</li>
+					<li><strong>Be seen today.</strong> Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</li>
+					<li><strong>This evening or at the weekend.</strong> Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</li>
 				</ul>
 				<p class="sc-trust">If you are worried, call. We would rather answer a question that turns out to be nothing than have you sit up all night deciding whether it was.</p>
 				<p class="area-office-act"><a class="btn blue" href="/medical-care/sick-visits/">Same-day sick visits</a> <a class="btn blue" href="/locations/">Find your office</a></p>
@@ -142,6 +147,23 @@ ${intro}
 		</div>
 	</div>
 </div>`;
+}
+
+/**
+ * The heading over our own words.
+ *
+ * "What the American Academy of Pediatrics advises" was the heading here, over
+ * a paragraph explaining why the tool is embedded rather than copied — which is
+ * this project's reasoning, not a worried parent's question. The heading now
+ * asks what they came to ask, in the words they would use.
+ */
+function introHeading(symptom: Symptom): string {
+  const subject = symptom.title
+    .replace(/ in (Children|Babies|Newborns)$/i, "")
+    .replace(/^A /, "");
+  return /^(Reactions|Jaundice|Hives|Nosebleeds|Headaches|Colds|Rashes|Insect|Tick|Asthma|Immunization)/i.test(subject)
+    ? `About ${subject.toLowerCase()}`
+    : `What ${subject.toLowerCase()} usually means`;
 }
 
 /* ---------------------------------------------------------- structured -- */
