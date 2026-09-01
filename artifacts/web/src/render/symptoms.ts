@@ -101,7 +101,7 @@ function renderSymptomPage(symptom: Symptom): string {
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-9">
-				<h2 class="dent-band-title">${escapeAttribute(introHeading(symptom))}</h2>
+				<h2 class="dent-band-title">${escapeAttribute(symptom.heading)}</h2>
 				<div class="pagebody" style="margin-top:0px">
 ${intro}
 				</div>
@@ -147,23 +147,6 @@ ${intro}
 		</div>
 	</div>
 </div>`;
-}
-
-/**
- * The heading over our own words.
- *
- * "What the American Academy of Pediatrics advises" was the heading here, over
- * a paragraph explaining why the tool is embedded rather than copied — which is
- * this project's reasoning, not a worried parent's question. The heading now
- * asks what they came to ask, in the words they would use.
- */
-function introHeading(symptom: Symptom): string {
-  const subject = symptom.title
-    .replace(/ in (Children|Babies|Newborns)$/i, "")
-    .replace(/^A /, "");
-  return /^(Reactions|Jaundice|Hives|Nosebleeds|Headaches|Colds|Rashes|Insect|Tick|Asthma|Immunization)/i.test(subject)
-    ? `About ${subject.toLowerCase()}`
-    : `What ${subject.toLowerCase()} usually means`;
 }
 
 /* ---------------------------------------------------------- structured -- */
@@ -235,12 +218,39 @@ export function symptomRoutes(): Array<GeneratedPage & { route: string }> {
   return symptoms.map(symptomDocument);
 }
 
-/** The list of symptom pages, for the Symptom Checker page to carry. */
+/**
+ * The index on the Symptom Checker page.
+ *
+ * This is the page's main job, so it is a set of grouped tiles rather than a
+ * list of links: twenty-eight titles that all end in "in Children" is a wall
+ * nobody reads, and a parent arriving here already knows the child is theirs.
+ * The groups are how somebody with a sick child actually narrows down — by
+ * what they can see or hear, not alphabetically.
+ */
 export function symptomIndexList(): string {
-  return symptoms
-    .map(
-      (symptom) =>
-        `<li><a href="${symptomHref(symptom)}">${escapeAttribute(symptom.title)}</a></li>`,
-    )
-    .join("");
+  const order: string[] = [];
+  const byGroup = new Map<string, typeof symptoms>();
+  for (const symptom of symptoms) {
+    if (!byGroup.has(symptom.group)) {
+      byGroup.set(symptom.group, []);
+      order.push(symptom.group);
+    }
+    byGroup.get(symptom.group)!.push(symptom);
+  }
+
+  return order
+    .map((group) => {
+      const tiles = byGroup
+        .get(group)!
+        .map(
+          (symptom) =>
+            `<li><a href="${symptomHref(symptom)}">${escapeAttribute(symptom.short)}</a></li>`,
+        )
+        .join("");
+      return `<div class="sym-group">
+						<h3 class="sym-group-title">${escapeAttribute(group)}</h3>
+						<ul class="sym-tiles">${tiles}</ul>
+					</div>`;
+    })
+    .join("\n\t\t\t\t\t");
 }
