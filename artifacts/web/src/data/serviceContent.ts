@@ -62,7 +62,7 @@ export const serviceContent: Record<string, DentalPage> = {
       {
         heading: "Why do these visits matter when my child is well?",
         body: [
-          "They matter because your child is well. Almost everything we screen for arrives quietly and is easiest to treat before anyone at home has a reason to worry: a growth curve that has flattened, hearing loss behind delayed speech, curvature of the spine, high blood pressure, anaemia, anxiety, or a developmental difference.",
+          "They matter because your child is well. Almost everything we screen for arrives quietly and is easiest to treat before anyone at home has a reason to worry: a growth curve that has flattened, hearing loss behind delayed speech, curvature of the spine, high blood pressure, anemia, anxiety, or a developmental difference.",
           "These visits are also how vaccines actually happen. The immunization schedule is built around well-child ages, so a family who keeps their appointments stays protected without ever thinking about it. A family who skips a year usually finds out at a school deadline.",
           "And they build the relationship. A teenager will tell a doctor they have known since kindergarten things they will not tell a stranger in an urgent care room. Fourteen years of ordinary visits is what buys that conversation.",
         ],

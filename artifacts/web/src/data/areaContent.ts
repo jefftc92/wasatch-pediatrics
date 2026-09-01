@@ -101,7 +101,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       why: [
         "Screening only works on a well child, which is why we ask you to come when nothing is wrong. Once a problem is obvious it no longer needs finding, and by then we have usually lost the easiest chance to treat it.",
-        "There is a second reason that matters in a neighbourhood where families move house often but stay in the area. If you keep the same practice through a move, your child's history moves with you. Changing addresses does not have to mean starting over.",
+        "There is a second reason that matters in a neighborhood where families move house often but stay in the area. If you keep the same practice through a move, your child's history moves with you. Changing addresses does not have to mean starting over.",
       ],
       when: [
         "Come in on a schedule set by your child's age rather than by how they seem. We see newborns, then at two weeks, 1, 2, 4, 6, 9, 12, 15, 18, 24, and 30 months, and once a year from three through twenty-one.",
@@ -132,7 +132,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       why: [
         "These visits are where we catch the quiet things. We find vision problems a child has simply adapted to, heart murmurs worth a second listen, iron deficiency in a picky eater, and low mood in a teenager who is still getting good grades.",
-        "They are also the only structured chance most families get to ask about sleep, screens, food, and behaviour without having to justify the appointment. That conversation is part of the care, not filler around the exam.",
+        "They are also the only structured chance most families get to ask about sleep, screens, food, and behavior without having to justify the appointment. That conversation is part of the care, not filler around the exam.",
       ],
       when: [
         "Plan on frequent visits through the first two and a half years, then one a year until twenty-one. The early appointments track the fastest changes; the later ones track a person becoming responsible for their own health.",
@@ -177,7 +177,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Come to our Willow Creek office at 7138 South Highland Drive, just north of Fort Union Boulevard. From the mouth of Big Cottonwood Canyon the drive takes about five to seven minutes, and from most addresses in the city it is under ten.",
         "Our Cottonwood office at 301 West 5400 South in Murray is about thirteen to seventeen minutes: west on Fort Union to I-215, then north and off at 5300 South. It is a longer trip, but nearly all of it is freeway, so it holds up better in bad weather than the surface route.",
         "There is a third within reach: our Salt Lake office at 3838 South 700 East, about fourteen to eighteen minutes straight north on Highland Drive. Take it when the same trip includes a drop-off at the university or anything else on the east bench.",
-        "For almost everyone here, Willow Creek is the answer. It is closest, it is on the side of the valley you live on, and it is the office your neighbours use. Consider Cottonwood in two cases: if you work west or downtown and would rather drive against the traffic, or if it can see you sooner. In winter, when Fort Union backs up with canyon traffic on a powder morning, the I-215 route can genuinely be the faster of the two.",
+        "For almost everyone here, Willow Creek is the answer. It is closest, it is on the side of the valley you live on, and it is the office your neighbors use. Consider Cottonwood in two cases: if you work west or downtown and would rather drive against the traffic, or if it can see you sooner. In winter, when Fort Union backs up with canyon traffic on a powder morning, the I-215 route can genuinely be the faster of the two.",
       ],
     },
     midvale: {
@@ -193,7 +193,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "That provider also coordinates the rest: our dietitians, our behavioral health team, and specialists outside the practice.",
       ],
       why: [
-        "This is the only appointment designed to find what nobody is looking for. We pick up anaemia, hearing loss, high blood pressure, a mood that has slipped, and vaccine gaps that would otherwise surface at a school registration desk.",
+        "This is the only appointment designed to find what nobody is looking for. We pick up anemia, hearing loss, high blood pressure, a mood that has slipped, and vaccine gaps that would otherwise surface at a school registration desk.",
         "For working families the practical case is just as strong. A well-child visit is a planned half hour, and the conditions it heads off are the ones that otherwise arrive as an unplanned day off.",
       ],
       when: [
@@ -314,8 +314,8 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "Everything else runs through that provider: dietitians, lactation support, behavioral health, and referrals out of the practice.",
       ],
       why: [
-        "Most of what we find has no symptoms yet: vision problems a child has adapted around, anaemia in a picky eater, blood pressure that should not be that high at fourteen, or a mood that has been sliding since autumn.",
-        "This is also the one appointment where nothing is wrong, which makes it the one where there is finally room to ask about sleep, screens, eating, and behaviour without a fever taking up the time.",
+        "Most of what we find has no symptoms yet: vision problems a child has adapted around, anemia in a picky eater, blood pressure that should not be that high at fourteen, or a mood that has been sliding since autumn.",
+        "This is also the one appointment where nothing is wrong, which makes it the one where there is finally room to ask about sleep, screens, eating, and behavior without a fever taking up the time.",
       ],
       when: [
         "Follow the schedule: newborn and two weeks, then 1, 2, 4, 6, 9, 12, 15, 18, 24, and 30 months, then once a year from three through twenty-one.",
@@ -434,7 +434,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
       ],
       why: [
         "We are aiming at what has no symptoms: low iron, hearing loss, blood pressure that is too high for a fourteen-year-old, a vision problem your child has quietly worked around, or a mood that has been sliding.",
-        "This is also the visit where you get to ask about the ordinary things — sleep, screens, eating, siblings, behaviour — the questions that never justify their own appointment but shape a family's year.",
+        "This is also the visit where you get to ask about the ordinary things — sleep, screens, eating, siblings, behavior — the questions that never justify their own appointment but shape a family's year.",
       ],
       when: [
         "Come in by age rather than by how your child seems: newborn and two weeks, then 1, 2, 4, 6, 9, 12, 15, 18, 24, and 30 months, then annually from three through twenty-one.",
@@ -494,7 +494,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "If they need a dietitian, a therapist or a specialist elsewhere, we make the arrangement and stay involved.",
       ],
       why: [
-        "We are looking for the things you would not bring a child in for: anaemia, hearing loss, high blood pressure, or a growth curve that has quietly flattened.",
+        "We are looking for the things you would not bring a child in for: anemia, hearing loss, high blood pressure, or a growth curve that has quietly flattened.",
         "It is also where vaccination stays on track without effort. Miss two years of visits and the gap usually surfaces at a school deadline; keep them and it never comes up.",
       ],
       when: [
@@ -515,13 +515,13 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
     "salt-lake-city": {
       description:
         "Well-child visits in Salt Lake City, Utah. Our Salt Lake office at 3838 South 700 East sees children from birth through age 21, about fifteen minutes from downtown.",
-      lead: "Our Salt Lake office is at 3838 South 700 East, south of the city centre and just off 3900 South.",
+      lead: "Our Salt Lake office is at 3838 South 700 East, south of the city center and just off 3900 South.",
       what: [
         "Once a year we look at the whole child: growth on their own curve, a full physical exam, vision and hearing, the screening due at that age, immunizations, and a conversation about how things actually are at home and at school.",
         "We complete school and sports forms at the same visit, so there is no separate physical to arrange.",
       ],
       who: [
-        "In a city where families move between neighbourhoods often, the constant worth keeping is the person who knows your child. A pediatrician or advanced practice provider takes the visit, and we protect that continuity.",
+        "In a city where families move between neighborhoods often, the constant worth keeping is the person who knows your child. A pediatrician or advanced practice provider takes the visit, and we protect that continuity.",
         "They coordinate the rest: our dietitians, our lactation consultants, our behavioral health team, and specialists outside the practice.",
       ],
       why: [
@@ -615,7 +615,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "They run everything else too: referrals to our dietitians, lactation consultants or behavioral health team, and to specialists outside the practice.",
       ],
       why: [
-        "These visits are aimed at silence. Vision that has slowly worsened, hearing loss, anaemia in a fussy eater, and a curving spine during a growth spurt all arrive without a symptom that would send a family to the doctor.",
+        "These visits are aimed at silence. Vision that has slowly worsened, hearing loss, anemia in a fussy eater, and a curving spine during a growth spurt all arrive without a symptom that would send a family to the doctor.",
         "We bill them as preventive care, and we participate with most health insurance plans and networks. What that means for you depends on your plan, so it is worth asking your insurer what a well-child visit costs you.",
       ],
       when: [
@@ -733,7 +733,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "If a dietitian, a therapist or a specialist outside the practice would help, your provider can arrange it from the visit.",
       ],
       why: [
-        "The findings here are ones nobody has noticed: anaemia, hearing loss, a spine beginning to curve, blood pressure that is too high, or a mood that has been slipping since autumn.",
+        "The findings here are ones nobody has noticed: anemia, hearing loss, a spine beginning to curve, blood pressure that is too high, or a mood that has been slipping since autumn.",
         "In a town where a lot of children play a lot of sport, these visits are also the only routine chance to talk about training load, old head injuries, and eating properly for growth rather than for performance.",
       ],
       when: [
@@ -763,7 +763,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "We also coordinate anything further — our dietitians, our behavioral health team, or a specialist elsewhere — so a referral does not become a second project for you.",
       ],
       why: [
-        "Screening only works while a child is still well. Hearing loss, vision problems, anaemia, a curving spine, high blood pressure, and anxiety are all compatible with a child who seems entirely fine.",
+        "Screening only works while a child is still well. Hearing loss, vision problems, anemia, a curving spine, high blood pressure, and anxiety are all compatible with a child who seems entirely fine.",
         "If you have moved to Layton from elsewhere, and many families have, the annual visit is also where an incomplete history becomes a proper record.",
       ],
       when: [
@@ -794,7 +794,7 @@ export const areaContent: Record<string, Record<string, AreaCopy>> = {
         "When something needs more than a well-child visit — imaging, sports medicine, a psychologist for testing — your provider can point you at it and stay involved.",
       ],
       why: [
-        "Fitness is an excellent disguise. A child who skis all winter and rides all summer can be anaemic, under-fuelled, sleeping badly, or quietly anxious, and none of it will show on the hill.",
+        "Fitness is an excellent disguise. A child who skis all winter and rides all summer can be anemic, under-fuelled, sleeping badly, or quietly anxious, and none of it will show on the hill.",
         "These visits are the one appointment a healthy, active child is guaranteed to have, and they are where we notice the things a season of activity has been hiding.",
       ],
       when: [
