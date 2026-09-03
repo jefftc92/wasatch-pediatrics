@@ -114,8 +114,8 @@ export const symptoms: Symptom[] = [
     description:
       "Coughs in children often last three weeks and that is normal. What the different coughs mean, what to watch in your child's breathing, and when to bring them in.",
     intro: [
-      "Look for fast breathing, skin pulling in between or under the ribs, nostrils flaring, or a baby who cannot finish a feed without stopping for air. Call us if you see any of them. A loud, dramatic cough in a child who is playing and eating is far less concerning than quiet, effortful breathing.",
-      "Expect the cough to outlast the illness that caused it. Three weeks after a cold is ordinary and does not mean we missed something. Do call if the cough was improving and then clearly got worse again. That change of direction is a different pattern, and it is worth a look.",
+      "Very little treats a cough itself, so aim at comfort: fluids through the day, a humidifier at night, and a spoonful of honey at bedtime for a child over one. Skip the over-the-counter cough medicines, which do not work in young children. Then judge the cough by your child's breathing rather than by its sound, because a loud, dramatic cough in a child who is playing and eating worries us far less than quiet, effortful breathing.",
+      "Call us straight away about fast breathing, skin pulling in between or under the ribs, nostrils flaring, or a baby who cannot finish a feed without stopping for air. Short of those signs, expect the cough to outlast the illness that caused it. A cough still hanging on three weeks after a cold is ordinary and does not mean we missed something. The one pattern that should bring you back to us is a cough that was clearly improving and then got worse again.",
     ],
   },
   {
@@ -227,7 +227,7 @@ export const symptoms: Symptom[] = [
       "Diarrhea in children: how long it normally lasts, how to keep your child hydrated, and the signs worth a call to Wasatch Pediatrics.",
     intro: [
       "Keep fluids going and let your child eat normally. Stools that firm up gradually over several days are behaving exactly as they should, and restricting the diet while it happens does not help.",
-      "Call us if you see blood in the stool, if the diarrhea comes with a high fever or severe stomach pain, or if your child will not keep fluids down. Blood, high fever, severe pain and refused fluids each change the picture, so call us rather than waiting any of them out.",
+      "Call us if you see blood in the stool, if the diarrhea comes with a high fever or severe stomach pain, or if your child will not keep fluids down. Each of those changes the picture enough that we would rather hear from you than have you wait it out.",
     ],
   },
   {
@@ -306,7 +306,7 @@ export const symptoms: Symptom[] = [
     description:
       "Head injuries in children: what to watch for in the hours afterward, which signs mean an emergency room, and when to call us.",
     intro: [
-      "Watch for repeated vomiting, a headache that keeps worsening, unusual drowsiness, confusion, unsteadiness on their feet, or a child who is simply not themselves in a way you cannot name. Call us about any of those.",
+      "Watch for repeated vomiting, a headache that keeps worsening, unusual drowsiness, confusion, unsteadiness on their feet, or a child who is simply not themselves in a way you cannot name. Call us if any of those signs appear.",
       "Do not be alarmed by a large soft swelling on the forehead. The scalp bleeds easily, and a swelling there usually means very little. Do go straight to an emergency room if your child lost consciousness, had a seizure, or fell from a significant height.",
     ],
   },
@@ -323,7 +323,7 @@ export const symptoms: Symptom[] = [
       "Widespread rashes in children: which are ordinary viral rashes, the ones that need urgent attention, and how to get seen the same day.",
     intro: [
       "Do the glass test first on any widespread rash. Most viral rashes go pale under pressure and return when you let go. Spots that do not fade, particularly in a child who is unwell with them, mean calling 911 or going straight to an emergency room.",
-      "Then look at your child rather than at the rash. A dramatic rash on a child who is eating, playing and comfortable is a very different thing from the same rash on a child who is floppy, feverish and getting worse.",
+      "Then look at your child rather than at the rash. A dramatic rash on a child who is eating, playing and comfortable is a very different thing from the same rash on a child who is floppy, feverish and getting worse. For an ordinary itchy rash, keep baths short and lukewarm, moisturize while the skin is still damp, and give an antihistamine at bedtime if the itch is keeping your child awake.",
     ],
   },
   {
@@ -370,8 +370,8 @@ export const symptoms: Symptom[] = [
     description:
       "Constipation in children: what actually counts as constipated, why holding on makes it worse, and how we help break the cycle.",
     intro: [
-      "Watch for holding on rather than straining. Crossed legs, going stiff and hiding behind the sofa all look like a child trying to go, and they are almost always a child trying not to. Breaking that cycle is the whole of the treatment.",
-      "Expect it to take months rather than days. We keep stools soft for long enough that a stretched bowel recovers and your child stops expecting pain. Stopping treatment early is the commonest reason constipation comes straight back.",
+      "Soften the stool first and then keep it soft. Call us for a laxative dose matched to your child's age and weight, keep fluids and fruit going through the day, and sit your child on the toilet for a few unhurried minutes after meals. Watch for holding on rather than straining, because crossed legs, going stiff and hiding behind the sofa all look like a child trying to go and are almost always a child trying not to.",
+      "Expect the treatment to take months rather than days. We keep stools soft for long enough that a stretched bowel recovers and your child stops expecting pain. Stopping early is the commonest reason constipation comes straight back.",
     ],
   },
   {
@@ -514,8 +514,8 @@ export const symptoms: Symptom[] = [
     description:
       "Headaches in children: the ordinary causes, the patterns worth attention, and when to book an appointment at Wasatch Pediatrics.",
     intro: [
-      "Go through the ordinary causes honestly before looking further. Ask about sleep, missed meals, how much your child drank, hours on a screen, and what is happening at school. Sleep, meals, water, screens and school stress account for the great majority of childhood headaches, and fixing any of them helps your child regardless.",
-      "Book an appointment if the headaches wake your child from sleep, come with vomiting in the early morning, followed a head injury, or are becoming steadily more frequent or more severe over weeks. A run of headaches over weeks is what we want to look at, rather than a single bad afternoon.",
+      "Go through the ordinary causes honestly before looking further. Ask about sleep, missed meals, how much your child drank, hours on a screen, and what is happening at school. Sleep, meals, water, screens and school stress account for the great majority of childhood headaches, and fixing any one of those causes helps your child regardless.",
+      "Book an appointment if the headaches wake your child from sleep, come with vomiting in the early morning, followed a head injury, or are becoming steadily more frequent or more severe over weeks. A run of headaches over weeks tells us something a single bad afternoon cannot.",
     ],
   },
   {
@@ -1603,7 +1603,7 @@ export const symptoms: Symptom[] = [
       "Infected wounds in children: what infection actually looks like, why the timing matters, and what needs urgent care.",
     intro: [
       "Watch the direction of travel. A wound is normally most painful and most red on day one and improves after that. Infection reverses the pattern: more redness, more pain and more swelling on day two or three, often with warmth, pus and a fever.",
-      "Draw a line around the redness with a pen and note the time, so you can tell us whether it is spreading and how fast. Call us today for any of these signs. Seek care immediately for red streaks running from the wound, spreading redness with a fever, or a wound that has become severely painful out of proportion to how it looks.",
+      "Draw a line around the redness with a pen and note the time, so you can tell us whether the edge is moving and how fast. Call us today if the redness, the pain or the swelling is increasing. Seek care immediately for red streaks running from the wound, spreading redness with a fever, or a wound that has become severely painful out of proportion to how it looks.",
     ],
   },
   {
@@ -2018,7 +2018,7 @@ export const symptoms: Symptom[] = [
     description:
       "Antibiotics for children: which illnesses need them, why green mucus is not a reason, and the cost of taking them when they will not help.",
     intro: [
-      "Expect no antibiotic for colds, most sore throats, most coughs, flu, croup or bronchiolitis, because viruses cause all of them. Green or yellow mucus is part of an ordinary cold and does not change that. Expect one for strep throat confirmed by a swab, most urinary infections, and skin infections such as impetigo or cellulitis.",
+      "Expect no antibiotic for colds, most sore throats, most coughs, flu, croup or bronchiolitis, because viruses cause all of those illnesses. Green or yellow mucus is part of an ordinary cold and does not call for one either. Expect an antibiotic for strep throat confirmed by a swab, most urinary infections, and skin infections such as impetigo or cellulitis.",
       "Finish any course we do prescribe, and never use a leftover prescription or somebody else's. Antibiotics taken when they cannot help still cause diarrhea, rashes and yeast infections, and they make the bacteria your child carries harder to treat next time.",
     ],
   },
@@ -2162,7 +2162,7 @@ export const symptoms: Symptom[] = [
     description:
       "Newborn appearance: the odd-looking things that are normal, how long each lasts, and the few worth asking about.",
     intro: [
-      "Expect a head molded into a cone by the birth, puffy eyelids, swollen breasts and genitals from your hormones, peeling skin in the first week, and eyes that wander or cross in the early months. All of those settle on their own and need nothing done.",
+      "Expect a head molded into a cone by the birth, puffy eyelids, swollen breasts and genitals from your hormones, peeling skin in the first week, and eyes that wander or cross in the early months. All of those features settle on their own and need nothing done.",
       "Ask us about anything that is not settling: eyes still crossing after four months, a soft spot that looks sunken or bulges when your baby is calm and upright, a head shape becoming more rather than less uneven, or any asymmetry in how your baby moves their arms and legs.",
     ],
   },
