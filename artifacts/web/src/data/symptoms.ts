@@ -170,7 +170,7 @@ export const symptoms: Symptom[] = [
     slug: "earache",
     title: "Earache in Children",
     short: "Earache",
-    group: "Skin, eyes and ears",
+    group: "Ears, nose, mouth and teeth",
     heading: "What to do about an earache",
     aap: "Earache",
     lead:
@@ -227,7 +227,7 @@ export const symptoms: Symptom[] = [
       "Diarrhea in children: how long it normally lasts, how to keep your child hydrated, and the signs worth a call to Wasatch Pediatrics.",
     intro: [
       "Keep fluids going and let your child eat normally. Stools that firm up gradually over several days are behaving exactly as they should, and restricting the diet while it happens does not help.",
-      "Call us if you see blood in the stool, if the diarrhea comes with a high fever or severe stomach pain, or if your child will not keep fluids down. Those change the picture and are worth a call rather than a wait.",
+      "Call us if you see blood in the stool, if the diarrhea comes with a high fever or severe stomach pain, or if your child will not keep fluids down. Blood, high fever, severe pain and refused fluids each change the picture, so call us rather than waiting any of them out.",
     ],
   },
   {
@@ -258,7 +258,7 @@ export const symptoms: Symptom[] = [
     description:
       "Flu in children: how it differs from a cold, why timing matters for antiviral treatment, and same-day appointments at Wasatch Pediatrics.",
     intro: [
-      "Recognize flu by how fast it arrives. A child who was fine at lunchtime is flat on the sofa by evening with a high fever, aching limbs and a headache. That abruptness separates it from a cold, which builds over days.",
+      "Recognize flu by how fast it arrives. A child who was fine at lunchtime is flat on the sofa by evening with a high fever, aching limbs and a headache. Flu arrives that fast, while a cold builds over several days.",
       "Do not expect a quick recovery. Several days of fever and aching is normal, and the cough often hangs on a week or two after everything else has passed. Antivirals do not suit every child — call and we will tell you whether they suit yours.",
     ],
   },
@@ -298,7 +298,7 @@ export const symptoms: Symptom[] = [
     slug: "head-injury",
     title: "Head Injury in Children",
     short: "Head injury",
-    group: "Knocks and bleeds",
+    group: "Knocks, pain and injuries",
     heading: "What to do after a head injury",
     aap: "Head Injury",
     lead:
@@ -314,7 +314,7 @@ export const symptoms: Symptom[] = [
     slug: "rash",
     title: "Rashes in Children",
     short: "Rashes",
-    group: "Skin, eyes and ears",
+    group: "Skin and rashes",
     heading: "What to do about a rash",
     aap: "Rash or Redness - Widespread",
     lead:
@@ -330,7 +330,7 @@ export const symptoms: Symptom[] = [
     slug: "hives",
     title: "Hives in Children",
     short: "Hives",
-    group: "Skin, eyes and ears",
+    group: "Skin and rashes",
     heading: "What to do about hives",
     aap: "Hives",
     lead:
@@ -346,7 +346,7 @@ export const symptoms: Symptom[] = [
     slug: "pink-eye",
     title: "Pink Eye in Children",
     short: "Pink eye",
-    group: "Skin, eyes and ears",
+    group: "Eyes",
     heading: "What to do about pink eye",
     aap: "Eye - Pus or Discharge",
     lead:
@@ -354,7 +354,7 @@ export const symptoms: Symptom[] = [
     description:
       "Pink eye in children: telling viral from bacterial, whether drops are needed, and when a child can go back to school.",
     intro: [
-      "Wipe from the inner corner outwards with a clean cloth each time, give your child their own towel, and wash your hands often. That stops it crossing to the other eye and around the house better than any drop will.",
+      "Wipe from the inner corner outwards with a clean cloth each time, give your child their own towel, and wash your hands often. Careful wiping and separate towels stop pink eye crossing to the other eye and around the household better than any drop will.",
       "Call us rather than waiting if your child has real pain rather than irritation, if their vision has changed, if bright light hurts them, if the eye was injured, or if your baby is a newborn.",
     ],
   },
@@ -394,7 +394,7 @@ export const symptoms: Symptom[] = [
     slug: "teething",
     title: "Teething in Babies",
     short: "Teething",
-    group: "Babies",
+    group: "Babies and newborns",
     heading: "What to do about teething",
     aap: "Teething",
     lead:
@@ -410,7 +410,7 @@ export const symptoms: Symptom[] = [
     slug: "newborn-jaundice",
     title: "Jaundice in Newborns",
     short: "Newborn jaundice",
-    group: "Babies",
+    group: "Babies and newborns",
     heading: "What to do about newborn jaundice",
     aap: "Jaundiced Newborn",
     lead:
@@ -426,7 +426,7 @@ export const symptoms: Symptom[] = [
     slug: "crying-baby",
     title: "A Crying Baby Under 3 Months",
     short: "A baby who will not stop crying",
-    group: "Babies",
+    group: "Babies and newborns",
     heading: "What to do when your baby will not stop crying",
     aap: "Crying Baby - Before 3 Months Old",
     lead:
@@ -434,7 +434,7 @@ export const symptoms: Symptom[] = [
     description:
       "A baby under three months who will not stop crying: what is normal, what helps, and when to call. Wasatch Pediatrics answers 24 hours a day.",
     intro: [
-      "Work through the ordinary causes first: hungry, wet, too hot, too cold, wind, or wanting to be held. Then try movement — a carrier, a walk outside, white noise, or simply a different pair of arms. Those work more often than anything else you can buy.",
+      "Work through the ordinary causes first: hungry, wet, too hot, too cold, wind, or wanting to be held. Then try movement — a carrier, a walk outside, white noise, or simply a different pair of arms. Movement, noise and a change of arms settle a crying baby more often than anything you can buy.",
       "Call us about crying that is different rather than crying that is long: a weak or high-pitched cry, a baby who has gone floppy or is hard to rouse, crying alongside a fever, or a sudden change in a baby who had been settled.",
     ],
   },
@@ -442,7 +442,7 @@ export const symptoms: Symptom[] = [
     slug: "immunization-reactions",
     title: "Reactions After Immunizations",
     short: "After immunizations",
-    group: "Babies",
+    group: "Babies and newborns",
     heading: "What to do after immunizations",
     aap: "Immunization Reactions",
     lead:
@@ -458,7 +458,7 @@ export const symptoms: Symptom[] = [
     slug: "insect-bites",
     title: "Insect Bites in Children",
     short: "Insect bites",
-    group: "Skin, eyes and ears",
+    group: "Bites and stings",
     heading: "What to do about insect bites",
     aap: "Insect Bite",
     lead:
@@ -474,7 +474,7 @@ export const symptoms: Symptom[] = [
     slug: "tick-bites",
     title: "Tick Bites in Children",
     short: "Tick bites",
-    group: "Skin, eyes and ears",
+    group: "Bites and stings",
     heading: "What to do about a tick bite",
     aap: "Tick Bite",
     lead:
@@ -490,7 +490,7 @@ export const symptoms: Symptom[] = [
     slug: "nosebleeds",
     title: "Nosebleeds in Children",
     short: "Nosebleeds",
-    group: "Knocks and bleeds",
+    group: "Knocks, pain and injuries",
     heading: "What to do about a nosebleed",
     aap: "Nosebleed",
     lead:
@@ -506,7 +506,7 @@ export const symptoms: Symptom[] = [
     slug: "headache",
     title: "Headaches in Children",
     short: "Headaches",
-    group: "Knocks and bleeds",
+    group: "Knocks, pain and injuries",
     heading: "What to do about headaches",
     aap: "Headache",
     lead:
@@ -514,8 +514,2184 @@ export const symptoms: Symptom[] = [
     description:
       "Headaches in children: the ordinary causes, the patterns worth attention, and when to book an appointment at Wasatch Pediatrics.",
     intro: [
-      "Go through the ordinary causes honestly before looking further. Ask about sleep, missed meals, how much your child drank, hours on a screen, and what is happening at school. Those account for the great majority, and fixing them is worth doing regardless.",
-      "Book an appointment if the headaches wake your child from sleep, come with vomiting in the early morning, followed a head injury, or are becoming steadily more frequent or more severe over weeks. That pattern is what we want to look at, rather than a single bad afternoon.",
+      "Go through the ordinary causes honestly before looking further. Ask about sleep, missed meals, how much your child drank, hours on a screen, and what is happening at school. Sleep, meals, water, screens and school stress account for the great majority of childhood headaches, and fixing any of them helps your child regardless.",
+      "Book an appointment if the headaches wake your child from sleep, come with vomiting in the early morning, followed a head injury, or are becoming steadily more frequent or more severe over weeks. A run of headaches over weeks is what we want to look at, rather than a single bad afternoon.",
+    ],
+  },
+  {
+    slug: "eczema",
+    title: "Eczema in Children",
+    short: "Eczema",
+    group: "Skin and rashes",
+    heading: "What to do about eczema",
+    aap: "Eczema",
+    lead:
+      "Moisturize every single day, not only when the skin flares — dry skin is what lets eczema start.",
+    description:
+      "Eczema in children: the daily moisturizing that prevents flares, how to use steroid creams without fear, and when to bring your child in.",
+    intro: [
+      "Apply a thick, unscented moisturizer at least twice a day, and put it on within three minutes of a bath while the skin still holds water. Choose an ointment or a heavy cream over a lotion, because lotions contain more water and evaporate.",
+      "Use the steroid cream we prescribe for as long as we tell you, rather than stopping the moment the redness fades. Parents commonly under-treat a flare from worry about steroids, and under-treating drags the flare out. Call us if the skin weeps, crusts yellow, or your child develops a fever, because eczema that is infected needs different treatment.",
+    ],
+  },
+  {
+    slug: "diaper-rash",
+    title: "Diaper Rash",
+    short: "Diaper rash",
+    group: "Skin and rashes",
+    heading: "What to do about diaper rash",
+    aap: "Diaper Rash",
+    lead:
+      "Change diapers more often and coat the skin with a thick zinc oxide barrier at every change.",
+    description:
+      "Diaper rash: the barrier cream and changing routine that clears most of it, how to tell yeast apart from ordinary rash, and when to call us.",
+    intro: [
+      "Change your baby the moment the diaper is wet or soiled, clean with water and a soft cloth rather than scented wipes, and let the skin dry in the air for a few minutes before you put a fresh diaper on. Then spread zinc oxide paste thickly, like frosting rather than lotion — you should not be able to see the skin through it.",
+      "Suspect yeast when the rash is bright red, has a clear scalloped edge, and shows small spots scattered beyond the main patch, especially in the creases. Yeast needs an antifungal cream rather than a barrier alone, so call us if a rash looks like that or has not improved after three days of good barrier care.",
+    ],
+  },
+  {
+    slug: "cradle-cap",
+    title: "Cradle Cap",
+    short: "Cradle cap",
+    group: "Skin and rashes",
+    heading: "What to do about cradle cap",
+    aap: "Cradle Cap",
+    lead:
+      "Cradle cap is harmless, does not itch, and clears on its own — soften the scale with oil and brush it gently rather than picking at it.",
+    description:
+      "Cradle cap in babies: how to loosen the scale safely, what not to do, and the rare signs that mean calling us.",
+    intro: [
+      "Rub a little baby oil or petroleum jelly into the scalp an hour before a bath, then loosen the softened scale with a soft brush and wash it out with baby shampoo. Repeat every few days rather than trying to clear the whole scalp at once.",
+      "Never pick dry scale off, because picking breaks the skin and invites infection. Call us if the scalp becomes red and weepy, if the rash spreads down onto the face and body, or if your baby seems itchy — cradle cap itself does not itch, so an itchy baby has something else going on.",
+    ],
+  },
+  {
+    slug: "heat-rash",
+    title: "Heat Rash in Children",
+    short: "Heat rash",
+    group: "Skin and rashes",
+    heading: "What to do about heat rash",
+    aap: "Heat Rash",
+    lead:
+      "Cool your child down and take a layer off — heat rash clears within a day or two once the skin stops sweating.",
+    description:
+      "Heat rash in children: how to cool the skin, what to avoid putting on it, and how to tell heat rash from a rash that needs looking at.",
+    intro: [
+      "Move your child somewhere cooler, remove a layer of clothing, and let the skin breathe. A lukewarm bath without soap helps, and so does dressing your child in loose cotton rather than anything synthetic or tight.",
+      "Skip creams and ointments, which trap heat against the skin and make heat rash worse rather than better. Call us if the little bumps turn into pustules, if the skin becomes painful or swollen, or if your child runs a fever, because those changes point to an infection rather than to blocked sweat glands.",
+    ],
+  },
+  {
+    slug: "hand-foot-and-mouth",
+    title: "Hand, Foot and Mouth Disease",
+    short: "Hand, foot and mouth",
+    group: "Skin and rashes",
+    heading: "What to do about hand, foot and mouth disease",
+    aap: "Hand-Foot-and-Mouth Disease-Viral Rash",
+    lead:
+      "Keep your child drinking, because the mouth ulcers hurt more than the spots and dehydration is the real risk.",
+    description:
+      "Hand, foot and mouth disease: managing the mouth pain so your child keeps drinking, how long it lasts, and when to call us.",
+    intro: [
+      "Offer cold drinks, ice pops and cool soft food, and give pain medicine before meals rather than after. Sore mouth ulcers stop children drinking, and dehydration — not the virus — is what brings most of these children in to see us.",
+      "Expect the spots on the hands and feet to last about a week and the mouth ulcers about the same. Peeling fingernails and toenails a few weeks later happen to some children and mean nothing. Call us if your child stops passing urine, refuses all fluids, or becomes floppy and hard to rouse.",
+    ],
+  },
+  {
+    slug: "chickenpox",
+    title: "Chickenpox in Children",
+    short: "Chickenpox",
+    group: "Skin and rashes",
+    heading: "What to do about chickenpox",
+    aap: "Chickenpox",
+    lead:
+      "Treat the itch and never give ibuprofen or aspirin for chickenpox — both raise the risk of serious complications.",
+    description:
+      "Chickenpox in children: safe pain relief, controlling the itch, how long a child stays contagious, and when to call us.",
+    intro: [
+      "Use acetaminophen for fever and discomfort. Avoid ibuprofen, which has been linked to severe skin infections in chickenpox, and never give aspirin to a child with chickenpox because of the risk of Reye syndrome. For the itch, try cool oatmeal baths, calamine lotion and an oral antihistamine at night, and cut your child's fingernails short.",
+      "Keep your child home until every blister has crusted over, which usually takes about a week from the first spot. Call us if any spot becomes hot, red and spreading, if your child develops a high fever after the rash had settled, or if your child is a newborn, is pregnant, or has a weakened immune system.",
+    ],
+  },
+  {
+    slug: "impetigo",
+    title: "Impetigo in Children",
+    short: "Impetigo",
+    group: "Skin and rashes",
+    heading: "What to do about impetigo",
+    aap: "Impetigo - Infected Sores",
+    lead:
+      "Impetigo spreads on fingers and towels, so cover the sores, wash hands often, and call us for the antibiotic that clears it.",
+    description:
+      "Impetigo in children: the honey-crusted sores, how to stop it spreading through the house, and when your child can go back to school.",
+    intro: [
+      "Recognize impetigo by its crust, which looks like dried honey stuck to red skin, usually around the nose and mouth. Wash the area gently with soap and water, cover it with a loose dressing, and give your child their own towel and washcloth.",
+      "Call us, because impetigo needs an antibiotic — a cream for a small patch, tablets for anything more widespread. Most schools ask that a child stay home until 24 hours after treatment starts, or until the sores have crusted and are covered.",
+    ],
+  },
+  {
+    slug: "ringworm",
+    title: "Ringworm in Children",
+    short: "Ringworm",
+    group: "Skin and rashes",
+    heading: "What to do about ringworm",
+    aap: "Ringworm",
+    lead:
+      "Ringworm is a fungus, not a worm, and an antifungal cream clears it — but keep applying it for two weeks after the ring disappears.",
+    description:
+      "Ringworm in children: what the ring looks like, which cream to use and for how long, and why scalp ringworm needs a prescription.",
+    intro: [
+      "Apply an over-the-counter antifungal cream to the patch and about an inch beyond its edge, twice a day. Keep going for two weeks after the ring has vanished, because stopping when it looks clear is why ringworm so often comes back.",
+      "Call us for ringworm on the scalp, which shows up as a scaly bald patch and never responds to cream — scalp ringworm needs an oral antifungal prescription. Call us too if the patch is spreading despite two weeks of treatment, or if the skin becomes swollen and tender.",
+    ],
+  },
+  {
+    slug: "scabies",
+    title: "Scabies in Children",
+    short: "Scabies",
+    group: "Skin and rashes",
+    heading: "What to do about scabies",
+    aap: "Scabies-Itch Mite Rash",
+    lead:
+      "Scabies itches worst at night, and everyone in the house needs treating on the same day, whether or not they itch.",
+    description:
+      "Scabies in children: recognizing the intense night-time itch, treating the whole household at once, and why the itch outlasts the mites.",
+    intro: [
+      "Call us for the prescription cream, then treat every person in the household on the same day — including anyone with no rash, because mites take weeks to cause itching and an untreated person will simply reinfect everyone else. Apply the cream from the neck down, and over the scalp too in babies.",
+      "Wash bedding, towels and clothing used in the previous three days in hot water and dry them on high heat. Expect the itch to carry on for two to four weeks after successful treatment, which is an allergic reaction to dead mites rather than a sign the treatment failed.",
+    ],
+  },
+  {
+    slug: "molluscum",
+    title: "Molluscum in Children",
+    short: "Molluscum",
+    group: "Skin and rashes",
+    heading: "What to do about molluscum",
+    aap: "Molluscum",
+    lead:
+      "Molluscum bumps clear on their own without treatment, though clearing can take six months to two years.",
+    description:
+      "Molluscum in children: why we usually leave the bumps alone, how to stop them spreading, and when treatment is worth it.",
+    intro: [
+      "Leave the bumps alone in most cases. Molluscum is a harmless virus, and the treatments available are uncomfortable enough that watching and waiting usually serves a child better. Stop your child scratching, because scratching spreads the virus to new patches of skin.",
+      "Cover bumps under clothing for sports, keep towels and baths separate from siblings, and treat any eczema nearby, since broken skin is where molluscum spreads fastest. Talk to us about treatment if the bumps are on the face, are spreading rapidly, or are causing your child distress.",
+    ],
+  },
+  {
+    slug: "warts",
+    title: "Warts in Children",
+    short: "Warts",
+    group: "Skin and rashes",
+    heading: "What to do about warts",
+    aap: "Warts",
+    lead:
+      "Most warts disappear on their own within two years, and salicylic acid speeds that up if you use it daily for weeks.",
+    description:
+      "Warts in children: the treatment that works at home, how long it takes, and which warts to bring in.",
+    intro: [
+      "Soak the wart in warm water for five minutes, file the dead surface down with an emery board kept only for that wart, then apply salicylic acid and cover it. Repeat every day. Expect this to take eight to twelve weeks — most families stop far too early and conclude it did not work.",
+      "Bring your child in for warts on the face or genitals, warts that bleed or change shape, or warts that have not budged after three months of daily treatment. Do not use over-the-counter freezing kits on a small child's face or hands without asking us first.",
+    ],
+  },
+  {
+    slug: "poison-ivy",
+    title: "Poison Ivy, Oak and Sumac",
+    short: "Poison ivy",
+    group: "Skin and rashes",
+    heading: "What to do about poison ivy",
+    aap: "Poison Ivy - Oak - Sumac",
+    lead:
+      "Wash the oil off with soap and cool water within an hour, and wash whatever your child was wearing — the rash spreads from lingering oil, not from the blisters.",
+    description:
+      "Poison ivy, oak and sumac in children: washing the oil off in time, calming the rash, and the reactions that need to be seen.",
+    intro: [
+      "Scrub the skin with soap and cool water as soon as you realize what happened, then wash the clothes, shoes and anything else that touched the plant. The rash cannot spread from one part of the body to another, and blister fluid is not contagious — new patches appear because oil is still on something your child keeps touching.",
+      "Calm the rash with cool compresses, calamine lotion and an oral antihistamine at night. Call us if the rash covers a large area, reaches the face or genitals, or if your child's eyes swell shut, because a reaction that widespread usually needs oral steroids rather than cream.",
+    ],
+  },
+  {
+    slug: "fifth-disease",
+    title: "Fifth Disease",
+    short: "Fifth disease",
+    group: "Skin and rashes",
+    heading: "What to do about fifth disease",
+    aap: "Fifth Disease-Viral Rash",
+    lead:
+      "By the time the bright red cheeks appear, your child is no longer contagious and needs no treatment.",
+    description:
+      "Fifth disease in children: the slapped-cheek rash, why your child can stay in school, and who does need to avoid it.",
+    intro: [
+      "Send your child back to school once the rash appears. Fifth disease spreads during the mild cold that comes before the rash, so the slapped-cheek look actually marks the end of the contagious period rather than the start.",
+      "Expect the lacy rash on the arms and body to come and go for weeks, flaring in a warm bath or in sunlight. Tell anyone pregnant who has been in contact, and call us if your child has sickle cell disease or a weakened immune system, because fifth disease affects those children differently.",
+    ],
+  },
+  {
+    slug: "roseola",
+    title: "Roseola",
+    short: "Roseola",
+    group: "Skin and rashes",
+    heading: "What to do about roseola",
+    aap: "Roseola-Viral Rash",
+    lead:
+      "Roseola runs three days of high fever and then breaks into a rash just as your child starts to feel better.",
+    description:
+      "Roseola in babies and toddlers: the pattern of high fever then rash, why the rash is good news, and what to watch during the fever.",
+    intro: [
+      "Treat the fever for comfort and keep fluids going for the two to three days it lasts. Watch for the giveaway pattern: the fever breaks, and within a day a pink rash appears on the trunk and spreads outward while your child is visibly improving.",
+      "Expect the rash to fade in one to three days and to need no treatment at all. Call us during the fever phase if your baby is under three months, becomes hard to rouse, or has a seizure — febrile seizures happen in a small number of children with roseola and always need assessing, even though most cause no lasting harm.",
+    ],
+  },
+  {
+    slug: "hair-loss",
+    title: "Hair Loss in Children",
+    short: "Hair loss",
+    group: "Skin and rashes",
+    heading: "What to do about hair loss",
+    aap: "Hair Loss",
+    lead:
+      "Bring your child in so we can look at the scalp — the cause of hair loss decides the treatment, and the causes look quite different from one another.",
+    description:
+      "Hair loss in children: the common causes, what the scalp tells us, and why a look in person settles it faster than anything else.",
+    intro: [
+      "Look at the bare patch before you call. A scaly, broken-off patch usually means scalp ringworm, which needs an oral prescription. Smooth, completely bald circles suggest alopecia areata. Hair that thinned all over a few months after an illness, an operation or a stressful stretch is usually telogen effluvium, which recovers on its own.",
+      "Tell us if your child twists or pulls at their hair, because habit-related hair pulling is common and we treat it quite differently from the rest. Bring your child in either way — these conditions look similar in a photograph and quite different under a light.",
+    ],
+  },
+  {
+    slug: "dry-skin",
+    title: "Dry and Cracked Skin",
+    short: "Dry skin",
+    group: "Skin and rashes",
+    heading: "What to do about dry skin",
+    aap: "Cracked or Dry Skin",
+    lead:
+      "Shorten the bath, drop the soap, and moisturize while the skin is still damp — Utah's air does the rest of the damage on its own.",
+    description:
+      "Dry and cracked skin in children: the bathing routine that helps, which moisturizers work, and when dry skin is something else.",
+    intro: [
+      "Keep baths to five or ten minutes in warm rather than hot water, use a gentle cleanser only where your child is actually dirty, and pat rather than rub dry. Apply a thick unscented ointment or cream within three minutes, while the skin still holds water from the bath.",
+      "Run a humidifier in the bedroom through the winter. Call us if the skin cracks deeply enough to bleed, if patches become red, weepy or crusted, or if the dryness itches enough to wake your child, because persistent itch usually means eczema rather than dry skin alone.",
+    ],
+  },
+  {
+    slug: "sunburn",
+    title: "Sunburn in Children",
+    short: "Sunburn",
+    group: "Skin and rashes",
+    heading: "What to do about sunburn",
+    aap: "Sunburn",
+    lead:
+      "Cool the skin, push fluids, and give ibuprofen early — the redness you can see at bedtime will look worse in the morning.",
+    description:
+      "Sunburn in children: cooling the skin, easing the pain, what not to put on a burn, and when a sunburn needs to be seen.",
+    intro: [
+      "Put your child in a cool bath or lay cool wet cloths on the skin, then apply plain aloe vera gel or a light moisturizer. Give ibuprofen in the first few hours, which does more for the pain and swelling than anything applied to the surface. Offer extra fluids, because burned skin loses water fast.",
+      "Never use butter, petroleum jelly or anything numbing that ends in caine, and leave blisters alone rather than popping them. Call us for a sunburn with widespread blistering, a burn on a baby under a year, or a sunburned child who develops a fever, chills, headache or confusion.",
+    ],
+  },
+  {
+    slug: "boil",
+    title: "Boils in Children",
+    short: "Boils",
+    group: "Skin and rashes",
+    heading: "What to do about a boil",
+    aap: "Boil",
+    lead:
+      "Hold a warm compress on a boil for fifteen minutes four times a day, and never squeeze it.",
+    description:
+      "Boils in children: the warm compresses that bring one to a head, why squeezing makes it worse, and when a boil needs draining.",
+    intro: [
+      "Soak a clean cloth in warm water and hold it against the boil for about fifteen minutes, four times a day. Warmth brings a boil to the surface so it drains by itself, which is the outcome you want. Squeezing pushes infection deeper into the skin and is the commonest reason a simple boil turns into something that needs cutting.",
+      "Cover a draining boil with a dressing, wash your hands afterward, and keep towels separate. Call us if the boil is bigger than a large coin, sits on the face or spine, comes with fever, or has not drained after three days of compresses — some boils need a small procedure to open them.",
+    ],
+  },
+  {
+    slug: "skin-lump",
+    title: "Skin Lumps in Children",
+    short: "Skin lumps",
+    group: "Skin and rashes",
+    heading: "What to do about a skin lump",
+    aap: "Skin Lump",
+    lead:
+      "Most lumps under a child's skin are swollen lymph nodes or harmless cysts, but let us feel any lump that keeps growing.",
+    description:
+      "Lumps under the skin in children: which ones are ordinary, what to note before you call, and the ones we want to examine.",
+    intro: [
+      "Note four things before you call: where the lump sits, how big it is against a coin, whether it moves when you press it, and whether your child was recently ill. A soft, mobile lump in the neck after a cold is almost always a lymph node doing its job.",
+      "Book an appointment for a lump that keeps growing over weeks, feels hard and fixed in place, sits above the collarbone, or comes with night sweats, weight loss or a fever that will not settle. Call sooner if the skin over the lump turns red, hot and painful, which points to an infection.",
+    ],
+  },
+  {
+    slug: "blisters",
+    title: "Blisters in Children",
+    short: "Blisters",
+    group: "Skin and rashes",
+    heading: "What to do about a blister",
+    aap: "Blisters",
+    lead:
+      "Leave a blister intact if you can — the roof of it is the best dressing your child has.",
+    description:
+      "Blisters in children: when to leave one alone, how to drain a painful one safely, and the signs of infection.",
+    intro: [
+      "Cover an intact blister with a padded dressing and let it be. The skin over the top keeps bacteria out and pain down, and it will peel away by itself once new skin has formed underneath.",
+      "Drain only a large, tense blister that hurts to walk or grip on. Clean the skin, pierce the edge with a needle sterilized in alcohol, press the fluid out gently, and leave the roof in place. Call us if the surrounding skin becomes red and spreading, if pus appears, or if your child develops a fever.",
+    ],
+  },
+  {
+    slug: "mosquito-bites",
+    title: "Mosquito Bites in Children",
+    short: "Mosquito bites",
+    group: "Bites and stings",
+    heading: "What to do about mosquito bites",
+    aap: "Mosquito Bite",
+    lead:
+      "Children swell far more than adults do after a mosquito bite, and a large firm lump is still an ordinary reaction.",
+    description:
+      "Mosquito bites in children: why the swelling looks alarming, what stops the itch, and how to tell a big reaction from an infection.",
+    intro: [
+      "Hold a cold pack on the bite for ten minutes and give an oral antihistamine if the itching keeps your child awake. Cut the fingernails short, because scratching is what turns a mosquito bite into an infected one.",
+      "Watch which way the swelling is heading. A bite that puffs up within hours and starts settling by the next day is normal, even when it is the size of a plum. Call us if the bite becomes hotter, redder and more painful on day two or three, if red streaks run from it, or if your child develops a fever.",
+    ],
+  },
+  {
+    slug: "bee-sting",
+    title: "Bee and Wasp Stings",
+    short: "Bee and wasp stings",
+    group: "Bites and stings",
+    heading: "What to do about a bee or wasp sting",
+    aap: "Bee or Yellow Jacket Sting",
+    lead:
+      "Scrape a bee's stinger out sideways with a card rather than pulling it, then watch your child for fifteen minutes.",
+    description:
+      "Bee and wasp stings in children: removing the stinger, easing the pain and swelling, and the reaction that means calling 911.",
+    intro: [
+      "Scrape the stinger off with the edge of a credit card or a fingernail. Squeezing it with tweezers pumps more venom into the skin. Then wash the area, apply a cold pack for twenty minutes, and give ibuprofen for the pain.",
+      "Call 911 immediately if your child has trouble breathing, swelling of the lips, tongue or throat, widespread hives, vomiting, or goes pale and floppy — that combination is anaphylaxis, and epinephrine cannot wait. Local swelling that spreads over a day or two and stays confined to the stung limb is uncomfortable but not dangerous.",
+    ],
+  },
+  {
+    slug: "spider-bite",
+    title: "Spider Bites in Children",
+    short: "Spider bites",
+    group: "Bites and stings",
+    heading: "What to do about a spider bite",
+    aap: "Spider Bite",
+    lead:
+      "Most bites blamed on spiders are not spider bites at all — they are skin infections, and they need treating as such.",
+    description:
+      "Spider bites in children: what most 'spider bites' actually are, first aid for a genuine bite, and the two spiders that matter in Utah.",
+    intro: [
+      "Wash the area, apply a cold pack and give pain relief. Then look again in a day. A single painful lump with a spreading red edge that grows over 48 hours is almost always a skin infection rather than a bite, and it needs an antibiotic — call us for it.",
+      "Call us straight away if your child was bitten by a black widow or a brown recluse, or if you cannot rule them out. Severe muscle cramps and stomach pain suggest a widow bite; a bite that darkens into an ulcer over days suggests a recluse. Bring the spider if you safely can.",
+    ],
+  },
+  {
+    slug: "fire-ant-sting",
+    title: "Fire Ant Stings",
+    short: "Fire ant stings",
+    group: "Bites and stings",
+    heading: "What to do about fire ant stings",
+    aap: "Fire Ant Sting",
+    lead:
+      "Fire ant stings turn into small pus-filled blisters within a day, and those blisters are the normal reaction rather than an infection.",
+    description:
+      "Fire ant stings in children: expecting the pustules, easing the burn and itch, and the reaction that needs 911.",
+    intro: [
+      "Wash the stings, apply a cold pack for twenty minutes, and give an antihistamine for the itch. Expect a small pustule to form on each sting within 24 hours. Leave those alone — opening them is what leads to infection.",
+      "Call 911 if your child develops widespread hives, trouble breathing, or swelling of the face and mouth after being stung. Call us if a sting site becomes hot and spreading over days, which points to a genuine skin infection on top of the stings.",
+    ],
+  },
+  {
+    slug: "bed-bug-bites",
+    title: "Bed Bug Bites",
+    short: "Bed bug bites",
+    group: "Bites and stings",
+    heading: "What to do about bed bug bites",
+    aap: "Bed Bug Bite",
+    lead:
+      "Bed bug bites come in lines or clusters on skin that was uncovered in bed, and treating the room matters more than treating the skin.",
+    description:
+      "Bed bug bites in children: recognizing the pattern, easing the itch, and dealing with the room the bites came from.",
+    intro: [
+      "Wash the bites with soap and water, apply a cold pack, and use an antihistamine at night for the itch. Look for the pattern that gives bed bugs away: three or four bites in a line or a tight cluster, on arms, shoulders, neck or legs that were outside the covers.",
+      "Deal with the room, because bites will keep appearing until you do. Strip and hot-wash all bedding, vacuum the mattress and frame, and arrange professional treatment — bed bugs rarely go away with home remedies. Call us if bites become infected from scratching.",
+    ],
+  },
+  {
+    slug: "scorpion-sting",
+    title: "Scorpion Stings",
+    short: "Scorpion stings",
+    group: "Bites and stings",
+    heading: "What to do about a scorpion sting",
+    aap: "Scorpion Sting",
+    lead:
+      "Wash the sting, apply a cold pack, and call Poison Control — they will tell you whether this particular scorpion needs more than home care.",
+    description:
+      "Scorpion stings in children: immediate first aid, calling Poison Control, and the symptoms that mean an emergency room.",
+    intro: [
+      "Wash the site with soap and water, hold a cold pack on it, and keep your child still and calm. Call Poison Control at 1-800-222-1222, which is staffed around the clock and can identify which species matter where you live.",
+      "Go to an emergency room now if your child develops muscle twitching, jerking limbs, roving eye movements, drooling, difficulty swallowing, or trouble breathing after a sting. Children react far more severely than adults to the scorpion stings that matter, and those signs need treatment rather than observation.",
+    ],
+  },
+  {
+    slug: "jellyfish-sting",
+    title: "Jellyfish Stings",
+    short: "Jellyfish stings",
+    group: "Bites and stings",
+    heading: "What to do about a jellyfish sting",
+    aap: "Jellyfish Sting",
+    lead:
+      "Rinse the sting with seawater rather than fresh water, lift off any tentacles, and soak the area in hot water for twenty minutes.",
+    description:
+      "Jellyfish stings in children: rinsing correctly, removing tentacles, easing the pain, and the reaction that needs 911.",
+    intro: [
+      "Rinse with seawater, not tap water — fresh water makes undischarged stinging cells fire. Lift visible tentacles off with tweezers or a gloved hand rather than rubbing them, then soak the area in water as hot as your child can comfortably stand for twenty minutes.",
+      "Skip the folk remedies. Urine, alcohol and meat tenderizer either do nothing or make the sting worse. Call 911 if your child has trouble breathing, chest pain, widespread hives, or was stung across a large part of the body.",
+    ],
+  },
+  {
+    slug: "animal-bite",
+    title: "Animal and Human Bites",
+    short: "Animal and human bites",
+    group: "Bites and stings",
+    heading: "What to do about an animal or human bite",
+    aap: "Animal or Human Bite",
+    lead:
+      "Wash any bite that breaks the skin under running water for five full minutes, then call us — bites that break skin usually need antibiotics.",
+    description:
+      "Animal and human bites in children: washing the wound properly, why most need to be seen, and what we need to know about the animal.",
+    intro: [
+      "Hold the wound under running water for five minutes, wash it with soap, and cover it. Then call us rather than waiting to see how it looks. Bites drive bacteria deep into tissue, and cat bites and hand bites in particular become infected often enough that we usually start antibiotics before any infection appears.",
+      "Find out what you can about the animal: whether it is a pet with vaccination records, a stray, or wildlife. Rabies risk decides part of what happens next, and so does when your child last had a tetanus shot. Report any bite from a stray or wild animal to animal control.",
+    ],
+  },
+  {
+    slug: "swimmers-itch",
+    title: "Swimmer's Itch",
+    short: "Swimmer's itch",
+    group: "Bites and stings",
+    heading: "What to do about swimmer's itch",
+    aap: "Swimmer's Itch - Lakes and Oceans",
+    lead:
+      "Swimmer's itch appears within hours of a lake swim, itches intensely for a few days, and cannot spread to anybody else.",
+    description:
+      "Swimmer's itch after lake swimming: what causes the bumps, how to settle the itch, and how to avoid it next time.",
+    intro: [
+      "Cool the skin, apply calamine or a hydrocortisone cream, and give an antihistamine at night. Expect small red itchy bumps on skin the swimsuit did not cover, appearing within a few hours of swimming and settling over a week.",
+      "Prevent the next round by toweling off briskly straight out of the water and rinsing with clean water, since the parasite burrows in as lake water evaporates on the skin. Call us if the bumps become infected from scratching, or if your child develops a fever.",
+    ],
+  },
+  {
+    slug: "pinworms",
+    title: "Pinworms in Children",
+    short: "Pinworms",
+    group: "Bites and stings",
+    heading: "What to do about pinworms",
+    aap: "Pinworms",
+    lead:
+      "Night-time bottom itching in a school-age child is usually pinworms, and everybody in the house gets treated at once.",
+    description:
+      "Pinworms in children: confirming it with a flashlight, treating the whole household, and the laundry that stops reinfection.",
+    intro: [
+      "Check with a flashlight two or three hours after your child falls asleep. Adult pinworms look like short white threads around the anus, and seeing one confirms it. You can also press clear tape against the skin first thing in the morning and bring it in.",
+      "Call us for treatment, then treat everyone in the household on the same day and repeat the dose two weeks later, because eggs survive that long. Wash all bedding, nightwear and towels in hot water, cut fingernails short, and get everyone washing hands after using the toilet — reinfection is far more common than treatment failure.",
+    ],
+  },
+  {
+    slug: "head-lice",
+    title: "Head Lice in Children",
+    short: "Head lice",
+    group: "Bites and stings",
+    heading: "What to do about head lice",
+    aap: "Head Lice",
+    lead:
+      "Comb wet, conditioned hair with a fine-toothed lice comb every three days for two weeks — combing removes what any treatment misses.",
+    description:
+      "Head lice in children: the wet-combing that actually clears them, using treatments correctly, and what schools now expect.",
+    intro: [
+      "Saturate the hair with conditioner, then comb it in small sections from scalp to tip with a proper metal lice comb, wiping the comb on a tissue after each stroke. Repeat every three days for two weeks. Combing catches the newly hatched lice that survive any single treatment.",
+      "Use an over-the-counter treatment alongside the combing and repeat it after nine days, following the instructions exactly — most treatment failures come from using too little or rinsing too soon. Do not bag toys or spray furniture; lice die within a day off a head. Most schools no longer send children home, so check yours rather than assuming.",
+    ],
+  },
+  {
+    slug: "eye-red-no-pus",
+    title: "A Red Eye Without Discharge",
+    short: "Red eye, no discharge",
+    group: "Eyes",
+    heading: "What to do about a red eye without discharge",
+    aap: "Eye - Red Without Pus",
+    lead:
+      "A pink eye with no pus is usually viral or allergic, and cool compresses do more for it than any drop.",
+    description:
+      "A red eye without discharge in children: telling viral from allergic, what helps, and the signs that need to be seen today.",
+    intro: [
+      "Apply a cool damp cloth for a few minutes several times a day and leave the eye alone otherwise. Suspect allergy if both eyes itch and your child is also sneezing; suspect a virus if a cold came first and the redness started in one eye before crossing to the other.",
+      "Call us today if your child has real eye pain rather than grittiness, if their vision has changed, if bright light hurts, if the eyelid is swelling shut, or if only one eye is red after an injury. Pain, changed vision, light sensitivity, a closing eyelid and a recent injury each point to something deeper in the eye than surface irritation.",
+    ],
+  },
+  {
+    slug: "eye-allergy",
+    title: "Eye Allergies in Children",
+    short: "Eye allergies",
+    group: "Eyes",
+    heading: "What to do about eye allergies",
+    aap: "Eye Allergy",
+    lead:
+      "Itching in both eyes is the sign that separates allergy from infection — infected eyes feel gritty, allergic eyes feel itchy.",
+    description:
+      "Eye allergies in children: telling allergy from infection, which drops help, and how to reduce what sets it off.",
+    intro: [
+      "Rinse the eyes with cool water or saline to wash the pollen out, then lay a cold compress across them. An over-the-counter antihistamine eye drop helps, and an oral antihistamine helps more if your child's nose is running too. Stop your child rubbing, because rubbing releases more histamine and worsens the itch.",
+      "Reduce the exposure where you can: wash hair before bed in pollen season, keep bedroom windows shut on high-pollen days, and wipe pets down after they have been outside. Call us if only one eye is affected, if you see pus, or if your child's vision changes.",
+    ],
+  },
+  {
+    slug: "eye-foreign-object",
+    title: "Something in a Child's Eye",
+    short: "Something in the eye",
+    group: "Eyes",
+    heading: "What to do about something in the eye",
+    aap: "Eye - Foreign Object",
+    lead:
+      "Flush the eye with clean lukewarm water for several minutes and never try to pick anything off the colored part of the eye.",
+    description:
+      "Getting something out of a child's eye: flushing safely, what not to touch, and when a foreign object needs removing by us.",
+    intro: [
+      "Hold your child's eyelid open and pour lukewarm water or saline across the eye from the inner corner outward for several minutes. Most specks wash out. Pull the upper lid out and down over the lower lid as well, which sweeps the underside of the lid.",
+      "Never touch anything sitting on the colored part of the eye, and never use tweezers or a cotton bud on the eye itself. Come in the same day if the object will not flush out, if your child still feels something after rinsing, if the eye keeps watering and closing, or if any chemical or metal fragment was involved.",
+    ],
+  },
+  {
+    slug: "chemical-in-eye",
+    title: "A Chemical in the Eye",
+    short: "Chemical in the eye",
+    group: "Eyes",
+    heading: "What to do about a chemical in the eye",
+    aap: "Chemical in eye",
+    lead:
+      "Flush the eye with running water for a full twenty minutes before you do anything else, including phoning.",
+    description:
+      "A chemical splash in a child's eye: flushing for twenty minutes, calling Poison Control, and why every chemical splash gets seen.",
+    intro: [
+      "Get your child under running lukewarm water immediately and hold the eyelid open. Flush for twenty full minutes by a clock — a shower, a tap or a clean jug all work. Do not stop early to look, and do not stop to make a phone call first, because the first minutes decide how much damage a chemical does.",
+      "Have somebody else call Poison Control at 1-800-222-1222 while you keep flushing, and have the container to hand. Every chemical eye injury needs examining afterward, so go to an emergency room once you have finished the twenty minutes, even if the eye looks normal.",
+    ],
+  },
+  {
+    slug: "eye-injury",
+    title: "Eye Injuries in Children",
+    short: "Eye injury",
+    group: "Eyes",
+    heading: "What to do about an eye injury",
+    aap: "Eye Injury",
+    lead:
+      "Cover an injured eye with a shield rather than a pad, keep your child from rubbing it, and have us look at it the same day.",
+    description:
+      "Eye injuries in children: protecting the eye, what never to do, and which injuries go straight to an emergency room.",
+    intro: [
+      "Cover the eye lightly with the bottom of a paper cup taped in place, so nothing presses on the eyeball. Keep your child from rubbing, and do not rinse, press, or try to remove anything embedded in the eye.",
+      "Go to an emergency room now for a cut on the eyeball, blood pooling in the colored part of the eye, a pupil that has changed shape, an object stuck in the eye, or any change in vision. Call us the same day for a black eye, a scratched surface, or an eye that keeps watering after a knock.",
+    ],
+  },
+  {
+    slug: "eyelid-swelling",
+    title: "A Swollen Eyelid",
+    short: "Swollen eyelid",
+    group: "Eyes",
+    heading: "What to do about a swollen eyelid",
+    aap: "Eyelid Swelling",
+    lead:
+      "A swollen eyelid with a fever, or one that has swollen shut, needs to be seen the same day rather than watched.",
+    description:
+      "Swollen eyelids in children: the harmless causes, the infection that needs treating quickly, and what to check at home.",
+    intro: [
+      "Look at the whole picture first. Swelling in both eyelids with itching usually means allergy, and a cold compress plus an antihistamine settles it. A small tender lump at the lash line is usually a sty.",
+      "Call us the same day for swelling in one eyelid that is red, warm and painful, particularly with a fever — an infection spreading around the eye socket needs treating quickly. Go to an emergency room if your child cannot open the eye, cannot move it in every direction, or complains of double vision.",
+    ],
+  },
+  {
+    slug: "sty",
+    title: "Styes in Children",
+    short: "Sty",
+    group: "Eyes",
+    heading: "What to do about a sty",
+    aap: "Sty",
+    lead:
+      "Hold a warm compress on a sty for ten minutes four times a day and never squeeze it.",
+    description:
+      "Styes in children: the warm compresses that clear one, why squeezing is a bad idea, and when a lump on the lid needs seeing.",
+    intro: [
+      "Soak a clean cloth in warm water and hold it against the closed eyelid for ten minutes, four times a day. Warmth softens the blocked oil gland so it drains by itself, which is what clears a sty. Wash your child's hands and keep them off the lid.",
+      "Never squeeze a sty, and skip antibiotic ointments unless we have prescribed one — most styes are blockages rather than infections. Call us if the whole eyelid becomes red and swollen, if your child has a fever, if vision changes, or if the lump is still there after two weeks.",
+    ],
+  },
+  {
+    slug: "blocked-tear-duct",
+    title: "A Blocked Tear Duct in Babies",
+    short: "Blocked tear duct",
+    group: "Eyes",
+    heading: "What to do about a blocked tear duct",
+    aap: "Tear Duct - Blocked",
+    lead:
+      "A baby with a constantly watery eye and no redness almost always has a blocked tear duct, and almost all of them open on their own within the first year.",
+    description:
+      "Blocked tear ducts in babies: the gentle massage that helps, what is normal, and the signs that mean an infection.",
+    intro: [
+      "Massage the duct two or three times a day: place a clean fingertip beside the inner corner of the eye, against the bone, and stroke firmly downward toward the nose about ten times. Wipe any crusting away with a clean cotton pad and warm water, using a fresh pad for each eye.",
+      "Expect a watery eye with no redness and a comfortable baby. Call us if the white of the eye turns red, if the eyelid becomes swollen or tender, if you see thick discharge alongside redness, or if the eye is still watering by your baby's first birthday.",
+    ],
+  },
+  {
+    slug: "earwax",
+    title: "Earwax Buildup",
+    short: "Earwax",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about earwax",
+    aap: "Earwax Buildup",
+    lead:
+      "Never put a cotton bud in your child's ear — it pushes wax against the eardrum and is how most wax blockages are made.",
+    description:
+      "Earwax in children: why cotton buds make it worse, what safely softens wax, and when a blockage needs removing here.",
+    intro: [
+      "Clean only the outer ear with a washcloth, and leave the canal alone. Ears clear themselves, and cotton buds, hairpins and ear candles all push wax deeper or damage the canal. Ear candling in particular does nothing and burns children.",
+      "Soften genuinely blocked wax with a few drops of mineral oil or an over-the-counter wax softener for several nights. Call us if your child's hearing has changed, if the ear hurts, or if you can see wax pressed hard against the canal — we can remove it safely, and doing it at home is where eardrums get perforated.",
+    ],
+  },
+  {
+    slug: "swimmers-ear",
+    title: "Swimmer's Ear",
+    short: "Swimmer's ear",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about swimmer's ear",
+    aap: "Ear - Swimmer's",
+    lead:
+      "Pain when you tug your child's earlobe points to swimmer's ear rather than a middle ear infection, and swimmer's ear needs prescription drops.",
+    description:
+      "Swimmer's ear in children: the tug test that identifies it, why it needs drops rather than tablets, and how to prevent the next one.",
+    intro: [
+      "Tug gently on the outer ear. Sharp pain from that tug means the infection sits in the ear canal rather than behind the eardrum, which changes the treatment completely. Give pain relief and call us for antibiotic ear drops, since tablets do not reach the canal well.",
+      "Keep the ear dry while it heals — no swimming until we say so, and a shower cap or a cotton ball smeared with petroleum jelly for washing. Prevent the next one by tilting the head to drain each ear after swimming and drying the outer ear thoroughly.",
+    ],
+  },
+  {
+    slug: "ear-discharge",
+    title: "Discharge From a Child's Ear",
+    short: "Ear discharge",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about ear discharge",
+    aap: "Ear - Discharge",
+    lead:
+      "Fluid draining from an ear usually means the eardrum has perforated, which relieves the pain and needs us to look.",
+    description:
+      "Discharge from a child's ear: what it usually means, why the pain suddenly stopped, and what to do while you wait to be seen.",
+    intro: [
+      "Wipe the outer ear clean and put nothing into the canal — no drops, no cotton buds, no plugs — until we have looked. Expect the ear pain to have eased suddenly, because pressure behind a bulging eardrum is what hurt, and a perforation releases it.",
+      "Call us today. Most perforations from an ear infection heal on their own within a few weeks, but your child needs the right treatment meanwhile and a check that it has closed. Call sooner if the discharge is bloody after an injury, or if your child has a fever with pain and swelling behind the ear.",
+    ],
+  },
+  {
+    slug: "ear-congestion",
+    title: "Ear Congestion and Pressure",
+    short: "Ear congestion",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about ear congestion",
+    aap: "Ear - Congestion",
+    lead:
+      "Blocked, popping ears after a cold or a flight are usually fluid behind the eardrum, and that fluid drains on its own over weeks.",
+    description:
+      "Blocked or popping ears in children: what causes the pressure, what helps it clear, and when persistent fluid needs checking.",
+    intro: [
+      "Encourage swallowing, yawning or chewing gum, which opens the tube that drains the middle ear. Treat any cold symptoms and use saline nasal spray. On a plane, have your child drink or suck something during the descent, which is when pressure hurts most.",
+      "Expect fluid after an ear infection to take up to three months to clear, without needing treatment. Call us if your child's hearing seems reduced for more than a few weeks, if speech seems to be slipping, or if pressure comes with pain and fever.",
+    ],
+  },
+  {
+    slug: "ear-injury",
+    title: "Ear Injuries in Children",
+    short: "Ear injury",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about an ear injury",
+    aap: "Ear Injury",
+    lead:
+      "Put nothing into an injured ear, and call us the same day for anything that involves the canal or the drum.",
+    description:
+      "Ear injuries in children: cuts and knocks to the outer ear, objects pushed into the canal, and what needs seeing today.",
+    intro: [
+      "Clean a cut on the outer ear with water, press gently to stop bleeding, and cover it. Apply a cold pack to a bruised ear. Leave the canal alone entirely — never try to retrieve an object with tweezers or a cotton bud, because pushing it deeper is far easier than pulling it out.",
+      "Call us the same day for an object stuck in the ear, blood or clear fluid coming from the canal, hearing loss after a knock, or a swollen bruise on the ear itself. Go to an emergency room for an ear that is partly torn away or a head injury alongside the ear injury.",
+    ],
+  },
+  {
+    slug: "toothache",
+    title: "Toothache in Children",
+    short: "Toothache",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about a toothache",
+    aap: "Toothache",
+    lead:
+      "Give ibuprofen, rinse with warm salt water, and book a dentist — a toothache does not settle by itself.",
+    description:
+      "Toothache in children: relieving the pain tonight, what not to put on the gum, and the swelling that needs urgent care.",
+    intro: [
+      "Give ibuprofen or acetaminophen at the correct dose for your child's weight, rinse with warm salt water, and hold a cold pack against the cheek. Floss gently either side of the sore tooth in case food is trapped. Never place aspirin against the gum, which burns the tissue.",
+      "Book a dental appointment, because pain from a tooth means decay or infection that will keep returning. Call us or go to an emergency room if your child's face or jaw is swelling, if they have a fever with the toothache, or if the swelling reaches the eye or makes swallowing difficult.",
+    ],
+  },
+  {
+    slug: "tooth-injury",
+    title: "A Knocked or Broken Tooth",
+    short: "Tooth injury",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about a knocked or broken tooth",
+    aap: "Tooth Injury",
+    lead:
+      "A knocked-out permanent tooth is a genuine emergency — put it back in the socket or in milk and get to a dentist within the hour.",
+    description:
+      "Knocked-out and broken teeth in children: what to do in the first hour, why baby teeth are handled differently, and where to go.",
+    intro: [
+      "Pick a permanent tooth up by the crown, never the root. Rinse it briefly in milk or saline if it is dirty, then push it straight back into the socket and have your child bite on a cloth. If you cannot reinsert it, put it in a cup of milk. Get to a dentist within the hour, because the chance of saving it falls sharply after that.",
+      "Never reinsert a knocked-out baby tooth, which can damage the permanent tooth forming above it — bring your child in instead. For a chipped or loosened tooth, give pain relief, offer soft food, and book a dental appointment the same day.",
+    ],
+  },
+  {
+    slug: "mouth-ulcers",
+    title: "Mouth Ulcers in Children",
+    short: "Mouth ulcers",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about mouth ulcers",
+    aap: "Mouth Ulcers",
+    lead:
+      "Keep your child drinking, because mouth ulcers stop children swallowing and dehydration is the reason most of them end up needing us.",
+    description:
+      "Mouth ulcers in children: managing the pain so your child keeps drinking, what to avoid, and when ulcers need looking at.",
+    intro: [
+      "Give pain relief twenty minutes before meals, offer cold and soft food — yoghurt, ice pops, smoothies — and skip anything salty, acidic or spicy. A straw helps a child drink past a sore spot at the front of the mouth.",
+      "Count wet diapers or trips to the toilet rather than counting ulcers. Call us if your child will not drink, has not passed urine for eight hours, has ulcers alongside a high fever, or has ulcers that keep coming back month after month.",
+    ],
+  },
+  {
+    slug: "mouth-injury",
+    title: "Mouth Injuries in Children",
+    short: "Mouth injury",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about a mouth injury",
+    aap: "Mouth Injury",
+    lead:
+      "Press a gauze pad or a cold wet cloth against the bleeding spot for ten minutes without lifting it to check.",
+    description:
+      "Cuts to a child's lip, tongue or mouth: stopping the bleeding, which cuts need closing, and the injuries that need seeing today.",
+    intro: [
+      "Press firmly on the cut with clean gauze or a cold wet cloth for ten minutes by the clock. Mouths bleed dramatically and stop reliably, so lifting the pad early is the usual reason bleeding seems to restart. An ice pop afterward numbs the area and encourages fluids.",
+      "Come in the same day for a cut that goes through the lip border, a cut longer than about half an inch, a puncture in the roof or back of the throat, or bleeding that will not stop after ten minutes of pressure. Small cuts inside the lip or on the tongue almost always heal alone.",
+    ],
+  },
+  {
+    slug: "thrush",
+    title: "Thrush in Babies",
+    short: "Thrush",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about thrush",
+    aap: "Thrush",
+    lead:
+      "White patches in a baby's mouth that will not wipe away are thrush, and thrush needs a prescription antifungal.",
+    description:
+      "Thrush in babies: telling it from milk residue, treating baby and mother together, and stopping it coming back.",
+    intro: [
+      "Try wiping a patch gently with a clean damp cloth. Milk residue lifts away; thrush stays put and may leave a raw red spot. Call us for an antifungal gel or drops, because thrush does not clear on its own.",
+      "Treat both sides at once if you are breastfeeding. Thrush passes back and forth between a baby's mouth and the nipple, so ask us about treating yourself at the same time. Sterilize bottle teats and pacifiers daily, and replace them after a week of treatment.",
+    ],
+  },
+  {
+    slug: "sinus-pain",
+    title: "Sinus Pain and Congestion",
+    short: "Sinus pain",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about sinus pain",
+    aap: "Sinus Pain or Congestion",
+    lead:
+      "Most sinus pain is a cold and needs no antibiotic — the pattern that changes our mind is a cold that improved and then clearly got worse again.",
+    description:
+      "Sinus pain and congestion in children: what helps, why antibiotics usually are not the answer, and the pattern that means calling us.",
+    intro: [
+      "Use saline nasal spray several times a day, run a humidifier at night, hold a warm cloth over the cheeks and nose, and give ibuprofen for the ache. Keep your child drinking, because thin mucus drains and thick mucus does not.",
+      "Call us if the congestion has gone on beyond ten days without improving, if your child had a cold that was settling and then developed a fever and worsening face pain, or if the skin around an eye becomes red or swollen. Redness or swelling around an eye needs seeing today.",
+    ],
+  },
+  {
+    slug: "hoarseness",
+    title: "Hoarseness in Children",
+    short: "Hoarseness",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about hoarseness",
+    aap: "Hoarseness",
+    lead:
+      "Rest the voice and add moisture to the air — most hoarseness follows shouting or a virus and clears within a week.",
+    description:
+      "Hoarseness and lost voice in children: what helps it recover, why whispering does not, and when a hoarse voice needs checking.",
+    intro: [
+      "Encourage quiet talking rather than whispering, which strains the vocal cords more than a soft voice does. Run a humidifier, keep fluids up, and keep your child away from smoke. Expect the voice to return over three to seven days.",
+      "Call us if hoarseness lasts more than two weeks, if it comes with drooling, difficulty swallowing or noisy breathing, or if your child sounds hoarse and is struggling to breathe — that combination needs urgent assessment rather than voice rest.",
+    ],
+  },
+  {
+    slug: "nose-injury",
+    title: "Nose Injuries in Children",
+    short: "Nose injury",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about a nose injury",
+    aap: "Nose Injury",
+    lead:
+      "Stop the bleeding by pinching the soft part of the nose for ten minutes, then apply ice — and have us look if the shape has changed.",
+    description:
+      "Nose injuries in children: stopping the bleeding, reducing swelling, and the signs of a break that needs setting.",
+    intro: [
+      "Sit your child up and lean them forward, pinch the soft part of the nose below the bone for ten unbroken minutes, then hold a cold pack across the bridge for twenty. Give acetaminophen rather than ibuprofen in the first hours, since ibuprofen encourages more bleeding.",
+      "Look at the nose from in front and above once the swelling settles over two or three days. Come in if the shape has changed, if your child cannot breathe through one side, if clear fluid drips from the nose after a hard knock, or if you can see a swollen bulge inside the nostril.",
+    ],
+  },
+  {
+    slug: "cuts-and-scrapes",
+    title: "Cuts, Scrapes and Bruises",
+    short: "Cuts and scrapes",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about a cut or scrape",
+    aap: "Cut, Scrape, or Bruise",
+    lead:
+      "Press on a bleeding cut for ten minutes without lifting the cloth, then wash it under running water for several minutes.",
+    description:
+      "Cuts, scrapes and bruises in children: stopping bleeding, cleaning a wound properly, and which cuts need closing today.",
+    intro: [
+      "Press firmly with clean gauze for ten minutes by a clock. Lifting the pad to look is why bleeding seems to restart. Once it stops, hold the wound under running water for several minutes to flush dirt out, then apply petroleum jelly and a plaster — wounds heal faster kept moist and covered than left to scab in the air.",
+      "Come in the same day for a cut that gapes open, is longer than half an inch, sits on the face, crosses a joint, or came from something dirty or rusty. Call us too if your child has not had a tetanus shot in five years and the wound is deep or dirty.",
+    ],
+  },
+  {
+    slug: "scrape",
+    title: "Scrapes and Grazes",
+    short: "Scrapes",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about a scrape",
+    aap: "Scrape",
+    lead:
+      "Scrub the grit out under running water — dirt left in a scrape is what causes both infection and permanent tattooing of the skin.",
+    description:
+      "Scrapes and grazes in children: cleaning grit out properly, keeping the wound moist, and the signs of infection.",
+    intro: [
+      "Run the scrape under lukewarm water and wash gently with soap, using a clean wet gauze pad to lift out embedded grit. Washing a scrape stings, so give pain relief first and warn your child. Any dirt left behind can stay visible in the skin for life.",
+      "Cover with petroleum jelly and a non-stick dressing, changing it daily, and skip hydrogen peroxide and alcohol, which damage healing tissue. Call us if you cannot get the grit out, if the scrape covers a large area, or if the edges become red, swollen and increasingly painful after two days.",
+    ],
+  },
+  {
+    slug: "puncture-wound",
+    title: "Puncture Wounds",
+    short: "Puncture wounds",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about a puncture wound",
+    aap: "Puncture Wound",
+    lead:
+      "A puncture wound looks trivial and carries the highest infection risk of any small injury — call us about any that goes through a shoe.",
+    description:
+      "Puncture wounds in children: why they get infected, tetanus timing, and which punctures need to be seen.",
+    intro: [
+      "Let the wound bleed for a moment, then wash it under running water for several minutes and cover it. Do not plug or seal it tightly, since a puncture needs to drain. Check when your child last had a tetanus shot, because a puncture is exactly the wound tetanus prevention exists for.",
+      "Call us for any puncture through a shoe, any wound from a nail, needle or animal tooth, anything that might have left material inside, and any puncture to the foot, hand, chest or abdomen. Watch for redness, swelling and increasing pain over the next two days.",
+    ],
+  },
+  {
+    slug: "arm-injury",
+    title: "Arm Injuries in Children",
+    short: "Arm injury",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about an arm injury",
+    aap: "Arm Injury",
+    lead:
+      "A child who will not use an arm at all needs an X-ray, whatever the arm looks like from outside.",
+    description:
+      "Arm injuries in children: what points to a break, first aid before you come in, and the injuries that go straight to an emergency room.",
+    intro: [
+      "Rest the arm, apply a cold pack for twenty minutes, and support it against the body with a sling or a folded towel. Give ibuprofen for pain and swelling. Watch what your child does with the arm rather than what they say about it.",
+      "Come in the same day if your child refuses to move the arm, if you can see swelling or bruising over a bone, or if the pain has not eased by the next morning. Go to an emergency room now for an obvious deformity, bone through skin, a hand that is numb, pale or cold, or an arm your child cannot feel.",
+    ],
+  },
+  {
+    slug: "leg-injury",
+    title: "Leg Injuries in Children",
+    short: "Leg injury",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about a leg injury",
+    aap: "Leg Injury",
+    lead:
+      "A child who will not put weight on a leg needs to be seen, even when nothing looks broken.",
+    description:
+      "Leg injuries in children: what limping tells us, first aid at home, and which injuries need an emergency room.",
+    intro: [
+      "Rest the leg, apply a cold pack for twenty minutes at a time, keep it raised where you can, and give ibuprofen. Ask your child to walk a few steps and watch closely — refusing to bear weight matters far more than how swollen the leg looks.",
+      "Come in the same day for a child who will not walk, a limp lasting more than a day, or swelling over a bone. Go to an emergency room for an obvious deformity, bone through skin, a foot that is numb, pale or cold, or a leg injury alongside a fever.",
+    ],
+  },
+  {
+    slug: "finger-injury",
+    title: "Finger Injuries in Children",
+    short: "Finger injury",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about a finger injury",
+    aap: "Finger Injury",
+    lead:
+      "Rings come off now, before swelling makes that impossible, and a crushed fingertip usually needs looking at.",
+    description:
+      "Finger injuries in children: removing rings, easing a crushed fingertip, and which finger injuries need to be seen.",
+    intro: [
+      "Take any ring off immediately, then apply a cold pack and raise the hand above the heart. Buddy-tape a hurt finger to the one beside it for support. For a blood blister under a nail, a cold pack and ibuprofen usually settle the throbbing.",
+      "Come in the same day for a finger that looks crooked or will not straighten, a cut through a nail bed, a nail torn partly off, or blood under more than half the nail — that last one often needs releasing to relieve the pressure. Go to an emergency room for an amputated fingertip, bringing the piece wrapped in damp gauze inside a bag on ice.",
+    ],
+  },
+  {
+    slug: "toe-injury",
+    title: "Toe Injuries in Children",
+    short: "Toe injury",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about a toe injury",
+    aap: "Toe Injury",
+    lead:
+      "Most broken toes need buddy-taping and stiff shoes rather than a cast, but a crooked toe or a nail-bed cut needs seeing.",
+    description:
+      "Toe injuries in children: taping, ice and shoes, plus the toe injuries that need to be examined.",
+    intro: [
+      "Tape the hurt toe to the toe beside it with a little gauze between them, apply a cold pack, keep the foot raised, and put your child in a stiff-soled shoe rather than something soft. Give ibuprofen for the first few days.",
+      "Come in the same day for a toe that points the wrong way, a cut through the nail bed, a nail torn off, or an injury to the big toe, which carries more of a child's weight than the others. Call us if your child still will not walk on the foot after two days.",
+    ],
+  },
+  {
+    slug: "neck-pain",
+    title: "Neck Pain and Stiffness",
+    short: "Neck pain",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about neck pain",
+    aap: "Neck Pain or Stiffness",
+    lead:
+      "A stiff neck with a fever needs to be seen now — a stiff neck after a night in an odd position does not.",
+    description:
+      "Neck pain and stiffness in children: separating a strain from something urgent, what helps, and when to seek care immediately.",
+    intro: [
+      "Ask your child to look down and touch their chin to their chest. A child who can do that comfortably almost never has meningitis. Treat an ordinary strain with heat, gentle movement and ibuprofen, and check whether a pillow or a screen position is the cause.",
+      "Seek care immediately for neck stiffness with fever, headache, vomiting, a rash, drowsiness or dislike of bright light. Go to an emergency room for neck pain after a fall or crash, or with numbness, tingling or weakness in the arms or legs — and do not move your child yourself after a significant injury.",
+    ],
+  },
+  {
+    slug: "back-pain",
+    title: "Back Pain in Children",
+    short: "Back pain",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about back pain",
+    aap: "Back Pain",
+    lead:
+      "Back pain in a child deserves more attention than back pain in an adult, because far fewer children get it without a reason.",
+    description:
+      "Back pain in children: what usually causes it, what helps, and the patterns that need investigating.",
+    intro: [
+      "Treat a simple strain with a day of rest, then gentle movement rather than bed rest, plus ibuprofen and heat. Check the obvious contributors: a heavy backpack worn on one shoulder, a growth spurt, a new sport, or hours hunched over a screen.",
+      "Book an appointment if the pain wakes your child at night, lasts more than a week, comes with fever or weight loss, follows an injury, or comes with numbness, weakness or changes in using the toilet. Night pain, fever, weight loss and numbness all need looking into rather than a few days of rest.",
+    ],
+  },
+  {
+    slug: "chest-pain",
+    title: "Chest Pain in Children",
+    short: "Chest pain",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about chest pain",
+    aap: "Chest Pain",
+    lead:
+      "Chest pain in children is almost never the heart — it is usually muscle, rib or lung, and the pattern tells you which.",
+    description:
+      "Chest pain in children: the common harmless causes, how to tell them apart, and the symptoms that need urgent care.",
+    intro: [
+      "Press on the spot. Pain that gets worse when you press it, or when your child takes a deep breath or twists, comes from muscle or rib and settles with rest and ibuprofen. Pain with a cough and fever points to the lungs. Burning behind the breastbone after meals points to reflux.",
+      "Seek care immediately for chest pain with fainting, palpitations, breathlessness at rest, or pain during exercise. Call us the same day for chest pain with a fever, or in a child with a heart condition, sickle cell disease or a family history of sudden cardiac death.",
+    ],
+  },
+  {
+    slug: "burn",
+    title: "Burns in Children",
+    short: "Burns",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about a burn",
+    aap: "Burn",
+    lead:
+      "Hold the burn under cool running water for twenty minutes — not ice, not butter, and not for two minutes.",
+    description:
+      "Burns in children: cooling for twenty minutes, what never to apply, and which burns need to be seen straight away.",
+    intro: [
+      "Run cool — not cold — water over the burn for a full twenty minutes, removing clothing and jewelry from the area unless fabric is stuck to the skin. Cooling properly in the first hour genuinely reduces how deep a burn goes. Cover it afterward with cling film laid loosely on top, or a clean non-fluffy cloth.",
+      "Never apply ice, butter, toothpaste or ointment, and do not burst blisters. Go to an emergency room for any burn larger than your child's palm, any burn on the face, hands, feet, genitals or across a joint, any burn that looks white or leathery, and every electrical or chemical burn.",
+    ],
+  },
+  {
+    slug: "frostbite",
+    title: "Frostbite in Children",
+    short: "Frostbite",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about frostbite",
+    aap: "Frostbite",
+    lead:
+      "Rewarm frostbitten skin in warm water rather than rubbing it, and never rewarm a part that might freeze again.",
+    description:
+      "Frostbite in children: rewarming safely, what damages the tissue further, and which cases need an emergency room.",
+    intro: [
+      "Get your child somewhere warm, remove wet clothing, and soak the affected part in warm water at about 40°C — comfortable to your own elbow — for twenty to thirty minutes. Never rub the skin, never use direct heat from a fire, radiator or hairdryer, and never rewarm feet your child then has to walk out on.",
+      "Expect rewarming to hurt, and give ibuprofen for it. Go to an emergency room for skin that stays white, grey or hard after rewarming, for blisters, for numbness that persists, or if your child is also shivering uncontrollably, confused or drowsy, which points to hypothermia.",
+    ],
+  },
+  {
+    slug: "heat-illness",
+    title: "Heat Exhaustion and Heatstroke",
+    short: "Heat illness",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about heat exhaustion",
+    aap: "Heat Exposure and Reactions",
+    lead:
+      "A child who stops sweating, becomes confused, or collapses in the heat has heatstroke — call 911 and start cooling immediately.",
+    description:
+      "Heat exhaustion and heatstroke in children: cooling fast, the difference between the two, and when to call 911.",
+    intro: [
+      "Move your child into shade or air conditioning, take off extra clothing, give cool fluids in small sips, and put cool wet cloths on the neck, armpits and groin. Heat exhaustion looks like heavy sweating, pale clammy skin, headache, nausea and weakness, and it improves within half an hour of cooling.",
+      "Call 911 for heatstroke, which looks different: hot skin that may have stopped sweating, a temperature above 104°F, confusion, slurred speech, seizures or collapse. Keep cooling your child while you wait — do not wait for the ambulance to start.",
+    ],
+  },
+  {
+    slug: "sliver",
+    title: "Slivers and Splinters",
+    short: "Slivers and splinters",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about a splinter",
+    aap: "Sliver or Splinter",
+    lead:
+      "Pull a splinter out along the same line it went in, using tweezers sterilized with alcohol.",
+    description:
+      "Splinters in children: removing one cleanly, when to leave it alone, and the signs it needs professional removal.",
+    intro: [
+      "Wash your hands and the skin, sterilize fine tweezers with alcohol, and grip the splinter as close to the skin as possible, pulling along the angle it entered. If the end is buried, sterilize a needle and gently lift the skin over the tip first. Wash the area again afterward.",
+      "Leave a tiny surface splinter alone — the skin will push it out within a few days. Call us for a splinter you cannot reach, one under a nail, one made of glass or metal, anything deeply embedded, or a site that becomes red, swollen and increasingly painful.",
+    ],
+  },
+  {
+    slug: "skin-foreign-object",
+    title: "Something Embedded in the Skin",
+    short: "Something in the skin",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about something embedded in the skin",
+    aap: "Skin Foreign Object",
+    lead:
+      "Leave anything large or deeply embedded exactly where it is and come in — pulling it out can cause more damage than it did going in.",
+    description:
+      "Objects embedded in a child's skin: what you can safely remove, what to leave alone, and how to protect the area on the way in.",
+    intro: [
+      "Remove only a small, superficial object you can grip easily with sterilized tweezers. Leave anything large, deep, or made of glass or metal exactly where it is. Pad around a protruding object and tape the padding down so nothing presses on it while you travel.",
+      "Come in the same day, and go to an emergency room for an object in the eye, the neck, the chest or the abdomen, for heavy bleeding, or for a fish hook past the barb. Check your child's tetanus history — we will ask.",
+    ],
+  },
+  {
+    slug: "wound-infection",
+    title: "An Infected Wound",
+    short: "Infected wound",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about an infected wound",
+    aap: "Wound Infection",
+    lead:
+      "Redness that spreads, pain that increases after day two, and a wound that is warm to touch all mean infection — call us rather than waiting.",
+    description:
+      "Infected wounds in children: what infection actually looks like, why the timing matters, and what needs urgent care.",
+    intro: [
+      "Watch the direction of travel. A wound is normally most painful and most red on day one and improves after that. Infection reverses the pattern: more redness, more pain and more swelling on day two or three, often with warmth, pus and a fever.",
+      "Draw a line around the redness with a pen and note the time, so you can tell us whether it is spreading and how fast. Call us today for any of these signs. Seek care immediately for red streaks running from the wound, spreading redness with a fever, or a wound that has become severely painful out of proportion to how it looks.",
+    ],
+  },
+  {
+    slug: "suture-care",
+    title: "Looking After Stitches",
+    short: "Stitches",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about stitches",
+    aap: "Suture Questions",
+    lead:
+      "Keep stitches clean and dry for the first day, then wash gently every day — and know the date they need to come out.",
+    description:
+      "Caring for a child's stitches: keeping the wound clean, when it can get wet, removal timing, and the signs of infection.",
+    intro: [
+      "Leave the dressing on for 24 hours, then wash the area gently with soap and water each day, patting it dry and applying petroleum jelly. Short showers are fine after the first day; keep your child out of baths, pools and lakes until the stitches are out.",
+      "Write the removal date down. Face stitches usually come out in about five days, arms and legs in about ten, and joints in about fourteen — leaving them too long marks the skin. Call us for spreading redness, pus, a fever, or a wound that opens up.",
+    ],
+  },
+  {
+    slug: "dizziness",
+    title: "Dizziness in Children",
+    short: "Dizziness",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about dizziness",
+    aap: "Dizziness",
+    lead:
+      "Have your child lie down and drink — most childhood dizziness is standing up too fast on an empty stomach.",
+    description:
+      "Dizziness in children: the common causes, what helps immediately, and the symptoms that need investigating.",
+    intro: [
+      "Lay your child down with their legs raised until the feeling passes, then give fluids and something to eat. Ask what happened just before: standing up quickly, a hot shower, a skipped meal or a hard practice explain the great majority.",
+      "Book an appointment if dizziness keeps returning, comes with the room spinning, or follows a head injury. Seek care immediately for dizziness with chest pain, palpitations, fainting during exercise, difficulty speaking, weakness on one side, or a severe headache.",
+    ],
+  },
+  {
+    slug: "fainting",
+    title: "Fainting in Children",
+    short: "Fainting",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about fainting",
+    aap: "Fainting",
+    lead:
+      "Fainting during exercise is different from fainting while standing still, and it needs checking rather than watching.",
+    description:
+      "Fainting in children: what to do at the time, the common harmless pattern, and the faints that need investigating.",
+    intro: [
+      "Lay your child flat and raise their legs until color returns, then let them sit up slowly and drink. Ask about the circumstances: standing a long time, a hot room, the sight of blood or a needle, or getting up quickly all point to ordinary fainting, which is common in teenagers.",
+      "Book an appointment after any faint so we can check the heart and take a history. Seek care immediately for fainting during exercise, fainting with chest pain or palpitations, fainting with no warning at all, a faint that lasted more than a minute, or any family history of sudden death in a young person.",
+    ],
+  },
+  {
+    slug: "weakness-and-fatigue",
+    title: "Weakness and Fatigue in Children",
+    short: "Weakness and fatigue",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about weakness and fatigue",
+    aap: "Weakness and Fatigue",
+    lead:
+      "Tell us whether your child is tired or actually weak — being unable to climb stairs is a different problem from wanting to sleep all day.",
+    description:
+      "Tiredness and weakness in children: separating the two, the common causes of each, and what needs seeing quickly.",
+    intro: [
+      "Work out which one you are seeing. Fatigue means low energy and wanting to rest, and usually follows a virus, poor sleep, low iron or a period of stress. Weakness means muscles that will not do their job — a child who cannot climb the stairs they managed last week, or whose face droops.",
+      "Seek care immediately for true weakness, especially on one side, or for weakness that is spreading upward from the feet. Book an appointment for fatigue lasting more than two weeks, or fatigue with weight loss, fever, night sweats, bruising or pale skin.",
+    ],
+  },
+  {
+    slug: "stomach-pain",
+    title: "Stomach Pain in Children",
+    short: "Stomach pain",
+    group: "Stomach and bowels",
+    heading: "What to do about stomach pain",
+    aap: "Stomach Pain - Male",
+    lead:
+      "Ask your child to point with one finger — pain they can localize to the lower right needs seeing today.",
+    description:
+      "Stomach pain in children: locating the pain, the harmless causes, and the pattern that suggests appendicitis.",
+    intro: [
+      "Ask your child to point to the sore spot with one finger. Pain all around the navel that comes and goes is usually constipation, a virus or anxiety, and it settles with rest, fluids and time. Pain your child can pin to the lower right, especially if it started near the navel and moved, needs assessing today.",
+      "Give nothing for pain until we have spoken if the pain is severe, because pain relief can mask what we need to feel. Seek care immediately for a rigid, board-like belly, blood in vomit or stool, green vomit, pain waking your child from sleep, or a boy with pain in the groin or testicle.",
+    ],
+  },
+  {
+    slug: "stomach-pain-female",
+    title: "Stomach Pain in Girls and Young Women",
+    short: "Stomach pain in girls",
+    group: "Stomach and bowels",
+    heading: "What to do about stomach pain in girls",
+    aap: "Stomach Pain - Female",
+    lead:
+      "In a girl who has started periods, stomach pain has causes a younger child's does not — tell us about her cycle when you call.",
+    description:
+      "Stomach pain in girls and young women: what the menstrual cycle adds, the causes we consider, and the pain that needs urgent care.",
+    intro: [
+      "Note where the pain sits, how it relates to her cycle, and when her last period was. Mid-cycle pain on one side for a day or two is usually ovulation. Cramping in the few days around a period is usually normal menstrual pain and responds to ibuprofen started early.",
+      "Seek care immediately for sudden severe one-sided pelvic pain, which can mean a twisted ovary and does not wait. Book the same day for pain with fever, vomiting, pain on passing urine, unusual discharge, or a missed period with pain.",
+    ],
+  },
+  {
+    slug: "blood-in-stool",
+    title: "Blood in a Child's Stool",
+    short: "Blood in stool",
+    group: "Stomach and bowels",
+    heading: "What to do about blood in the stool",
+    aap: "Stools - Blood In",
+    lead:
+      "Bright red streaks on hard stool are almost always a small tear from constipation — dark, tarry or mixed-in blood is different and needs seeing.",
+    description:
+      "Blood in a child's stool: the common harmless cause, what different colors mean, and what needs urgent assessment.",
+    intro: [
+      "Look at how the blood appears. Bright red streaks on the surface of a hard stool, or on the paper, almost always come from a small anal tear, and treating the constipation treats the bleeding. Softening the stool matters more than anything applied to the skin.",
+      "Call us today for blood mixed through the stool, black tarry stools, blood with diarrhea, or blood in a baby under a year. Seek care immediately for large amounts of blood, blood with severe stomach pain, or a child who is pale, floppy or has jelly-like red stool.",
+    ],
+  },
+  {
+    slug: "unusual-stool-color",
+    title: "Unusual Stool Colors",
+    short: "Stool color",
+    group: "Stomach and bowels",
+    heading: "What to do about unusual stool colors",
+    aap: "Stools - Unusual Color",
+    lead:
+      "Green, yellow, orange and brown stools are all normal — the three colors that matter are red, black and white.",
+    description:
+      "Unusual stool colors in children: which colors are normal, which three need a call, and what food explains most of it.",
+    intro: [
+      "Think about what your child ate in the last day or two. Beets and red gelatin turn stool red, spinach and food coloring turn it green, iron supplements turn it black, and none of that means anything. Breastfed babies produce mustard-yellow stool and formula-fed babies tan or green, both normal.",
+      "Call us about three colors: red or black that food does not explain, and white or chalky pale stool at any age. Pale stool in a baby needs seeing quickly, because it can mean bile is not reaching the gut.",
+    ],
+  },
+  {
+    slug: "decreased-fluid-intake",
+    title: "A Child Who Will Not Drink",
+    short: "Not drinking enough",
+    group: "Stomach and bowels",
+    heading: "What to do when your child will not drink",
+    aap: "Drinking Fluids - Decreased",
+    lead:
+      "Count wet diapers or trips to the toilet rather than counting cups — output tells you what intake cannot.",
+    description:
+      "A child who will not drink: how to tell whether they are dehydrated, what to offer, and when to call us.",
+    intro: [
+      "Track how often your child passes urine. A baby should wet a diaper at least every six to eight hours, and an older child should use the toilet at least three or four times a day. Moist lips, tears when crying and normal energy all say your child is keeping up.",
+      "Offer small amounts constantly rather than a full cup occasionally — a teaspoon or a syringe every few minutes, ice pops, or oral rehydration solution in sips. Call us if your child has passed no urine for eight hours, has a dry mouth, cries without tears, seems unusually sleepy, or is a baby whose soft spot looks sunken.",
+    ],
+  },
+  {
+    slug: "reflux",
+    title: "Reflux and Spitting Up in Babies",
+    short: "Reflux and spitting up",
+    group: "Stomach and bowels",
+    heading: "What to do about reflux and spitting up",
+    aap: "Reflux (Spitting Up)",
+    lead:
+      "A baby who spits up but is gaining weight and content is a laundry problem, not a medical one.",
+    description:
+      "Reflux and spitting up in babies: what is normal, what actually helps, and the signs that mean something more.",
+    intro: [
+      "Keep your baby upright for twenty to thirty minutes after feeds, burp partway through as well as at the end, and avoid a tight diaper or car seat straight after a feed. If bottle feeding, try smaller feeds more often. Most spitting up peaks around four months and stops once a baby sits and eats solids.",
+      "Call us if your baby is not gaining weight, arches and screams during feeds, refuses to feed, has blood or green color in the vomit, coughs and chokes with feeds, or vomits forcefully across the room — that last pattern in a young baby needs assessing quickly.",
+    ],
+  },
+  {
+    slug: "vomiting-baby",
+    title: "Vomiting in Babies Under 12 Months",
+    short: "Vomiting under 12 months",
+    group: "Stomach and bowels",
+    heading: "What to do about vomiting in a baby",
+    aap: "Vomiting (0-12 Months)",
+    lead:
+      "Give a baby small amounts of milk or oral rehydration solution very often, and call us sooner than you would for an older child.",
+    description:
+      "Vomiting in babies under a year: keeping fluids in, telling spitting up from vomiting, and the signs that need same-day care.",
+    intro: [
+      "Wait about twenty minutes after a vomit, then offer small amounts — a teaspoon or two of breast milk, formula or oral rehydration solution every five minutes, building up slowly. Babies dehydrate far faster than older children, which is why volume and frequency matter more than what you use.",
+      "Call us today for vomiting in a baby under three months, forceful vomiting after every feed, green or bloody vomit, a swollen or tender belly, fewer than four wet diapers a day, or a baby who is difficult to rouse.",
+    ],
+  },
+  {
+    slug: "diarrhea-baby",
+    title: "Diarrhea in Babies Under 12 Months",
+    short: "Diarrhea under 12 months",
+    group: "Stomach and bowels",
+    heading: "What to do about diarrhea in a baby",
+    aap: "Diarrhea (0-12 Months)",
+    lead:
+      "Keep breast or formula feeds going through diarrhea rather than stopping them — babies need the calories and the fluid.",
+    description:
+      "Diarrhea in babies under a year: continuing feeds, telling normal stool from diarrhea, and when a baby needs seeing.",
+    intro: [
+      "Carry on feeding as normal and add oral rehydration solution between feeds if stools are frequent. Do not dilute formula, and do not switch to water or juice — diluted feeds and sugary drinks both make diarrhea worse and can be dangerous in a small baby.",
+      "Know what normal looks like first: breastfed babies can pass loose yellow stool after every feed. Diarrhea means a clear increase in number and wateriness. Call us for blood or mucus in the stool, fewer than four wet diapers a day, a sunken soft spot, or a baby who is limp or hard to wake.",
+    ],
+  },
+  {
+    slug: "colds-baby",
+    title: "Colds in Babies Under 12 Months",
+    short: "Colds under 12 months",
+    group: "Stomach and bowels",
+    heading: "What to do about a cold in a baby",
+    aap: "Colds (0-12 Months)",
+    lead:
+      "Use saline drops and a bulb syringe before every feed — a blocked-nosed baby cannot breathe and feed at the same time.",
+    description:
+      "Colds in babies under a year: clearing the nose so a baby can feed, what medicines to avoid, and when to call us.",
+    intro: [
+      "Put two or three saline drops in each nostril, wait a moment, then suction gently with a bulb syringe or nasal aspirator. Do this before feeds and before sleep rather than constantly. Run a cool-mist humidifier and keep feeds small and frequent.",
+      "Give no over-the-counter cough or cold medicine to a baby, and no honey under a year. Call us for any fever in a baby under three months, fast or laboured breathing, ribs pulling in, pauses in breathing, feeding much less than usual, or fewer than four wet diapers a day.",
+    ],
+  },
+  {
+    slug: "cough-baby",
+    title: "Cough in Babies Under 12 Months",
+    short: "Cough under 12 months",
+    group: "Stomach and bowels",
+    heading: "What to do about a cough in a baby",
+    aap: "Cough (0-12 Months)",
+    lead:
+      "Count your baby's breaths for a full minute — the number matters more than the sound of the cough.",
+    description:
+      "Cough in babies under a year: counting breathing, clearing the nose, and the signs that need same-day care.",
+    intro: [
+      "Watch your baby's chest for a full minute while they are calm and count the breaths. Then look for ribs or the hollow above the breastbone pulling in, nostrils flaring, or grunting at the end of each breath. Pulling, flaring and grunting all mean call us, whatever the cough sounds like.",
+      "Clear the nose with saline and suction before feeds, run a humidifier, and keep feeds small and frequent. Give no cough medicine and no honey under a year. Call us today for any fever under three months, breathing pauses, a blue tinge around the lips, or a baby feeding much less than usual.",
+    ],
+  },
+  {
+    slug: "motion-sickness",
+    title: "Motion Sickness in Children",
+    short: "Motion sickness",
+    group: "Stomach and bowels",
+    heading: "What to do about motion sickness",
+    aap: "Motion Sickness",
+    lead:
+      "Prevention works and treatment barely does — give the medicine an hour before you set off, not once your child feels sick.",
+    description:
+      "Motion sickness in children: preventing it before a journey, seating and food that help, and what to do once it starts.",
+    intro: [
+      "Give an over-the-counter motion sickness medicine one hour before departure if your child has a history of it, and ask us about dosing for children under two. Seat your child where the motion is least — middle seat looking forward in a car, over the wing on a plane, midship on a boat.",
+      "Keep a window cracked, discourage screens and books, and encourage looking at the horizon. Offer a light dry snack rather than an empty or full stomach. Once vomiting starts, stop the journey briefly, get fresh air, and offer small sips of water.",
+    ],
+  },
+  {
+    slug: "travellers-diarrhea",
+    title: "Diarrhea After Travel",
+    short: "Diarrhea after travel",
+    group: "Stomach and bowels",
+    heading: "What to do about diarrhea after travel",
+    aap: "Diarrhea Diseases from Travel",
+    lead:
+      "Tell us where your child travelled and when they got back — diarrhea after a trip is investigated differently from an ordinary bug.",
+    description:
+      "Diarrhea after travel in children: rehydration, what to tell us, and which travel-related diarrhea needs testing.",
+    intro: [
+      "Keep fluids going with oral rehydration solution and let your child eat normally. Then call us with the details: which country, which dates, whether anyone else on the trip is ill, and whether your child swam in fresh water or drank untreated water.",
+      "Call us the same day for bloody diarrhea, a fever above 102°F, diarrhea lasting more than a week, or severe stomach pain. Travel diarrhea can need stool testing and specific treatment, which ordinary childhood diarrhea does not.",
+    ],
+  },
+  {
+    slug: "urinary-tract-infection",
+    title: "Urinary Tract Infections in Children",
+    short: "Urinary tract infection",
+    group: "Peeing and private parts",
+    heading: "What to do about a urinary tract infection",
+    aap: "Urinary Tract Infection - Female",
+    lead:
+      "A urine sample is the only way to confirm a urinary infection, so call us rather than starting cranberry juice and hoping.",
+    description:
+      "Urinary tract infections in children: the symptoms at different ages, why a sample matters, and when a UTI becomes urgent.",
+    intro: [
+      "Call us for a urine test if your child has burning when passing urine, is going far more often, is suddenly wetting again after being dry, or has smelly or cloudy urine. In a baby, a urinary infection often shows only as an unexplained fever, poor feeding or vomiting.",
+      "Give fluids and pain relief while you wait, and do not start any leftover antibiotic. Seek care the same day for fever with back or side pain, vomiting alongside urinary symptoms, or a baby under three months with any fever.",
+    ],
+  },
+  {
+    slug: "painful-urination",
+    title: "Pain When Passing Urine",
+    short: "Pain passing urine",
+    group: "Peeing and private parts",
+    heading: "What to do about pain passing urine",
+    aap: "Urination Pain - Female",
+    lead:
+      "Get a urine sample tested rather than guessing, because a urinary infection and simple skin irritation feel identical to a child.",
+    description:
+      "Pain when passing urine in children: the two common causes, what helps at home, and why a test settles it.",
+    intro: [
+      "Call us for a urine test. Burning can come from an infection inside the bladder or from irritated skin outside it, and the treatments are completely different — only a sample tells them apart.",
+      "Meanwhile, have your child sit in a shallow warm bath without soap or bubble bath, drink plenty, and try passing urine while sitting in the bath if it hurts too much otherwise. Stop bubble baths and scented soaps, which cause a good share of these cases in young girls.",
+    ],
+  },
+  {
+    slug: "penis-and-scrotum-symptoms",
+    title: "Penis and Scrotum Symptoms in Boys",
+    short: "Penis and scrotum symptoms",
+    group: "Peeing and private parts",
+    heading: "What to do about penis or scrotum symptoms",
+    aap: "Penis-Scrotum Symptoms-Child",
+    lead:
+      "Sudden pain or swelling in a testicle is an emergency — go to an emergency room rather than waiting for an appointment.",
+    description:
+      "Penis and scrotum symptoms in boys: the emergency that cannot wait, the ordinary causes, and what to do at home.",
+    intro: [
+      "Go to an emergency room immediately for sudden severe pain or swelling in a testicle, particularly with vomiting. A twisted testicle has only a few hours before the damage becomes permanent, and no appointment is quicker than an emergency room.",
+      "Call us the same day for redness, swelling or discharge at the tip, pain passing urine, a foreskin that will not go back forward, or a painless swelling in the scrotum. Wash gently with plain water and avoid soap in the meantime.",
+    ],
+  },
+  {
+    slug: "vaginal-symptoms",
+    title: "Vaginal Symptoms in Girls",
+    short: "Vaginal symptoms",
+    group: "Peeing and private parts",
+    heading: "What to do about vaginal symptoms",
+    aap: "Vaginal Symptoms-Child",
+    lead:
+      "Most itching and soreness in young girls comes from soap, bubble bath and damp clothing rather than from an infection.",
+    description:
+      "Vaginal itching, soreness and discharge in girls: the common causes, what to change at home, and what needs seeing.",
+    intro: [
+      "Stop bubble baths, scented soaps and shampoo in the bath water, switch to plain warm water, and have your child change out of wet swimsuits promptly. Cotton underwear and no underwear overnight both help. Most soreness in a young girl settles within a week of those changes.",
+      "Call us for discharge with a strong smell, any bleeding before puberty, a sore that will not heal, or symptoms that have not improved after a week. Call us straight away if you have any concern about how an injury or a symptom happened.",
+    ],
+  },
+  {
+    slug: "circumcision-problems",
+    title: "Circumcision Questions",
+    short: "Circumcision care",
+    group: "Peeing and private parts",
+    heading: "What to do about circumcision care",
+    aap: "Circumcision Problems",
+    lead:
+      "Apply petroleum jelly at every diaper change for the first week so the healing skin does not stick to the diaper.",
+    description:
+      "Caring for a newly circumcised baby: what normal healing looks like, the petroleum jelly routine, and when to call us.",
+    intro: [
+      "Smear petroleum jelly generously on the tip at every change for about a week. Clean with plain warm water rather than wipes, and expect a yellow film to form over the healing area — that film is normal and is not pus or infection.",
+      "Call us for bleeding more than a few spots, swelling that increases after the second day, no urine passed in twelve hours, a foul smell, a fever, or a ring device that has not fallen off within two weeks.",
+    ],
+  },
+  {
+    slug: "foreskin-care",
+    title: "Foreskin Care in Boys",
+    short: "Foreskin care",
+    group: "Peeing and private parts",
+    heading: "What to do about foreskin care",
+    aap: "Foreskin Care Questions",
+    lead:
+      "Never force a young boy's foreskin back — it separates on its own, usually somewhere between three and five years old.",
+    description:
+      "Foreskin care in uncircumcised boys: why not to retract it, what is normal at each age, and the problems that need us.",
+    intro: [
+      "Wash the outside with plain water and leave the foreskin alone. Forcing it back tears the skin and causes the scarring that later needs treating. Once it retracts easily on its own, teach your son to pull it back, rinse and return it forward.",
+      "Expect white lumps under the skin, which are shed skin cells working their way out and need no treatment. Call us for redness and swelling at the tip, pain passing urine, ballooning of the foreskin when urinating, or a foreskin pulled back that will not go forward — that last one needs seeing straight away.",
+    ],
+  },
+  {
+    slug: "taking-a-temperature",
+    title: "How to Take a Child's Temperature",
+    short: "Taking a temperature",
+    group: "Fever and infection",
+    heading: "How to take your child's temperature",
+    aap: "Fever - How to Take the Temperature",
+    lead:
+      "Use a rectal thermometer for a baby under three months — no other method is accurate enough at the age it matters most.",
+    description:
+      "Taking a child's temperature: which method suits which age, how to do each one properly, and what counts as a fever.",
+    intro: [
+      "Choose by age. Under three months, take a rectal temperature with a digital thermometer, a little petroleum jelly and half an inch of insertion. From three months to four years, rectal stays most accurate, though a forehead scanner is reasonable. From four years, an oral reading works if your child can hold the probe under the tongue with a closed mouth.",
+      "Skip ear thermometers under six months and skip forehead strips at any age. Wait thirty minutes after a bath or a hot drink. A fever means 100.4°F or above however you measure it, and add nothing to the reading to 'correct' it — tell us the number and the method.",
+    ],
+  },
+  {
+    slug: "fever-myths",
+    title: "Fever Myths and Facts",
+    short: "Fever myths",
+    group: "Fever and infection",
+    heading: "What to believe about fevers",
+    aap: "Fever - Myths Versus Facts",
+    lead:
+      "Fever itself does not cause brain damage, and treating a fever is about comfort rather than about preventing harm.",
+    description:
+      "Fever myths in children: what fever does and does not do, why the number matters less than parents expect, and what actually needs attention.",
+    intro: [
+      "Set aside four common beliefs. Ordinary fevers from infection do not cause brain damage. A high number does not mean a serious illness — a mild virus can produce 104°F and a serious infection can produce very little. Teething does not cause a fever above 100.4°F. And a fever that does not come all the way down with medicine is not a sign of anything sinister.",
+      "Treat your child rather than the thermometer. Give fever medicine when your child is uncomfortable, and skip it when they are playing. Call us about how your child looks and behaves — floppy, hard to rouse, refusing fluids, or breathing hard — rather than about the reading alone.",
+    ],
+  },
+  {
+    slug: "emergency-symptoms",
+    title: "Emergency Symptoms Not to Miss",
+    short: "Emergency symptoms",
+    group: "Fever and infection",
+    heading: "The symptoms that need help now",
+    aap: "Emergency Symptoms Not to Miss",
+    lead:
+      "Some symptoms mean call 911 rather than call us, and knowing which ones in advance saves the minutes that matter.",
+    description:
+      "The childhood symptoms that need emergency care: what to call 911 for, what needs an emergency room, and what a nurse call can settle.",
+    intro: [
+      "Call 911 for a child who is struggling to breathe, turning blue around the lips, unresponsive or unrousable, having a seizure that will not stop, bleeding heavily, or who has a rash that does not fade when you press a glass against it. Do not drive a child who cannot breathe.",
+      "Go to an emergency room for a serious injury, a possible broken bone through skin, a burn larger than a palm, sudden severe pain, or a head injury with vomiting or confusion. Call our nurse line for everything else at any hour — we would far rather talk it through than have you guess.",
+    ],
+  },
+  {
+    slug: "antibiotics",
+    title: "When Antibiotics Help",
+    short: "When antibiotics help",
+    group: "Fever and infection",
+    heading: "When antibiotics help and when they do not",
+    aap: "Antibiotics: When Do They Help?",
+    lead:
+      "Antibiotics kill bacteria and do nothing at all to viruses, which cause the great majority of childhood illness.",
+    description:
+      "Antibiotics for children: which illnesses need them, why green mucus is not a reason, and the cost of taking them when they will not help.",
+    intro: [
+      "Expect no antibiotic for colds, most sore throats, most coughs, flu, croup or bronchiolitis, because viruses cause all of them. Green or yellow mucus is part of an ordinary cold and does not change that. Expect one for strep throat confirmed by a swab, most urinary infections, and skin infections such as impetigo or cellulitis.",
+      "Finish any course we do prescribe, and never use a leftover prescription or somebody else's. Antibiotics taken when they cannot help still cause diarrhea, rashes and yeast infections, and they make the bacteria your child carries harder to treat next time.",
+    ],
+  },
+  {
+    slug: "cough-medicine",
+    title: "Cough Medicines and Home Remedies",
+    short: "Cough medicines",
+    group: "Coughs and breathing",
+    heading: "What actually helps a cough",
+    aap: "Coughs: Meds or Home Remedies?",
+    lead:
+      "Do not give over-the-counter cough or cold medicine to a child under six — honey works better and is safer, from age one.",
+    description:
+      "Cough medicines for children: why they are not recommended, what honey and fluids do instead, and when to call us.",
+    intro: [
+      "Give half a teaspoon to a teaspoon of honey to a child over one, straight or in warm water, especially at bedtime — trials show it beats the cough syrups sold for the purpose. Never give honey under a year because of the risk of infant botulism.",
+      "Skip over-the-counter cough and cold medicines under six years, since they do not work in young children and cause real side effects. Run a humidifier, keep fluids going, and prop the head of the bed slightly. Call us if the cough comes with fast or laboured breathing, wheezing, or a fever lasting more than three days.",
+    ],
+  },
+  {
+    slug: "wheezing",
+    title: "Wheezing in Children",
+    short: "Wheezing",
+    group: "Coughs and breathing",
+    heading: "What to do about wheezing",
+    aap: "Wheezing (Other Than Asthma)",
+    lead:
+      "Wheezing is a whistling sound as your child breathes out, and a first episode in a child without asthma needs to be assessed.",
+    description:
+      "Wheezing in children without asthma: what it sounds like, the common causes, and when wheezing becomes an emergency.",
+    intro: [
+      "Listen with your ear near your child's open mouth. Wheezing is a high musical whistle on the way out, and it differs from the harsh noise of croup on the way in, and from the rattle of mucus in the throat. Note whether a cold came first, whether the wheeze started suddenly, and whether your child was eating small objects.",
+      "Call 911 for wheezing with severe breathing difficulty, blue lips, or an inability to speak or feed. Go to an emergency room if the wheeze began suddenly with choking, which suggests something inhaled. Call us the same day for a first wheeze in any child, and for any wheeze in a baby.",
+    ],
+  },
+  {
+    slug: "breathing-trouble",
+    title: "Trouble Breathing in Children",
+    short: "Trouble breathing",
+    group: "Coughs and breathing",
+    heading: "What to do about trouble breathing",
+    aap: "Breathing Trouble",
+    lead:
+      "Undress your child's chest and watch it — pulling in between the ribs is the sign that decides how urgent this is.",
+    description:
+      "Trouble breathing in children: the signs to look for on the chest, counting breaths, and when to call 911.",
+    intro: [
+      "Lift your child's shirt and watch the chest for a full minute. Look for skin sucking in between the ribs, under the ribs or at the base of the throat, nostrils flaring with each breath, grunting at the end of a breath, or a child sitting forward to breathe. Count the breaths as well.",
+      "Call 911 for blue or grey lips, a child too breathless to speak, feed or cry, pauses in breathing, or a child becoming drowsy while working hard to breathe. Call us the same day for any of the pulling-in signs without those, and for a baby breathing faster than usual.",
+    ],
+  },
+  {
+    slug: "lymph-nodes",
+    title: "Swollen Lymph Nodes in Children",
+    short: "Swollen glands",
+    group: "Fever and infection",
+    heading: "What to do about swollen glands",
+    aap: "Lymph Nodes - Swollen",
+    lead:
+      "Small movable lumps in the neck after an illness are lymph nodes doing their job, and they stay enlarged for weeks afterward.",
+    description:
+      "Swollen lymph nodes in children: which are ordinary, how long they last, and the ones we want to examine.",
+    intro: [
+      "Feel the lump. Nodes that are pea to grape sized, soft, movable and appear during or after an infection are normal, and they shrink slowly over four to six weeks. Do not keep squeezing them, since handling keeps them irritated.",
+      "Book an appointment for a node bigger than an inch, one that keeps growing after two weeks, one that feels hard and fixed, or any node above the collarbone. Call the same day if the skin over it is red and hot, or if swollen nodes come with night sweats, weight loss or a fever that will not settle.",
+    ],
+  },
+  {
+    slug: "strep-exposure",
+    title: "Exposure to Strep Throat",
+    short: "Strep exposure",
+    group: "Fever and infection",
+    heading: "What to do after strep exposure",
+    aap: "Strep Throat Exposure",
+    lead:
+      "Do not test or treat a child who has been exposed to strep but has no symptoms — wait until they actually feel ill.",
+    description:
+      "After exposure to strep throat: why we do not test well children, what to watch for, and when to call.",
+    intro: [
+      "Watch and wait. A well child who was near somebody with strep needs no swab and no antibiotic, because many healthy children carry strep in the throat without being ill, and testing them leads to treatment that helps nobody.",
+      "Call us if your child develops a sore throat with fever and no cough, a headache or stomach ache with a sore throat, or a fine sandpapery rash, usually within two to five days of exposure. Wash hands and keep drinking cups separate meanwhile.",
+    ],
+  },
+  {
+    slug: "flu-exposure",
+    title: "Exposure to Flu",
+    short: "Flu exposure",
+    group: "Fever and infection",
+    heading: "What to do after flu exposure",
+    aap: "Influenza Exposure",
+    lead:
+      "Call us within 48 hours of an exposure if your child is high risk — preventive antiviral treatment only works inside that window.",
+    description:
+      "After exposure to flu: who needs preventive treatment, the window that matters, and what to watch for.",
+    intro: [
+      "Call us within two days of the exposure if your child is under two, has asthma, a heart condition, diabetes, or a weakened immune system. Preventive antiviral medicine can help those children, and the window for starting it is short.",
+      "Watch everybody else for symptoms rather than treating them. Flu shows up one to four days after exposure and arrives suddenly — high fever, aching, headache and exhaustion. Get your child vaccinated if they are not already, since it still helps during a season.",
+    ],
+  },
+  {
+    slug: "infection-exposure",
+    title: "Exposure to an Infection",
+    short: "Exposure to infection",
+    group: "Fever and infection",
+    heading: "What to do after an exposure",
+    aap: "Infection Exposure Questions",
+    lead:
+      "Tell us what your child was exposed to and when, because the answer depends almost entirely on which infection and how long ago.",
+    description:
+      "After a child is exposed to an infection: the details we need, which exposures need action quickly, and which need only watching.",
+    intro: [
+      "Note three things before you call: which illness, when the contact happened, and how close it was. Then check your child's immunization record, because for measles, chickenpox and whooping cough, being up to date changes the advice completely.",
+      "Call us the same day for exposure to measles, chickenpox, whooping cough, meningitis or tuberculosis, and for any exposure in a baby under three months or a child with a weakened immune system. For most ordinary childhood viruses, watch for symptoms rather than acting in advance.",
+    ],
+  },
+  {
+    slug: "newborn-illness",
+    title: "Telling if a Newborn Is Unwell",
+    short: "Is my newborn unwell?",
+    group: "Babies and newborns",
+    heading: "How to tell if your newborn is unwell",
+    aap: "Newborn Illness - How to Recognize",
+    lead:
+      "Newborns show illness through feeding, color and how easily they wake — not through the symptoms an older child would give you.",
+    description:
+      "Recognizing illness in a newborn: the signs that actually matter at this age, why any fever means calling, and what to watch each day.",
+    intro: [
+      "Watch four things every day: how well your baby feeds, how many wet diapers they produce, what color their skin is, and how easily they rouse. A newborn who is feeding well, wetting six or more diapers and waking for feeds is almost always well, whatever else you notice.",
+      "Call us straight away for any temperature of 100.4°F or above, for a baby who will not feed or has to be woken for every feed, for grunting or fast breathing, for yellow skin deepening after the first week, for fewer than six wet diapers a day, or for a baby who has simply gone quiet and floppy. We would far rather check a newborn than wait.",
+    ],
+  },
+  {
+    slug: "newborn-appearance",
+    title: "Newborn Appearance Questions",
+    short: "How newborns look",
+    group: "Babies and newborns",
+    heading: "What is normal in how a newborn looks",
+    aap: "Newborn Appearance Questions",
+    lead:
+      "Most of what looks alarming on a new baby — swollen genitals, a cone-shaped head, crossed eyes, peeling skin — is normal and passes within weeks.",
+    description:
+      "Newborn appearance: the odd-looking things that are normal, how long each lasts, and the few worth asking about.",
+    intro: [
+      "Expect a head molded into a cone by the birth, puffy eyelids, swollen breasts and genitals from your hormones, peeling skin in the first week, and eyes that wander or cross in the early months. All of those settle on their own and need nothing done.",
+      "Ask us about anything that is not settling: eyes still crossing after four months, a soft spot that looks sunken or bulges when your baby is calm and upright, a head shape becoming more rather than less uneven, or any asymmetry in how your baby moves their arms and legs.",
+    ],
+  },
+  {
+    slug: "newborn-reflexes",
+    title: "Newborn Reflexes and Behavior",
+    short: "Newborn reflexes",
+    group: "Babies and newborns",
+    heading: "What newborn reflexes and behavior mean",
+    aap: "Newborn Reflexes and Behavior",
+    lead:
+      "Startling, hiccupping, sneezing, jerky movements and noisy sleep are all normal newborn behavior rather than signs of a problem.",
+    description:
+      "Newborn reflexes and behavior: what is normal in the early weeks, what each reflex is for, and the movements that need checking.",
+    intro: [
+      "Expect your baby to fling both arms out when startled, root toward anything touching the cheek, grip your finger hard, hiccup daily, sneeze often, and make a great deal of noise while asleep. Jerky, twitchy movements while drifting off are ordinary too.",
+      "Call us about movements that look different: rhythmic jerking that carries on when you hold the limb still, stiffening with staring, a baby who has become floppy or unusually stiff, or one arm or leg that consistently moves less than the other.",
+    ],
+  },
+  {
+    slug: "newborn-rashes",
+    title: "Newborn Rashes and Birthmarks",
+    short: "Newborn rashes",
+    group: "Babies and newborns",
+    heading: "What to do about newborn rashes and birthmarks",
+    aap: "Newborn Rashes and Birthmarks",
+    lead:
+      "Almost every rash in the first weeks — blotchy spots, tiny white bumps, baby acne — clears without treatment and needs nothing on it.",
+    description:
+      "Newborn rashes and birthmarks: which are normal and self-clearing, what to leave alone, and the ones that need checking.",
+    intro: [
+      "Leave the common ones alone. Blotchy red patches with a small pale center, tiny white bumps across the nose, and baby acne at three to six weeks all clear by themselves. Wash with plain water and skip creams, oils and lotions, which usually make baby acne worse.",
+      "Call us about a rash with blisters or pus, a rash in a baby with a fever, spots that do not fade when you press a glass against them, a birthmark that is growing quickly, or any birthmark near the eye, nose or mouth.",
+    ],
+  },
+  {
+    slug: "umbilical-cord",
+    title: "Umbilical Cord Care",
+    short: "Umbilical cord",
+    group: "Babies and newborns",
+    heading: "What to do about the umbilical cord",
+    aap: "Umbilical Cord Symptoms",
+    lead:
+      "Keep the cord stump dry and open to the air, and fold the diaper down below it — that is the whole of the care.",
+    description:
+      "Umbilical cord care in newborns: keeping the stump dry, what normal separation looks like, and the signs of infection.",
+    intro: [
+      "Fold the front of the diaper down so the stump stays uncovered, dress your baby loosely, and give sponge baths rather than tub baths until the stump falls off. Skip alcohol swabs — drying the stump in air separates it faster than cleaning it does.",
+      "Expect the stump to turn black, smell slightly, and drop off between one and three weeks, sometimes leaving a few drops of blood. Call us for redness spreading onto the belly, pus, a foul smell, a fever, a stump still attached after three weeks, or a moist red lump left behind afterward.",
+    ],
+  },
+  {
+    slug: "breath-holding",
+    title: "Breath-Holding Spells",
+    short: "Breath-holding spells",
+    group: "Babies and newborns",
+    heading: "What to do about a breath-holding spell",
+    aap: "Breath-holding Spell",
+    lead:
+      "Lay your child on their side and wait — a breath-holding spell frightens the parent far more than it harms the child.",
+    description:
+      "Breath-holding spells in toddlers: what happens, what to do during one, and why they are not tantrums or seizures.",
+    intro: [
+      "Lay your child flat on their side, clear the area around them, and stay calm. Breathing restarts on its own within a minute. Do not shake your child, splash water, or put anything in their mouth. A brief stiffening or twitching at the end of a spell is common and does not mean epilepsy.",
+      "Understand what triggers them: pain, fright, frustration or anger. A child cannot do this on purpose, so punishing a spell achieves nothing. Book an appointment after a first spell so we can check for iron deficiency, which is common in these children and treatable. Call 911 if breathing does not restart within a minute.",
+    ],
+  },
+  {
+    slug: "crying-older-baby",
+    title: "A Crying Child Over 3 Months",
+    short: "Crying after 3 months",
+    group: "Babies and newborns",
+    heading: "What to do when an older baby cries inconsolably",
+    aap: "Crying Child - 3 Months and Older",
+    lead:
+      "Colic ends by three or four months, so persistent inconsolable crying in an older baby has a cause worth finding.",
+    description:
+      "Inconsolable crying in a baby over three months: the causes to check at home, and why this age needs looking at rather than waiting out.",
+    intro: [
+      "Undress your baby completely and check them over. Look for a hair wrapped tightly around a finger, toe or penis, a scratched cornea, an ear that hurts when touched, a swelling in the groin, and any sore or bruise. Check the temperature and think about teething, constipation and a recent vaccine.",
+      "Call us if you cannot find a cause and your baby will not settle, because we treat unexplained inconsolable crying at this age as a symptom rather than a phase. Call the same day if crying comes with a fever, vomiting, a swollen belly, or a baby who is limp between bouts.",
+    ],
+  },
+  {
+    slug: "breastfeeding",
+    title: "Breastfeeding Questions",
+    short: "Breastfeeding",
+    group: "Feeding and growth",
+    heading: "What to do about breastfeeding problems",
+    aap: "Breast-Feeding Questions",
+    lead:
+      "Judge feeding by diapers and weight rather than by minutes at the breast or by how full you feel.",
+    description:
+      "Breastfeeding questions: knowing your baby is getting enough, fixing a painful latch, and the lactation support we offer.",
+    intro: [
+      "Count output. From day five, expect six or more wet diapers and three or more stools a day, and expect your baby back to birth weight by two weeks. Diapers and weight tell you more than time at the breast, and far more than whether your breasts feel full.",
+      "Call us for pain that lasts beyond the first few seconds of a latch, cracked or bleeding nipples, a hard red painful area with a fever, or a baby who is not gaining. Our lactation consultants work alongside your provider, so ask at any visit — most latch problems are fixed in one appointment.",
+    ],
+  },
+  {
+    slug: "bottle-feeding",
+    title: "Bottle Feeding and Formula",
+    short: "Bottle feeding",
+    group: "Feeding and growth",
+    heading: "What to do about bottle feeding",
+    aap: "Bottle-Feeding (Formula) Questions",
+    lead:
+      "Mix formula exactly to the instructions — adding extra water or extra powder is genuinely dangerous to a baby.",
+    description:
+      "Bottle feeding and formula: mixing safely, how much a baby needs, paced feeding, and when to call us.",
+    intro: [
+      "Follow the tin exactly, adding water first and then powder. Diluting formula to make it last can cause seizures from low sodium, and over-concentrating it strains a baby's kidneys. Discard anything left in a bottle an hour after a feed starts, and never microwave a bottle.",
+      "Feed on your baby's cues rather than to a schedule, holding the bottle horizontally and pausing often so your baby controls the pace. Call us before switching formulas — most parents switch for symptoms that formula will not fix — and call for forceful vomiting, blood in the stool, or poor weight gain.",
+    ],
+  },
+  {
+    slug: "solid-foods",
+    title: "Starting Solid Foods",
+    short: "Starting solids",
+    group: "Feeding and growth",
+    heading: "What to do about starting solids",
+    aap: "Solid Foods (Baby Foods)",
+    lead:
+      "Start solids around six months, and introduce peanut and egg early rather than delaying them — waiting raises the risk of allergy.",
+    description:
+      "Starting solid foods: when to begin, introducing allergens early, choking risks to avoid, and how much milk still matters.",
+    intro: [
+      "Look for the signs rather than the date: sitting with support, good head control, and interest in your food, usually around six months. Offer iron-rich foods first, introduce one new food every few days, and include smooth peanut butter and well-cooked egg early — current advice is that delaying them increases allergy risk, not reduces it.",
+      "Keep breast milk or formula as the main nutrition through the first year, and give no honey, no cow's milk as a drink, and no whole nuts, grapes, popcorn or raw carrot. Call us if your baby gags constantly, refuses all textures, or develops hives, vomiting or swelling after a new food.",
+    ],
+  },
+  {
+    slug: "food-allergy",
+    title: "Food Allergies in Children",
+    short: "Food allergy",
+    group: "Feeding and growth",
+    heading: "What to do about a food allergy",
+    aap: "Food Allergy",
+    lead:
+      "Hives, vomiting or swelling within minutes of a food is an allergy; a stomach ache hours later usually is not.",
+    description:
+      "Food allergies in children: what a real reaction looks like, when to use epinephrine, and how allergy is properly diagnosed.",
+    intro: [
+      "Note the timing. A genuine allergic reaction begins within minutes to two hours and produces hives, swelling, vomiting, coughing or wheezing. Bloating, loose stool or discomfort many hours later points to intolerance rather than allergy, and the two are investigated quite differently.",
+      "Use epinephrine first and call 911 for any trouble breathing, swelling of the lips or tongue, repeated vomiting or collapse after a food — antihistamines do not treat anaphylaxis. Book an appointment before cutting foods out, because unnecessary elimination causes its own problems and makes proper testing harder.",
+    ],
+  },
+  {
+    slug: "medicine-refusal",
+    title: "A Child Who Refuses Medicine",
+    short: "Refusing medicine",
+    group: "Feeding and growth",
+    heading: "What to do when your child refuses medicine",
+    aap: "Medicine - Refusal to Take",
+    lead:
+      "Use a syringe against the inside of the cheek rather than a spoon, and give it in small squirts your child can swallow between.",
+    description:
+      "Getting medicine into a child: the syringe technique that works, what you can mix it with, and what to do about a dose brought back up.",
+    intro: [
+      "Sit your child upright, place a syringe between the cheek and the gum toward the back, and give a little at a time so they can swallow between squirts. Aiming at the back of the throat causes gagging. A cold drink or an ice pop just before numbs the taste.",
+      "Ask us before mixing medicine into food or drink, because some antibiotics are inactivated by milk and juice, and a half-finished bottle means a half-finished dose. If your child vomits within fifteen minutes of a dose, call us — whether to repeat it depends on the medicine.",
+    ],
+  },
+  {
+    slug: "swallowed-object",
+    title: "A Swallowed Object",
+    short: "Swallowed object",
+    group: "Feeding and growth",
+    heading: "What to do about a swallowed object",
+    aap: "Swallowed Foreign Object",
+    lead:
+      "A swallowed button battery or magnet is an emergency — go straight to an emergency room rather than waiting to see.",
+    description:
+      "When a child swallows something: which objects are emergencies, which pass on their own, and what to watch for.",
+    intro: [
+      "Go to an emergency room immediately for a button battery, which burns through tissue within hours, and for more than one magnet, which can pinch the bowel between them. Take the packaging or an identical object with you if you have one.",
+      "Call us about anything else swallowed. Small smooth objects such as a coin usually pass within a few days, and we will tell you what to watch for. Seek care immediately for drooling, refusing to eat or drink, chest or throat pain, vomiting, or any difficulty breathing.",
+    ],
+  },
+  {
+    slug: "swallowed-substance",
+    title: "A Swallowed Household Substance",
+    short: "Swallowed a substance",
+    group: "Feeding and growth",
+    heading: "What to do when a child swallows something",
+    aap: "Swallowed Harmless Substance",
+    lead:
+      "Call Poison Control on 1-800-222-1222 before you do anything else, and never make your child vomit.",
+    description:
+      "When a child swallows a household substance: calling Poison Control first, what never to do, and which substances need an emergency room.",
+    intro: [
+      "Call Poison Control at 1-800-222-1222 straight away, with the container in your hand. Poison Control answers around the clock, charges nothing, and will tell you within a minute whether your child needs watching at home or a trip to the hospital. Never induce vomiting and never give syrup of ipecac.",
+      "Go to an emergency room now, calling on the way, if your child swallowed a drain cleaner, oven cleaner or other caustic substance, anything containing petrol or lamp oil, or an adult medicine — and for any child who is drowsy, vomiting, having a seizure or struggling to breathe.",
+    ],
+  },
+  {
+    slug: "depression",
+    title: "Depression in Children and Teens",
+    short: "Depression",
+    group: "Feelings and mental health",
+    heading: "What to do about depression",
+    aap: "Depression",
+    lead:
+      "Ask your child directly whether they have thought about hurting themselves — asking does not plant the idea, and it is the question that opens the conversation.",
+    description:
+      "Depression in children and teenagers: what it looks like at different ages, how to start the conversation, and how to reach help now.",
+    intro: [
+      "Ask plainly and without flinching. Parents worry that raising self-harm suggests it; research is clear that it does not, and most young people are relieved somebody noticed. If your child says yes, stay with them, remove medicines and firearms from the house, and call the 988 Suicide and Crisis Lifeline by phone or text.",
+      "Look for depression in what has changed rather than in sadness alone. Withdrawal from friends, irritability, sleeping far more or far less, dropping grades, losing interest in things they used to love, and unexplained aches all count at this age. Book an appointment with us — our behavioral health team works alongside your child's pediatrician, so the first conversation can start here.",
+    ],
+  },
+  {
+    slug: "suicide-concerns",
+    title: "Suicide Concerns",
+    short: "Suicide concerns",
+    group: "Feelings and mental health",
+    heading: "What to do if you are worried about suicide",
+    aap: "Suicide Concerns",
+    lead:
+      "Call or text 988 now if your child has talked about ending their life — the Suicide and Crisis Lifeline answers 24 hours a day.",
+    description:
+      "If you are worried your child may be suicidal: getting help immediately, making the home safer, and what to say.",
+    intro: [
+      "Call or text 988 straight away, or go to the nearest emergency room if your child is in immediate danger. Do not leave them alone. Take firearms out of the house entirely and lock up all medicines, including over-the-counter ones — reducing access to means is the single most effective thing a parent can do.",
+      "Say the words rather than talking around them. Ask whether they are thinking of killing themselves, listen without arguing or promising secrecy, and tell them you are getting help because you love them. Call us as well: we will get your child in, and our behavioral health team can pick it up from there.",
+    ],
+  },
+  {
+    slug: "anxiety-attack",
+    title: "Anxiety Attacks in Children",
+    short: "Anxiety attacks",
+    group: "Feelings and mental health",
+    heading: "What to do during an anxiety attack",
+    aap: "Anxiety Attack",
+    lead:
+      "Slow your child's breathing out rather than in — a long exhale is what switches the body's alarm off.",
+    description:
+      "Anxiety attacks in children: what to do in the moment, why breathing out matters, and getting help between episodes.",
+    intro: [
+      "Sit with your child and breathe out slowly and audibly, asking them to match you — in for four, out for six or eight. Lengthening the out-breath calms the nervous system, while telling a child to take deep breaths in often makes things worse. Name what is happening: this is anxiety, it is horrible, and it will pass.",
+      "Book an appointment once the episode is over. Anxiety in children responds well to treatment, and doing nothing between attacks usually means more of them. Go to an emergency room instead if this is a first episode with chest pain, fainting or a racing heart that will not settle, so the heart can be checked.",
+    ],
+  },
+  {
+    slug: "panic-attack",
+    title: "Panic Attacks in Children",
+    short: "Panic attacks",
+    group: "Feelings and mental health",
+    heading: "What to do during a panic attack",
+    aap: "Panic Attack",
+    lead:
+      "A panic attack peaks within about ten minutes and cannot harm your child, however convincingly it feels otherwise.",
+    description:
+      "Panic attacks in children and teens: what to do while one is happening, why it feels so physical, and what helps prevent the next.",
+    intro: [
+      "Stay calm, keep your voice low, and ride it out with your child. Slow the out-breath, get them to name five things they can see and four they can hear, and remind them that this peaks in about ten minutes and then fades. Do not have them breathe into a paper bag.",
+      "Book an appointment afterward. Panic attacks respond well to treatment, and left alone they tend to spread — children start avoiding places where one happened. Go to an emergency room for a first attack with chest pain, fainting or an irregular heartbeat, so we can rule out a physical cause.",
+    ],
+  },
+  {
+    slug: "mental-health-problems",
+    title: "Mental Health Concerns in Children",
+    short: "Mental health concerns",
+    group: "Feelings and mental health",
+    heading: "What to do about a mental health concern",
+    aap: "Mental Health Problems",
+    lead:
+      "Start with your pediatrician rather than searching for a specialist — mental health care is part of what we do here.",
+    description:
+      "Mental health concerns in children: what to notice, how to raise it, and the behavioral health team inside the practice.",
+    intro: [
+      "Book an appointment and say plainly what you are worried about when you call, so we can allow enough time. Bring specifics rather than impressions: what changed, when it started, how it shows at home and at school, and what you have already tried.",
+      "Expect the conversation to continue with people in this practice. Our behavioral health team — therapists, psychiatric providers and psychologists who do testing — work alongside your child's pediatrician, so a referral stays inside the same records. Call 988 or go to an emergency room at any hour if your child is at immediate risk.",
+    ],
+  },
+  {
+    slug: "behavioral-health-problems",
+    title: "Behavior Concerns in Children",
+    short: "Behavior concerns",
+    group: "Feelings and mental health",
+    heading: "What to do about a behavior concern",
+    aap: "Behavioral Health Problems",
+    lead:
+      "Write down what happens immediately before and after the behavior for a week — that record tells us more than any description.",
+    description:
+      "Behavior concerns in children: keeping a useful record, what to bring to the appointment, and how we assess it.",
+    intro: [
+      "Keep a simple log for a week: what happened just before, what your child did, how long it lasted, and what happened afterward. Patterns show up in that record that nobody notices in the moment, and it turns a difficult conversation into a specific one.",
+      "Bring school reports and any teacher comments with you. Behavior that appears at home and school both points somewhere different from behavior confined to one. Book a longer appointment when you call, and tell us if sleep, screens, a new sibling, a move or a loss have changed recently.",
+    ],
+  },
+  {
+    slug: "menstrual-cramps",
+    title: "Menstrual Cramps",
+    short: "Period cramps",
+    group: "Growing up",
+    heading: "What to do about period cramps",
+    aap: "Menstrual Cramps",
+    lead:
+      "Start ibuprofen the day before a period is due, or at the very first cramp — taken early it prevents pain rather than chasing it.",
+    description:
+      "Period cramps in teenagers: the timing that makes ibuprofen work, what else helps, and cramps that need investigating.",
+    intro: [
+      "Give ibuprofen with food at the start of the period, or the day before if her cycle is predictable, and continue at regular intervals for the first two days rather than waiting for pain to build. Ibuprofen blocks the chemical that causes cramping, so it works far better before that chemical is released. Add a heat pack and gentle exercise.",
+      "Book an appointment if cramps keep her home from school, if ibuprofen taken properly does not control them, if pain begins days before bleeding, or if periods have become steadily more painful over time. Cramps that severe, or that early, can point to something treatable rather than to bad luck.",
+    ],
+  },
+  {
+    slug: "missed-period",
+    title: "A Missed or Late Period",
+    short: "Missed period",
+    group: "Growing up",
+    heading: "What to do about a missed or late period",
+    aap: "Menstrual Period - Missed or Late",
+    lead:
+      "Irregular periods are normal for the first two years after they start, and a pregnancy test is still worth doing whenever pregnancy is possible.",
+    description:
+      "Missed and late periods in teenagers: what is normal early on, when to test, and the causes worth investigating.",
+    intro: [
+      "Expect irregularity in the first couple of years. Cycles anywhere from 21 to 45 days, and the occasional skipped month, are both normal while a cycle settles. Do a home pregnancy test if pregnancy is possible at all, because that answer changes everything that follows.",
+      "Book an appointment for no period by age fifteen, no periods for three months after they had been regular, cycles consistently longer than 45 days, or missed periods alongside significant weight change, heavy exercise or acne and unwanted hair growth.",
+    ],
+  },
+  {
+    slug: "vaginal-bleeding",
+    title: "Unexpected Vaginal Bleeding",
+    short: "Unexpected bleeding",
+    group: "Growing up",
+    heading: "What to do about unexpected vaginal bleeding",
+    aap: "Vaginal Bleeding",
+    lead:
+      "Any vaginal bleeding before puberty needs to be seen, and so does bleeding heavy enough to soak a pad every hour.",
+    description:
+      "Unexpected vaginal bleeding in girls: what needs seeing straight away, tracking heavy periods, and what we look for.",
+    intro: [
+      "Call us the same day for any bleeding in a girl who has not started puberty. Bleeding before puberty always needs examining, whatever the likely explanation seems to be.",
+      "For a teenager, track it: how many pads or tampons per day, whether any are soaked through in under an hour, whether clots are larger than a quarter, and how many days it has lasted. Seek care immediately for soaking a pad hourly for several hours, dizziness or fainting, or bleeding with severe pain, and call us for periods lasting beyond seven days.",
+    ],
+  },
+  {
+    slug: "breast-symptoms",
+    title: "Breast Symptoms in Children and Teens",
+    short: "Breast symptoms",
+    group: "Growing up",
+    heading: "What to do about breast symptoms",
+    aap: "Breast Symptoms-Teen",
+    lead:
+      "Uneven breast development and tenderness during puberty are normal in girls, and temporary breast tissue in boys is normal too.",
+    description:
+      "Breast changes in children and teenagers: what puberty normally produces, what boys can expect, and the changes we want to see.",
+    intro: [
+      "Expect asymmetry, tenderness and lumps that come and go with the cycle in a developing girl — one side commonly starts months before the other and evens out over a couple of years. In boys, a tender disc of tissue under the nipple in early puberty is common and usually settles within a year or two.",
+      "Book an appointment for a hard fixed lump, any discharge from the nipple, redness and pain with a fever, breast development before age eight, or no development by age thirteen. Call us for a boy whose breast tissue is enlarging beyond early puberty or causing him distress.",
+    ],
+  },
+  {
+    slug: "sti-exposure",
+    title: "Possible STI Exposure",
+    short: "STI exposure",
+    group: "Growing up",
+    heading: "What to do after possible STI exposure",
+    aap: "STI Exposure",
+    lead:
+      "Book a confidential appointment quickly — some exposures have treatment that only works within days.",
+    description:
+      "After possible sexually transmitted infection exposure: how quickly to be seen, what confidentiality means for teens, and what testing involves.",
+    intro: [
+      "Call us and ask for an appointment as soon as possible. Timing matters: emergency contraception, HIV prevention medicine and treatment after an assault all have windows measured in hours or days rather than weeks. Say on the phone that it is time-sensitive.",
+      "Know that teenagers can discuss sexual health confidentially with us, and we will explain exactly what that covers at the visit. Testing is usually a urine sample or a swab rather than anything invasive. Go to an emergency room now for an assault, severe pain, or fever with pelvic pain.",
+    ],
+  },
+  {
+    slug: "sexually-transmitted-infections",
+    title: "Sexually Transmitted Infections in Teens",
+    short: "STIs",
+    group: "Growing up",
+    heading: "What to do about a possible STI",
+    aap: "Sexually Transmitted Infections",
+    lead:
+      "Most sexually transmitted infections cause no symptoms at all, so testing is the only way a teenager finds out.",
+    description:
+      "Sexually transmitted infections in teenagers: why symptoms are unreliable, what testing involves, and confidential care here.",
+    intro: [
+      "Book a test rather than waiting for symptoms, because chlamydia in particular usually causes none and is the commonest one we find. Testing is straightforward — a urine sample or a self-collected swab — and treatment for most is a single course of antibiotics.",
+      "Call us the same day for pelvic or testicular pain, unusual discharge, sores, pain passing urine, or fever with pelvic pain. Teenagers can talk to us confidentially about sexual health, and we will be clear at the start of the visit about what that means.",
+    ],
+  },
+  {
+    slug: "acne",
+    title: "Acne in Children and Teens",
+    short: "Acne",
+    group: "Growing up",
+    heading: "What to do about acne",
+    aap: "Acne",
+    lead:
+      "Treat the whole area rather than individual spots, and give any treatment eight to twelve weeks before deciding it has failed.",
+    description:
+      "Acne in teenagers: what actually works, how long it takes, the myths to ignore, and when to come in.",
+    intro: [
+      "Apply treatment across the whole affected area rather than dabbing it on spots, since the aim is preventing the next breakout rather than shrinking today's. Start with benzoyl peroxide or adapalene, use it once daily, expect dryness for the first fortnight, and add a plain moisturizer. Wash twice a day with a gentle cleanser and no scrubbing.",
+      "Ignore the food myths — chocolate and greasy food do not cause acne, though skimmed milk and high-sugar diets show a weak link. Book an appointment for deep painful lumps, scarring, acne that has not improved after three months of consistent treatment, or acne that is affecting your teenager's mood.",
+    ],
+  },
+  {
+    slug: "arm-pain",
+    title: "Arm Pain Without an Injury",
+    short: "Arm pain",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about arm pain",
+    aap: "Arm Pain",
+    lead:
+      "Arm pain with no injury behind it is usually overuse or a virus, but pain that wakes your child at night needs looking at.",
+    description:
+      "Arm pain in children without an injury: the usual causes, what helps, and the patterns that need investigating.",
+    intro: [
+      "Ask what your child has been doing. A new sport, hours on a keyboard or a controller, or a growth spurt explain most arm pain, and rest, ibuprofen and a few days off the activity settle it. Aching in both arms during a viral illness is common and passes with the illness.",
+      "Book an appointment for pain that wakes your child from sleep, pain in one arm lasting more than a week, swelling or warmth over a joint, or arm pain with fever or weight loss. Seek care immediately for a limb your child will not move at all, or one that is numb, pale or cold.",
+    ],
+  },
+  {
+    slug: "leg-pain",
+    title: "Leg Pain Without an Injury",
+    short: "Leg pain",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about leg pain",
+    aap: "Leg Pain",
+    lead:
+      "Growing pains happen in both legs, in the evening, and never make a child limp — anything else deserves a look.",
+    description:
+      "Leg pain in children without an injury: recognizing growing pains, what helps, and the pain that needs assessing.",
+    intro: [
+      "Check three things against the growing-pains pattern: both legs rather than one, evenings or night rather than mornings, and a child who runs normally the next day. Massage, a warm bath and ibuprofen at bedtime settle those, and they cause no lasting harm.",
+      "Book an appointment for pain in one leg only, a limp, a swollen or warm joint, pain that is worse in the morning, or pain with fever, weight loss or night sweats. Seek care the same day for a child who refuses to bear weight, or leg pain with a fever.",
+    ],
+  },
+  {
+    slug: "ear-infections",
+    title: "Ear Infection Questions",
+    short: "Ear infections",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to know about ear infections",
+    aap: "Ear Infection Questions",
+    lead:
+      "Many ear infections clear without antibiotics, so we often treat the pain first and reassess in a day or two.",
+    description:
+      "Ear infections in children: why antibiotics are not automatic, how long fluid lasts afterward, and when tubes get discussed.",
+    intro: [
+      "Expect a conversation rather than an automatic prescription. For a child over two with a mild infection in one ear, watching for 48 hours with good pain relief works as well as antibiotics and avoids the side effects. Babies, severe pain, both ears, and a perforated eardrum usually get treated straight away.",
+      "Expect fluid to stay behind the eardrum for up to three months after the infection clears, muffling hearing without causing pain. Call us if your child has three infections in six months, four in a year, or hearing and speech concerns — those are the points at which we discuss ear tubes.",
+    ],
+  },
+  {
+    slug: "ear-piercing",
+    title: "Ear Piercing Problems",
+    short: "Ear piercing",
+    group: "Ears, nose, mouth and teeth",
+    heading: "What to do about a sore ear piercing",
+    aap: "Ear Piercing Symptoms",
+    lead:
+      "Clean a new piercing with saline twice a day and leave the earring in — taking it out traps infection inside a closing hole.",
+    description:
+      "Sore and infected ear piercings: cleaning routine, keeping the earring in, and the signs that need antibiotics.",
+    intro: [
+      "Wash your hands, then clean front and back with saline twice a day and turn the earring gently. Keep the earring in even if the site is sore, because removing it lets the channel close over an infection. Use hypoallergenic posts and skip alcohol and hydrogen peroxide, which irritate healing skin.",
+      "Call us for spreading redness, pus, increasing pain, a fever, or an earring back that has become embedded in the lobe — that last one needs removing here rather than at home. Seek care the same day for infection in a cartilage piercing at the top of the ear, which is more serious than a lobe infection.",
+    ],
+  },
+  {
+    slug: "hay-fever",
+    title: "Hay Fever in Children",
+    short: "Hay fever",
+    group: "Fever and infection",
+    heading: "What to do about hay fever",
+    aap: "Hay Fever",
+    lead:
+      "Start allergy medicine two weeks before your child's usual season rather than waiting for the sneezing.",
+    description:
+      "Hay fever in children: starting treatment early, which medicines work, and reducing pollen at home.",
+    intro: [
+      "Begin a daily non-drowsy antihistamine, or the steroid nasal spray we recommend, about two weeks before the season your child reacts to. Both work far better as prevention than as rescue. Use a saline rinse to wash pollen out, and teach your child to aim a nasal spray away from the septum.",
+      "Cut the exposure where you can: shut bedroom windows on high-pollen days, wash hair before bed, and change clothes after long spells outside. Book an appointment if symptoms persist despite daily treatment, if your child is missing school, or if hay fever is setting off asthma.",
+    ],
+  },
+  {
+    slug: "athletes-foot",
+    title: "Athlete's Foot",
+    short: "Athlete's foot",
+    group: "Skin and rashes",
+    heading: "What to do about athlete's foot",
+    aap: "Athlete's Foot",
+    lead:
+      "Keep the feet dry and keep applying antifungal cream for two weeks after the skin looks normal.",
+    description:
+      "Athlete's foot in children: the cream and the routine that clear it, why it comes back, and when to come in.",
+    intro: [
+      "Apply an over-the-counter antifungal cream twice a day, working it between every toe, and carry on for two weeks after the skin looks clear. Dry between the toes properly after washing, change socks daily, alternate shoes so each pair dries out, and wear sandals in changing rooms.",
+      "Call us if the skin cracks and weeps, if the foot becomes red, swollen and painful, or if two weeks of consistent treatment has changed nothing. Bring in a child with diabetes rather than treating the foot at home.",
+    ],
+  },
+  {
+    slug: "jock-itch",
+    title: "Jock Itch",
+    short: "Jock itch",
+    group: "Skin and rashes",
+    heading: "What to do about jock itch",
+    aap: "Jock Itch",
+    lead:
+      "Treat the feet at the same time as the groin — jock itch usually travels up from athlete's foot on a towel or a pair of shorts.",
+    description:
+      "Jock itch in children and teens: treating it and its source, keeping the area dry, and what needs seeing.",
+    intro: [
+      "Apply an antifungal cream twice a day for two weeks past clearing, and check the feet at the same time, since the same fungus usually lives there. Put socks on before underwear so the fungus does not travel, wash athletic clothing after every use, and dry the groin thoroughly.",
+      "Call us if the rash weeps or blisters, if it spreads onto the scrotum or penis, or if two weeks of treatment has changed nothing — a rash that does not respond to antifungal cream is usually something other than jock itch.",
+    ],
+  },
+  {
+    slug: "ingrown-toenail",
+    title: "Ingrown Toenails",
+    short: "Ingrown toenail",
+    group: "Knocks, pain and injuries",
+    heading: "What to do about an ingrown toenail",
+    aap: "Toenail - Ingrown",
+    lead:
+      "Soak the foot in warm salt water and cut toenails straight across, never curved down at the corners.",
+    description:
+      "Ingrown toenails in children: soaking, correct nail cutting, roomier shoes, and when a nail needs a small procedure.",
+    intro: [
+      "Soak the foot in warm salty water for fifteen minutes three times a day, then dry it and gently lift the nail edge away from the skin with a wisp of clean cotton. Cut nails straight across, level with the end of the toe, and put your child in shoes with room at the front.",
+      "Call us for pus, spreading redness, a fever, or a toe that is too painful to walk on. An ingrown nail that keeps coming back usually needs a small procedure to remove the edge permanently, which a doctor does under local anesthetic in a single visit.",
     ],
   },
 ];

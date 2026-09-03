@@ -4426,3 +4426,232 @@
   background: #ffffff;
   margin-top: 8px;
 }
+
+/*
+ * The embedded Symptom Checker, given a frame of its own.
+ *
+ * A raw 2200px iframe reads as a hole in the page: the AAP's own typography
+ * starts abruptly, there is no edge to it, and when the tool is short the
+ * bottom half is blank white with no explanation. Wrapping it in a titled panel
+ * says three things a bare frame cannot — that this is a tool rather than more
+ * of our page, whose it is, and where to go when it misbehaves.
+ *
+ * The width is capped as well. The questions are a single narrow column, and
+ * stretching that column across 1200px of desktop leaves the reader tracking
+ * one short line across an enormous field of white.
+ */
+.sym-embed {
+  max-width: 860px;
+  margin: 0 0 20px 0;
+  border: 1px solid #dfe2e5;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+.sym-embed-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 20px;
+  background: #f4f5f6;
+  border-bottom: 1px solid #e4e7ea;
+}
+
+.sym-embed-name {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #636466;
+}
+
+/* The topic the frame is opened at, so the panel says what it is showing. */
+.sym-embed-topic {
+  display: inline-block;
+  margin-left: 10px;
+  padding: 3px 10px 4px 10px;
+  border-radius: 999px;
+  background: #2b93d1;
+  color: #ffffff;
+  font-size: 12px;
+  letter-spacing: 0.4px;
+  text-transform: none;
+}
+
+.sym-embed-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  flex: 0 0 auto;
+  color: #2b93d1;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.sym-embed-open:hover {
+  color: #f58220;
+  text-decoration: underline;
+}
+
+.sym-embed-open svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/*
+ * The AAP viewer is cross-origin and sends no resize message, so the frame
+ * cannot size itself to its content. Its tallest tab runs past 1500px on some
+ * topics, and a box tall enough for the worst case leaves a slab of white on
+ * every other one. So the frame gets a comfortable height and scrolls inside
+ * itself, and the bar offers full screen for anyone who wants the room.
+ */
+.sym-embed-acts {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  flex: 0 0 auto;
+}
+
+.sym-embed-grow {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #2b93d1;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sym-embed-grow:hover {
+  color: #f58220;
+}
+
+.sym-embed-grow svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.sym-embed-frame {
+  display: block;
+  width: 100%;
+  height: 780px;
+  border: 0;
+  background: #ffffff;
+}
+
+/* The launched tool. Closed dialogs stay display:none via the UA sheet. */
+.sym-modal {
+  width: min(1060px, 100vw - 32px);
+  height: min(900px, 100vh - 32px);
+  max-width: none;
+  max-height: none;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+}
+
+.sym-modal[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+.sym-modal::backdrop {
+  background: rgba(33, 37, 41, 0.62);
+}
+
+.sym-modal-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex: 0 0 auto;
+  padding: 12px 20px;
+  background: #f4f5f6;
+  border-bottom: 1px solid #e4e7ea;
+}
+
+.sym-modal-close {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #636466;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sym-modal-close:hover {
+  color: #f58220;
+}
+
+.sym-modal-close svg {
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.sym-modal-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #ffffff;
+}
+
+.sym-modal-body iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+@media (max-width: 767px) {
+  .sym-modal {
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 575px) {
+  .sym-embed-bar {
+    padding: 10px 14px;
+  }
+
+  .sym-embed-topic {
+    display: none;
+  }
+
+  .sym-embed-acts {
+    gap: 14px;
+  }
+
+  .sym-embed-frame {
+    height: 620px;
+  }
+}
