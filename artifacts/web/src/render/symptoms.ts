@@ -20,6 +20,7 @@
  */
 
 import { symptoms, type Symptom } from "../data/symptoms.ts";
+import { symptomTerms } from "../data/symptomTerms.ts";
 import { escapeAttribute, SITE, type GeneratedPage } from "./generated.ts";
 import type { Crumb } from "./generated.ts";
 
@@ -83,18 +84,30 @@ function renderSymptomPage(symptom: Symptom): string {
     .map((p) => `\t\t\t\t\t<p>${escapeAttribute(p)}</p>`)
     .join("\n");
 
-  const others = symptoms
-    .filter((other) => other.slug !== symptom.slug)
+  /*
+   * The rest of this symptom's own group, not all 163 others. Listing every
+   * page ran to seven thousand pixels on a phone — more than twice the rest
+   * of the page — and put the same block on all 164, which helps nobody
+   * reading and says nothing to a search engine. Neighbours in the group are
+   * the pages a parent might actually have wanted instead of this one.
+   */
+  const NEIGHBOURS = 11;
+  const siblings = symptoms.filter(
+    (other) => other.group === symptom.group && other.slug !== symptom.slug,
+  );
+  const others = siblings
+    .slice(0, NEIGHBOURS)
     .map(
       (other) =>
         `<li><a href="${symptomHref(other)}">${escapeAttribute(other.title)}</a></li>`,
     )
     .join("");
+  const moreInGroup = siblings.length > NEIGHBOURS;
 
   return `${heroBand(symptom)}
 <div class="sym-alert">
 	<div class="container">
-		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt — call 911 now.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
+		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, call 911 now.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
 	</div>
 </div>
 <div class="whitebg padme90 sym-intro">
@@ -114,18 +127,17 @@ ${intro}
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">Should my child be seen?</h2>
-				<p class="sym-tool-lead">The American Academy of Pediatrics keeps a decision tool for this. Work through its questions — how your child looks, how long this has run, what has changed since it started — and it ends on one of three answers: care for your child at home, book an appointment, or seek care now. Most parents finish in about a minute.</p>
+				<p class="sym-tool-lead">The American Academy of Pediatrics keeps a decision tool for this. Work through its questions about how your child looks, how long this has run and what has changed since it started, and it ends on one of three answers: care for your child at home, book an appointment, or seek care now. Most parents finish in about a minute.</p>
 				<div class="sym-embed">
-					<div class="sym-embed-bar">
-						<span class="sym-embed-name">Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
+					<p class="sym-embed-bar">
+						<span class="sym-embed-name">AAP Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
 						<span class="sym-embed-acts">
-							<button type="button" class="sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)} — Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
+							<button type="button" class="sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
 							<a class="sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">New tab<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
 						</span>
-					</div>
-					<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)} — Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
+					</p>
+					<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
 				</div>
-				<p class="sc-note">The American Academy of Pediatrics writes these questions and keeps them current. Wasatch Pediatrics does not edit them. The panel scrolls, and the full-screen view hands the tool the whole window.</p>
 				<dialog class="sym-modal" aria-label="Symptom Checker: ${escapeAttribute(symptom.short)}">
 					<div class="sym-modal-bar">
 						<span class="sym-embed-name">Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
@@ -146,7 +158,7 @@ ${intro}
 			<div class="col-12">
 				<h2 class="dent-band-title">Getting your child seen</h2>
 				<ul class="sc-routes">
-					<li><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number — nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.</li>
+					<li><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.</li>
 					<li><strong>Be seen today.</strong> Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</li>
 					<li><strong>This evening or at the weekend.</strong> Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</li>
 				</ul>
@@ -160,8 +172,9 @@ ${intro}
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="svc-index-title">Other symptoms</h2>
+				<h2 class="svc-index-title">More on ${escapeAttribute(symptom.group.toLowerCase())}</h2>
 				<ul class="area-group">${others}</ul>
+				<p class="sym-others-all"><a href="${CHECKER}">${moreInGroup ? "See the rest of this group and all 164 symptoms" : "See all 164 symptoms"}</a></p>
 			</div>
 		</div>
 	</div>
@@ -188,7 +201,7 @@ function symptomSchema(symptom: Symptom): object[] {
        */
       citation: {
         "@type": "WebPage",
-        name: `${symptom.aap} — Symptom Checker`,
+        name: `${symptom.aap}: Symptom Checker`,
         publisher: {
           "@type": "Organization",
           name: "American Academy of Pediatrics",
@@ -246,6 +259,50 @@ export function symptomRoutes(): Array<GeneratedPage & { route: string }> {
  * The groups are how somebody with a sick child actually narrows down — by
  * what they can see or hear, not alphabetically.
  */
+/*
+ * The twelve a parent is likeliest to arrive with. They sit above the full
+ * list so that the common case never involves scrolling: on mobile the
+ * grouped list alone runs close to nine thousand pixels.
+ */
+const COMMON = [
+  "fever",
+  "cough",
+  "vomiting",
+  "diarrhea",
+  "rash",
+  "sore-throat",
+  "earache",
+  "colds",
+  "stomach-pain",
+  "head-injury",
+  "croup",
+  "pink-eye",
+];
+
+/** Everything a tile can be found by, for the type-to-filter box. */
+function tileTerms(symptom: Symptom): string {
+  const words = [
+    symptom.short,
+    symptom.title,
+    symptom.aap,
+    symptom.group,
+    ...(symptomTerms[symptom.slug] ?? []),
+  ]
+    .join(" ")
+    .toLowerCase()
+    // Apostrophes first, so "won't" collapses to "wont" rather than
+    // splitting into "won" and a stray "t" that matches nothing.
+    .replace(/['\u2018\u2019]/g, "")
+    .replace(/[^a-z0-9 ]+/g, " ")
+    .split(/\s+/)
+    .filter(Boolean);
+  return [...new Set(words)].join(" ");
+}
+
+function tile(symptom: Symptom): string {
+  return `<li data-terms="${escapeAttribute(tileTerms(symptom))}"><a href="${symptomHref(symptom)}">${escapeAttribute(symptom.short)}</a></li>`;
+}
+
 export function symptomIndexList(): string {
   /*
    * Commonest first, not alphabetical. A parent scanning at two in the morning
@@ -281,19 +338,40 @@ export function symptomIndexList(): string {
     return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi);
   });
 
-  return order
+  const bySlug = new Map(symptoms.map((s) => [s.slug, s]));
+  const common = COMMON.map((slug) => bySlug.get(slug)).filter(Boolean) as Symptom[];
+
+  const groups = order
     .map((group) => {
-      const tiles = byGroup
-        .get(group)!
-        .map(
-          (symptom) =>
-            `<li><a href="${symptomHref(symptom)}">${escapeAttribute(symptom.short)}</a></li>`,
-        )
-        .join("");
+      const list = byGroup.get(group)!;
       return `<div class="sym-group">
-						<h3 class="sym-group-title">${escapeAttribute(group)}</h3>
-						<ul class="sym-tiles">${tiles}</ul>
-					</div>`;
+							<h3 class="sym-group-title">${escapeAttribute(group)} <span class="sym-group-count">${list.length}</span></h3>
+							<ul class="sym-tiles">${list.map(tile).join("")}</ul>
+						</div>`;
     })
-    .join("\n\t\t\t\t\t");
+    .join("\n\t\t\t\t\t\t");
+
+  return `<div class="sym-find">
+						<label class="sym-find-label" for="sym-find-input">Type what you are seeing</label>
+						<div class="sym-find-box">
+							<svg class="sym-find-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6"></circle><path d="M13.5 13.5L18 18"></path></svg>
+							<input id="sym-find-input" class="sym-find-input" type="search" autocomplete="off" placeholder="throwing up, rash, ear, hit head&#8230;">
+							<button type="button" class="sym-find-clear" hidden>Clear<span class="visually-hidden"> the search</span></button>
+						</div>
+						<p class="sym-find-hint">Everyday words work: &#8220;throwing up&#8221;, &#8220;poop&#8221;, &#8220;bug bite&#8221;, &#8220;temperature&#8221;.</p>
+						<p class="sym-find-count" role="status" aria-live="polite"></p>
+					</div>
+					<div class="sym-group sym-common">
+						<h3 class="sym-group-title">Most looked up</h3>
+						<ul class="sym-tiles">${common.map(tile).join("")}</ul>
+					</div>
+					<div class="sym-browse">
+						<h3 class="sym-browse-title">Or browse all ${symptoms.length}</h3>
+						${groups}
+					</div>
+					<div class="sym-none" hidden>
+						<p class="sym-none-lead">Nothing here matches that word.</p>
+						<p>Try a plainer word: &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
+						<p class="area-office-act"><a class="btn blue" href="/locations/">Find your office</a></p>
+					</div>`;
 }
