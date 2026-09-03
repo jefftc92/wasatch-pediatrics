@@ -122,7 +122,21 @@ ${intro}
 		</div>
 	</div>
 </div>
-<div class="graybg padme90 sym-tool">
+${
+  symptom.noTool
+    ? `<div class="graybg padme90 sym-tool">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="dent-band-title">Where this comes from</h2>
+				<p class="sym-tool-lead">The American Academy of Pediatrics publishes the guidance behind this page and keeps it current. Their Symptom Checker carries a question-by-question tool for individual symptoms, and it covers this subject as background rather than as a set of questions to work through.</p>
+				<p class="sym-embed-plain"><a class="btn blue" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">Open the AAP Symptom Checker</a></p>
+			</div>
+		</div>
+	</div>
+</div>
+`
+    : `<div class="graybg padme90 sym-tool">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -152,6 +166,8 @@ ${intro}
 		</div>
 	</div>
 </div>
+`
+}
 <div class="whitebg padme90 sym-next">
 	<div class="container">
 		<div class="row">
@@ -352,21 +368,21 @@ export function symptomIndexList(): string {
     .join("\n\t\t\t\t\t\t");
 
   return `<div class="sym-find">
-						<label class="sym-find-label" for="sym-find-input">Type what you are seeing</label>
+						<label class="visually-hidden" for="sym-find-input">Type what you are seeing</label>
 						<div class="sym-find-box">
 							<svg class="sym-find-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6"></circle><path d="M13.5 13.5L18 18"></path></svg>
-							<input id="sym-find-input" class="sym-find-input" type="search" autocomplete="off" placeholder="throwing up, rash, ear, hit head&#8230;">
+							<input id="sym-find-input" class="sym-find-input" type="search" autocomplete="off" placeholder="Type what you are seeing&#8230;">
 							<button type="button" class="sym-find-clear" hidden>Clear<span class="visually-hidden"> the search</span></button>
 						</div>
-						<p class="sym-find-hint">Everyday words work: &#8220;throwing up&#8221;, &#8220;poop&#8221;, &#8220;bug bite&#8221;, &#8220;temperature&#8221;.</p>
+						<p class="sym-find-hint">Everyday words work: &#8220;throwing up&#8221;, &#8220;poop&#8221;, &#8220;bug bite&#8221;, &#8220;hit head&#8221;.</p>
 						<p class="sym-find-count" role="status" aria-live="polite"></p>
 					</div>
 					<div class="sym-group sym-common">
-						<h3 class="sym-group-title">Most looked up</h3>
+						<h3 class="sym-sec">Common right now</h3>
 						<ul class="sym-tiles">${common.map(tile).join("")}</ul>
 					</div>
 					<div class="sym-browse">
-						<h3 class="sym-browse-title">Or browse all ${symptoms.length}</h3>
+						<h3 class="sym-sec sym-browse-title">Browse by category<span class="sym-sec-note">all ${symptoms.length} pages</span></h3>
 						${groups}
 					</div>
 					<div class="sym-none" hidden>
