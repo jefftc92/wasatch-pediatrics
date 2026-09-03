@@ -4338,3 +4338,91 @@
   line-height: 28px;
   max-width: 58em;
 }
+
+/*
+ * The symptom index: the landing page's main job.
+ *
+ * It was twenty-eight links in a column, each ending "in Children", below a
+ * 2200px frame — which made the most useful thing on the page the hardest to
+ * find and the hardest to read. Tiles now, grouped by what a parent can
+ * actually see or hear, because that is how somebody with a sick child
+ * narrows down. Alphabetical would only help a reader who already knows the
+ * word for it.
+ */
+.sc-lead {
+  font-size: 19px;
+  line-height: 30px;
+  color: #636466;
+  max-width: 56em;
+  margin-bottom: 34px;
+}
+
+.sym-group {
+  margin-bottom: 34px;
+}
+
+.sym-group-title {
+  font-size: 15px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #8a8a8c;
+  margin: 0 0 14px 0;
+}
+
+.sym-tiles {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/*
+ * Each one is a target rather than a line of text — 48px tall, which is a
+ * comfortable thumb on a phone, and wide enough that the longest label does
+ * not wrap. A parent doing this one-handed at 2am is the case to design for.
+ */
+.sym-tiles a {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 10px 20px;
+  border: 1px solid #dfe2e5;
+  border-radius: 24px;
+  background: #ffffff;
+  color: #2b93d1;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 22px;
+  text-decoration: none;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.sym-tiles a:hover,
+.sym-tiles a:focus-visible {
+  border-color: #2b93d1;
+  color: #1c7cb4;
+  text-decoration: none;
+}
+
+.graybg .sym-tiles a {
+  background: #ffffff;
+}
+
+@media (max-width: 575px) {
+  .sym-tiles a {
+    padding: 10px 16px;
+    font-size: 16px;
+  }
+}
+
+/* The tool is the fallback here, not the headline, so it sits quieter. */
+.sc-tool .sc-frame {
+  display: block;
+  width: 100%;
+  border: 0;
+  border-radius: 25px;
+  background: #ffffff;
+  margin-top: 8px;
+}
