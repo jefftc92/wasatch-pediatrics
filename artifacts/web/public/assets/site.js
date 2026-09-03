@@ -1225,3 +1225,153 @@
     if (event.target === modal) modal.close();
   });
 })();
+
+/*
+ * The symptom index: type to filter, and collapsible groups.
+ *
+ * The page ships every one of the 164 tiles expanded, so a reader without
+ * JavaScript — and a crawler — gets the whole list and every link. This
+ * turns that list into something a person can actually use: the groups fold
+ * up so the set fits one screen, and the box filters on the words parents
+ * type rather than the ones we chose ("throwing up" has to find vomiting).
+ *
+ * Matching is all-terms-must-appear against a data-terms string built at
+ * render time, so a two-word query like "baby cough" narrows rather than
+ * widens. Results stay inside their groups: knowing a match sits under
+ * "Skin and rashes" is worth more than a flat list ranked by a score the
+ * reader cannot see.
+ */
+(function () {
+  var find = document.querySelector(".sym-find-input");
+  var browse = document.querySelector(".sym-browse");
+  if (!find || !browse) return;
+
+  var clear = document.querySelector(".sym-find-clear");
+  var count = document.querySelector(".sym-find-count");
+  var common = document.querySelector(".sym-common");
+  var none = document.querySelector(".sym-none");
+  var browseTitle = browse.querySelector(".sym-browse-title");
+  var groups = [].slice.call(browse.querySelectorAll(".sym-group"));
+  var tiles = [].slice.call(browse.querySelectorAll(".sym-tiles li"));
+
+  var CHEVRON =
+    '<svg class="sym-group-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3.5L10.5 8L6 12.5"></path></svg>';
+
+  // Turn each group heading into a real button. Done here rather than in the
+  // markup so that a button never ships to a reader who cannot act on it.
+  groups.forEach(function (group, index) {
+    var title = group.querySelector(".sym-group-title");
+    var list = group.querySelector(".sym-tiles");
+    if (!title || !list) return;
+
+    var id = "sym-group-" + index;
+    list.id = id;
+
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "sym-group-toggle";
+    button.setAttribute("aria-controls", id);
+    button.innerHTML = CHEVRON + "<span>" + title.innerHTML + "</span>";
+    title.innerHTML = "";
+    title.appendChild(button);
+
+    setOpen(group, false);
+    button.addEventListener("click", function () {
+      setOpen(group, list.hidden);
+    });
+  });
+  browse.classList.add("is-collapsible");
+
+  function setOpen(group, open) {
+    var list = group.querySelector(".sym-tiles");
+    var button = group.querySelector(".sym-group-toggle");
+    list.hidden = !open;
+    if (button) button.setAttribute("aria-expanded", String(open));
+  }
+
+  function showCounts(show) {
+    [].slice.call(browse.querySelectorAll(".sym-group-count")).forEach(function (badge) {
+      badge.hidden = !show;
+    });
+  }
+
+  function apply() {
+    // Same normalisation the tiles were built with: apostrophes collapse
+    // first, so "won't drink" and "wont drink" reach the same tokens.
+    var query = find.value
+      .toLowerCase()
+      .replace(/['\u2018\u2019]/g, "")
+      .replace(/[^a-z0-9 ]+/g, " ")
+      .trim();
+    var words = query ? query.split(/\s+/) : [];
+    if (clear) clear.hidden = !query;
+
+    if (!words.length) {
+      tiles.forEach(function (tile) {
+        tile.hidden = false;
+      });
+      groups.forEach(function (group) {
+        group.hidden = false;
+        setOpen(group, false);
+      });
+      if (common) common.hidden = false;
+      if (browseTitle) browseTitle.hidden = false;
+      if (none) none.hidden = true;
+      if (count) count.textContent = "";
+      showCounts(true);
+      return;
+    }
+
+    var hits = 0;
+    tiles.forEach(function (tile) {
+      // Leading space so indexOf only ever lands on a word boundary: a bare
+      // substring test makes "ear" match the "pearly" in molluscum's terms.
+      var terms = " " + (tile.getAttribute("data-terms") || "");
+      var match = words.every(function (word) {
+        return terms.indexOf(" " + word) !== -1;
+      });
+      tile.hidden = !match;
+      if (match) hits++;
+    });
+
+    // A group with nothing in it should not sit there as an empty heading.
+    groups.forEach(function (group) {
+      var any = [].slice.call(group.querySelectorAll(".sym-tiles li")).some(function (t) {
+        return !t.hidden;
+      });
+      group.hidden = !any;
+      if (any) setOpen(group, true);
+    });
+
+    if (common) common.hidden = true;
+    // The badge counts the whole group, which contradicts a filtered list.
+    showCounts(false);
+    if (browseTitle) browseTitle.hidden = true;
+    if (none) none.hidden = hits > 0;
+    if (count) {
+      count.textContent = hits
+        ? hits + (hits === 1 ? " page matches" : " pages match")
+        : "";
+    }
+  }
+
+  find.addEventListener("input", apply);
+  find.addEventListener("search", apply);
+  find.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && find.value) {
+      event.stopPropagation();
+      find.value = "";
+      apply();
+    }
+  });
+
+  if (clear) {
+    clear.addEventListener("click", function () {
+      find.value = "";
+      apply();
+      find.focus();
+    });
+  }
+
+  apply();
+})();

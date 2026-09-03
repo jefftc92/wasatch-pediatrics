@@ -4361,6 +4361,238 @@
   margin-bottom: 34px;
 }
 
+.sym-others-all {
+  margin: 22px 0 0 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* ------------------------------------------- the symptom index -------- */
+
+/*
+ * 164 tiles in 13 groups runs to nine thousand pixels on a phone. Scanning
+ * that is not navigation. So the box comes first: nearly everyone arrives
+ * knowing the word for what they are looking at, and typing three letters
+ * of it beats any amount of scrolling. The groups stay underneath for the
+ * people who do not have the word, collapsed so the whole set is one screen.
+ */
+.sym-find {
+  max-width: 620px;
+  margin: 0 0 34px 0;
+}
+
+.sym-find-label {
+  display: block;
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: #636466;
+}
+
+.sym-find-box {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sym-find-icon {
+  position: absolute;
+  left: 18px;
+  width: 19px;
+  height: 19px;
+  fill: none;
+  stroke: #9a9b9d;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  pointer-events: none;
+}
+
+.sym-find-input {
+  width: 100%;
+  padding: 15px 18px 15px 48px;
+  border: 2px solid #dfe2e5;
+  border-radius: 999px;
+  background: #ffffff;
+  font-size: 17px;
+  color: #4a4b4d;
+  appearance: none;
+}
+
+.sym-find-input:focus {
+  outline: none;
+  border-color: #2b93d1;
+  box-shadow: 0 0 0 4px rgba(43, 147, 209, 0.15);
+}
+
+.sym-find-input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.sym-find-clear {
+  position: absolute;
+  right: 8px;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: #2b93d1;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sym-find-clear:hover {
+  color: #f58220;
+}
+
+.sym-find-hint {
+  margin: 10px 2px 0 2px;
+  font-size: 14px;
+  color: #7c7d7f;
+}
+
+.sym-find-count {
+  margin: 10px 2px 0 2px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #636466;
+}
+
+.sym-find-count:empty {
+  display: none;
+}
+
+.sym-browse-title {
+  margin: 38px 0 4px 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #8f9092;
+}
+
+/* Set by script once the groups can actually be opened and shut. */
+.sym-browse.is-collapsible .sym-group-title {
+  margin: 0;
+}
+
+/*
+ * Inside the accordion these are controls, not quiet section labels, so
+ * they drop the uppercase treatment the standalone headings carry and take
+ * a readable weight and colour.
+ */
+.sym-group-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 13px 4px;
+  border: 0;
+  border-bottom: 1px solid #e4e7ea;
+  background: none;
+  color: #4a4b4d;
+  font-family: "Montserrat", sans-serif;
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.sym-group-toggle:hover,
+.sym-group-toggle:focus-visible {
+  color: #2b93d1;
+}
+
+.sym-group-toggle:hover .sym-group-chevron {
+  color: #2b93d1;
+}
+
+.sym-group-toggle .sym-group-count {
+  margin-left: auto;
+}
+
+.sym-group-chevron {
+  flex: 0 0 auto;
+  color: #a8a9ab;
+  width: 13px;
+  height: 13px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.18s ease;
+}
+
+.sym-group-toggle[aria-expanded="true"] .sym-group-chevron {
+  transform: rotate(90deg);
+}
+
+.sym-browse.is-collapsible .sym-tiles {
+  margin: 14px 0 22px 0;
+}
+
+.sym-group-count {
+  display: inline-block;
+  min-width: 26px;
+  padding: 2px 8px 3px 8px;
+  border-radius: 999px;
+  background: #eef0f2;
+  color: #7c7d7f;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-align: center;
+}
+
+.sym-none {
+  max-width: 620px;
+  padding: 26px 28px 8px 28px;
+  border-radius: 16px;
+  background: #f4f5f6;
+}
+
+.sym-none-lead {
+  margin: 0 0 10px 0;
+  font-size: 19px;
+  font-weight: 600;
+  color: #4a4b4d;
+}
+
+.sym-none p {
+  color: #636466;
+}
+
+.sc-more-acts {
+  margin-top: 22px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 575px) {
+  .sym-find-input {
+    font-size: 16px;
+    padding: 14px 16px 14px 44px;
+  }
+
+  .sym-find-icon {
+    left: 16px;
+  }
+}
+
 .sym-group-title {
   font-size: 15px;
   text-transform: uppercase;
@@ -4440,23 +4672,24 @@
  * stretching that column across 1200px of desktop leaves the reader tracking
  * one short line across an enormous field of white.
  */
+/*
+ * Deliberately not a card. A filled header bar and a hard border around a
+ * third-party page make it read as a widget bolted onto ours; a plain label
+ * line above a white sheet reads as part of the page. The sheet is white
+ * because the frame's own background is, so no seam shows at its edge.
+ */
 .sym-embed {
   max-width: 860px;
-  margin: 0 0 20px 0;
-  border: 1px solid #dfe2e5;
-  border-radius: 18px;
-  overflow: hidden;
-  background: #ffffff;
+  margin: 0 0 8px 0;
 }
 
 .sym-embed-bar {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   justify-content: space-between;
   gap: 16px;
-  padding: 12px 20px;
-  background: #f4f5f6;
-  border-bottom: 1px solid #e4e7ea;
+  margin: 0 0 10px 0;
+  padding: 0 2px;
 }
 
 .sym-embed-name {
@@ -4552,8 +4785,9 @@
 .sym-embed-frame {
   display: block;
   width: 100%;
-  height: 780px;
-  border: 0;
+  height: 560px;
+  border: 1px solid #e4e7ea;
+  border-radius: 14px;
   background: #ffffff;
 }
 
@@ -4652,6 +4886,6 @@
   }
 
   .sym-embed-frame {
-    height: 620px;
+    height: 460px;
   }
 }
