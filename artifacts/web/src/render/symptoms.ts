@@ -107,7 +107,7 @@ function renderSymptomPage(symptom: Symptom): string {
   return `${heroBand(symptom)}
 <div class="sym-alert">
 	<div class="container">
-		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt — call 911 now.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
+		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, call 911 now.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
 	</div>
 </div>
 <div class="whitebg padme90 sym-intro">
@@ -127,16 +127,16 @@ ${intro}
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">Should my child be seen?</h2>
-				<p class="sym-tool-lead">The American Academy of Pediatrics keeps a decision tool for this. Work through its questions — how your child looks, how long this has run, what has changed since it started — and it ends on one of three answers: care for your child at home, book an appointment, or seek care now. Most parents finish in about a minute.</p>
+				<p class="sym-tool-lead">The American Academy of Pediatrics keeps a decision tool for this. Work through its questions about how your child looks, how long this has run and what has changed since it started, and it ends on one of three answers: care for your child at home, book an appointment, or seek care now. Most parents finish in about a minute.</p>
 				<div class="sym-embed">
 					<p class="sym-embed-bar">
 						<span class="sym-embed-name">AAP Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
 						<span class="sym-embed-acts">
-							<button type="button" class="sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)} — Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
+							<button type="button" class="sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
 							<a class="sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">New tab<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
 						</span>
 					</p>
-					<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)} — Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
+					<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
 				</div>
 				<dialog class="sym-modal" aria-label="Symptom Checker: ${escapeAttribute(symptom.short)}">
 					<div class="sym-modal-bar">
@@ -158,7 +158,7 @@ ${intro}
 			<div class="col-12">
 				<h2 class="dent-band-title">Getting your child seen</h2>
 				<ul class="sc-routes">
-					<li><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number — nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.</li>
+					<li><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.</li>
 					<li><strong>Be seen today.</strong> Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</li>
 					<li><strong>This evening or at the weekend.</strong> Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</li>
 				</ul>
@@ -201,7 +201,7 @@ function symptomSchema(symptom: Symptom): object[] {
        */
       citation: {
         "@type": "WebPage",
-        name: `${symptom.aap} — Symptom Checker`,
+        name: `${symptom.aap}: Symptom Checker`,
         publisher: {
           "@type": "Organization",
           name: "American Academy of Pediatrics",
@@ -371,7 +371,7 @@ export function symptomIndexList(): string {
 					</div>
 					<div class="sym-none" hidden>
 						<p class="sym-none-lead">Nothing here matches that word.</p>
-						<p>Try a plainer one &#8212; &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
+						<p>Try a plainer word: &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
 						<p class="area-office-act"><a class="btn blue" href="/locations/">Find your office</a></p>
 					</div>`;
 }
