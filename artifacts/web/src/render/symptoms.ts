@@ -114,9 +114,28 @@ ${intro}
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">Should my child be seen?</h2>
-				<p class="sym-tool-lead">Answer these and you will get a straight recommendation — care at home, an appointment, or urgent care. They are written and kept current by the American Academy of Pediatrics.</p>
-				<iframe title="${escapeAttribute(symptom.title)} — Symptom Checker, from the American Academy of Pediatrics" class="sc-frame" src="${escapeAttribute(aapFrameUrl(symptom))}" width="800" height="2200" loading="lazy"></iframe>
-				<p class="sc-note">From the <a href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">American Academy of Pediatrics</a>. If it will not load, or the questions run past the bottom, <a href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">open it on their site</a>.</p>
+				<p class="sym-tool-lead">The American Academy of Pediatrics keeps a decision tool for this. Work through its questions — how your child looks, how long this has run, what has changed since it started — and it ends on one of three answers: care for your child at home, book an appointment, or seek care now. Most parents finish in about a minute.</p>
+				<div class="sym-embed">
+					<div class="sym-embed-bar">
+						<span class="sym-embed-name">Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
+						<span class="sym-embed-acts">
+							<button type="button" class="sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)} — Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
+							<a class="sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">New tab<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
+						</span>
+					</div>
+					<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)} — Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
+				</div>
+				<p class="sc-note">The American Academy of Pediatrics writes these questions and keeps them current. Wasatch Pediatrics does not edit them. The panel scrolls, and the full-screen view hands the tool the whole window.</p>
+				<dialog class="sym-modal" aria-label="Symptom Checker: ${escapeAttribute(symptom.short)}">
+					<div class="sym-modal-bar">
+						<span class="sym-embed-name">Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
+						<span class="sym-embed-acts">
+							<a class="sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">New tab<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
+							<button type="button" class="sym-modal-close" data-sym-close>Close<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+						</span>
+					</div>
+					<div class="sym-modal-body"></div>
+				</dialog>
 			</div>
 		</div>
 	</div>
@@ -228,15 +247,39 @@ export function symptomRoutes(): Array<GeneratedPage & { route: string }> {
  * what they can see or hear, not alphabetically.
  */
 export function symptomIndexList(): string {
-  const order: string[] = [];
+  /*
+   * Commonest first, not alphabetical. A parent scanning at two in the morning
+   * is far likelier to want a fever or a cough than a tick bite, and the order
+   * should follow that rather than the letter a group starts with. Any group
+   * missing from this list falls to the end, so adding a symptom can never
+   * silently drop its group off the page.
+   */
+  const GROUP_ORDER = [
+    "Fever and infection",
+    "Coughs and breathing",
+    "Stomach and bowels",
+    "Skin and rashes",
+    "Ears, nose, mouth and teeth",
+    "Eyes",
+    "Knocks, pain and injuries",
+    "Bites and stings",
+    "Babies and newborns",
+    "Feeding and growth",
+    "Peeing and private parts",
+    "Feelings and mental health",
+    "Growing up",
+  ];
+
   const byGroup = new Map<string, typeof symptoms>();
   for (const symptom of symptoms) {
-    if (!byGroup.has(symptom.group)) {
-      byGroup.set(symptom.group, []);
-      order.push(symptom.group);
-    }
+    if (!byGroup.has(symptom.group)) byGroup.set(symptom.group, []);
     byGroup.get(symptom.group)!.push(symptom);
   }
+  const order = [...byGroup.keys()].sort((a, b) => {
+    const ai = GROUP_ORDER.indexOf(a);
+    const bi = GROUP_ORDER.indexOf(b);
+    return (ai < 0 ? 99 : ai) - (bi < 0 ? 99 : bi);
+  });
 
   return order
     .map((group) => {

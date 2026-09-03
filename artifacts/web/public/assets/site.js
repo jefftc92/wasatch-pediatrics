@@ -1172,3 +1172,56 @@
     chip.setAttribute("aria-pressed", String(chip.classList.contains("is-on")));
   });
 })();
+
+/*
+ * Symptom Checker: full screen.
+ *
+ * The AAP viewer is cross-origin and sends no resize message, so the inline
+ * frame cannot grow to fit whichever tab a parent opens. The frame scrolls
+ * inside itself, and this hands it the whole window on request. The button
+ * ships hidden and is revealed only where <dialog> works, so it never sits
+ * there doing nothing. The overlay frame is built on first open.
+ */
+(function () {
+  var grow = document.querySelector("[data-sym-frame]");
+  var modal = document.querySelector(".sym-modal");
+  if (!grow || !modal || typeof modal.showModal !== "function") return;
+
+  var body = modal.querySelector(".sym-modal-body");
+  var root = document.documentElement;
+  var prior = "";
+
+  grow.hidden = false;
+
+  grow.addEventListener("click", function () {
+    if (!body.firstChild) {
+      var frame = document.createElement("iframe");
+      frame.title = grow.getAttribute("data-sym-title") || "Symptom Checker";
+      frame.src = grow.getAttribute("data-sym-frame");
+      body.appendChild(frame);
+    }
+    // Both axes: setting overflow-y alone leaves overflow-x computing to auto.
+    prior = root.style.overflow;
+    root.style.overflow = "hidden";
+    modal.showModal();
+  });
+
+  function restore() {
+    root.style.overflow = prior;
+  }
+
+  modal.addEventListener("close", restore);
+  modal.addEventListener("cancel", restore);
+
+  var closer = modal.querySelector("[data-sym-close]");
+  if (closer) {
+    closer.addEventListener("click", function () {
+      modal.close();
+    });
+  }
+
+  // A click on the backdrop lands on the dialog itself, never on its contents.
+  modal.addEventListener("click", function (event) {
+    if (event.target === modal) modal.close();
+  });
+})();
