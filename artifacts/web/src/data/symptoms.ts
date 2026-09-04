@@ -83,15 +83,15 @@ export const symptoms: Symptom[] = [
     title: "Fever in Children",
     short: "Fever",
     group: "Fever and infection",
-    heading: "What to do about a fever",
+    heading: "Judging a fever by your child, not the thermometer",
     aap: "Fever",
     lead:
-      "Judge a fever by how your child is behaving, not by the number on the thermometer.",
+      "A fever is your child's body fighting an infection, so how they look and behave tells you far more than any reading does.",
     description:
       "Most childhood fevers are ordinary infections, and how a child is acting matters more than the reading. What to watch for, and how to reach a Wasatch Pediatrics nurse at any hour.",
     intro: [
-      "Look for three things: is your child drinking, do they respond to you, and do they play a little once fever medicine has taken the edge off? Stop watching the thermometer if all three hold. Call us if your child goes limp, if you cannot rouse them, or if they refuse every drink, even when the reading looks unremarkable.",
-      "Give fever medicine for comfort rather than to chase a number down. If it brings the temperature far enough down that your child will drink and sleep, it has done its job, even though the fever has not gone. Expect most fevers from ordinary infections to settle within two to three days.",
+      "Three questions settle most fevers at home. Is your child drinking? Do they respond to you normally? Do they play a little once fever medicine has taken the edge off? A child who manages all three is well enough to watch at home, whatever the thermometer says. A child who has gone limp, cannot be roused, or refuses every drink needs us, even when the reading looks unremarkable.",
+      "Call your office's main number at any hour and you reach a nurse or a physician rather than an answering service. Call the same day about any fever in a baby under three months, about a fever that has run beyond three days, and about a fever that went away and then came back. We look for what is causing the fever rather than treating the number itself.",
     ],
   },
   {
@@ -99,7 +99,7 @@ export const symptoms: Symptom[] = [
     title: "Fever in Babies Under 12 Months",
     short: "Fever under 12 months",
     group: "Fever and infection",
-    heading: "What to do about a fever in a baby",
+    heading: "Why we see babies with fevers rather than wait",
     aap: "Fever (0-12 Months)",
     lead:
       "Call us about any fever in a baby under three months. At that age we check rather than wait.",
@@ -107,7 +107,7 @@ export const symptoms: Symptom[] = [
       "Fever in a baby under a year is handled differently from fever in an older child. Under three months it means calling us straight away. Wasatch Pediatrics answers 24 hours a day.",
     intro: [
       "A small baby cannot tell you where it hurts, and the signs that would be obvious in a four-year-old are muted or missing altogether. We set the threshold lower and see babies sooner precisely so that you are not left judging it at home. Hold the fever medicine until we have seen your baby, because bringing the temperature down first makes the fever harder for us to read.",
-      "Watch feeding and alertness above everything else between three and twelve months. A baby who feeds as usual and wakes normally is reassuring, whatever the thermometer says. Call us if your baby has gone floppy, is hard to wake, or has stopped taking milk.",
+      "Watch feeding and alertness above everything else between three and twelve months. A baby who feeds as usual and wakes normally is reassuring, whatever the thermometer says. Call us if your baby has gone floppy, is hard to wake, or has stopped taking milk. Our nurse line answers on your office's own number at any hour, and nobody minds the call.",
     ],
   },
   {
@@ -115,15 +115,15 @@ export const symptoms: Symptom[] = [
     title: "Cough in Children",
     short: "Cough",
     group: "Coughs and breathing",
-    heading: "What to do about a cough",
+    heading: "The breathing matters more than the cough",
     aap: "Cough",
     lead:
-      "Watch how hard your child is working to breathe rather than listening to the cough itself.",
+      "A dramatic cough frightens parents far more than the quiet, effortful breathing that actually worries us.",
     description:
       "Coughs in children often last three weeks and that is normal. What the different coughs mean, what to watch in your child's breathing, and when to bring them in.",
     intro: [
-      "Very little treats a cough itself, so aim at comfort: fluids through the day, a humidifier at night, and a spoonful of honey at bedtime for a child over one. Skip the over-the-counter cough medicines, which do not work in young children. Then judge the cough by your child's breathing rather than by its sound, because a loud, dramatic cough in a child who is playing and eating worries us far less than quiet, effortful breathing.",
-      "Call us straight away about fast breathing, skin pulling in between or under the ribs, nostrils flaring, or a baby who cannot finish a feed without stopping for air. Expect the cough to outlast the illness that caused it. A cough still hanging on three weeks after a cold is ordinary and does not mean we missed something. The one pattern that should bring you back to us is a cough that was clearly improving and then got worse again.",
+      "Watch your child's chest rather than listening to the cough. A loud, barking, hacking cough in a child who is playing, eating and talking in full sentences is doing no harm at all. The signs that change what we do are different ones. Watch for fast breathing, skin sucking in between or under the ribs, nostrils flaring with each breath, or a baby who cannot finish a feed without stopping for air. A child can show all four while barely coughing.",
+      "Call us straight away about any of those breathing signs, at whatever hour. Call as well about a cough that was clearly improving and then turned worse again, because that is the pattern that occasionally proves to be pneumonia. A cough still hanging on three weeks after a cold is ordinary, and it does not mean we missed anything.",
     ],
   },
   {
@@ -131,7 +131,7 @@ export const symptoms: Symptom[] = [
     title: "Croup in Children",
     short: "Croup",
     group: "Coughs and breathing",
-    heading: "What to do about croup",
+    heading: "The croup sound that decides how urgent it is",
     aap: "Croup",
     lead:
       "Croup makes a barking, seal-like cough that always sounds worse at night and almost always sounds worse than it is.",
@@ -147,15 +147,15 @@ export const symptoms: Symptom[] = [
     title: "Sore Throat in Children",
     short: "Sore throat",
     group: "Fever and infection",
-    heading: "What to do about a sore throat",
+    heading: "Which sore throats are worth a strep swab",
     aap: "Sore Throat",
     lead:
-      "A sore throat that comes with a runny nose and a cough is almost always viral. A sore throat that arrives alone with a fever is worth a strep swab.",
+      "A sore throat alongside a runny nose and a cough is almost always viral. One that arrives on its own with a fever is worth testing.",
     description:
       "Sore throats in children: which ones are viral, which are worth testing for strep, and how to get a same-day swab at Wasatch Pediatrics.",
     intro: [
-      "Treat the sore throat itself first, with cold drinks, ice pops, and ibuprofen or acetaminophen at the dose for your child's weight. Then look at whether your child also has a cough. Strep rarely causes a cough. A sore throat that arrives with a fever and no cough is the combination that makes us want to swab. A headache or a stomach ache alongside it strengthens the case, and a fine sandpapery rash settles it.",
-      "Book the swab rather than waiting it out. Nobody can tell strep from a viral sore throat by looking, including us, and the test takes minutes. Treatment shortens the illness and prevents the complications that follow an untreated infection.",
+      "Nobody can tell strep from a viral sore throat by looking, including us, which is why we swab rather than guess. Strep rarely causes a cough, so the combination that makes us want to test is a sore throat with a fever and no cough. A headache or a stomach ache alongside it strengthens the case, and a fine sandpapery rash settles it.",
+      "Book a swab rather than waiting it out. We take it in the office in minutes and give you the result before you leave. Treating strep shortens the illness and prevents the complications that follow an untreated infection. Call the same day if your child is drooling, cannot swallow, or cannot open their mouth fully, because those point past an ordinary sore throat.",
     ],
   },
   {
@@ -163,15 +163,15 @@ export const symptoms: Symptom[] = [
     title: "Strep Throat in Children",
     short: "Strep throat",
     group: "Fever and infection",
-    heading: "What to do about strep throat",
+    heading: "Why the whole course of antibiotics matters",
     aap: "Strep Throat Infection",
     lead:
       "Only a swab confirms strep, so book the test rather than guessing. Treating strep prevents complications that a viral sore throat never causes.",
     description:
       "Strep throat in children: how it differs from a viral sore throat, why a swab is the only way to know, and same-day testing at Wasatch Pediatrics.",
     intro: [
-      "Expect your child to feel better within a day or two of starting antibiotics, and to stop being contagious after about 24 hours of them. Most schools use that 24 hours to decide when a child can return.",
-      "Finish the whole course even after your child feels well. We treat strep not only to settle the sore throat but to prevent the kidney and heart complications that can follow an infection left half-treated.",
+      "Strep is one of the few childhood throat infections where treatment changes the outcome rather than only the comfort. Your child should feel better within a day or two of starting the antibiotic, and stops being contagious after about 24 hours of it, which is the mark most schools use to decide when a child can return.",
+      "Finish the whole course even once your child feels well, because we treat strep to prevent the kidney and heart complications that follow a half-treated infection, not merely to settle the throat. Call us if the fever is still there after two full days of antibiotics, if a rash appears, or if your child cannot swallow their own saliva.",
     ],
   },
   {
@@ -179,15 +179,15 @@ export const symptoms: Symptom[] = [
     title: "Earache in Children",
     short: "Earache",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about an earache",
+    heading: "Why an earache does not always mean antibiotics",
     aap: "Earache",
     lead:
       "Ear pain usually arrives a few days after a cold, and in a baby it looks like pulling at the ear and a night nobody sleeps through.",
     description:
       "Ear pain in children: why it follows colds, what it looks like in a baby who cannot tell you, and how to get seen the same day.",
     intro: [
-      "Treat the pain properly while you decide what to do next. A child who is not hurting will drink and sleep, and both help them recover, so give pain relief now rather than saving it for later.",
-      "Do not assume antibiotics are the answer. Many ear infections clear without them, and we will often treat the pain and reassess in a day or two. Call sooner if fluid drains from the ear, or if the area behind the ear becomes swollen or tender.",
+      "Pain relief matters more than the antibiotic question in the first hours, because a child who is not hurting will drink and sleep, and both of those help them recover. The antibiotic question is genuinely open. Many ear infections clear without one, and for a child over two with a mild infection in one ear, waiting 48 hours with good pain relief works as well as treating straight away.",
+      "Book a visit so we can look in the ear, because a red painful ear and a blocked painful ear look identical from outside and only one needs treating. We will often agree a plan of pain relief now and a call back in two days rather than a prescription today. Call us sooner if fluid drains from the ear, or if the bone behind the ear becomes swollen, red or tender.",
     ],
   },
   {
@@ -195,15 +195,15 @@ export const symptoms: Symptom[] = [
     title: "Vomiting in Children",
     short: "Vomiting",
     group: "Stomach and bowels",
-    heading: "What to do when your child is vomiting",
+    heading: "Dehydration is what we watch, not the vomiting",
     aap: "Vomiting Without Diarrhea",
     lead:
-      "Give small amounts of fluid often. A few teaspoons every few minutes will stay down when a full glass comes straight back.",
+      "Most vomiting settles on its own within a day. Whether your child is keeping enough fluid down is the part that decides anything.",
     description:
       "Vomiting in children without diarrhea: how to keep a child hydrated, what to offer and when, and the signs that mean calling us.",
     intro: [
-      "Wait about twenty minutes after a vomit, then start again with teaspoons and build up slowly. Expect to lose the drink and begin again if your child gulps a whole glass.",
-      "Count wet diapers rather than vomits. A child who is passing urine, has moist lips and still makes tears is keeping up, however grim the night has been. Call us when the diapers stay dry, the mouth looks dry, or your child is too sleepy to drink.",
+      "Count wet diapers, or trips to the toilet, rather than counting vomits. A child who is still passing urine, whose lips stay moist and who can still make tears is keeping up, however grim the night has been. Dry diapers, a dry mouth, no tears, or a child too sleepy to drink are what tell us a child is falling behind.",
+      "Call us when those signs of dehydration appear, and call the same day about any vomiting in a baby under three months. Tell us if the vomit is green or contains blood, if your child's belly is swollen or tender, or if the vomiting followed a head injury, because each of those sends us looking somewhere different. We can give fluids in the office for most children rather than sending you to an emergency room.",
     ],
   },
   {
@@ -211,15 +211,15 @@ export const symptoms: Symptom[] = [
     title: "Vomiting and Diarrhea in Children",
     short: "Vomiting with diarrhea",
     group: "Stomach and bowels",
-    heading: "What to do about vomiting and diarrhea",
+    heading: "Why oral rehydration solution beats juice and water",
     aap: "Vomiting With Diarrhea",
     lead:
       "Use oral rehydration solution rather than juice, sports drinks or soda, because the sugar in those makes diarrhea worse.",
     description:
       "Vomiting with diarrhea in children: how to keep fluids going, how long it usually lasts, and when a child needs to be seen.",
     intro: [
-      "Buy oral rehydration solution before you need it and keep it in the cupboard. Give it in small, frequent amounts. Water alone is not enough for a child losing a lot of fluid, and undiluted juice actively works against you.",
-      "Feed your child as soon as they want to eat, and do not restrict what they have. The old advice about bland diets and clear fluids for days has gone, because returning to ordinary food helps the gut recover faster.",
+      "Not all fluids replace what a child is losing. Oral rehydration solution carries salt and sugar in the proportions the gut absorbs best. Plain water dilutes what little salt is left, and undiluted juice or soda pulls more water into the bowel and makes the diarrhea worse. The drink you choose therefore matters more here than the amount.",
+      "Call us if your child cannot keep fluids down at all, passes no urine for eight hours, or has gone quiet and floppy, and we can give fluids in the office rather than sending you to an emergency room. Ask us as well before restricting food, since the bland-diet advice you may remember has gone: ordinary eating speeds the gut's recovery rather than slowing it.",
     ],
   },
   {
@@ -227,15 +227,15 @@ export const symptoms: Symptom[] = [
     title: "Diarrhea in Children",
     short: "Diarrhea",
     group: "Stomach and bowels",
-    heading: "What to do about diarrhea",
+    heading: "How long diarrhea runs, and when to call us",
     aap: "Diarrhea",
     lead:
-      "Expect loose stools to carry on for about a week after everything else improves. Those late loose stools are recovery, not a relapse.",
+      "Loose stools carry on for about a week after everything else improves, and that tail is recovery rather than a relapse.",
     description:
       "Diarrhea in children: how long it normally lasts, how to keep your child hydrated, and the signs worth a call to Wasatch Pediatrics.",
     intro: [
-      "Keep fluids going and let your child eat normally. Stools that firm up gradually over several days are behaving exactly as they should, and restricting the diet while it happens does not help.",
-      "Call us if you see blood in the stool, if the diarrhea comes with a high fever or severe stomach pain, or if your child will not keep fluids down. Each of those changes the picture enough that we would rather hear from you than have you wait it out.",
+      "Diarrhea worries parents most around day four or five, when the child seems otherwise better but the stools are still loose. Diarrhea takes that shape because the lining of the gut recovers more slowly than the rest of your child does. Watch how your child is doing rather than what the stool looks like, because a child who is drinking, playing and passing urine is winning even with several loose stools a day.",
+      "Call us about blood in the stool, about diarrhea alongside a high fever or severe stomach pain, and about a child who cannot keep fluids down. Call the same day about any diarrhea in a baby under three months. Tell us if your child has traveled recently, because diarrhea after a trip gets investigated differently and often needs a stool sample.",
     ],
   },
   {
@@ -243,14 +243,14 @@ export const symptoms: Symptom[] = [
     title: "Colds in Children",
     short: "Colds",
     group: "Coughs and breathing",
-    heading: "What to do about a cold",
+    heading: "The shape of a cold, and when it breaks",
     aap: "Colds",
     lead:
       "Six to ten colds a year is normal for a small child, and green mucus is not a reason for antibiotics.",
     description:
       "Colds in children: why so many are normal, what green mucus does and does not mean, and when a cold is worth a call.",
     intro: [
-      "A cold has a shape, and knowing it saves most parents a phone call. Symptoms build for about three days, peak, then ease over the following week, and the cough outlasts everything else by a fortnight. Green mucus arrives in the middle of that and means the cold is running its normal course, not that it has turned bacterial.",
+      "A cold has a shape, and knowing it saves most parents a phone call. Symptoms build for about three days, peak, then ease over the following week, and the cough outlasts everything else by two weeks. Green mucus arrives in the middle of that and means the cold is running its normal course, not that it has turned bacterial.",
       "Call us when the shape breaks. A child who was recovering and then clearly went downhill is the pattern we want to hear about. So is a fever that arrives several days into a cold that had been settling. That turn is the one that occasionally proves to be an ear infection or a pneumonia. Call us about any cold in a baby under three months as well, whatever the shape.",
     ],
   },
@@ -259,7 +259,7 @@ export const symptoms: Symptom[] = [
     title: "Flu in Children",
     short: "Flu",
     group: "Fever and infection",
-    heading: "What to do about flu",
+    heading: "How fast flu arrives, and why that matters",
     aap: "Influenza - Seasonal",
     lead:
       "Call us on the first day if you think your child has flu, because antiviral treatment only helps when it starts early.",
@@ -267,7 +267,7 @@ export const symptoms: Symptom[] = [
       "Flu in children: how it differs from a cold, why timing matters for antiviral treatment, and same-day appointments at Wasatch Pediatrics.",
     intro: [
       "Recognize flu by how fast it arrives. A child who was fine at lunchtime is flat on the sofa by evening with a high fever, aching limbs and a headache. Flu arrives that fast, while a cold builds over several days.",
-      "Do not expect a quick recovery. Several days of fever and aching is normal, and the cough often hangs on a week or two after everything else has passed. Antivirals do not suit every child. Call us and we will tell you whether they suit yours.",
+      "Call us on the first day if you think your child has flu, because antiviral treatment only works when it starts within about 48 hours. We will tell you whether it suits your child, since it helps some children a great deal and others hardly at all. Expect several days of fever and aching regardless, and a cough that hangs on a week or two after everything else has cleared.",
     ],
   },
   {
@@ -275,15 +275,15 @@ export const symptoms: Symptom[] = [
     title: "RSV and Bronchiolitis in Babies",
     short: "RSV and bronchiolitis",
     group: "Coughs and breathing",
-    heading: "What to do about RSV and bronchiolitis",
+    heading: "Why RSV gets worse before it gets better",
     aap: "RSV-Bronchiolitis",
     lead:
       "Watch how your baby feeds. A baby working hard to breathe cannot feed well, so feeding is usually the first thing to change.",
     description:
       "RSV and bronchiolitis in babies: what to watch in breathing and feeding, why days three to five matter most, and when to call us.",
     intro: [
-      "Expect RSV to worsen before it improves, usually around day three to five. A baby who seemed to be coping on Monday may need looking at again by Wednesday, so keep watching rather than assuming the worst has passed.",
-      "Call us if your baby takes noticeably less than usual, takes much longer over each feed, or stops partway through to breathe. Nothing shortens bronchiolitis, not antibiotics and usually not inhalers, so the job is keeping your baby fed, hydrated and breathing comfortably for the week or two it runs.",
+      "RSV worsens before it improves, usually peaking around day three to five. That course catches parents out every winter: a baby who seemed to be coping on Monday can need looking at again by Wednesday, and the first day of the illness tells you very little about how the week will go.",
+      "Call us if your baby takes noticeably less than usual, takes much longer over each feed, or stops partway through to breathe, because feeding is the first thing to fail when the work of breathing rises. We can check an oxygen level in the office and watch your baby feed. Nothing shortens bronchiolitis, so the two weeks it runs are about keeping your baby fed, hydrated and comfortable.",
     ],
   },
   {
@@ -291,15 +291,15 @@ export const symptoms: Symptom[] = [
     title: "COVID-19 in Children",
     short: "COVID-19",
     group: "Fever and infection",
-    heading: "What to do about COVID-19",
+    heading: "Which children we want to hear about early",
     aap: "COVID-19 Diagnosed or Suspected",
     lead:
       "Most children get through COVID at home like any other winter virus. Age and existing conditions are what change that.",
     description:
       "COVID-19 in children: what to expect at home, what to watch for, how long to keep a child off school, and when to call Wasatch Pediatrics.",
     intro: [
-      "Call us early rather than waiting if your child is a baby, or has a significant heart, lung or immune condition. Treat COVID-19 in every other child as you would any respiratory virus: fluids, rest, and fever medicine for comfort.",
-      "Check your school or daycare's own rules before you plan a return. Public health guidance changes and individual schools often set their own, so the two do not always agree.",
+      "Most children get through COVID-19 like any other winter virus, and age and existing conditions are what change that. Call us early rather than waiting if your child is a baby, or has a significant heart, lung or immune condition, because treatment for those children works best started early.",
+      "Check your school or daycare's own rules before you plan a return, since public health guidance changes and individual schools often set their own on top of it. Call us about breathing that is fast or labored, about a child who will not drink, and about a fever that returns after your child had recovered.",
     ],
   },
   {
@@ -307,15 +307,15 @@ export const symptoms: Symptom[] = [
     title: "Head Injury in Children",
     short: "Head injury",
     group: "Knocks, pain and injuries",
-    heading: "What to do after a head injury",
+    heading: "Behavior after the knock, not the size of the lump",
     aap: "Head Injury",
     lead:
       "Judge a head injury by how your child behaves in the hours afterward, not by the size of the lump.",
     description:
       "Head injuries in children: what to watch for in the hours afterward, which signs mean an emergency room, and when to call us.",
     intro: [
-      "Watch for repeated vomiting, a headache that keeps worsening, unusual drowsiness, confusion, unsteadiness on their feet, or a child who is simply not themselves in a way you cannot name. Call us if any of those signs appear.",
-      "Do not be alarmed by a large soft swelling on the forehead. The scalp bleeds easily, and a swelling there usually means very little. Do go straight to an emergency room if your child lost consciousness, had a seizure, or fell from a significant height.",
+      "How your child behaves over the next few hours tells us far more than the bump does. Watch for repeated vomiting, a headache that keeps building, unusual drowsiness, confusion, unsteadiness on their feet, or a child who is simply not themselves in a way you cannot name. Call us if any of those appear, at whatever hour.",
+      "A large soft swelling on the forehead alarms parents more than anything else and usually means very little, because the scalp bleeds freely into loose tissue. Size is not the signal. Go straight to an emergency room if your child lost consciousness, had a seizure, or fell from a significant height. Call us about anything short of that, and we will examine your child and tell you exactly what to watch for overnight.",
     ],
   },
   {
@@ -323,15 +323,15 @@ export const symptoms: Symptom[] = [
     title: "Rashes in Children",
     short: "Rashes",
     group: "Skin and rashes",
-    heading: "What to do about a rash",
+    heading: "The glass test, and the child underneath the rash",
     aap: "Rash or Redness - Widespread",
     lead:
-      "Press a glass against the spots. A rash that stays visible under pressure needs urgent attention.",
+      "A rash that stays visible when you press a glass against it needs emergency care now. Almost every other rash can wait until morning.",
     description:
       "Widespread rashes in children: which are ordinary viral rashes, the ones that need urgent attention, and how to get seen the same day.",
     intro: [
-      "Do the glass test first on any widespread rash. Most viral rashes go pale under pressure and return when you let go. Spots that do not fade, particularly in a child who is unwell with them, mean calling 911 or going straight to an emergency room.",
-      "Then look at your child rather than at the rash. A dramatic rash on a child who is eating, playing and comfortable is a very different thing from the same rash on a child who is floppy, feverish and getting worse. Keep baths short and lukewarm for an ordinary itchy rash, moisturize while the skin is still damp, and give an antihistamine at bedtime if the itch is keeping your child awake.",
+      "Press a clear drinking glass firmly against the spots and look through the bottom of it. Most viral rashes go pale under that pressure and color back in when you let go. Spots that stay visible through the glass, especially in a child who is unwell with them, mean calling 911 or going straight to an emergency room, because that is how meningococcal disease shows on the skin.",
+      "Look at your child rather than at the rash for everything else. A dramatic rash on a child who is eating, playing and comfortable is a very different thing from the same rash on a child who has gone floppy and feverish. Call us the same day about a rash with a fever, one that blisters or weeps, or any rash in a baby under three months, and we will look at it here rather than guess from a photograph.",
     ],
   },
   {
@@ -339,15 +339,15 @@ export const symptoms: Symptom[] = [
     title: "Hives in Children",
     short: "Hives",
     group: "Skin and rashes",
-    heading: "What to do about hives",
+    heading: "Hives alone, and hives that mean anaphylaxis",
     aap: "Hives",
     lead:
       "Hives with swelling of the lips or face, or any trouble breathing, mean 911. Hives on their own usually mean an antihistamine.",
     description:
       "Hives in children: why they travel, what usually triggers them, what helps the itch, and the swelling that means an emergency.",
     intro: [
-      "Give an antihistamine and keep giving it for several days rather than stopping after one dose. Hives arrive in waves as they settle, so they will look as though they are coming back before they finally go.",
-      "Look at what else is happening. Hives alone are usually a reaction to a virus rather than to food. Hives with swelling of the lips, tongue or face, difficulty breathing or swallowing, or vomiting and floppiness, is anaphylaxis until proven otherwise. Call 911, and use epinephrine if your child has been prescribed it.",
+      "Hives on their own and hives as part of anaphylaxis look the same on the skin, so what else is happening decides everything. Hives by themselves are usually a reaction to a virus rather than to any food, and they come in waves as they settle, which makes them look as though they are returning before they finally go.",
+      "Hives alongside swelling of the lips, tongue or face, difficulty breathing or swallowing, or vomiting and floppiness, is anaphylaxis until proven otherwise. Call 911, and use epinephrine first if your child has been prescribed it. Call us about hives that keep returning for more than six weeks, because that pattern is worth investigating rather than treating over and over.",
     ],
   },
   {
@@ -355,15 +355,15 @@ export const symptoms: Symptom[] = [
     title: "Pink Eye in Children",
     short: "Pink eye",
     group: "Eyes",
-    heading: "What to do about pink eye",
+    heading: "Which pink eye needs drops, and which does not",
     aap: "Eye - Pus or Discharge",
     lead:
       "Most pink eye clears on its own. The kind that glues the lashes shut overnight is the kind that may need drops.",
     description:
       "Pink eye in children: telling viral from bacterial, whether drops are needed, and when a child can go back to school.",
     intro: [
-      "Wipe from the inner corner outwards with a clean cloth each time, give your child their own towel, and wash your hands often. Careful wiping and separate towels stop pink eye crossing to the other eye and around the household better than any drop will.",
-      "Call us rather than waiting for real pain rather than irritation, for changed vision, or for light that hurts. Call about any eye that was injured, and about any red eye in a newborn.",
+      "What the eye produces separates the two kinds. Thick yellow or green discharge that glues the lashes shut overnight suggests a bacterial infection, which may need prescription drops. A watery, gritty red eye alongside a cold is viral and clears on its own, and drops do nothing for it. Itching in both eyes points to allergy instead.",
+      "Come in and we will tell you which kind your child has, since the three look similar from a photograph and lead to three different answers. Call us rather than waiting for genuine eye pain rather than irritation, for any change in vision, or for light that hurts. Call the same day about any red eye that follows an injury, and about any red eye in a newborn.",
     ],
   },
   {
@@ -371,15 +371,15 @@ export const symptoms: Symptom[] = [
     title: "Constipation in Children",
     short: "Constipation",
     group: "Stomach and bowels",
-    heading: "What to do about constipation",
+    heading: "Why constipation takes months to undo",
     aap: "Constipation",
     lead:
       "Constipation is about how hard and how painful, not how often. A child hurt once will hold on, and holding on makes the next stool worse.",
     description:
       "Constipation in children: what actually counts as constipated, why holding on makes it worse, and how we help break the cycle.",
     intro: [
-      "Soften the stool first and then keep it soft. Call us for a laxative dose matched to your child's age and weight. Keep fluids and fruit going through the day, and sit your child on the toilet for a few unhurried minutes after meals. Watch for holding on rather than straining, because crossed legs, going stiff and hiding behind the sofa all look like a child trying to go and are almost always a child trying not to.",
-      "Expect the treatment to take months rather than days. We keep stools soft for long enough that a stretched bowel recovers and your child stops expecting pain. Stopping early is the commonest reason constipation comes straight back.",
+      "Constipation in children is a cycle rather than an event. One painful stool teaches a child to hold on, holding on makes the next one harder, and a bowel held full for weeks stretches and stops signalling properly. Crossed legs, going stiff and hiding behind the sofa look like a child straining to go, and are almost always a child working hard not to.",
+      "Call us for a laxative dose matched to your child's age and weight, and expect us to talk about months rather than days. We keep stools soft long enough for a stretched bowel to recover its shape and for your child to stop expecting pain. Stopping the moment things improve is the single commonest reason constipation comes straight back.",
     ],
   },
   {
@@ -387,7 +387,7 @@ export const symptoms: Symptom[] = [
     title: "Asthma Attacks in Children",
     short: "Asthma attack",
     group: "Coughs and breathing",
-    heading: "What to do during an asthma attack",
+    heading: "Judging whether the reliever inhaler worked",
     aap: "Asthma Attack",
     lead:
       "Follow your child's action plan and give the reliever first, then judge how well it worked by their breathing rather than their cough.",
@@ -395,7 +395,7 @@ export const symptoms: Symptom[] = [
       "Asthma attacks in children: using the action plan, judging whether the inhaler is working, and when an attack needs urgent care.",
     intro: [
       "Give the reliever inhaler, then check three things a few minutes later: can your child speak in full sentences, are they calm, and have they stopped using their neck and ribs to breathe? The reliever is working if all three hold. Call 911 if your child cannot finish a sentence, or goes quiet and still.",
-      "Bring the plan and the inhalers to any appointment and ask us to watch your child use them. A spacer used properly delivers far more of the dose than an inhaler alone, and poor technique is one of the commonest reasons an attack seems not to respond.",
+      "Bring the action plan and the inhalers to any appointment and ask us to watch your child use them. A spacer used properly delivers far more of the drug to the lungs than an inhaler held alone. Poor technique is one of the commonest reasons an attack appears not to respond to treatment that should have worked.",
     ],
   },
   {
@@ -403,7 +403,7 @@ export const symptoms: Symptom[] = [
     title: "Teething in Babies",
     short: "Teething",
     group: "Babies and newborns",
-    heading: "What to do about teething",
+    heading: "What teething causes, and what it does not",
     aap: "Teething",
     lead:
       "Teething makes gums sore and babies miserable. Teething does not cause a high fever, diarrhea or a cough.",
@@ -411,7 +411,7 @@ export const symptoms: Symptom[] = [
       "Teething in babies: what it really causes, what helps, and why blaming a fever on teething is how something else gets missed.",
     intro: [
       "Give your baby something cold and firm to bite: a chilled teething ring, a clean cold washcloth, or your own clean finger rubbed along the gum. Avoid teething gels, and do not use amber necklaces at all, because they are a choking and strangulation risk.",
-      "Treat a fever, diarrhea or a cough as a separate illness rather than blaming the teeth, because that assumption is how something else gets missed. Expect the timing to vary widely too: a first tooth anywhere between three months and a year is normal.",
+      "Treat a fever, diarrhea or a cough as a separate illness rather than blaming the teeth, because that assumption is exactly how something else gets missed. Call us about any of the three in a baby who is also teething. Expect the timing to vary enormously as well: a first tooth anywhere between three months and a year is entirely normal.",
     ],
   },
   {
@@ -419,7 +419,7 @@ export const symptoms: Symptom[] = [
     title: "Jaundice in Newborns",
     short: "Newborn jaundice",
     group: "Babies and newborns",
-    heading: "What to do about newborn jaundice",
+    heading: "Why we measure jaundice rather than judge it",
     aap: "Jaundiced Newborn",
     lead:
       "Feed your baby often. Jaundice clears through the stool, so a well-fed baby filling diapers is doing exactly what is needed.",
@@ -435,7 +435,7 @@ export const symptoms: Symptom[] = [
     title: "A Crying Baby Under 3 Months",
     short: "A baby who will not stop crying",
     group: "Babies and newborns",
-    heading: "What to do when your baby will not stop crying",
+    heading: "Crying that is different, not crying that is long",
     aap: "Crying Baby - Before 3 Months Old",
     lead:
       "Crying peaks at about six weeks, and hours a day can be normal. Put your baby down somewhere safe and call us if you reach the end of your rope.",
@@ -451,14 +451,14 @@ export const symptoms: Symptom[] = [
     title: "Reactions After Immunizations",
     short: "After immunizations",
     group: "Babies and newborns",
-    heading: "What to do after immunizations",
+    heading: "Which reactions we want to hear about",
     aap: "Immunization Reactions",
     lead:
       "A sore leg, a small fever and a grumpy day or two after vaccines are expected, and they pass on their own.",
     description:
       "What is normal after a child's immunizations, how long it lasts, what helps, and the reactions worth telling us about.",
     intro: [
-      "Move the limb, offer extra feeds, and hold a cool cloth against the spot. Give fever medicine if your child is uncomfortable. Fever medicine does not stop the vaccine working, whatever you may have read.",
+      "A sore arm or leg, a mild fever and a grumpy day or two are the vaccine doing its work, and they pass within 48 hours. Fever medicine is fine for comfort and does not stop a vaccine working, whatever you may have read. What we want to hear about is anything that outlasts or outsizes that ordinary picture.",
       "Tell us about anything beyond the ordinary: redness spreading up the limb, a fever lasting more than a couple of days, or a baby inconsolable for hours in a way that is unlike them. We record it, and it shapes how we plan the next visit.",
     ],
   },
@@ -467,7 +467,7 @@ export const symptoms: Symptom[] = [
     title: "Insect Bites in Children",
     short: "Insect bites",
     group: "Bites and stings",
-    heading: "What to do about insect bites",
+    heading: "Telling an ordinary bite from an infected one",
     aap: "Insect Bite",
     lead:
       "An ordinary bite swells within a day and then settles. An infected bite grows redder and more painful after two or three days.",
@@ -475,7 +475,7 @@ export const symptoms: Symptom[] = [
       "Insect bites and stings in children: telling a normal reaction from an infection, what helps the itch, and when to be seen.",
     intro: [
       "Watch which way the bite is heading over the next few days. A big reaction that appears quickly and then starts improving is normal, especially in a small child. A bite that is more painful, redder and warmer on day three, sometimes with a spreading edge or a fever, needs looking at.",
-      "Use a cold compress and an antihistamine for the itch rather than a cream. Cut your child's fingernails short as well, because most infected bites began as scratched ones.",
+      "Call us about a bite heading the wrong way, and we will tell you whether it needs an antibiotic. Most do not. Cut your child's fingernails short in the meantime, because most infected bites we see began as scratched ones rather than as bad bites.",
     ],
   },
   {
@@ -483,7 +483,7 @@ export const symptoms: Symptom[] = [
     title: "Tick Bites in Children",
     short: "Tick bites",
     group: "Bites and stings",
-    heading: "What to do about a tick bite",
+    heading: "Removing a tick, and what to do with it afterwards",
     aap: "Tick Bite",
     lead:
       "Pull a tick straight out with fine tweezers held close to the skin. Use no heat, no petroleum jelly, and no twisting.",
@@ -499,7 +499,7 @@ export const symptoms: Symptom[] = [
     title: "Nosebleeds in Children",
     short: "Nosebleeds",
     group: "Knocks, pain and injuries",
-    heading: "What to do about a nosebleed",
+    heading: "Why nosebleeds restart, and how to prevent the next one",
     aap: "Nosebleed",
     lead:
       "Pinch the soft part of the nose, not the bridge, and hold for a full ten minutes without letting go to check.",
@@ -515,14 +515,14 @@ export const symptoms: Symptom[] = [
     title: "Headaches in Children",
     short: "Headaches",
     group: "Knocks, pain and injuries",
-    heading: "What to do about headaches",
+    heading: "One headache, or a pattern worth investigating",
     aap: "Headache",
     lead:
       "A single headache usually means sleep, food, water or screens. Bring us a pattern instead, particularly headaches that wake your child at night.",
     description:
       "Headaches in children: the ordinary causes, the patterns worth attention, and when to book an appointment at Wasatch Pediatrics.",
     intro: [
-      "Go through the ordinary causes honestly before looking further. Ask about sleep, missed meals, how much your child drank, hours on a screen, and what is happening at school. Sleep, meals, water, screens and school stress account for the great majority of childhood headaches, and fixing any one of those causes helps your child regardless.",
+      "A single headache almost never means anything, and a pattern often does. Sleep, missed meals, not enough to drink, hours on a screen and school stress account for the great majority of childhood headaches, and going through those five honestly is worth more than any scan. Fixing any one of them helps your child regardless of what else is going on.",
       "Book an appointment if the headaches wake your child from sleep, come with vomiting in the early morning, followed a head injury, or are becoming steadily more frequent or more severe over weeks. A run of headaches over weeks tells us something a single bad afternoon cannot.",
     ],
   },
@@ -531,14 +531,14 @@ export const symptoms: Symptom[] = [
     title: "Eczema in Children",
     short: "Eczema",
     group: "Skin and rashes",
-    heading: "What to do about eczema",
+    heading: "Why eczema flares come back, and what we prescribe",
     aap: "Eczema",
     lead:
       "Moisturize every single day, not only when the skin flares, because dry skin is what lets eczema start.",
     description:
       "Eczema in children: the daily moisturizing that prevents flares, how to use steroid creams without fear, and when to bring your child in.",
     intro: [
-      "Apply a thick, unscented moisturizer at least twice a day, and put it on within three minutes of a bath while the skin still holds water. Choose an ointment or a heavy cream over a lotion, because lotions contain more water and evaporate.",
+      "Eczema is a barrier problem before it is an inflammation problem. Skin that cannot hold water cracks, lets irritants in, and flares, which is why daily moisturizing on skin that is not currently red does more to prevent the next flare than anything you apply once one has started. An ointment or a heavy cream holds water where a lotion evaporates.",
       "Use the steroid cream we prescribe for as long as we tell you, rather than stopping the moment the redness fades. Parents commonly under-treat a flare from worry about steroids, and under-treating drags the flare out. Call us if the skin weeps, crusts yellow, or your child develops a fever, because eczema that is infected needs different treatment.",
     ],
   },
@@ -547,15 +547,15 @@ export const symptoms: Symptom[] = [
     title: "Diaper Rash",
     short: "Diaper rash",
     group: "Skin and rashes",
-    heading: "What to do about diaper rash",
+    heading: "Ordinary diaper rash, and the yeast kind",
     aap: "Diaper Rash",
     lead:
       "Change diapers more often and coat the skin with a thick zinc oxide barrier at every change.",
     description:
       "Diaper rash: the barrier cream and changing routine that clears most of it, how to tell yeast apart from ordinary rash, and when to call us.",
     intro: [
-      "Change your baby the moment the diaper is wet or soiled. Clean with water and a soft cloth rather than scented wipes, then let the skin dry in the air for a few minutes before the fresh diaper goes on. Then spread zinc oxide paste thickly, like frosting rather than lotion. You should not be able to see the skin through the paste.",
-      "Suspect yeast when the rash is bright red, has a clear scalloped edge, and shows small spots scattered beyond the main patch, especially in the creases. Yeast needs an antifungal cream rather than a barrier alone, so call us if a rash looks like that or has not improved after three days of good barrier care.",
+      "Two different rashes wear the same name, and they need different treatment. Ordinary diaper rash comes from skin sitting against a wet diaper, stays on the surfaces the diaper touches, and answers to a thick barrier paste. The yeast kind is bright red, has a clear scalloped edge, sits deep in the creases where a diaper barely touches, and throws small spots out beyond the main patch.",
+      "Call us if the rash matches that second description, or if any diaper rash has not improved after three days of good barrier care. Yeast needs an antifungal cream and will sit there indefinitely under a barrier alone. Call the same day if the skin blisters, weeps, or breaks open, or if your baby develops a fever alongside the rash.",
     ],
   },
   {
@@ -563,14 +563,14 @@ export const symptoms: Symptom[] = [
     title: "Cradle Cap",
     short: "Cradle cap",
     group: "Skin and rashes",
-    heading: "What to do about cradle cap",
+    heading: "Why cradle cap looks worse than it is",
     aap: "Cradle Cap",
     lead:
       "Cradle cap is harmless, does not itch, and clears on its own. Soften the scale with oil and brush it gently rather than picking at it.",
     description:
       "Cradle cap in babies: how to loosen the scale safely, what not to do, and the rare signs that mean calling us.",
     intro: [
-      "Rub a little baby oil or petroleum jelly into the scalp an hour before a bath, then loosen the softened scale with a soft brush and wash it out with baby shampoo. Repeat every few days rather than trying to clear the whole scalp at once.",
+      "Cradle cap bothers parents far more than it bothers babies. The thick yellow scale looks like a skin condition that must be uncomfortable, and it causes no itching, no pain and no harm at all. It clears on its own over weeks to months, and softening the scale with oil before a bath only speeds up something that was going to happen anyway.",
       "Never pick dry scale off, because picking breaks the skin and invites infection. Call us if the scalp becomes red and weepy, if the rash spreads down onto the face and body, or if your baby seems itchy. Cradle cap itself does not itch, so an itchy baby has something else going on.",
     ],
   },
@@ -579,14 +579,14 @@ export const symptoms: Symptom[] = [
     title: "Heat Rash in Children",
     short: "Heat rash",
     group: "Skin and rashes",
-    heading: "What to do about heat rash",
+    heading: "Why creams make heat rash worse",
     aap: "Heat Rash",
     lead:
       "Cool your child down and take a layer off. Heat rash clears within a day or two once the skin stops sweating.",
     description:
       "Heat rash in children: how to cool the skin, what to avoid putting on it, and how to tell heat rash from a rash that needs looking at.",
     intro: [
-      "Move your child somewhere cooler, remove a layer of clothing, and let the skin breathe. A lukewarm bath without soap helps, and so does dressing your child in loose cotton rather than anything synthetic or tight.",
+      "Heat rash is blocked sweat glands, not an infection or an allergy, which is why the instinct to put something on it works against you. Creams and ointments seal the ducts that are already blocked and trap the heat underneath. Cooling the skin and letting it breathe unblocks them, and the rash goes within a day or two.",
       "Skip creams and ointments, which trap heat against the skin and make heat rash worse rather than better. Call us if the little bumps turn into pustules, if the skin becomes painful or swollen, or if your child runs a fever. Those changes point to an infection rather than to blocked sweat glands.",
     ],
   },
@@ -595,7 +595,7 @@ export const symptoms: Symptom[] = [
     title: "Hand, Foot and Mouth Disease",
     short: "Hand, foot and mouth",
     group: "Skin and rashes",
-    heading: "What to do about hand, foot and mouth disease",
+    heading: "The mouth ulcers matter, not the spots",
     aap: "Hand-Foot-and-Mouth Disease-Viral Rash",
     lead:
       "Keep your child drinking, because the mouth ulcers hurt more than the spots and dehydration is the real risk.",
@@ -611,7 +611,7 @@ export const symptoms: Symptom[] = [
     title: "Chickenpox in Children",
     short: "Chickenpox",
     group: "Skin and rashes",
-    heading: "What to do about chickenpox",
+    heading: "The two medicines to avoid in chickenpox",
     aap: "Chickenpox",
     lead:
       "Treat the itch, and never give ibuprofen or aspirin for chickenpox, because both raise the risk of serious complications.",
@@ -627,15 +627,15 @@ export const symptoms: Symptom[] = [
     title: "Impetigo in Children",
     short: "Impetigo",
     group: "Skin and rashes",
-    heading: "What to do about impetigo",
+    heading: "Why impetigo always needs a prescription",
     aap: "Impetigo - Infected Sores",
     lead:
       "Impetigo spreads on fingers and towels, so cover the sores, wash hands often, and call us for the antibiotic that clears it.",
     description:
       "Impetigo in children: the honey-crusted sores, how to stop it spreading through the house, and when your child can go back to school.",
     intro: [
-      "Recognize impetigo by its crust, which looks like dried honey stuck to red skin, usually around the nose and mouth. Wash the area gently with soap and water, cover it with a loose dressing, and give your child their own towel and washcloth.",
-      "Call us, because impetigo needs an antibiotic: a cream for a small patch, tablets for anything more widespread. Most schools ask that a child stay home until 24 hours after treatment starts, or until the sores have crusted and are covered.",
+      "Impetigo is a bacterial infection of the surface of the skin, so unlike most childhood rashes it will not clear on its own. The crust gives it away: it looks like dried honey stuck to red skin, most often around the nose and mouth, and it spreads to wherever your child's fingers carry it next.",
+      "Call us, and we will prescribe a cream for a small patch or tablets for anything more widespread. Give your child their own towel and washcloth in the meantime, since impetigo travels around a household on shared linen. Most schools ask that a child stay home until 24 hours after treatment starts, or until the sores have crusted over and are covered.",
     ],
   },
   {
@@ -643,14 +643,14 @@ export const symptoms: Symptom[] = [
     title: "Ringworm in Children",
     short: "Ringworm",
     group: "Skin and rashes",
-    heading: "What to do about ringworm",
+    heading: "Why ringworm comes back, and when cream will not work",
     aap: "Ringworm",
     lead:
       "Ringworm is a fungus, not a worm, and an antifungal cream clears it. Keep applying the cream for two weeks after the ring disappears.",
     description:
       "Ringworm in children: what the ring looks like, which cream to use and for how long, and why scalp ringworm needs a prescription.",
     intro: [
-      "Apply an over-the-counter antifungal cream to the patch and about an inch beyond its edge, twice a day. Keep going for two weeks after the ring has vanished, because stopping when it looks clear is why ringworm so often comes back.",
+      "Ringworm is a fungus and not a worm, and it clears with an over-the-counter antifungal cream in most cases. It comes back because families stop at the wrong moment. The visible ring disappears well before the fungus does, so treatment has to carry on for two full weeks after the skin looks clear, and out about an inch beyond where the edge used to be.",
       "Call us for ringworm on the scalp, which shows up as a scaly bald patch and never responds to cream. Scalp ringworm needs an oral antifungal prescription. Call us too if the patch is spreading despite two weeks of treatment, or if the skin becomes swollen and tender.",
     ],
   },
@@ -659,7 +659,7 @@ export const symptoms: Symptom[] = [
     title: "Scabies in Children",
     short: "Scabies",
     group: "Skin and rashes",
-    heading: "What to do about scabies",
+    heading: "Why everyone in the house gets treated at once",
     aap: "Scabies-Itch Mite Rash",
     lead:
       "Scabies itches worst at night, and everyone in the house needs treating on the same day, whether or not they itch.",
@@ -667,7 +667,7 @@ export const symptoms: Symptom[] = [
       "Scabies in children: recognizing the intense night-time itch, treating the whole household at once, and why the itch outlasts the mites.",
     intro: [
       "Call us for the prescription cream, then treat every person in the household on the same day, including anyone with no rash. Mites take weeks to cause itching, and an untreated person will simply reinfect everyone else. Apply the cream from the neck down, and over the scalp too in babies.",
-      "Wash bedding, towels and clothing used in the previous three days in hot water and dry them on high heat. Expect the itch to carry on for two to four weeks after successful treatment, which is an allergic reaction to dead mites rather than a sign the treatment failed.",
+      "Expect the itch to carry on for two to four weeks after successful treatment, which catches almost every family out. That itch is an allergic reaction to dead mites in the skin rather than a sign of live ones, so returning for a second course rarely helps. Wash bedding, towels and clothing from the previous three days in hot water, and dry them on high heat.",
     ],
   },
   {
@@ -675,7 +675,7 @@ export const symptoms: Symptom[] = [
     title: "Molluscum in Children",
     short: "Molluscum",
     group: "Skin and rashes",
-    heading: "What to do about molluscum",
+    heading: "Why we usually leave molluscum alone",
     aap: "Molluscum",
     lead:
       "Molluscum bumps clear on their own without treatment, though clearing can take six months to two years.",
@@ -691,14 +691,14 @@ export const symptoms: Symptom[] = [
     title: "Warts in Children",
     short: "Warts",
     group: "Skin and rashes",
-    heading: "What to do about warts",
+    heading: "Why wart treatment takes three months",
     aap: "Warts",
     lead:
       "Most warts disappear on their own within two years, and salicylic acid speeds that up if you use it daily for weeks.",
     description:
       "Warts in children: the treatment that works at home, how long it takes, and which warts to bring in.",
     intro: [
-      "Soak the wart in warm water for five minutes, file the dead surface down with an emery board kept only for that wart, then apply salicylic acid and cover it. Repeat every day. Expect the wart to take eight to twelve weeks to clear. Most families stop far too early and conclude the treatment did not work.",
+      "Warts fail to clear for one reason far more often than any other: the family stopped too soon. Salicylic acid works by taking the wart down a layer at a time, so eight to twelve weeks of daily treatment is the normal course rather than a sign that something is wrong. A wart treated for three weeks and abandoned will simply still be there.",
       "Bring your child in for warts on the face or genitals, warts that bleed or change shape, or warts that have not budged after three months of daily treatment. Do not use over-the-counter freezing kits on a small child's face or hands without asking us first.",
     ],
   },
@@ -707,7 +707,7 @@ export const symptoms: Symptom[] = [
     title: "Poison Ivy, Oak and Sumac",
     short: "Poison ivy",
     group: "Skin and rashes",
-    heading: "What to do about poison ivy",
+    heading: "Why poison ivy seems to spread, and does not",
     aap: "Poison Ivy - Oak - Sumac",
     lead:
       "Wash the oil off with soap and cool water within an hour, and wash whatever your child was wearing. The rash spreads from lingering oil, not from the blisters.",
@@ -715,7 +715,7 @@ export const symptoms: Symptom[] = [
       "Poison ivy, oak and sumac in children: washing the oil off in time, calming the rash, and the reactions that need to be seen.",
     intro: [
       "Scrub the skin with soap and cool water as soon as you realize what happened, then wash the clothes, shoes and anything else that touched the plant. The rash cannot spread from one part of the body to another, and blister fluid is not contagious. New patches appear because oil is still on something your child keeps touching.",
-      "Calm the rash with cool compresses, calamine lotion and an oral antihistamine at night. Call us if the rash covers a large area, reaches the face or genitals, or if your child's eyes swell shut, because a reaction that widespread usually needs oral steroids rather than cream.",
+      "Call us if the rash covers a large area, reaches the face or the genitals, or swells your child's eyes shut, because a reaction that widespread needs oral steroids rather than anything you can buy. Call as well if the skin turns yellow-crusted or increasingly painful, which means a bacterial infection has moved in on top of the rash.",
     ],
   },
   {
@@ -723,7 +723,7 @@ export const symptoms: Symptom[] = [
     title: "Fifth Disease",
     short: "Fifth disease",
     group: "Skin and rashes",
-    heading: "What to do about fifth disease",
+    heading: "The rash means your child is no longer contagious",
     aap: "Fifth Disease-Viral Rash",
     lead:
       "Your child stops being contagious by the time the bright red cheeks appear, and needs no treatment.",
@@ -739,14 +739,14 @@ export const symptoms: Symptom[] = [
     title: "Roseola",
     short: "Roseola",
     group: "Skin and rashes",
-    heading: "What to do about roseola",
+    heading: "The roseola pattern: fever first, rash after",
     aap: "Roseola-Viral Rash",
     lead:
       "Roseola runs three days of high fever and then breaks into a rash just as your child starts to feel better.",
     description:
       "Roseola in babies and toddlers: the pattern of high fever then rash, why the rash is good news, and what to watch during the fever.",
     intro: [
-      "Treat the fever for comfort and keep fluids going for the two to three days it lasts. Watch for the giveaway pattern: the fever breaks, and within a day a pink rash appears on the trunk and spreads outward while your child is visibly improving.",
+      "Roseola runs in a sequence that identifies it, and the sequence is what reassures parents rather than any single feature. A high fever comes first and lasts two or three days with very little else to show for it. The fever then breaks, and within a day a pink rash appears on the trunk and spreads outward while your child is visibly getting better.",
       "Expect the rash to fade in one to three days and to need no treatment at all. Call us during the fever phase if your baby is under three months, becomes hard to rouse, or has a seizure. Febrile seizures happen in a small number of children with roseola and always need assessing, even though most cause no lasting harm.",
     ],
   },
@@ -755,7 +755,7 @@ export const symptoms: Symptom[] = [
     title: "Hair Loss in Children",
     short: "Hair loss",
     group: "Skin and rashes",
-    heading: "What to do about hair loss",
+    heading: "What the bare patch itself tells us",
     aap: "Hair Loss",
     lead:
       "Bring your child in so we can look at the scalp. The cause of the hair loss decides the treatment, and the causes call for quite different things.",
@@ -771,14 +771,14 @@ export const symptoms: Symptom[] = [
     title: "Dry and Cracked Skin",
     short: "Dry skin",
     group: "Skin and rashes",
-    heading: "What to do about dry skin",
+    heading: "Why Utah winters crack children's skin",
     aap: "Cracked or Dry Skin",
     lead:
       "Shorten the bath, drop the soap, and moisturize while the skin is still damp. Utah's air does the rest of the damage on its own.",
     description:
       "Dry and cracked skin in children: the bathing routine that helps, which moisturizers work, and when dry skin is something else.",
     intro: [
-      "Keep baths to five or ten minutes in warm rather than hot water, use a gentle cleanser only where your child is actually dirty, and pat rather than rub dry. Apply a thick unscented ointment or cream within three minutes, while the skin still holds water from the bath.",
+      "Dry air pulls water out of skin faster than skin can replace it, and Utah supplies that air for half the year. A bath adds water to the skin and then takes more away as it evaporates, which is why the three minutes after a bath decide whether the bath helped or hurt. Anything thick and unscented applied inside that window traps the water your child just soaked up.",
       "Run a humidifier in the bedroom through the winter. Call us if the skin cracks deeply enough to bleed, or if patches turn red, weepy or crusted. Call as well if the dryness itches enough to wake your child, because a persistent itch usually means eczema rather than dry skin alone.",
     ],
   },
@@ -787,14 +787,14 @@ export const symptoms: Symptom[] = [
     title: "Sunburn in Children",
     short: "Sunburn",
     group: "Skin and rashes",
-    heading: "What to do about sunburn",
+    heading: "Sunburn gets worse before it gets better",
     aap: "Sunburn",
     lead:
       "Cool the skin, push fluids, and give ibuprofen early. The redness you can see at bedtime will look worse in the morning.",
     description:
       "Sunburn in children: cooling the skin, easing the pain, what not to put on a burn, and when a sunburn needs to be seen.",
     intro: [
-      "Put your child in a cool bath or lay cool wet cloths on the skin, then apply plain aloe vera gel or a light moisturizer. Give ibuprofen in the first few hours, which does more for the pain and swelling than anything applied to the surface. Offer extra fluids, because burned skin loses water fast.",
+      "Sunburn keeps developing for a day after the sun goes in, so the redness you see at bedtime is not the redness you will see in the morning. Judging a burn too early is how parents miss a bad one. Ibuprofen taken in those first few hours does more for the pain and the swelling than anything applied to the surface, because it works on the inflammation rather than on the skin.",
       "Never use butter, petroleum jelly or anything numbing that ends in caine, and leave blisters alone rather than popping them. Call us for a sunburn with widespread blistering, a burn on a baby under a year, or a sunburned child who develops a fever, chills, headache or confusion.",
     ],
   },
@@ -803,7 +803,7 @@ export const symptoms: Symptom[] = [
     title: "Boils in Children",
     short: "Boils",
     group: "Skin and rashes",
-    heading: "What to do about a boil",
+    heading: "Why squeezing a boil makes it worse",
     aap: "Boil",
     lead:
       "Hold a warm compress on a boil for fifteen minutes four times a day, and never squeeze it.",
@@ -819,7 +819,7 @@ export const symptoms: Symptom[] = [
     title: "Skin Lumps in Children",
     short: "Skin lumps",
     group: "Skin and rashes",
-    heading: "What to do about a skin lump",
+    heading: "Which lumps are lymph nodes doing their job",
     aap: "Skin Lump",
     lead:
       "Most lumps under a child's skin are swollen lymph nodes or harmless cysts, but let us feel any lump that keeps growing.",
@@ -835,7 +835,7 @@ export const symptoms: Symptom[] = [
     title: "Blisters in Children",
     short: "Blisters",
     group: "Skin and rashes",
-    heading: "What to do about a blister",
+    heading: "Why an intact blister should stay intact",
     aap: "Blisters",
     lead:
       "Leave a blister intact if you can, because the roof of it is the best dressing your child has.",
@@ -851,7 +851,7 @@ export const symptoms: Symptom[] = [
     title: "Mosquito Bites in Children",
     short: "Mosquito bites",
     group: "Bites and stings",
-    heading: "What to do about mosquito bites",
+    heading: "Which direction the bite is heading",
     aap: "Mosquito Bite",
     lead:
       "Children swell far more than adults do after a mosquito bite, and a large firm lump is still an ordinary reaction.",
@@ -867,14 +867,14 @@ export const symptoms: Symptom[] = [
     title: "Bee and Wasp Stings",
     short: "Bee and wasp stings",
     group: "Bites and stings",
-    heading: "What to do about a bee or wasp sting",
+    heading: "Local swelling, and the swelling that means 911",
     aap: "Bee or Yellow Jacket Sting",
     lead:
       "Scrape a bee's stinger out sideways with a card rather than pulling it, then watch your child for fifteen minutes.",
     description:
       "Bee and wasp stings in children: removing the stinger, easing the pain and swelling, and the reaction that means calling 911.",
     intro: [
-      "Scrape the stinger off with the edge of a credit card or a fingernail. Squeezing it with tweezers pumps more venom into the skin. Then wash the area, apply a cold pack for twenty minutes, and give ibuprofen for the pain.",
+      "A stung limb that swells over a day or two and stays swollen for several more frightens parents into thinking their child is allergic. A large local reaction is not an allergy. A large local reaction stays confined to the limb that was stung and is uncomfortable rather than dangerous. An allergic reaction shows up somewhere the sting was not.",
       "Call 911 immediately if your child has trouble breathing, swelling of the lips, tongue or throat, widespread hives, vomiting, or goes pale and floppy. That combination is anaphylaxis, and epinephrine cannot wait. Local swelling that spreads over a day or two and stays confined to the stung limb is uncomfortable but not dangerous.",
     ],
   },
@@ -883,7 +883,7 @@ export const symptoms: Symptom[] = [
     title: "Spider Bites in Children",
     short: "Spider bites",
     group: "Bites and stings",
-    heading: "What to do about a spider bite",
+    heading: "Most spider bites are not spider bites",
     aap: "Spider Bite",
     lead:
       "Most bites blamed on spiders are not spider bites at all. They are skin infections, and they need treating as such.",
@@ -899,7 +899,7 @@ export const symptoms: Symptom[] = [
     title: "Fire Ant Stings",
     short: "Fire ant stings",
     group: "Bites and stings",
-    heading: "What to do about fire ant stings",
+    heading: "The pustules are normal, and picking them is not",
     aap: "Fire Ant Sting",
     lead:
       "Fire ant stings turn into small pus-filled blisters within a day, and those blisters are the normal reaction rather than an infection.",
@@ -915,14 +915,14 @@ export const symptoms: Symptom[] = [
     title: "Bed Bug Bites",
     short: "Bed bug bites",
     group: "Bites and stings",
-    heading: "What to do about bed bug bites",
+    heading: "The bite pattern that gives bed bugs away",
     aap: "Bed Bug Bite",
     lead:
       "Bed bug bites come in lines or clusters on skin that was uncovered in bed, and treating the room matters more than treating the skin.",
     description:
       "Bed bug bites in children: recognizing the pattern, easing the itch, and dealing with the room the bites came from.",
     intro: [
-      "Wash the bites with soap and water, apply a cold pack, and use an antihistamine at night for the itch. Look for the pattern that gives bed bugs away: three or four bites in a line or a tight cluster, on arms, shoulders, neck or legs that were outside the covers.",
+      "Bed bug bites are recognized by their arrangement rather than by any single bite. Three or four in a straight line, or in a tight cluster, on skin that was outside the covers overnight, is the pattern. Arms, shoulders, neck and legs collect them, and the same person can be bitten repeatedly while nobody else in the bed reacts at all.",
       "Deal with the room, because bites will keep appearing until you do. Strip and hot-wash all bedding, vacuum the mattress and frame, and arrange professional treatment, because bed bugs rarely go away with home remedies. Call us if bites become infected from scratching.",
     ],
   },
@@ -931,7 +931,7 @@ export const symptoms: Symptom[] = [
     title: "Scorpion Stings",
     short: "Scorpion stings",
     group: "Bites and stings",
-    heading: "What to do about a scorpion sting",
+    heading: "Which scorpion decides everything that follows",
     aap: "Scorpion Sting",
     lead:
       "Wash the sting, apply a cold pack, and call Poison Control. They will tell you whether this particular scorpion needs more than home care.",
@@ -947,7 +947,7 @@ export const symptoms: Symptom[] = [
     title: "Jellyfish Stings",
     short: "Jellyfish stings",
     group: "Bites and stings",
-    heading: "What to do about a jellyfish sting",
+    heading: "Why fresh water makes a jellyfish sting worse",
     aap: "Jellyfish Sting",
     lead:
       "Rinse the sting with seawater rather than fresh water, lift off any tentacles, and soak the area in hot water for twenty minutes.",
@@ -963,7 +963,7 @@ export const symptoms: Symptom[] = [
     title: "Animal and Human Bites",
     short: "Animal and human bites",
     group: "Bites and stings",
-    heading: "What to do about an animal or human bite",
+    heading: "Why a bite gets antibiotics before it looks infected",
     aap: "Animal or Human Bite",
     lead:
       "Wash any bite that breaks the skin under running water for five full minutes, then call us. Bites that break the skin usually need antibiotics.",
@@ -979,14 +979,14 @@ export const symptoms: Symptom[] = [
     title: "Swimmer's Itch",
     short: "Swimmer's itch",
     group: "Bites and stings",
-    heading: "What to do about swimmer's itch",
+    heading: "Why the rash stops at the swimsuit line",
     aap: "Swimmer's Itch - Lakes and Oceans",
     lead:
       "Swimmer's itch appears within hours of a lake swim, itches intensely for a few days, and cannot spread to anybody else.",
     description:
       "Swimmer's itch after lake swimming: what causes the bumps, how to settle the itch, and how to avoid it next time.",
     intro: [
-      "Cool the skin, apply calamine or a hydrocortisone cream, and give an antihistamine at night. Expect small red itchy bumps on skin the swimsuit did not cover, appearing within a few hours of swimming and settling over a week.",
+      "The rash maps exactly onto the skin a swimsuit left bare, which is what identifies it. A parasite in fresh water burrows into the skin as the water evaporates off it, so covered skin stays clear and everything else comes up in small red itchy bumps within a few hours. It settles over about a week and cannot pass to anyone else.",
       "Prevent the next round by toweling off briskly straight out of the water and rinsing with clean water, since the parasite burrows in as lake water evaporates on the skin. Call us if the bumps become infected from scratching, or if your child develops a fever.",
     ],
   },
@@ -995,7 +995,7 @@ export const symptoms: Symptom[] = [
     title: "Pinworms in Children",
     short: "Pinworms",
     group: "Bites and stings",
-    heading: "What to do about pinworms",
+    heading: "Why the itch keeps to the small hours",
     aap: "Pinworms",
     lead:
       "Night-time bottom itching in a school-age child is usually pinworms, and everybody in the house gets treated at once.",
@@ -1011,14 +1011,14 @@ export const symptoms: Symptom[] = [
     title: "Head Lice in Children",
     short: "Head lice",
     group: "Bites and stings",
-    heading: "What to do about head lice",
+    heading: "Why combing matters more than the treatment",
     aap: "Head Lice",
     lead:
       "Comb wet, conditioned hair with a fine-toothed lice comb every three days for two weeks. Combing removes what any treatment misses.",
     description:
       "Head lice in children: the wet-combing that actually clears them, using treatments correctly, and what schools now expect.",
     intro: [
-      "Saturate the hair with conditioner, then comb it in small sections from scalp to tip with a proper metal lice comb, wiping the comb on a tissue after each stroke. Repeat every three days for two weeks. Combing catches the newly hatched lice that survive any single treatment.",
+      "No lice treatment kills eggs reliably, which is why treatment alone fails so often. Eggs already laid hatch over the following week or so, and the combing is what catches those newly hatched lice before they can lay in turn. Conditioner in the hair stuns them long enough for a metal lice comb to pull them out.",
       "Use an over-the-counter treatment alongside the combing and repeat it after nine days, following the instructions exactly. Most treatment failures come from using too little or rinsing too soon. Do not bag toys or spray furniture, because lice die within a day off a head. Most schools no longer send children home, so check yours rather than assuming.",
     ],
   },
@@ -1027,14 +1027,14 @@ export const symptoms: Symptom[] = [
     title: "A Red Eye Without Discharge",
     short: "Red eye, no discharge",
     group: "Eyes",
-    heading: "What to do about a red eye without discharge",
+    heading: "Telling allergy from a virus in a red eye",
     aap: "Eye - Red Without Pus",
     lead:
       "A pink eye with no pus is usually viral or allergic, and cool compresses do more for it than any drop.",
     description:
       "A red eye without discharge in children: telling viral from allergic, what helps, and the signs that need to be seen today.",
     intro: [
-      "Apply a cool damp cloth for a few minutes several times a day and leave the eye alone otherwise. Suspect allergy if both eyes itch and your child is also sneezing. Suspect a virus if a cold came first and the redness started in one eye before crossing to the other.",
+      "Two very different things produce a red eye with nothing coming out of it, and the history separates them. Allergy itches, takes both eyes at once, and arrives with a running nose and sneezing. A virus feels gritty rather than itchy, follows a cold, and usually starts in one eye before crossing to the other a day or two later.",
       "Call us today for real eye pain rather than grittiness, for changed vision, or for light that hurts. Call too if the eyelid is swelling shut, or if only one eye turned red after a knock. Pain, changed vision, light sensitivity, a closing eyelid and a recent injury each point to something deeper in the eye than surface irritation.",
     ],
   },
@@ -1043,14 +1043,14 @@ export const symptoms: Symptom[] = [
     title: "Eye Allergies in Children",
     short: "Eye allergies",
     group: "Eyes",
-    heading: "What to do about eye allergies",
+    heading: "Why rubbing allergic eyes makes them worse",
     aap: "Eye Allergy",
     lead:
       "Itching in both eyes is the sign that separates allergy from infection. Infected eyes feel gritty, allergic eyes feel itchy.",
     description:
       "Eye allergies in children: telling allergy from infection, which drops help, and how to reduce what sets it off.",
     intro: [
-      "Rinse the eyes with cool water or saline to wash the pollen out, then lay a cold compress across them. An over-the-counter antihistamine eye drop helps, and an oral antihistamine helps more if your child's nose is running too. Stop your child rubbing, because rubbing releases more histamine and worsens the itch.",
+      "Rubbing is the reason allergic eyes get worse through the day. Pressure on the eye releases more histamine from the cells already primed in the lid, so each rub buys a few seconds of relief and then more itching than before. Breaking that loop matters more than any drop, and a cold compress does it faster than telling a child to stop.",
       "Reduce the exposure where you can: wash hair before bed in pollen season, keep bedroom windows shut on high-pollen days, and wipe pets down after they have been outside. Call us if only one eye is affected, if you see pus, or if your child's vision changes.",
     ],
   },
@@ -1059,7 +1059,7 @@ export const symptoms: Symptom[] = [
     title: "Something in a Child's Eye",
     short: "Something in the eye",
     group: "Eyes",
-    heading: "What to do about something in the eye",
+    heading: "Why the feeling lasts after the speck has gone",
     aap: "Eye - Foreign Object",
     lead:
       "Flush the eye with clean lukewarm water for several minutes and never try to pick anything off the colored part of the eye.",
@@ -1075,7 +1075,7 @@ export const symptoms: Symptom[] = [
     title: "A Chemical in the Eye",
     short: "Chemical in the eye",
     group: "Eyes",
-    heading: "What to do about a chemical in the eye",
+    heading: "Why the first twenty minutes decide the damage",
     aap: "Chemical in eye",
     lead:
       "Flush the eye with running water for a full twenty minutes before you do anything else, including phoning.",
@@ -1091,7 +1091,7 @@ export const symptoms: Symptom[] = [
     title: "Eye Injuries in Children",
     short: "Eye injury",
     group: "Eyes",
-    heading: "What to do about an eye injury",
+    heading: "Why nothing should press on an injured eye",
     aap: "Eye Injury",
     lead:
       "Cover an injured eye with a shield rather than a pad, keep your child from rubbing it, and have us look at it the same day.",
@@ -1107,14 +1107,14 @@ export const symptoms: Symptom[] = [
     title: "A Swollen Eyelid",
     short: "Swollen eyelid",
     group: "Eyes",
-    heading: "What to do about a swollen eyelid",
+    heading: "The swollen eyelid that needs seeing today",
     aap: "Eyelid Swelling",
     lead:
       "A swollen eyelid with a fever, or an eyelid that has swollen shut, needs to be seen the same day rather than watched.",
     description:
       "Swollen eyelids in children: the harmless causes, the infection that needs treating quickly, and what to check at home.",
     intro: [
-      "Look at the whole picture first. Swelling in both eyelids with itching usually means allergy, and a cold compress plus an antihistamine settles it. A small tender lump at the lash line is usually a sty.",
+      "Most swollen eyelids are allergy or a sty and settle at home. One picture does not: a single eyelid that is red, warm and painful, especially alongside a fever. That combination can mean infection spreading into the tissue around the eye socket, which moves quickly and needs treating the same day rather than watching overnight.",
       "Call us the same day for swelling in one eyelid that is red, warm and painful, particularly with a fever. An infection spreading around the eye socket needs treating quickly. Go to an emergency room if your child cannot open the eye, cannot move it in every direction, or complains of double vision.",
     ],
   },
@@ -1123,14 +1123,14 @@ export const symptoms: Symptom[] = [
     title: "Styes in Children",
     short: "Sty",
     group: "Eyes",
-    heading: "What to do about a sty",
+    heading: "Why a sty needs warmth, not an antibiotic",
     aap: "Sty",
     lead:
       "Hold a warm compress on a sty for ten minutes four times a day and never squeeze it.",
     description:
       "Styes in children: the warm compresses that clear one, why squeezing is a bad idea, and when a lump on the lid needs seeing.",
     intro: [
-      "Soak a clean cloth in warm water and hold it against the closed eyelid for ten minutes, four times a day. Warmth softens the blocked oil gland so it drains by itself, which is what clears a sty. Wash your child's hands and keep them off the lid.",
+      "A sty is a blocked oil gland rather than an infection, which is why antibiotic ointment does so little for one. Warmth softens the blockage until the gland drains itself, and that is what clears it. Squeezing pushes the contents deeper into the lid and is the usual reason a simple sty turns into something that needs treating.",
       "Never squeeze a sty, and skip antibiotic ointments unless we have prescribed one. Most styes are blockages rather than infections. Call us if the whole eyelid becomes red and swollen, if your child has a fever, if vision changes, or if the lump is still there after two weeks.",
     ],
   },
@@ -1139,14 +1139,14 @@ export const symptoms: Symptom[] = [
     title: "A Blocked Tear Duct in Babies",
     short: "Blocked tear duct",
     group: "Eyes",
-    heading: "What to do about a blocked tear duct",
+    heading: "Why a baby's eye waters, and when it stops",
     aap: "Tear Duct - Blocked",
     lead:
       "A baby with a constantly watery eye and no redness almost always has a blocked tear duct, and almost all of them open on their own within the first year.",
     description:
       "Blocked tear ducts in babies: the gentle massage that helps, what is normal, and the signs that mean an infection.",
     intro: [
-      "Massage the duct two or three times a day: place a clean fingertip beside the inner corner of the eye, against the bone, and stroke firmly downward toward the nose about ten times. Wipe any crusting away with a clean cotton pad and warm water, using a fresh pad for each eye.",
+      "Nearly one baby in five is born with a tear duct that has not opened yet, so tears pool and spill instead of draining into the nose. The eye therefore waters constantly while staying white and comfortable. Almost all of these ducts open on their own during the first year, and massage over the duct helps them along rather than being the thing that fixes it.",
       "Expect a watery eye with no redness and a comfortable baby. Call us if the white of the eye turns red, if the eyelid becomes swollen or tender, or if thick discharge appears alongside redness. Call as well if the eye is still watering by your baby's first birthday.",
     ],
   },
@@ -1155,14 +1155,14 @@ export const symptoms: Symptom[] = [
     title: "Earwax Buildup",
     short: "Earwax",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about earwax",
+    heading: "Why cotton buds cause the blockages they clear",
     aap: "Earwax Buildup",
     lead:
       "Never put a cotton bud in your child's ear. A cotton bud pushes wax against the eardrum, and that is how most wax blockages start.",
     description:
       "Earwax in children: why cotton buds make it worse, what safely softens wax, and when a blockage needs removing here.",
     intro: [
-      "Clean only the outer ear with a washcloth, and leave the canal alone. Ears clear themselves, and cotton buds, hairpins and ear candles all push wax deeper or damage the canal. Ear candling in particular does nothing and burns children.",
+      "Ears clean themselves. Wax forms at the outer part of the canal and migrates outward on its own, so a canal left alone almost never blocks. A cotton bud reverses that: it takes a little wax out and pushes the rest inward against the eardrum, which is how most of the blockages we remove got there. Ear candling does nothing at all and burns children.",
       "Soften genuinely blocked wax with a few drops of mineral oil or an over-the-counter wax softener for several nights. Call us if your child's hearing has changed, if the ear hurts, or if you can see wax pressed hard against the canal. We can remove wax safely, and removing it at home is where eardrums get perforated.",
     ],
   },
@@ -1171,7 +1171,7 @@ export const symptoms: Symptom[] = [
     title: "Swimmer's Ear",
     short: "Swimmer's ear",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about swimmer's ear",
+    heading: "The tug test that tells the two ear pains apart",
     aap: "Ear - Swimmer's",
     lead:
       "Pain when you tug your child's earlobe points to swimmer's ear rather than a middle ear infection, and swimmer's ear needs prescription drops.",
@@ -1187,7 +1187,7 @@ export const symptoms: Symptom[] = [
     title: "Discharge From a Child's Ear",
     short: "Ear discharge",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about ear discharge",
+    heading: "Why the pain stops when the ear starts draining",
     aap: "Ear - Discharge",
     lead:
       "Fluid draining from an ear usually means the eardrum has perforated, which relieves the pain and needs us to look.",
@@ -1203,14 +1203,14 @@ export const symptoms: Symptom[] = [
     title: "Ear Congestion and Pressure",
     short: "Ear congestion",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about ear congestion",
+    heading: "Why fluid lingers for months after an ear infection",
     aap: "Ear - Congestion",
     lead:
       "Blocked, popping ears after a cold or a flight are usually fluid behind the eardrum, and that fluid drains on its own over weeks.",
     description:
       "Blocked or popping ears in children: what causes the pressure, what helps it clear, and when persistent fluid needs checking.",
     intro: [
-      "Encourage swallowing, yawning or chewing gum, which opens the tube that drains the middle ear. Treat any cold symptoms and use saline nasal spray. Have your child drink or suck something during a plane's descent, which is when the pressure hurts most.",
+      "The tube that drains the middle ear runs almost flat in a young child and only opens when they swallow or yawn. A cold blocks that tube easily, pressure builds behind it on a plane's descent, and fluid can sit behind the eardrum for weeks after the infection itself has gone. The tube steepens as a child grows, and the problem fades with it.",
       "Expect fluid after an ear infection to take up to three months to clear, without needing treatment. Call us if your child's hearing seems reduced for more than a few weeks, if speech seems to be slipping, or if pressure comes with pain and fever.",
     ],
   },
@@ -1219,7 +1219,7 @@ export const symptoms: Symptom[] = [
     title: "Ear Injuries in Children",
     short: "Ear injury",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about an ear injury",
+    heading: "Why nothing should go into the canal",
     aap: "Ear Injury",
     lead:
       "Put nothing into an injured ear, and call us the same day for anything that involves the canal or the drum.",
@@ -1235,14 +1235,14 @@ export const symptoms: Symptom[] = [
     title: "Toothache in Children",
     short: "Toothache",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about a toothache",
+    heading: "A toothache does not settle on its own",
     aap: "Toothache",
     lead:
       "Give ibuprofen, rinse with warm salt water, and book a dentist, because a toothache does not settle by itself.",
     description:
       "Toothache in children: relieving the pain tonight, what not to put on the gum, and the swelling that needs urgent care.",
     intro: [
-      "Give ibuprofen or acetaminophen at the correct dose for your child's weight, rinse with warm salt water, and hold a cold pack against the cheek. Floss gently either side of the sore tooth in case food is trapped. Never place aspirin against the gum, which burns the tissue.",
+      "Toothache means decay or infection that has reached the nerve, and neither resolves by itself. Pain relief buys a night's sleep and changes nothing underneath, so the appointment is the treatment. Never place an aspirin against the gum while you wait, which is an old remedy that burns the tissue it touches.",
       "Book a dental appointment, because pain from a tooth means decay or infection that will keep returning. Call us if your child's face or jaw is swelling, or if a fever arrives with the toothache. Go to an emergency room if the swelling reaches the eye or makes swallowing difficult.",
     ],
   },
@@ -1251,7 +1251,7 @@ export const symptoms: Symptom[] = [
     title: "A Knocked or Broken Tooth",
     short: "Tooth injury",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about a knocked or broken tooth",
+    heading: "Minutes decide whether a permanent tooth survives",
     aap: "Tooth Injury",
     lead:
       "A knocked-out permanent tooth is a genuine emergency. Put the tooth back in the socket or in milk, and get to a dentist within the hour.",
@@ -1267,14 +1267,14 @@ export const symptoms: Symptom[] = [
     title: "Mouth Ulcers in Children",
     short: "Mouth ulcers",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about mouth ulcers",
+    heading: "Ulcers stop children drinking, and that is the risk",
     aap: "Mouth Ulcers",
     lead:
       "Keep your child drinking, because mouth ulcers stop children swallowing and dehydration is the reason most of them end up needing us.",
     description:
       "Mouth ulcers in children: managing the pain so your child keeps drinking, what to avoid, and when ulcers need looking at.",
     intro: [
-      "Give pain relief twenty minutes before meals, offer cold and soft food such as yogurt, ice pops and smoothies, and skip anything salty, acidic or spicy. A straw helps a child drink past a sore spot at the front of the mouth.",
+      "Mouth ulcers rarely cause trouble in themselves. They cause trouble because a child with a painful mouth quietly stops drinking, and dehydration is what actually brings these children in to see us. Timing pain relief about twenty minutes before meals rather than after them is what keeps a child drinking through the week the ulcers take.",
       "Count wet diapers or trips to the toilet rather than counting ulcers. Call us if your child will not drink, has not passed urine for eight hours, has ulcers alongside a high fever, or has ulcers that keep coming back month after month.",
     ],
   },
@@ -1283,7 +1283,7 @@ export const symptoms: Symptom[] = [
     title: "Mouth Injuries in Children",
     short: "Mouth injury",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about a mouth injury",
+    heading: "Why mouth injuries look so much worse than they are",
     aap: "Mouth Injury",
     lead:
       "Press a gauze pad or a cold wet cloth against the bleeding spot for ten minutes without lifting it to check.",
@@ -1299,7 +1299,7 @@ export const symptoms: Symptom[] = [
     title: "Thrush in Babies",
     short: "Thrush",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about thrush",
+    heading: "Telling thrush from milk on the tongue",
     aap: "Thrush",
     lead:
       "White patches in a baby's mouth that will not wipe away are thrush, and thrush needs a prescription antifungal.",
@@ -1315,7 +1315,7 @@ export const symptoms: Symptom[] = [
     title: "Sinus Pain and Congestion",
     short: "Sinus pain",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about sinus pain",
+    heading: "The shape of the illness, not the face pain",
     aap: "Sinus Pain or Congestion",
     lead:
       "Most sinus pain is a cold and needs no antibiotic. The pattern that changes our mind is a cold that improved and then clearly got worse again.",
@@ -1331,14 +1331,14 @@ export const symptoms: Symptom[] = [
     title: "Hoarseness in Children",
     short: "Hoarseness",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about hoarseness",
+    heading: "Why whispering strains the voice more than talking",
     aap: "Hoarseness",
     lead:
       "Rest the voice and add moisture to the air. Most hoarseness follows shouting or a virus and clears within a week.",
     description:
       "Hoarseness and lost voice in children: what helps it recover, why whispering does not, and when a hoarse voice needs checking.",
     intro: [
-      "Encourage quiet talking rather than whispering, which strains the vocal cords more than a soft voice does. Run a humidifier, keep fluids up, and keep your child away from smoke. Expect the voice to return over three to seven days.",
+      "Whispering is the instinct and the wrong one. It holds the vocal cords apart under tension rather than resting them, so it strains an already inflamed voice more than talking quietly does. Quiet ordinary speech, moist air and no smoke give the cords the three to seven days they need to recover.",
       "Call us if hoarseness lasts more than two weeks, if it comes with drooling, difficulty swallowing or noisy breathing, or if your child sounds hoarse and is struggling to breathe. That combination needs urgent assessment rather than voice rest.",
     ],
   },
@@ -1347,7 +1347,7 @@ export const symptoms: Symptom[] = [
     title: "Nose Injuries in Children",
     short: "Nose injury",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about a nose injury",
+    heading: "Why a broken nose is judged after the swelling goes",
     aap: "Nose Injury",
     lead:
       "Stop the bleeding by pinching the soft part of the nose for ten minutes, then apply ice. Have us look if the shape of the nose has changed.",
@@ -1355,7 +1355,7 @@ export const symptoms: Symptom[] = [
       "Nose injuries in children: stopping the bleeding, reducing swelling, and the signs of a break that needs setting.",
     intro: [
       "Sit your child up and lean them forward, pinch the soft part of the nose below the bone for ten unbroken minutes, then hold a cold pack across the bridge for twenty. Give acetaminophen rather than ibuprofen in the first hours, since ibuprofen encourages more bleeding.",
-      "Look at the nose from in front and above once the swelling settles over two or three days. Come in if the shape has changed, or if your child cannot breathe through one side. Come the same day for clear fluid dripping from the nose after a hard knock, or for a swollen bulge you can see inside the nostril.",
+      "A nose swells enough in the first days to hide its own shape, so nobody can judge whether it is broken until that settles. Look from in front and from above after two or three days, and come in if the shape has changed or your child cannot breathe through one side. Come the same day for clear fluid dripping from the nose after a hard knock, or for a swollen bulge inside the nostril, since both need attention before the swelling story plays out.",
     ],
   },
   {
@@ -1363,7 +1363,7 @@ export const symptoms: Symptom[] = [
     title: "Cuts, Scrapes and Bruises",
     short: "Cuts and scrapes",
     group: "Knocks, pain and injuries",
-    heading: "What to do about a cut or scrape",
+    heading: "Why lifting the pad restarts the bleeding",
     aap: "Cut, Scrape, or Bruise",
     lead:
       "Press on a bleeding cut for ten minutes without lifting the cloth, then wash it under running water for several minutes.",
@@ -1379,7 +1379,7 @@ export const symptoms: Symptom[] = [
     title: "Scrapes and Grazes",
     short: "Scrapes",
     group: "Knocks, pain and injuries",
-    heading: "What to do about a scrape",
+    heading: "Why grit left in a scrape stays for life",
     aap: "Scrape",
     lead:
       "Scrub the grit out under running water. Dirt left in a scrape is what causes both infection and permanent tattooing of the skin.",
@@ -1387,7 +1387,7 @@ export const symptoms: Symptom[] = [
       "Scrapes and grazes in children: cleaning grit out properly, keeping the wound moist, and the signs of infection.",
     intro: [
       "Run the scrape under lukewarm water and wash gently with soap, using a clean wet gauze pad to lift out embedded grit. Washing a scrape stings, so give pain relief first and warn your child. Any dirt left behind can stay visible in the skin for life.",
-      "Cover with petroleum jelly and a non-stick dressing, changing it daily, and skip hydrogen peroxide and alcohol, which damage healing tissue. Call us if you cannot get the grit out, if the scrape covers a large area, or if the edges become red, swollen and increasingly painful after two days.",
+      "Come in if you cannot get the grit out yourself, because we can numb the area and clean it properly, and that is far easier than living with the mark. Skip hydrogen peroxide and alcohol meanwhile, which damage the healing tissue they are meant to protect. Call us if the scrape covers a large area, or if the edges turn red, swollen and increasingly painful after two days.",
     ],
   },
   {
@@ -1395,14 +1395,14 @@ export const symptoms: Symptom[] = [
     title: "Puncture Wounds",
     short: "Puncture wounds",
     group: "Knocks, pain and injuries",
-    heading: "What to do about a puncture wound",
+    heading: "Why a puncture is riskier than a cut",
     aap: "Puncture Wound",
     lead:
       "A puncture wound looks trivial and carries the highest infection risk of any small injury. Call us about any puncture that goes through a shoe.",
     description:
       "Puncture wounds in children: why they get infected, tetanus timing, and which punctures need to be seen.",
     intro: [
-      "Let the wound bleed for a moment, then wash it under running water for several minutes and cover it. Do not plug or seal it tightly, since a puncture needs to drain. Check when your child last had a tetanus shot, because a puncture is exactly the wound tetanus prevention exists for.",
+      "A cut opens and drains. A puncture seals itself over whatever went in with it. A wound the size of a pinhead therefore carries the highest infection risk of any small injury, and tetanus prevention exists mainly for this shape of wound. A puncture through a shoe is the classic one, because it carries sock fibers and foot bacteria deep into the sole.",
       "Call us for any puncture through a shoe, any wound from a nail, needle or animal tooth, anything that might have left material inside, and any puncture to the foot, hand, chest or abdomen. Watch for redness, swelling and increasing pain over the next two days.",
     ],
   },
@@ -1411,7 +1411,7 @@ export const symptoms: Symptom[] = [
     title: "Arm Injuries in Children",
     short: "Arm injury",
     group: "Knocks, pain and injuries",
-    heading: "What to do about an arm injury",
+    heading: "What your child does with the arm, not what they say",
     aap: "Arm Injury",
     lead:
       "A child who will not use an arm at all needs an X-ray, whatever the arm looks like from outside.",
@@ -1427,7 +1427,7 @@ export const symptoms: Symptom[] = [
     title: "Leg Injuries in Children",
     short: "Leg injury",
     group: "Knocks, pain and injuries",
-    heading: "What to do about a leg injury",
+    heading: "One test sorts most leg injuries",
     aap: "Leg Injury",
     lead:
       "A child who will not put weight on a leg needs to be seen, even when nothing looks broken.",
@@ -1443,14 +1443,14 @@ export const symptoms: Symptom[] = [
     title: "Finger Injuries in Children",
     short: "Finger injury",
     group: "Knocks, pain and injuries",
-    heading: "What to do about a finger injury",
+    heading: "Take the ring off before anything else",
     aap: "Finger Injury",
     lead:
       "Rings come off now, before swelling makes that impossible, and a crushed fingertip usually needs looking at.",
     description:
       "Finger injuries in children: removing rings, easing a crushed fingertip, and which finger injuries need to be seen.",
     intro: [
-      "Take any ring off immediately, then apply a cold pack and raise the hand above the heart. Buddy-tape a hurt finger to the one beside it for support. A cold pack and ibuprofen usually settle the throbbing of a blood blister under a nail.",
+      "A finger swells fast, and a ring that slid off easily an hour ago can trap blood in the finger by evening. Take any ring off before you do anything else, including looking at the injury properly. A cold pack and a hand raised above the heart then do more than anything else, and buddy-taping the hurt finger to the one beside it keeps it still.",
       "Come in the same day for a finger that looks crooked or will not straighten, a cut through a nail bed, a nail torn partly off, or blood under more than half the nail. Blood under a nail often needs releasing to relieve the pressure. Go to an emergency room for an amputated fingertip, bringing the piece wrapped in damp gauze inside a bag on ice.",
     ],
   },
@@ -1459,7 +1459,7 @@ export const symptoms: Symptom[] = [
     title: "Toe Injuries in Children",
     short: "Toe injury",
     group: "Knocks, pain and injuries",
-    heading: "What to do about a toe injury",
+    heading: "Why a big toe injury matters more than the others",
     aap: "Toe Injury",
     lead:
       "Most broken toes need buddy-taping and stiff shoes rather than a cast, but a crooked toe or a nail-bed cut needs seeing.",
@@ -1475,7 +1475,7 @@ export const symptoms: Symptom[] = [
     title: "Neck Pain and Stiffness",
     short: "Neck pain",
     group: "Knocks, pain and injuries",
-    heading: "What to do about neck pain",
+    heading: "The chin-to-chest test, and what it rules out",
     aap: "Neck Pain or Stiffness",
     lead:
       "A stiff neck with a fever needs to be seen now. A stiff neck after a night in an odd position does not.",
@@ -1491,14 +1491,14 @@ export const symptoms: Symptom[] = [
     title: "Back Pain in Children",
     short: "Back pain",
     group: "Knocks, pain and injuries",
-    heading: "What to do about back pain",
+    heading: "Why back pain in a child is taken seriously",
     aap: "Back Pain",
     lead:
       "Back pain in a child deserves more attention than back pain in an adult, because far fewer children get it without a reason.",
     description:
       "Back pain in children: what usually causes it, what helps, and the patterns that need investigating.",
     intro: [
-      "Treat a simple strain with a day of rest, then gentle movement rather than bed rest, plus ibuprofen and heat. Check the obvious contributors: a heavy backpack worn on one shoulder, a growth spurt, a new sport, or hours hunched over a screen.",
+      "Back pain is ordinary in adults and less so in children, which is why we ask more questions about it than you might expect. Most of it still turns out to be a heavy backpack worn on one shoulder, a growth spurt, a new sport, or hours hunched over a screen, and gentle movement beats bed rest for all four.",
       "Book an appointment if the pain wakes your child at night, lasts more than a week, or follows an injury. Book one for pain alongside fever or weight loss, and for numbness, weakness, or any change in using the toilet. Night pain, fever, weight loss and numbness all need looking into rather than a few days of rest.",
     ],
   },
@@ -1507,7 +1507,7 @@ export const symptoms: Symptom[] = [
     title: "Chest Pain in Children",
     short: "Chest pain",
     group: "Knocks, pain and injuries",
-    heading: "What to do about chest pain",
+    heading: "Chest pain in children is almost never the heart",
     aap: "Chest Pain",
     lead:
       "Chest pain in children is almost never the heart. The cause is usually muscle, rib or lung, and the pattern tells you which.",
@@ -1523,7 +1523,7 @@ export const symptoms: Symptom[] = [
     title: "Burns in Children",
     short: "Burns",
     group: "Knocks, pain and injuries",
-    heading: "What to do about a burn",
+    heading: "Why twenty minutes of cool water changes the burn",
     aap: "Burn",
     lead:
       "Hold the burn under cool running water for twenty minutes. Use no ice and no butter, and do not stop at two minutes.",
@@ -1539,14 +1539,14 @@ export const symptoms: Symptom[] = [
     title: "Frostbite in Children",
     short: "Frostbite",
     group: "Knocks, pain and injuries",
-    heading: "What to do about frostbite",
+    heading: "Why rubbing frostbitten skin causes damage",
     aap: "Frostbite",
     lead:
       "Rewarm frostbitten skin in warm water rather than rubbing it, and never rewarm a part that might freeze again.",
     description:
       "Frostbite in children: rewarming safely, what damages the tissue further, and which cases need an emergency room.",
     intro: [
-      "Get your child somewhere warm, remove wet clothing, and soak the affected part for twenty to thirty minutes in warm water at about 40°C, which should feel comfortable to your own elbow. Never rub the skin, never use direct heat from a fire, radiator or hairdryer, and never rewarm feet your child then has to walk out on.",
+      "Frozen tissue is full of ice crystals, and rubbing drags them through the cells around them, which is why the instinct to warm hands by rubbing does real damage here. Direct heat from a fire, radiator or hairdryer burns skin that cannot feel it yet. Warm water at about 40°C, comfortable to your own elbow, rewarms without either risk. Never rewarm feet your child then has to walk out on, because refreezing does more harm than staying frozen.",
       "Expect rewarming to hurt, and give ibuprofen for it. Go to an emergency room for skin that stays white, gray or hard after rewarming, for blisters, or for numbness that persists. Go straight away if your child is also shivering uncontrollably, confused or drowsy, which points to hypothermia.",
     ],
   },
@@ -1555,14 +1555,14 @@ export const symptoms: Symptom[] = [
     title: "Heat Exhaustion and Heatstroke",
     short: "Heat illness",
     group: "Knocks, pain and injuries",
-    heading: "What to do about heat exhaustion",
+    heading: "Heat exhaustion, and the heatstroke that follows it",
     aap: "Heat Exposure and Reactions",
     lead:
       "A child who stops sweating, becomes confused, or collapses in the heat has heatstroke. Call 911 and start cooling immediately.",
     description:
       "Heat exhaustion and heatstroke in children: cooling fast, the difference between the two, and when to call 911.",
     intro: [
-      "Move your child into shade or air conditioning, take off extra clothing, give cool fluids in small sips, and put cool wet cloths on the neck, armpits and groin. Heat exhaustion looks like heavy sweating, pale clammy skin, headache, nausea and weakness, and it improves within half an hour of cooling.",
+      "Move your child into shade or air conditioning, take off extra clothing, give cool water or a sports drink in small sips, and put cool wet cloths on the neck, armpits and groin. Heat exhaustion looks like heavy sweating, pale clammy skin, headache, nausea and weakness, and it improves within half an hour of cooling.",
       "Call 911 for heatstroke, which looks different: hot skin that may have stopped sweating, a temperature above 104°F, confusion, slurred speech, seizures or collapse. Keep cooling your child while you wait, rather than leaving the cooling to the ambulance crew.",
     ],
   },
@@ -1571,7 +1571,7 @@ export const symptoms: Symptom[] = [
     title: "Slivers and Splinters",
     short: "Slivers and splinters",
     group: "Knocks, pain and injuries",
-    heading: "What to do about a splinter",
+    heading: "Which splinters to leave alone",
     aap: "Sliver or Splinter",
     lead:
       "Pull a splinter out along the same line it went in, using tweezers sterilized with alcohol.",
@@ -1587,7 +1587,7 @@ export const symptoms: Symptom[] = [
     title: "Something Embedded in the Skin",
     short: "Something in the skin",
     group: "Knocks, pain and injuries",
-    heading: "What to do about something embedded in the skin",
+    heading: "What to pull out, and what to leave alone",
     aap: "Skin Foreign Object",
     lead:
       "Leave anything large or deeply embedded exactly where it is and come in. Pulling an object out can cause more damage than it did going in.",
@@ -1603,7 +1603,7 @@ export const symptoms: Symptom[] = [
     title: "An Infected Wound",
     short: "Infected wound",
     group: "Knocks, pain and injuries",
-    heading: "What to do about an infected wound",
+    heading: "Wounds improve after day one; infections do not",
     aap: "Wound Infection",
     lead:
       "Redness that spreads, pain that increases after day two, and a wound that is warm to touch all mean infection, so call us rather than waiting.",
@@ -1619,14 +1619,14 @@ export const symptoms: Symptom[] = [
     title: "Looking After Stitches",
     short: "Stitches",
     group: "Knocks, pain and injuries",
-    heading: "What to do about stitches",
+    heading: "Why the removal date matters",
     aap: "Suture Questions",
     lead:
       "Keep stitches clean and dry for the first day, then wash gently every day. Know the date the stitches need to come out.",
     description:
       "Caring for a child's stitches: keeping the wound clean, when it can get wet, removal timing, and the signs of infection.",
     intro: [
-      "Leave the dressing on for 24 hours, then wash the area gently with soap and water each day, patting it dry and applying petroleum jelly. Short showers are fine after the first day, but keep your child out of baths, pools and lakes until the stitches are out.",
+      "Stitches have a window. Taken out too early, a wound can open. Left in too long, the threads leave their own marks in the skin, and that second half is the part families forget. Write the date down when the stitches go in, because nobody remembers it a week later, and the appointment is easy to arrange only if you know when it should be.",
       "Write the removal date down. Face stitches usually come out in about five days, arms and legs in about ten, and joints in about fourteen. Leaving stitches in too long marks the skin. Call us for spreading redness, pus, a fever, or a wound that opens up.",
     ],
   },
@@ -1635,7 +1635,7 @@ export const symptoms: Symptom[] = [
     title: "Dizziness in Children",
     short: "Dizziness",
     group: "Knocks, pain and injuries",
-    heading: "What to do about dizziness",
+    heading: "What happened in the minute before",
     aap: "Dizziness",
     lead:
       "Have your child lie down and drink. Most childhood dizziness is standing up too fast on an empty stomach.",
@@ -1651,7 +1651,7 @@ export const symptoms: Symptom[] = [
     title: "Fainting in Children",
     short: "Fainting",
     group: "Knocks, pain and injuries",
-    heading: "What to do about fainting",
+    heading: "The faints that need a heart check",
     aap: "Fainting",
     lead:
       "Fainting during exercise is different from fainting while standing still, and it needs checking rather than watching.",
@@ -1667,7 +1667,7 @@ export const symptoms: Symptom[] = [
     title: "Weakness and Fatigue in Children",
     short: "Weakness and fatigue",
     group: "Knocks, pain and injuries",
-    heading: "What to do about weakness and fatigue",
+    heading: "Tired and weak are different problems",
     aap: "Weakness and Fatigue",
     lead:
       "Tell us whether your child is tired or actually weak. Being unable to climb stairs is a different problem from wanting to sleep all day.",
@@ -1683,15 +1683,15 @@ export const symptoms: Symptom[] = [
     title: "Stomach Pain in Children",
     short: "Stomach pain",
     group: "Stomach and bowels",
-    heading: "What to do about stomach pain",
+    heading: "Where the pain sits tells us most of it",
     aap: "Stomach Pain - Male",
     lead:
       "Ask your child to point with one finger. Pain they can localize to the lower right needs seeing today.",
     description:
       "Stomach pain in children: locating the pain, the harmless causes, and the pattern that suggests appendicitis.",
     intro: [
-      "Ask your child to point to the sore spot with one finger. Pain all around the navel that comes and goes is usually constipation, a virus or anxiety, and it settles with rest, fluids and time. Pain your child can pin to the lower right, especially if it started near the navel and moved, needs assessing today.",
-      "Give nothing for pain until we have spoken if the pain is severe, because pain relief can mask what we need to feel. Seek care immediately for a rigid, board-like belly, blood in vomit or stool, green vomit, pain waking your child from sleep, or a boy with pain in the groin or testicle.",
+      "Ask your child to point to the sore spot with one finger, and watch where the finger lands. Pain spread around the navel that comes and goes is usually constipation, a virus or anxiety. Pain your child can pin to one spot in the lower right is the one we want to see today, particularly if it began near the navel and moved there over several hours, which is how appendicitis classically behaves.",
+      "Call us before giving anything for severe pain, because pain relief softens the very findings we examine for. We can feel the belly, test the urine and arrange imaging from the office. Seek care immediately for a rigid, board-like belly, for blood in vomit or stool, for green vomit, for pain that wakes your child from sleep, or for a boy with pain in the groin or a testicle.",
     ],
   },
   {
@@ -1699,7 +1699,7 @@ export const symptoms: Symptom[] = [
     title: "Stomach Pain in Girls and Young Women",
     short: "Stomach pain in girls",
     group: "Stomach and bowels",
-    heading: "What to do about stomach pain in girls",
+    heading: "Why her cycle changes what we look for",
     aap: "Stomach Pain - Female",
     lead:
       "Stomach pain in a girl who has started periods has causes that a younger child's does not, so tell us about her cycle when you call.",
@@ -1715,7 +1715,7 @@ export const symptoms: Symptom[] = [
     title: "Blood in a Child's Stool",
     short: "Blood in stool",
     group: "Stomach and bowels",
-    heading: "What to do about blood in the stool",
+    heading: "Where the blood sits tells us most of it",
     aap: "Stools - Blood In",
     lead:
       "Bright red streaks on hard stool are almost always a small tear from constipation. Dark, tarry or mixed-in blood is different, and it needs seeing.",
@@ -1731,7 +1731,7 @@ export const symptoms: Symptom[] = [
     title: "Unusual Stool Colors",
     short: "Stool color",
     group: "Stomach and bowels",
-    heading: "What to do about unusual stool colors",
+    heading: "Only three stool colors matter",
     aap: "Stools - Unusual Color",
     lead:
       "Green, yellow, orange and brown stools are all normal. The three colors that matter are red, black and white.",
@@ -1747,7 +1747,7 @@ export const symptoms: Symptom[] = [
     title: "A Child Who Will Not Drink",
     short: "Not drinking enough",
     group: "Stomach and bowels",
-    heading: "What to do when your child will not drink",
+    heading: "Counting output, not intake",
     aap: "Drinking Fluids - Decreased",
     lead:
       "Count wet diapers or trips to the toilet rather than counting cups, because output tells you what intake cannot.",
@@ -1755,7 +1755,7 @@ export const symptoms: Symptom[] = [
       "A child who will not drink: how to tell whether they are dehydrated, what to offer, and when to call us.",
     intro: [
       "Track how often your child passes urine. A baby should wet a diaper at least every six to eight hours, and an older child should use the toilet at least three or four times a day. Moist lips, tears when crying and normal energy all say your child is keeping up.",
-      "Offer small amounts constantly rather than a full cup occasionally: a teaspoon or a syringe every few minutes, ice pops, or oral rehydration solution in sips. Call us if your child has passed no urine for eight hours, has a dry mouth, cries without tears, seems unusually sleepy, or is a baby whose soft spot looks sunken.",
+      "Call us if your child has passed no urine for eight hours, has a dry mouth, cries without tears, seems unusually sleepy, or is a baby whose soft spot looks sunken. We can weigh your child against their last visit, which tells us how much fluid they have actually lost, and we can give fluids in the office for most children rather than sending you to an emergency room.",
     ],
   },
   {
@@ -1763,14 +1763,14 @@ export const symptoms: Symptom[] = [
     title: "Reflux and Spitting Up in Babies",
     short: "Reflux and spitting up",
     group: "Stomach and bowels",
-    heading: "What to do about reflux and spitting up",
+    heading: "Spitting up that is laundry, and spitting up that is not",
     aap: "Reflux (Spitting Up)",
     lead:
       "A baby who spits up but is gaining weight and content is a laundry problem, not a medical one.",
     description:
       "Reflux and spitting up in babies: what is normal, what actually helps, and the signs that mean something more.",
     intro: [
-      "Keep your baby upright for twenty to thirty minutes after feeds, burp partway through as well as at the end, and avoid a tight diaper or car seat straight after a feed. Try smaller feeds more often if you are bottle feeding. Most spitting up peaks around four months and stops once a baby sits and eats solids.",
+      "Almost all spitting up is a laundry problem rather than a medical one. A baby who brings milk back after most feeds, and who is gaining weight and content between them, has a valve at the top of the stomach that has not tightened up yet, and time is the only treatment. Spitting up peaks around four months and settles once a baby sits upright and eats solids.",
       "Call us if your baby is not gaining weight, arches and screams during feeds, or refuses to feed. Call about blood or green color in the vomit, coughing and choking with feeds, or vomiting that travels across the room. Forceful vomiting in a young baby needs assessing quickly.",
     ],
   },
@@ -1779,14 +1779,14 @@ export const symptoms: Symptom[] = [
     title: "Vomiting in Babies Under 12 Months",
     short: "Vomiting under 12 months",
     group: "Stomach and bowels",
-    heading: "What to do about vomiting in a baby",
+    heading: "Why babies dehydrate faster than older children",
     aap: "Vomiting (0-12 Months)",
     lead:
       "Give a baby small amounts of milk or oral rehydration solution very often, and call us sooner than you would for an older child.",
     description:
       "Vomiting in babies under a year: keeping fluids in, telling spitting up from vomiting, and the signs that need same-day care.",
     intro: [
-      "Wait about twenty minutes after a vomit, then offer small amounts: a teaspoon or two of breast milk, formula or oral rehydration solution every five minutes, building up slowly. Babies dehydrate far faster than older children, which is why volume and frequency matter more than what you use.",
+      "A baby holds far less fluid in reserve than an older child and loses it proportionally faster, so a day of vomiting that a five-year-old shrugs off can leave a three-month-old genuinely dry. We set the threshold for seeing babies much lower for that reason, and counting wet diapers matters more here than counting vomits.",
       "Call us today for any vomiting in a baby under three months. Call too for forceful vomiting after every feed, green or bloody vomit, or a swollen or tender belly. Call straight away for fewer than four wet diapers a day, or a baby who is difficult to rouse.",
     ],
   },
@@ -1795,7 +1795,7 @@ export const symptoms: Symptom[] = [
     title: "Diarrhea in Babies Under 12 Months",
     short: "Diarrhea under 12 months",
     group: "Stomach and bowels",
-    heading: "What to do about diarrhea in a baby",
+    heading: "What normal looks like for your own baby",
     aap: "Diarrhea (0-12 Months)",
     lead:
       "Keep breast or formula feeds going through diarrhea rather than stopping them, because babies need the calories and the fluid.",
@@ -1811,14 +1811,14 @@ export const symptoms: Symptom[] = [
     title: "Colds in Babies Under 12 Months",
     short: "Colds under 12 months",
     group: "Stomach and bowels",
-    heading: "What to do about a cold in a baby",
+    heading: "Why a blocked nose matters more in a baby",
     aap: "Colds (0-12 Months)",
     lead:
       "Use saline drops and a bulb syringe before every feed, because a baby with a blocked nose cannot breathe and feed at the same time.",
     description:
       "Colds in babies under a year: clearing the nose so a baby can feed, what medicines to avoid, and when to call us.",
     intro: [
-      "Put two or three saline drops in each nostril, wait a moment, then suction gently with a bulb syringe or nasal aspirator. Do this before feeds and before sleep rather than constantly. Run a cool-mist humidifier and keep feeds small and frequent.",
+      "Babies breathe through the nose, and they cannot breathe and feed at the same time with a blocked one. An ordinary cold that would barely slow a toddler therefore stops a baby feeding, and clearing the nose before a feed does more than anything else you can offer. Suction before feeds and before sleep rather than constantly, since over-suctioning swells the lining further.",
       "Give no over-the-counter cough or cold medicine to a baby, and no honey under a year. Call us for any fever in a baby under three months, fast or labored breathing, ribs pulling in, pauses in breathing, feeding much less than usual, or fewer than four wet diapers a day.",
     ],
   },
@@ -1827,7 +1827,7 @@ export const symptoms: Symptom[] = [
     title: "Cough in Babies Under 12 Months",
     short: "Cough under 12 months",
     group: "Stomach and bowels",
-    heading: "What to do about a cough in a baby",
+    heading: "Count the breaths, not the coughs",
     aap: "Cough (0-12 Months)",
     lead:
       "Count your baby's breaths for a full minute. The number matters more than the sound of the cough.",
@@ -1835,7 +1835,7 @@ export const symptoms: Symptom[] = [
       "Cough in babies under a year: counting breathing, clearing the nose, and the signs that need same-day care.",
     intro: [
       "Watch your baby's chest for a full minute while they are calm and count the breaths. Then look for ribs or the hollow above the breastbone pulling in, nostrils flaring, or grunting at the end of each breath. Pulling, flaring and grunting all mean call us, whatever the cough sounds like.",
-      "Clear the nose with saline and suction before feeds, run a humidifier, and keep feeds small and frequent. Give no cough medicine and no honey under a year. Call us today for any fever under three months, breathing pauses, a blue tinge around the lips, or a baby feeding much less than usual.",
+      "Give no cough medicine at all under six, and no honey under a year, because neither is safe at those ages. Call us today for any fever in a baby under three months, for pauses in breathing, for a blue tinge around the lips, or for a baby feeding much less than usual. We can check an oxygen level in the office and watch your baby feed, which tells us more than any description over the phone.",
     ],
   },
   {
@@ -1843,7 +1843,7 @@ export const symptoms: Symptom[] = [
     title: "Motion Sickness in Children",
     short: "Motion sickness",
     group: "Stomach and bowels",
-    heading: "What to do about motion sickness",
+    heading: "Prevention works, and treatment barely does",
     aap: "Motion Sickness",
     lead:
       "Prevention works and treatment barely does, so give the medicine an hour before you set off rather than once your child feels sick.",
@@ -1851,7 +1851,7 @@ export const symptoms: Symptom[] = [
       "Motion sickness in children: preventing it before a journey, seating and food that help, and what to do once it starts.",
     intro: [
       "Give an over-the-counter motion sickness medicine one hour before departure if your child has a history of it, and ask us about dosing for children under two. Seat your child where the motion is least: the middle seat looking forward in a car, over the wing on a plane, midship on a boat.",
-      "Keep a window cracked, discourage screens and books, and encourage looking at the horizon. Offer a light dry snack rather than an empty or full stomach. Stop the journey briefly once vomiting starts, get fresh air, and offer small sips of water.",
+      "Motion sickness comes from a mismatch between what the eyes report and what the inner ear feels. Looking down at a screen or a book widens that gap and makes it far worse. Looking at the horizon closes it. The medicine has to go in before the journey for the same reason, because once the mismatch has started nothing catches up with it.",
     ],
   },
   {
@@ -1859,7 +1859,7 @@ export const symptoms: Symptom[] = [
     title: "Diarrhea After Travel",
     short: "Diarrhea after travel",
     group: "Stomach and bowels",
-    heading: "What to do about diarrhea after travel",
+    heading: "Why diarrhea after a trip is investigated differently",
     aap: "Diarrhea Diseases from Travel",
     lead:
       "Tell us where your child traveled and when they got back, because diarrhea after a trip is investigated differently from an ordinary bug.",
@@ -1875,7 +1875,7 @@ export const symptoms: Symptom[] = [
     title: "Urinary Tract Infections in Children",
     short: "Urinary tract infection",
     group: "Peeing and private parts",
-    heading: "What to do about a urinary tract infection",
+    heading: "Why a urine sample settles this and guessing does not",
     aap: "Urinary Tract Infection - Female",
     lead:
       "A urine sample is the only way to confirm a urinary infection, so call us rather than starting cranberry juice and hoping.",
@@ -1883,7 +1883,7 @@ export const symptoms: Symptom[] = [
       "Urinary tract infections in children: the symptoms at different ages, why a sample matters, and when a UTI becomes urgent.",
     intro: [
       "Call us for a urine test if your child has burning when passing urine, is going far more often, is suddenly wetting again after being dry, or has smelly or cloudy urine. A urinary infection in a baby often shows only as an unexplained fever, poor feeding or vomiting.",
-      "Give fluids and pain relief while you wait, and do not start any leftover antibiotic. Seek care the same day for fever with back or side pain, vomiting alongside urinary symptoms, or a baby under three months with any fever.",
+      "Never start a leftover antibiotic while you wait, because it clouds the sample without curing anything, and we then cannot tell what we are treating. Seek care the same day for a fever alongside back or side pain, for vomiting with urinary symptoms, and for any fever in a baby under three months, since those suggest the infection has reached the kidney.",
     ],
   },
   {
@@ -1891,7 +1891,7 @@ export const symptoms: Symptom[] = [
     title: "Pain When Passing Urine",
     short: "Pain passing urine",
     group: "Peeing and private parts",
-    heading: "What to do about pain passing urine",
+    heading: "Burning inside the bladder, or soreness outside it",
     aap: "Urination Pain - Female",
     lead:
       "Get a urine sample tested rather than guessing, because a urinary infection and simple skin irritation feel identical to a child.",
@@ -1907,7 +1907,7 @@ export const symptoms: Symptom[] = [
     title: "Penis and Scrotum Symptoms in Boys",
     short: "Penis and scrotum symptoms",
     group: "Peeing and private parts",
-    heading: "What to do about penis or scrotum symptoms",
+    heading: "The testicle pain that cannot wait for an appointment",
     aap: "Penis-Scrotum Symptoms-Child",
     lead:
       "Sudden pain or swelling in a testicle is an emergency. Go to an emergency room rather than waiting for an appointment.",
@@ -1923,7 +1923,7 @@ export const symptoms: Symptom[] = [
     title: "Vaginal Symptoms in Girls",
     short: "Vaginal symptoms",
     group: "Peeing and private parts",
-    heading: "What to do about vaginal symptoms",
+    heading: "Why soap causes most of this",
     aap: "Vaginal Symptoms-Child",
     lead:
       "Most itching and soreness in young girls comes from soap, bubble bath and damp clothing rather than from an infection.",
@@ -1939,14 +1939,14 @@ export const symptoms: Symptom[] = [
     title: "Circumcision Questions",
     short: "Circumcision care",
     group: "Peeing and private parts",
-    heading: "What to do about circumcision care",
+    heading: "The yellow film is healing, not infection",
     aap: "Circumcision Problems",
     lead:
       "Apply petroleum jelly at every diaper change for the first week so the healing skin does not stick to the diaper.",
     description:
       "Caring for a newly circumcised baby: what normal healing looks like, the petroleum jelly routine, and when to call us.",
     intro: [
-      "Smear petroleum jelly generously on the tip at every change for about a week. Clean with plain warm water rather than wipes, and expect a yellow film to form over the healing area. That film is normal, and it is not pus or infection.",
+      "A yellow-white film forms over the healing tip within a day or two and alarms almost every parent, who reasonably reads it as pus. The film is granulation tissue, which is what healing looks like on this kind of surface, and it clears on its own over a week or so. Petroleum jelly at every change stops the tip sticking to the diaper while that happens.",
       "Call us for bleeding beyond a few spots, for swelling that increases after the second day, or for no urine passed in twelve hours. Call too for a foul smell, for any fever, or for a ring device still attached after two weeks.",
     ],
   },
@@ -1955,7 +1955,7 @@ export const symptoms: Symptom[] = [
     title: "Foreskin Care in Boys",
     short: "Foreskin care",
     group: "Peeing and private parts",
-    heading: "What to do about foreskin care",
+    heading: "Why forcing a foreskin back causes the problem",
     aap: "Foreskin Care Questions",
     lead:
       "Never force a young boy's foreskin back. The foreskin separates on its own, usually somewhere between three and five years old.",
@@ -2056,7 +2056,7 @@ export const symptoms: Symptom[] = [
     title: "Wheezing in Children",
     short: "Wheezing",
     group: "Coughs and breathing",
-    heading: "What to do about wheezing",
+    heading: "Telling a wheeze from the other noisy breathing",
     aap: "Wheezing (Other Than Asthma)",
     lead:
       "Wheezing is a whistling sound as your child breathes out, and a first episode in a child without asthma needs to be assessed.",
@@ -2072,7 +2072,7 @@ export const symptoms: Symptom[] = [
     title: "Trouble Breathing in Children",
     short: "Trouble breathing",
     group: "Coughs and breathing",
-    heading: "What to do about trouble breathing",
+    heading: "Watch the chest, not the nose or the cough",
     aap: "Breathing Trouble",
     lead:
       "Undress your child's chest and watch it. Skin pulling in between the ribs is the sign that decides how urgent this is.",
@@ -2088,7 +2088,7 @@ export const symptoms: Symptom[] = [
     title: "Swollen Lymph Nodes in Children",
     short: "Swollen glands",
     group: "Fever and infection",
-    heading: "What to do about swollen glands",
+    heading: "Which lumps in the neck are doing their job",
     aap: "Lymph Nodes - Swollen",
     lead:
       "Small movable lumps in the neck after an illness are lymph nodes doing their job, and they stay enlarged for weeks afterward.",
@@ -2104,7 +2104,7 @@ export const symptoms: Symptom[] = [
     title: "Exposure to Strep Throat",
     short: "Strep exposure",
     group: "Fever and infection",
-    heading: "What to do after strep exposure",
+    heading: "Why we do not swab a well child",
     aap: "Strep Throat Exposure",
     lead:
       "Do not test or treat a child who has been exposed to strep but has no symptoms. Wait until they actually feel ill.",
@@ -2120,7 +2120,7 @@ export const symptoms: Symptom[] = [
     title: "Exposure to Flu",
     short: "Flu exposure",
     group: "Fever and infection",
-    heading: "What to do after flu exposure",
+    heading: "The 48-hour window for preventive treatment",
     aap: "Influenza Exposure",
     lead:
       "Call us within 48 hours of an exposure if your child is high risk, because preventive antiviral treatment only works inside that window.",
@@ -2136,7 +2136,7 @@ export const symptoms: Symptom[] = [
     title: "Exposure to an Infection",
     short: "Exposure to infection",
     group: "Fever and infection",
-    heading: "What to do after an exposure",
+    heading: "Which exposures change what we do",
     aap: "Infection Exposure Questions",
     lead:
       "Tell us what your child was exposed to and when, because the answer depends almost entirely on which infection and how long ago.",
@@ -2201,7 +2201,7 @@ export const symptoms: Symptom[] = [
     title: "Newborn Rashes and Birthmarks",
     short: "Newborn rashes",
     group: "Babies and newborns",
-    heading: "What to do about newborn rashes and birthmarks",
+    heading: "Which newborn rashes need nothing at all",
     aap: "Newborn Rashes and Birthmarks",
     lead:
       "Blotchy spots, tiny white bumps and baby acne cover almost every rash of the first weeks, and all of them clear without treatment and need nothing on them.",
@@ -2217,7 +2217,7 @@ export const symptoms: Symptom[] = [
     title: "Umbilical Cord Care",
     short: "Umbilical cord",
     group: "Babies and newborns",
-    heading: "What to do about the umbilical cord",
+    heading: "Air separates a cord faster than cleaning",
     aap: "Umbilical Cord Symptoms",
     lead:
       "Keep the cord stump dry and open to the air, and fold the diaper down below it. That is the whole of the care.",
@@ -2233,7 +2233,7 @@ export const symptoms: Symptom[] = [
     title: "Breath-Holding Spells",
     short: "Breath-holding spells",
     group: "Babies and newborns",
-    heading: "What to do about a breath-holding spell",
+    heading: "A breath-holding spell is not a seizure",
     aap: "Breath-holding Spell",
     lead:
       "Lay your child on their side and wait. A breath-holding spell frightens the parent far more than it harms the child.",
@@ -2249,7 +2249,7 @@ export const symptoms: Symptom[] = [
     title: "A Crying Child Over 3 Months",
     short: "Crying after 3 months",
     group: "Babies and newborns",
-    heading: "What to do when an older baby cries inconsolably",
+    heading: "Undress the baby and look everywhere",
     aap: "Crying Child - 3 Months and Older",
     lead:
       "Colic ends by three or four months, so persistent inconsolable crying in an older baby has a cause worth finding.",
@@ -2265,7 +2265,7 @@ export const symptoms: Symptom[] = [
     title: "Breastfeeding Questions",
     short: "Breastfeeding",
     group: "Feeding and growth",
-    heading: "What to do about breastfeeding problems",
+    heading: "Diapers and the scale answer the real question",
     aap: "Breast-Feeding Questions",
     lead:
       "Judge feeding by diapers and weight rather than by minutes at the breast or by how full you feel.",
@@ -2281,14 +2281,14 @@ export const symptoms: Symptom[] = [
     title: "Bottle Feeding and Formula",
     short: "Bottle feeding",
     group: "Feeding and growth",
-    heading: "What to do about bottle feeding",
+    heading: "Why the formula measurements are not approximate",
     aap: "Bottle-Feeding (Formula) Questions",
     lead:
       "Mix formula exactly to the instructions, because adding extra water or extra powder is genuinely dangerous to a baby.",
     description:
       "Bottle feeding and formula: mixing safely, how much a baby needs, paced feeding, and when to call us.",
     intro: [
-      "Follow the tin exactly, adding water first and then powder. Diluting formula to make it last can cause seizures from low sodium, and over-concentrating it strains a baby's kidneys. Discard anything left in a bottle an hour after a feed starts, and never microwave a bottle.",
+      "Formula is a medicine as much as a food, and the ratio on the tin is not a suggestion. Watering it down to make it last dilutes the sodium in a baby's blood and can cause seizures. Making it stronger loads kidneys that cannot yet concentrate urine. Add the water first and then the powder, every time, because doing it the other way changes the ratio.",
       "Feed on your baby's cues rather than to a schedule, holding the bottle horizontally and pausing often so your baby controls the pace. Call us before switching formulas, since most parents switch for symptoms that formula will not fix. Call too for forceful vomiting, blood in the stool, or poor weight gain.",
     ],
   },
@@ -2297,7 +2297,7 @@ export const symptoms: Symptom[] = [
     title: "Starting Solid Foods",
     short: "Starting solids",
     group: "Feeding and growth",
-    heading: "What to do about starting solids",
+    heading: "Why peanut and egg go in early now",
     aap: "Solid Foods (Baby Foods)",
     lead:
       "Start solids around six months, and introduce peanut and egg early rather than delaying them, because waiting raises the risk of allergy.",
@@ -2313,7 +2313,7 @@ export const symptoms: Symptom[] = [
     title: "Food Allergies in Children",
     short: "Food allergy",
     group: "Feeding and growth",
-    heading: "What to do about a food allergy",
+    heading: "Timing separates allergy from intolerance",
     aap: "Food Allergy",
     lead:
       "Hives, vomiting or swelling within minutes of a food is an allergy. A stomach ache hours later usually is not.",
@@ -2329,14 +2329,14 @@ export const symptoms: Symptom[] = [
     title: "A Child Who Refuses Medicine",
     short: "Refusing medicine",
     group: "Feeding and growth",
-    heading: "What to do when your child refuses medicine",
+    heading: "Where the syringe points decides this",
     aap: "Medicine - Refusal to Take",
     lead:
       "Use a syringe against the inside of the cheek rather than a spoon, and give it in small squirts your child can swallow between.",
     description:
       "Getting medicine into a child: the syringe technique that works, what you can mix it with, and what to do about a dose brought back up.",
     intro: [
-      "Where the syringe points decides whether this works. Aimed at the back of the throat, a syringe triggers a gag and the dose comes straight back. Tucked between the cheek and the gum, it goes down almost every time. Give it in small squirts so your child can swallow between them, and blunt the taste with something cold beforehand.",
+      "Where the syringe points decides whether this works. Aimed at the back of the throat, a syringe triggers a gag and the medicine comes straight back. Tucked between the cheek and the gum, it goes down almost every time. Give it in small squirts so your child can swallow between them, and blunt the taste with something cold beforehand.",
       "Ask us before you hide a medicine in food or drink. Milk and juice stop some antibiotics working altogether, and a bottle your child abandons halfway takes half the dose with it. Ask us about flavoring as well, since most pharmacies can add one to a liquid antibiotic. Call us if your child vomits within fifteen minutes of a dose, because whether to give it again depends on the medicine.",
     ],
   },
@@ -2345,7 +2345,7 @@ export const symptoms: Symptom[] = [
     title: "A Swallowed Object",
     short: "Swallowed object",
     group: "Feeding and growth",
-    heading: "What to do about a swallowed object",
+    heading: "Batteries and magnets, and everything else",
     aap: "Swallowed Foreign Object",
     lead:
       "A swallowed button battery or magnet is an emergency. Go straight to an emergency room rather than waiting to see.",
@@ -2361,7 +2361,7 @@ export const symptoms: Symptom[] = [
     title: "A Swallowed Household Substance",
     short: "Swallowed a substance",
     group: "Feeding and growth",
-    heading: "What to do when a child swallows something",
+    heading: "Call Poison Control before you call us",
     aap: "Swallowed Harmless Substance",
     lead:
       "Call Poison Control on 1-800-222-1222 before you do anything else, and never make your child vomit.",
@@ -2377,7 +2377,7 @@ export const symptoms: Symptom[] = [
     title: "Depression in Children and Teens",
     short: "Depression",
     group: "Feelings and mental health",
-    heading: "What to do about depression",
+    heading: "Asking about self-harm does not plant the idea",
     aap: "Depression",
     lead:
       "Ask your child directly whether they have thought about hurting themselves. Asking does not plant the idea, and it is the question that opens the conversation.",
@@ -2393,7 +2393,7 @@ export const symptoms: Symptom[] = [
     title: "Suicide Concerns",
     short: "Suicide concerns",
     group: "Feelings and mental health",
-    heading: "What to do if you are worried about suicide",
+    heading: "Say the words, and remove the means",
     aap: "Suicide Concerns",
     lead:
       "Call or text 988 now if your child has talked about ending their life. The Suicide and Crisis Lifeline answers 24 hours a day.",
@@ -2409,7 +2409,7 @@ export const symptoms: Symptom[] = [
     title: "Anxiety Attacks in Children",
     short: "Anxiety attacks",
     group: "Feelings and mental health",
-    heading: "What to do during an anxiety attack",
+    heading: "Lengthen the out-breath, not the in-breath",
     aap: "Anxiety Attack",
     lead:
       "Slow your child's breathing out rather than in, because a long exhale is what switches the body's alarm off.",
@@ -2425,7 +2425,7 @@ export const symptoms: Symptom[] = [
     title: "Panic Attacks in Children",
     short: "Panic attacks",
     group: "Feelings and mental health",
-    heading: "What to do during a panic attack",
+    heading: "A panic attack peaks and passes",
     aap: "Panic Attack",
     lead:
       "A panic attack peaks within about ten minutes and cannot harm your child, however convincingly it feels otherwise.",
@@ -2441,7 +2441,7 @@ export const symptoms: Symptom[] = [
     title: "Mental Health Concerns in Children",
     short: "Mental health concerns",
     group: "Feelings and mental health",
-    heading: "What to do about a mental health concern",
+    heading: "Start here rather than searching for a specialist",
     aap: "Mental Health Problems",
     lead:
       "Start with your pediatrician rather than searching for a specialist, because mental health care is part of what we do here.",
@@ -2457,7 +2457,7 @@ export const symptoms: Symptom[] = [
     title: "Behavior Concerns in Children",
     short: "Behavior concerns",
     group: "Feelings and mental health",
-    heading: "What to do about a behavior concern",
+    heading: "A week of notes beats any description",
     aap: "Behavioral Health Problems",
     lead:
       "Write down what happens immediately before and after the behavior for a week. That record tells us more than any description.",
@@ -2473,7 +2473,7 @@ export const symptoms: Symptom[] = [
     title: "Menstrual Cramps",
     short: "Period cramps",
     group: "Growing up",
-    heading: "What to do about period cramps",
+    heading: "Why ibuprofen has to go in early",
     aap: "Menstrual Cramps",
     lead:
       "Start ibuprofen the day before a period is due, or at the very first cramp. Taken early, ibuprofen prevents pain rather than chasing it.",
@@ -2489,7 +2489,7 @@ export const symptoms: Symptom[] = [
     title: "A Missed or Late Period",
     short: "Missed period",
     group: "Growing up",
-    heading: "What to do about a missed or late period",
+    heading: "What counts as irregular in the first years",
     aap: "Menstrual Period - Missed or Late",
     lead:
       "Irregular periods are normal for the first two years after they start, and a pregnancy test is still worth doing whenever pregnancy is possible.",
@@ -2505,7 +2505,7 @@ export const symptoms: Symptom[] = [
     title: "Unexpected Vaginal Bleeding",
     short: "Unexpected bleeding",
     group: "Growing up",
-    heading: "What to do about unexpected vaginal bleeding",
+    heading: "Bleeding before puberty always needs examining",
     aap: "Vaginal Bleeding",
     lead:
       "Any vaginal bleeding before puberty needs to be seen, and so does bleeding heavy enough to soak a pad every hour.",
@@ -2521,7 +2521,7 @@ export const symptoms: Symptom[] = [
     title: "Breast Symptoms in Children and Teens",
     short: "Breast symptoms",
     group: "Growing up",
-    heading: "What to do about breast symptoms",
+    heading: "What is ordinary in a developing chest",
     aap: "Breast Symptoms-Teen",
     lead:
       "Uneven breast development and tenderness during puberty are normal in girls, and temporary breast tissue in boys is normal too.",
@@ -2537,7 +2537,7 @@ export const symptoms: Symptom[] = [
     title: "Possible STI Exposure",
     short: "STI exposure",
     group: "Growing up",
-    heading: "What to do after possible STI exposure",
+    heading: "Why the timing of this call matters",
     aap: "STI Exposure",
     lead:
       "Book a confidential appointment quickly, because some exposures have treatment that only works within days.",
@@ -2553,7 +2553,7 @@ export const symptoms: Symptom[] = [
     title: "Sexually Transmitted Infections in Teens",
     short: "STIs",
     group: "Growing up",
-    heading: "What to do about a possible STI",
+    heading: "Why we test before symptoms appear",
     aap: "Sexually Transmitted Infections",
     lead:
       "Most sexually transmitted infections cause no symptoms at all, so testing is the only way a teenager finds out.",
@@ -2569,14 +2569,14 @@ export const symptoms: Symptom[] = [
     title: "Acne in Children and Teens",
     short: "Acne",
     group: "Growing up",
-    heading: "What to do about acne",
+    heading: "Treat the area, not the spots",
     aap: "Acne",
     lead:
       "Treat the whole area rather than individual spots, and give any treatment eight to twelve weeks before deciding it has failed.",
     description:
       "Acne in teenagers: what actually works, how long it takes, the myths to ignore, and when to come in.",
     intro: [
-      "Apply treatment across the whole affected area rather than dabbing it on spots, since the aim is preventing the next breakout rather than shrinking today's. Start with benzoyl peroxide or adapalene, use it once daily, expect dryness for the first fortnight, and add a plain moisturizer. Wash twice a day with a gentle cleanser and no scrubbing.",
+      "Acne treatment prevents the next breakout rather than shrinking today's, which is why dabbing it on visible spots achieves so little. The blocked pores that become next week's spots are already forming in skin that looks clear now, so the whole area gets treated. Expect two weeks of dryness while the skin adjusts, and expect eight to twelve weeks before judging whether the treatment works.",
       "Ignore the food myths. Chocolate and greasy food do not cause acne, though skim milk and high-sugar diets show a weak link. Book an appointment for deep painful lumps, scarring, acne that has not improved after three months of consistent treatment, or acne that is affecting your teenager's mood.",
     ],
   },
@@ -2585,7 +2585,7 @@ export const symptoms: Symptom[] = [
     title: "Arm Pain Without an Injury",
     short: "Arm pain",
     group: "Knocks, pain and injuries",
-    heading: "What to do about arm pain",
+    heading: "Arm pain with no injury behind it",
     aap: "Arm Pain",
     lead:
       "Arm pain with no injury behind it is usually overuse or a virus, but pain that wakes your child at night needs looking at.",
@@ -2601,7 +2601,7 @@ export const symptoms: Symptom[] = [
     title: "Leg Pain Without an Injury",
     short: "Leg pain",
     group: "Knocks, pain and injuries",
-    heading: "What to do about leg pain",
+    heading: "The growing-pains pattern, and what breaks it",
     aap: "Leg Pain",
     lead:
       "Growing pains happen in both legs, in the evening, and never make a child limp. Leg pain that behaves differently deserves a look.",
@@ -2633,7 +2633,7 @@ export const symptoms: Symptom[] = [
     title: "Ear Piercing Problems",
     short: "Ear piercing",
     group: "Ears, nose, mouth and teeth",
-    heading: "What to do about a sore ear piercing",
+    heading: "Why the earring stays in when it gets sore",
     aap: "Ear Piercing Symptoms",
     lead:
       "Clean a new piercing with saline twice a day and leave the earring in, because taking it out traps infection inside a closing hole.",
@@ -2649,7 +2649,7 @@ export const symptoms: Symptom[] = [
     title: "Hay Fever in Children",
     short: "Hay fever",
     group: "Fever and infection",
-    heading: "What to do about hay fever",
+    heading: "Why hay fever medicine goes in before the season",
     aap: "Hay Fever",
     lead:
       "Start allergy medicine two weeks before your child's usual season rather than waiting for the sneezing.",
@@ -2665,14 +2665,14 @@ export const symptoms: Symptom[] = [
     title: "Athlete's Foot",
     short: "Athlete's foot",
     group: "Skin and rashes",
-    heading: "What to do about athlete's foot",
+    heading: "Why athlete's foot keeps coming back",
     aap: "Athlete's Foot",
     lead:
       "Keep the feet dry and keep applying antifungal cream for two weeks after the skin looks normal.",
     description:
       "Athlete's foot in children: the cream and the routine that clear it, why it comes back, and when to come in.",
     intro: [
-      "Apply an over-the-counter antifungal cream twice a day, working it between every toe, and carry on for two weeks after the skin looks clear. Dry between the toes properly after washing, change socks daily, alternate shoes so each pair dries out, and wear sandals in changing rooms.",
+      "The fungus lives in warm damp skin, so it returns to whatever stays warm and damp. Shoes worn two days running never dry out, and socks pulled onto feet that were dried in a hurry keep the space between the toes wet all day. Treating the skin without changing those two things clears athlete's foot for two weeks at most.",
       "Call us if the skin cracks and weeps, if the foot becomes red, swollen and painful, or if two weeks of consistent treatment has changed nothing. Bring in a child with diabetes rather than treating the foot at home.",
     ],
   },
@@ -2681,7 +2681,7 @@ export const symptoms: Symptom[] = [
     title: "Jock Itch",
     short: "Jock itch",
     group: "Skin and rashes",
-    heading: "What to do about jock itch",
+    heading: "Jock itch usually travels up from the feet",
     aap: "Jock Itch",
     lead:
       "Treat the feet at the same time as the groin, because jock itch usually travels up from athlete's foot on a towel or a pair of shorts.",
@@ -2697,14 +2697,14 @@ export const symptoms: Symptom[] = [
     title: "Ingrown Toenails",
     short: "Ingrown toenail",
     group: "Knocks, pain and injuries",
-    heading: "What to do about an ingrown toenail",
+    heading: "Why the nail is cut straight across",
     aap: "Toenail - Ingrown",
     lead:
       "Soak the foot in warm salt water and cut toenails straight across, never curved down at the corners.",
     description:
       "Ingrown toenails in children: soaking, correct nail cutting, roomier shoes, and when a nail needs a small procedure.",
     intro: [
-      "Soak the foot in warm salty water for fifteen minutes three times a day, then dry it and gently lift the nail edge away from the skin with a wisp of clean cotton. Cut nails straight across, level with the end of the toe, and put your child in shoes with room at the front.",
+      "A toenail curved down at the corners digs into the skin beside it as it grows forward, and the instinct to trim that painful corner shorter makes the next growth dig in deeper still. Cutting straight across, level with the end of the toe, is what breaks the cycle. Tight shoes press the skin onto the nail and do the rest.",
       "Call us for pus, spreading redness, a fever, or a toe that is too painful to walk on. An ingrown nail that keeps coming back usually needs a small procedure to remove the edge permanently, which a doctor does under local anesthetic in a single visit.",
     ],
   },
