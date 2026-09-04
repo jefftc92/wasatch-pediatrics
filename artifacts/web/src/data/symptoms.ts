@@ -170,7 +170,7 @@ export const symptoms: Symptom[] = [
     description:
       "Strep throat in children: how it differs from a viral sore throat, why a swab is the only way to know, and same-day testing at Wasatch Pediatrics.",
     intro: [
-      "Strep is one of the few childhood throat infections where treatment changes the outcome rather than only the comfort. Your child should feel better within a day or two of starting the antibiotic, and stops being contagious after about 24 hours of it, which is the mark most schools use to decide when a child can return.",
+      "Strep is one of the few childhood throat infections where treatment changes the outcome rather than only the comfort. Your child should feel better within a day or two of starting the antibiotic. They stop being contagious after about 24 hours of it, which is the mark most schools use to decide when a child can return.",
       "Finish the whole course even once your child feels well, because we treat strep to prevent the kidney and heart complications that follow a half-treated infection, not merely to settle the throat. Call us if the fever is still there after two full days of antibiotics, if a rash appears, or if your child cannot swallow their own saliva.",
     ],
   },
@@ -203,7 +203,7 @@ export const symptoms: Symptom[] = [
       "Vomiting in children without diarrhea: how to keep a child hydrated, what to offer and when, and the signs that mean calling us.",
     intro: [
       "Count wet diapers, or trips to the toilet, rather than counting vomits. A child who is still passing urine, whose lips stay moist and who can still make tears is keeping up, however grim the night has been. Dry diapers, a dry mouth, no tears, or a child too sleepy to drink are what tell us a child is falling behind.",
-      "Call us when those signs of dehydration appear, and call the same day about any vomiting in a baby under three months. Tell us if the vomit is green or contains blood, if your child's belly is swollen or tender, or if the vomiting followed a head injury, because each of those sends us looking somewhere different. We can give fluids in the office for most children rather than sending you to an emergency room.",
+      "Call us when those signs of dehydration appear, and call the same day about any vomiting in a baby under three months. Tell us if the vomit is green or contains blood, if your child's belly is swollen or tender, or if the vomiting followed a head injury. Each of those sends us looking somewhere different. We can give fluids in the office for most children rather than sending you to an emergency room.",
     ],
   },
   {
@@ -219,7 +219,7 @@ export const symptoms: Symptom[] = [
       "Vomiting with diarrhea in children: how to keep fluids going, how long it usually lasts, and when a child needs to be seen.",
     intro: [
       "Not all fluids replace what a child is losing. Oral rehydration solution carries salt and sugar in the proportions the gut absorbs best. Plain water dilutes what little salt is left, and undiluted juice or soda pulls more water into the bowel and makes the diarrhea worse. The drink you choose therefore matters more here than the amount.",
-      "Call us if your child cannot keep fluids down at all, passes no urine for eight hours, or has gone quiet and floppy, and we can give fluids in the office rather than sending you to an emergency room. Ask us as well before restricting food, since the bland-diet advice you may remember has gone: ordinary eating speeds the gut's recovery rather than slowing it.",
+      "Call us if your child cannot keep fluids down at all, passes no urine for eight hours, or has gone quiet and floppy. We can give fluids in the office rather than sending you to an emergency room. Ask us as well before restricting food, since the bland-diet advice you may remember has gone: ordinary eating speeds the gut's recovery rather than slowing it.",
     ],
   },
   {
@@ -282,8 +282,8 @@ export const symptoms: Symptom[] = [
     description:
       "RSV and bronchiolitis in babies: what to watch in breathing and feeding, why days three to five matter most, and when to call us.",
     intro: [
-      "RSV worsens before it improves, usually peaking around day three to five. That course catches parents out every winter: a baby who seemed to be coping on Monday can need looking at again by Wednesday, and the first day of the illness tells you very little about how the week will go.",
-      "Call us if your baby takes noticeably less than usual, takes much longer over each feed, or stops partway through to breathe, because feeding is the first thing to fail when the work of breathing rises. We can check an oxygen level in the office and watch your baby feed. Nothing shortens bronchiolitis, so the two weeks it runs are about keeping your baby fed, hydrated and comfortable.",
+      "RSV worsens before it improves, usually peaking around day three to five. That course catches parents out every winter. A baby who seemed to be coping on Monday can need looking at again by Wednesday, and the first day tells you very little about how the week will go.",
+      "Call us if your baby takes noticeably less than usual, takes much longer over each feed, or stops partway through to breathe. Feeding is the first thing to fail when the work of breathing rises. We can check an oxygen level in the office and watch your baby feed. Nothing shortens bronchiolitis, so the two weeks it runs are about keeping your baby fed, hydrated and comfortable.",
     ],
   },
   {
@@ -330,8 +330,8 @@ export const symptoms: Symptom[] = [
     description:
       "Widespread rashes in children: which are ordinary viral rashes, the ones that need urgent attention, and how to get seen the same day.",
     intro: [
-      "Press a clear drinking glass firmly against the spots and look through the bottom of it. Most viral rashes go pale under that pressure and color back in when you let go. Spots that stay visible through the glass, especially in a child who is unwell with them, mean calling 911 or going straight to an emergency room, because that is how meningococcal disease shows on the skin.",
-      "Look at your child rather than at the rash for everything else. A dramatic rash on a child who is eating, playing and comfortable is a very different thing from the same rash on a child who has gone floppy and feverish. Call us the same day about a rash with a fever, one that blisters or weeps, or any rash in a baby under three months, and we will look at it here rather than guess from a photograph.",
+      "Press a clear drinking glass firmly against the spots and look through the bottom of it. Most viral rashes go pale under that pressure and color back in when you let go. Spots that stay visible through the glass mean calling 911 or going straight to an emergency room, particularly in a child who is unwell with them. A non-fading rash is how meningococcal disease shows on the skin.",
+      "Look at your child rather than at the rash for everything else. A dramatic rash on a child who is eating, playing and comfortable is a very different thing from the same rash on a child who has gone floppy and feverish. Call us the same day about a rash with a fever, one that blisters or weeps, or any rash in a baby under three months. We will look at it here rather than guess from a photograph.",
     ],
   },
   {
@@ -346,7 +346,7 @@ export const symptoms: Symptom[] = [
     description:
       "Hives in children: why they travel, what usually triggers them, what helps the itch, and the swelling that means an emergency.",
     intro: [
-      "Hives on their own and hives as part of anaphylaxis look the same on the skin, so what else is happening decides everything. Hives by themselves are usually a reaction to a virus rather than to any food, and they come in waves as they settle, which makes them look as though they are returning before they finally go.",
+      "Hives on their own and hives as part of anaphylaxis look the same on the skin, so what else is happening decides everything. Hives by themselves are usually a reaction to a virus rather than to any food. They come in waves as they settle, which makes them look as though they are returning before they finally go.",
       "Hives alongside swelling of the lips, tongue or face, difficulty breathing or swallowing, or vomiting and floppiness, is anaphylaxis until proven otherwise. Call 911, and use epinephrine first if your child has been prescribed it. Call us about hives that keep returning for more than six weeks, because that pattern is worth investigating rather than treating over and over.",
     ],
   },
@@ -538,7 +538,7 @@ export const symptoms: Symptom[] = [
     description:
       "Eczema in children: the daily moisturizing that prevents flares, how to use steroid creams without fear, and when to bring your child in.",
     intro: [
-      "Eczema is a barrier problem before it is an inflammation problem. Skin that cannot hold water cracks, lets irritants in, and flares, which is why daily moisturizing on skin that is not currently red does more to prevent the next flare than anything you apply once one has started. An ointment or a heavy cream holds water where a lotion evaporates.",
+      "Eczema is a barrier problem before it is an inflammation problem. Skin that cannot hold water cracks, lets irritants in, and flares. Daily moisturizing on skin that is not currently red therefore does more to prevent the next flare than anything you apply once one has started. An ointment or a heavy cream holds water where a lotion evaporates.",
       "Use the steroid cream we prescribe for as long as we tell you, rather than stopping the moment the redness fades. Parents commonly under-treat a flare from worry about steroids, and under-treating drags the flare out. Call us if the skin weeps, crusts yellow, or your child develops a fever, because eczema that is infected needs different treatment.",
     ],
   },
@@ -650,7 +650,7 @@ export const symptoms: Symptom[] = [
     description:
       "Ringworm in children: what the ring looks like, which cream to use and for how long, and why scalp ringworm needs a prescription.",
     intro: [
-      "Ringworm is a fungus and not a worm, and it clears with an over-the-counter antifungal cream in most cases. It comes back because families stop at the wrong moment. The visible ring disappears well before the fungus does, so treatment has to carry on for two full weeks after the skin looks clear, and out about an inch beyond where the edge used to be.",
+      "Ringworm is a fungus and not a worm, and it clears with an over-the-counter antifungal cream in most cases. It comes back because families stop at the wrong moment. The visible ring disappears well before the fungus does. Treatment has to carry on for two full weeks after the skin looks clear, and out about an inch beyond where the edge used to be.",
       "Call us for ringworm on the scalp, which shows up as a scaly bald patch and never responds to cream. Scalp ringworm needs an oral antifungal prescription. Call us too if the patch is spreading despite two weeks of treatment, or if the skin becomes swollen and tender.",
     ],
   },
@@ -715,7 +715,7 @@ export const symptoms: Symptom[] = [
       "Poison ivy, oak and sumac in children: washing the oil off in time, calming the rash, and the reactions that need to be seen.",
     intro: [
       "Scrub the skin with soap and cool water as soon as you realize what happened, then wash the clothes, shoes and anything else that touched the plant. The rash cannot spread from one part of the body to another, and blister fluid is not contagious. New patches appear because oil is still on something your child keeps touching.",
-      "Call us if the rash covers a large area, reaches the face or the genitals, or swells your child's eyes shut, because a reaction that widespread needs oral steroids rather than anything you can buy. Call as well if the skin turns yellow-crusted or increasingly painful, which means a bacterial infection has moved in on top of the rash.",
+      "Call us if the rash covers a large area, reaches the face or the genitals, or swells your child's eyes shut. A reaction that widespread needs oral steroids rather than anything you can buy. Call as well if the skin turns yellow-crusted or increasingly painful, which means a bacterial infection has moved in on top of the rash.",
     ],
   },
   {
@@ -1498,7 +1498,7 @@ export const symptoms: Symptom[] = [
     description:
       "Back pain in children: what usually causes it, what helps, and the patterns that need investigating.",
     intro: [
-      "Back pain is ordinary in adults and less so in children, which is why we ask more questions about it than you might expect. Most of it still turns out to be a heavy backpack worn on one shoulder, a growth spurt, a new sport, or hours hunched over a screen, and gentle movement beats bed rest for all four.",
+      "Back pain is ordinary in adults and less so in children, which is why we ask more questions about it than you might expect. Most of it still turns out to be a heavy backpack worn on one shoulder, a growth spurt, a new sport, or hours hunched over a screen. Gentle movement beats bed rest for all four.",
       "Book an appointment if the pain wakes your child at night, lasts more than a week, or follows an injury. Book one for pain alongside fever or weight loss, and for numbness, weakness, or any change in using the toilet. Night pain, fever, weight loss and numbness all need looking into rather than a few days of rest.",
     ],
   },
@@ -1690,8 +1690,8 @@ export const symptoms: Symptom[] = [
     description:
       "Stomach pain in children: locating the pain, the harmless causes, and the pattern that suggests appendicitis.",
     intro: [
-      "Ask your child to point to the sore spot with one finger, and watch where the finger lands. Pain spread around the navel that comes and goes is usually constipation, a virus or anxiety. Pain your child can pin to one spot in the lower right is the one we want to see today, particularly if it began near the navel and moved there over several hours, which is how appendicitis classically behaves.",
-      "Call us before giving anything for severe pain, because pain relief softens the very findings we examine for. We can feel the belly, test the urine and arrange imaging from the office. Seek care immediately for a rigid, board-like belly, for blood in vomit or stool, for green vomit, for pain that wakes your child from sleep, or for a boy with pain in the groin or a testicle.",
+      "Ask your child to point to the sore spot with one finger, and watch where the finger lands. Pain spread around the navel that comes and goes is usually constipation, a virus or anxiety. Pain your child can pin to one spot in the lower right is the one we want to see today. The case is stronger still if the pain began near the navel and moved there over several hours, which is how appendicitis classically behaves.",
+      "Call us before giving anything for severe pain, because pain relief softens the very findings we examine for. We can feel the belly, test the urine and arrange imaging from the office. Seek care immediately for a rigid, board-like belly, for blood in vomit or stool, or for green vomit. Go too for pain that wakes your child from sleep, or for a boy with pain in the groin or a testicle.",
     ],
   },
   {
@@ -1755,7 +1755,7 @@ export const symptoms: Symptom[] = [
       "A child who will not drink: how to tell whether they are dehydrated, what to offer, and when to call us.",
     intro: [
       "Track how often your child passes urine. A baby should wet a diaper at least every six to eight hours, and an older child should use the toilet at least three or four times a day. Moist lips, tears when crying and normal energy all say your child is keeping up.",
-      "Call us if your child has passed no urine for eight hours, has a dry mouth, cries without tears, seems unusually sleepy, or is a baby whose soft spot looks sunken. We can weigh your child against their last visit, which tells us how much fluid they have actually lost, and we can give fluids in the office for most children rather than sending you to an emergency room.",
+      "Call us if your child has passed no urine for eight hours, has a dry mouth, cries without tears, seems unusually sleepy, or is a baby whose soft spot looks sunken. We can weigh your child against their last visit, which tells us how much fluid they have actually lost. For most children we can then give fluids here rather than sending you to an emergency room.",
     ],
   },
   {
@@ -1770,7 +1770,7 @@ export const symptoms: Symptom[] = [
     description:
       "Reflux and spitting up in babies: what is normal, what actually helps, and the signs that mean something more.",
     intro: [
-      "Almost all spitting up is a laundry problem rather than a medical one. A baby who brings milk back after most feeds, and who is gaining weight and content between them, has a valve at the top of the stomach that has not tightened up yet, and time is the only treatment. Spitting up peaks around four months and settles once a baby sits upright and eats solids.",
+      "Almost all spitting up is a laundry problem rather than a medical one. A baby who brings milk back after most feeds, and who is gaining weight and content between them, has a valve at the top of the stomach that has not tightened up yet. Time is the only treatment. Spitting up peaks around four months and settles once a baby sits upright and eats solids.",
       "Call us if your baby is not gaining weight, arches and screams during feeds, or refuses to feed. Call about blood or green color in the vomit, coughing and choking with feeds, or vomiting that travels across the room. Forceful vomiting in a young baby needs assessing quickly.",
     ],
   },
@@ -1786,7 +1786,7 @@ export const symptoms: Symptom[] = [
     description:
       "Vomiting in babies under a year: keeping fluids in, telling spitting up from vomiting, and the signs that need same-day care.",
     intro: [
-      "A baby holds far less fluid in reserve than an older child and loses it proportionally faster, so a day of vomiting that a five-year-old shrugs off can leave a three-month-old genuinely dry. We set the threshold for seeing babies much lower for that reason, and counting wet diapers matters more here than counting vomits.",
+      "A baby holds far less fluid in reserve than an older child and loses it proportionally faster. A day of vomiting that a five-year-old shrugs off can leave a three-month-old genuinely dry. We set the threshold for seeing babies much lower for that reason, and counting wet diapers matters more here than counting vomits.",
       "Call us today for any vomiting in a baby under three months. Call too for forceful vomiting after every feed, green or bloody vomit, or a swollen or tender belly. Call straight away for fewer than four wet diapers a day, or a baby who is difficult to rouse.",
     ],
   },
@@ -1883,7 +1883,7 @@ export const symptoms: Symptom[] = [
       "Urinary tract infections in children: the symptoms at different ages, why a sample matters, and when a UTI becomes urgent.",
     intro: [
       "Call us for a urine test if your child has burning when passing urine, is going far more often, is suddenly wetting again after being dry, or has smelly or cloudy urine. A urinary infection in a baby often shows only as an unexplained fever, poor feeding or vomiting.",
-      "Never start a leftover antibiotic while you wait, because it clouds the sample without curing anything, and we then cannot tell what we are treating. Seek care the same day for a fever alongside back or side pain, for vomiting with urinary symptoms, and for any fever in a baby under three months, since those suggest the infection has reached the kidney.",
+      "Never start a leftover antibiotic while you wait, because it clouds the sample without curing anything, and we then cannot tell what we are treating. Seek care the same day for a fever alongside back or side pain, for vomiting with urinary symptoms, and for any fever in a baby under three months. Each suggests the infection has reached the kidney.",
     ],
   },
   {
