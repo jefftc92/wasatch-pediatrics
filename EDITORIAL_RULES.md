@@ -209,3 +209,41 @@ everything else.**
 sign below its AAP tier, and, since round 3, a page that omits a 911 or ER sign
 altogether. The second half exists because deleting is what this rule asks for,
 and deletion was previously invisible to the gate.
+
+## 18. Never raise a threshold and then withhold it
+
+Rule 17 moved the AAP's lower tiers off our prose and onto the panel. Applied
+without limit, it took the numbers with them, and the round-3 reader caught the
+result on four pages:
+
+- fever: "I came with a number in my hand, 103.2... it never tells me what
+  temperature counts as a fever at all."
+- head-injury: "One is how wide the swelling has spread, and the When To Call tab
+  below gives the width that matters." Reader: "You've just told me a width
+  matters and then refused to tell me the width. I'm looking at the lump right
+  now with my hand on it."
+- constipation: the page explains why a child holds back and never says what
+  counts as constipated.
+- croup: the page promises what to do in the next twenty minutes and offers
+  nothing to do.
+
+Four of the six meta descriptions were checked against the pages afterwards and
+each promised something the revision had removed.
+
+So rule 17 stops here:
+
+- **A definition or threshold the judgement depends on is not a lower tier. It
+  is the judgement, and it belongs on the page.** What counts as a fever, what
+  counts as constipated, the width of swelling that matters, how many days is too
+  many. Give the number.
+- **If you name that a threshold exists, give it in the same sentence.** Pointing
+  at a tab for a number you have just said matters is worse than never raising it.
+- **The meta description is a promise.** Anything it names must be answered in
+  the prose. When a revision removes material, check the description against the
+  page before finishing, and change one or the other.
+- **One concrete action beats a pointer** when the reader is standing over the
+  child right now. Croup's twenty minutes is the case: name the step, then send
+  them to Care Advice for the rest.
+
+Rules 17 and 18 are the same rule seen from two sides. Do not repeat what the
+panel says. Do not withhold what the reader came for.

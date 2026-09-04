@@ -53,6 +53,40 @@ const seen = { heading: new Map(), lead: new Map(), title: new Map() };
 for (const e of entries) {
   const all = [e.lead, ...e.intro];
 
+  /*
+   * Rule 18. Rule 17 moved the AAP's lower tiers onto the panel and took the
+   * numbers with them. The round 3 reader, holding a thermometer reading 103.2,
+   * finished the fever page without learning what counts as a fever, and the
+   * head injury page told them a width mattered and sent them to a tab for it.
+   * Two shapes are mechanical enough to catch.
+   */
+
+  // A sentence that says a specific value matters and hands it to the panel.
+  const VALUE = /\b(width|number|amount|dose|dosage|temperature|reading|size|how much|how many|how long|how wide|how old)\b/i;
+  for (const text of [e.lead, ...e.intro]) {
+    for (const s of sentences(text)) {
+      if (/\btabs?\b/i.test(s) && VALUE.test(s) && !/\d/.test(s)) {
+        fail(18, e.slug, s.slice(0, 80), "names a value that matters and sends the reader to a tab for it");
+      }
+    }
+  }
+
+  // The meta description is a promise. If it offers a definition or a
+  // threshold, the prose has to carry the figure that answers it. 911 and 988
+  // are routing numbers, not thresholds, so they do not count as an answer.
+  const prose = e.intro.join(" ").replace(/\b(911|988)\b/g, "");
+  const PROMISES = [
+    [/counts as a fever/i, /\d+(\.\d+)?\s*(°|degrees)/i, "a temperature"],
+    [/how long/i, /\b\d+\s*(to\s*\d+\s*)?(minute|hour|day|week|month)/i, "a duration"],
+    [/what counts as|how much|how many/i, /\d/, "a figure"],
+  ];
+  for (const [promise, answer, what] of PROMISES) {
+    if (promise.test(e.description) && !answer.test(prose)) {
+      fail(18, e.slug, e.description.slice(0, 80), `description promises ${what} the prose never gives`);
+      break;
+    }
+  }
+
   if (/^What to do/i.test(e.heading)) {
     fail(4, e.slug, e.heading, "heading promises instructions the framed source already gives");
   }
