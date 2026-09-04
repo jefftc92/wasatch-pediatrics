@@ -82,7 +82,7 @@ function aapTiers(slug) {
 /* --- what urgency does one of our sentences assign? --------------------- */
 
 const OUR_URGENCY = [
-  [/\bcall 911\b|\bdial 911\b/i, 4],
+  [/\b911\b/, 4], // any mention: "needs 911 too" is as much a 911 route as "call 911"
   [/emergency room|\bER\b|go to an emergency/i, 3],
   [/straight away|right away|same day|today|at any hour|any time, day or night|\bnow\b|immediately/i, 2],
   [/\bcall us\b|\bcall your\b|\bcall the\b|\btell us\b|\bcome in\b|\bbring your child\b/i, 1],
