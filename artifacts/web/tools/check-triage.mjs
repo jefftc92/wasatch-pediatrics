@@ -74,7 +74,17 @@ function aapTiers(slug) {
     const items = body
       .split("|")
       .map((s) => s.trim())
-      .filter((s) => s.length > 12 && /[a-z]/.test(s) && !/^Select New/.test(s));
+      // "Vomiting bile (green color). Exception: stomach juice which is
+      // yellow." carries nine content words, of which the sign is two. The
+      // parenthetical and the exception dragged the match threshold above what
+      // any correctly-written sentence of ours could reach, so the page that
+      // says exactly the right thing was reported as omitting it.
+      .map((s) => s.replace(/\([^)]*\)/g, " ").replace(/\s*Exception(&#58;|:)[\s\S]*$/i, " ").replace(/\s+/g, " ").trim())
+      .filter((s) => s.length > 12 && /[a-z]/.test(s) && !/^Select New/.test(s))
+      // Catch-alls, not signs. A page cannot "mention" these and should not be
+      // asked to.
+      .filter((s) => !/^You think your child has a life-threatening emergency/i.test(s))
+      .filter((s) => !/^Your child looks or acts very sick$/i.test(s));
     return { ...tier, items };
   });
 }
@@ -103,6 +113,18 @@ const STOP = new Set(
    "hard large small big long high low new times normally sudden severe great").split(" ")
 );
 
+/*
+ * Our copy conjugates. The AAP writes "Passed out or stopped breathing" and we
+ * write "passes out or stops breathing", which shares no whole word beyond
+ * "breathing". Comparing stems rather than words is what lets the two meet.
+ */
+function stem(w) {
+  return w
+    .replace(/(ies)$/, "y")
+    .replace(/(ing|ed|es|s)$/, "")
+    .replace(/(.)\1$/, "$1");
+}
+
 function keywords(item) {
   return [...new Set((item.toLowerCase().match(/[a-z']{4,}/g) || []).filter((w) => !STOP.has(w)))];
 }
@@ -113,6 +135,9 @@ const SYNONYM = {
   unconscious: ["consciousness", "knocked", "passed", "blacked"],
   wake: ["rouse", "rousing", "waking", "woken"],
   confused: ["confusion", "confused"],
+  talks: ["speech", "talking", "talks", "says"],
+  acts: ["behavior", "behaves", "acting", "acts"],
+  alert: ["alert", "responds", "responsive", "woken", "rouse"],
   slurred: ["slurred", "speech"],
   steady: ["unsteady", "unsteadiness", "steady", "balance"],
   weakness: ["weak", "weakness", "floppy"],
@@ -136,10 +161,11 @@ function mentions(text, item) {
   const kw = keywords(item);
   if (!kw.length) return null;
   const lower = text.toLowerCase();
+  const stems = new Set((lower.match(/[a-z']{4,}/g) || []).map(stem));
   const hits = kw.filter((w) => {
-    if (lower.includes(w)) return true;
+    if (lower.includes(w) || stems.has(stem(w))) return true;
     const alts = SYNONYM[w];
-    return alts ? alts.some((a) => lower.includes(a)) : false;
+    return alts ? alts.some((a) => lower.includes(a) || stems.has(stem(a))) : false;
   });
   // Scale with the item's length. "Vomited 2 or more times" reduces to two
   // distinctive words, so a fixed threshold of two never fires on it, which
@@ -154,6 +180,15 @@ function mentions(text, item) {
 
 const sentences = (t) => t.split(/(?<=[.!?]) /).map((s) => s.trim()).filter(Boolean);
 const findings = [];
+/*
+ * Round 3 of the editorial review decided that the top two AAP tiers belong in
+ * our prose in full, and that everything below them belongs to the panel. The
+ * under-routing check above cannot enforce the first half of that: it only
+ * compares signs our page already mentions, so deleting a 911 sign outright
+ * made the page pass. Deleting is exactly what the redundancy work does, so
+ * this records the 911 and ER items no sentence on the page mentions at all.
+ */
+const missing = [];
 let scanned = 0;
 let noSource = [];
 
@@ -179,6 +214,13 @@ for (const page of pages) {
         }),
       );
       if (alreadyHandled) continue;
+
+      const mentionedAnywhere = page.text.some((para) =>
+        sentences(para).some((s) => mentions(s, item)),
+      );
+      if (!mentionedAnywhere) {
+        missing.push({ slug: page.slug, aapTier: tier.label, aapItem: item.replace(/\s+/g, " ").slice(0, 90) });
+      }
 
       for (const para of page.text) {
         const ss = sentences(para);
@@ -216,9 +258,32 @@ const RANK_NAME = { 4: "911", 3: "ER now", 2: "same day / now", 1: "call us", 0:
 console.log(`triage gate: ${scanned} pages compared against their AAP source`);
 if (noSource.length) console.log(`  no AAP source cached for ${noSource.length}: ${noSource.slice(0, 6).join(", ")}`);
 
+const seenMiss = new Set();
+const gaps = missing.filter((f) => {
+  const k = f.slug + "|" + f.aapItem;
+  return seenMiss.has(k) ? false : (seenMiss.add(k), true);
+});
+
+function reportGaps() {
+  if (!gaps.length) return;
+  console.log(`\n${gaps.length} emergency signs the AAP lists that our prose never mentions:\n`);
+  const byPage = gaps.reduce((a, f) => ((a[f.slug] ||= []).push(f), a), {});
+  for (const [slug, list] of Object.entries(byPage)) {
+    console.log(`  ${slug}`);
+    for (const f of list) console.log(`    ${f.aapTier}: ${f.aapItem}`);
+    console.log("");
+  }
+}
+
+if (!findings.length && !gaps.length) {
+  console.log("\nno page assigns a lower urgency than its source, and none omits an emergency sign.");
+  process.exit(0);
+}
+
 if (!findings.length) {
   console.log("\nno page assigns a lower urgency than its source.");
-  process.exit(0);
+  reportGaps();
+  process.exit(1);
 }
 
 // One line per page/item pair, deduplicated.
@@ -239,6 +304,7 @@ for (const [slug, list] of Object.entries(byPage)) {
     console.log(`    matched on: ${f.matched}\n`);
   }
 }
+reportGaps();
 console.log("Every hit needs confirming. Matching is by content words, so a page");
 console.log("that discusses a sign without triaging it will show up here too.");
 process.exit(1);

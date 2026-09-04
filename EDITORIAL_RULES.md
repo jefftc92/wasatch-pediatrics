@@ -175,3 +175,37 @@ how quickly it can see a child must be traceable to a published page.
 sentence over 34 words, bare-pronoun subject, measure with no substance named,
 duplicate heading or lead, or a "What to do about" heading on a page whose
 source already answers it. Run it before committing copy changes.
+
+## 17. The division of labour with the AAP panel
+
+Both round-2 evaluators, working blind, reported the same fault on four of six
+pages: our prose was re-saying the panel sitting directly below it. The fever
+page transcribed the AAP *When To Call* tab in its own order with near-identical
+wording; croup, diaper rash and constipation reproduced *Care Advice* almost
+point for point. The client had said this in their own words before this system
+existed: the content "might contain information that is already on the iframe."
+
+This conflicted with rule 15, never be less urgent than the source, which had
+been read as an instruction to state every AAP tier in prose. Following both at
+once is impossible, and the oscillation between them is what round 2 spent
+itself on. The division is therefore fixed:
+
+**The prose carries the emergency floor and the judgement. The panel carries
+everything else.**
+
+- **Call 911 Now and Go to ER Now items belong in our prose, in full.** A parent
+  must never have to find a tab, open it and scroll to learn that a sign means
+  911. This is the half of rule 15 that survives.
+- **Lower tiers belong to the panel.** Do not transcribe *Contact Doctor Within
+  24 Hours*, *Contact Doctor During Office Hours* or *Self Care at Home*. Name
+  the tab and let the parent open it.
+- **Home treatment steps never appear in our prose.** No warm-mist routine, no
+  rinsing method, no dosing. *Care Advice* holds all of it.
+- **What only we can say, we must say:** how to judge this child rather than the
+  number, why the body does this, what happens when you call us, and who is
+  eligible for what.
+
+`tools/check-triage.mjs` enforces both halves. It fails a page that routes a
+sign below its AAP tier, and, since round 3, a page that omits a 911 or ER sign
+altogether. The second half exists because deleting is what this rule asks for,
+and deletion was previously invisible to the gate.
