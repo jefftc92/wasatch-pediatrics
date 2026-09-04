@@ -4371,6 +4371,64 @@
   margin: 4px 0 0 0;
 }
 
+/*
+ * A row of pills, not the office card's stacked text links. Reusing
+ * .area-office-act here inherited its "padding: 6px 0", which is right for a
+ * plain link and strips a .btn of the horizontal padding its 25px radius
+ * needs: the label then ran straight off both rounded ends.
+ */
+.sym-acts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 26px 0 0 0;
+}
+
+.sym-acts .btn {
+  padding: 10px 28px;
+  font-size: 17px;
+  line-height: 1.35;
+}
+
+@media (max-width: 575px) {
+  .sym-acts {
+    gap: 10px;
+  }
+
+  .sym-acts .btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px 20px;
+    font-size: 16px;
+  }
+}
+
+/*
+ * The theme gives .herowrap a 60px top margin, which collapses through the
+ * page section and drops the whole page 60px below the nav. Only three pages
+ * use that hero; the 272 on .dent-hero sit flush against the header, so on
+ * this page the gap reads as a broken menu rather than as spacing.
+ */
+.sc-pagebody,
+.sc-herowrap {
+  margin-top: 0;
+}
+
+/*
+ * Bands on this page were white, grey, white, grey with nothing at the seam,
+ * so at a glance the whole page read as one column of text. A hairline at the
+ * top of each band gives the eye somewhere to stop.
+ */
+.sc-index,
+.sc-more,
+.sc-reach,
+.sc-questions,
+.sym-tool,
+.sym-next,
+.sym-others {
+  border-top: 1px solid #e4e7ea;
+}
+
 /* ------------------------------------------- the symptom index -------- */
 
 /*
