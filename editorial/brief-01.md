@@ -166,3 +166,128 @@ formality. "Any time, day or night" is the spoken form.
 
 Every page's paragraph 2 opens with "Call us" or "Call". A parent reading a
 second page will skim it. Vary where the call instruction sits.
+
+---
+
+## Z. FACTUAL INTEGRITY. Highest priority. Overrides every section above.
+
+The factual reviewer compared all six pages against the AAP source pages they
+frame. It found invented clinical facts and, worse, triage levels moved *down*
+from the source. These are not editorial matters. Fix them first, and where a
+finding conflicts with anything in sections A to I, this section wins.
+
+**Z1. head-injury routes four AAP emergencies to a phone call.** AAP puts "hard
+to wake up", "confused or slurred speech", and "walking not steady or weakness
+of arms or legs" under Call 911 Now, and "vomited 2 or more times" under Go to
+ER Now. Our page lists all four and says "Call us if any of those appear."
+This is the most consequential error in the packet.
+
+**Z2. head-injury moves seizure and loss of consciousness the wrong way.** AAP:
+seizure, and knocked out for more than a minute, are 911. Knocked out for less
+than a minute is seek-care-now. Our page sends all of it to the ER by car and
+loses the one-minute threshold that separates them.
+
+**Z3. head-injury: "Size is not the signal" contradicts the source.** AAP gives
+a threshold: swelling larger than 1 inch (2.5 cm), or a large dent in the
+skull, is seek-care-now. Keep the reassurance about scalp bleeding. Drop the
+absolute.
+
+**Z4. croup: "peaks on the second or third night" is invented.** AAP says croup
+lasts 5 to 6 days and is worse at night. There is no peak night in the source.
+Remove it, and remove "why it peaks in the small hours" from the meta.
+
+**Z5. croup: the steroid claim is invented twice over.** AAP says children with
+stridor often need a steroid. It gives no dose count and no time to effect, so
+"a single dose usually settles croup within a few hours" is manufactured. And
+nothing on this site says the practice stocks or gives steroids in an office,
+so "we would far rather give it" asserts a capability we cannot support.
+
+**Z6. croup: the crying claim is invented and unsafe.** AAP says crying makes
+existing stridor worse, and that stridor at rest marks severity. Our page says
+crying produces the sound in children who do not have it, which licenses a
+parent to dismiss stridor they hear while their child cries.
+
+**Z7. croup: an infant with stridor needs the ER.** AAP routes under-1 with
+stridor to Go to ER Now. Our page sends them to a phone call.
+
+**Z8. croup: the 911 line was altered.** AAP: "drooling, spitting or having
+great trouble swallowing" — an or-chain. Ours: "drools and cannot swallow", so
+a drooling child who can still swallow no longer triggers 911. Two AAP 911
+criteria are missing entirely: passed out or stopped breathing, and croup that
+began suddenly after a bee sting, a new medicine or an allergic food.
+
+**Z9. diaper-rash names the wrong cause.** AAP: stool irritates the skin, and
+"urine alone has no germs in it and usually doesn't irritate the skin". Our
+page blames the wet diaper. That changes what a parent does about it.
+
+**Z10. diaper-rash: the zinc oxide barrier is invented.** AAP does not name zinc
+oxide anywhere and recommends a protective ointment only for diarrhea rash
+around the anus, saying otherwise it is generally not needed. Its treatment is
+warm water, air exposure, and anti-yeast cream where indicated.
+
+**Z11. diaper-rash: the scalloped edge and the creases are invented.** AAP says
+yeast is bright red, can be raw and weepy, with sharp borders and small red
+bumps beyond the border. The spots-beyond-the-patch detail is right. The edge
+shape and the crease distribution are not.
+
+**Z12. diaper-rash drops every under-1-month red flag,** and downgrades "fever
+and looks infected (spreading redness)" from seek-care-now to same day. The
+under-1-month triggers are: tiny water blisters or pimples in a group, looks
+infected, or looks or acts abnormal in any way.
+
+**Z13. diaper-rash routes an over-the-counter treatment through us.** Anti-yeast
+cream needs no prescription. Our page tells a parent to call us for it.
+
+**Z14. suicide-concerns never mentions 911,** and collapses AAP's ER triggers —
+a suicide threat, a suicide plan, an attempt within the week — into the
+parent's own judgement of "immediate danger". A child with a stated plan is
+currently sent to a phone line.
+
+**Z15. suicide-concerns guarantees access we cannot support.** "We will get your
+child in" appears on the page where a parent can least absorb a delay. Nothing
+published says how quickly a behavioral health appointment can be had; the
+same-day promise covers sick visits only.
+
+**Z16. suicide-concerns drops two named means.** AAP names alcohol and car keys
+alongside firearms and medicines, and offers a fallback for a parent who cannot
+remove a firearm: unload it and lock it, or store it with a relative. Our page
+says take firearms out entirely and leaves that parent with nothing.
+
+**Z17. constipation: "months" is invented.** AAP says stool softeners should
+produce regular soft stools in one to three days, and to call if constipation
+lasts more than a week after dietary changes. No duration beyond a week appears
+in the source. This is in our heading and repeated in the body.
+
+**Z18. constipation: the stretched-bowel mechanism is invented.** AAP describes
+holding back as a behaviour with causes. It states no stretching and no loss of
+signal, and no timescale of weeks.
+
+**Z19. constipation: weight-based laxative dosing is invented,** and the age
+floor is dropped. AAP doses Miralax by age band, over one year old only, and
+says it needs no prescription.
+
+**Z20. constipation contradicts the source in its first sentence.** AAP defines
+constipation partly by frequency, with a three-day threshold. Our lead tells a
+parent to disregard frequency.
+
+**Z21. constipation: the retentive postures are invented.** Crossed legs, going
+stiff and hiding are not in the AAP page, and are asserted with an "almost
+always" the source does not license. AAP's stated most common cause, power
+struggles around toilet training, is absent from our page entirely.
+
+**Z22. fever: the AAP threshold is 12 weeks, not three months,** and AAP routes
+fever at that age to seek care now. Our page says "the same day", which also
+contradicts our own fever-under-1 page, which says call straight away.
+
+**Z23. fever carries no 911 line at all.** AAP has one: not moving or too weak
+to stand, cannot wake up, severe trouble breathing, purple or blood-coloured
+spots on the skin.
+
+**Z24. fever: "a fever that went away and then came back"** loses AAP's
+qualification, which is that it returned after being gone more than 24 hours.
+
+### Rule for this and every future round
+
+Where our page and the AAP panel disagree about urgency, the panel wins, and
+our page must not sit above a panel that contradicts it. We may be more
+cautious than the source. We may never be less.

@@ -141,6 +141,32 @@ practice's published pages. A plausible clinical detail is not therefore true.
 A number that changes during a rewrite is a critical fault even when the new
 number is also plausible.
 
+## 15. Never be less urgent than the source
+
+Where our page and a source we frame disagree about urgency, the source wins.
+We may be more cautious than it. We may never be less.
+
+This rule exists because a factual review found six pages that had quietly
+moved triage levels down while the prose was being improved. The head-injury
+page listed four signs the AAP puts under Call 911 Now or Go to ER Now and told
+the parent to call the office. The croup page sent an infant with stridor to a
+phone call where the AAP sends them to an emergency room, and turned the AAP's
+"drooling, spitting or great trouble swallowing" into "drools and cannot
+swallow", so a drooling child who can still swallow no longer triggered 911.
+
+Check every threshold, age, duration and route against the source rather than
+against your sense of what is clinically reasonable.
+
+## 16. A capability claim needs a published source
+
+"We would far rather give it" asserted that this practice stocks and gives
+steroids in an office. "We will get your child in" promised access on the
+behavioral health page. Neither appears anywhere on the site. Both were written
+because they sounded like things a pediatric practice would do.
+
+Anything asserted about what the practice does, stocks, can do in an office, or
+how quickly it can see a child must be traceable to a published page.
+
 ---
 
 ## Automated gates
