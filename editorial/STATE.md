@@ -61,3 +61,23 @@ opens with "Call us".
   carrying the same definitions, which preserves independence.
 - The AAP source cache in /tmp/aap is not persistent. Refetch with
   tools/fetch-aap.sh equivalent before a session that needs it.
+
+## Packet construction: a mistake to not repeat
+
+Round 1's evaluation packet carried only the heading, lead and two intro
+paragraphs. It did not carry the rest of the page. Evaluator B's most emphatic
+finding was that four of six pages say "call us" and never say how to reach
+anyone, which is true of the intro copy and false of the page: every symptom
+page ends with a "Getting your child seen" band carrying the 24/7 nurse line,
+the same-day route, After Hours Care, and a Find your office link.
+
+The finding was correct about what it was shown. The packet was wrong.
+
+Two consequences. Evaluation packets must carry the whole rendered page, not
+the fields being edited. And the correct round 2 action is the opposite of what
+the finding suggests: the fever page's paragraph 2 repeats the nurse-line
+explanation verbatim from the band below it, so that sentence comes out rather
+than being added to the other five.
+
+Check a finding's premise before acting on it. An evaluator can only judge what
+it was handed.
