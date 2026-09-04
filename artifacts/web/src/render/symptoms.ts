@@ -141,7 +141,7 @@ ${
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">Should my child be seen?</h2>
-				<p class="sym-tool-lead">The American Academy of Pediatrics keeps a decision tool for this. Work through its questions about how your child looks, how long this has run and what has changed since it started, and it ends on one of three answers: care for your child at home, book an appointment, or seek care now. Most parents finish in about a minute.</p>
+				<p class="sym-tool-lead">The panel below is the American Academy of Pediatrics&#8217; own guide to ${escapeAttribute(symptom.short.toLowerCase())}, and it has three tabs. <strong>Definition</strong> describes what you are looking at. <strong>When To Call</strong> runs through their questions and ends on one of three answers: care for your child at home, book an appointment, or seek care now. <strong>Care Advice</strong> gives the home treatment in full. The AAP writes and updates all of it.</p>
 				<div class="sym-embed">
 					<p class="sym-embed-bar">
 						<span class="sym-embed-name">AAP Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
@@ -179,7 +179,7 @@ ${
 					<li><strong>This evening or at the weekend.</strong> Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</li>
 				</ul>
 				<p class="sc-trust">If you are worried, call. We would rather answer a question that turns out to be nothing than have you sit up all night deciding whether it was.</p>
-				<p class="area-office-act"><a class="btn blue" href="/medical-care/sick-visits/">Same-day sick visits</a> <a class="btn blue" href="/locations/">Find your office</a></p>
+				<p class="sym-acts"><a class="btn blue" href="/medical-care/sick-visits/">Same-day sick visits</a> <a class="btn blue" href="/locations/">Find your office</a></p>
 			</div>
 		</div>
 	</div>
@@ -388,6 +388,6 @@ export function symptomIndexList(): string {
 					<div class="sym-none" hidden>
 						<p class="sym-none-lead">Nothing here matches that word.</p>
 						<p>Try a plainer word: &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
-						<p class="area-office-act"><a class="btn blue" href="/locations/">Find your office</a></p>
+						<p class="sym-acts"><a class="btn blue" href="/locations/">Find your office</a></p>
 					</div>`;
 }
