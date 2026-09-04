@@ -85,13 +85,11 @@ export const symptoms: Symptom[] = [
     group: "Fever and infection",
     heading: "Judging a fever by your child, not the thermometer",
     aap: "Fever",
-    lead:
-      "A fever is your child's body fighting an infection, so how they look and behave tells you far more than any reading does.",
-    description:
-      "Most childhood fevers are ordinary infections, and how a child is acting matters more than the reading. What to watch for, and how to reach a Wasatch Pediatrics nurse at any hour.",
+    lead: "Most childhood fevers come from ordinary viruses, and how your child drinks, responds and plays tells you more about this one than the number does.",
+    description: "Most childhood fevers come from ordinary infections. Which fevers need to be seen now, what counts as a fever in a young baby, and how to reach a Wasatch Pediatrics nurse at any hour.",
     intro: [
-      "Three questions settle most fevers at home. Is your child drinking? Do they respond to you normally? Do they play a little once fever medicine has taken the edge off? A child who manages all three is well enough to watch at home, whatever the thermometer says. A child who has gone limp, cannot be roused, or refuses every drink needs us, even when the reading looks unremarkable.",
-      "Call your office's main number at any hour and you reach a nurse or a physician rather than an answering service. Call the same day about any fever in a baby under three months, about a fever that has run beyond three days, and about a fever that went away and then came back. We look for what is causing the fever rather than treating the number itself.",
+      "Three questions settle most fevers at home. Is your child drinking? Do they respond to you normally? Do they play a little once fever medicine has taken the edge off? A child who does all three is usually well enough to watch at home, whatever the thermometer says. A child who has gone limp, cannot be roused, or refuses every drink needs to be seen, even when the reading looks unremarkable.",
+      "Call 911 if your child cannot be woken, is too weak to stand or move, or is struggling for every breath. Call 911 as well for purple or blood-colored spots on the skin. Go straight to an emergency room for a stiff neck, a seizure with the fever, or a child who is hard to wake or acting confused. A baby under 12 weeks old with a rectal temperature of 100.4°F or higher needs to be seen right away, and should not be given fever medicine before that visit. Call your office's main number at any hour and you reach a nurse or a physician on call rather than an answering service. Call us the same day for a fever above 104°F, for any fever in a baby three to six months old, or for a fever lasting more than three days. Call the same day too if your child stops drinking, or if a fever comes back after being gone more than 24 hours. We look for what is causing the fever rather than treating the number itself.",
     ],
   },
   {
@@ -133,13 +131,11 @@ export const symptoms: Symptom[] = [
     group: "Coughs and breathing",
     heading: "The croup sound that decides how urgent it is",
     aap: "Croup",
-    lead:
-      "Croup makes a barking, seal-like cough that always sounds worse at night and almost always sounds worse than it is.",
-    description:
-      "Croup's barking cough and noisy breathing, why it peaks in the small hours, what helps at home, and when a child needs to be seen tonight.",
+    lead: "Croup makes a barking, seal-like cough that gets worse at night. The sound that decides how urgent it is comes not from the cough but from your child breathing in.",
+    description: "Croup's barking cough and noisy breathing: which sound means severe croup, which signs mean 911 or an emergency room, and how to reach a nurse at any hour.",
     intro: [
-      "Croup sounds far worse than it usually is, and the noise misleads almost every parent the first time. What matters is not how loud the barking cough gets but whether your child makes a harsh, rasping sound breathing in while calm and at rest. Crying tightens the airway and produces that sound in children who do not have it, which is why calming your child comes before judging anything.",
-      "Call us if you hear that rasping at rest, at whatever hour. A single dose of steroid usually settles croup within a few hours, and we would far rather give it than have you sit up watching. Croup peaks on the second or third night and eases from there. Call 911 if your child struggles for breath, drools and cannot swallow, or turns blue around the lips.",
+      "The noise misleads almost every parent the first time. What matters is not how loud the barking cough gets but whether your child makes a harsh, raspy sound while breathing in. That sound is called stridor. Loud or constant stridor, or stridor while your child is calm and at rest, means the croup is severe. Crying makes stridor worse, so comfort your child and listen again once they are calm. Do not dismiss stridor because your child was crying when you first heard it.",
+      "Call 911 if your child is struggling for each breath, passes out or stops breathing, or turns bluish in the lips or face when not coughing. Call 911 too if your child is drooling, spitting, or having great trouble swallowing. Call 911 if croup began suddenly after a bee sting, a new medicine, or a food your child is allergic to. Go straight to an emergency room if your baby is under a year old and has stridor. Go too if the ribs pull in with each breath, or if your child may have choked on a small object. For any other stridor, call your office's main number at any hour and you reach a nurse or a physician on call. Children with stridor often need a steroid, and the nurse or physician will tell you where your child should be seen for it. Croup usually lasts five to six days.",
     ],
   },
   {
@@ -307,15 +303,13 @@ export const symptoms: Symptom[] = [
     title: "Head Injury in Children",
     short: "Head injury",
     group: "Knocks, pain and injuries",
-    heading: "Behavior after the knock, not the size of the lump",
+    heading: "How your child acts in the next few hours, and when the lump itself matters",
     aap: "Head Injury",
-    lead:
-      "Judge a head injury by how your child behaves in the hours afterward, not by the size of the lump.",
-    description:
-      "Head injuries in children: what to watch for in the hours afterward, which signs mean an emergency room, and when to call us.",
+    lead: "Most head injuries damage only the scalp, and what your child does over the next few hours shows whether this one did more.",
+    description: "Head injuries in children: which signs mean 911 or an emergency room, what to watch for in the hours afterward, and when to call us.",
     intro: [
-      "How your child behaves over the next few hours tells us far more than the bump does. Watch for repeated vomiting, a headache that keeps building, unusual drowsiness, confusion, unsteadiness on their feet, or a child who is simply not themselves in a way you cannot name. Call us if any of those appear, at whatever hour.",
-      "A large soft swelling on the forehead alarms parents more than anything else and usually means very little, because the scalp bleeds freely into loose tissue. Size is not the signal. Go straight to an emergency room if your child lost consciousness, had a seizure, or fell from a significant height. Call us about anything short of that, and we will examine your child and tell you exactly what to watch for overnight.",
+      "Watch how your child wakes, talks, walks and keeps food down. Call 911 if your child had a seizure or was knocked out for more than a minute. Call 911 as well if your child is confused, slurring words, walking unsteadily, or weak in an arm or leg. Go to an emergency room if your child has vomited two or more times, cannot remember what happened, or has a headache or crying that will not stop.",
+      "A big soft lump alarms parents more than anything else, and most of the time it means little. The scalp has a large blood supply and bleeds easily into the loose tissue beneath, so a small injury can raise a large swelling. Size still has a limit. Call us right away about swelling wider than an inch or a dent in the skull. Call right away too after a blow from a hard object, or a fall from higher than your child is tall. A baby under a year old needs a call right away after any head injury, and so does a child who was knocked out even briefly. Call us about anything short of that, and we will examine your child and tell you exactly what to watch for overnight.",
     ],
   },
   {
@@ -371,15 +365,13 @@ export const symptoms: Symptom[] = [
     title: "Constipation in Children",
     short: "Constipation",
     group: "Stomach and bowels",
-    heading: "Why constipation takes months to undo",
+    heading: "Why children hold stools back, and why that keeps constipation going",
     aap: "Constipation",
-    lead:
-      "Constipation is about how hard and how painful, not how often. A child hurt once will hold on, and holding on makes the next stool worse.",
-    description:
-      "Constipation in children: what actually counts as constipated, why holding on makes it worse, and how we help break the cycle.",
+    lead: "A child who has had one painful stool will often hold the next one back, and holding back is what turns a bad week into a pattern.",
+    description: "Constipation in children: what actually counts as constipated, why a child starts holding back, and when to call us.",
     intro: [
-      "Constipation in children is a cycle rather than an event. One painful stool teaches a child to hold on, holding on makes the next one harder, and a bowel held full for weeks stretches and stops signalling properly. Crossed legs, going stiff and hiding behind the sofa look like a child straining to go, and are almost always a child working hard not to.",
-      "Call us for a laxative dose matched to your child's age and weight, and expect us to talk about months rather than days. We keep stools soft long enough for a stretched bowel to recover its shape and for your child to stop expecting pain. Stopping the moment things improve is the single commonest reason constipation comes straight back.",
+      "Constipation means pain or crying when passing a stool, straining for more than ten minutes without success, or three or more days without a stool. Breastfed babies over a month old are the exception, and can go four to seven days with stools that stay soft and painless. Pain is one trigger for holding back. The other, and the most common cause of repeated constipation, is a power struggle, usually over toilet training or a refusal to use school toilets. Pressure and punishment make holding back worse, so praise and small rewards do more than either.",
+      "We can go over a stool softener with you before you start one. Miralax and similar softeners are sold without a prescription, are for children over one year old, and should produce regular soft stools within one to three days. Call us if constipation lasts more than a week after you have changed what your child eats, or if painful stools keep happening. Call us the same day if there is bleeding from the anus, if belly or rectal pain lasts more than an hour, or if your child looks or acts very sick. Call the same day too if your child vomits twice or more and the belly looks more swollen than usual. Call 911 if your child's vomit is green.",
     ],
   },
   {
@@ -549,13 +541,11 @@ export const symptoms: Symptom[] = [
     group: "Skin and rashes",
     heading: "Ordinary diaper rash, and the yeast kind",
     aap: "Diaper Rash",
-    lead:
-      "Change diapers more often and coat the skin with a thick zinc oxide barrier at every change.",
-    description:
-      "Diaper rash: the barrier cream and changing routine that clears most of it, how to tell yeast apart from ordinary rash, and when to call us.",
+    lead: "Two different rashes wear the same name, and they need different treatment.",
+    description: "Diaper rash in babies: how to tell an ordinary rash from a yeast infection, which rashes need to be seen, and when to call us.",
     intro: [
-      "Two different rashes wear the same name, and they need different treatment. Ordinary diaper rash comes from skin sitting against a wet diaper, stays on the surfaces the diaper touches, and answers to a thick barrier paste. The yeast kind is bright red, has a clear scalloped edge, sits deep in the creases where a diaper barely touches, and throws small spots out beyond the main patch.",
-      "Call us if the rash matches that second description, or if any diaper rash has not improved after three days of good barrier care. Yeast needs an antifungal cream and will sit there indefinitely under a barrier alone. Call the same day if the skin blisters, weeps, or breaks open, or if your baby develops a fever alongside the rash.",
+      "Ordinary diaper rash comes from stool sitting against the skin. Urine on its own carries no germs and usually does not irritate. What clears most rashes is rinsing stool off with warm water and leaving the bottom open to air, usually within about three days. A yeast rash behaves differently. The skin is bright red with sharp borders, and it can be raw and weepy. Small red bumps or pimples often appear on the skin just beyond that border.",
+      "A rash still there after three days of that care has probably picked up yeast. An anti-yeast cream such as clotrimazole treats it, and no prescription is needed. Call us the same day if your baby has a fever and the rash looks infected with redness spreading out from it, or if bright red skin is peeling off in sheets. A baby under one month old needs a call the same day for tiny water blisters or pimples in a group. Call the same day too for yellow scabs, for spreading redness, or for a baby who looks or acts abnormal in any way. Call us within a day about any pimples, blisters, boils or open sores, and tell us if the rash has not improved after three days of yeast cream. We will examine your baby and tell you which rash you are dealing with.",
     ],
   },
   {
@@ -2395,13 +2385,11 @@ export const symptoms: Symptom[] = [
     group: "Feelings and mental health",
     heading: "Say the words, and remove the means",
     aap: "Suicide Concerns",
-    lead:
-      "Call or text 988 now if your child has talked about ending their life. The Suicide and Crisis Lifeline answers 24 hours a day.",
-    description:
-      "If you are worried your child may be suicidal: getting help immediately, making the home safer, and what to say.",
+    lead: "Call or text 988 now if you think your child may be suicidal, whether they said something, wrote something, or you simply cannot shake the feeling. The Suicide and Crisis Lifeline answers 24 hours a day.",
+    description: "If you are worried your child may be suicidal: 988, when to call 911 or go to an emergency room, making the home safer, and what to say.",
     intro: [
-      "Call or text 988 straight away, or go to the nearest emergency room if your child is in immediate danger. Do not leave them alone. Take firearms out of the house entirely and lock up all medicines, including over-the-counter ones. Reducing access to means is the single most effective thing a parent can do.",
-      "Say the words rather than talking around them. Ask whether they are thinking of killing themselves, listen without arguing or promising secrecy, and tell them you are getting help because you love them. Call us as well: we will get your child in, and our behavioral health team can pick it up from there.",
+      "Call 911 if your child has attempted suicide in the past 24 hours, or is confused in speech or behavior. Go to an emergency room if your child has threatened suicide, has a plan, or has attempted suicide within the past week. Do not leave your child alone. Take firearms out of the house, or unload them and lock them up, or store them with a relative or friend. Lock up all medicines, including over-the-counter ones, and any alcohol. For an older teen, consider holding on to the car keys. Access to lethal means is among the strongest risk factors for suicide, which is why this comes before anything else.",
+      "Ask your child directly whether they are thinking of killing themselves. Plain words are safer than careful ones, and asking the question does not put the idea in your child's head. Listen without arguing. Do not promise to keep what your child tells you secret, and say that you are getting help because you love them. Thoughts of suicide, talk of having no reason to live, and themes of death in what your child draws or writes all need attention now. Call 988 at any hour, and call us as well. Behavioral health services are available at our offices, and we will talk with you about what your child needs next.",
     ],
   },
   {

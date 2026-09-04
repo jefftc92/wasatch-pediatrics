@@ -97,7 +97,10 @@ function urgencyOf(sentence) {
 /* --- does our sentence talk about the same sign? ------------------------ */
 
 const STOP = new Set(
-  ("the a an and or of to in for on with is are was were be been it its they them this that these those your you our we us if not no do does did can will would should have has had at as by from about into over under more most than then when what which who whom how child children age less year years old month months present caution note reason such example other your").split(" ")
+  ("the a an and or of to in for on with is are was were be been it its they them this that these those your you our we us if not no do does did can will would should have has had at as by from about into over under more most than then when what which who whom how child children age less year years old month months present caution note reason such example other your " +
+   // Too generic to identify a sign. "Hard to wake up" matching a sentence
+   // about a hard object is noise; "wake" alone still carries it.
+   "hard large small big long high low new times normally sudden severe great").split(" ")
 );
 
 function keywords(item) {
@@ -165,6 +168,18 @@ for (const page of pages) {
 
   for (const tier of urgent) {
     for (const item of tier.items) {
+      // If the page already routes this same sign at the right urgency
+      // somewhere, it is handled, and a looser match elsewhere is noise. This
+      // is what separates "the page is less urgent than the source" from "the
+      // word fever appears in another sentence".
+      const alreadyHandled = page.text.some((para) =>
+        sentences(para).some((s) => {
+          if (!mentions(s, item)) return false;
+          return urgencyOf(s) >= tier.rank;
+        }),
+      );
+      if (alreadyHandled) continue;
+
       for (const para of page.text) {
         const ss = sentences(para);
         for (let i = 0; i < ss.length; i++) {
