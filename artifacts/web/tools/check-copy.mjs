@@ -43,7 +43,7 @@ const SUBSTANCE =
 const BARE_SUBJECT = /^(It|They|This|That|These|Those)\s+(is|are|was|were|means|needs|can|will|does|do|has|have)\b/;
 
 const BRITISH =
-  /\b(fibres?|colour\w*|behaviour\w*|paediatric\w*|laboured|grey|neighbour\w*|fortnight|travelled|whilst|amongst|yoghurt|centre|litre|metre|practise)\b/i;
+  /\b(fibres?|colour\w*|behaviour\w*|paediatric\w*|laboured|grey|neighbour\w*|fortnight|travelled|whilst|amongst|yoghurt|centre|litre|metre|practise|signall\w*|labell\w*|modell\w*|cancell\w*|travell\w*|marvell\w*|counsell\w*|fuell\w*|organis\w*|recognis\w*|realis\w*|analys\w*|apologis\w*|defence|offence|licence|programme|storey|kerb|plough|draught)\b/i;
 
 const checks = [];
 const fail = (rule, slug, quote, detail) => checks.push({ rule, slug, quote, detail });

@@ -8,8 +8,8 @@ Status values: not started | in review | in rewrite | in evaluation | passed
 
 | # | Batch | Pages | Status | Rounds | Notes |
 |---|-------|-------|--------|--------|-------|
-| 1 | Symptom pages, sample | fever, croup, diaper-rash, head-injury, suicide-concerns, constipation | in review | 0 | Chosen to span an emergency page, a reassurance page, a judgement page, a routine-care page and a mental-health page |
-| 2 | Well-child, sample | murray, bountiful, kamas | not started | 0 | Chosen to span an office-in-town city, a nearby city and a distant one |
+| 1 | Symptom pages, sample | fever, croup, diaper-rash, head-injury, suicide-concerns, constipation | in rewrite | 1 | Chosen to span an emergency page, a reassurance page, a judgement page, a routine-care page and a mental-health page |
+| 2 | Well-child, sample | murray, bountiful, kamas | packet built | 0 | Chosen to span an office-in-town city, a nearby city and a distant one |
 | 3 | Symptom pages, remainder | 158 | not started | 0 | Batch after the first two establish the recurring rules |
 | 4 | Well-child, remainder | well-child parent page + 24 cities | not started | 0 | |
 
