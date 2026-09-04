@@ -28,7 +28,7 @@ another patch.
 
 | # | Batch | Pages | Status | Rounds |
 |---|-------|-------|--------|--------|
-| 1 | Symptom sample | fever, croup, diaper-rash, head-injury, suicide-concerns, constipation | in rewrite | 1 |
+| 1 | Symptom sample | fever, croup, diaper-rash, head-injury, suicide-concerns, constipation | round 2 rewrite | 2 |
 | 2 | Well-child sample | murray, bountiful, kamas | packet built | 0 |
 | 3 | Triage repairs | the 29 pages check-triage reports | not started | 0 |
 | 4 | Symptom remainder | the rest of the 164 | not started | 0 |
@@ -81,3 +81,28 @@ than being added to the other five.
 
 Check a finding's premise before acting on it. An evaluator can only judge what
 it was handed.
+
+## Round 1 outcome
+
+Both blind evaluators returned FAIL.
+
+Evaluator A found 13 critical and 15 editorial faults. The critical ones were
+mostly things round 1 introduced while fixing the urgency levels: a fall
+threshold ("higher than your child is tall"), an overnight watch where the
+source says two hours, a one-week duration for constipation, and 104F levelled
+down from seek-care-now to same day. It also caught that "hard to wake up", a
+911 item, had been dropped from head-injury while the paragraph still opened by
+telling a parent to watch how their child wakes.
+
+Evaluator B found that head-injury never answers whether a child can sleep,
+that croup never says what to do in the next ten minutes, and that fever's
+second paragraph is eight instructions at three urgency levels in one block
+that it read twice without being able to say afterwards which were which.
+
+Three of their findings were artifacts of the packet and are recorded in
+brief-02 as not to be acted on. Checking those premises surfaced a real one:
+the site says behavioral health services are for established patients only, and
+the suicide page does not say so.
+
+The pattern worth naming: round 1 traded invented facts for different invented
+facts. That is now explicit in the round 2 brief.
