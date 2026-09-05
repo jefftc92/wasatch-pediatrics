@@ -115,7 +115,7 @@ const STOP = new Set(
   ("the a an and or of to in for on with is are was were be been it its they them this that these those your you our we us if not no do does did can will would should have has had at as by from about into over under more most than then when what which who whom how child children age less year years old month months present caution note reason such example other your " +
    // Too generic to identify a sign. "Hard to wake up" matching a sentence
    // about a hard object is noise; "wake" alone still carries it.
-   "hard large small big long high low new times normally sudden severe great").split(" ")
+   "hard large small big long high low new times normally sudden severe great mild suspected possible").split(" ")
 );
 
 /*
@@ -148,6 +148,7 @@ const SYNONYM = {
   unconscious: ["consciousness", "knocked", "passed", "blacked"],
   wake: ["rouse", "rousing", "waking", "woken"],
   confused: ["confusion", "confused"],
+  concussion: ["concussion", "concussed"],
   talks: ["speech", "talking", "talks", "says", "sense"],
   acts: ["behavior", "behaves", "acting", "acts"],
   alert: ["alert", "responds", "responsive", "woken", "rouse"],
