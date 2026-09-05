@@ -135,7 +135,7 @@ const SYNONYM = {
   unconscious: ["consciousness", "knocked", "passed", "blacked"],
   wake: ["rouse", "rousing", "waking", "woken"],
   confused: ["confusion", "confused"],
-  talks: ["speech", "talking", "talks", "says"],
+  talks: ["speech", "talking", "talks", "says", "sense"],
   acts: ["behavior", "behaves", "acting", "acts"],
   alert: ["alert", "responds", "responsive", "woken", "rouse"],
   slurred: ["slurred", "speech"],
