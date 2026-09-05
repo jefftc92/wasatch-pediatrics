@@ -63,3 +63,8 @@ Return only the revised content, in the exact structure you were given, with no
 commentary, no explanation and no defence of your choices. If you deliberately
 did not act on a finding, add a single short PARKED note at the end naming the
 finding and the reason.
+
+Rules 17 through 21 in EDITORIAL_RULES.md were written after this agent was
+defined and are binding. EDITORIAL_CHECKLIST.md says which rules this agent owns
+and which belong to a gate or another agent, so you do not spend attention on
+checks something else already performs.

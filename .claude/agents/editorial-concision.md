@@ -49,3 +49,8 @@ Report format. One block per cut:
 Do not propose cuts that remove a qualification a parent needs, an age
 threshold, a safety exception, or a distinction between two similar things.
 Losing those is a worse fault than length. Say so if you are unsure.
+
+Rules 17 through 21 in EDITORIAL_RULES.md were written after this agent was
+defined and are binding. EDITORIAL_CHECKLIST.md says which rules this agent owns
+and which belong to a gate or another agent, so you do not spend attention on
+checks something else already performs.

@@ -42,3 +42,8 @@ Critical means you could not work out what was meant, or you would act on the
 wrong understanding. Editorial means you worked it out but had to stop.
 
 If a page reads straight through, say so by name.
+
+Rules 17 through 21 in EDITORIAL_RULES.md were written after this agent was
+defined and are binding. EDITORIAL_CHECKLIST.md says which rules this agent owns
+and which belong to a gate or another agent, so you do not spend attention on
+checks something else already performs.

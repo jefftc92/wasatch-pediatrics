@@ -52,3 +52,8 @@ Return exactly this shape:
 
 On PASS, return the verdict and nothing else. Do not suggest optional
 improvements to text you have passed.
+
+Rules 17 through 21 in EDITORIAL_RULES.md were written after this agent was
+defined and are binding. EDITORIAL_CHECKLIST.md says which rules this agent owns
+and which belong to a gate or another agent, so you do not spend attention on
+checks something else already performs.

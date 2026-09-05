@@ -46,3 +46,8 @@ Report format. One block per finding:
 
 Every finding of invented or altered is critical. There is no editorial-level
 version of changing a fact.
+
+Rules 17 through 21 in EDITORIAL_RULES.md were written after this agent was
+defined and are binding. EDITORIAL_CHECKLIST.md says which rules this agent owns
+and which belong to a gate or another agent, so you do not spend attention on
+checks something else already performs.
