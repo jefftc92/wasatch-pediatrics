@@ -241,9 +241,15 @@ So rule 17 stops here:
 - **The meta description is a promise.** Anything it names must be answered in
   the prose. When a revision removes material, check the description against the
   page before finishing, and change one or the other.
-- **One concrete action beats a pointer** when the reader is standing over the
-  child right now. Croup's twenty minutes is the case: name the step, then send
-  them to Care Advice for the rest.
+- **One concrete action beats a pointer** when the reader cannot act until they
+  have it. Croup's twenty minutes is the case: name the step, then send them to
+  Care Advice for the rest. This is not limited to emergencies. A parent at a
+  drugstore shelf at 11pm cannot act on "use an anti-yeast cream" without a name,
+  and the round 4 reader failed the diaper rash page for exactly that, so
+  **Lotrimin AF stays named**. Evaluator A has argued the opposite in three
+  consecutive rounds on rule 17 grounds. The question is settled here so it stops
+  being relitigated: rule 18 wins, and the test is whether the reader can act,
+  not whether the situation is an emergency.
 
 Rules 17 and 18 are the same rule seen from two sides. Do not repeat what the
 panel says. Do not withhold what the reader came for.
@@ -279,3 +285,42 @@ Three tests, all of which must hold before you keep a split:
 
 If the answer to the last is yes and either of the first two is no, collapse the
 tiers upward.
+
+## 19a. After collapsing upward, check for a collision
+
+Round 6 collapsed croup's stridor tiers under rule 19 and created a new fault
+the rule did not anticipate. The page now says "If you can still hear stridor
+while your child is calm and resting, call 911" and, two sentences later, "A
+baby under a year old with any stridor at all needs an emergency room now."
+
+An infant under one who has stridor at rest satisfies both. One says call an
+ambulance, the other says drive. The AAP does not create this collision, because
+it puts stridor-heard-now at call-now and infant stridor at the emergency room.
+Our escalation created it.
+
+**Raising one branch of a split can make it overlap a neighbouring rule.** After
+every collapse, take the specific child the collapse was written for and read the
+whole page as them. If they match two routes, the page has to say which wins,
+or the two routes have to merge.
+
+## 20. An emergency list is one block
+
+The round 6 reader, on two pages independently:
+
+> "At 2am I scan. If I'd stopped at the end of the first paragraph, thinking that
+> was the emergency list, I'd have missed the purple spots."
+
+Fever ended a paragraph on a 911 item and opened the next on another. Croup did
+the same, with five further 911 triggers including blue lips and drooling
+stranded in the second paragraph.
+
+- **Never split 911 items across a paragraph break.** A break reads as the end of
+  a list. Everything that means 911 goes in one uninterrupted run, then the
+  emergency-room items, then everything else.
+- **Never print the same list of signs twice.** Head injury named four signs word
+  for word in consecutive paragraphs, once for happening now and once for having
+  resolved. The reader thought the page had duplicated itself, in two separate
+  rounds. Name the signs once, then split by timing.
+- **Do not count the items out loud.** "Three other signs mean calling us now"
+  and "Four more signs mean 911" both drew the comment that the writing reads
+  assembled rather than said.
