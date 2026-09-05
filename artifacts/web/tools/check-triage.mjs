@@ -94,7 +94,12 @@ function aapTiers(slug) {
 const OUR_URGENCY = [
   [/\b911\b/, 4], // any mention: "needs 911 too" is as much a 911 route as "call 911"
   [/emergency room|\bER\b|go to an emergency/i, 3],
-  [/straight away|right away|same day|today|at any hour|any time, day or night|\bnow\b|immediately/i, 2],
+  // "Now" and "the same day" are not the same promise. Scoring them alike let
+  // two pages route AAP "Call Doctor or Seek Care Now" signs to "call us the
+  // same day", which at midnight means the morning, and the gate saw no
+  // difference. A blind evaluator found both.
+  [/straight away|right away|at any hour|any time, day or night|\bnow\b|immediately|tonight/i, 2],
+  [/same day|\btoday\b|within a day|within 24 hours/i, 1],
   [/\bcall us\b|\bcall your\b|\bcall the\b|\btell us\b|\bcome in\b|\bbring your child\b/i, 1],
   [/book an appointment|book a|schedule/i, 0],
 ];
@@ -125,8 +130,16 @@ function stem(w) {
     .replace(/(.)\1$/, "$1");
 }
 
+/*
+ * Numbers are keywords. Without them "Fever higher than 104 F" reduced to
+ * "fever" and "higher", so any sentence on the fever page mentioning a fever
+ * counted as already handling it, and a page that downgraded the 104 threshold
+ * to "the same day" passed the gate. A blind evaluator caught what this missed.
+ */
 function keywords(item) {
-  return [...new Set((item.toLowerCase().match(/[a-z']{4,}/g) || []).filter((w) => !STOP.has(w)))];
+  const words = (item.toLowerCase().match(/[a-z']{4,}/g) || []).filter((w) => !STOP.has(w));
+  const numbers = (item.match(/\d+(?:\.\d+)?/g) || []);
+  return [...new Set([...words, ...numbers])];
 }
 
 /* Synonym bridges, because our copy and the AAP say the same thing in
@@ -161,7 +174,10 @@ function mentions(text, item) {
   const kw = keywords(item);
   if (!kw.length) return null;
   const lower = text.toLowerCase();
-  const stems = new Set((lower.match(/[a-z']{4,}/g) || []).map(stem));
+  const stems = new Set([
+    ...(lower.match(/[a-z']{4,}/g) || []).map(stem),
+    ...(text.match(/\d+(?:\.\d+)?/g) || []),
+  ]);
   const hits = kw.filter((w) => {
     if (lower.includes(w) || stems.has(stem(w))) return true;
     const alts = SYNONYM[w];
@@ -199,7 +215,7 @@ for (const page of pages) {
     continue;
   }
   scanned++;
-  const urgent = tiers.filter((t) => t.rank >= 3); // 911 and ER only
+  const urgent = tiers.filter((t) => t.rank >= 2); // 911, ER, and call-now
 
   for (const tier of urgent) {
     for (const item of tier.items) {
@@ -218,7 +234,7 @@ for (const page of pages) {
       const mentionedAnywhere = page.text.some((para) =>
         sentences(para).some((s) => mentions(s, item)),
       );
-      if (!mentionedAnywhere) {
+      if (!mentionedAnywhere && tier.rank >= 3) {
         missing.push({ slug: page.slug, aapTier: tier.label, aapItem: item.replace(/\s+/g, " ").slice(0, 90) });
       }
 
