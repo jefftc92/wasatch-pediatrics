@@ -324,3 +324,32 @@ stranded in the second paragraph.
 - **Do not count the items out loud.** "Three other signs mean calling us now"
   and "Four more signs mean 911" both drew the comment that the writing reads
   assembled rather than said.
+
+## 21. Age rules are never optional, and partial tiers mislead
+
+The round 7 reader, with a seven-month-old who had banged their head:
+
+> "Nothing on this page mentions babies at all. The fever page has a rule for
+> under three months, croup has one for under a year, diaper rash has one for
+> under a month, constipation has one for under a month. This page has none, so
+> I read that as 'age does not change anything here' and settled in to measure
+> the lump. The AAP tab says any child under one needs a call now. I would have
+> gone to bed having got that wrong, and I would have got it wrong because the
+> page voluntarily gave me two other call-now items and skipped this one."
+
+They were right. "Age less than 1 year old" sits in the AAP head injury
+Call Doctor Or Seek Care Now tier alongside "Large swelling (larger than 1 inch)"
+and "Large dent in skull", and our page carried the second and third and dropped
+the first.
+
+Rule 17 permits handing a lower tier to the panel wholesale. It does not permit
+taking some items from a tier and leaving others, because the reader treats what
+we chose to say as the complete set of things that change the answer. Silence
+about age reads as "age does not matter here", and across a set of pages where
+five carry an age rule, the sixth reads as deliberate.
+
+- **If a page carries any item from a tier, it carries that tier's age rules.**
+- **Never omit an age rule.** A parent cannot infer one, and the age of the child
+  is the fact they are most certain about.
+- Check a page against its siblings. A shape the other pages share becomes a
+  promise, and breaking it silently is itself a claim.
