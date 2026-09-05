@@ -247,3 +247,35 @@ So rule 17 stops here:
 
 Rules 17 and 18 are the same rule seen from two sides. Do not repeat what the
 panel says. Do not withhold what the reader came for.
+
+## 19. Drop a distinction the reader cannot make in the moment
+
+Round 3's reader asked, of croup's "bluish when your child is not coughing",
+whether blue lips during a coughing fit are therefore fine. Round 4 answered by
+stating the AAP's other tier, which is faithful to the source and worse to read.
+Blue lips then appeared as 911 in one sentence and a phone call four sentences
+later, with the difference hanging on whether the child happened to be coughing
+at that second. The round 4 reader: "I understand it now, but I had to stop and
+decode it, and I would not have managed that while watching it happen."
+
+The fix for a confusion produced a sharper confusion, because it preserved a
+distinction the source can make and a parent watching their child turn blue
+cannot.
+
+**When the source splits a sign into tiers on an observation the reader cannot
+reliably make while it is happening, take the more urgent branch and drop the
+split.** Rule 15 permits being more cautious than the source, and this is what
+that permission is for.
+
+The pattern was already there and nobody generalized it. Round 3 cut "unless the
+drooling is from teething" for exactly this reason: a parent cannot judge airway
+drool against teething drool at midnight. Blue lips is the same shape, and so is
+any tier that turns on timing the reader is not in a position to measure.
+
+Three tests, all of which must hold before you keep a split:
+- Can the reader observe the deciding detail without training?
+- Can they observe it while the emergency is in progress?
+- Would getting it wrong route them to a less urgent tier?
+
+If the answer to the last is yes and either of the first two is no, collapse the
+tiers upward.
