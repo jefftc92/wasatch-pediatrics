@@ -4737,7 +4737,6 @@
 .sym-tiles a:hover,
 .sym-tiles a:focus-visible {
   border-color: #2b93d1;
-  color: #1c7cb4;
   text-decoration: none;
 }
 
@@ -4991,4 +4990,69 @@
   .sym-embed-frame {
     height: 460px;
   }
+}
+
+/* ------------------------------------------ symptom section: contrast -- */
+
+/*
+ * `#2B93D1` is a brand colour and stays exactly that as a fill, a border, the
+ * hero wash and the topic pill. Text is the one place it fails: 3.39:1 on
+ * white against the 4.5:1 minimum, on all 164 tile labels among others.
+ * `#1a6f9f` is 5.50:1 on white and 5.00:1 on the theme's `#F4F4F4`, which
+ * matters because half the section is grey bands. The existing hover
+ * `#1c7cb4` was not enough: 4.57 on white but 4.16 on grey.
+ */
+.sym-tiles a,
+.sym-find-clear,
+.sym-others .area-group a,
+.sym-embed-open,
+.sym-embed-grow,
+.sc-index .sym-find-count {
+  color: #1a6f9f;
+}
+
+.sym-sec-note,
+.sc-index .sym-find-hint {
+  color: #636466; /* 2.78 and 3.41 -> 5.92 */
+}
+
+.sym-group-count {
+  color: #5a5b5d; /* 3.61 -> 5.95 on its own #eef0f2 pill */
+}
+
+/* Hover was `#F58220` on white, 2.59:1. A text-only shade at 5.01:1; every
+   orange fill and rule stays `#F58220`. */
+.sym-tiles a:hover,
+.sym-tiles a:focus-visible,
+.sym-find-clear:hover,
+.sym-others .area-group a:hover,
+.sym-embed-open:hover,
+.sym-embed-grow:hover {
+  color: #b3540c;
+}
+
+/* ------------------------------------- symptom section: tap targets -- */
+
+/* 366 x 43px against a 44px minimum, on 5 to 11 links per page. Scoped to
+   `.sym-others`: `.area-group` is also /locations/ and the service areas. */
+.sym-others .area-group li a {
+  padding: 9px 0;
+}
+
+/* 67 x 32px inside a 52px input: the padding grows without growing the box. */
+.sym-find-clear {
+  min-height: 44px;
+  min-width: 76px;
+  padding: 11px 18px;
+}
+
+/*
+ * 107 x 15px at y=95. The trail is pinned, so the pad is absorbed by an equal
+ * negative margin and the hero does not grow. 35px is not 44; the 366 x 52px
+ * "All symptoms" button below it is the reachable route to the same place.
+ */
+.sym-hero .hero-crumbs a {
+  display: inline-block;
+  padding: 10px 2px;
+  margin: -10px 0;
 }
