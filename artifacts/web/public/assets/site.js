@@ -1235,12 +1235,13 @@
   modal.addEventListener("close", restore);
   modal.addEventListener("cancel", restore);
 
-  var closer = modal.querySelector("[data-sym-close]");
-  if (closer) {
+  // Two of them now: the icon in the bar, and the full-width one at the foot
+  // that a thumb can actually reach on a phone.
+  [].slice.call(modal.querySelectorAll("[data-sym-close]")).forEach(function (closer) {
     closer.addEventListener("click", function () {
       modal.close();
     });
-  }
+  });
 
   // A click on the backdrop lands on the dialog itself, never on its contents.
   modal.addEventListener("click", function (event) {

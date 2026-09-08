@@ -141,26 +141,33 @@ ${
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">${escapeAttribute(symptom.aapHeading)}</h2>
-				<p class="sym-tool-lead">${escapeAttribute(symptom.aapLead)}</p>
 				<div class="sym-embed">
-					<p class="sym-embed-bar">
-						<span class="sym-embed-name">AAP Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
-						<span class="sym-embed-acts">
-							<button type="button" class="sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
-							<a class="sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">New tab<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
-						</span>
+					<p class="sym-embed-cap"><span class="sym-embed-name">AAP Symptom Checker</span><span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></p>
+					<div class="sym-embed-stage">
+						<div class="sym-embed-fallback">
+							<p class="sym-embed-fallback-lead">If the Symptom Checker does not appear here</p>
+							<p>It is the American Academy of Pediatrics&#8217; own tool and it loads from their site, so a lost connection or a content blocker leaves this space empty. Open it on HealthyChildren.org with the button below, or call your office and a nurse will answer.</p>
+						</div>
+						<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
+					</div>
+					<p class="sym-embed-acts">
+						<button type="button" class="sym-embed-act sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
+						<a class="sym-embed-act sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">Open on HealthyChildren.org<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
 					</p>
-					<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
 				</div>
+				<p class="sym-tool-lead">${escapeAttribute(symptom.aapLead)}</p>
 				<dialog class="sym-modal" aria-label="Symptom Checker: ${escapeAttribute(symptom.short)}">
 					<div class="sym-modal-bar">
 						<span class="sym-embed-name">Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
 						<span class="sym-embed-acts">
 							<a class="sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">New tab<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
-							<button type="button" class="sym-modal-close" data-sym-close>Close<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+							<button type="button" class="sym-modal-close" data-sym-close><span class="visually-hidden">Close</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
 						</span>
 					</div>
 					<div class="sym-modal-body"></div>
+					<div class="sym-modal-foot">
+						<button type="button" class="sym-modal-done" data-sym-close>Close and go back</button>
+					</div>
 				</dialog>
 			</div>
 		</div>

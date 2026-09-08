@@ -4857,12 +4857,17 @@
   margin: 0 0 8px 0;
 }
 
-.sym-embed-bar {
+/*
+ * A caption, not a bar. It was a 62px row carrying the panel's name on the
+ * left and its two escape hatches on the right, 21px tall in the corner
+ * furthest from a thumb. The name stays here; the controls move below the
+ * frame, where the hand is.
+ */
+.sym-embed-cap {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin: 0 0 10px 0;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px 0;
   padding: 0 2px;
 }
 
@@ -4898,6 +4903,7 @@
   text-decoration: none;
   white-space: nowrap;
 }
+
 
 .sym-embed-open:hover {
   color: #f58220;
@@ -4956,13 +4962,106 @@
   stroke-linejoin: round;
 }
 
+/*
+ * The two ways out of the frame, as real targets. 94x21 and 74x21 against a
+ * 44px minimum, and the only thing on the page telling a reader what to do
+ * when the frame shows nothing.
+ */
+.sym-embed-act {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 1px solid #dfe2e5;
+  border-radius: 24px;
+  background: #ffffff;
+  color: #1a6f9f;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.sym-embed-act:hover,
+.sym-embed-act:focus-visible {
+  border-color: #2b93d1;
+  text-decoration: none;
+}
+
+.sym-embed .sym-embed-acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+  margin: 10px 0 0 0;
+}
+
+/*
+ * The panel's edge belongs to the stage rather than to the frame, so it looks
+ * the same whether or not anything loads.
+ */
+.sym-embed-stage {
+  position: relative;
+  border: 1px solid #e4e7ea;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/*
+ * Behind the frame, not instead of it. Nothing here asks whether the frame
+ * loaded — a cross-origin frame gives no trustworthy load or error signal, and
+ * hard constraint 3 forbids depending on one. When the frame arrives the AAP's
+ * own white page covers this; when it never does, this is what was always
+ * there. Worded as a condition rather than as a report, because it is in the
+ * document either way and a screen reader reads it either way.
+ *
+ * Honest limit: an offline or DNS failure makes the browser paint its own
+ * error page inside the frame, which covers this. The always-visible
+ * "Open on HealthyChildren.org" control below the frame is the rescue that
+ * does not depend on anything.
+ */
+.sym-embed-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 22px;
+  background: #f8f9fa;
+}
+
+.sym-embed-fallback-lead {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #4a4b4d;
+}
+
+.sym-embed-fallback p {
+  margin: 0;
+  max-width: 40em;
+  font-size: 16px;
+  line-height: 25px;
+  color: #636466;
+}
+
+/* The frame must not paint its own fill, or it covers the message. */
 .sym-embed-frame {
+  position: relative;
   display: block;
   width: 100%;
   height: 560px;
-  border: 1px solid #e4e7ea;
-  border-radius: 14px;
-  background: #ffffff;
+  border: 0;
+  background: transparent;
 }
 
 /* The launched tool. Closed dialogs stay display:none via the UA sheet. */
@@ -5002,13 +5101,14 @@
 .sym-modal-close {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
+  border-radius: 22px;
   background: none;
   color: #636466;
-  font-size: 14px;
-  font-weight: 600;
   cursor: pointer;
 }
 
@@ -5038,6 +5138,35 @@
   border: 0;
 }
 
+/*
+ * A phone has no Escape key and, at 100vw, no backdrop to tap, so the 58x21px
+ * "Close" in the top-right corner was the only way out of a full-screen
+ * dialog — and the top-right corner is the least reachable place on an 844px
+ * screen held in one hand. The way out is a full-width control at the bottom.
+ */
+.sym-modal-foot {
+  flex: 0 0 auto;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: #f4f5f6;
+  border-top: 1px solid #e4e7ea;
+}
+
+.sym-modal-done {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 26px;
+  background: #1a6f9f;
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
 @media (max-width: 767px) {
   .sym-modal {
     width: 100vw;
@@ -5046,16 +5175,30 @@
   }
 }
 
-@media (max-width: 575px) {
-  .sym-embed-bar {
-    padding: 10px 14px;
+@media (min-width: 768px) {
+  /* Room for both, so neither has to be full width. */
+  .sym-embed-act {
+    flex: 0 0 auto;
   }
 
-  .sym-embed-topic {
+  /* Escape and a backdrop both exist here; the top-right close is enough. */
+  .sym-modal-foot {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .sym-embed-cap .sym-embed-topic {
     display: none;
   }
 
-  .sym-embed-acts {
+  /* Inside the dialog the bar otherwise read only "SYMPTOM CHECKER" and no
+     longer said which symptom it was showing. */
+  .sym-modal .sym-embed-topic {
+    display: inline-block;
+  }
+
+  .sym-modal .sym-embed-acts {
     gap: 14px;
   }
 
