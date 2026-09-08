@@ -595,6 +595,18 @@
   opacity: 0;
 }
 
+/* Live only at rest. See the `is-folding` comment in site.js. */
+.ctadock.is-folding .ctadock-btn {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctadock-btn,
+  .ctadock-label {
+    transition: none;
+  }
+}
+
 @media (max-width: 1199px) {
   .ctadock {
     display: flex;

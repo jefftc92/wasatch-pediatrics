@@ -55,8 +55,30 @@
      * bubble used to fly down to the corner and back as you scrolled, which
      * was a second copy of a button already on the page.
      */
+    /*
+     * While the button folds from 358px to 56px it is still 358px wide to a
+     * finger: a tap 80ms after a scroll stop landed on /contact-us/ instead of
+     * the tile under it. `is-folding` takes it out of the hit test for the
+     * length of the transition. A missed tap is recoverable; a wrong
+     * navigation is not.
+     *
+     * Not `transitionend`, which does not fire when the reverse toggle
+     * interrupts the transition — exactly what fast scrolling does — and would
+     * leave the button permanently dead.
+     */
+    var still = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var folding = null;
     var syncDock = function () {
-      dock.classList.toggle("is-mini", !wide.matches && window.scrollY > 140);
+      var mini = !wide.matches && window.scrollY > 140;
+      if (mini === dock.classList.contains("is-mini")) return;
+      dock.classList.toggle("is-mini", mini);
+      // Nothing animates under reduced motion, so nothing has to be blocked.
+      if (still.matches) return;
+      dock.classList.add("is-folding");
+      window.clearTimeout(folding);
+      folding = window.setTimeout(function () {
+        dock.classList.remove("is-folding");
+      }, 320);
     };
 
     syncDock();
