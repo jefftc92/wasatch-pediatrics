@@ -5128,3 +5128,75 @@
   padding: 10px 2px;
   margin: -10px 0;
 }
+
+/* ------------------------------------ symptom index: the first screen -- */
+
+/*
+ * 711px of an 844px phone screen went before the search box, and no topic
+ * link was visible at all. Nothing is removed: the photograph stays, because
+ * every other page has one and this section is not the place to become the odd
+ * page out, and the alert band is untouched at 170px. What comes out is
+ * spacing that was sized for a page with more to say above the fold than this
+ * one has.
+ */
+.sc-index {
+  padding-top: 24px;
+}
+
+.sc-index h2 {
+  margin-bottom: 10px;
+}
+
+.sc-index .sc-lead {
+  margin-bottom: 18px;
+}
+
+.sym-find,
+.sc-index .sym-find-off {
+  margin: 0 0 18px 0;
+}
+
+.sym-sec {
+  margin: 0 0 14px 0;
+  padding: 0 0 8px 0;
+}
+
+/*
+ * The theme swaps the wide hero for this image below 992 and gives it a width
+ * and no height, so it came in at its intrinsic 400px — the single largest
+ * thing above the search box on a tablet. Fixing the height also removes a
+ * layout shift the page has always had, since nothing was reserved until the
+ * image decoded.
+ */
+@media (max-width: 991px) {
+  #mobileheroimage.sc-heroimg {
+    height: 160px;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+}
+
+@media (max-width: 767px) {
+  #mobileheroimage.sc-heroimg {
+    height: 96px;
+  }
+}
+
+@media (min-width: 992px) {
+  .sc-index {
+    padding-top: 34px;
+  }
+
+  /*
+   * The theme's `#usergeneratedsection .herowrap` is 512px, and it is the wide
+   * hero from 992 up. At 1280 that put the search box 182px below the fold, so
+   * the whole first screen was a photograph and a 911 banner with nothing to
+   * say the page does anything. Same specificity as the theme's rule, later in
+   * the cascade: site.css is emitted after style.css in both
+   * `authored/head.html` and `document.ts`. The id supplies the specificity;
+   * the class it styles is ours.
+   */
+  #usergeneratedsection .sc-herowrap {
+    height: 340px;
+  }
+}
