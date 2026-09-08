@@ -4343,8 +4343,14 @@
 }
 
 /* The line introducing the tool — what it does, not why it is embedded. */
+/*
+ * The line introducing the tool. `-18px` pulled it into the heading: the gap
+ * measured -4px here against +15px for the identical heading-and-lead pairing
+ * in the intro band 300px above, so the page ran two rhythms. It sits below
+ * the frame now, so the margin is on the other side.
+ */
 .sym-tool-lead {
-  margin: -18px 0 26px 0;
+  margin: 16px 0 0 0;
   color: #636466;
   font-size: 18px;
   line-height: 28px;
@@ -5487,5 +5493,65 @@
     min-width: 0;
     padding: 13px 10px;
     text-align: center;
+  }
+}
+
+/* -------------------------------- the space above the frame, and bands -- */
+
+/*
+ * `padme90` is 90px, 50px below 768. It was sized for pages carrying three
+ * paragraphs; these carry one, of 16 to 52 words, and /sty/ at 1280 measured
+ * 326px of band around 116px of content — 65% padding. Four of these bands at
+ * 390 spent 400px on a 3,700px page.
+ *
+ * The hairline at the seam is what fixed the recorded fault "no dividers
+ * between sections", so it stays and only the padding around it comes in.
+ * Anchored on our own band classes; `.padme90` is here to outrank the theme's
+ * utility, which 272 pages use, and is never selected on its own.
+ */
+.sym-intro.padme90,
+.sym-tool.padme90,
+.sym-next.padme90,
+.sym-others.padme90 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+  .sym-intro.padme90,
+  .sym-tool.padme90,
+  .sym-next.padme90,
+  .sym-others.padme90 {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+/*
+ * The hero was a fixed 420px box holding 330 to 384px of content, so every one
+ * of the 164 pages carried 36 to 90px of empty blue below its buttons — inside
+ * the 1,306px that stood between the reader and the tool the page exists for.
+ */
+.sym-hero .dent-hero-inner {
+  min-height: 0;
+}
+
+@media (max-width: 767px) {
+  /* The trail two lines above already says "Symptom Checker". */
+  .sym-hero .dent-hero-eyebrow {
+    display: none;
+  }
+
+  .sym-hero .dent-hero-inner {
+    padding-top: 40px;
+    padding-bottom: 28px;
+  }
+
+  .sym-hero .hero-crumbs {
+    top: 12px;
+  }
+
+  .sym-hero .dent-hero-act {
+    margin-top: 24px;
   }
 }
