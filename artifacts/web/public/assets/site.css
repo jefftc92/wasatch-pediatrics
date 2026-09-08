@@ -5343,3 +5343,149 @@
     height: 340px;
   }
 }
+
+/* --------------------------------------- the numbers, and what routes -- */
+
+/*
+ * The section had no phone number anywhere: `a[href^="tel:"]` was 0 on all 164
+ * pages and on the index, while the routing band's strongest line said "call
+ * your office's main number" and the alert band said the nurse line answers on
+ * it. Reaching one meant two taps, three scroll journeys and a 109x17px link
+ * on /locations/.
+ *
+ * Eight offices, eight numbers, so the picker is the answer. The geometry and
+ * palette are the topic tile's, because three card idioms already exist on
+ * this page and this is a fourth content, not a fourth style.
+ */
+.sym-call {
+  margin: 0 0 26px 0;
+  scroll-margin-top: 72px; /* the header is sticky below 1200 */
+}
+
+.sym-call-title {
+  margin: 0 0 12px 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: #636466;
+}
+
+.sym-call-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.sym-call-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-height: 64px;
+  padding: 10px 12px;
+  border: 1px solid #dfe2e5;
+  border-radius: 14px;
+  background: #ffffff;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.sym-call-item:hover,
+.sym-call-item:focus-visible {
+  border-color: #2b93d1;
+  text-decoration: none;
+}
+
+.sym-call-office {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #636466;
+}
+
+.sym-call-num {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a6f9f;
+}
+
+.sym-call-note {
+  margin: 14px 0 0 0;
+  font-size: 15px;
+  line-height: 24px;
+  color: #636466;
+}
+
+.sym-call-note a {
+  color: #1a6f9f;
+}
+
+/*
+ * "911" at 17px/300 did not survive a four-pixel blur, on the one band that
+ * must not be missed. The band's height is unchanged, so finding 4's
+ * arithmetic is not affected.
+ */
+.sym-911 {
+  white-space: nowrap;
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 #f58220;
+}
+
+.sym-hero-call {
+  background: #ffffff;
+  color: #1a6f9f !important;
+  border: 2px solid #ffffff;
+}
+
+/*
+ * Under a two-second glance the routing band inverted its own priority: the
+ * survivors were the two blue underlined inline links, so "Talk to a nurse
+ * now" — bold #2b2c2e, no link, no colour, no number — was the least salient
+ * of the three routes despite being the first and the most urgent.
+ */
+.sc-routes .sc-route-now {
+  padding-left: 22px;
+}
+
+.sc-routes .sc-route-now:before {
+  width: 10px;
+  height: 10px;
+  top: 10px;
+  background: #f58220;
+}
+
+.sc-routes .sc-route-now strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 19px;
+  color: #8a4b12;
+}
+
+@media (min-width: 768px) {
+  .sym-call-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  /* Two buttons on one line rather than two stacked bars, so the hero does
+     not grow to pay for the first one. */
+  .sym-hero .dent-hero-act {
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .sym-hero .dent-hero-act .btn {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 13px 10px;
+    text-align: center;
+  }
+}

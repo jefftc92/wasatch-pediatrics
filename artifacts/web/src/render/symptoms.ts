@@ -21,6 +21,8 @@
 
 import { symptoms, type Symptom } from "../data/symptoms.ts";
 import { symptomTerms } from "../data/symptomTerms.ts";
+import { offices, formatPhone } from "../data/offices.ts";
+import { locationNames } from "../data/services.ts";
 import { escapeAttribute, SITE, type GeneratedPage } from "./generated.ts";
 import type { Crumb } from "./generated.ts";
 
@@ -74,9 +76,35 @@ function heroBand(symptom: Symptom): string {
 		<p class="dent-hero-eyebrow">Symptom Checker</p>
 		<h1 class="dent-hero-title">${escapeAttribute(symptom.title)}</h1>
 		<p class="dent-hero-lead">${escapeAttribute(symptom.lead)}</p>
-		<p class="dent-hero-act"><a class="btn dent-hero-ghost" href="${CHECKER}">All symptoms</a></p>
+		<p class="dent-hero-act"><a class="btn sym-hero-call" href="#sym-call">Call a nurse</a> <a class="btn dent-hero-ghost" href="${CHECKER}">All symptoms</a></p>
 	</div>
 </div>`;
+}
+
+/**
+ * Eight offices, eight main numbers, and the nurse line answers on each.
+ *
+ * There is no practice-wide number to give. `offices.ts` holds eight distinct
+ * `phone` fields, neither `renderHeader()` nor `renderFooter()` contains a
+ * `tel:` at all, and the section's own copy says why: the nurse line is
+ * reached through an office's ordinary main number. So the page gives the
+ * choice rather than a link to a page that has the numbers on it. Inventing
+ * one would send a Park City parent to the wrong office at three in the
+ * morning.
+ */
+function callList(): string {
+	const items = offices
+		.map((office) => {
+			const name = locationNames[office.slug] ?? office.slug;
+			return `<li><a class="sym-call-item" href="tel:${office.phone}"><span class="sym-call-office">${escapeAttribute(name)}</span><span class="sym-call-num">${formatPhone(office.phone)}</span></a></li>`;
+		})
+		.join("");
+
+	return `<div class="sym-call" id="sym-call">
+					<h3 class="sym-call-title">Call your office &#8212; a nurse answers at any hour</h3>
+					<ul class="sym-call-list">${items}</ul>
+					<p class="sym-call-note">Any office will help if yours is not on your mind. <a href="/locations/">Hours, addresses and directions</a>.</p>
+				</div>`;
 }
 
 function renderSymptomPage(symptom: Symptom): string {
@@ -107,7 +135,7 @@ function renderSymptomPage(symptom: Symptom): string {
   return `${heroBand(symptom)}
 <div class="sym-alert">
 	<div class="container">
-		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, call 911 now.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
+		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <span class="sym-911">call 911 now</span>.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
 	</div>
 </div>
 <div class="whitebg padme90 sym-intro">
@@ -180,8 +208,9 @@ ${
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">Getting your child seen</h2>
+				${callList()}
 				<ul class="sc-routes">
-					<li><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.</li>
+					<li class="sc-route-now"><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.</li>
 					<li><strong>Be seen today.</strong> Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</li>
 					<li><strong>This evening or at the weekend.</strong> Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</li>
 				</ul>
