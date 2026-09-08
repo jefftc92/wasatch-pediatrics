@@ -47,6 +47,24 @@ export const buildMeta = `<meta name="x-build" content="${buildId}" />`;
 export const siteAssets = [
   `<link rel='stylesheet' id='site-css' href='/assets/site.css?v=${buildId}' media='all' />`,
   `<script id="site-js" src="/assets/site.js?v=${buildId}" defer></script>`,
+  /*
+   * What every page looks like with scripting off.
+   *
+   * The theme's `.page-load` is a fixed white sheet at z-index 9999 that only
+   * jQuery ever takes down, so without script the whole site is a blank screen
+   * with a complete DOM behind it. The stylesheet that sizes it belongs to the
+   * vendored theme and is never edited; this is our own rule, from our own
+   * head, and `<noscript>` in `<head>` is the one place a stylesheet may be
+   * conditioned on scripting without a media query no old phone supports.
+   *
+   * The symptom index's search box is the same problem in miniature: an input
+   * that filters nothing without script. It hides here and the `<noscript>`
+   * paragraph beside it in the markup takes its place. The box is not shipped
+   * `hidden` and revealed by JS, which is the pattern elsewhere, because that
+   * would need a reserved height to avoid a jump and the height is exactly what
+   * finding 5 was spending.
+   */
+  `<noscript><style>.page-load{display:none!important}.sym-find{display:none}</style></noscript>`,
 ].join("\n");
 
 /**

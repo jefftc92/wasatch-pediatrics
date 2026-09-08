@@ -595,6 +595,18 @@
   opacity: 0;
 }
 
+/* Live only at rest. See the `is-folding` comment in site.js. */
+.ctadock.is-folding .ctadock-btn {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ctadock-btn,
+  .ctadock-label {
+    transition: none;
+  }
+}
+
 @media (max-width: 1199px) {
   .ctadock {
     display: flex;
@@ -4331,8 +4343,14 @@
 }
 
 /* The line introducing the tool — what it does, not why it is embedded. */
+/*
+ * The line introducing the tool. `-18px` pulled it into the heading: the gap
+ * measured -4px here against +15px for the identical heading-and-lead pairing
+ * in the intro band 300px above, so the page ran two rhythms. It sits below
+ * the frame now, so the margin is on the other side.
+ */
 .sym-tool-lead {
-  margin: -18px 0 26px 0;
+  margin: 16px 0 0 0;
   color: #636466;
   font-size: 18px;
   line-height: 28px;
@@ -4516,8 +4534,30 @@
   color: #2b93d1;
 }
 
+/* Filled rather than emptied on zero hits, so the polite live region says
+   something instead of saying nothing. */
+.sc-index .sym-find-count.is-none {
+  color: #8a4b12;
+}
+
 .sc-index .sym-find-count:empty {
   display: none;
+}
+
+/*
+ * What stands in for the box when there is no script to drive it. Only ever
+ * rendered inside <noscript>, so it costs a reader with script nothing; the
+ * matching rule that hides `.sym-find` is in the head, in `build.ts`.
+ */
+.sc-index .sym-find-off {
+  max-width: 620px;
+  margin: 4px 0 38px 0;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #f4f5f6;
+  font-size: 16px;
+  line-height: 24px;
+  color: #4a4b4d;
 }
 
 /*
@@ -4635,11 +4675,19 @@
   text-align: center;
 }
 
+/*
+ * A zero-hit query used to change nothing on screen: the count was cleared,
+ * `:empty` hid it, and the panel sat 857px down, below the fold. The panel is
+ * directly under the box now and names the query back, so the answer to
+ * "seizure" is not a screen identical to the one before it.
+ */
 .sym-none {
   max-width: 620px;
-  padding: 26px 28px 8px 28px;
+  margin: 0 0 26px 0;
+  padding: 22px 24px 6px 24px;
   border-radius: 16px;
   background: #f4f5f6;
+  border-left: 4px solid #f58220;
 }
 
 .sym-none-lead {
@@ -4647,6 +4695,52 @@
   font-size: 19px;
   font-weight: 600;
   color: #4a4b4d;
+}
+
+/* An unbroken 40-character token must not widen the panel. */
+.sym-none-q {
+  font-style: italic;
+  color: #2b2c2e;
+  overflow-wrap: anywhere;
+}
+
+/*
+ * "seizure" and "choking" are two of the four words in our own 911 sentence,
+ * and no page covers either — nor should one. Shipped hidden, revealed only by
+ * typing, so it never sits on the page as a warning about nothing.
+ */
+.sym-emergency {
+  max-width: 620px;
+  margin: 0 0 26px 0;
+  padding: 22px 24px 8px 24px;
+  border-radius: 16px;
+  background: #fff4e8;
+  border: 2px solid #f58220;
+}
+
+.sym-emergency-lead {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #8a4b12;
+}
+
+.sc-index .sym-emergency-body {
+  margin: 0;
+  font-size: 17px;
+  line-height: 26px;
+  color: #6b4a24;
+}
+
+.sc-index .sym-emergency-body a {
+  color: #8a4b12;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sym-emergency .btn.sym-emergency-call {
+  background: #a63d08;
+  color: #ffffff !important;
 }
 
 .sym-none p {
@@ -4721,7 +4815,6 @@
 .sym-tiles a:hover,
 .sym-tiles a:focus-visible {
   border-color: #2b93d1;
-  color: #1c7cb4;
   text-decoration: none;
 }
 
@@ -4770,12 +4863,17 @@
   margin: 0 0 8px 0;
 }
 
-.sym-embed-bar {
+/*
+ * A caption, not a bar. It was a 62px row carrying the panel's name on the
+ * left and its two escape hatches on the right, 21px tall in the corner
+ * furthest from a thumb. The name stays here; the controls move below the
+ * frame, where the hand is.
+ */
+.sym-embed-cap {
   display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 16px;
-  margin: 0 0 10px 0;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 8px 0;
   padding: 0 2px;
 }
 
@@ -4811,6 +4909,7 @@
   text-decoration: none;
   white-space: nowrap;
 }
+
 
 .sym-embed-open:hover {
   color: #f58220;
@@ -4869,13 +4968,106 @@
   stroke-linejoin: round;
 }
 
+/*
+ * The two ways out of the frame, as real targets. 94x21 and 74x21 against a
+ * 44px minimum, and the only thing on the page telling a reader what to do
+ * when the frame shows nothing.
+ */
+.sym-embed-act {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 1 1 auto;
+  min-height: 48px;
+  padding: 12px 18px;
+  border: 1px solid #dfe2e5;
+  border-radius: 24px;
+  background: #ffffff;
+  color: #1a6f9f;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 22px;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  cursor: pointer;
+}
+
+.sym-embed-act:hover,
+.sym-embed-act:focus-visible {
+  border-color: #2b93d1;
+  text-decoration: none;
+}
+
+.sym-embed .sym-embed-acts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 10px;
+  margin: 10px 0 0 0;
+}
+
+/*
+ * The panel's edge belongs to the stage rather than to the frame, so it looks
+ * the same whether or not anything loads.
+ */
+.sym-embed-stage {
+  position: relative;
+  border: 1px solid #e4e7ea;
+  border-radius: 14px;
+  overflow: hidden;
+  background: #ffffff;
+}
+
+/*
+ * Behind the frame, not instead of it. Nothing here asks whether the frame
+ * loaded — a cross-origin frame gives no trustworthy load or error signal, and
+ * hard constraint 3 forbids depending on one. When the frame arrives the AAP's
+ * own white page covers this; when it never does, this is what was always
+ * there. Worded as a condition rather than as a report, because it is in the
+ * document either way and a screen reader reads it either way.
+ *
+ * Honest limit: an offline or DNS failure makes the browser paint its own
+ * error page inside the frame, which covers this. The always-visible
+ * "Open on HealthyChildren.org" control below the frame is the rescue that
+ * does not depend on anything.
+ */
+.sym-embed-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 24px 22px;
+  background: #f8f9fa;
+}
+
+.sym-embed-fallback-lead {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 700;
+  color: #4a4b4d;
+}
+
+.sym-embed-fallback p {
+  margin: 0;
+  max-width: 40em;
+  font-size: 16px;
+  line-height: 25px;
+  color: #636466;
+}
+
+/* The frame must not paint its own fill, or it covers the message. */
 .sym-embed-frame {
+  position: relative;
   display: block;
   width: 100%;
   height: 560px;
-  border: 1px solid #e4e7ea;
-  border-radius: 14px;
-  background: #ffffff;
+  border: 0;
+  background: transparent;
 }
 
 /* The launched tool. Closed dialogs stay display:none via the UA sheet. */
@@ -4915,13 +5107,14 @@
 .sym-modal-close {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
   padding: 0;
   border: 0;
+  border-radius: 22px;
   background: none;
   color: #636466;
-  font-size: 14px;
-  font-weight: 600;
   cursor: pointer;
 }
 
@@ -4951,6 +5144,35 @@
   border: 0;
 }
 
+/*
+ * A phone has no Escape key and, at 100vw, no backdrop to tap, so the 58x21px
+ * "Close" in the top-right corner was the only way out of a full-screen
+ * dialog — and the top-right corner is the least reachable place on an 844px
+ * screen held in one hand. The way out is a full-width control at the bottom.
+ */
+.sym-modal-foot {
+  flex: 0 0 auto;
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: #f4f5f6;
+  border-top: 1px solid #e4e7ea;
+}
+
+.sym-modal-done {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+  border: 0;
+  border-radius: 26px;
+  background: #1a6f9f;
+  color: #ffffff;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+}
+
 @media (max-width: 767px) {
   .sym-modal {
     width: 100vw;
@@ -4959,20 +5181,419 @@
   }
 }
 
-@media (max-width: 575px) {
-  .sym-embed-bar {
-    padding: 10px 14px;
+@media (min-width: 768px) {
+  /* Room for both, so neither has to be full width. */
+  .sym-embed-act {
+    flex: 0 0 auto;
   }
 
-  .sym-embed-topic {
+  /* Escape and a backdrop both exist here; the top-right close is enough. */
+  .sym-modal-foot {
+    display: none;
+  }
+}
+
+@media (max-width: 575px) {
+  .sym-embed-cap .sym-embed-topic {
     display: none;
   }
 
-  .sym-embed-acts {
+  /* Inside the dialog the bar otherwise read only "SYMPTOM CHECKER" and no
+     longer said which symptom it was showing. */
+  .sym-modal .sym-embed-topic {
+    display: inline-block;
+  }
+
+  .sym-modal .sym-embed-acts {
     gap: 14px;
   }
 
   .sym-embed-frame {
     height: 460px;
   }
+}
+
+/* ------------------------------------------ symptom section: contrast -- */
+
+/*
+ * `#2B93D1` is a brand colour and stays exactly that as a fill, a border, the
+ * hero wash and the topic pill. Text is the one place it fails: 3.39:1 on
+ * white against the 4.5:1 minimum, on all 164 tile labels among others.
+ * `#1a6f9f` is 5.50:1 on white and 5.00:1 on the theme's `#F4F4F4`, which
+ * matters because half the section is grey bands. The existing hover
+ * `#1c7cb4` was not enough: 4.57 on white but 4.16 on grey.
+ */
+.sym-tiles a,
+.sym-find-clear,
+.sym-others .area-group a,
+.sym-embed-open,
+.sym-embed-grow,
+.sc-index .sym-find-count {
+  color: #1a6f9f;
+}
+
+.sym-sec-note,
+.sc-index .sym-find-hint {
+  color: #636466; /* 2.78 and 3.41 -> 5.92 */
+}
+
+.sym-group-count {
+  color: #5a5b5d; /* 3.61 -> 5.95 on its own #eef0f2 pill */
+}
+
+/* Hover was `#F58220` on white, 2.59:1. A text-only shade at 5.01:1; every
+   orange fill and rule stays `#F58220`. */
+.sym-tiles a:hover,
+.sym-tiles a:focus-visible,
+.sym-find-clear:hover,
+.sym-others .area-group a:hover,
+.sym-embed-open:hover,
+.sym-embed-grow:hover {
+  color: #b3540c;
+}
+
+/* ------------------------------------- symptom section: tap targets -- */
+
+/* 366 x 43px against a 44px minimum, on 5 to 11 links per page. Scoped to
+   `.sym-others`: `.area-group` is also /locations/ and the service areas. */
+.sym-others .area-group li a {
+  padding: 9px 0;
+}
+
+/* 67 x 32px inside a 52px input: the padding grows without growing the box. */
+.sym-find-clear {
+  min-height: 44px;
+  min-width: 76px;
+  padding: 11px 18px;
+}
+
+/*
+ * 107 x 15px at y=95. The trail is pinned, so the pad is absorbed by an equal
+ * negative margin and the hero does not grow. 35px is not 44; the 366 x 52px
+ * "All symptoms" button below it is the reachable route to the same place.
+ */
+.sym-hero .hero-crumbs a {
+  display: inline-block;
+  padding: 10px 2px;
+  margin: -10px 0;
+}
+
+/* ------------------------------------ symptom index: the first screen -- */
+
+/*
+ * 711px of an 844px phone screen went before the search box, and no topic
+ * link was visible at all. Nothing is removed: the photograph stays, because
+ * every other page has one and this section is not the place to become the odd
+ * page out, and the alert band is untouched at 170px. What comes out is
+ * spacing that was sized for a page with more to say above the fold than this
+ * one has.
+ */
+.sc-index {
+  padding-top: 24px;
+}
+
+.sc-index h2 {
+  margin-bottom: 10px;
+}
+
+.sc-index .sc-lead {
+  margin-bottom: 18px;
+}
+
+.sym-find,
+.sc-index .sym-find-off {
+  margin: 0 0 18px 0;
+}
+
+.sym-sec {
+  margin: 0 0 14px 0;
+  padding: 0 0 8px 0;
+}
+
+/*
+ * The theme swaps the wide hero for this image below 992 and gives it a width
+ * and no height, so it came in at its intrinsic 400px — the single largest
+ * thing above the search box on a tablet. Fixing the height also removes a
+ * layout shift the page has always had, since nothing was reserved until the
+ * image decoded.
+ */
+@media (max-width: 991px) {
+  #mobileheroimage.sc-heroimg {
+    height: 160px;
+    object-fit: cover;
+    object-position: center 30%;
+  }
+}
+
+@media (max-width: 767px) {
+  #mobileheroimage.sc-heroimg {
+    height: 96px;
+  }
+}
+
+@media (min-width: 992px) {
+  .sc-index {
+    padding-top: 34px;
+  }
+
+  /*
+   * The theme's `#usergeneratedsection .herowrap` is 512px, and it is the wide
+   * hero from 992 up. At 1280 that put the search box 182px below the fold, so
+   * the whole first screen was a photograph and a 911 banner with nothing to
+   * say the page does anything. Same specificity as the theme's rule, later in
+   * the cascade: site.css is emitted after style.css in both
+   * `authored/head.html` and `document.ts`. The id supplies the specificity;
+   * the class it styles is ours.
+   */
+  #usergeneratedsection .sc-herowrap {
+    height: 340px;
+  }
+}
+
+/* --------------------------------------- the numbers, and what routes -- */
+
+/*
+ * The section had no phone number anywhere: `a[href^="tel:"]` was 0 on all 164
+ * pages and on the index, while the routing band's strongest line said "call
+ * your office's main number" and the alert band said the nurse line answers on
+ * it. Reaching one meant two taps, three scroll journeys and a 109x17px link
+ * on /locations/.
+ *
+ * Eight offices, eight numbers, so the picker is the answer. The geometry and
+ * palette are the topic tile's, because three card idioms already exist on
+ * this page and this is a fourth content, not a fourth style.
+ */
+.sym-call {
+  margin: 0 0 26px 0;
+  scroll-margin-top: 72px; /* the header is sticky below 1200 */
+}
+
+.sym-call-title {
+  margin: 0 0 12px 0;
+  font-family: "Montserrat", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: #636466;
+}
+
+.sym-call-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.sym-call-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+  min-height: 64px;
+  padding: 10px 12px;
+  border: 1px solid #dfe2e5;
+  border-radius: 14px;
+  background: #ffffff;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.sym-call-item:hover,
+.sym-call-item:focus-visible {
+  border-color: #2b93d1;
+  text-decoration: none;
+}
+
+.sym-call-office {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #636466;
+}
+
+.sym-call-num {
+  font-size: 17px;
+  font-weight: 700;
+  color: #1a6f9f;
+}
+
+.sym-call-note {
+  margin: 14px 0 0 0;
+  font-size: 15px;
+  line-height: 24px;
+  color: #636466;
+}
+
+.sym-call-note a {
+  color: #1a6f9f;
+}
+
+/*
+ * "911" at 17px/300 did not survive a four-pixel blur, on the one band that
+ * must not be missed. The band's height is unchanged, so finding 4's
+ * arithmetic is not affected.
+ */
+.sym-911 {
+  white-space: nowrap;
+  font-weight: 700;
+  box-shadow: inset 0 -2px 0 #f58220;
+}
+
+.sym-hero-call {
+  background: #ffffff;
+  color: #1a6f9f !important;
+  border: 2px solid #ffffff;
+}
+
+/*
+ * Under a two-second glance the routing band inverted its own priority: the
+ * survivors were the two blue underlined inline links, so "Talk to a nurse
+ * now" — bold #2b2c2e, no link, no colour, no number — was the least salient
+ * of the three routes despite being the first and the most urgent.
+ */
+.sc-routes .sc-route-now {
+  padding-left: 22px;
+}
+
+.sc-routes .sc-route-now:before {
+  width: 10px;
+  height: 10px;
+  top: 10px;
+  background: #f58220;
+}
+
+.sc-routes .sc-route-now strong {
+  display: block;
+  margin-bottom: 2px;
+  font-size: 19px;
+  color: #8a4b12;
+}
+
+@media (min-width: 768px) {
+  .sym-call-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  /* Two buttons on one line rather than two stacked bars, so the hero does
+     not grow to pay for the first one. */
+  .sym-hero .dent-hero-act {
+    flex-wrap: nowrap;
+    gap: 12px;
+  }
+
+  .sym-hero .dent-hero-act .btn {
+    width: auto;
+    flex: 1 1 0;
+    min-width: 0;
+    padding: 13px 10px;
+    text-align: center;
+  }
+}
+
+/* -------------------------------- the space above the frame, and bands -- */
+
+/*
+ * `padme90` is 90px, 50px below 768. It was sized for pages carrying three
+ * paragraphs; these carry one, of 16 to 52 words, and /sty/ at 1280 measured
+ * 326px of band around 116px of content — 65% padding. Four of these bands at
+ * 390 spent 400px on a 3,700px page.
+ *
+ * The hairline at the seam is what fixed the recorded fault "no dividers
+ * between sections", so it stays and only the padding around it comes in.
+ * Anchored on our own band classes; `.padme90` is here to outrank the theme's
+ * utility, which 272 pages use, and is never selected on its own.
+ */
+.sym-intro.padme90,
+.sym-tool.padme90,
+.sym-next.padme90,
+.sym-others.padme90 {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+@media (min-width: 768px) {
+  .sym-intro.padme90,
+  .sym-tool.padme90,
+  .sym-next.padme90,
+  .sym-others.padme90 {
+    padding-top: 56px;
+    padding-bottom: 56px;
+  }
+}
+
+/*
+ * The hero was a fixed 420px box holding 330 to 384px of content, so every one
+ * of the 164 pages carried 36 to 90px of empty blue below its buttons — inside
+ * the 1,306px that stood between the reader and the tool the page exists for.
+ */
+.sym-hero .dent-hero-inner {
+  min-height: 0;
+}
+
+@media (max-width: 767px) {
+  /* The trail two lines above already says "Symptom Checker". */
+  .sym-hero .dent-hero-eyebrow {
+    display: none;
+  }
+
+  /*
+   * 40px was the design's number and it put the H1 through the pinned trail:
+   * measured -10px between the last crumb and the title, because dropping the
+   * eyebrow also dropped the buffer it had been providing. 56px clears both
+   * the trail's text and the tap box finding 14 gave its link.
+   */
+  .sym-hero .dent-hero-inner {
+    padding-top: 56px;
+    padding-bottom: 28px;
+  }
+
+  .sym-hero .hero-crumbs {
+    top: 8px;
+  }
+
+  .sym-hero .dent-hero-act {
+    margin-top: 24px;
+  }
+}
+
+/*
+ * Paint order, not document order.
+ *
+ * The frame is the reason a symptom page exists and it began 1,306px down,
+ * with zero of it on the first screen at any of the three viewports. Our own
+ * paragraph now follows it on screen while still preceding it in the document,
+ * so a crawler and a screen reader still get the only unique prose on the page
+ * first. `.sym-intro` carries no focusable element on any of the 164 pages —
+ * checked against the served HTML, not assumed — so visual order and focus
+ * order do not diverge for anyone.
+ *
+ * The wrapper is only emitted for pages that have a frame. On the six `noTool`
+ * pages the band is background rather than a tool, and it belongs after the
+ * introduction, which is where it stays.
+ *
+ * The alternation cream, white, grey, white, grey is kept, so "no dividers
+ * between sections" does not reopen: every seam still carries either the alert
+ * band's border-bottom or an `#e4e7ea` hairline.
+ */
+.sym-flow {
+  display: flex;
+  flex-direction: column;
+}
+
+.sym-flow > .sym-tool {
+  order: 1;
+  background: #ffffff;
+  border-top: 0;
+}
+
+.sym-flow > .sym-intro {
+  order: 2;
+  background: #f4f4f4;
+  border-top: 1px solid #e4e7ea;
 }

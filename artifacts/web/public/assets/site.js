@@ -55,8 +55,30 @@
      * bubble used to fly down to the corner and back as you scrolled, which
      * was a second copy of a button already on the page.
      */
+    /*
+     * While the button folds from 358px to 56px it is still 358px wide to a
+     * finger: a tap 80ms after a scroll stop landed on /contact-us/ instead of
+     * the tile under it. `is-folding` takes it out of the hit test for the
+     * length of the transition. A missed tap is recoverable; a wrong
+     * navigation is not.
+     *
+     * Not `transitionend`, which does not fire when the reverse toggle
+     * interrupts the transition — exactly what fast scrolling does — and would
+     * leave the button permanently dead.
+     */
+    var still = window.matchMedia("(prefers-reduced-motion: reduce)");
+    var folding = null;
     var syncDock = function () {
-      dock.classList.toggle("is-mini", !wide.matches && window.scrollY > 140);
+      var mini = !wide.matches && window.scrollY > 140;
+      if (mini === dock.classList.contains("is-mini")) return;
+      dock.classList.toggle("is-mini", mini);
+      // Nothing animates under reduced motion, so nothing has to be blocked.
+      if (still.matches) return;
+      dock.classList.add("is-folding");
+      window.clearTimeout(folding);
+      folding = window.setTimeout(function () {
+        dock.classList.remove("is-folding");
+      }, 320);
     };
 
     syncDock();
@@ -1213,12 +1235,13 @@
   modal.addEventListener("close", restore);
   modal.addEventListener("cancel", restore);
 
-  var closer = modal.querySelector("[data-sym-close]");
-  if (closer) {
+  // Two of them now: the icon in the bar, and the full-width one at the foot
+  // that a thumb can actually reach on a phone.
+  [].slice.call(modal.querySelectorAll("[data-sym-close]")).forEach(function (closer) {
     closer.addEventListener("click", function () {
       modal.close();
     });
-  }
+  });
 
   // A click on the backdrop lands on the dialog itself, never on its contents.
   modal.addEventListener("click", function (event) {
@@ -1250,9 +1273,106 @@
   var count = document.querySelector(".sym-find-count");
   var common = document.querySelector(".sym-common");
   var none = document.querySelector(".sym-none");
+  var noneQ = none && none.querySelector(".sym-none-q");
+  var emergency = document.querySelector(".sym-emergency");
+  var emergencyBody = emergency && emergency.querySelector(".sym-emergency-body");
   var browseTitle = browse.querySelector(".sym-browse-title");
   var groups = [].slice.call(browse.querySelectorAll(".sym-group"));
   var tiles = [].slice.call(browse.querySelectorAll(".sym-tiles li"));
+
+  /*
+   * Everything a tile can be found by, plus its adjacent pairs joined up, so
+   * "pinkeye" reaches a tile whose terms say "pink eye" and "stomachache"
+   * reaches one that says "stomach ache". Built once here, in memory: nothing
+   * is added to the 164 data-terms attributes and the page stays 72KB.
+   */
+  var index = tiles.map(function (tile) {
+    var words = (tile.getAttribute("data-terms") || "").split(" ").filter(Boolean);
+    var tokens = words.slice();
+    for (var i = 0; i < words.length - 1; i++) tokens.push(words[i] + words[i + 1]);
+    return " " + tokens.join(" ");
+  });
+
+  var SPELLING = {
+    diarrhoea: "diarrhea",
+    diarhea: "diarrhea",
+    vomitting: "vomiting",
+    vomitted: "vomited",
+    oedema: "edema",
+    faeces: "feces"
+  };
+
+  // Shortest useful root: "constipated" -> "constipat", "pukes" -> "puk".
+  // Deliberately not a real stemmer: a dependency in spirit, and it would make
+  // the 41 queries that already land correctly less predictable.
+  function stem(word) {
+    if (word.length < 5) return word;
+    if (/ies$/.test(word)) return word.slice(0, -3) + "y";
+    if (/(ing|ed)$/.test(word)) {
+      var cut = word.replace(/(ing|ed)$/, "");
+      if (/(.)\1$/.test(cut)) cut = cut.slice(0, -1); // "vomitting" -> "vomit"
+      return cut;
+    }
+    if (/es$/.test(word)) return word.slice(0, -2);
+    if (/s$/.test(word)) return word.slice(0, -1);
+    return word;
+  }
+
+  function has(terms, word) {
+    var fixed = SPELLING[word] || word;
+    return (
+      terms.indexOf(" " + fixed) !== -1 || terms.indexOf(" " + stem(fixed)) !== -1
+    );
+  }
+
+  /*
+   * A compound the reader joined that the tile keeps apart. The index above
+   * catches this by joining adjacent terms, but `tileTerms` deduplicates
+   * before it joins, so "stomach ache" loses its adjacency to the earlier
+   * "Stomach pain" and "stomachache" found nothing. Splitting from the other
+   * end covers it, and both halves must still be at least three characters
+   * and appear on the same tile.
+   */
+  function hasSplit(terms, word) {
+    if (word.length < 6) return false;
+    for (var i = 3; i <= word.length - 3; i++) {
+      if (has(terms, word.slice(0, i)) && has(terms, word.slice(i))) return true;
+    }
+    return false;
+  }
+
+  /*
+   * Two of the four words in our own 911 sentence returned nothing, and
+   * finding 6 meant they returned it invisibly. No page covers either and none
+   * should, so they get a purpose-built answer rather than a forced match onto
+   * a symptom page.
+   */
+  var EMERGENCY = [
+    {
+      words: ["seizure", "seizures", "seizing", "convulsion", "convulsions", "fitting"],
+      body:
+        "Call 911 now. A child who is having a seizure, or who has just had one" +
+        " for the first time, needs emergency services rather than a page on" +
+        " this site."
+    },
+    {
+      words: ["choking", "choke", "choked", "notbreathing", "cantbreathe", "bluelips", "unconscious", "unresponsive", "drowning"],
+      body:
+        "Call 911 now if your child cannot breathe, cough or cry, cannot be" +
+        " woken, or has blue lips. If something was swallowed and breathing is" +
+        " normal, <a href=\"/symptom-checker/swallowed-object/\">Swallowed" +
+        " object</a> is the page for that."
+    }
+  ];
+
+  function emergencyFor(words) {
+    for (var i = 0; i < EMERGENCY.length; i++) {
+      for (var j = 0; j < words.length; j++) {
+        if (EMERGENCY[i].words.indexOf(words[j]) !== -1) return EMERGENCY[i];
+      }
+    }
+    return null;
+  }
 
   var CHEVRON =
     '<svg class="sym-group-chevron" viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3.5L10.5 8L6 12.5"></path></svg>';
@@ -1317,19 +1437,37 @@
       if (common) common.hidden = false;
       if (browseTitle) browseTitle.hidden = false;
       if (none) none.hidden = true;
-      if (count) count.textContent = "";
+      if (emergency) emergency.hidden = true;
+      if (count) {
+        count.classList.remove("is-none");
+        count.textContent = "";
+      }
       showCounts(true);
       return;
     }
 
     var hits = 0;
-    tiles.forEach(function (tile) {
+    tiles.forEach(function (tile, i) {
       // Leading space so indexOf only ever lands on a word boundary: a bare
       // substring test makes "ear" match the "pearly" in molluscum's terms.
       var terms = " " + (tile.getAttribute("data-terms") || "");
       var match = words.every(function (word) {
         return terms.indexOf(" " + word) !== -1;
       });
+      /*
+       * Only once the exact test has failed, so every query that already
+       * landed correctly still takes the same path it did. "ear ache" against
+       * a tile that says "earache" is the joined form; "constipated" and
+       * "vomitting" are the stem.
+       */
+      if (!match) {
+        match =
+          words.every(function (word) {
+            return has(index[i], word);
+          }) ||
+          (words.length > 1 && has(index[i], words.join(""))) ||
+          (words.length === 1 && hasSplit(index[i], words[0]));
+      }
       tile.hidden = !match;
       if (match) hits++;
     });
@@ -1347,11 +1485,26 @@
     // The badge counts the whole group, which contradicts a filtered list.
     showCounts(false);
     if (browseTitle) browseTitle.hidden = true;
-    if (none) none.hidden = hits > 0;
+
+    var alarm = emergencyFor(words);
+    if (emergency) {
+      emergency.hidden = !alarm;
+      if (alarm && emergencyBody) emergencyBody.innerHTML = alarm.body;
+    }
+
+    if (none) {
+      none.hidden = hits > 0;
+      // Naming the query back is the difference between "the page did nothing"
+      // and "the page read me". Truncated so a long paste cannot widen the
+      // panel, and kept out of the live region so a fast typist is not read
+      // their own keystrokes back.
+      if (noneQ) noneQ.textContent = "\u201C" + find.value.trim().slice(0, 40) + "\u201D";
+    }
     if (count) {
+      count.classList.toggle("is-none", hits === 0);
       count.textContent = hits
         ? hits + (hits === 1 ? " page matches" : " pages match")
-        : "";
+        : "No pages match that word";
     }
   }
 

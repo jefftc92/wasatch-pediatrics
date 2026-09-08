@@ -21,6 +21,8 @@
 
 import { symptoms, type Symptom } from "../data/symptoms.ts";
 import { symptomTerms } from "../data/symptomTerms.ts";
+import { offices, formatPhone } from "../data/offices.ts";
+import { locationNames } from "../data/services.ts";
 import { escapeAttribute, SITE, type GeneratedPage } from "./generated.ts";
 import type { Crumb } from "./generated.ts";
 
@@ -74,9 +76,35 @@ function heroBand(symptom: Symptom): string {
 		<p class="dent-hero-eyebrow">Symptom Checker</p>
 		<h1 class="dent-hero-title">${escapeAttribute(symptom.title)}</h1>
 		<p class="dent-hero-lead">${escapeAttribute(symptom.lead)}</p>
-		<p class="dent-hero-act"><a class="btn dent-hero-ghost" href="${CHECKER}">All symptoms</a></p>
+		<p class="dent-hero-act"><a class="btn sym-hero-call" href="#sym-call">Call a nurse</a> <a class="btn dent-hero-ghost" href="${CHECKER}">All symptoms</a></p>
 	</div>
 </div>`;
+}
+
+/**
+ * Eight offices, eight main numbers, and the nurse line answers on each.
+ *
+ * There is no practice-wide number to give. `offices.ts` holds eight distinct
+ * `phone` fields, neither `renderHeader()` nor `renderFooter()` contains a
+ * `tel:` at all, and the section's own copy says why: the nurse line is
+ * reached through an office's ordinary main number. So the page gives the
+ * choice rather than a link to a page that has the numbers on it. Inventing
+ * one would send a Park City parent to the wrong office at three in the
+ * morning.
+ */
+function callList(): string {
+	const items = offices
+		.map((office) => {
+			const name = locationNames[office.slug] ?? office.slug;
+			return `<li><a class="sym-call-item" href="tel:${office.phone}"><span class="sym-call-office">${escapeAttribute(name)}</span><span class="sym-call-num">${formatPhone(office.phone)}</span></a></li>`;
+		})
+		.join("");
+
+	return `<div class="sym-call" id="sym-call">
+					<h3 class="sym-call-title">Call your office &#8212; a nurse answers at any hour</h3>
+					<ul class="sym-call-list">${items}</ul>
+					<p class="sym-call-note">Any office will help if yours is not on your mind. <a href="/locations/">Hours, addresses and directions</a>.</p>
+				</div>`;
 }
 
 function renderSymptomPage(symptom: Symptom): string {
@@ -107,9 +135,10 @@ function renderSymptomPage(symptom: Symptom): string {
   return `${heroBand(symptom)}
 <div class="sym-alert">
 	<div class="container">
-		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, call 911 now.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
+		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <span class="sym-911">call 911 now</span>.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
 	</div>
 </div>
+${symptom.noTool ? "" : `<div class="sym-flow">`}
 <div class="whitebg padme90 sym-intro">
 	<div class="container">
 		<div class="row">
@@ -141,26 +170,33 @@ ${
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">${escapeAttribute(symptom.aapHeading)}</h2>
-				<p class="sym-tool-lead">${escapeAttribute(symptom.aapLead)}</p>
 				<div class="sym-embed">
-					<p class="sym-embed-bar">
-						<span class="sym-embed-name">AAP Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
-						<span class="sym-embed-acts">
-							<button type="button" class="sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
-							<a class="sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">New tab<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
-						</span>
+					<p class="sym-embed-cap"><span class="sym-embed-name">AAP Symptom Checker</span><span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></p>
+					<div class="sym-embed-stage">
+						<div class="sym-embed-fallback">
+							<p class="sym-embed-fallback-lead">If the Symptom Checker does not appear here</p>
+							<p>It is the American Academy of Pediatrics&#8217; own tool and it loads from their site, so a lost connection or a content blocker leaves this space empty. Open it on HealthyChildren.org with the button below, or call your office and a nurse will answer.</p>
+						</div>
+						<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
+					</div>
+					<p class="sym-embed-acts">
+						<button type="button" class="sym-embed-act sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
+						<a class="sym-embed-act sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">Open on HealthyChildren.org<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
 					</p>
-					<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
 				</div>
+				<p class="sym-tool-lead">${escapeAttribute(symptom.aapLead)}</p>
 				<dialog class="sym-modal" aria-label="Symptom Checker: ${escapeAttribute(symptom.short)}">
 					<div class="sym-modal-bar">
 						<span class="sym-embed-name">Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
 						<span class="sym-embed-acts">
 							<a class="sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">New tab<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
-							<button type="button" class="sym-modal-close" data-sym-close>Close<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
+							<button type="button" class="sym-modal-close" data-sym-close><span class="visually-hidden">Close</span><svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8"></path></svg></button>
 						</span>
 					</div>
 					<div class="sym-modal-body"></div>
+					<div class="sym-modal-foot">
+						<button type="button" class="sym-modal-done" data-sym-close>Close and go back</button>
+					</div>
 				</dialog>
 			</div>
 		</div>
@@ -168,13 +204,15 @@ ${
 </div>
 `
 }
+${symptom.noTool ? "" : `</div>`}
 <div class="whitebg padme90 sym-next">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">Getting your child seen</h2>
+				${callList()}
 				<ul class="sc-routes">
-					<li><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.</li>
+					<li class="sc-route-now"><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.</li>
 					<li><strong>Be seen today.</strong> Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</li>
 					<li><strong>This evening or at the weekend.</strong> Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</li>
 				</ul>
@@ -377,6 +415,17 @@ export function symptomIndexList(): string {
 						<p class="sym-find-hint">Everyday words work: &#8220;throwing up&#8221;, &#8220;poop&#8221;, &#8220;bug bite&#8221;, &#8220;hit head&#8221;.</p>
 						<p class="sym-find-count" role="status" aria-live="polite"></p>
 					</div>
+					<div class="sym-emergency" hidden>
+						<p class="sym-emergency-lead">This one is an emergency.</p>
+						<p class="sym-emergency-body"></p>
+						<p class="sym-acts"><a class="btn sym-emergency-call" href="tel:911">Call 911</a> <a class="btn blue" href="/locations/">Find your office</a></p>
+					</div>
+					<div class="sym-none" hidden>
+						<p class="sym-none-lead">Nothing here matches <span class="sym-none-q">that word</span>.</p>
+						<p>Try a plainer word: &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
+						<p class="sym-acts"><a class="btn blue" href="/locations/">Find your office</a></p>
+					</div>
+					<noscript><p class="sym-find-off">Type-to-search needs JavaScript. Every one of the ${symptoms.length} pages is listed below, grouped by what you can see or hear.</p></noscript>
 					<div class="sym-group sym-common">
 						<h3 class="sym-sec">Common right now</h3>
 						<ul class="sym-tiles">${common.map(tile).join("")}</ul>
@@ -384,10 +433,5 @@ export function symptomIndexList(): string {
 					<div class="sym-browse">
 						<h3 class="sym-sec sym-browse-title">Browse by category<span class="sym-sec-note">all ${symptoms.length} pages</span></h3>
 						${groups}
-					</div>
-					<div class="sym-none" hidden>
-						<p class="sym-none-lead">Nothing here matches that word.</p>
-						<p>Try a plainer word: &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
-						<p class="sym-acts"><a class="btn blue" href="/locations/">Find your office</a></p>
 					</div>`;
 }
