@@ -138,6 +138,7 @@ function renderSymptomPage(symptom: Symptom): string {
 		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <span class="sym-911">call 911 now</span>.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
 	</div>
 </div>
+${symptom.noTool ? "" : `<div class="sym-flow">`}
 <div class="whitebg padme90 sym-intro">
 	<div class="container">
 		<div class="row">
@@ -203,6 +204,7 @@ ${
 </div>
 `
 }
+${symptom.noTool ? "" : `</div>`}
 <div class="whitebg padme90 sym-next">
 	<div class="container">
 		<div class="row">

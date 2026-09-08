@@ -5542,16 +5542,58 @@
     display: none;
   }
 
+  /*
+   * 40px was the design's number and it put the H1 through the pinned trail:
+   * measured -10px between the last crumb and the title, because dropping the
+   * eyebrow also dropped the buffer it had been providing. 56px clears both
+   * the trail's text and the tap box finding 14 gave its link.
+   */
   .sym-hero .dent-hero-inner {
-    padding-top: 40px;
+    padding-top: 56px;
     padding-bottom: 28px;
   }
 
   .sym-hero .hero-crumbs {
-    top: 12px;
+    top: 8px;
   }
 
   .sym-hero .dent-hero-act {
     margin-top: 24px;
   }
+}
+
+/*
+ * Paint order, not document order.
+ *
+ * The frame is the reason a symptom page exists and it began 1,306px down,
+ * with zero of it on the first screen at any of the three viewports. Our own
+ * paragraph now follows it on screen while still preceding it in the document,
+ * so a crawler and a screen reader still get the only unique prose on the page
+ * first. `.sym-intro` carries no focusable element on any of the 164 pages —
+ * checked against the served HTML, not assumed — so visual order and focus
+ * order do not diverge for anyone.
+ *
+ * The wrapper is only emitted for pages that have a frame. On the six `noTool`
+ * pages the band is background rather than a tool, and it belongs after the
+ * introduction, which is where it stays.
+ *
+ * The alternation cream, white, grey, white, grey is kept, so "no dividers
+ * between sections" does not reopen: every seam still carries either the alert
+ * band's border-bottom or an `#e4e7ea` hairline.
+ */
+.sym-flow {
+  display: flex;
+  flex-direction: column;
+}
+
+.sym-flow > .sym-tool {
+  order: 1;
+  background: #ffffff;
+  border-top: 0;
+}
+
+.sym-flow > .sym-intro {
+  order: 2;
+  background: #f4f4f4;
+  border-top: 1px solid #e4e7ea;
 }
