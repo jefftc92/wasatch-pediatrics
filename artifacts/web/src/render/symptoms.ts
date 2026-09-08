@@ -377,6 +377,7 @@ export function symptomIndexList(): string {
 						<p class="sym-find-hint">Everyday words work: &#8220;throwing up&#8221;, &#8220;poop&#8221;, &#8220;bug bite&#8221;, &#8220;hit head&#8221;.</p>
 						<p class="sym-find-count" role="status" aria-live="polite"></p>
 					</div>
+					<noscript><p class="sym-find-off">Type-to-search needs JavaScript. Every one of the ${symptoms.length} pages is listed below, grouped by what you can see or hear.</p></noscript>
 					<div class="sym-group sym-common">
 						<h3 class="sym-sec">Common right now</h3>
 						<ul class="sym-tiles">${common.map(tile).join("")}</ul>

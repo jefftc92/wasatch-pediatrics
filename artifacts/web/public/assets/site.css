@@ -4521,6 +4521,22 @@
 }
 
 /*
+ * What stands in for the box when there is no script to drive it. Only ever
+ * rendered inside <noscript>, so it costs a reader with script nothing; the
+ * matching rule that hides `.sym-find` is in the head, in `build.ts`.
+ */
+.sc-index .sym-find-off {
+  max-width: 620px;
+  margin: 4px 0 38px 0;
+  padding: 16px 18px;
+  border-radius: 14px;
+  background: #f4f5f6;
+  font-size: 16px;
+  line-height: 24px;
+  color: #4a4b4d;
+}
+
+/*
  * "Common right now" and "Browse by category" are the two ways into the
  * list, so they get the same label, sitting on a rule that separates them
  * from what came before. Previously they were two differently-styled scraps
