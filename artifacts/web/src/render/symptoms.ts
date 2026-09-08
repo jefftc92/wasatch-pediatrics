@@ -140,8 +140,8 @@ ${
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="dent-band-title">Should my child be seen?</h2>
-				<p class="sym-tool-lead">The panel below is the American Academy of Pediatrics&#8217; own guide to ${escapeAttribute(symptom.short.toLowerCase())}, and it has three tabs. <strong>Definition</strong> describes what you are looking at. <strong>When To Call</strong> runs through their questions and ends on one of three answers: care for your child at home, book an appointment, or seek care now. <strong>Care Advice</strong> gives the home treatment in full. The AAP writes and updates all of it.</p>
+				<h2 class="dent-band-title">${escapeAttribute(symptom.aapHeading)}</h2>
+				<p class="sym-tool-lead">${escapeAttribute(symptom.aapLead)}</p>
 				<div class="sym-embed">
 					<p class="sym-embed-bar">
 						<span class="sym-embed-name">AAP Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
