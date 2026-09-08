@@ -98,7 +98,7 @@ export const symptoms: Symptom[] = [
       "Watch whether your child drinks, responds normally and becomes more active as the fever comes down. A young baby needs more attention because babies can become seriously ill without showing the same obvious symptoms as older children.",
     ],
     aapHeading: "AAP Guide to Fever in Children",
-    aapLead: "The AAP guide below explains what counts as a fever, which warning signs need urgent care, and what you can do at home. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what counts as a fever, which warning signs need urgent care, and what you can do at home.",
   },
   {
     slug: "fever-under-1",
@@ -113,7 +113,7 @@ export const symptoms: Symptom[] = [
       "Pay attention to how much your baby drinks, how easily they wake and the number of wet diapers during the day. A baby who drinks much less than usual, becomes hard to wake or has fewer wet diapers needs more attention. Young babies need earlier medical evaluation for fever than older children.",
     ],
     aapHeading: "AAP Guide to Fever in Babies Under 12 Months",
-    aapLead: "The AAP guide below explains what counts as a fever, what to watch for, and when your baby needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what counts as a fever, what to watch for, and when your baby needs medical care.",
   },
   {
     slug: "cough",
@@ -128,7 +128,7 @@ export const symptoms: Symptom[] = [
       "Watch your child’s chest and ribs while they breathe. A child who is breathing comfortably can usually talk, eat and drink without stopping to catch their breath. Fast breathing or ribs pulling in matter more than whether the cough sounds loud or harsh.",
     ],
     aapHeading: "AAP Guide to Cough in Children",
-    aapLead: "The AAP guide below explains common causes of cough, breathing signs to look for, and when your child needs care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes of cough, breathing signs to look for, and when your child needs care.",
   },
   {
     slug: "croup",
@@ -143,7 +143,7 @@ export const symptoms: Symptom[] = [
       "Listen to your child after they calm down because crying can make stridor louder. Stridor that continues while your child is calm shows that the airway is still narrowed.",
     ],
     aapHeading: "AAP Guide to Croup in Children",
-    aapLead: "The AAP guide below explains croup symptoms, what stridor sounds like, what you can do at home, and when your child needs urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains croup symptoms, what stridor sounds like, what you can do at home, and when your child needs urgent care.",
   },
   {
     slug: "sore-throat",
@@ -158,7 +158,7 @@ export const symptoms: Symptom[] = [
       "We usually consider a strep test when a sore throat comes with fever but no cough, runny nose or hoarseness. Cough, runny nose and hoarseness usually make a virus more likely. Only a throat test can confirm strep.",
     ],
     aapHeading: "AAP Guide to Sore Throat in Children",
-    aapLead: "The AAP guide below explains the common causes of sore throats, when to suspect strep, and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains the common causes of sore throats, when to suspect strep, and when your child needs medical care.",
   },
   {
     slug: "strep-throat",
@@ -173,7 +173,7 @@ export const symptoms: Symptom[] = [
       "Your child can have the same sore throat symptoms with a virus or with strep. A throat swab tells us which infection is causing the symptoms. A positive test also tells us that your child needs to finish the full antibiotic course.",
     ],
     aapHeading: "AAP Guide to Strep Throat in Children",
-    aapLead: "The AAP guide below explains the symptoms of strep, testing and treatment, and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains the symptoms of strep, testing and treatment, and when your child needs medical care.",
   },
   {
     slug: "earache",
@@ -188,7 +188,7 @@ export const symptoms: Symptom[] = [
       "We look at your child’s eardrum to find the cause of the pain. Some ear infections improve without immediate antibiotics, while other ear problems need different treatment. The ear exam helps us choose the right next step.",
     ],
     aapHeading: "AAP Guide to Earache in Children",
-    aapLead: "The AAP guide below explains common causes of ear pain, what symptoms to watch for, and when to bring your child in. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes of ear pain, what symptoms to watch for, and when to bring your child in.",
   },
   {
     slug: "vomiting",
@@ -203,7 +203,7 @@ export const symptoms: Symptom[] = [
       "Keep track of how often your child urinates. A child who urinates regularly and has a moist mouth is less likely to be dehydrated. Tears when crying are another reassuring sign. Hydration matters more than the number of times your child vomits.",
     ],
     aapHeading: "AAP Guide to Vomiting in Children",
-    aapLead: "The AAP guide below explains what to offer, how to watch for dehydration, and when vomiting needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to offer, how to watch for dehydration, and when vomiting needs medical care.",
   },
   {
     slug: "vomiting-and-diarrhea",
@@ -218,7 +218,7 @@ export const symptoms: Symptom[] = [
       "Give fluids in small, frequent amounts while your child is still vomiting. Oral rehydration solution replaces both water and salts and often works well during active vomiting and diarrhea.",
     ],
     aapHeading: "AAP Guide to Vomiting and Diarrhea in Children",
-    aapLead: "The AAP guide below explains which fluids to offer, how to watch for dehydration, and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains which fluids to offer, how to watch for dehydration, and when your child needs medical care.",
   },
   {
     slug: "diarrhea",
@@ -233,7 +233,7 @@ export const symptoms: Symptom[] = [
       "Make sure your child keeps drinking and urinating normally. Loose stools can continue for several days even after your child’s energy and appetite return.",
     ],
     aapHeading: "AAP Guide to Diarrhea in Children",
-    aapLead: "The AAP guide below explains what is normal, how to prevent dehydration, and when diarrhea needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what is normal, how to prevent dehydration, and when diarrhea needs medical care.",
   },
   {
     slug: "colds",
@@ -248,7 +248,7 @@ export const symptoms: Symptom[] = [
       "Cold symptoms often build for a few days before they improve. The cough can last longer than the runny nose, and mucus can change color during a normal cold. A new fever or a clear worsening after your child starts improving may mean another problem has developed.",
     ],
     aapHeading: "AAP Guide to Colds in Children",
-    aapLead: "The AAP guide below explains the usual course of a cold, what symptoms to watch for, and when your child needs care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains the usual course of a cold, what symptoms to watch for, and when your child needs care.",
   },
   {
     slug: "flu",
@@ -263,7 +263,7 @@ export const symptoms: Symptom[] = [
       "Call us early if you think your child has the flu because some treatments work best when they start soon after symptoms begin. We consider your child’s age, health history and symptoms when we decide whether treatment may help.",
     ],
     aapHeading: "AAP Guide to Flu in Children",
-    aapLead: "The AAP guide below explains common flu symptoms, what to expect, and when to bring your child in. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common flu symptoms, what to expect, and when to bring your child in.",
   },
   {
     slug: "rsv",
@@ -278,7 +278,7 @@ export const symptoms: Symptom[] = [
       "Pay attention to whether your baby drinks less, takes longer to finish a feed or stops often to breathe. Babies often feed less when breathing becomes harder. RSV can get worse during the first several days before it begins to improve.",
     ],
     aapHeading: "AAP Guide to RSV and Bronchiolitis in Babies",
-    aapLead: "The AAP guide below explains what to expect, which symptoms matter most, and when your baby needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to expect, which symptoms matter most, and when your baby needs medical care.",
   },
   {
     slug: "covid-19",
@@ -293,7 +293,7 @@ export const symptoms: Symptom[] = [
       "Babies and children with significant heart, lung or immune conditions may need earlier medical advice. Tell us about your child’s health history when you call.",
     ],
     aapHeading: "AAP Guide to COVID-19 in Children",
-    aapLead: "The AAP guide below explains what to expect, what to watch for, and when to contact us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to expect, what to watch for, and when to contact us.",
   },
   {
     slug: "head-injury",
@@ -308,7 +308,7 @@ export const symptoms: Symptom[] = [
       "Check that your child wakes, talks, walks and responds normally. Repeated vomiting, a worsening headache, balance problems or unusual sleepiness need more attention after a head injury.",
     ],
     aapHeading: "AAP Guide to Head Injury in Children",
-    aapLead: "The AAP guide below explains what to watch for after a head injury and when your child needs urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to watch for after a head injury and when your child needs urgent care.",
   },
   {
     slug: "rash",
@@ -323,7 +323,7 @@ export const symptoms: Symptom[] = [
       "Start with how your child feels overall. A child who is eating, drinking, playing and responding normally is less concerning than a child who seems very sick. Then check whether the rash spreads, blisters, bruises or changes when you press on it.",
     ],
     aapHeading: "AAP Guide to Rashes in Children",
-    aapLead: "The AAP guide below explains common types of rashes, warning signs, and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common types of rashes, warning signs, and when your child needs medical care.",
   },
   {
     slug: "hives",
@@ -338,7 +338,7 @@ export const symptoms: Symptom[] = [
       "Watch for symptoms outside the skin. Trouble breathing, trouble swallowing or swelling of the lips, tongue or face can mean a serious allergic reaction.",
     ],
     aapHeading: "AAP Guide to Hives in Children",
-    aapLead: "The AAP guide below explains common causes, what you can do for the itching, and when hives need emergency care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes, what you can do for the itching, and when hives need emergency care.",
   },
   {
     slug: "pink-eye",
@@ -353,7 +353,7 @@ export const symptoms: Symptom[] = [
       "Thick yellow or green discharge can suggest a bacterial infection. A watery red eye with a cold often comes from a virus. Itching in both eyes usually suggests allergies. An eye exam can separate these causes when the symptoms overlap.",
     ],
     aapHeading: "AAP Guide to Pink Eye in Children",
-    aapLead: "The AAP guide below explains the common causes of pink eye, when drops may help, and when your child needs care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains the common causes of pink eye, when drops may help, and when your child needs care.",
   },
   {
     slug: "constipation",
@@ -368,7 +368,7 @@ export const symptoms: Symptom[] = [
       "Stool becomes harder the longer your child holds it. A harder stool can then hurt more when it finally passes, which can make your child want to hold the next bowel movement too.",
     ],
     aapHeading: "AAP Guide to Constipation in Children",
-    aapLead: "The AAP guide below explains what constipation looks like, what causes it, and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what constipation looks like, what causes it, and when your child needs medical care.",
   },
   {
     slug: "asthma-attack",
@@ -383,7 +383,7 @@ export const symptoms: Symptom[] = [
       "Follow your child’s asthma action plan and then check their breathing. Rescue medicine should make breathing easier and help your child speak normally. Continued hard breathing means your child needs more help.",
     ],
     aapHeading: "AAP Guide to Asthma Attacks in Children",
-    aapLead: "The AAP guide below explains what to watch for, how to follow the asthma plan, and when your child needs urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to watch for, how to follow the asthma plan, and when your child needs urgent care.",
   },
   {
     slug: "teething",
@@ -398,7 +398,7 @@ export const symptoms: Symptom[] = [
       "Your baby can have teething and a separate illness at the same time. Treat fever, diarrhea or cough as separate symptoms instead of automatically blaming the teeth.",
     ],
     aapHeading: "AAP Guide to Teething in Babies",
-    aapLead: "The AAP guide below explains normal teething symptoms, what can help, and when your baby’s symptoms need a closer look. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains normal teething symptoms, what can help, and when your baby’s symptoms need a closer look.",
   },
   {
     slug: "newborn-jaundice",
@@ -413,7 +413,7 @@ export const symptoms: Symptom[] = [
       "Your baby’s skin tone, room lighting and other factors can change how yellow the skin looks. A bilirubin measurement gives us an objective number. We also look at how well your baby feeds and the number of wet diapers each day.",
     ],
     aapHeading: "AAP Guide to Jaundice in Newborns",
-    aapLead: "The AAP guide below explains what jaundice is, what to watch for, and when your baby needs care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what jaundice is, what to watch for, and when your baby needs care.",
   },
   {
     slug: "crying-baby",
@@ -428,7 +428,7 @@ export const symptoms: Symptom[] = [
       "Listen for a cry that sounds weak, unusually high-pitched or very different from your baby’s normal cry. Pay attention to whether your baby feeds normally, wakes easily and responds to you.",
     ],
     aapHeading: "AAP Guide for a Crying Baby Under 3 Months",
-    aapLead: "The AAP guide below explains common causes of crying and when your baby needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes of crying and when your baby needs medical care.",
   },
   {
     slug: "immunization-reactions",
@@ -443,7 +443,7 @@ export const symptoms: Symptom[] = [
       "Watch whether your child’s symptoms improve as expected. Redness that keeps spreading, a fever that lasts longer than expected or crying that is very different from your child’s normal behavior deserves a call.",
     ],
     aapHeading: "AAP Guide to Reactions After Immunizations",
-    aapLead: "The AAP guide below explains common vaccine reactions, what you can do at home, and when to contact us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common vaccine reactions, what you can do at home, and when to contact us.",
   },
   {
     slug: "insect-bites",
@@ -458,7 +458,7 @@ export const symptoms: Symptom[] = [
       "Check the bite over the next two or three days. An ordinary bite should become less swollen and less painful. Increasing heat, redness or pain may mean the skin has become infected.",
     ],
     aapHeading: "AAP Guide to Insect Bites in Children",
-    aapLead: "The AAP guide below explains common reactions, ways to ease the itching, and when a bite needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common reactions, ways to ease the itching, and when a bite needs medical care.",
   },
   {
     slug: "tick-bites",
@@ -473,7 +473,7 @@ export const symptoms: Symptom[] = [
       "Save the tick if you can and write down the date of the bite. Watch your child for a new rash, fever, headache or body aches during the following weeks.",
     ],
     aapHeading: "AAP Guide to Tick Bites in Children",
-    aapLead: "The AAP guide below explains tick removal, what to watch for in the following weeks, and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains tick removal, what to watch for in the following weeks, and when to call us.",
   },
   {
     slug: "nosebleeds",
@@ -488,7 +488,7 @@ export const symptoms: Symptom[] = [
       "Have your child sit up and lean forward. Pinch the soft part of the nose and hold steady pressure long enough for a clot to form. Releasing the nose too soon can make the bleeding start again.",
     ],
     aapHeading: "AAP Guide to Nosebleeds in Children",
-    aapLead: "The AAP guide below explains how to stop a nosebleed, how to reduce repeat bleeding, and when your child needs care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to stop a nosebleed, how to reduce repeat bleeding, and when your child needs care.",
   },
   {
     slug: "headache",
@@ -503,7 +503,7 @@ export const symptoms: Symptom[] = [
       "Write down when each headache starts, how long it lasts and what your child was doing before it began. Record sleep, meals, fluids and other symptoms too. A short record of several headaches is easier to evaluate than a general description of frequent headaches.",
     ],
     aapHeading: "AAP Guide to Headaches in Children",
-    aapLead: "The AAP guide below explains common causes, what to track, and when headaches need medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes, what to track, and when headaches need medical care.",
   },
   {
     slug: "eczema",
@@ -518,7 +518,7 @@ export const symptoms: Symptom[] = [
       "Your child’s skin loses moisture more easily when eczema damages the skin barrier. Thick, unscented moisturizers help hold water in the skin. Regular skin care can reduce the chance that dryness turns into another flare.",
     ],
     aapHeading: "AAP Guide to Eczema in Children",
-    aapLead: "The AAP guide below explains how eczema behaves, what can help control flares, and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how eczema behaves, what can help control flares, and when your child needs medical care.",
   },
   {
     slug: "diaper-rash",
@@ -533,7 +533,7 @@ export const symptoms: Symptom[] = [
       "Ordinary diaper rash often follows contact with stool or prolonged moisture. Yeast can cause a brighter red rash with a sharper border and small spots beyond the main rash.",
     ],
     aapHeading: "AAP Guide to Diaper Rash",
-    aapLead: "The AAP guide below explains common diaper rashes, care at home, and when your baby needs to be seen. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common diaper rashes, care at home, and when your baby needs to be seen.",
   },
   {
     slug: "cradle-cap",
@@ -548,7 +548,7 @@ export const symptoms: Symptom[] = [
       "Your baby may have yellow or greasy scale without redness or discomfort. Cradle cap usually clears over time. Redness, weeping or itching can mean your baby has a different skin problem that needs attention.",
     ],
     aapHeading: "AAP Guide to Cradle Cap",
-    aapLead: "The AAP guide below explains what cradle cap looks like, gentle care at home, and when the scalp changes should be checked. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what cradle cap looks like, gentle care at home, and when the scalp changes should be checked.",
   },
   {
     slug: "heat-rash",
@@ -563,7 +563,7 @@ export const symptoms: Symptom[] = [
       "Move your child to a cooler environment and remove extra layers of clothing. Heavy creams and ointments can trap more heat against the skin.",
     ],
     aapHeading: "AAP Guide to Heat Rash in Children",
-    aapLead: "The AAP guide below explains what heat rash looks like, what can help, and when a rash may be something else. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what heat rash looks like, what can help, and when a rash may be something else.",
   },
   {
     slug: "hand-foot-and-mouth",
@@ -578,7 +578,7 @@ export const symptoms: Symptom[] = [
       "Keep track of how much your child drinks and how often they urinate. Mouth pain can make a child drink much less even when the skin rash looks mild.",
     ],
     aapHeading: "AAP Guide to Hand, Foot and Mouth Disease",
-    aapLead: "The AAP guide below explains what to expect, how to keep your child comfortable and hydrated, and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to expect, how to keep your child comfortable and hydrated, and when to call us.",
   },
   {
     slug: "chickenpox",
@@ -593,7 +593,7 @@ export const symptoms: Symptom[] = [
       "Keep your child from scratching as much as possible and use only medicines that your pediatrician recommends for chickenpox. Avoid pain medicines that are not recommended for chickenpox.",
     ],
     aapHeading: "AAP Guide to Chickenpox in Children",
-    aapLead: "The AAP guide below explains what to expect, how to care for the rash, and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to expect, how to care for the rash, and when your child needs medical care.",
   },
   {
     slug: "impetigo",
@@ -608,7 +608,7 @@ export const symptoms: Symptom[] = [
       "Keep the sores covered when possible and encourage frequent handwashing. Give your child a separate towel and washcloth while the infection is active.",
     ],
     aapHeading: "AAP Guide to Impetigo in Children",
-    aapLead: "The AAP guide below explains what impetigo looks like, how it is treated, and when your child can return to school or activities. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what impetigo looks like, how it is treated, and when your child can return to school or activities.",
   },
   {
     slug: "ringworm",
@@ -623,7 +623,7 @@ export const symptoms: Symptom[] = [
       "Antifungal cream can treat many ringworm patches on the skin. Cream does not reach scalp fungus well enough to treat it. A scaly bald patch on the scalp therefore needs medical evaluation and usually requires medicine by mouth.",
     ],
     aapHeading: "AAP Guide to Ringworm in Children",
-    aapLead: "The AAP guide below explains what ringworm looks like, how it is treated, and when to bring your child in. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what ringworm looks like, how it is treated, and when to bring your child in.",
   },
   {
     slug: "scabies",
@@ -638,7 +638,7 @@ export const symptoms: Symptom[] = [
       "Scabies mites can live on a person for weeks before symptoms become obvious. One untreated family member can pass scabies back to someone who already completed treatment. Treating close household contacts at the same time helps prevent reinfection.",
     ],
     aapHeading: "AAP Guide to Scabies in Children",
-    aapLead: "The AAP guide below explains the symptoms, treatment and cleaning steps, and what to expect after treatment. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains the symptoms, treatment and cleaning steps, and what to expect after treatment.",
   },
   {
     slug: "molluscum",
@@ -653,7 +653,7 @@ export const symptoms: Symptom[] = [
       "Some molluscum treatments cause discomfort, so waiting is often reasonable when the bumps do not bother your child. Treatment may make more sense when bumps spread quickly, appear on the face or cause significant distress.",
     ],
     aapHeading: "AAP Guide to Molluscum in Children",
-    aapLead: "The AAP guide below explains what molluscum looks like, how it spreads, and when treatment may be worth considering. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what molluscum looks like, how it spreads, and when treatment may be worth considering.",
   },
   {
     slug: "warts",
@@ -668,7 +668,7 @@ export const symptoms: Symptom[] = [
       "Salicylic acid removes the wart gradually, one layer at a time. Your child needs consistent treatment for the medicine to work. Stopping after a few weeks can leave most of the wart behind.",
     ],
     aapHeading: "AAP Guide to Warts in Children",
-    aapLead: "The AAP guide below explains home treatment, how long it can take, and which warts need an exam. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains home treatment, how long it can take, and which warts need an exam.",
   },
   {
     slug: "poison-ivy",
@@ -683,7 +683,7 @@ export const symptoms: Symptom[] = [
       "Plant oil can stay on clothing, shoes, tools or other objects after the original exposure. Your child can develop new patches after touching that leftover oil. Washing the skin and contaminated items helps stop new exposure.",
     ],
     aapHeading: "AAP Guide to Poison Ivy, Oak and Sumac",
-    aapLead: "The AAP guide below explains washing, itch relief and when a reaction needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains washing, itch relief and when a reaction needs medical care.",
   },
   {
     slug: "fifth-disease",
@@ -698,7 +698,7 @@ export const symptoms: Symptom[] = [
       "Your child usually spreads the virus during the earlier cold-like phase. The later rash can still fade and return for several weeks. Pregnant people and people with certain health conditions should talk with their own clinician after an exposure.",
     ],
     aapHeading: "AAP Guide to Fifth Disease",
-    aapLead: "The AAP guide below explains the usual course of fifth disease, who needs extra caution, and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains the usual course of fifth disease, who needs extra caution, and when to call us.",
   },
   {
     slug: "roseola",
@@ -713,7 +713,7 @@ export const symptoms: Symptom[] = [
       "Your child usually develops the fever first. The fever then improves, and a pink rash appears on the body. The fever-then-rash sequence helps distinguish roseola from illnesses that cause fever and rash at the same time.",
     ],
     aapHeading: "AAP Guide to Roseola",
-    aapLead: "The AAP guide below explains what to expect during the fever and rash, and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to expect during the fever and rash, and when your child needs medical care.",
   },
   {
     slug: "hair-loss",
@@ -728,7 +728,7 @@ export const symptoms: Symptom[] = [
       "Look for scale, broken hairs, smooth bald skin or thinning across the whole scalp. Each of these findings can have a different cause. An in-person scalp exam often gives us more useful information than a photograph alone.",
     ],
     aapHeading: "AAP Guide to Hair Loss in Children",
-    aapLead: "The AAP guide below explains common causes of hair loss and when your child needs an exam. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes of hair loss and when your child needs an exam.",
   },
   {
     slug: "dry-skin",
@@ -743,7 +743,7 @@ export const symptoms: Symptom[] = [
       "Use shorter baths with warm rather than very hot water. Apply a thick, unscented moisturizer while your child’s skin is still damp. Moisturizing damp skin helps trap water instead of letting it evaporate.",
     ],
     aapHeading: "AAP Guide to Dry and Cracked Skin",
-    aapLead: "The AAP guide below explains how to care for dry skin, which moisturizers help, and when dryness may be eczema or another skin problem. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to care for dry skin, which moisturizers help, and when dryness may be eczema or another skin problem.",
   },
   {
     slug: "sunburn",
@@ -758,7 +758,7 @@ export const symptoms: Symptom[] = [
       "Cool your child’s skin and keep offering fluids. Check the skin again later because sunburn can become more obvious several hours after the sun exposure ends.",
     ],
     aapHeading: "AAP Guide to Sunburn in Children",
-    aapLead: "The AAP guide below explains sunburn care, what to avoid, and when a burn needs medical attention. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains sunburn care, what to avoid, and when a burn needs medical attention.",
   },
   {
     slug: "boil",
@@ -773,7 +773,7 @@ export const symptoms: Symptom[] = [
       "Use warm compresses to encourage the boil to soften and drain on its own. Watch whether the boil gets smaller and less painful or instead grows and becomes more painful. Fever or repeated boils also deserve medical attention.",
     ],
     aapHeading: "AAP Guide to Boils in Children",
-    aapLead: "The AAP guide below explains safe care at home, what changes to watch for, and when your child may need us to drain a boil. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains safe care at home, what changes to watch for, and when your child may need us to drain a boil.",
   },
   {
     slug: "skin-lump",
@@ -788,7 +788,7 @@ export const symptoms: Symptom[] = [
       "See whether the lump moves under the skin and estimate its size with a ruler or coin. Think about whether your child recently had a cold or another infection. A lump that keeps growing or feels hard and fixed needs more attention.",
     ],
     aapHeading: "AAP Guide to Skin Lumps in Children",
-    aapLead: "The AAP guide below explains common causes of lumps and which ones should be examined. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes of lumps and which ones should be examined.",
   },
   {
     slug: "blisters",
@@ -803,7 +803,7 @@ export const symptoms: Symptom[] = [
       "Check what caused the blister and where it is on your child’s body. A friction blister on the heel needs different care from a burn blister or a group of unexplained blisters. Redness, pus or fever may mean an infection has started.",
     ],
     aapHeading: "AAP Guide to Blisters in Children",
-    aapLead: "The AAP guide below explains blister care, when you can care for one at home, and when to bring your child in. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains blister care, when you can care for one at home, and when to bring your child in.",
   },
   {
     slug: "mosquito-bites",
@@ -818,7 +818,7 @@ export const symptoms: Symptom[] = [
       "Check the bite over the next two or three days. An ordinary reaction should begin to settle. Increasing heat, redness and pain may mean the bite has become infected.",
     ],
     aapHeading: "AAP Guide to Mosquito Bites in Children",
-    aapLead: "The AAP guide below explains normal reactions, itch relief and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains normal reactions, itch relief and when to call us.",
   },
   {
     slug: "bee-sting",
@@ -833,7 +833,7 @@ export const symptoms: Symptom[] = [
       "Call 911 if your child develops trouble breathing, swelling of the lips or tongue, widespread hives, vomiting or sudden weakness. These symptoms can happen during anaphylaxis.",
     ],
     aapHeading: "AAP Guide to Bee and Wasp Stings",
-    aapLead: "The AAP guide below explains sting care, allergic reactions and when to call 911. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains sting care, allergic reactions and when to call 911.",
   },
   {
     slug: "spider-bite",
@@ -848,7 +848,7 @@ export const symptoms: Symptom[] = [
       "Wash the area and check it again over the next day or two. Increasing pain, spreading redness or a sore that turns darker deserves medical attention. Tell us if you saw the spider or think a black widow or brown recluse may have caused the bite.",
     ],
     aapHeading: "AAP Guide to Spider Bites in Children",
-    aapLead: "The AAP guide below explains common spider bites, first aid and which symptoms need medical attention. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common spider bites, first aid and which symptoms need medical attention.",
   },
   {
     slug: "fire-ant-sting",
@@ -863,7 +863,7 @@ export const symptoms: Symptom[] = [
       "Your child may develop one small blister at each sting site. Leave the blisters closed because opening them can increase the chance of infection.",
     ],
     aapHeading: "AAP Guide to Fire Ant Stings",
-    aapLead: "The AAP guide below explains what to expect, how to care for the stings and when an allergic reaction needs emergency care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to expect, how to care for the stings and when an allergic reaction needs emergency care.",
   },
   {
     slug: "bed-bug-bites",
@@ -878,7 +878,7 @@ export const symptoms: Symptom[] = [
       "Look for several bites close together on the arms, shoulders, neck or legs. Different people in the same room may react differently, so one person can have obvious bites while another has none.",
     ],
     aapHeading: "AAP Guide to Bed Bug Bites",
-    aapLead: "The AAP guide below explains how bed bug bites usually look, how to care for the skin and what to do about the source. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how bed bug bites usually look, how to care for the skin and what to do about the source.",
   },
   {
     slug: "scorpion-sting",
@@ -893,7 +893,7 @@ export const symptoms: Symptom[] = [
       "Wash the sting, apply a cold pack and call Poison Control for guidance. Tell Poison Control where the sting happened and what your child is experiencing. Muscle twitching, trouble swallowing or trouble breathing needs emergency care.",
     ],
     aapHeading: "AAP Guide to Scorpion Stings",
-    aapLead: "The AAP guide below explains first aid, symptoms to watch for and when your child needs emergency care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains first aid, symptoms to watch for and when your child needs emergency care.",
   },
   {
     slug: "jellyfish-sting",
@@ -908,7 +908,7 @@ export const symptoms: Symptom[] = [
       "Use seawater rather than fresh water to rinse the area. Remove visible tentacles without rubbing the skin, then use hot water for pain relief.",
     ],
     aapHeading: "AAP Guide to Jellyfish Stings",
-    aapLead: "The AAP guide below explains first aid, pain relief and which reactions need emergency care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains first aid, pain relief and which reactions need emergency care.",
   },
   {
     slug: "animal-bite",
@@ -923,7 +923,7 @@ export const symptoms: Symptom[] = [
       "Tell us what bit your child, where the bite occurred and whether the skin broke. Tell us what you know about the animal and its vaccination status. We use that information to assess infection, tetanus and rabies risk.",
     ],
     aapHeading: "AAP Guide to Animal and Human Bites",
-    aapLead: "The AAP guide below explains wound care, infection and rabies concerns, and when to bring your child in. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains wound care, infection and rabies concerns, and when to bring your child in.",
   },
   {
     slug: "swimmers-itch",
@@ -938,7 +938,7 @@ export const symptoms: Symptom[] = [
       "Your child may develop small red itchy bumps within hours after swimming. The rash cannot spread from your child to another person.",
     ],
     aapHeading: "AAP Guide to Swimmer's Itch",
-    aapLead: "The AAP guide below explains what causes it, how to ease the itching and how to reduce the chance of getting it again. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what causes it, how to ease the itching and how to reduce the chance of getting it again.",
   },
   {
     slug: "pinworms",
@@ -953,7 +953,7 @@ export const symptoms: Symptom[] = [
       "Look for small white thread-like worms around your child’s bottom a few hours after bedtime. You can also use clear tape first thing in the morning before your child gets up.",
     ],
     aapHeading: "AAP Guide to Pinworms in Children",
-    aapLead: "The AAP guide below explains how to check for pinworms, how they are treated and how to reduce reinfection. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to check for pinworms, how they are treated and how to reduce reinfection.",
   },
   {
     slug: "head-lice",
@@ -968,7 +968,7 @@ export const symptoms: Symptom[] = [
       "Lice treatments may not kill every egg. Regular combing removes lice that hatch after the first treatment. Following the full treatment schedule helps prevent newly hatched lice from starting the cycle again.",
     ],
     aapHeading: "AAP Guide to Head Lice in Children",
-    aapLead: "The AAP guide below explains how to check for lice, how to treat them and what to expect with school or daycare. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to check for lice, how to treat them and what to expect with school or daycare.",
   },
   {
     slug: "eye-red-no-pus",
@@ -983,7 +983,7 @@ export const symptoms: Symptom[] = [
       "Allergies usually make both eyes itch and often come with sneezing or a runny nose. A viral eye infection often feels gritty and may start in one eye during a cold. Eye pain, vision changes or light sensitivity need more attention.",
     ],
     aapHeading: "AAP Guide to a Red Eye Without Discharge",
-    aapLead: "The AAP guide below explains common causes, comfort measures and which eye symptoms need medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes, comfort measures and which eye symptoms need medical care.",
   },
   {
     slug: "eye-allergy",
@@ -998,7 +998,7 @@ export const symptoms: Symptom[] = [
       "Use a cold compress and encourage your child not to rub their eyes. Rubbing can increase irritation and itching.",
     ],
     aapHeading: "AAP Guide to Eye Allergies in Children",
-    aapLead: "The AAP guide below explains how allergies differ from infection, what can ease symptoms and when your child’s eyes should be checked. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how allergies differ from infection, what can ease symptoms and when your child’s eyes should be checked.",
   },
   {
     slug: "eye-foreign-object",
@@ -1013,7 +1013,7 @@ export const symptoms: Symptom[] = [
       "Rinse the eye with clean lukewarm water and keep your child from rubbing it. Continued pain or a gritty feeling after a thorough rinse can mean that the object scratched the eye.",
     ],
     aapHeading: "AAP Guide to Something in a Child's Eye",
-    aapLead: "The AAP guide below explains safe rinsing, what not to touch and when your child needs an eye exam. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains safe rinsing, what not to touch and when your child needs an eye exam.",
   },
   {
     slug: "chemical-in-eye",
@@ -1028,7 +1028,7 @@ export const symptoms: Symptom[] = [
       "Hold your child’s eyelid open and flush the eye with clean lukewarm water for the full recommended time. Do not stop the rinse to inspect the eye.",
     ],
     aapHeading: "AAP Guide to a Chemical in the Eye",
-    aapLead: "The AAP guide below explains how to flush the eye, when to call Poison Control and why the eye may need to be examined. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to flush the eye, when to call Poison Control and why the eye may need to be examined.",
   },
   {
     slug: "eye-injury",
@@ -1043,7 +1043,7 @@ export const symptoms: Symptom[] = [
       "Keep your child from rubbing or pressing on the eye. Do not try to remove an object that remains lodged in the eye.",
     ],
     aapHeading: "AAP Guide to Eye Injuries in Children",
-    aapLead: "The AAP guide below explains what to do after an eye injury and which signs need urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to do after an eye injury and which signs need urgent care.",
   },
   {
     slug: "eyelid-swelling",
@@ -1058,7 +1058,7 @@ export const symptoms: Symptom[] = [
       "Check whether the eyelid becomes red, warm or painful. Make sure your child can open the eye and move it normally. Fever, vision changes or trouble moving the eye may mean the infection is more serious.",
     ],
     aapHeading: "AAP Guide to a Swollen Eyelid",
-    aapLead: "The AAP guide below explains common causes of eyelid swelling and when to bring your child in. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes of eyelid swelling and when to bring your child in.",
   },
   {
     slug: "sty",
@@ -1073,7 +1073,7 @@ export const symptoms: Symptom[] = [
       "Hold a warm compress against the eyelid several times a day. Do not squeeze the lump.",
     ],
     aapHeading: "AAP Guide to Styes in Children",
-    aapLead: "The AAP guide below explains home care, what to avoid and when an eyelid lump needs medical attention. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains home care, what to avoid and when an eyelid lump needs medical attention.",
   },
   {
     slug: "blocked-tear-duct",
@@ -1088,7 +1088,7 @@ export const symptoms: Symptom[] = [
       "A blocked tear duct can make one eye water even when your baby is not crying. Gentle massage can help while the duct opens naturally over time. Redness, swelling or tenderness around the eye may mean an infection has developed.",
     ],
     aapHeading: "AAP Guide to a Blocked Tear Duct in Babies",
-    aapLead: "The AAP guide below explains what is normal, how massage may help and which changes may mean your baby has an infection. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what is normal, how massage may help and which changes may mean your baby has an infection.",
   },
   {
     slug: "earwax",
@@ -1103,7 +1103,7 @@ export const symptoms: Symptom[] = [
       "Leave normal earwax alone and avoid putting objects into the ear canal. Wax-softening drops can help when wax is truly blocked.",
     ],
     aapHeading: "AAP Guide to Earwax Buildup",
-    aapLead: "The AAP guide below explains safe earwax care, what can soften a blockage and when your child needs help removing it. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains safe earwax care, what can soften a blockage and when your child needs help removing it.",
   },
   {
     slug: "swimmers-ear",
@@ -1118,7 +1118,7 @@ export const symptoms: Symptom[] = [
       "Gently moving the outer ear can reproduce the pain when swimmer’s ear inflames the ear canal. Middle-ear infections usually do not cause the same outer-ear tenderness. An ear exam confirms the cause and guides treatment.",
     ],
     aapHeading: "AAP Guide to Swimmer's Ear",
-    aapLead: "The AAP guide below explains the symptoms, treatment and ways to help prevent another episode. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains the symptoms, treatment and ways to help prevent another episode.",
   },
   {
     slug: "ear-discharge",
@@ -1133,7 +1133,7 @@ export const symptoms: Symptom[] = [
       "Notice the color of the fluid and whether your child still has pain or fever. Drainage can happen when pressure behind the eardrum releases.",
     ],
     aapHeading: "AAP Guide to Ear Discharge in Children",
-    aapLead: "The AAP guide below explains common causes of ear discharge, what to do while you wait and when your child needs care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes of ear discharge, what to do while you wait and when your child needs care.",
   },
   {
     slug: "ear-congestion",
@@ -1148,7 +1148,7 @@ export const symptoms: Symptom[] = [
       "Your child may notice fullness, popping or muffled hearing for a while after a cold or ear infection. Ear fullness, popping and muffled hearing can improve gradually as the fluid clears. Persistent pain, fever or hearing problems deserve an exam.",
     ],
     aapHeading: "AAP Guide to Ear Congestion and Pressure",
-    aapLead: "The AAP guide below explains common causes, what can help and when persistent symptoms need to be checked. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes, what can help and when persistent symptoms need to be checked.",
   },
   {
     slug: "ear-injury",
@@ -1163,7 +1163,7 @@ export const symptoms: Symptom[] = [
       "Keep objects out of the ear canal and do not probe for anything that remains inside. Watch for bleeding, severe pain or hearing changes.",
     ],
     aapHeading: "AAP Guide to Ear Injuries in Children",
-    aapLead: "The AAP guide below explains first aid and which ear injuries need same-day care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains first aid and which ear injuries need same-day care.",
   },
   {
     slug: "toothache",
@@ -1178,7 +1178,7 @@ export const symptoms: Symptom[] = [
       "Keep the area clean and use appropriate pain relief while you arrange a dental visit. Swelling of the face or gum can mean the infection is spreading.",
     ],
     aapHeading: "AAP Guide to Toothache in Children",
-    aapLead: "The AAP guide below explains what you can do while waiting for dental care and which swelling or symptoms need urgent attention. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what you can do while waiting for dental care and which swelling or symptoms need urgent attention.",
   },
   {
     slug: "tooth-injury",
@@ -1193,7 +1193,7 @@ export const symptoms: Symptom[] = [
       "Find the tooth or broken piece if you can and handle it carefully. A dentist may sometimes save a permanent tooth when you handle it correctly and get treatment quickly.",
     ],
     aapHeading: "AAP Guide to a Knocked or Broken Tooth",
-    aapLead: "The AAP guide below explains what to do right away, how to protect the tooth and where your child should be seen. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to do right away, how to protect the tooth and where your child should be seen.",
   },
   {
     slug: "mouth-ulcers",
@@ -1208,7 +1208,7 @@ export const symptoms: Symptom[] = [
       "Offer drinks your child can tolerate and keep track of how often they urinate. Pain relief may make it easier for your child to drink.",
     ],
     aapHeading: "AAP Guide to Mouth Ulcers in Children",
-    aapLead: "The AAP guide below explains common causes, ways to ease the pain and when mouth sores need medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes, ways to ease the pain and when mouth sores need medical care.",
   },
   {
     slug: "mouth-injury",
@@ -1223,7 +1223,7 @@ export const symptoms: Symptom[] = [
       "Use steady pressure to stop bleeding and look for deep cuts or damaged teeth after the bleeding slows. Some mouth cuts heal without stitches, while others need repair.",
     ],
     aapHeading: "AAP Guide to Mouth Injuries in Children",
-    aapLead: "The AAP guide below explains how to stop bleeding and which mouth injuries should be seen. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to stop bleeding and which mouth injuries should be seen.",
   },
   {
     slug: "thrush",
@@ -1238,7 +1238,7 @@ export const symptoms: Symptom[] = [
       "Look for white patches on the tongue, cheeks or gums that stay in place when you gently wipe them. A breastfeeding parent can also develop symptoms.",
     ],
     aapHeading: "AAP Guide to Thrush in Babies",
-    aapLead: "The AAP guide below explains how to recognize thrush, how it is treated and how to reduce the chance of it coming back. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to recognize thrush, how it is treated and how to reduce the chance of it coming back.",
   },
   {
     slug: "sinus-pain",
@@ -1253,7 +1253,7 @@ export const symptoms: Symptom[] = [
       "Watch whether your child’s congestion gradually improves or becomes worse after starting to get better. A new fever or a clear turn for the worse can suggest a complication.",
     ],
     aapHeading: "AAP Guide to Sinus Pain and Congestion",
-    aapLead: "The AAP guide below explains common causes, what can help and when sinus symptoms should be checked. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes, what can help and when sinus symptoms should be checked.",
   },
   {
     slug: "hoarseness",
@@ -1268,7 +1268,7 @@ export const symptoms: Symptom[] = [
       "Encourage quiet normal speech instead of whispering. Whispering can strain the voice instead of resting it.",
     ],
     aapHeading: "AAP Guide to Hoarseness in Children",
-    aapLead: "The AAP guide below explains what can help, why whispering may not be useful and when hoarseness needs medical attention. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what can help, why whispering may not be useful and when hoarseness needs medical attention.",
   },
   {
     slug: "nose-injury",
@@ -1283,7 +1283,7 @@ export const symptoms: Symptom[] = [
       "Control bleeding first and use a cold pack for swelling. Check whether your child can breathe through both sides of the nose and whether the nose looks crooked after swelling decreases.",
     ],
     aapHeading: "AAP Guide to Nose Injuries in Children",
-    aapLead: "The AAP guide below explains first aid and which signs suggest a more serious injury. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains first aid and which signs suggest a more serious injury.",
   },
   {
     slug: "cuts-and-scrapes",
@@ -1298,7 +1298,7 @@ export const symptoms: Symptom[] = [
       "Press directly on the wound without lifting the cloth to check too early. Clean the wound well after the bleeding stops.",
     ],
     aapHeading: "AAP Guide to Cuts, Scrapes and Bruises",
-    aapLead: "The AAP guide below explains how to stop bleeding, clean a wound and tell when a cut may need to be closed. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to stop bleeding, clean a wound and tell when a cut may need to be closed.",
   },
   {
     slug: "scrape",
@@ -1313,7 +1313,7 @@ export const symptoms: Symptom[] = [
       "Rinse the scrape well and use good lighting to check for dirt that remains in the skin. Do not keep digging at material that will not come out easily.",
     ],
     aapHeading: "AAP Guide to Scrapes and Grazes",
-    aapLead: "The AAP guide below explains how to clean and protect a scrape and which changes need medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to clean and protect a scrape and which changes need medical care.",
   },
   {
     slug: "puncture-wound",
@@ -1328,7 +1328,7 @@ export const symptoms: Symptom[] = [
       "Remember what caused the puncture and whether it passed through a shoe or another dirty surface. We also need to know your child’s tetanus history.",
     ],
     aapHeading: "AAP Guide to Puncture Wounds",
-    aapLead: "The AAP guide below explains wound care, infection risk and when a puncture needs an exam. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains wound care, infection risk and when a puncture needs an exam.",
   },
   {
     slug: "arm-injury",
@@ -1343,7 +1343,7 @@ export const symptoms: Symptom[] = [
       "Compare the injured arm with the other arm. Check whether your child can reach, rotate and lift it normally. Swelling, a crooked shape or complete refusal to use the arm can mean your child needs an exam.",
     ],
     aapHeading: "AAP Guide to Arm Injuries in Children",
-    aapLead: "The AAP guide below explains first aid and which arm injuries need urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains first aid and which arm injuries need urgent care.",
   },
   {
     slug: "leg-injury",
@@ -1358,7 +1358,7 @@ export const symptoms: Symptom[] = [
       "Ask your child to take a few normal steps if they can do so safely. A mild limp is different from complete refusal to put weight on the leg. Swelling or a crooked shape also raises concern for a more serious injury.",
     ],
     aapHeading: "AAP Guide to Leg Injuries in Children",
-    aapLead: "The AAP guide below explains first aid and which leg injuries need medical evaluation. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains first aid and which leg injuries need medical evaluation.",
   },
   {
     slug: "finger-injury",
@@ -1373,7 +1373,7 @@ export const symptoms: Symptom[] = [
       "Remove rings as soon as possible. Then check the finger for a crooked joint, a crushed fingertip or blood under the nail.",
     ],
     aapHeading: "AAP Guide to Finger Injuries in Children",
-    aapLead: "The AAP guide below explains first aid and which finger injuries need an exam. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains first aid and which finger injuries need an exam.",
   },
   {
     slug: "toe-injury",
@@ -1388,7 +1388,7 @@ export const symptoms: Symptom[] = [
       "Check whether the toe looks straight and whether your child can walk in a supportive shoe. A crooked toe, severe swelling or a significant nail injury deserves a closer look.",
     ],
     aapHeading: "AAP Guide to Toe Injuries in Children",
-    aapLead: "The AAP guide below explains home care and which toe injuries need an exam. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains home care and which toe injuries need an exam.",
   },
   {
     slug: "neck-pain",
@@ -1403,7 +1403,7 @@ export const symptoms: Symptom[] = [
       "Check whether your child has a fever or other signs of illness. Then check whether your child can move the neck normally.",
     ],
     aapHeading: "AAP Guide to Neck Pain and Stiffness",
-    aapLead: "The AAP guide below explains common causes, what can help and when neck pain needs urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes, what can help and when neck pain needs urgent care.",
   },
   {
     slug: "back-pain",
@@ -1418,7 +1418,7 @@ export const symptoms: Symptom[] = [
       "Ask whether the pain follows activity, wakes your child at night or comes with fever, weakness or numbness. Persistent back pain without an obvious cause deserves an evaluation.",
     ],
     aapHeading: "AAP Guide to Back Pain in Children",
-    aapLead: "The AAP guide below explains common causes of back pain and which symptoms need an evaluation. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes of back pain and which symptoms need an evaluation.",
   },
   {
     slug: "chest-pain",
@@ -1433,7 +1433,7 @@ export const symptoms: Symptom[] = [
       "Ask what your child was doing when the pain started and whether movement or breathing changes the pain. Pay attention to trouble breathing, fainting or a racing heartbeat.",
     ],
     aapHeading: "AAP Guide to Chest Pain in Children",
-    aapLead: "The AAP guide below explains common reasons for chest pain and which symptoms need urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common reasons for chest pain and which symptoms need urgent care.",
   },
   {
     slug: "burn",
@@ -1448,7 +1448,7 @@ export const symptoms: Symptom[] = [
       "Move your child away from the heat source and cool the burned skin with running water. Do not put butter or other home remedies on the burn.",
     ],
     aapHeading: "AAP Guide to Burns in Children",
-    aapLead: "The AAP guide below explains first aid, what not to put on a burn and which burns need medical care right away. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains first aid, what not to put on a burn and which burns need medical care right away.",
   },
   {
     slug: "frostbite",
@@ -1463,7 +1463,7 @@ export const symptoms: Symptom[] = [
       "Move your child to a warm place and begin gentle rewarming as directed. Do not rub the frozen area or place it against a heater.",
     ],
     aapHeading: "AAP Guide to Frostbite in Children",
-    aapLead: "The AAP guide below explains how to rewarm frostbitten skin and when your child needs emergency care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to rewarm frostbitten skin and when your child needs emergency care.",
   },
   {
     slug: "heat-illness",
@@ -1478,7 +1478,7 @@ export const symptoms: Symptom[] = [
       "Move your child out of the heat and start cooling them. Confusion, collapse or major changes in behavior may mean your child has heatstroke.",
     ],
     aapHeading: "AAP Guide to Heat Exhaustion and Heatstroke",
-    aapLead: "The AAP guide below explains how to cool your child, how the two conditions differ and when to call 911. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to cool your child, how the two conditions differ and when to call 911.",
   },
   {
     slug: "sliver",
@@ -1493,7 +1493,7 @@ export const symptoms: Symptom[] = [
       "Use clean tweezers for a shallow splinter that you can grasp easily. Do not dig deeply into the skin for a splinter that will not come out.",
     ],
     aapHeading: "AAP Guide to Slivers and Splinters",
-    aapLead: "The AAP guide below explains removal, wound care and when a splinter needs professional help. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains removal, wound care and when a splinter needs professional help.",
   },
   {
     slug: "skin-foreign-object",
@@ -1508,7 +1508,7 @@ export const symptoms: Symptom[] = [
       "Do not pull out a large, deep or firmly stuck object. Protect the area from movement instead.",
     ],
     aapHeading: "AAP Guide to Something Embedded in the Skin",
-    aapLead: "The AAP guide below explains what you can remove, what to leave alone and how to protect the area. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what you can remove, what to leave alone and how to protect the area.",
   },
   {
     slug: "wound-infection",
@@ -1523,7 +1523,7 @@ export const symptoms: Symptom[] = [
       "Watch for spreading redness, increasing warmth, more pain, pus or new fever. Spreading redness, warmth, pain, pus or fever mean the wound is not following a normal healing course.",
     ],
     aapHeading: "AAP Guide to An Infected Wound",
-    aapLead: "The AAP guide below explains what wound infection looks like and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what wound infection looks like and when your child needs medical care.",
   },
   {
     slug: "suture-care",
@@ -1538,7 +1538,7 @@ export const symptoms: Symptom[] = [
       "Follow the wound-care instructions and keep track of the planned removal date. Watch for redness, drainage or increasing pain around the stitches.",
     ],
     aapHeading: "AAP Guide to Looking After Stitches",
-    aapLead: "The AAP guide below explains daily care, bathing, removal timing and signs of infection. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains daily care, bathing, removal timing and signs of infection.",
   },
   {
     slug: "dizziness",
@@ -1553,7 +1553,7 @@ export const symptoms: Symptom[] = [
       "Ask whether your child had just stood up, skipped a meal, exercised or been in a hot place. Ask about headache, fainting or other symptoms at the same time.",
     ],
     aapHeading: "AAP Guide to Dizziness in Children",
-    aapLead: "The AAP guide below explains common causes, what can help and which symptoms need medical evaluation. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes, what can help and which symptoms need medical evaluation.",
   },
   {
     slug: "fainting",
@@ -1568,7 +1568,7 @@ export const symptoms: Symptom[] = [
       "Ask what your child was doing immediately before they fainted and whether they felt warning symptoms first. Fainting during exercise or with chest pain deserves prompt medical attention.",
     ],
     aapHeading: "AAP Guide to Fainting in Children",
-    aapLead: "The AAP guide below explains what to do after a faint and which episodes should be investigated. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to do after a faint and which episodes should be investigated.",
   },
   {
     slug: "weakness-and-fatigue",
@@ -1583,7 +1583,7 @@ export const symptoms: Symptom[] = [
       "Ask whether your child simply wants to rest or actually cannot climb stairs, lift an arm or perform another normal movement. True weakness deserves more attention than ordinary tiredness.",
     ],
     aapHeading: "AAP Guide to Weakness and Fatigue in Children",
-    aapLead: "The AAP guide below explains common causes of fatigue and weakness and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes of fatigue and weakness and when your child needs medical care.",
   },
   {
     slug: "stomach-pain",
@@ -1598,7 +1598,7 @@ export const symptoms: Symptom[] = [
       "Ask your child to point to the pain with one finger. Check whether the pain moves around or stays in one spot.",
     ],
     aapHeading: "AAP Guide to Stomach Pain in Children",
-    aapLead: "The AAP guide below explains common causes and which symptoms need urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes and which symptoms need urgent care.",
   },
   {
     slug: "stomach-pain-female",
@@ -1613,7 +1613,7 @@ export const symptoms: Symptom[] = [
       "Write down where your child feels the pain and whether it occurs before, during or after a period. Record any bleeding, vomiting, fever or urinary symptoms.",
     ],
     aapHeading: "AAP Guide to Stomach Pain in Girls and Young Women",
-    aapLead: "The AAP guide below explains what to consider and when the pain needs urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to consider and when the pain needs urgent care.",
   },
   {
     slug: "blood-in-stool",
@@ -1628,7 +1628,7 @@ export const symptoms: Symptom[] = [
       "Check whether the blood is bright red, dark or mixed throughout the stool. Note any constipation, diarrhea or stomach pain.",
     ],
     aapHeading: "AAP Guide to Blood in a Child's Stool",
-    aapLead: "The AAP guide below explains common causes and which types of bleeding need medical evaluation. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes and which types of bleeding need medical evaluation.",
   },
   {
     slug: "unusual-stool-color",
@@ -1643,7 +1643,7 @@ export const symptoms: Symptom[] = [
       "Think about what your child ate or drank before the color changed. Some colors can come directly from food dyes or medicines.",
     ],
     aapHeading: "AAP Guide to Unusual Stool Colors",
-    aapLead: "The AAP guide below explains which stool colors matter and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains which stool colors matter and when to call us.",
   },
   {
     slug: "decreased-fluid-intake",
@@ -1658,7 +1658,7 @@ export const symptoms: Symptom[] = [
       "Keep track of how often your child urinates. A dry mouth, unusual sleepiness or difficulty drinking can mean your child is becoming dehydrated.",
     ],
     aapHeading: "AAP Guide for a Child Who Will Not Drink",
-    aapLead: "The AAP guide below explains what fluids to offer, how to watch for dehydration and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what fluids to offer, how to watch for dehydration and when to call us.",
   },
   {
     slug: "reflux",
@@ -1673,7 +1673,7 @@ export const symptoms: Symptom[] = [
       "Pay attention to how well your baby feeds, gains weight and seems after feeding. Forceful vomiting, poor weight gain or a baby who seems ill may mean something other than normal reflux.",
     ],
     aapHeading: "AAP Guide to Reflux and Spitting Up in Babies",
-    aapLead: "The AAP guide below explains normal reflux, what can help and when your baby needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains normal reflux, what can help and when your baby needs medical care.",
   },
   {
     slug: "vomiting-baby",
@@ -1688,7 +1688,7 @@ export const symptoms: Symptom[] = [
       "Keep track of how much your baby drinks and the number of wet diapers during the day. Make sure your baby wakes and responds normally.",
     ],
     aapHeading: "AAP Guide to Vomiting in Babies Under 12 Months",
-    aapLead: "The AAP guide below explains feeding and fluids, signs of dehydration and when your baby needs care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains feeding and fluids, signs of dehydration and when your baby needs care.",
   },
   {
     slug: "diarrhea-baby",
@@ -1703,7 +1703,7 @@ export const symptoms: Symptom[] = [
       "Look for a clear increase in how often your baby stools or how loose the stools look compared with normal. Keep track of feeding and the number of wet diapers too.",
     ],
     aapHeading: "AAP Guide to Diarrhea in Babies Under 12 Months",
-    aapLead: "The AAP guide below explains what diarrhea looks like in babies and when your baby needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what diarrhea looks like in babies and when your baby needs medical care.",
   },
   {
     slug: "colds-baby",
@@ -1718,7 +1718,7 @@ export const symptoms: Symptom[] = [
       "Clear your baby’s nose before feeds when congestion makes feeding difficult. Make sure your baby can finish feeds and keeps having the usual number of wet diapers.",
     ],
     aapHeading: "AAP Guide to Colds in Babies Under 12 Months",
-    aapLead: "The AAP guide below explains cold symptoms, safe care and when your baby needs medical attention. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains cold symptoms, safe care and when your baby needs medical attention.",
   },
   {
     slug: "cough-baby",
@@ -1733,7 +1733,7 @@ export const symptoms: Symptom[] = [
       "Watch your baby’s ribs and breathing rate. Pay attention to whether your baby can finish a feed without stopping to breathe. Babies often drink less when breathing becomes harder.",
     ],
     aapHeading: "AAP Guide to Cough in Babies Under 12 Months",
-    aapLead: "The AAP guide below explains what to watch for and when your baby needs care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to watch for and when your baby needs care.",
   },
   {
     slug: "motion-sickness",
@@ -1748,7 +1748,7 @@ export const symptoms: Symptom[] = [
       "Have your child look forward, avoid heavy meals before travel and take breaks when possible. Some children may also benefit from medicine before the trip.",
     ],
     aapHeading: "AAP Guide to Motion Sickness in Children",
-    aapLead: "The AAP guide below explains prevention, what can help during travel and when repeated symptoms need a closer look. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains prevention, what can help during travel and when repeated symptoms need a closer look.",
   },
   {
     slug: "travellers-diarrhea",
@@ -1763,7 +1763,7 @@ export const symptoms: Symptom[] = [
       "Tell us where your child traveled, when the diarrhea started and what food or water exposures occurred. Let us know if anyone else became sick.",
     ],
     aapHeading: "AAP Guide to Diarrhea After Travel",
-    aapLead: "The AAP guide below explains hydration, what information to share and when your child needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains hydration, what information to share and when your child needs medical care.",
   },
   {
     slug: "urinary-tract-infection",
@@ -1778,7 +1778,7 @@ export const symptoms: Symptom[] = [
       "Your child’s symptoms can suggest a UTI, but symptoms alone cannot confirm the diagnosis. A urine sample helps us choose the right treatment.",
     ],
     aapHeading: "AAP Guide to Urinary Tract Infections in Children",
-    aapLead: "The AAP guide below explains common UTI symptoms, testing and when your child needs prompt care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common UTI symptoms, testing and when your child needs prompt care.",
   },
   {
     slug: "painful-urination",
@@ -1793,7 +1793,7 @@ export const symptoms: Symptom[] = [
       "Ask about frequent urination, fever or new accidents. Check the outside skin for redness or irritation.",
     ],
     aapHeading: "AAP Guide to Pain When Passing Urine",
-    aapLead: "The AAP guide below explains common reasons for painful urination and when to bring your child in. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common reasons for painful urination and when to bring your child in.",
   },
   {
     slug: "penis-and-scrotum-symptoms",
@@ -1808,7 +1808,7 @@ export const symptoms: Symptom[] = [
       "Ask when the pain started and whether the scrotum looks swollen or sits differently than usual. Sudden severe testicle pain needs immediate evaluation.",
     ],
     aapHeading: "AAP Guide to Penis and Scrotum Symptoms in Boys",
-    aapLead: "The AAP guide below explains common symptoms and which problems cannot wait for an appointment. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common symptoms and which problems cannot wait for an appointment.",
   },
   {
     slug: "vaginal-symptoms",
@@ -1823,7 +1823,7 @@ export const symptoms: Symptom[] = [
       "Look for redness and ask about new soaps, bath products or tight clothing. Fever, pain with urination or unusual discharge may mean something more than simple skin irritation.",
     ],
     aapHeading: "AAP Guide to Vaginal Symptoms in Girls",
-    aapLead: "The AAP guide below explains common causes, simple changes that may help and when your child needs to be seen. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes, simple changes that may help and when your child needs to be seen.",
   },
   {
     slug: "circumcision-problems",
@@ -1838,7 +1838,7 @@ export const symptoms: Symptom[] = [
       "Keep the area protected as directed and watch the healing process each day. Increasing redness, bleeding or trouble urinating needs medical attention.",
     ],
     aapHeading: "AAP Guide to Circumcision Questions",
-    aapLead: "The AAP guide below explains normal healing, routine care and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains normal healing, routine care and when to call us.",
   },
   {
     slug: "foreskin-care",
@@ -1853,7 +1853,7 @@ export const symptoms: Symptom[] = [
       "Clean only the outside until the foreskin retracts easily on its own. Do not force the foreskin back.",
     ],
     aapHeading: "AAP Guide to Foreskin Care in Boys",
-    aapLead: "The AAP guide below explains normal foreskin development, basic care and which problems need medical attention. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains normal foreskin development, basic care and which problems need medical attention.",
   },
   {
     slug: "taking-a-temperature",
@@ -1869,7 +1869,7 @@ export const symptoms: Symptom[] = [
     ],
     noTool: true,
     aapHeading: "AAP Guide to How to Take a Child's Temperature",
-    aapLead: "The AAP guide below explains how to take a temperature accurately and what counts as a fever. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to take a temperature accurately and what counts as a fever.",
   },
   {
     slug: "fever-myths",
@@ -1885,7 +1885,7 @@ export const symptoms: Symptom[] = [
     ],
     noTool: true,
     aapHeading: "AAP Guide to Fever Myths and Facts",
-    aapLead: "The AAP guide below explains what fever does and does not mean and which symptoms need attention. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what fever does and does not mean and which symptoms need attention.",
   },
   {
     slug: "emergency-symptoms",
@@ -1901,7 +1901,7 @@ export const symptoms: Symptom[] = [
     ],
     noTool: true,
     aapHeading: "AAP Guide to Emergency Symptoms Not to Miss",
-    aapLead: "The AAP guide below explains which symptoms mean call 911, which need an emergency room and which can be handled with a nurse or office call. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains which symptoms mean call 911, which need an emergency room and which can be handled with a nurse or office call.",
   },
   {
     slug: "antibiotics",
@@ -1917,7 +1917,7 @@ export const symptoms: Symptom[] = [
     ],
     noTool: true,
     aapHeading: "AAP Guide to When Antibiotics Help",
-    aapLead: "The AAP guide below explains when antibiotics are useful, when they are not and why certain symptoms do not automatically mean a bacterial infection. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains when antibiotics are useful, when they are not and why certain symptoms do not automatically mean a bacterial infection.",
   },
   {
     slug: "cough-medicine",
@@ -1933,7 +1933,7 @@ export const symptoms: Symptom[] = [
     ],
     noTool: true,
     aapHeading: "AAP Guide to Cough Medicines and Home Remedies",
-    aapLead: "The AAP guide below explains what can help a cough and when coughing needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what can help a cough and when coughing needs medical care.",
   },
   {
     slug: "wheezing",
@@ -1948,7 +1948,7 @@ export const symptoms: Symptom[] = [
       "Listen for a musical or whistling sound when your child breathes out. Pay attention to how hard your child is working to breathe.",
     ],
     aapHeading: "AAP Guide to Wheezing in Children",
-    aapLead: "The AAP guide below explains what wheezing sounds like, common causes and when breathing symptoms need urgent care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what wheezing sounds like, common causes and when breathing symptoms need urgent care.",
   },
   {
     slug: "breathing-trouble",
@@ -1963,7 +1963,7 @@ export const symptoms: Symptom[] = [
       "Watch your child’s chest and ribs while they breathe. A child who is breathing comfortably can usually talk, eat and drink normally.",
     ],
     aapHeading: "AAP Guide to Trouble Breathing in Children",
-    aapLead: "The AAP guide below explains what to watch for and when breathing trouble needs emergency care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to watch for and when breathing trouble needs emergency care.",
   },
   {
     slug: "lymph-nodes",
@@ -1978,7 +1978,7 @@ export const symptoms: Symptom[] = [
       "Notice where the node is, how large it feels and whether it moves under the skin. A node that keeps growing, feels hard and fixed or appears in an unusual location needs more attention.",
     ],
     aapHeading: "AAP Guide to Swollen Lymph Nodes in Children",
-    aapLead: "The AAP guide below explains what normal lymph nodes can feel like and which lumps need an exam. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what normal lymph nodes can feel like and which lumps need an exam.",
   },
   {
     slug: "strep-exposure",
@@ -1993,7 +1993,7 @@ export const symptoms: Symptom[] = [
       "Watch for sore throat, fever, headache or stomach symptoms. Cough and runny nose usually point more toward a viral illness.",
     ],
     aapHeading: "AAP Guide to Exposure to Strep Throat",
-    aapLead: "The AAP guide below explains what to watch for after an exposure and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to watch for after an exposure and when to call us.",
   },
   {
     slug: "flu-exposure",
@@ -2008,7 +2008,7 @@ export const symptoms: Symptom[] = [
       "Tell us when the exposure happened and whether your child has developed symptoms. Some children may benefit from early or preventive treatment.",
     ],
     aapHeading: "AAP Guide to Exposure to Flu",
-    aapLead: "The AAP guide below explains what to watch for after exposure and when to contact us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to watch for after exposure and when to contact us.",
   },
   {
     slug: "infection-exposure",
@@ -2024,7 +2024,7 @@ export const symptoms: Symptom[] = [
     ],
     noTool: true,
     aapHeading: "AAP Guide to Exposure to an Infection",
-    aapLead: "The AAP guide below explains what information matters and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what information matters and when to call us.",
   },
   {
     slug: "newborn-illness",
@@ -2039,7 +2039,7 @@ export const symptoms: Symptom[] = [
       "Pay attention to how easily your baby wakes for feeds, how well they eat and how comfortably they breathe. Keep track of the number of wet diapers. A sudden change from your baby’s usual behavior deserves attention.",
     ],
     aapHeading: "AAP Guide to Telling if a Newborn Is Unwell",
-    aapLead: "The AAP guide below explains which changes matter most in a newborn and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains which changes matter most in a newborn and when to call us.",
   },
   {
     slug: "newborn-appearance",
@@ -2054,7 +2054,7 @@ export const symptoms: Symptom[] = [
       "Your baby’s head shape, breasts, genitals and skin can all look different from what you expected. Many early changes improve on their own.",
     ],
     aapHeading: "AAP Guide to Newborn Appearance Questions",
-    aapLead: "The AAP guide below explains common newborn appearance changes and which ones should be checked. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common newborn appearance changes and which ones should be checked.",
   },
   {
     slug: "newborn-reflexes",
@@ -2069,7 +2069,7 @@ export const symptoms: Symptom[] = [
       "Watch whether your baby remains responsive, feeds normally and settles after the movement. Repetitive movements that do not stop with gentle touch can be different from normal reflexes.",
     ],
     aapHeading: "AAP Guide to Newborn Reflexes and Behavior",
-    aapLead: "The AAP guide below explains common newborn reflexes and which movements or behaviors need medical attention. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common newborn reflexes and which movements or behaviors need medical attention.",
   },
   {
     slug: "newborn-rashes",
@@ -2084,7 +2084,7 @@ export const symptoms: Symptom[] = [
       "Your baby may develop blotchy spots, tiny white bumps or baby acne during the first weeks. Most of these changes do not bother the baby.",
     ],
     aapHeading: "AAP Guide to Newborn Rashes and Birthmarks",
-    aapLead: "The AAP guide below explains common newborn skin findings and which changes need an exam. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common newborn skin findings and which changes need an exam.",
   },
   {
     slug: "umbilical-cord",
@@ -2099,7 +2099,7 @@ export const symptoms: Symptom[] = [
       "Fold the diaper below the stump and let air reach the area. Do not pull the stump off before it separates naturally.",
     ],
     aapHeading: "AAP Guide to Umbilical Cord Care",
-    aapLead: "The AAP guide below explains normal cord healing and which signs can mean infection. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains normal cord healing and which signs can mean infection.",
   },
   {
     slug: "breath-holding",
@@ -2114,7 +2114,7 @@ export const symptoms: Symptom[] = [
       "The spell usually starts after a strong emotion or minor injury and ends on its own. Your child then starts breathing again.",
     ],
     aapHeading: "AAP Guide to Breath-Holding Spells",
-    aapLead: "The AAP guide below explains what happens during a spell, what you should do and when your child needs medical evaluation. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what happens during a spell, what you should do and when your child needs medical evaluation.",
   },
   {
     slug: "crying-older-baby",
@@ -2129,7 +2129,7 @@ export const symptoms: Symptom[] = [
       "Look for fever, injury, vomiting, breathing trouble or another obvious source of discomfort. Pay attention to whether you can soothe your child and whether they return to normal between crying episodes.",
     ],
     aapHeading: "AAP Guide for a Crying Child Over 3 Months",
-    aapLead: "The AAP guide below explains common causes to check and when persistent crying needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common causes to check and when persistent crying needs medical care.",
   },
   {
     slug: "breastfeeding",
@@ -2144,7 +2144,7 @@ export const symptoms: Symptom[] = [
       "Keep track of wet diapers and your baby’s weight gain. Pay attention to pain during feeds or a baby who seems to struggle to get enough milk. A good latch helps your baby transfer milk and protects the breastfeeding parent from nipple injury.",
     ],
     aapHeading: "AAP Guide to Breastfeeding Questions",
-    aapLead: "The AAP guide below explains common breastfeeding concerns and when to ask for help. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common breastfeeding concerns and when to ask for help.",
   },
   {
     slug: "bottle-feeding",
@@ -2159,7 +2159,7 @@ export const symptoms: Symptom[] = [
       "Measure the water and formula exactly as directed and use safe water and clean bottles. Feed your baby according to hunger and fullness cues rather than forcing a fixed amount.",
     ],
     aapHeading: "AAP Guide to Bottle Feeding and Formula",
-    aapLead: "The AAP guide below explains safe mixing, feeding amounts and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains safe mixing, feeding amounts and when to call us.",
   },
   {
     slug: "solid-foods",
@@ -2174,7 +2174,7 @@ export const symptoms: Symptom[] = [
       "Your baby should be able to sit with support, control their head and move food safely in the mouth. Start with textures your baby can handle and introduce foods gradually.",
     ],
     aapHeading: "AAP Guide to Starting Solid Foods",
-    aapLead: "The AAP guide below explains when to start, how to introduce foods and which choking risks to avoid. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains when to start, how to introduce foods and which choking risks to avoid.",
   },
   {
     slug: "food-allergy",
@@ -2189,7 +2189,7 @@ export const symptoms: Symptom[] = [
       "Watch for hives, swelling, vomiting, coughing or breathing trouble after a food. A severe reaction can need epinephrine and emergency care.",
     ],
     aapHeading: "AAP Guide to Food Allergies in Children",
-    aapLead: "The AAP guide below explains what an allergic reaction can look like, when epinephrine is needed and how food allergy is evaluated. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what an allergic reaction can look like, when epinephrine is needed and how food allergy is evaluated.",
   },
   {
     slug: "medicine-refusal",
@@ -2204,7 +2204,7 @@ export const symptoms: Symptom[] = [
       "Use an oral syringe and place the medicine toward the inside of the cheek rather than the back of the throat. Give small amounts at a time.",
     ],
     aapHeading: "AAP Guide for a Child Who Refuses Medicine",
-    aapLead: "The AAP guide below explains how to give liquid medicine and what to do if your child spits up or vomits a dose. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains how to give liquid medicine and what to do if your child spits up or vomits a dose.",
   },
   {
     slug: "swallowed-object",
@@ -2219,7 +2219,7 @@ export const symptoms: Symptom[] = [
       "Find out exactly what your child swallowed and how many objects may be missing. Do not make your child vomit unless a medical professional tells you to.",
     ],
     aapHeading: "AAP Guide to a Swallowed Object",
-    aapLead: "The AAP guide below explains which objects are emergencies and what to watch for with the rest. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains which objects are emergencies and what to watch for with the rest.",
   },
   {
     slug: "swallowed-substance",
@@ -2234,7 +2234,7 @@ export const symptoms: Symptom[] = [
       "Keep the container or product label with you and call Poison Control. Do not make your child vomit unless Poison Control tells you to.",
     ],
     aapHeading: "AAP Guide to a Swallowed Household Substance",
-    aapLead: "The AAP guide below explains what information to gather, what not to do and when your child needs emergency care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what information to gather, what not to do and when your child needs emergency care.",
   },
   {
     slug: "depression",
@@ -2249,7 +2249,7 @@ export const symptoms: Symptom[] = [
       "Ask your child directly how they have been feeling and whether they have thought about hurting themselves. Direct questions give your child a chance to answer clearly.",
     ],
     aapHeading: "AAP Guide to Depression in Children and Teens",
-    aapLead: "The AAP guide below explains signs of depression and how to get help when safety is a concern. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains signs of depression and how to get help when safety is a concern.",
   },
   {
     slug: "suicide-concerns",
@@ -2264,7 +2264,7 @@ export const symptoms: Symptom[] = [
       "Ask directly whether your child is thinking about suicide and whether they have a plan or access to a method. Stay with your child when you believe they may be in immediate danger.",
     ],
     aapHeading: "AAP Guide to Suicide Concerns",
-    aapLead: "The AAP guide below explains when to call 988 or 911, when to go to an emergency room and how to make the home safer. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains when to call 988 or 911, when to go to an emergency room and how to make the home safer.",
   },
   {
     slug: "anxiety-attack",
@@ -2279,7 +2279,7 @@ export const symptoms: Symptom[] = [
       "Stay calm and help your child slow their breathing. Move to a quieter place when possible and give the episode time to settle.",
     ],
     aapHeading: "AAP Guide to Anxiety Attacks in Children",
-    aapLead: "The AAP guide below explains what to do during an attack and how to get help when anxiety keeps interfering with daily life. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to do during an attack and how to get help when anxiety keeps interfering with daily life.",
   },
   {
     slug: "panic-attack",
@@ -2294,7 +2294,7 @@ export const symptoms: Symptom[] = [
       "Stay with your child and encourage slow, steady breathing. Avoid arguing with the fear while the body is still highly activated.",
     ],
     aapHeading: "AAP Guide to Panic Attacks in Children",
-    aapLead: "The AAP guide below explains what to do during a panic attack and when ongoing episodes need treatment. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to do during a panic attack and when ongoing episodes need treatment.",
   },
   {
     slug: "mental-health-problems",
@@ -2309,7 +2309,7 @@ export const symptoms: Symptom[] = [
       "Write down the changes you have noticed and how long they have been happening. Share those examples with your child’s pediatrician.",
     ],
     aapHeading: "AAP Guide to Mental Health Concerns in Children",
-    aapLead: "The AAP guide below explains what to notice, how to start the conversation and when your child needs more support. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to notice, how to start the conversation and when your child needs more support.",
   },
   {
     slug: "behavioral-health-problems",
@@ -2324,7 +2324,7 @@ export const symptoms: Symptom[] = [
       "Write down what happened right before the behavior, what your child did and what happened afterward. Record how often the behavior happens and where it happens. Specific examples give us more useful information than a general description.",
     ],
     aapHeading: "AAP Guide to Behavior Concerns in Children",
-    aapLead: "The AAP guide below explains what to track and what to bring to an appointment. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to track and what to bring to an appointment.",
   },
   {
     slug: "menstrual-cramps",
@@ -2339,7 +2339,7 @@ export const symptoms: Symptom[] = [
       "Track when the cramps begin in relation to bleeding and how much they interfere with school, sleep or activities. Severe pain or pain that keeps getting worse deserves an evaluation.",
     ],
     aapHeading: "AAP Guide to Menstrual Cramps",
-    aapLead: "The AAP guide below explains what can help cramps and which patterns deserve further evaluation. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what can help cramps and which patterns deserve further evaluation.",
   },
   {
     slug: "missed-period",
@@ -2354,7 +2354,7 @@ export const symptoms: Symptom[] = [
       "Track the dates of recent periods and note major changes in weight, exercise, stress or health. Pregnancy testing may also be appropriate depending on the situation.",
     ],
     aapHeading: "AAP Guide to a Missed or Late Period",
-    aapLead: "The AAP guide below explains what can be normal, when testing may be useful and when to schedule an evaluation. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what can be normal, when testing may be useful and when to schedule an evaluation.",
   },
   {
     slug: "vaginal-bleeding",
@@ -2369,7 +2369,7 @@ export const symptoms: Symptom[] = [
       "Note how much bleeding is present, when it started and whether your child has pain, dizziness or other symptoms. For teens who menstruate, compare the bleeding with their usual periods.",
     ],
     aapHeading: "AAP Guide to Unexpected Vaginal Bleeding",
-    aapLead: "The AAP guide below explains what to track and which bleeding needs prompt care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to track and which bleeding needs prompt care.",
   },
   {
     slug: "breast-symptoms",
@@ -2384,7 +2384,7 @@ export const symptoms: Symptom[] = [
       "Check whether the lump sits directly under the nipple or in another area. Redness, drainage, severe pain or a lump that changes quickly deserves an exam.",
     ],
     aapHeading: "AAP Guide to Breast Symptoms in Children and Teens",
-    aapLead: "The AAP guide below explains common changes and which symptoms need an exam. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common changes and which symptoms need an exam.",
   },
   {
     slug: "sti-exposure",
@@ -2399,7 +2399,7 @@ export const symptoms: Symptom[] = [
       "Write down when the exposure happened and what type of contact occurred. A clinician can then recommend testing, preventive treatment or emergency contraception when appropriate.",
     ],
     aapHeading: "AAP Guide to Possible STI Exposure",
-    aapLead: "The AAP guide below explains what to do after an exposure, how testing works and when to be seen. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what to do after an exposure, how testing works and when to be seen.",
   },
   {
     slug: "sexually-transmitted-infections",
@@ -2414,7 +2414,7 @@ export const symptoms: Symptom[] = [
       "The type of exposure and the possible infection determine which test your teen needs. Testing gives a more reliable answer than waiting for symptoms.",
     ],
     aapHeading: "AAP Guide to Sexually Transmitted Infections in Teens",
-    aapLead: "The AAP guide below explains common STIs, testing and confidential care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common STIs, testing and confidential care.",
   },
   {
     slug: "acne",
@@ -2429,7 +2429,7 @@ export const symptoms: Symptom[] = [
       "Apply treatment to the acne-prone area as directed instead of treating only individual pimples. Improvement usually takes several weeks.",
     ],
     aapHeading: "AAP Guide to Acne in Children and Teens",
-    aapLead: "The AAP guide below explains common treatments, what to expect and when acne should be evaluated. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common treatments, what to expect and when acne should be evaluated.",
   },
   {
     slug: "arm-pain",
@@ -2444,7 +2444,7 @@ export const symptoms: Symptom[] = [
       "Pay attention to which movements trigger the pain and whether rest improves it. Note any swelling, weakness, numbness or pain that wakes your child at night.",
     ],
     aapHeading: "AAP Guide to Arm Pain Without an Injury",
-    aapLead: "The AAP guide below explains common reasons for arm pain and which symptoms need medical evaluation. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common reasons for arm pain and which symptoms need medical evaluation.",
   },
   {
     slug: "leg-pain",
@@ -2459,7 +2459,7 @@ export const symptoms: Symptom[] = [
       "Check whether the pain affects both legs, happens mostly at night and is gone by morning. Swelling, limping, fever or pain in one specific spot deserves more attention.",
     ],
     aapHeading: "AAP Guide to Leg Pain Without an Injury",
-    aapLead: "The AAP guide below explains what can be normal and which leg symptoms need an evaluation. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains what can be normal and which leg symptoms need an evaluation.",
   },
   {
     slug: "ear-infections",
@@ -2474,7 +2474,7 @@ export const symptoms: Symptom[] = [
       "Your child’s pain should become easier to manage as the infection improves. Fluid can remain behind the eardrum after the active infection clears and may temporarily affect hearing.",
     ],
     aapHeading: "AAP Guide to Ear Infection Questions",
-    aapLead: "The AAP guide below explains treatment, what to expect afterward and when repeated infections may lead to a discussion about tubes. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains treatment, what to expect afterward and when repeated infections may lead to a discussion about tubes.",
   },
   {
     slug: "ear-piercing",
@@ -2489,7 +2489,7 @@ export const symptoms: Symptom[] = [
       "Keep the area clean and avoid removing jewelry unless a clinician recommends it, because the opening can close over trapped infection. Cartilage piercings deserve extra attention.",
     ],
     aapHeading: "AAP Guide to Ear Piercing Problems",
-    aapLead: "The AAP guide below explains cleaning, infection signs and when to call us. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains cleaning, infection signs and when to call us.",
   },
   {
     slug: "hay-fever",
@@ -2504,7 +2504,7 @@ export const symptoms: Symptom[] = [
       "Track which seasons or exposures make your child sneeze, itch or develop a runny nose. Reducing exposure and using allergy medicine as directed can control symptoms.",
     ],
     aapHeading: "AAP Guide to Hay Fever in Children",
-    aapLead: "The AAP guide below explains common symptoms, treatment options and ways to reduce exposure. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains common symptoms, treatment options and ways to reduce exposure.",
   },
   {
     slug: "athletes-foot",
@@ -2519,7 +2519,7 @@ export const symptoms: Symptom[] = [
       "Keep your child’s feet clean and dry and change damp socks promptly. Use antifungal treatment as directed for the full course.",
     ],
     aapHeading: "AAP Guide to Athlete's Foot",
-    aapLead: "The AAP guide below explains treatment, foot care and when the rash should be checked. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains treatment, foot care and when the rash should be checked.",
   },
   {
     slug: "jock-itch",
@@ -2534,7 +2534,7 @@ export const symptoms: Symptom[] = [
       "Check your child’s feet for athlete’s foot and treat both areas when needed. Keep the groin clean and dry and use antifungal treatment as directed.",
     ],
     aapHeading: "AAP Guide to Jock Itch",
-    aapLead: "The AAP guide below explains treatment and when the rash needs medical care. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains treatment and when the rash needs medical care.",
   },
   {
     slug: "ingrown-toenail",
@@ -2549,7 +2549,7 @@ export const symptoms: Symptom[] = [
       "Let the nail grow past the skin edge and trim it straight across. Use roomy shoes while the toe is sore.",
     ],
     aapHeading: "AAP Guide to Ingrown Toenails",
-    aapLead: "The AAP guide below explains home care, prevention and when the nail may need a procedure. AAP IFRAME FOLLOWS",
+    aapLead: "The AAP guide below explains home care, prevention and when the nail may need a procedure.",
   },
 ];
 
