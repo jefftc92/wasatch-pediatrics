@@ -377,6 +377,16 @@ export function symptomIndexList(): string {
 						<p class="sym-find-hint">Everyday words work: &#8220;throwing up&#8221;, &#8220;poop&#8221;, &#8220;bug bite&#8221;, &#8220;hit head&#8221;.</p>
 						<p class="sym-find-count" role="status" aria-live="polite"></p>
 					</div>
+					<div class="sym-emergency" hidden>
+						<p class="sym-emergency-lead">This one is an emergency.</p>
+						<p class="sym-emergency-body"></p>
+						<p class="sym-acts"><a class="btn sym-emergency-call" href="tel:911">Call 911</a> <a class="btn blue" href="/locations/">Find your office</a></p>
+					</div>
+					<div class="sym-none" hidden>
+						<p class="sym-none-lead">Nothing here matches <span class="sym-none-q">that word</span>.</p>
+						<p>Try a plainer word: &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
+						<p class="sym-acts"><a class="btn blue" href="/locations/">Find your office</a></p>
+					</div>
 					<noscript><p class="sym-find-off">Type-to-search needs JavaScript. Every one of the ${symptoms.length} pages is listed below, grouped by what you can see or hear.</p></noscript>
 					<div class="sym-group sym-common">
 						<h3 class="sym-sec">Common right now</h3>
@@ -385,10 +395,5 @@ export function symptomIndexList(): string {
 					<div class="sym-browse">
 						<h3 class="sym-sec sym-browse-title">Browse by category<span class="sym-sec-note">all ${symptoms.length} pages</span></h3>
 						${groups}
-					</div>
-					<div class="sym-none" hidden>
-						<p class="sym-none-lead">Nothing here matches that word.</p>
-						<p>Try a plainer word: &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
-						<p class="sym-acts"><a class="btn blue" href="/locations/">Find your office</a></p>
 					</div>`;
 }

@@ -4528,6 +4528,12 @@
   color: #2b93d1;
 }
 
+/* Filled rather than emptied on zero hits, so the polite live region says
+   something instead of saying nothing. */
+.sc-index .sym-find-count.is-none {
+  color: #8a4b12;
+}
+
 .sc-index .sym-find-count:empty {
   display: none;
 }
@@ -4663,11 +4669,19 @@
   text-align: center;
 }
 
+/*
+ * A zero-hit query used to change nothing on screen: the count was cleared,
+ * `:empty` hid it, and the panel sat 857px down, below the fold. The panel is
+ * directly under the box now and names the query back, so the answer to
+ * "seizure" is not a screen identical to the one before it.
+ */
 .sym-none {
   max-width: 620px;
-  padding: 26px 28px 8px 28px;
+  margin: 0 0 26px 0;
+  padding: 22px 24px 6px 24px;
   border-radius: 16px;
   background: #f4f5f6;
+  border-left: 4px solid #f58220;
 }
 
 .sym-none-lead {
@@ -4675,6 +4689,52 @@
   font-size: 19px;
   font-weight: 600;
   color: #4a4b4d;
+}
+
+/* An unbroken 40-character token must not widen the panel. */
+.sym-none-q {
+  font-style: italic;
+  color: #2b2c2e;
+  overflow-wrap: anywhere;
+}
+
+/*
+ * "seizure" and "choking" are two of the four words in our own 911 sentence,
+ * and no page covers either — nor should one. Shipped hidden, revealed only by
+ * typing, so it never sits on the page as a warning about nothing.
+ */
+.sym-emergency {
+  max-width: 620px;
+  margin: 0 0 26px 0;
+  padding: 22px 24px 8px 24px;
+  border-radius: 16px;
+  background: #fff4e8;
+  border: 2px solid #f58220;
+}
+
+.sym-emergency-lead {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: #8a4b12;
+}
+
+.sc-index .sym-emergency-body {
+  margin: 0;
+  font-size: 17px;
+  line-height: 26px;
+  color: #6b4a24;
+}
+
+.sc-index .sym-emergency-body a {
+  color: #8a4b12;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.sym-emergency .btn.sym-emergency-call {
+  background: #a63d08;
+  color: #ffffff !important;
 }
 
 .sym-none p {
