@@ -5852,18 +5852,35 @@
 }
 
 .sym-route-title {
-  margin: 0 0 10px 0;
-  font-size: 19px;
-  line-height: 26px;
+  margin: 0 0 8px 0;
+  font-size: 17px;
+  line-height: 25px;
   font-weight: 700;
   color: #2b2c2e;
 }
 
-.sym-route-body {
+.sym-route-body,
+.sym-call-note,
+.sym-next .sc-trust {
   margin: 0;
-  font-size: 17px;
-  line-height: 27px;
+  font-size: 16px;
+  line-height: 25px;
+  font-style: normal;
   color: #4a4b4d;
+}
+
+/*
+ * One link treatment. The band held three: the numbers (bold #1a6f9f, no
+ * underline), the /locations/ link (600 #1a6f9f, underlined) and the two
+ * prose links — which the theme was drawing at 700 in Bootstrap's own
+ * rgb(13, 110, 253), a second blue that is not in the brand and was the
+ * loudest thing in the band. The numbers keep their own weight because they
+ * are the payload; every other link in the band now reads the same.
+ */
+.sym-route-body a,
+.sym-call-more a {
+  font-weight: 600;
+  color: #1a6f9f;
 }
 
 /*
@@ -5873,16 +5890,10 @@
  */
 .sym-route-pair {
   display: grid;
-  gap: 22px;
-  margin-top: 24px;
-  padding-top: 24px;
+  gap: 20px;
+  margin-top: 22px;
+  padding-top: 22px;
   border-top: 1px solid #e6e9ec;
-}
-
-.sym-route-pair .sym-route-title {
-  margin-bottom: 4px;
-  font-size: 17px;
-  line-height: 25px;
 }
 
 /* --- the directory: eight numbers, three hairlines, no box --- */
@@ -5905,6 +5916,7 @@
   padding: 7px 0;
   border: 0;
   border-top: 1px solid #e6e9ec;
+  color: #1a6f9f; /* the theme's Bootstrap blue is not a brand colour */
   text-decoration: none;
 }
 
@@ -5946,10 +5958,7 @@
 
 /* The caption under the directory rather than the paragraph above it. */
 .sym-call-note {
-  margin: 14px 0 0 0;
-  font-size: 15px;
-  line-height: 23px;
-  color: #636466;
+  margin-top: 14px;
 }
 
 /*
@@ -5967,22 +5976,14 @@
  */
 .sym-call-more {
   margin: 0;
-  font-size: 15px;
-  line-height: 23px;
+  font-size: 16px;
+  line-height: 25px;
 }
 
 .sym-call-more a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  font-weight: 600;
-  color: #1a6f9f;
-}
-
-.sym-next .sc-trust {
-  margin: 0;
-  font-size: 17px;
-  line-height: 26px;
 }
 
 @media (min-width: 768px) {
