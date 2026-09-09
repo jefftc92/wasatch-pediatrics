@@ -106,7 +106,16 @@ function heroBand(symptom: Symptom): string {
  * reassurance reads better once the number is in sight. No word is added,
  * removed or reordered by the move.
  *
- * The caption's opening clause, "Call your office's main number,", has gone.
+ * The caption is now one sentence. "Nights, weekends and holidays included"
+ * said again, 38px lower, what the route's own lead-in says in "at any hour",
+ * and "Any office will help if yours is not on your mind" answered a question
+ * the page stopped asking when the clause below was removed: nothing here now
+ * tells the reader to use their own office, so nothing needs to release them
+ * from it. What is left is the one thing a parent cannot infer from eight
+ * numbers — that a person answers.
+ *
+ * The caption's opening clause, "Call your office's main number,", had gone
+ * before that.
  * It was written when the numbers were not on the page; eight of them now sit
  * directly above it, each labelled with its office, so the clause described
  * what the reader was already looking at. Nothing else in the caption changes
@@ -129,7 +138,7 @@ function callList(): string {
 		.join("");
 
 	return `<ul class="sym-call-list">${items}</ul>
-						<p class="sym-call-note">Nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service. Any office will help if yours is not on your mind.</p>
+						<p class="sym-call-note">You will reach a nurse or a physician, not an answering service.</p>
 						<p class="sym-call-more"><a href="/locations/">Hours, addresses and directions</a></p>`;
 }
 
@@ -247,11 +256,11 @@ ${symptom.noTool ? "" : `</div>`}
 						</div>
 						<div class="sym-route">
 							<p class="sym-route-title">This evening or at the weekend.</p>
-							<p class="sym-route-body">Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</p>
+							<p class="sym-route-body">Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>, by appointment rather than walk-in.</p>
 						</div>
 					</div>
 				</div>
-				<p class="sc-trust">If you are worried, call. We would rather answer a question that turns out to be nothing than have you sit up all night deciding whether it was.</p>
+				<p class="sc-trust">If you are worried, call. We would rather answer a question that turns out to be nothing.</p>
 			</div>
 		</div>
 	</div>
