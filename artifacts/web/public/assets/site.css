@@ -5789,172 +5789,151 @@
 /* ------------------------------- "Getting your child seen", uncluttered -- */
 
 /*
- * The client: the band "looks very cluttered". Measured on all 164 it was
- * 1,173px at 390 — 28.7% of the page — holding 54 elements, 13 links to 11
- * distinct destinations, two headings in a row and five type treatments.
+ * The client, four times: "it looks very cluttered", and then "it is still too
+ * cluttered". Each earlier round answered a different reading of the word.
  *
- * Three faults behind the word. `.sym-call-title` said "call your office, a
- * nurse answers at any hour" and the first route 400px below said the same
- * thing again in different words, with the eight numbers stranded between the
- * two. `.sym-acts` linked /medical-care/sick-visits/ and /locations/, both
- * already linked in the prose above it, in the loudest treatment in the band.
- * And `#sym-call` landed on a wrapper whose first child was that duplicate
- * heading rather than on an answer.
+ * Round one: the band held two headings saying the same thing 400px apart with
+ * eight numbers stranded between them, and a button row repeating two links
+ * already in the prose. Those went. Round two: eight separately outlined cards
+ * were eight objects to scan when a parent needs one, so they became a single
+ * bordered directory. Round three: the three routes sat in a bulleted list
+ * whose items were of wildly unequal weight — one carried a 225px directory,
+ * the others a sentence each — so the list became three objects on one edge.
  *
- * One heading, one list. The grid moves inside the route whose own first line
- * already explains it, and the duplicate button row goes.
+ * Round three answered the structure and then paid for it in ink. It put a
+ * filled panel round the first route and a bordered tile round each of the
+ * other two, on top of a bordered directory that already had seven internal
+ * rules of its own. Counted at 390: three boxes, four corner radii, eleven
+ * drawn lines and two fills, around 62 words. The structure was right and the
+ * decoration was the clutter.
  *
- * The client, having seen that: it still needs cleaning up. Re-measured, what
- * was left is not height. It is that eight separately outlined cards are eight
- * objects to scan when a parent needs one, and that four lines of prose stood
- * between the promise and the delivery.
+ * So the fourth round removes rather than arranges. Nothing here is boxed.
+ * Hierarchy comes from type, space and three hairlines:
  *
- * So the eight cards become one directory: a single bordered panel with
- * hairlines between its cells, sitting directly under the route's own lead-in
- * with the prose following as a caption. Nothing is removed — all eight `tel:`
- * links stay visible, because `offices.ts` holds eight distinct numbers and
- * there is no practice-wide one to give.
+ *   - The urgent route is marked by a 3px orange rule down its left edge and
+ *     nothing else. One line of ink where a filled, bordered, rounded panel
+ *     was, and it still wins the two-second glance because it is the only
+ *     colour in the band above the links.
+ *   - The directory loses its outer border, its radius and its vertical rules.
+ *     Eight cells separated by three horizontal hairlines and a 24px gutter
+ *     read as eight numbers; they did that before, with nine more lines drawn
+ *     round them.
+ *   - The office labels lose their uppercase and their letterspacing. Eight
+ *     shouted labels are half the text in the directory and none of the
+ *     information: the number is the information.
+ *   - The two later routes lose their tiles and are separated from the urgent
+ *     one by a single hairline, which is the whole of the divider the band
+ *     needs.
  *
- * The rules are drawn on the cells rather than as grid gaps showing the list's
- * background, so a ninth office would give the last row one bordered cell
- * rather than a solid grey block where the empty cell would be.
+ * Every word is the copy that was there, all eight `tel:` links are still
+ * visible, and `offices.ts` still holds eight distinct numbers with no
+ * practice-wide one to give.
  *
- * The hairlines are decoration and not the structure: what separates one office
- * from the next is a 5.92:1 label above a 5.50:1 bold number, and each cell is
- * its own link. If the rules vanish — forced colors, a printout — the directory
- * still reads as eight labelled numbers.
- *
- * ---- and still cluttered, a third time. What was left, measured at 390:
- *
- * The band was 831px for three routes, and the three sat in a bulleted list
- * whose items were of wildly different weights — one carried a 225px directory
- * and 122px of caption, the other two were a sentence each. A bullet in front
- * of a panel is a bullet in front of a panel. Four left edges ran down the
- * band (heading 24, dots 12, panel 34, sentences 34), the two later routes
- * dissolved into one undifferentiated grey wash, and the loudest things left
- * on screen were the two blue inline links inside them — the same inverted
- * priority `.sc-route-now` was written to fix, returning by a different door.
- *
- * The list idiom goes. The three routes become three objects on one left edge:
- * the urgent one a warm panel, the other two a pair of tiles that read as two
- * options rather than two paragraphs, side by side from 768 up. Every word is
- * the copy that was there. The tiles borrow the directory cell's own geometry
- * — 1px #dfe2e5, 14px radius, white — so this is a fourth use of an idiom the
- * band already has rather than a fourth idiom.
- *
- * The markup is `.sym-*` and no longer `.sc-routes`, which stays exactly as it
- * is for the index's `.sc-reach`: that list is three plain sentences with no
- * directory in it, and it was the shared selector that made every rule here an
- * override of a rule written for the other page.
+ * The markup is `.sym-*` and not `.sc-routes`, which stays as it is for the
+ * index's `.sc-reach`: that list is three plain sentences with no directory in
+ * it, and the shared selector was what made every rule here an override of a
+ * rule written for the other page.
  */
 .sym-routes {
   max-width: 62em;
-  margin: 0 0 22px 0;
-}
-
-/* One card idiom, two temperatures: the tile the office cells already use. */
-.sym-route {
-  border: 1px solid #dfe2e5;
-  border-radius: 14px;
-  background: #ffffff;
-  padding: 13px 14px;
+  margin: 0 0 24px 0;
 }
 
 /*
- * Under a two-second glance the routing inverted its own priority: the
+ * Under a two-second glance the routing used to invert its own priority: the
  * survivors were the blue underlined inline links, so "Talk to a nurse now" —
  * no link, no colour, no number — was the least salient of the three routes
- * despite being the first and the most urgent. Warm ground and an orange rule
- * put it back in front without a shape of its own.
+ * despite being the first and the most urgent. The rule is the whole fix.
  */
 .sym-route-now {
-  border-color: #f3d9bd;
-  background: #fffaf4;
-  border-top: 3px solid #f58220;
+  border-left: 3px solid #f58220;
+  padding-left: 16px;
   scroll-margin-top: 72px; /* the header is sticky below 1200 */
 }
 
 .sym-route-title {
-  margin: 0 0 8px 0;
-  font-size: 17px;
-  line-height: 24px;
+  margin: 0 0 10px 0;
+  font-size: 19px;
+  line-height: 26px;
   font-weight: 700;
   color: #2b2c2e;
 }
 
-.sym-route-now .sym-route-title {
-  font-size: 19px;
-  line-height: 26px;
-  color: #8a4b12;
-}
-
 .sym-route-body {
   margin: 0;
-  font-size: 16px;
-  line-height: 25px;
+  font-size: 17px;
+  line-height: 27px;
   color: #4a4b4d;
 }
 
-/* Two options, so two tiles: stacked on a phone, side by side once there is
-   room. Equal heights, because a shorter sentence should not make a shorter
-   card next to a longer one. */
+/*
+ * The divider between the route that is answered here and the two that are
+ * answered elsewhere. One hairline, the full width of the routes, doing the
+ * work three borders and two fills were doing.
+ */
 .sym-route-pair {
   display: grid;
-  gap: 10px;
-  margin-top: 10px;
+  gap: 22px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid #e6e9ec;
 }
 
-/* The directory: one bordered panel of eight cells, not eight cards. */
+.sym-route-pair .sym-route-title {
+  margin-bottom: 4px;
+  font-size: 17px;
+  line-height: 25px;
+}
+
+/* --- the directory: eight numbers, three hairlines, no box --- */
+
 .sym-call-list {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0;
-  background: #ffffff;
-  border: 1px solid #dfe2e5;
-  border-radius: 12px;
-  overflow: hidden;
+  column-gap: 24px;
 }
 
 .sym-call-item {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 0;
-  min-height: 54px;
-  padding: 8px 12px;
+  gap: 1px;
+  min-height: 52px;
+  padding: 7px 0;
   border: 0;
-  border-top: 1px solid #dfe2e5;
-  border-left: 1px solid #dfe2e5;
-  background: #ffffff;
+  border-top: 1px solid #e6e9ec;
   text-decoration: none;
 }
 
-/* 2-up: the first row and the first column carry the panel's own edge. */
+/* The first row sits under the lead-in and needs no rule above it. */
 .sym-call-list > li:nth-child(-n + 2) .sym-call-item {
   border-top: 0;
 }
 
-.sym-call-list > li:nth-child(odd) .sym-call-item {
-  border-left: 0;
+/*
+ * No border of its own to recolour, and a fill would put back the box this
+ * round removed — so the hover and focus state is the number's own underline,
+ * which is also what a keyboard user gets.
+ */
+.sym-call-item:hover .sym-call-num,
+.sym-call-item:focus-visible .sym-call-num {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
-/* The cells have no border of their own to recolour on hover. */
-.sym-call-item:hover,
 .sym-call-item:focus-visible {
-  background: #f2f8fc;
-  box-shadow: inset 0 0 0 2px #2b93d1;
-  text-decoration: none;
+  outline: 2px solid #2b93d1;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 .sym-call-office {
-  font-size: 12px;
-  line-height: 16px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
   color: #636466;
 }
 
@@ -5967,18 +5946,18 @@
 
 /* The caption under the directory rather than the paragraph above it. */
 .sym-call-note {
-  margin: 10px 0 0 0;
+  margin: 14px 0 0 0;
   font-size: 15px;
-  line-height: 22px;
+  line-height: 23px;
   color: #636466;
 }
 
 /*
  * The band's only route to /locations/, so it has to be a real target: 44px
- * tall, and on a line of its own now. In the caption it was an inline-block
- * with 11px of vertical pad sat mid-sentence, which left the full stop after
- * it floating clear of the word before — and put a 237px underline in the
- * middle of the quietest paragraph in the band.
+ * tall, and on a line of its own. In the caption it was an inline-block with
+ * 11px of vertical pad sat mid-sentence, which left the full stop after it
+ * floating clear of the word before — and put a 237px underline through the
+ * quietest paragraph in the band. A standing link wants no full stop.
  *
  * Deliberately not extended to the two links inside the route sentences. They
  * are inline prose links, which WCAG 2.5.8 exempts, and they are the same 20px
@@ -5987,9 +5966,9 @@
  * own, leaving a ragged gap in the middle of a sentence.
  */
 .sym-call-more {
-  margin: 2px 0 0 0;
+  margin: 0;
   font-size: 15px;
-  line-height: 22px;
+  line-height: 23px;
 }
 
 .sym-call-more a {
@@ -6007,34 +5986,25 @@
 }
 
 @media (min-width: 768px) {
-  .sym-route {
-    padding: 18px 20px;
+  .sym-route-now {
+    padding-left: 20px;
   }
 
   .sym-route-pair {
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-    margin-top: 16px;
+    gap: 40px;
   }
 
   .sym-call-list {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  /* Four columns, so the first row and the first column are different cells. */
+  /* Four columns, so the first row is four cells and not two. */
   .sym-call-list > li:nth-child(-n + 2) .sym-call-item {
-    border-top: 1px solid #dfe2e5;
-  }
-
-  .sym-call-list > li:nth-child(odd) .sym-call-item {
-    border-left: 1px solid #dfe2e5;
+    border-top: 1px solid #e6e9ec;
   }
 
   .sym-call-list > li:nth-child(-n + 4) .sym-call-item {
     border-top: 0;
-  }
-
-  .sym-call-list > li:nth-child(4n + 1) .sym-call-item {
-    border-left: 0;
   }
 }
