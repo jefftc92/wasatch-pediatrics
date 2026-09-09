@@ -105,6 +105,20 @@ function heroBand(symptom: Symptom): string {
  * is reassurance — nights and weekends, not an answering service — and
  * reassurance reads better once the number is in sight. No word is added,
  * removed or reordered by the move.
+ *
+ * The caption's opening clause, "Call your office's main number,", has gone.
+ * It was written when the numbers were not on the page; eight of them now sit
+ * directly above it, each labelled with its office, so the clause described
+ * what the reader was already looking at. Nothing else in the caption changes
+ * and no information is lost with it — "nights, weekends and holidays
+ * included" is still the sentence's point.
+ *
+ * The link to /locations/ has come out of the end of that caption and on to a
+ * line of its own. It needs an 11px vertical pad to make 44px, and an
+ * inline-block with that pad, sat mid-sentence, left its full stop floating a
+ * character-width clear of the word before it. A standing link wants no full
+ * stop, so the caption now ends on "not on your mind." and the link follows as
+ * an action. The words are the caption's own, unchanged.
  */
 function callList(): string {
 	const items = offices
@@ -115,7 +129,8 @@ function callList(): string {
 		.join("");
 
 	return `<ul class="sym-call-list">${items}</ul>
-						<p class="sym-call-note">Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service. Any office will help if yours is not on your mind. <a href="/locations/">Hours, addresses and directions</a>.</p>`;
+						<p class="sym-call-note">Nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service. Any office will help if yours is not on your mind.</p>
+						<p class="sym-call-more"><a href="/locations/">Hours, addresses and directions</a></p>`;
 }
 
 function renderSymptomPage(symptom: Symptom): string {
@@ -220,13 +235,22 @@ ${symptom.noTool ? "" : `</div>`}
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">Getting your child seen</h2>
-				<ul class="sc-routes">
-					<li class="sc-route-now" id="sym-call"><strong>Talk to a nurse now, at any hour.</strong>
+				<div class="sym-routes">
+					<div class="sym-route sym-route-now" id="sym-call">
+						<p class="sym-route-title">Talk to a nurse now, at any hour.</p>
 						${callList()}
-					</li>
-					<li><strong>Be seen today.</strong> Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</li>
-					<li><strong>This evening or at the weekend.</strong> Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</li>
-				</ul>
+					</div>
+					<div class="sym-route-pair">
+						<div class="sym-route">
+							<p class="sym-route-title">Be seen today.</p>
+							<p class="sym-route-body">Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</p>
+						</div>
+						<div class="sym-route">
+							<p class="sym-route-title">This evening or at the weekend.</p>
+							<p class="sym-route-body">Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</p>
+						</div>
+					</div>
+				</div>
 				<p class="sc-trust">If you are worried, call. We would rather answer a question that turns out to be nothing than have you sit up all night deciding whether it was.</p>
 			</div>
 		</div>
