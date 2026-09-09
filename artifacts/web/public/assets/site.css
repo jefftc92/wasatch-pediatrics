@@ -4525,14 +4525,14 @@
 
 /* Scoped to the band: the theme sets a 23px paragraph size inside
  * .usergenerated, which a bare class cannot outrank. */
-.sc-index .sym-find-hint {
+.sc-pagebody .sym-find-hint {
   margin: 12px 4px 0 4px;
   font-size: 14px;
   line-height: 1.5;
   color: #8a8b8d;
 }
 
-.sc-index .sym-find-count {
+.sc-pagebody .sym-find-count {
   margin: 12px 4px 0 4px;
   font-size: 14px;
   line-height: 1.5;
@@ -4542,11 +4542,11 @@
 
 /* Filled rather than emptied on zero hits, so the polite live region says
    something instead of saying nothing. */
-.sc-index .sym-find-count.is-none {
+.sc-pagebody .sym-find-count.is-none {
   color: #8a4b12;
 }
 
-.sc-index .sym-find-count:empty {
+.sc-pagebody .sym-find-count:empty {
   display: none;
 }
 
@@ -4555,7 +4555,7 @@
  * rendered inside <noscript>, so it costs a reader with script nothing; the
  * matching rule that hides `.sym-find` is in the head, in `build.ts`.
  */
-.sc-index .sym-find-off {
+.sc-pagebody .sym-find-off {
   max-width: 620px;
   margin: 4px 0 38px 0;
   padding: 16px 18px;
@@ -4731,14 +4731,14 @@
   color: #8a4b12;
 }
 
-.sc-index .sym-emergency-body {
+.sc-pagebody .sym-emergency-body {
   margin: 0;
   font-size: 17px;
   line-height: 26px;
   color: #6b4a24;
 }
 
-.sc-index .sym-emergency-body a {
+.sc-pagebody .sym-emergency-body a {
   color: #8a4b12;
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -5271,12 +5271,12 @@
 .sym-others .area-group a,
 .sym-embed-open,
 .sym-embed-grow,
-.sc-index .sym-find-count {
+.sc-pagebody .sym-find-count {
   color: #1a6f9f;
 }
 
 .sym-sec-note,
-.sc-index .sym-find-hint {
+.sc-pagebody .sym-find-hint {
   color: #636466; /* 2.78 and 3.41 -> 5.92 */
 }
 
@@ -5344,7 +5344,7 @@
 }
 
 .sym-find,
-.sc-index .sym-find-off {
+.sc-pagebody .sym-find-off {
   margin: 0 0 18px 0;
 }
 
@@ -5637,17 +5637,22 @@
  * `rgba(0,0,0,0)`. The only internal boundary was the `2px #eef0f2` rule under
  * the two `.sym-sec` labels, 1.14:1 on white.
  *
- * The answer is the page's own band alternation, one level down: the tool sits
- * on a plinth, the twelve common topics stay on the page's white so the fast
- * path is the one thing not in a box, and the thirteen categories sit in a
- * panel. Grey, white, grey. The panel shape is `.sym-embed-stage`'s, so this is
- * a third content in an existing shape and not a third card style.
+ * The answer is the page's own band alternation, one level down: the search
+ * sits on a plinth, the twelve common topics stay on the page's white so the
+ * fast path is the one thing not in a box, and the thirteen categories sit in a
+ * panel. The panel shape is `.sym-embed-stage`'s, so this is a third content in
+ * an existing shape and not a third card style.
+ *
+ * Still three surfaces, but the first of them has since moved into the hero and
+ * is now blue rather than grey: blue band, white common, grey browse panel. The
+ * declarations below are the plinth as it is anywhere; `.sc-findband` overrides
+ * the two that only made sense against white.
  *
  * Honest limit, since it decides how much of this works: `#f4f5f6` on white is
  * 1.09:1 and the `#e4e7ea` edge is 1.24:1. The fill alone is not the boundary.
- * What carries it is the accent on each zone's entry point — the plinth's 3px
- * `#2b93d1` top edge at 3.39:1 and the 44px bars under the two labels — plus
- * the thirteen white cards, which are a pattern rather than a contrast.
+ * What carries it is the accent on each zone's entry point — the 44px bars
+ * under the two labels — plus the thirteen white cards, which are a pattern
+ * rather than a contrast.
  */
 .sc-find-plinth {
   max-width: 660px;
@@ -5691,7 +5696,7 @@
  * a blue edge and nothing in it. The plinth supplies the surface this used to
  * carry for itself.
  */
-.sc-index .sc-find-plinth .sym-find-off {
+.sc-find-plinth .sym-find-off {
   margin: 0;
   padding: 0;
   max-width: none;
@@ -5756,12 +5761,66 @@
 }
 
 @media (min-width: 768px) {
-  .sc-find-plinth {
-    padding: 16px;
-  }
-
   .sc-index .sym-browse {
     padding: 22px 20px 10px 20px;
+  }
+}
+
+/* --------------------------------- symptom index: the search in the header -- */
+
+/*
+ * The client: "lets stick the search bar in the main h1 header". Measured, the
+ * box was at y=598 on a 390x844 phone and y=769 at 1280x800 — the last thing on
+ * the first screen, on the page whose whole job is naming what you can see.
+ *
+ * Below 992 the theme hides `.herowrap` and shows `.mobileheromessage`, whose
+ * computed background is `rgb(43,147,209)`, exactly `#2B93D1`. This band
+ * carries the same fill and no top padding, so on a phone the title and the
+ * search read as one block with no seam. From 992 up both of those are
+ * `display: none` and the band lands under the photographic hero, where the
+ * plinth is pulled up onto the hero's bottom edge.
+ *
+ * The input is never on the photograph. A white card on `#2B93D1` is a 3.39:1
+ * boundary, and every word inside it keeps a white background: the hint at
+ * `#636466` is 5.92:1 there and would be 1.9:1 on the blue.
+ *
+ * The rules this element's contents rely on are scoped to `.sc-pagebody` and
+ * not to `.sc-index`, because they are no longer inside `.sc-index`. That
+ * prefix is load-bearing rather than tidy: without it the theme's
+ * `.pagebody p` at 18px wins and the hint alone grows 39px.
+ */
+.sc-findband {
+  background: #2b93d1;
+  padding: 0 0 14px 0;
+}
+
+/*
+ * The plinth's `#f4f5f6` fill and its `3px #2b93d1` top edge both existed to
+ * separate it from the white band it used to sit in. On blue, white is the
+ * separation and a blue edge says nothing.
+ */
+.sc-findband .sc-find-plinth {
+  max-width: 660px;
+  margin: 0;
+  padding: 10px;
+  background: #ffffff;
+  border: 0;
+  border-radius: 14px;
+}
+
+@media (min-width: 992px) {
+  .sc-findband {
+    padding: 0 0 22px 0;
+  }
+
+  /*
+   * The card straddles the hero's bottom edge rather than sitting under it, so
+   * the search is in the hero and not merely near it.
+   */
+  .sc-findband .sc-find-plinth {
+    margin-top: -46px;
+    padding: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
   }
 }
 
