@@ -5452,72 +5452,7 @@
   }
 }
 
-/* --------------------------------------- the numbers, and what routes -- */
-
-/*
- * The section had no phone number anywhere: `a[href^="tel:"]` was 0 on all 164
- * pages and on the index, while the routing band's strongest line said "call
- * your office's main number" and the alert band said the nurse line answers on
- * it. Reaching one meant two taps, three scroll journeys and a 109x17px link
- * on /locations/.
- *
- * Eight offices, eight numbers, so the picker is the answer. The geometry and
- * palette are the topic tile's, because three card idioms already exist on
- * this page and this is a fourth content, not a fourth style.
- */
-.sym-call-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-.sym-call-item {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2px;
-  min-height: 64px;
-  padding: 10px 12px;
-  border: 1px solid #dfe2e5;
-  border-radius: 14px;
-  background: #ffffff;
-  text-decoration: none;
-  transition: border-color 0.15s ease;
-}
-
-.sym-call-item:hover,
-.sym-call-item:focus-visible {
-  border-color: #2b93d1;
-  text-decoration: none;
-}
-
-.sym-call-office {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.6px;
-  text-transform: uppercase;
-  color: #636466;
-}
-
-.sym-call-num {
-  font-size: 17px;
-  font-weight: 700;
-  color: #1a6f9f;
-}
-
-.sym-call-note {
-  margin: 14px 0 0 0;
-  font-size: 15px;
-  line-height: 24px;
-  color: #636466;
-}
-
-.sym-call-note a {
-  color: #1a6f9f;
-}
+/* --------------------------------- the alert band and the hero call -- */
 
 /*
  * "911" at 17px/300 did not survive a four-pixel blur, on the one band that
@@ -5534,38 +5469,6 @@
   background: #ffffff;
   color: #1a6f9f !important;
   border: 2px solid #ffffff;
-}
-
-/*
- * Under a two-second glance the routing band inverted its own priority: the
- * survivors were the two blue underlined inline links, so "Talk to a nurse
- * now" — bold #2b2c2e, no link, no colour, no number — was the least salient
- * of the three routes despite being the first and the most urgent.
- */
-.sc-routes > .sc-route-now {
-  padding-left: 22px;
-  margin-bottom: 26px; /* the grid needs more air after it than a sentence does */
-  scroll-margin-top: 72px; /* moved off the deleted `.sym-call`; the header is sticky below 1200 */
-}
-
-.sc-routes > .sc-route-now:before {
-  width: 10px;
-  height: 10px;
-  top: 10px;
-  background: #f58220;
-}
-
-.sc-routes > .sc-route-now strong {
-  display: block;
-  margin-bottom: 2px;
-  font-size: 19px;
-  color: #8a4b12;
-}
-
-@media (min-width: 768px) {
-  .sym-call-list {
-    grid-template-columns: repeat(4, 1fr);
-  }
 }
 
 @media (max-width: 767px) {
@@ -5901,17 +5804,13 @@
  * One heading, one list. The grid moves inside the route whose own first line
  * already explains it, and the duplicate button row goes.
  *
- * The grid's shape is unchanged — same 2-up / 4-up, same tile geometry and
- * palette. Its type is pinned because inside a route it would otherwise
- * inherit 18px/28px instead of the band's.
- *
  * The client, having seen that: it still needs cleaning up. Re-measured, what
  * was left is not height. It is that eight separately outlined cards are eight
  * objects to scan when a parent needs one, and that four lines of prose stood
  * between the promise and the delivery.
  *
  * So the eight cards become one directory: a single bordered panel with
- * hairlines between its cells, sitting directly under the route's bold lead-in
+ * hairlines between its cells, sitting directly under the route's own lead-in
  * with the prose following as a caption. Nothing is removed — all eight `tel:`
  * links stay visible, because `offices.ts` holds eight distinct numbers and
  * there is no practice-wide one to give.
@@ -5924,76 +5823,181 @@
  * from the next is a 5.92:1 label above a 5.50:1 bold number, and each cell is
  * its own link. If the rules vanish — forced colors, a printout — the directory
  * still reads as eight labelled numbers.
+ *
+ * ---- and still cluttered, a third time. What was left, measured at 390:
+ *
+ * The band was 831px for three routes, and the three sat in a bulleted list
+ * whose items were of wildly different weights — one carried a 225px directory
+ * and 122px of caption, the other two were a sentence each. A bullet in front
+ * of a panel is a bullet in front of a panel. Four left edges ran down the
+ * band (heading 24, dots 12, panel 34, sentences 34), the two later routes
+ * dissolved into one undifferentiated grey wash, and the loudest things left
+ * on screen were the two blue inline links inside them — the same inverted
+ * priority `.sc-route-now` was written to fix, returning by a different door.
+ *
+ * The list idiom goes. The three routes become three objects on one left edge:
+ * the urgent one a warm panel, the other two a pair of tiles that read as two
+ * options rather than two paragraphs, side by side from 768 up. Every word is
+ * the copy that was there. The tiles borrow the directory cell's own geometry
+ * — 1px #dfe2e5, 14px radius, white — so this is a fourth use of an idiom the
+ * band already has rather than a fourth idiom.
+ *
+ * The markup is `.sym-*` and no longer `.sc-routes`, which stays exactly as it
+ * is for the index's `.sc-reach`: that list is three plain sentences with no
+ * directory in it, and it was the shared selector that made every rule here an
+ * override of a rule written for the other page.
  */
-.sc-routes .sym-call-list {
-  margin: 10px 0 0 0;
+.sym-routes {
+  max-width: 62em;
+  margin: 0 0 22px 0;
+}
+
+/* One card idiom, two temperatures: the tile the office cells already use. */
+.sym-route {
+  border: 1px solid #dfe2e5;
+  border-radius: 14px;
+  background: #ffffff;
+  padding: 13px 14px;
+}
+
+/*
+ * Under a two-second glance the routing inverted its own priority: the
+ * survivors were the blue underlined inline links, so "Talk to a nurse now" —
+ * no link, no colour, no number — was the least salient of the three routes
+ * despite being the first and the most urgent. Warm ground and an orange rule
+ * put it back in front without a shape of its own.
+ */
+.sym-route-now {
+  border-color: #f3d9bd;
+  background: #fffaf4;
+  border-top: 3px solid #f58220;
+  scroll-margin-top: 72px; /* the header is sticky below 1200 */
+}
+
+.sym-route-title {
+  margin: 0 0 8px 0;
+  font-size: 17px;
+  line-height: 24px;
+  font-weight: 700;
+  color: #2b2c2e;
+}
+
+.sym-route-now .sym-route-title {
+  font-size: 19px;
+  line-height: 26px;
+  color: #8a4b12;
+}
+
+.sym-route-body {
+  margin: 0;
+  font-size: 16px;
+  line-height: 25px;
+  color: #4a4b4d;
+}
+
+/* Two options, so two tiles: stacked on a phone, side by side once there is
+   room. Equal heights, because a shorter sentence should not make a shorter
+   card next to a longer one. */
+.sym-route-pair {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* The directory: one bordered panel of eight cells, not eight cards. */
+.sym-call-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0;
   background: #ffffff;
   border: 1px solid #dfe2e5;
-  border-radius: 14px;
+  border-radius: 12px;
   overflow: hidden;
 }
 
-.sc-routes .sym-call-item {
+.sym-call-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0;
   min-height: 54px;
   padding: 8px 12px;
-  gap: 0;
   border: 0;
   border-top: 1px solid #dfe2e5;
   border-left: 1px solid #dfe2e5;
-  border-radius: 0;
   background: #ffffff;
+  text-decoration: none;
 }
 
 /* 2-up: the first row and the first column carry the panel's own edge. */
-.sc-routes .sym-call-list > li:nth-child(-n + 2) .sym-call-item {
+.sym-call-list > li:nth-child(-n + 2) .sym-call-item {
   border-top: 0;
 }
 
-.sc-routes .sym-call-list > li:nth-child(odd) .sym-call-item {
+.sym-call-list > li:nth-child(odd) .sym-call-item {
   border-left: 0;
 }
 
-/* The cells no longer have a border of their own to recolour on hover. */
-.sc-routes .sym-call-item:hover,
-.sc-routes .sym-call-item:focus-visible {
+/* The cells have no border of their own to recolour on hover. */
+.sym-call-item:hover,
+.sym-call-item:focus-visible {
   background: #f2f8fc;
   box-shadow: inset 0 0 0 2px #2b93d1;
+  text-decoration: none;
 }
 
-.sc-routes .sym-call-office {
+.sym-call-office {
   font-size: 12px;
   line-height: 16px;
+  font-weight: 600;
   letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: #636466;
 }
 
-.sc-routes .sym-call-num {
+.sym-call-num {
   font-size: 17px;
   line-height: 23px;
+  font-weight: 700;
+  color: #1a6f9f;
 }
 
-/* Now the caption under the directory rather than the paragraph above it. */
-.sc-routes .sym-call-note {
+/* The caption under the directory rather than the paragraph above it. */
+.sym-call-note {
   margin: 10px 0 0 0;
+  font-size: 15px;
+  line-height: 22px;
+  color: #636466;
+}
+
+/*
+ * The band's only route to /locations/, so it has to be a real target: 44px
+ * tall, and on a line of its own now. In the caption it was an inline-block
+ * with 11px of vertical pad sat mid-sentence, which left the full stop after
+ * it floating clear of the word before — and put a 237px underline in the
+ * middle of the quietest paragraph in the band.
+ *
+ * Deliberately not extended to the two links inside the route sentences. They
+ * are inline prose links, which WCAG 2.5.8 exempts, and they are the same 20px
+ * they are on the index's `.sc-reach`. Measured: growing them costs 52px of
+ * band height at 390 and forces "same-day appointments" onto a line of its
+ * own, leaving a ragged gap in the middle of a sentence.
+ */
+.sym-call-more {
+  margin: 2px 0 0 0;
   font-size: 15px;
   line-height: 22px;
 }
 
-/*
- * With `.sym-acts` gone this is the band's only route to /locations/, so it has
- * to be a real target: 237 x 17px becomes 237 x 44px, and the negative margin
- * keeps the line rhythm.
- *
- * Deliberately not extended to the two links inside the route sentences. They
- * are inline prose links, which WCAG 2.5.8 exempts, and they are the same 20px
- * they are today and on the index's `.sc-reach`. Measured: growing them costs
- * 52px of band height at 390 and forces "same-day appointments" onto a line of
- * its own, leaving a ragged gap in the middle of a sentence.
- */
-.sc-routes .sym-call-note a {
-  display: inline-block;
-  padding: 11px 2px;
-  margin: -5px 0;
+.sym-call-more a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 600;
+  color: #1a6f9f;
 }
 
 .sym-next .sc-trust {
@@ -6003,20 +6007,34 @@
 }
 
 @media (min-width: 768px) {
+  .sym-route {
+    padding: 18px 20px;
+  }
+
+  .sym-route-pair {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-top: 16px;
+  }
+
+  .sym-call-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
   /* Four columns, so the first row and the first column are different cells. */
-  .sc-routes .sym-call-list > li:nth-child(-n + 2) .sym-call-item {
+  .sym-call-list > li:nth-child(-n + 2) .sym-call-item {
     border-top: 1px solid #dfe2e5;
   }
 
-  .sc-routes .sym-call-list > li:nth-child(odd) .sym-call-item {
+  .sym-call-list > li:nth-child(odd) .sym-call-item {
     border-left: 1px solid #dfe2e5;
   }
 
-  .sc-routes .sym-call-list > li:nth-child(-n + 4) .sym-call-item {
+  .sym-call-list > li:nth-child(-n + 4) .sym-call-item {
     border-top: 0;
   }
 
-  .sc-routes .sym-call-list > li:nth-child(4n + 1) .sym-call-item {
+  .sym-call-list > li:nth-child(4n + 1) .sym-call-item {
     border-left: 0;
   }
 }
