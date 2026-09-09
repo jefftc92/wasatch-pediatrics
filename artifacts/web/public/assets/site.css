@@ -5066,12 +5066,39 @@
   color: #636466;
 }
 
-/* The frame must not paint its own fill, or it covers the message. */
+/*
+ * The frame must not paint its own fill, or it covers the message.
+ *
+ * The client: "the iframe almost always requires scrolling". It was a flat
+ * 460/560px on 158 pages at every screen size. At 390x844 the usable fold is
+ * 714px — 844 less the 58px sticky header and the 72px the fixed CTA dock
+ * covers — so the frame spent 64% of the screen and asked the reader to scroll
+ * inside the other 36%. The literal request, measuring the frame's content, is
+ * not possible: healthychildren.org is another origin, there is no postMessage
+ * contract, and hard constraint 3 forbids depending on the frame having
+ * loaded. So the frame is fitted to the screen instead.
+ *
+ * `svh` and not `dvh`: `dvh` changes every time a mobile URL bar collapses, so
+ * the frame would resize under the reader's thumb mid-scroll. `svh` is the
+ * viewport with the browser chrome shown and does not move during a scroll, so
+ * this reflows exactly never after first paint.
+ *
+ * The static declaration first is the fallback. A browser that does not know
+ * `svh` drops the second declaration at parse time and gets today's height —
+ * verified, it computes to 560px. No JavaScript, no @supports, no feature test.
+ *
+ * The floor is today's value at each breakpoint, so no viewport anywhere ends
+ * up with less frame than it has now. The 720px ceiling is deliberate: UI_RULES
+ * records "the frame previously sat in an oversized box that dominated the page
+ * without being usable", and a cap is what stops that returning on a tall
+ * desktop.
+ */
 .sym-embed-frame {
   position: relative;
   display: block;
   width: 100%;
   height: 560px;
+  height: clamp(560px, calc(100svh - 158px), 720px);
   border: 0;
   background: transparent;
 }
@@ -5214,8 +5241,18 @@
     gap: 14px;
   }
 
+  /* 58px sticky header + 72px dock + 16px so the frame's own bottom edge shows */
   .sym-embed-frame {
     height: 460px;
+    height: clamp(460px, calc(100svh - 146px), 720px);
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Measured: the header is not sticky here and the dock is not rendered. */
+  .sym-embed-frame {
+    height: 560px;
+    height: clamp(560px, calc(100svh - 96px), 720px);
   }
 }
 
