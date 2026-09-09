@@ -5859,14 +5859,42 @@
   color: #2b2c2e;
 }
 
-.sym-route-body,
-.sym-call-note,
-.sym-next .sc-trust {
+/*
+ * Two levels of prose, not one.
+ *
+ * The round before this one flattened every sentence in the band to a single
+ * treatment, on the theory that fewer treatments is less clutter. It is not,
+ * when the treatments were carrying a distinction: the band holds three routes
+ * a parent acts on and two notes that reassure, and giving both the same
+ * 16px/25 #4a4b4d made the notes read as loud as the routes. The client, on
+ * seeing it: the nights-and-weekends note "is distracting", and so is "If you
+ * are worried, call" — the information is useful, the size and colour are not.
+ *
+ * So the routes keep that treatment and the notes step back to 15px/24 in a
+ * lighter grey. Both notes take the same one, because they are the same kind
+ * of thing in the same band.
+ */
+.sym-route-body {
   margin: 0;
   font-size: 16px;
   line-height: 25px;
-  font-style: normal;
   color: #4a4b4d;
+}
+
+/*
+ * #6b6d70 is 5.19:1 on white, against the routes' 8.73:1. Measured rather than
+ * eyeballed because the obvious next stop, #75777a, is 4.49:1 and fails AA for
+ * normal text by a hundredth — on a page somebody reads at three in the
+ * morning. This one clears the 4.5 floor with room to spare and is still
+ * visibly quieter than the sentence above it.
+ */
+.sym-call-note,
+.sym-next .sc-trust {
+  margin: 0;
+  font-size: 15px;
+  line-height: 24px;
+  font-style: normal;
+  color: #6b6d70;
 }
 
 /*
@@ -5976,8 +6004,8 @@
  */
 .sym-call-more {
   margin: 0;
-  font-size: 16px;
-  line-height: 25px;
+  font-size: 15px;
+  line-height: 24px;
 }
 
 .sym-call-more a {
