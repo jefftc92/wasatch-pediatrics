@@ -182,7 +182,7 @@ ${
 			<div class="col-12">
 				<h2 class="dent-band-title">${escapeAttribute(symptom.aapHeading)}</h2>
 				<div class="sym-embed">
-					<p class="sym-embed-cap"><span class="sym-embed-name">AAP Symptom Checker</span><span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></p>
+					<p class="sym-embed-cap"><span class="sym-embed-name">AAP Symptom Checker</span><span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span><button type="button" class="sym-embed-act sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Read full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button></p>
 					<div class="sym-embed-stage">
 						<div class="sym-embed-fallback">
 							<p class="sym-embed-fallback-lead">If the Symptom Checker does not appear here</p>
@@ -191,7 +191,6 @@ ${
 						<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
 					</div>
 					<p class="sym-embed-acts">
-						<button type="button" class="sym-embed-act sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
 						<a class="sym-embed-act sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">Open on HealthyChildren.org<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
 					</p>
 				</div>

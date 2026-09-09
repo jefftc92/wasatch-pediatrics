@@ -4870,10 +4870,21 @@
 }
 
 /*
- * A caption, not a bar. It was a 62px row carrying the panel's name on the
- * left and its two escape hatches on the right, 21px tall in the corner
- * furthest from a thumb. The name stays here; the controls move below the
- * frame, where the hand is.
+ * A control bar again, and the reversal is deliberate. design-01 moved these
+ * controls below the frame "where the hand is", and that was right when the
+ * frame was 460px and its bottom edge was on screen with it. design-02 fitted
+ * the frame to the viewport, so it is now 698px at 390 — the whole usable fold
+ * — and "below the frame" means off screen: parked at the natural reading
+ * position, "Full screen" landed at screen y=767 under a dock starting at 772
+ * and "Open on HealthyChildren.org" at y=825, below the fold entirely.
+ *
+ * So the way out of the frame comes back above it, where it stays in view for
+ * as long as the frame is being read, and the frame gives back 44px of itself
+ * to pay for it. The rescue link — the one that matters when the frame shows
+ * nothing — stays below and now has the row to itself.
+ *
+ * `min-height` rather than content height, so revealing the `hidden` button
+ * moves nothing.
  */
 .sym-embed-cap {
   display: flex;
@@ -4881,6 +4892,31 @@
   gap: 10px;
   margin: 0 0 8px 0;
   padding: 0 2px;
+  min-height: 44px;
+}
+
+.sym-embed-cap .sym-embed-grow {
+  flex: 0 0 auto;
+  align-self: center;
+  margin-left: auto;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #dfe2e5;
+  border-radius: 22px;
+  background: #ffffff;
+  color: #1a6f9f;
+  font-size: 15px;
+}
+
+.sym-embed-cap .sym-embed-grow:hover,
+.sym-embed-cap .sym-embed-grow:focus-visible {
+  border-color: #2b93d1;
+  color: #b3540c;
+}
+
+.sym-embed-cap .sym-embed-grow svg {
+  width: 14px;
+  height: 14px;
 }
 
 .sym-embed-name {
@@ -5092,13 +5128,30 @@
  * records "the frame previously sat in an oversized box that dominated the page
  * without being usable", and a cap is what stops that returning on a tall
  * desktop.
+ *
+ * The client: "the iframe is not being automatically sized ... i have to scroll
+ * up and down on the iframe just to see all the content". It cannot be sized to
+ * its content, and this is why, recorded so nobody re-derives it. The AAP
+ * viewer is a three-tab widget — its own 126-byte AAP.SymptomChecker.js runs
+ * jQuery Tools `.tabs()` over Definition, When To Call and Care Advice — and it
+ * shows one tab at a time. Across the 158 topics with a tool, the tab the
+ * reader lands on holds a median 1,826 characters and the Care Advice tab a
+ * median 3,355, up to 17,930. The height of the content is a property of a
+ * click that happens inside a cross-origin frame, not of the topic. Any fixed
+ * height either restores the scrollbar on the long tab or leaves a slab of
+ * white on the short one, and the tallest-pane figure would push the routing
+ * band and its eight phone numbers past y=5,000 on a phone.
+ *
+ * So the frame keeps its viewport fit and gives back 44px of itself to buy the
+ * control bar above, which stays on screen while the frame is being read. Only
+ * the three subtrahends change.
  */
 .sym-embed-frame {
   position: relative;
   display: block;
   width: 100%;
   height: 560px;
-  height: clamp(560px, calc(100svh - 158px), 720px);
+  height: clamp(560px, calc(100svh - 202px), 720px);
   border: 0;
   background: transparent;
 }
@@ -5126,13 +5179,19 @@
   background: rgba(33, 37, 41, 0.62);
 }
 
+/*
+ * The dialog was spending 144px of an 844px phone on a 71px bar and a 73px
+ * footer, which is why escaping to full screen gained two pixels over the
+ * inline frame. The close button stays 44x44 and the footer button stays a
+ * full-width 44px; only the padding around them comes in.
+ */
 .sym-modal-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   flex: 0 0 auto;
-  padding: 12px 20px;
+  padding: 6px 12px;
   background: #f4f5f6;
   border-bottom: 1px solid #e4e7ea;
 }
@@ -5185,7 +5244,7 @@
  */
 .sym-modal-foot {
   flex: 0 0 auto;
-  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  padding: 6px 12px calc(6px + env(safe-area-inset-bottom, 0px));
   background: #f4f5f6;
   border-top: 1px solid #e4e7ea;
 }
@@ -5193,9 +5252,9 @@
 .sym-modal-done {
   display: block;
   width: 100%;
-  min-height: 52px;
+  min-height: 44px;
   border: 0;
-  border-radius: 26px;
+  border-radius: 22px;
   background: #1a6f9f;
   color: #ffffff;
   font-family: "Montserrat", sans-serif;
@@ -5241,18 +5300,18 @@
     gap: 14px;
   }
 
-  /* 58px sticky header + 72px dock + 16px so the frame's own bottom edge shows */
+  /* 58px sticky header + 72px dock + 44px bar + 9px gap + 7px of daylight */
   .sym-embed-frame {
     height: 460px;
-    height: clamp(460px, calc(100svh - 146px), 720px);
+    height: clamp(460px, calc(100svh - 190px), 720px);
   }
 }
 
 @media (min-width: 1200px) {
-  /* Measured: the header is not sticky here and the dock is not rendered. */
+  /* No sticky header and no dock here, so the acts row fits below as well. */
   .sym-embed-frame {
     height: 560px;
-    height: clamp(560px, calc(100svh - 96px), 720px);
+    height: clamp(560px, calc(100svh - 140px), 720px);
   }
 }
 
