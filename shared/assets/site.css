@@ -4271,7 +4271,13 @@
   max-width: 62em;
 }
 
-.sc-routes li {
+/*
+ * The child combinator, not a descendant selector: the phone grid now lives
+ * inside the first route, and as a descendant it inherited the bullet, the
+ * 20px indent and 18px/28px type. Checked on the index — `.sc-reach`'s
+ * `.sc-routes` has no nested list and is 1,024px at 390 before and after.
+ */
+.sc-routes > li {
   position: relative;
   margin-bottom: 14px;
   padding: 0 0 0 20px;
@@ -4280,7 +4286,7 @@
   color: #4a4b4d;
 }
 
-.sc-routes li:before {
+.sc-routes > li:before {
   content: "";
   position: absolute;
   left: 0;
@@ -5060,12 +5066,39 @@
   color: #636466;
 }
 
-/* The frame must not paint its own fill, or it covers the message. */
+/*
+ * The frame must not paint its own fill, or it covers the message.
+ *
+ * The client: "the iframe almost always requires scrolling". It was a flat
+ * 460/560px on 158 pages at every screen size. At 390x844 the usable fold is
+ * 714px — 844 less the 58px sticky header and the 72px the fixed CTA dock
+ * covers — so the frame spent 64% of the screen and asked the reader to scroll
+ * inside the other 36%. The literal request, measuring the frame's content, is
+ * not possible: healthychildren.org is another origin, there is no postMessage
+ * contract, and hard constraint 3 forbids depending on the frame having
+ * loaded. So the frame is fitted to the screen instead.
+ *
+ * `svh` and not `dvh`: `dvh` changes every time a mobile URL bar collapses, so
+ * the frame would resize under the reader's thumb mid-scroll. `svh` is the
+ * viewport with the browser chrome shown and does not move during a scroll, so
+ * this reflows exactly never after first paint.
+ *
+ * The static declaration first is the fallback. A browser that does not know
+ * `svh` drops the second declaration at parse time and gets today's height —
+ * verified, it computes to 560px. No JavaScript, no @supports, no feature test.
+ *
+ * The floor is today's value at each breakpoint, so no viewport anywhere ends
+ * up with less frame than it has now. The 720px ceiling is deliberate: UI_RULES
+ * records "the frame previously sat in an oversized box that dominated the page
+ * without being usable", and a cap is what stops that returning on a tall
+ * desktop.
+ */
 .sym-embed-frame {
   position: relative;
   display: block;
   width: 100%;
   height: 560px;
+  height: clamp(560px, calc(100svh - 158px), 720px);
   border: 0;
   background: transparent;
 }
@@ -5208,8 +5241,18 @@
     gap: 14px;
   }
 
+  /* 58px sticky header + 72px dock + 16px so the frame's own bottom edge shows */
   .sym-embed-frame {
     height: 460px;
+    height: clamp(460px, calc(100svh - 146px), 720px);
+  }
+}
+
+@media (min-width: 1200px) {
+  /* Measured: the header is not sticky here and the dock is not rendered. */
+  .sym-embed-frame {
+    height: 560px;
+    height: clamp(560px, calc(100svh - 96px), 720px);
   }
 }
 
@@ -5293,11 +5336,11 @@
 }
 
 .sc-index h2 {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .sc-index .sc-lead {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .sym-find,
@@ -5363,21 +5406,6 @@
  * palette are the topic tile's, because three card idioms already exist on
  * this page and this is a fourth content, not a fourth style.
  */
-.sym-call {
-  margin: 0 0 26px 0;
-  scroll-margin-top: 72px; /* the header is sticky below 1200 */
-}
-
-.sym-call-title {
-  margin: 0 0 12px 0;
-  font-family: "Montserrat", sans-serif;
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.9px;
-  text-transform: uppercase;
-  color: #636466;
-}
-
 .sym-call-list {
   list-style: none;
   margin: 0;
@@ -5455,18 +5483,20 @@
  * now" — bold #2b2c2e, no link, no colour, no number — was the least salient
  * of the three routes despite being the first and the most urgent.
  */
-.sc-routes .sc-route-now {
+.sc-routes > .sc-route-now {
   padding-left: 22px;
+  margin-bottom: 26px; /* the grid needs more air after it than a sentence does */
+  scroll-margin-top: 72px; /* moved off the deleted `.sym-call`; the header is sticky below 1200 */
 }
 
-.sc-routes .sc-route-now:before {
+.sc-routes > .sc-route-now:before {
   width: 10px;
   height: 10px;
   top: 10px;
   background: #f58220;
 }
 
-.sc-routes .sc-route-now strong {
+.sc-routes > .sc-route-now strong {
   display: block;
   margin-bottom: 2px;
   font-size: 19px;
@@ -5596,4 +5626,212 @@
   order: 2;
   background: #f4f4f4;
   border-top: 1px solid #e4e7ea;
+}
+
+/* ------------------------------- symptom index: three zones, three surfaces -- */
+
+/*
+ * The client's report: search, common and categories "are all in one section
+ * but they lack color to divide them up". Measured, that is literally true —
+ * `.sc-index` is 1,953px of one white field at 390 and every child computes to
+ * `rgba(0,0,0,0)`. The only internal boundary was the `2px #eef0f2` rule under
+ * the two `.sym-sec` labels, 1.14:1 on white.
+ *
+ * The answer is the page's own band alternation, one level down: the tool sits
+ * on a plinth, the twelve common topics stay on the page's white so the fast
+ * path is the one thing not in a box, and the thirteen categories sit in a
+ * panel. Grey, white, grey. The panel shape is `.sym-embed-stage`'s, so this is
+ * a third content in an existing shape and not a third card style.
+ *
+ * Honest limit, since it decides how much of this works: `#f4f5f6` on white is
+ * 1.09:1 and the `#e4e7ea` edge is 1.24:1. The fill alone is not the boundary.
+ * What carries it is the accent on each zone's entry point — the plinth's 3px
+ * `#2b93d1` top edge at 3.39:1 and the 44px bars under the two labels — plus
+ * the thirteen white cards, which are a pattern rather than a contrast.
+ */
+.sc-find-plinth {
+  max-width: 660px;
+  margin: 0 0 18px 0;
+  padding: 12px;
+  background: #f4f5f6;
+  border: 1px solid #e4e7ea;
+  border-top: 3px solid #2b93d1; /* `.sym-alert`'s idiom, in the other brand colour */
+  border-radius: 14px;
+}
+
+.sc-find-plinth .sym-find {
+  margin: 0;
+  max-width: none;
+}
+
+.sc-find-plinth .sym-find-hint,
+.sc-find-plinth .sym-find-count {
+  margin: 6px 4px 0 4px;
+}
+
+/* White on `#f4f5f6` is 1.09:1, so the input has to keep an edge of its own. */
+.sc-find-plinth .sym-find-input {
+  border-color: #c9ced4;
+}
+
+/* Its own `#f4f5f6` would vanish into the plinth's; the answers are white now. */
+.sc-find-plinth .sym-none {
+  background: #ffffff;
+}
+
+.sc-find-plinth .sym-none,
+.sc-find-plinth .sym-emergency {
+  margin: 12px 0 0 0;
+  max-width: none;
+}
+
+/*
+ * Only ever rendered inside <noscript>, and it is inside the plinth so that
+ * `build.ts`'s `.sym-find{display:none}` does not leave an empty grey box with
+ * a blue edge and nothing in it. The plinth supplies the surface this used to
+ * carry for itself.
+ */
+.sc-index .sc-find-plinth .sym-find-off {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  background: none;
+  border-radius: 0;
+}
+
+/* Paying for most of the plinth's own height out of the copy above it. */
+.sc-index .sym-common {
+  margin-bottom: 28px;
+}
+
+.sc-index .sym-browse {
+  margin: 0;
+  padding: 16px 14px 6px 14px;
+  background: #f4f5f6;
+  border: 1px solid #e4e7ea;
+  border-radius: 14px;
+}
+
+/* Thirteen rows reading as one machine rather than thirteen stray lines. */
+.sc-index .sym-browse .sym-group-toggle {
+  margin-bottom: 8px;
+  background: #ffffff;
+  border: 1px solid #e4e7ea;
+  border-radius: 10px;
+}
+
+/*
+ * Caused by this change rather than a separate fix: this heading is visible
+ * only with scripting off, and `#8a8a8c` was already 3.45:1 on white. On the
+ * panel it would be 3.16:1. `#5a5b5d` is 6.23:1 on `#f4f5f6`.
+ */
+.sc-index .sym-browse .sym-group-title {
+  color: #5a5b5d;
+}
+
+/*
+ * The saturated cue the client asked for, on the two entry points that carry a
+ * label. Decoration over the surface and the label, never the only signal:
+ * `#f58220` is 2.59:1 on white and would fail 1.4.11 if it were carrying
+ * meaning alone. Each zone is also named in text at 5.43:1 and separated by a
+ * surface change. `.sym-sec` is index-only today; the prefix keeps a bare
+ * `.sym-sec:after` out of the cascade if it ever stops being.
+ */
+.sc-index .sym-sec {
+  position: relative;
+}
+
+.sc-index .sym-sec:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 44px;
+  height: 2px;
+  background: #2b93d1;
+}
+
+.sc-index .sym-common .sym-sec:after {
+  background: #f58220;
+}
+
+@media (min-width: 768px) {
+  .sc-find-plinth {
+    padding: 16px;
+  }
+
+  .sc-index .sym-browse {
+    padding: 22px 20px 10px 20px;
+  }
+}
+
+/* ------------------------------- "Getting your child seen", uncluttered -- */
+
+/*
+ * The client: the band "looks very cluttered". Measured on all 164 it was
+ * 1,173px at 390 — 28.7% of the page — holding 54 elements, 13 links to 11
+ * distinct destinations, two headings in a row and five type treatments.
+ *
+ * Three faults behind the word. `.sym-call-title` said "call your office, a
+ * nurse answers at any hour" and the first route 400px below said the same
+ * thing again in different words, with the eight numbers stranded between the
+ * two. `.sym-acts` linked /medical-care/sick-visits/ and /locations/, both
+ * already linked in the prose above it, in the loudest treatment in the band.
+ * And `#sym-call` landed on a wrapper whose first child was that duplicate
+ * heading rather than on an answer.
+ *
+ * One heading, one list. The grid moves inside the route whose own first line
+ * already explains it, and the duplicate button row goes.
+ *
+ * The grid's shape is unchanged — same 2-up / 4-up, same tile geometry and
+ * palette. It is tightened, and its type is pinned because inside a route it
+ * would otherwise inherit 18px/28px instead of the band's.
+ */
+.sc-routes .sym-call-list {
+  margin: 12px 0 0 0;
+  gap: 8px;
+}
+
+.sc-routes .sym-call-item {
+  min-height: 56px;
+  padding: 9px 12px;
+  gap: 1px;
+}
+
+.sc-routes .sym-call-office {
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.4px;
+}
+
+.sc-routes .sym-call-num {
+  font-size: 17px;
+  line-height: 22px;
+}
+
+.sc-routes .sym-call-note {
+  margin: 8px 0 0 0;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+/*
+ * With `.sym-acts` gone this is the band's only route to /locations/, so it has
+ * to be a real target: 237 x 17px becomes 237 x 44px, and the negative margin
+ * keeps the line rhythm.
+ *
+ * Deliberately not extended to the two links inside the route sentences. They
+ * are inline prose links, which WCAG 2.5.8 exempts, and they are the same 20px
+ * they are today and on the index's `.sc-reach`. Measured: growing them costs
+ * 52px of band height at 390 and forces "same-day appointments" onto a line of
+ * its own, leaving a ragged gap in the middle of a sentence.
+ */
+.sc-routes .sym-call-note a {
+  display: inline-block;
+  padding: 11px 2px;
+  margin: -5px 0;
+}
+
+.sym-next .sc-trust {
+  margin: 0;
 }
