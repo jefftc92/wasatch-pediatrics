@@ -5843,33 +5843,79 @@
  * already explains it, and the duplicate button row goes.
  *
  * The grid's shape is unchanged — same 2-up / 4-up, same tile geometry and
- * palette. It is tightened, and its type is pinned because inside a route it
- * would otherwise inherit 18px/28px instead of the band's.
+ * palette. Its type is pinned because inside a route it would otherwise
+ * inherit 18px/28px instead of the band's.
+ *
+ * The client, having seen that: it still needs cleaning up. Re-measured, what
+ * was left is not height. It is that eight separately outlined cards are eight
+ * objects to scan when a parent needs one, and that four lines of prose stood
+ * between the promise and the delivery.
+ *
+ * So the eight cards become one directory: a single bordered panel with
+ * hairlines between its cells, sitting directly under the route's bold lead-in
+ * with the prose following as a caption. Nothing is removed — all eight `tel:`
+ * links stay visible, because `offices.ts` holds eight distinct numbers and
+ * there is no practice-wide one to give.
+ *
+ * The rules are drawn on the cells rather than as grid gaps showing the list's
+ * background, so a ninth office would give the last row one bordered cell
+ * rather than a solid grey block where the empty cell would be.
+ *
+ * The hairlines are decoration and not the structure: what separates one office
+ * from the next is a 5.92:1 label above a 5.50:1 bold number, and each cell is
+ * its own link. If the rules vanish — forced colors, a printout — the directory
+ * still reads as eight labelled numbers.
  */
 .sc-routes .sym-call-list {
-  margin: 12px 0 0 0;
-  gap: 8px;
+  margin: 10px 0 0 0;
+  gap: 0;
+  background: #ffffff;
+  border: 1px solid #dfe2e5;
+  border-radius: 14px;
+  overflow: hidden;
 }
 
 .sc-routes .sym-call-item {
-  min-height: 56px;
-  padding: 9px 12px;
-  gap: 1px;
+  min-height: 54px;
+  padding: 8px 12px;
+  gap: 0;
+  border: 0;
+  border-top: 1px solid #dfe2e5;
+  border-left: 1px solid #dfe2e5;
+  border-radius: 0;
+  background: #ffffff;
+}
+
+/* 2-up: the first row and the first column carry the panel's own edge. */
+.sc-routes .sym-call-list > li:nth-child(-n + 2) .sym-call-item {
+  border-top: 0;
+}
+
+.sc-routes .sym-call-list > li:nth-child(odd) .sym-call-item {
+  border-left: 0;
+}
+
+/* The cells no longer have a border of their own to recolour on hover. */
+.sc-routes .sym-call-item:hover,
+.sc-routes .sym-call-item:focus-visible {
+  background: #f2f8fc;
+  box-shadow: inset 0 0 0 2px #2b93d1;
 }
 
 .sc-routes .sym-call-office {
   font-size: 12px;
   line-height: 16px;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
 }
 
 .sc-routes .sym-call-num {
   font-size: 17px;
-  line-height: 22px;
+  line-height: 23px;
 }
 
+/* Now the caption under the directory rather than the paragraph above it. */
 .sc-routes .sym-call-note {
-  margin: 8px 0 0 0;
+  margin: 10px 0 0 0;
   font-size: 15px;
   line-height: 22px;
 }
@@ -5893,4 +5939,25 @@
 
 .sym-next .sc-trust {
   margin: 0;
+  font-size: 17px;
+  line-height: 26px;
+}
+
+@media (min-width: 768px) {
+  /* Four columns, so the first row and the first column are different cells. */
+  .sc-routes .sym-call-list > li:nth-child(-n + 2) .sym-call-item {
+    border-top: 1px solid #dfe2e5;
+  }
+
+  .sc-routes .sym-call-list > li:nth-child(odd) .sym-call-item {
+    border-left: 1px solid #dfe2e5;
+  }
+
+  .sc-routes .sym-call-list > li:nth-child(-n + 4) .sym-call-item {
+    border-top: 0;
+  }
+
+  .sc-routes .sym-call-list > li:nth-child(4n + 1) .sym-call-item {
+    border-left: 0;
+  }
 }

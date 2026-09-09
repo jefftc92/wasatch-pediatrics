@@ -97,6 +97,14 @@ function heroBand(symptom: Symptom): string {
  * previously introduced by a second heading saying the same thing in different
  * words, 400px above the words themselves, with the eight numbers stranded
  * between the two.
+ *
+ * The numbers now come first inside the route and the four-line paragraph that
+ * used to precede them follows as one caption. The sentence that introduces
+ * them is the route's bold lead-in, "Talk to a nurse now, at any hour", which
+ * still comes first and is now 38px above them rather than 154px. What follows
+ * is reassurance — nights and weekends, not an answering service — and
+ * reassurance reads better once the number is in sight. No word is added,
+ * removed or reordered by the move.
  */
 function callList(): string {
 	const items = offices
@@ -107,7 +115,7 @@ function callList(): string {
 		.join("");
 
 	return `<ul class="sym-call-list">${items}</ul>
-						<p class="sym-call-note">Any office will help if yours is not on your mind. <a href="/locations/">Hours, addresses and directions</a>.</p>`;
+						<p class="sym-call-note">Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service. Any office will help if yours is not on your mind. <a href="/locations/">Hours, addresses and directions</a>.</p>`;
 }
 
 function renderSymptomPage(symptom: Symptom): string {
@@ -214,7 +222,7 @@ ${symptom.noTool ? "" : `</div>`}
 			<div class="col-12">
 				<h2 class="dent-band-title">Getting your child seen</h2>
 				<ul class="sc-routes">
-					<li class="sc-route-now" id="sym-call"><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.
+					<li class="sc-route-now" id="sym-call"><strong>Talk to a nurse now, at any hour.</strong>
 						${callList()}
 					</li>
 					<li><strong>Be seen today.</strong> Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</li>
