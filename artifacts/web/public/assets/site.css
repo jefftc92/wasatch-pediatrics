@@ -5293,11 +5293,11 @@
 }
 
 .sc-index h2 {
-  margin-bottom: 10px;
+  margin-bottom: 6px;
 }
 
 .sc-index .sc-lead {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .sym-find,
@@ -5596,4 +5596,141 @@
   order: 2;
   background: #f4f4f4;
   border-top: 1px solid #e4e7ea;
+}
+
+/* ------------------------------- symptom index: three zones, three surfaces -- */
+
+/*
+ * The client's report: search, common and categories "are all in one section
+ * but they lack color to divide them up". Measured, that is literally true —
+ * `.sc-index` is 1,953px of one white field at 390 and every child computes to
+ * `rgba(0,0,0,0)`. The only internal boundary was the `2px #eef0f2` rule under
+ * the two `.sym-sec` labels, 1.14:1 on white.
+ *
+ * The answer is the page's own band alternation, one level down: the tool sits
+ * on a plinth, the twelve common topics stay on the page's white so the fast
+ * path is the one thing not in a box, and the thirteen categories sit in a
+ * panel. Grey, white, grey. The panel shape is `.sym-embed-stage`'s, so this is
+ * a third content in an existing shape and not a third card style.
+ *
+ * Honest limit, since it decides how much of this works: `#f4f5f6` on white is
+ * 1.09:1 and the `#e4e7ea` edge is 1.24:1. The fill alone is not the boundary.
+ * What carries it is the accent on each zone's entry point — the plinth's 3px
+ * `#2b93d1` top edge at 3.39:1 and the 44px bars under the two labels — plus
+ * the thirteen white cards, which are a pattern rather than a contrast.
+ */
+.sc-find-plinth {
+  max-width: 660px;
+  margin: 0 0 18px 0;
+  padding: 12px;
+  background: #f4f5f6;
+  border: 1px solid #e4e7ea;
+  border-top: 3px solid #2b93d1; /* `.sym-alert`'s idiom, in the other brand colour */
+  border-radius: 14px;
+}
+
+.sc-find-plinth .sym-find {
+  margin: 0;
+  max-width: none;
+}
+
+.sc-find-plinth .sym-find-hint,
+.sc-find-plinth .sym-find-count {
+  margin: 6px 4px 0 4px;
+}
+
+/* White on `#f4f5f6` is 1.09:1, so the input has to keep an edge of its own. */
+.sc-find-plinth .sym-find-input {
+  border-color: #c9ced4;
+}
+
+/* Its own `#f4f5f6` would vanish into the plinth's; the answers are white now. */
+.sc-find-plinth .sym-none {
+  background: #ffffff;
+}
+
+.sc-find-plinth .sym-none,
+.sc-find-plinth .sym-emergency {
+  margin: 12px 0 0 0;
+  max-width: none;
+}
+
+/*
+ * Only ever rendered inside <noscript>, and it is inside the plinth so that
+ * `build.ts`'s `.sym-find{display:none}` does not leave an empty grey box with
+ * a blue edge and nothing in it. The plinth supplies the surface this used to
+ * carry for itself.
+ */
+.sc-index .sc-find-plinth .sym-find-off {
+  margin: 0;
+  padding: 0;
+  max-width: none;
+  background: none;
+  border-radius: 0;
+}
+
+/* Paying for most of the plinth's own height out of the copy above it. */
+.sc-index .sym-common {
+  margin-bottom: 28px;
+}
+
+.sc-index .sym-browse {
+  margin: 0;
+  padding: 16px 14px 6px 14px;
+  background: #f4f5f6;
+  border: 1px solid #e4e7ea;
+  border-radius: 14px;
+}
+
+/* Thirteen rows reading as one machine rather than thirteen stray lines. */
+.sc-index .sym-browse .sym-group-toggle {
+  margin-bottom: 8px;
+  background: #ffffff;
+  border: 1px solid #e4e7ea;
+  border-radius: 10px;
+}
+
+/*
+ * Caused by this change rather than a separate fix: this heading is visible
+ * only with scripting off, and `#8a8a8c` was already 3.45:1 on white. On the
+ * panel it would be 3.16:1. `#5a5b5d` is 6.23:1 on `#f4f5f6`.
+ */
+.sc-index .sym-browse .sym-group-title {
+  color: #5a5b5d;
+}
+
+/*
+ * The saturated cue the client asked for, on the two entry points that carry a
+ * label. Decoration over the surface and the label, never the only signal:
+ * `#f58220` is 2.59:1 on white and would fail 1.4.11 if it were carrying
+ * meaning alone. Each zone is also named in text at 5.43:1 and separated by a
+ * surface change. `.sym-sec` is index-only today; the prefix keeps a bare
+ * `.sym-sec:after` out of the cascade if it ever stops being.
+ */
+.sc-index .sym-sec {
+  position: relative;
+}
+
+.sc-index .sym-sec:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 44px;
+  height: 2px;
+  background: #2b93d1;
+}
+
+.sc-index .sym-common .sym-sec:after {
+  background: #f58220;
+}
+
+@media (min-width: 768px) {
+  .sc-find-plinth {
+    padding: 16px;
+  }
+
+  .sc-index .sym-browse {
+    padding: 22px 20px 10px 20px;
+  }
 }
