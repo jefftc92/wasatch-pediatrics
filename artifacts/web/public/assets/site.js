@@ -1293,6 +1293,33 @@
     return " " + tokens.join(" ");
   });
 
+  /*
+   * Function words, dropped from the query before matching.
+   *
+   * Matching is all-terms-must-appear, which is right for "baby cough" and
+   * wrong for the way a parent actually types. "my baby has a rash" required
+   * "my", "has" and "a" to sit on the tile, so a query that names a symptom
+   * we have a page for returned "No pages match that word". Measured before
+   * this list: 13 of 15 natural phrasings returned nothing, "baby has
+   * diarrhea" and "kid has pink eye" among them, both of which land instantly
+   * as a single word.
+   *
+   * Only words that can never be a symptom are here. "cold", "flu", "night",
+   * "baby", "newborn" and the age words stay in the query because tiles are
+   * found by them, and so do "up", "out", "down" and "over", which are half
+   * of "throwing up" and "passing out".
+   */
+  var FILLER = (
+    "a an the this that these those my our your his her their its" +
+    " i im me we us you he she it they them" +
+    " is am are was were be been being has have had do does did" +
+    " can cant cannot could will wont would should may might must" +
+    " and or but if so then than because" +
+    " of to for in on at by with from about into" +
+    " what when where why how who which" +
+    " please need got very really just still some any"
+  ).split(" ");
+
   var SPELLING = {
     diarrhoea: "diarrhea",
     diarhea: "diarrhea",
@@ -1423,10 +1450,21 @@
       .replace(/['\u2018\u2019]/g, "")
       .replace(/[^a-z0-9 ]+/g, " ")
       .trim();
-    var words = query ? query.split(/\s+/) : [];
+    var typed = query ? query.split(/\s+/) : [];
+    /*
+     * Everything below works on the words that carry meaning. Kept separate
+     * from `typed` so an empty box and a box holding only function words stay
+     * different things: the first shows the whole list, the second says it
+     * found nothing rather than silently matching all 164 tiles, which is
+     * what an empty `every()` would have done.
+     */
+    var words = typed.filter(function (word) {
+      return FILLER.indexOf(word) === -1;
+    });
+    var loose = false;
     if (clear) clear.hidden = !query;
 
-    if (!words.length) {
+    if (!typed.length) {
       tiles.forEach(function (tile) {
         tile.hidden = false;
       });
@@ -1448,6 +1486,10 @@
 
     var hits = 0;
     tiles.forEach(function (tile, i) {
+      if (!words.length) {
+        tile.hidden = true;
+        return;
+      }
       // Leading space so indexOf only ever lands on a word boundary: a bare
       // substring test makes "ear" match the "pearly" in molluscum's terms.
       var terms = " " + (tile.getAttribute("data-terms") || "");
@@ -1471,6 +1513,66 @@
       tile.hidden = !match;
       if (match) hits++;
     });
+
+    /*
+     * Nothing carried every word. Rather than a dead end, fall back to as much
+     * of the query as any tile can carry: score each tile by how many of the
+     * words it holds and show the ones holding the most. "2 year old with a
+     * fever" strips to "2 year old fever", which no tile has in full, and the
+     * best any tile does is "fever" — so the fever pages come back instead of
+     * nothing.
+     *
+     * Taking the best score rather than any match is what keeps this from
+     * being a plain OR, which would have answered that query with every tile
+     * mentioning "old". And it only runs when the strict pass found nothing,
+     * so no query that works today can reach it or change.
+     */
+    if (!hits && words.length) {
+      /*
+       * A word most of the corpus carries cannot narrow anything, and in the
+       * fallback it actively misleads: "my child is choking" scored every one
+       * of the 83 tiles carrying "child" and answered a 911 query with 83
+       * symptom pages. Measured across the 164 tiles, the split is clean —
+       * "child" is on 51% and "children" on 45%, while the commonest word
+       * that is actually a symptom, "pain", is on 21%. A third separates them
+       * with room either side, so the fallback ignores anything above it and
+       * "choking", which no tile carries, is left to the 911 panel.
+       *
+       * Only the fallback filters: in the strict pass every word has to
+       * appear anyway, so a common one narrows honestly and is left alone.
+       */
+      var ceiling = tiles.length / 3;
+      var useful = words.filter(function (word) {
+        var carriers = 0;
+        for (var t = 0; t < tiles.length; t++) {
+          if (has(index[t], word)) carriers++;
+        }
+        return carriers <= ceiling;
+      });
+
+      var scores = tiles.map(function (tile, i) {
+        var terms = " " + (tile.getAttribute("data-terms") || "");
+        var carried = 0;
+        useful.forEach(function (word) {
+          if (
+            terms.indexOf(" " + word) !== -1 ||
+            has(index[i], word) ||
+            hasSplit(index[i], word)
+          ) {
+            carried++;
+          }
+        });
+        return carried;
+      });
+      var best = Math.max.apply(null, scores);
+      if (best > 0) {
+        loose = true;
+        tiles.forEach(function (tile, i) {
+          tile.hidden = scores[i] !== best;
+          if (!tile.hidden) hits++;
+        });
+      }
+    }
 
     // A group with nothing in it should not sit there as an empty heading.
     groups.forEach(function (group) {
@@ -1503,7 +1605,9 @@
     if (count) {
       count.classList.toggle("is-none", hits === 0);
       count.textContent = hits
-        ? hits + (hits === 1 ? " page matches" : " pages match")
+        ? hits +
+          (hits === 1 ? " page matches" : " pages match") +
+          (loose ? " part of that" : "")
         : "No pages match that word";
     }
   }
