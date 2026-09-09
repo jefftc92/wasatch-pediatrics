@@ -4449,6 +4449,7 @@
 .sc-questions,
 .sym-tool,
 .sym-next,
+.sym-seen,
 .sym-others {
   border-top: 1px solid #e4e7ea;
 }
@@ -5471,6 +5472,21 @@
   border: 2px solid #ffffff;
 }
 
+/*
+ * The theme uppercases every `.btn`, and "HOURS, ADDRESSES AND DIRECTIONS" is
+ * 30 characters of it. At 390 the pill is 347px wide with 307px usable inside
+ * the padding its 25px radius needs, and the label at the shared 16px measured
+ * 330px — so it wrapped to two lines and made a 69px pill. 15px brings it back
+ * to one line on the narrowest phone this site is designed for, without
+ * touching the label, which is the client's wording.
+ */
+@media (max-width: 575px) {
+  .sym-call-acts .btn {
+    font-size: 15px;
+    padding: 13px 18px;
+  }
+}
+
 @media (max-width: 767px) {
   /* Two buttons on one line rather than two stacked bars, so the hero does
      not grow to pay for the first one. */
@@ -5504,6 +5520,7 @@
 .sym-intro.padme90,
 .sym-tool.padme90,
 .sym-next.padme90,
+.sym-seen.padme90,
 .sym-others.padme90 {
   padding-top: 30px;
   padding-bottom: 30px;
@@ -5513,6 +5530,7 @@
   .sym-intro.padme90,
   .sym-tool.padme90,
   .sym-next.padme90,
+  .sym-seen.padme90,
   .sym-others.padme90 {
     padding-top: 56px;
     padding-bottom: 56px;
@@ -5834,18 +5852,20 @@
  * it, and the shared selector was what made every rule here an override of a
  * rule written for the other page.
  */
-.sym-routes {
-  max-width: 62em;
-  margin: 0 0 24px 0;
-}
-
 /*
  * Under a two-second glance the routing used to invert its own priority: the
  * survivors were the blue underlined inline links, so "Talk to a nurse now" —
  * no link, no colour, no number — was the least salient of the three routes
  * despite being the first and the most urgent. The rule is the whole fix.
  */
+/*
+ * Now the whole of its own band, under a heading that says what it is. The
+ * orange rule stays: one line of ink, and the only thing marking this section
+ * apart from the appointment section below it, which is the distinction that
+ * matters at three in the morning.
+ */
 .sym-route-now {
+  max-width: 62em;
   border-left: 3px solid #f58220;
   padding-left: 16px;
   scroll-margin-top: 72px; /* the header is sticky below 1200 */
@@ -5888,8 +5908,7 @@
  * morning. This one clears the 4.5 floor with room to spare and is still
  * visibly quieter than the sentence above it.
  */
-.sym-call-note,
-.sym-next .sc-trust {
+.sym-seen .sc-trust {
   margin: 0;
   font-size: 14px;
   line-height: 22px;
@@ -5905,25 +5924,9 @@
  * loudest thing in the band. The numbers keep their own weight because they
  * are the payload; every other link in the band now reads the same.
  */
-.sym-route-body a,
-.sym-call-more a {
-  color: #1a6f9f;
-}
-
-/* Without this the theme puts them back to 700, which is where they were
-   shouting from in the first place. */
 .sym-route-body a {
-  font-weight: 600;
-}
-
-/*
- * The /locations/ link sits between the two quietest things in the band, so at
- * 600 it was the loudest thing in the lower half of the call block — the same
- * distraction the notes were, in a different weight. Underline and brand blue
- * are already an unmistakable link; the bold was decoration.
- */
-.sym-call-more a {
-  font-weight: 400;
+  font-weight: 600; /* without this the theme puts them back to 700 */
+  color: #1a6f9f;
 }
 
 /*
@@ -5931,12 +5934,15 @@
  * answered elsewhere. One hairline, the full width of the routes, doing the
  * work three borders and two fills were doing.
  */
+/*
+ * The hairline this drew was standing in for a section break. It is a real
+ * band now, so the seam rule draws it and a heading names it, and this rule
+ * would be a second divider a few pixels from the first.
+ */
 .sym-route-pair {
   display: grid;
   gap: 20px;
-  margin-top: 22px;
-  padding-top: 22px;
-  border-top: 1px solid #e6e9ec;
+  max-width: 62em;
 }
 
 /* --- the directory: eight numbers, three hairlines, no box --- */
@@ -5999,34 +6005,26 @@
   color: #1a6f9f;
 }
 
-/* The caption under the directory rather than the paragraph above it. */
-.sym-call-note {
-  margin-top: 14px;
+/*
+ * The /locations/ route is a pill now rather than a standing link. `.sym-acts`
+ * carries the geometry, because it exists for exactly this mistake: reusing
+ * the office card's link class for a `.btn` inherited its "padding: 6px 0"
+ * and ran the label off both rounded ends. Only the margin changes here — 26px
+ * is spaced for a row of pills closing a band, and this one follows a
+ * directory inside one. The pill is its own tap target, so the inline-block
+ * padding that used to buy 44px goes with the paragraph it sat in.
+ */
+.sym-call-acts {
+  margin-top: 16px;
 }
 
 /*
- * The band's only route to /locations/, so it has to be a real target: 44px
- * tall, and on a line of its own. In the caption it was an inline-block with
- * 11px of vertical pad sat mid-sentence, which left the full stop after it
- * floating clear of the word before — and put a 237px underline through the
- * quietest paragraph in the band. A standing link wants no full stop.
- *
- * Deliberately not extended to the two links inside the route sentences. They
- * are inline prose links, which WCAG 2.5.8 exempts, and they are the same 20px
- * they are on the index's `.sc-reach`. Measured: growing them costs 52px of
- * band height at 390 and forces "same-day appointments" onto a line of its
- * own, leaving a ragged gap in the middle of a sentence.
+ * The closing line follows a route sentence directly, so without this it sits
+ * on the paragraph above: two different voices four pixels apart, reading as
+ * one block.
  */
-.sym-call-more {
-  margin: 0;
-  font-size: 14px;
-  line-height: 22px;
-}
-
-.sym-call-more a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
+.sym-seen .sc-trust {
+  margin-top: 22px;
 }
 
 @media (min-width: 768px) {
