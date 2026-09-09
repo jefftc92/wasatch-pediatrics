@@ -97,6 +97,14 @@ function heroBand(symptom: Symptom): string {
  * previously introduced by a second heading saying the same thing in different
  * words, 400px above the words themselves, with the eight numbers stranded
  * between the two.
+ *
+ * The numbers now come first inside the route and the four-line paragraph that
+ * used to precede them follows as one caption. The sentence that introduces
+ * them is the route's bold lead-in, "Talk to a nurse now, at any hour", which
+ * still comes first and is now 38px above them rather than 154px. What follows
+ * is reassurance — nights and weekends, not an answering service — and
+ * reassurance reads better once the number is in sight. No word is added,
+ * removed or reordered by the move.
  */
 function callList(): string {
 	const items = offices
@@ -107,7 +115,7 @@ function callList(): string {
 		.join("");
 
 	return `<ul class="sym-call-list">${items}</ul>
-						<p class="sym-call-note">Any office will help if yours is not on your mind. <a href="/locations/">Hours, addresses and directions</a>.</p>`;
+						<p class="sym-call-note">Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service. Any office will help if yours is not on your mind. <a href="/locations/">Hours, addresses and directions</a>.</p>`;
 }
 
 function renderSymptomPage(symptom: Symptom): string {
@@ -174,7 +182,7 @@ ${
 			<div class="col-12">
 				<h2 class="dent-band-title">${escapeAttribute(symptom.aapHeading)}</h2>
 				<div class="sym-embed">
-					<p class="sym-embed-cap"><span class="sym-embed-name">AAP Symptom Checker</span><span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></p>
+					<p class="sym-embed-cap"><span class="sym-embed-name">AAP Symptom Checker</span><span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span><button type="button" class="sym-embed-act sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Read full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button></p>
 					<div class="sym-embed-stage">
 						<div class="sym-embed-fallback">
 							<p class="sym-embed-fallback-lead">If the Symptom Checker does not appear here</p>
@@ -183,7 +191,6 @@ ${
 						<iframe class="sym-embed-frame" title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" src="${escapeAttribute(aapFrameUrl(symptom))}" loading="lazy"></iframe>
 					</div>
 					<p class="sym-embed-acts">
-						<button type="button" class="sym-embed-act sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button>
 						<a class="sym-embed-act sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">Open on HealthyChildren.org<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
 					</p>
 				</div>
@@ -214,7 +221,7 @@ ${symptom.noTool ? "" : `</div>`}
 			<div class="col-12">
 				<h2 class="dent-band-title">Getting your child seen</h2>
 				<ul class="sc-routes">
-					<li class="sc-route-now" id="sym-call"><strong>Talk to a nurse now, at any hour.</strong> Call your office&#8217;s main number, nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service.
+					<li class="sc-route-now" id="sym-call"><strong>Talk to a nurse now, at any hour.</strong>
 						${callList()}
 					</li>
 					<li><strong>Be seen today.</strong> Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</li>
@@ -360,6 +367,50 @@ function tile(symptom: Symptom): string {
   return `<li data-terms="${escapeAttribute(tileTerms(symptom))}"><a href="${symptomHref(symptom)}">${escapeAttribute(symptom.short)}</a></li>`;
 }
 
+/**
+ * The box, and the two panels that answer it.
+ *
+ * Emitted separately from the tile list because it does not live with the
+ * tiles any more: the search belongs in the page's header, and below 992 the
+ * header is the theme's blue `.mobileheromessage` band rather than a
+ * photograph. The band below is ours; the title band above it is the theme's
+ * and is not touched, styled or depended on beyond the fact that it is
+ * `#2B93D1`, which is hard constraint 5.
+ *
+ * `.sym-emergency` and `.sym-none` travel with the box because they are its
+ * output. `site.js` reaches all of these with document-scoped `querySelector`,
+ * so no JavaScript changes.
+ */
+export function symptomFindBox(): string {
+  return `<div class="sc-findband">
+	<div class="container">
+		<div class="sc-find-plinth">
+			<div class="sym-find">
+				<label class="visually-hidden" for="sym-find-input">Type what you are seeing</label>
+				<div class="sym-find-box">
+					<svg class="sym-find-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6"></circle><path d="M13.5 13.5L18 18"></path></svg>
+					<input id="sym-find-input" class="sym-find-input" type="search" autocomplete="off" placeholder="Type what you are seeing&#8230;">
+					<button type="button" class="sym-find-clear" hidden>Clear<span class="visually-hidden"> the search</span></button>
+				</div>
+				<p class="sym-find-hint">Everyday words work: &#8220;throwing up&#8221;, &#8220;poop&#8221;, &#8220;bug bite&#8221;, &#8220;hit head&#8221;.</p>
+				<p class="sym-find-count" role="status" aria-live="polite"></p>
+			</div>
+			<noscript><p class="sym-find-off">Type-to-search needs JavaScript. Every one of the ${symptoms.length} pages is listed below, grouped by what you can see or hear.</p></noscript>
+			<div class="sym-emergency" hidden>
+				<p class="sym-emergency-lead">This one is an emergency.</p>
+				<p class="sym-emergency-body"></p>
+				<p class="sym-acts"><a class="btn sym-emergency-call" href="tel:911">Call 911</a> <a class="btn blue" href="/locations/">Find your office</a></p>
+			</div>
+			<div class="sym-none" hidden>
+				<p class="sym-none-lead">Nothing here matches <span class="sym-none-q">that word</span>.</p>
+				<p>Try a plainer word: &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
+				<p class="sym-acts"><a class="btn blue" href="/locations/">Find your office</a></p>
+			</div>
+		</div>
+	</div>
+</div>`;
+}
+
 export function symptomIndexList(): string {
   /*
    * Commonest first, not alphabetical. A parent scanning at two in the morning
@@ -408,30 +459,7 @@ export function symptomIndexList(): string {
     })
     .join("\n\t\t\t\t\t\t");
 
-  return `<div class="sc-find-plinth">
-						<div class="sym-find">
-							<label class="visually-hidden" for="sym-find-input">Type what you are seeing</label>
-							<div class="sym-find-box">
-								<svg class="sym-find-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6"></circle><path d="M13.5 13.5L18 18"></path></svg>
-								<input id="sym-find-input" class="sym-find-input" type="search" autocomplete="off" placeholder="Type what you are seeing&#8230;">
-								<button type="button" class="sym-find-clear" hidden>Clear<span class="visually-hidden"> the search</span></button>
-							</div>
-							<p class="sym-find-hint">Everyday words work: &#8220;throwing up&#8221;, &#8220;poop&#8221;, &#8220;bug bite&#8221;, &#8220;hit head&#8221;.</p>
-							<p class="sym-find-count" role="status" aria-live="polite"></p>
-						</div>
-						<noscript><p class="sym-find-off">Type-to-search needs JavaScript. Every one of the ${symptoms.length} pages is listed below, grouped by what you can see or hear.</p></noscript>
-						<div class="sym-emergency" hidden>
-							<p class="sym-emergency-lead">This one is an emergency.</p>
-							<p class="sym-emergency-body"></p>
-							<p class="sym-acts"><a class="btn sym-emergency-call" href="tel:911">Call 911</a> <a class="btn blue" href="/locations/">Find your office</a></p>
-						</div>
-						<div class="sym-none" hidden>
-							<p class="sym-none-lead">Nothing here matches <span class="sym-none-q">that word</span>.</p>
-							<p>Try a plainer word: &#8220;rash&#8221; rather than the name of a rash, &#8220;tummy&#8221; rather than where it hurts. If you would rather just ask someone, call your office and a nurse will answer, whatever the hour.</p>
-							<p class="sym-acts"><a class="btn blue" href="/locations/">Find your office</a></p>
-						</div>
-					</div>
-					<div class="sym-group sym-common">
+  return `<div class="sym-group sym-common">
 						<h3 class="sym-sec">Common right now</h3>
 						<ul class="sym-tiles">${common.map(tile).join("")}</ul>
 					</div>

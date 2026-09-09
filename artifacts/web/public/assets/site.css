@@ -4525,14 +4525,14 @@
 
 /* Scoped to the band: the theme sets a 23px paragraph size inside
  * .usergenerated, which a bare class cannot outrank. */
-.sc-index .sym-find-hint {
+.sc-pagebody .sym-find-hint {
   margin: 12px 4px 0 4px;
   font-size: 14px;
   line-height: 1.5;
   color: #8a8b8d;
 }
 
-.sc-index .sym-find-count {
+.sc-pagebody .sym-find-count {
   margin: 12px 4px 0 4px;
   font-size: 14px;
   line-height: 1.5;
@@ -4542,11 +4542,11 @@
 
 /* Filled rather than emptied on zero hits, so the polite live region says
    something instead of saying nothing. */
-.sc-index .sym-find-count.is-none {
+.sc-pagebody .sym-find-count.is-none {
   color: #8a4b12;
 }
 
-.sc-index .sym-find-count:empty {
+.sc-pagebody .sym-find-count:empty {
   display: none;
 }
 
@@ -4555,7 +4555,7 @@
  * rendered inside <noscript>, so it costs a reader with script nothing; the
  * matching rule that hides `.sym-find` is in the head, in `build.ts`.
  */
-.sc-index .sym-find-off {
+.sc-pagebody .sym-find-off {
   max-width: 620px;
   margin: 4px 0 38px 0;
   padding: 16px 18px;
@@ -4731,14 +4731,14 @@
   color: #8a4b12;
 }
 
-.sc-index .sym-emergency-body {
+.sc-pagebody .sym-emergency-body {
   margin: 0;
   font-size: 17px;
   line-height: 26px;
   color: #6b4a24;
 }
 
-.sc-index .sym-emergency-body a {
+.sc-pagebody .sym-emergency-body a {
   color: #8a4b12;
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -4870,10 +4870,21 @@
 }
 
 /*
- * A caption, not a bar. It was a 62px row carrying the panel's name on the
- * left and its two escape hatches on the right, 21px tall in the corner
- * furthest from a thumb. The name stays here; the controls move below the
- * frame, where the hand is.
+ * A control bar again, and the reversal is deliberate. design-01 moved these
+ * controls below the frame "where the hand is", and that was right when the
+ * frame was 460px and its bottom edge was on screen with it. design-02 fitted
+ * the frame to the viewport, so it is now 698px at 390 — the whole usable fold
+ * — and "below the frame" means off screen: parked at the natural reading
+ * position, "Full screen" landed at screen y=767 under a dock starting at 772
+ * and "Open on HealthyChildren.org" at y=825, below the fold entirely.
+ *
+ * So the way out of the frame comes back above it, where it stays in view for
+ * as long as the frame is being read, and the frame gives back 44px of itself
+ * to pay for it. The rescue link — the one that matters when the frame shows
+ * nothing — stays below and now has the row to itself.
+ *
+ * `min-height` rather than content height, so revealing the `hidden` button
+ * moves nothing.
  */
 .sym-embed-cap {
   display: flex;
@@ -4881,6 +4892,31 @@
   gap: 10px;
   margin: 0 0 8px 0;
   padding: 0 2px;
+  min-height: 44px;
+}
+
+.sym-embed-cap .sym-embed-grow {
+  flex: 0 0 auto;
+  align-self: center;
+  margin-left: auto;
+  min-height: 44px;
+  padding: 10px 14px;
+  border: 1px solid #dfe2e5;
+  border-radius: 22px;
+  background: #ffffff;
+  color: #1a6f9f;
+  font-size: 15px;
+}
+
+.sym-embed-cap .sym-embed-grow:hover,
+.sym-embed-cap .sym-embed-grow:focus-visible {
+  border-color: #2b93d1;
+  color: #b3540c;
+}
+
+.sym-embed-cap .sym-embed-grow svg {
+  width: 14px;
+  height: 14px;
 }
 
 .sym-embed-name {
@@ -5092,13 +5128,30 @@
  * records "the frame previously sat in an oversized box that dominated the page
  * without being usable", and a cap is what stops that returning on a tall
  * desktop.
+ *
+ * The client: "the iframe is not being automatically sized ... i have to scroll
+ * up and down on the iframe just to see all the content". It cannot be sized to
+ * its content, and this is why, recorded so nobody re-derives it. The AAP
+ * viewer is a three-tab widget — its own 126-byte AAP.SymptomChecker.js runs
+ * jQuery Tools `.tabs()` over Definition, When To Call and Care Advice — and it
+ * shows one tab at a time. Across the 158 topics with a tool, the tab the
+ * reader lands on holds a median 1,826 characters and the Care Advice tab a
+ * median 3,355, up to 17,930. The height of the content is a property of a
+ * click that happens inside a cross-origin frame, not of the topic. Any fixed
+ * height either restores the scrollbar on the long tab or leaves a slab of
+ * white on the short one, and the tallest-pane figure would push the routing
+ * band and its eight phone numbers past y=5,000 on a phone.
+ *
+ * So the frame keeps its viewport fit and gives back 44px of itself to buy the
+ * control bar above, which stays on screen while the frame is being read. Only
+ * the three subtrahends change.
  */
 .sym-embed-frame {
   position: relative;
   display: block;
   width: 100%;
   height: 560px;
-  height: clamp(560px, calc(100svh - 158px), 720px);
+  height: clamp(560px, calc(100svh - 202px), 720px);
   border: 0;
   background: transparent;
 }
@@ -5126,13 +5179,19 @@
   background: rgba(33, 37, 41, 0.62);
 }
 
+/*
+ * The dialog was spending 144px of an 844px phone on a 71px bar and a 73px
+ * footer, which is why escaping to full screen gained two pixels over the
+ * inline frame. The close button stays 44x44 and the footer button stays a
+ * full-width 44px; only the padding around them comes in.
+ */
 .sym-modal-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   flex: 0 0 auto;
-  padding: 12px 20px;
+  padding: 6px 12px;
   background: #f4f5f6;
   border-bottom: 1px solid #e4e7ea;
 }
@@ -5185,7 +5244,7 @@
  */
 .sym-modal-foot {
   flex: 0 0 auto;
-  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  padding: 6px 12px calc(6px + env(safe-area-inset-bottom, 0px));
   background: #f4f5f6;
   border-top: 1px solid #e4e7ea;
 }
@@ -5193,9 +5252,9 @@
 .sym-modal-done {
   display: block;
   width: 100%;
-  min-height: 52px;
+  min-height: 44px;
   border: 0;
-  border-radius: 26px;
+  border-radius: 22px;
   background: #1a6f9f;
   color: #ffffff;
   font-family: "Montserrat", sans-serif;
@@ -5241,18 +5300,18 @@
     gap: 14px;
   }
 
-  /* 58px sticky header + 72px dock + 16px so the frame's own bottom edge shows */
+  /* 58px sticky header + 72px dock + 44px bar + 9px gap + 7px of daylight */
   .sym-embed-frame {
     height: 460px;
-    height: clamp(460px, calc(100svh - 146px), 720px);
+    height: clamp(460px, calc(100svh - 190px), 720px);
   }
 }
 
 @media (min-width: 1200px) {
-  /* Measured: the header is not sticky here and the dock is not rendered. */
+  /* No sticky header and no dock here, so the acts row fits below as well. */
   .sym-embed-frame {
     height: 560px;
-    height: clamp(560px, calc(100svh - 96px), 720px);
+    height: clamp(560px, calc(100svh - 140px), 720px);
   }
 }
 
@@ -5271,12 +5330,12 @@
 .sym-others .area-group a,
 .sym-embed-open,
 .sym-embed-grow,
-.sc-index .sym-find-count {
+.sc-pagebody .sym-find-count {
   color: #1a6f9f;
 }
 
 .sym-sec-note,
-.sc-index .sym-find-hint {
+.sc-pagebody .sym-find-hint {
   color: #636466; /* 2.78 and 3.41 -> 5.92 */
 }
 
@@ -5344,7 +5403,7 @@
 }
 
 .sym-find,
-.sc-index .sym-find-off {
+.sc-pagebody .sym-find-off {
   margin: 0 0 18px 0;
 }
 
@@ -5637,17 +5696,22 @@
  * `rgba(0,0,0,0)`. The only internal boundary was the `2px #eef0f2` rule under
  * the two `.sym-sec` labels, 1.14:1 on white.
  *
- * The answer is the page's own band alternation, one level down: the tool sits
- * on a plinth, the twelve common topics stay on the page's white so the fast
- * path is the one thing not in a box, and the thirteen categories sit in a
- * panel. Grey, white, grey. The panel shape is `.sym-embed-stage`'s, so this is
- * a third content in an existing shape and not a third card style.
+ * The answer is the page's own band alternation, one level down: the search
+ * sits on a plinth, the twelve common topics stay on the page's white so the
+ * fast path is the one thing not in a box, and the thirteen categories sit in a
+ * panel. The panel shape is `.sym-embed-stage`'s, so this is a third content in
+ * an existing shape and not a third card style.
+ *
+ * Still three surfaces, but the first of them has since moved into the hero and
+ * is now blue rather than grey: blue band, white common, grey browse panel. The
+ * declarations below are the plinth as it is anywhere; `.sc-findband` overrides
+ * the two that only made sense against white.
  *
  * Honest limit, since it decides how much of this works: `#f4f5f6` on white is
  * 1.09:1 and the `#e4e7ea` edge is 1.24:1. The fill alone is not the boundary.
- * What carries it is the accent on each zone's entry point — the plinth's 3px
- * `#2b93d1` top edge at 3.39:1 and the 44px bars under the two labels — plus
- * the thirteen white cards, which are a pattern rather than a contrast.
+ * What carries it is the accent on each zone's entry point — the 44px bars
+ * under the two labels — plus the thirteen white cards, which are a pattern
+ * rather than a contrast.
  */
 .sc-find-plinth {
   max-width: 660px;
@@ -5691,7 +5755,7 @@
  * a blue edge and nothing in it. The plinth supplies the surface this used to
  * carry for itself.
  */
-.sc-index .sc-find-plinth .sym-find-off {
+.sc-find-plinth .sym-find-off {
   margin: 0;
   padding: 0;
   max-width: none;
@@ -5756,12 +5820,66 @@
 }
 
 @media (min-width: 768px) {
-  .sc-find-plinth {
-    padding: 16px;
-  }
-
   .sc-index .sym-browse {
     padding: 22px 20px 10px 20px;
+  }
+}
+
+/* --------------------------------- symptom index: the search in the header -- */
+
+/*
+ * The client: "lets stick the search bar in the main h1 header". Measured, the
+ * box was at y=598 on a 390x844 phone and y=769 at 1280x800 — the last thing on
+ * the first screen, on the page whose whole job is naming what you can see.
+ *
+ * Below 992 the theme hides `.herowrap` and shows `.mobileheromessage`, whose
+ * computed background is `rgb(43,147,209)`, exactly `#2B93D1`. This band
+ * carries the same fill and no top padding, so on a phone the title and the
+ * search read as one block with no seam. From 992 up both of those are
+ * `display: none` and the band lands under the photographic hero, where the
+ * plinth is pulled up onto the hero's bottom edge.
+ *
+ * The input is never on the photograph. A white card on `#2B93D1` is a 3.39:1
+ * boundary, and every word inside it keeps a white background: the hint at
+ * `#636466` is 5.92:1 there and would be 1.9:1 on the blue.
+ *
+ * The rules this element's contents rely on are scoped to `.sc-pagebody` and
+ * not to `.sc-index`, because they are no longer inside `.sc-index`. That
+ * prefix is load-bearing rather than tidy: without it the theme's
+ * `.pagebody p` at 18px wins and the hint alone grows 39px.
+ */
+.sc-findband {
+  background: #2b93d1;
+  padding: 0 0 14px 0;
+}
+
+/*
+ * The plinth's `#f4f5f6` fill and its `3px #2b93d1` top edge both existed to
+ * separate it from the white band it used to sit in. On blue, white is the
+ * separation and a blue edge says nothing.
+ */
+.sc-findband .sc-find-plinth {
+  max-width: 660px;
+  margin: 0;
+  padding: 10px;
+  background: #ffffff;
+  border: 0;
+  border-radius: 14px;
+}
+
+@media (min-width: 992px) {
+  .sc-findband {
+    padding: 0 0 22px 0;
+  }
+
+  /*
+   * The card straddles the hero's bottom edge rather than sitting under it, so
+   * the search is in the hero and not merely near it.
+   */
+  .sc-findband .sc-find-plinth {
+    margin-top: -46px;
+    padding: 14px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
   }
 }
 
@@ -5784,33 +5902,79 @@
  * already explains it, and the duplicate button row goes.
  *
  * The grid's shape is unchanged — same 2-up / 4-up, same tile geometry and
- * palette. It is tightened, and its type is pinned because inside a route it
- * would otherwise inherit 18px/28px instead of the band's.
+ * palette. Its type is pinned because inside a route it would otherwise
+ * inherit 18px/28px instead of the band's.
+ *
+ * The client, having seen that: it still needs cleaning up. Re-measured, what
+ * was left is not height. It is that eight separately outlined cards are eight
+ * objects to scan when a parent needs one, and that four lines of prose stood
+ * between the promise and the delivery.
+ *
+ * So the eight cards become one directory: a single bordered panel with
+ * hairlines between its cells, sitting directly under the route's bold lead-in
+ * with the prose following as a caption. Nothing is removed — all eight `tel:`
+ * links stay visible, because `offices.ts` holds eight distinct numbers and
+ * there is no practice-wide one to give.
+ *
+ * The rules are drawn on the cells rather than as grid gaps showing the list's
+ * background, so a ninth office would give the last row one bordered cell
+ * rather than a solid grey block where the empty cell would be.
+ *
+ * The hairlines are decoration and not the structure: what separates one office
+ * from the next is a 5.92:1 label above a 5.50:1 bold number, and each cell is
+ * its own link. If the rules vanish — forced colors, a printout — the directory
+ * still reads as eight labelled numbers.
  */
 .sc-routes .sym-call-list {
-  margin: 12px 0 0 0;
-  gap: 8px;
+  margin: 10px 0 0 0;
+  gap: 0;
+  background: #ffffff;
+  border: 1px solid #dfe2e5;
+  border-radius: 14px;
+  overflow: hidden;
 }
 
 .sc-routes .sym-call-item {
-  min-height: 56px;
-  padding: 9px 12px;
-  gap: 1px;
+  min-height: 54px;
+  padding: 8px 12px;
+  gap: 0;
+  border: 0;
+  border-top: 1px solid #dfe2e5;
+  border-left: 1px solid #dfe2e5;
+  border-radius: 0;
+  background: #ffffff;
+}
+
+/* 2-up: the first row and the first column carry the panel's own edge. */
+.sc-routes .sym-call-list > li:nth-child(-n + 2) .sym-call-item {
+  border-top: 0;
+}
+
+.sc-routes .sym-call-list > li:nth-child(odd) .sym-call-item {
+  border-left: 0;
+}
+
+/* The cells no longer have a border of their own to recolour on hover. */
+.sc-routes .sym-call-item:hover,
+.sc-routes .sym-call-item:focus-visible {
+  background: #f2f8fc;
+  box-shadow: inset 0 0 0 2px #2b93d1;
 }
 
 .sc-routes .sym-call-office {
   font-size: 12px;
   line-height: 16px;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.5px;
 }
 
 .sc-routes .sym-call-num {
   font-size: 17px;
-  line-height: 22px;
+  line-height: 23px;
 }
 
+/* Now the caption under the directory rather than the paragraph above it. */
 .sc-routes .sym-call-note {
-  margin: 8px 0 0 0;
+  margin: 10px 0 0 0;
   font-size: 15px;
   line-height: 22px;
 }
@@ -5834,4 +5998,25 @@
 
 .sym-next .sc-trust {
   margin: 0;
+  font-size: 17px;
+  line-height: 26px;
+}
+
+@media (min-width: 768px) {
+  /* Four columns, so the first row and the first column are different cells. */
+  .sc-routes .sym-call-list > li:nth-child(-n + 2) .sym-call-item {
+    border-top: 1px solid #dfe2e5;
+  }
+
+  .sc-routes .sym-call-list > li:nth-child(odd) .sym-call-item {
+    border-left: 1px solid #dfe2e5;
+  }
+
+  .sc-routes .sym-call-list > li:nth-child(-n + 4) .sym-call-item {
+    border-top: 0;
+  }
+
+  .sc-routes .sym-call-list > li:nth-child(4n + 1) .sym-call-item {
+    border-left: 0;
+  }
 }

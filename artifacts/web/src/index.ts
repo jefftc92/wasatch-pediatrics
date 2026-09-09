@@ -28,7 +28,7 @@ import {
   renderPillarPage,
   serviceRoutes,
 } from "./render/services.ts";
-import { symptomIndexList, symptomRoutes } from "./render/symptoms.ts";
+import { symptomFindBox, symptomIndexList, symptomRoutes } from "./render/symptoms.ts";
 import { serviceBySlug } from "./data/services.ts";
 import { LOCATIONS_HREF, locationsDocument } from "./render/locations.ts";
 import { RESOURCES_HREF, resourcesDocument } from "./render/resources.ts";
@@ -240,8 +240,14 @@ app.get("/{*path}", (request, response, next) => {
   const content = pillar
     ? renderPillarPage(pillar, pageContent(page.slug))
     /* The symptom index is generated, so the stored page carries a token for
-       it rather than a list that would go stale the moment one is added. */
-    : pageContent(page.slug).replace("{{SYMPTOM_LIST}}", symptomIndexList());
+       it rather than a list that would go stale the moment one is added. Two
+       tokens: the search box sits in the hero, above the theme's mobile hero
+       image, and the tiles sit in the band below. The replacements are
+       functions because a string replacement gives `$&` and its siblings a
+       meaning, and neither fragment should ever acquire one. */
+    : pageContent(page.slug)
+        .replace("{{SYMPTOM_FIND}}", () => symptomFindBox())
+        .replace("{{SYMPTOM_LIST}}", () => symptomIndexList());
 
   response.type("html").send(
     renderDocument({
