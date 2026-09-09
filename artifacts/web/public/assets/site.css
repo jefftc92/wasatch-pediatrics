@@ -5891,8 +5891,8 @@
 .sym-call-note,
 .sym-next .sc-trust {
   margin: 0;
-  font-size: 15px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 22px;
   font-style: normal;
   color: #6b6d70;
 }
@@ -5907,8 +5907,23 @@
  */
 .sym-route-body a,
 .sym-call-more a {
-  font-weight: 600;
   color: #1a6f9f;
+}
+
+/* Without this the theme puts them back to 700, which is where they were
+   shouting from in the first place. */
+.sym-route-body a {
+  font-weight: 600;
+}
+
+/*
+ * The /locations/ link sits between the two quietest things in the band, so at
+ * 600 it was the loudest thing in the lower half of the call block — the same
+ * distraction the notes were, in a different weight. Underline and brand blue
+ * are already an unmistakable link; the bold was decoration.
+ */
+.sym-call-more a {
+  font-weight: 400;
 }
 
 /*
@@ -6004,8 +6019,8 @@
  */
 .sym-call-more {
   margin: 0;
-  font-size: 15px;
-  line-height: 24px;
+  font-size: 14px;
+  line-height: 22px;
 }
 
 .sym-call-more a {
