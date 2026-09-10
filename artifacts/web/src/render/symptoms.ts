@@ -75,7 +75,7 @@ function heroBand(symptom: Symptom): string {
 		<nav class="crumbs hero-crumbs" aria-label="Breadcrumb"><ol>${trail}</ol></nav>
 		<p class="dent-hero-eyebrow">Symptom Checker</p>
 		<h1 class="dent-hero-title">${escapeAttribute(symptom.title)}</h1>
-		<p class="dent-hero-lead">${escapeAttribute(symptom.lead)}</p>
+		${symptom.intro.map((p) => `<p class="dent-hero-lead">${escapeAttribute(p)}</p>`).join("\n\t\t")}
 		<p class="dent-hero-act"><a class="btn sym-hero-call" href="#sym-call">Call a nurse</a> <a class="btn dent-hero-ghost" href="${CHECKER}">All symptoms</a></p>
 	</div>
 </div>`;
@@ -161,10 +161,6 @@ function seeDoctorBand(symptom: Symptom): string {
 }
 
 function renderSymptomPage(symptom: Symptom): string {
-  const intro = symptom.intro
-    .map((p) => `\t\t\t\t\t<p>${escapeAttribute(p)}</p>`)
-    .join("\n");
-
   /*
    * The rest of this symptom's own group, not all 163 others. Listing every
    * page ran to seven thousand pixels on a phone — more than twice the rest
@@ -189,19 +185,6 @@ function renderSymptomPage(symptom: Symptom): string {
 <div class="sym-alert">
 	<div class="container">
 		<p>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <strong class="sym-911">call 911 now</strong>.</p>
-	</div>
-</div>
-${symptom.noTool ? "" : `<div class="sym-flow">`}
-<div class="whitebg padme90 sym-intro">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-9">
-				<h2 class="dent-band-title">${escapeAttribute(symptom.heading)}</h2>
-				<div class="pagebody" style="margin-top:0px">
-${intro}
-				</div>
-			</div>
-		</div>
 	</div>
 </div>
 ${
@@ -256,7 +239,6 @@ ${
 </div>
 `
 }
-${symptom.noTool ? "" : `</div>`}
 ${seeDoctorBand(symptom)}
 <div class="whitebg padme90 sym-next">
 	<div class="container">
@@ -523,6 +505,8 @@ export function symptomIndexList(): string {
 					</div>
 					<div class="sym-browse">
 						<h3 class="sym-sec sym-browse-title">Browse by category<span class="sym-sec-note">all ${symptoms.length} pages</span></h3>
+						<div class="sym-browse-grid">
 						${groups}
+						</div>
 					</div>`;
 }
