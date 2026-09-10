@@ -5514,7 +5514,6 @@
  * Anchored on our own band classes; `.padme90` is here to outrank the theme's
  * utility, which 272 pages use, and is never selected on its own.
  */
-.sym-intro.padme90,
 .sym-tool.padme90,
 .sym-doctor.padme90,
 .sym-next.padme90,
@@ -5525,7 +5524,6 @@
 }
 
 @media (min-width: 768px) {
-  .sym-intro.padme90,
   .sym-tool.padme90,
   .sym-doctor.padme90,
   .sym-next.padme90,
@@ -5572,41 +5570,11 @@
 }
 
 /*
- * Paint order, not document order.
- *
- * The frame is the reason a symptom page exists and it began 1,306px down,
- * with zero of it on the first screen at any of the three viewports. Our own
- * paragraph now follows it on screen while still preceding it in the document,
- * so a crawler and a screen reader still get the only unique prose on the page
- * first. `.sym-intro` carries no focusable element on any of the 164 pages —
- * checked against the served HTML, not assumed — so visual order and focus
- * order do not diverge for anyone.
- *
- * The wrapper is only emitted for pages that have a frame. On the six `noTool`
- * pages the band is background rather than a tool, and it belongs after the
- * introduction, which is where it stays.
- *
- * The alternation cream, white, grey, white, grey is kept, so "no dividers
- * between sections" does not reopen: every seam still carries either the alert
- * band's border-bottom or an `#e4e7ea` hairline.
+ * The flex wrapper that used to paint the AAP frame above our own paragraph
+ * while keeping it after it in the document has gone with the band it
+ * reordered: the overview is the hero's text now, so it is above the frame at
+ * both, and there is nothing left to swap.
  */
-.sym-flow {
-  display: flex;
-  flex-direction: column;
-}
-
-.sym-flow > .sym-tool {
-  order: 1;
-  background: #ffffff;
-  border-top: 0;
-}
-
-.sym-flow > .sym-intro {
-  order: 2;
-  background: #f4f4f4;
-  border-top: 1px solid #e4e7ea;
-}
-
 /* ------------------------------- symptom index: three zones, three surfaces -- */
 
 /*
@@ -5688,20 +5656,88 @@
   margin-bottom: 28px;
 }
 
+/*
+ * Thirteen categories, and on a wide screen they were thirteen full-width
+ * bars.
+ *
+ * Measured at 1280: each row was 1,300px of card carrying a label about 120px
+ * long, so roughly 90% of every bar was empty, and the thirteen of them ran to
+ * 1,180px inside a 1,617px section. That is a phone pattern stretched to a
+ * desktop, which is what it looked like.
+ *
+ * They are a grid now — two from 768, three from 1200 — so the same thirteen
+ * fit five rows instead of thirteen, and each tile is about the width of its
+ * own label. `align-items: start` matters: a category opens inside its own
+ * cell, and without it every tile in that row would stretch to match the one
+ * that opened.
+ *
+ * The grey panel goes with the bars. The tiles are bordered cards already, and
+ * a panel around cards is a box inside a box; the section's own label and the
+ * page's white are enough to hold them.
+ */
 .sc-index .sym-browse {
   margin: 0;
-  padding: 16px 14px 6px 14px;
-  background: #f4f5f6;
-  border: 1px solid #e4e7ea;
-  border-radius: 14px;
+  padding: 0;
+  background: none;
+  border: 0;
+  border-radius: 0;
 }
 
-/* Thirteen rows reading as one machine rather than thirteen stray lines. */
 .sc-index .sym-browse .sym-group-toggle {
   margin-bottom: 8px;
   background: #ffffff;
   border: 1px solid #e4e7ea;
   border-radius: 10px;
+}
+
+@media (min-width: 768px) {
+  .sym-browse-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 18px;
+    align-items: start;
+  }
+
+  /*
+   * `gap` owns the spacing here, so the two margins that used to do it are
+   * cleared. `.sym-group`'s own 34px bottom margin was written for a stack and
+   * became a 34px row gap on top of the toggle's 10px — measured 34px between
+   * rows against 10px between the columns, which read as four loose rows
+   * rather than one grid.
+   */
+  .sym-browse-grid > .sym-group {
+    margin: 0;
+  }
+
+  .sc-index .sym-browse .sym-group-toggle {
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sym-browse-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/*
+ * An open category takes the whole row.
+ *
+ * Left in its own column it was a 347px strip: "Knocks, pain and injuries" put
+ * its 26 pages into thirteen rows of two and ran 1,350px down a third of the
+ * page, with the other two columns blank beside it. Spanning every column lets
+ * the same 26 sit in a few wide rows, and it makes which category is open
+ * unmistakable.
+ */
+@media (min-width: 768px) {
+  .sym-browse-grid > .sym-group.is-open {
+    grid-column: 1 / -1;
+  }
+
+  .sc-index .sym-browse.is-collapsible .sym-tiles {
+    margin: 10px 0 4px 0;
+    padding: 0 2px 2px 2px;
+  }
 }
 
 /*
@@ -6183,5 +6219,25 @@
 
   .sc-hero .dent-hero-lead {
     font-size: 17px;
+  }
+}
+
+/*
+ * The overview is the hero's text now.
+ *
+ * The client: it belongs in the hero and should replace what was there. It was
+ * two paragraphs in a band of its own under a written heading, and the hero
+ * carried a separate one-sentence lead — so the page opened by saying two
+ * different things in two places before it reached the AAP's tool. The band is
+ * gone and its paragraphs are the lead, which is why there can now be more
+ * than one of them.
+ */
+.sym-hero .dent-hero-lead + .dent-hero-lead {
+  margin-top: 12px;
+}
+
+@media (min-width: 992px) {
+  .sym-hero .dent-hero-lead {
+    max-width: 44em;
   }
 }
