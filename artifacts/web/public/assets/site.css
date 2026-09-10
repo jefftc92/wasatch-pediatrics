@@ -4330,21 +4330,35 @@
  * across the top of a page about a cough frightens more people than it helps.
  */
 .sym-alert {
-  background: #fff4e8;
-  border-top: 3px solid #f58220;
-  border-bottom: 1px solid #f3dcc4;
-  padding: 18px 0;
+  border-bottom: 1px solid #e4e7ea;
+  padding: 14px 0;
 }
 
+/*
+ * A standing note, not an alert component.
+ *
+ * It had the whole apparatus: a tinted fill, a 3px accent edge above and a
+ * hairline below, brown type on cream, and 109 of its 193 characters set bold
+ * — 56% of the sentence shouting, which is the same as none of it shouting.
+ * At 390 that came to 170px, a fifth of the first screen, on a warning most
+ * of the people reading it do not need.
+ *
+ * What is left is the orange rule the rest of the section already uses for
+ * 911 — the same 3px `#f58220` as `.sym-doctor-911` — and one emphasised
+ * phrase, which is the phrase that tells a parent what to do. The words of
+ * the emergency sentence are unchanged.
+ */
 .sym-alert p {
   margin: 0;
-  font-size: 17px;
-  line-height: 26px;
-  color: #6b4a24;
-  max-width: 70em;
+  padding-left: 14px;
+  border-left: 3px solid #f58220;
+  font-size: 15px;
+  line-height: 23px;
+  color: #6b6d70;
+  max-width: 62em;
 }
 
-.sym-alert strong {
+.sym-alert .sym-911 {
   color: #8a4b12;
 }
 

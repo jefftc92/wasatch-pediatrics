@@ -188,7 +188,7 @@ function renderSymptomPage(symptom: Symptom): string {
   return `${heroBand(symptom)}
 <div class="sym-alert">
 	<div class="container">
-		<p><strong>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <span class="sym-911">call 911 now</span>.</strong> For anything else, our nurse line answers on your office&#8217;s own number, at any hour.</p>
+		<p>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <strong class="sym-911">call 911 now</strong>.</p>
 	</div>
 </div>
 ${symptom.noTool ? "" : `<div class="sym-flow">`}
