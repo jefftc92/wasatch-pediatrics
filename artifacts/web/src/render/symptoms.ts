@@ -86,39 +86,26 @@ function heroBand(symptom: Symptom): string {
  *
  * There is no practice-wide number to give. `offices.ts` holds eight distinct
  * `phone` fields, neither `renderHeader()` nor `renderFooter()` contains a
- * `tel:` at all, and the section's own copy says why: the nurse line is
- * reached through an office's ordinary main number. So the page gives the
- * choice rather than a link to a page that has the numbers on it. Inventing
- * one would send a Park City parent to the wrong office at three in the
- * morning.
+ * `tel:` at all, and the nurse line is reached through an office's ordinary
+ * main number. So the page gives the choice rather than a link to a page that
+ * has the numbers on it. Inventing one would send a Park City parent to the
+ * wrong office at three in the morning.
  *
- * This sits inside the first route rather than above the list, because the
- * sentence that tells a parent to call is that route's own first line. It was
- * previously introduced by a second heading saying the same thing in different
- * words, 400px above the words themselves, with the eight numbers stranded
- * between the two.
+ * The caption that used to sit under the numbers has gone entirely. It ran to
+ * three sentences and lost one per round as each turned out to repeat
+ * something else on the page: "Call your office's main number," described what
+ * the reader was already looking at, "nights, weekends and holidays included"
+ * said again what the heading says in "at any hour", and "Any office will help
+ * if yours is not on your mind" released the reader from an instruction no
+ * longer given. The client has now cut the last of it, "You will reach a nurse
+ * or a physician, not an answering service", and the numbers stand on their
+ * own under a heading that already promises a nurse at any hour.
  *
- * The numbers now come first inside the route and the four-line paragraph that
- * used to precede them follows as one caption. The sentence that introduces
- * them is the route's bold lead-in, "Talk to a nurse now, at any hour", which
- * still comes first and is now 38px above them rather than 154px. What follows
- * is reassurance — nights and weekends, not an answering service — and
- * reassurance reads better once the number is in sight. No word is added,
- * removed or reordered by the move.
- *
- * The caption's opening clause, "Call your office's main number,", has gone.
- * It was written when the numbers were not on the page; eight of them now sit
- * directly above it, each labelled with its office, so the clause described
- * what the reader was already looking at. Nothing else in the caption changes
- * and no information is lost with it — "nights, weekends and holidays
- * included" is still the sentence's point.
- *
- * The link to /locations/ has come out of the end of that caption and on to a
- * line of its own. It needs an 11px vertical pad to make 44px, and an
- * inline-block with that pad, sat mid-sentence, left its full stop floating a
- * character-width clear of the word before it. A standing link wants no full
- * stop, so the caption now ends on "not on your mind." and the link follows as
- * an action. The words are the caption's own, unchanged.
+ * What followed the caption is now a pill rather than a standing link, on
+ * `.sym-acts`, which exists because reusing the office card's link class here
+ * once inherited "padding: 6px 0" and ran the label off both rounded ends. The
+ * pill is its own 44px target, so the inline-block padding that used to buy
+ * that height is gone with the paragraph it sat in.
  */
 function callList(): string {
 	const items = offices
@@ -129,8 +116,48 @@ function callList(): string {
 		.join("");
 
 	return `<ul class="sym-call-list">${items}</ul>
-						<p class="sym-call-note">Nights, weekends and holidays included. You will reach a nurse or a physician, not an answering service. Any office will help if yours is not on your mind.</p>
-						<p class="sym-call-more"><a href="/locations/">Hours, addresses and directions</a></p>`;
+						<p class="sym-acts sym-call-acts"><a class="btn blue" href="/locations/">Hours, addresses and directions</a></p>`;
+}
+
+/**
+ * "When to see a doctor": the client's two lists, kept two.
+ *
+ * `contact` is call your pediatrician and `emergency` is call 911. They are
+ * rendered as two blocks rather than one list because they are two different
+ * decisions, and a reader who cannot tell which line belongs to which is the
+ * collision EDITORIAL_RULES 19 is about. Each keeps the client's own lead-in
+ * sentence verbatim, including its colon.
+ *
+ * The rules are the page's existing idiom — `.sym-route-now` marks the urgent
+ * route the same way — and they are colour-coded rather than decorative: blue
+ * is the practice, orange is 911, which is the same orange the alert band at
+ * the top of the page and `.sym-911` already use. Orange rather than red is a
+ * decision this project already made and recorded: a red block on a page about
+ * a cough frightens more people than it helps.
+ */
+function seeDoctorBand(symptom: Symptom): string {
+	const list = (items: string[]) =>
+		items.map((item) => `<li>${escapeAttribute(item)}</li>`).join("");
+
+	return `<div class="whitebg padme90 sym-doctor">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="dent-band-title">When to see a doctor</h2>
+				<div class="sym-route-pair">
+					<div class="sym-route sym-doctor-call">
+						<p class="sym-route-title">Contact your pediatrician or another healthcare professional if:</p>
+						<ul class="sym-doctor-list">${list(symptom.seeDoctor.contact)}</ul>
+					</div>
+					<div class="sym-route sym-doctor-911">
+						<p class="sym-route-title">Call 911 or get emergency care if:</p>
+						<ul class="sym-doctor-list">${list(symptom.seeDoctor.emergency)}</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>`;
 }
 
 function renderSymptomPage(symptom: Symptom): string {
@@ -230,28 +257,35 @@ ${
 `
 }
 ${symptom.noTool ? "" : `</div>`}
+${seeDoctorBand(symptom)}
 <div class="whitebg padme90 sym-next">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
-				<h2 class="dent-band-title">Getting your child seen</h2>
-				<div class="sym-routes">
-					<div class="sym-route sym-route-now" id="sym-call">
-						<p class="sym-route-title">Talk to a nurse now, at any hour.</p>
-						${callList()}
+				<h2 class="dent-band-title">Talk to a nurse now, at any hour</h2>
+				<div class="sym-route sym-route-now" id="sym-call">
+					${callList()}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="whitebg padme90 sym-seen">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="dent-band-title">When can my child be seen</h2>
+				<div class="sym-route-pair">
+					<div class="sym-route">
+						<p class="sym-route-title">Be seen today.</p>
+						<p class="sym-route-body">Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</p>
 					</div>
-					<div class="sym-route-pair">
-						<div class="sym-route">
-							<p class="sym-route-title">Be seen today.</p>
-							<p class="sym-route-body">Every office keeps <a href="/medical-care/sick-visits/">same-day appointments</a> for illness and injury.</p>
-						</div>
-						<div class="sym-route">
-							<p class="sym-route-title">This evening or at the weekend.</p>
-							<p class="sym-route-body">Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>. It is by appointment rather than walk-in, and the hours differ by office.</p>
-						</div>
+					<div class="sym-route">
+						<p class="sym-route-title">This evening or at the weekend.</p>
+						<p class="sym-route-body">Most offices run <a href="/medical-care/after-hours-care/">After Hours Care</a>, by appointment rather than walk-in.</p>
 					</div>
 				</div>
-				<p class="sc-trust">If you are worried, call. We would rather answer a question that turns out to be nothing than have you sit up all night deciding whether it was.</p>
+				<p class="sc-trust">If you are worried, call. We would rather answer a question that turns out to be nothing.</p>
 			</div>
 		</div>
 	</div>
