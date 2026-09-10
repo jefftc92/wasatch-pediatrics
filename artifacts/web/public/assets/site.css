@@ -4428,13 +4428,12 @@
 }
 
 /*
- * The theme gives .herowrap a 60px top margin, which collapses through the
- * page section and drops the whole page 60px below the nav. Only three pages
- * use that hero; the 272 on .dent-hero sit flush against the header, so on
- * this page the gap reads as a broken menu rather than as spacing.
+ * The theme gave `.herowrap` a 60px top margin that collapsed through the page
+ * section and dropped the whole page below the nav. The index is on
+ * `.dent-hero` now like the other 272 pages, so only the section itself still
+ * needs pinning flush to the header.
  */
-.sc-pagebody,
-.sc-herowrap {
+.sc-pagebody {
   margin-top: 0;
 }
 
@@ -4542,7 +4541,7 @@
  * .usergenerated, which a bare class cannot outrank. */
 .sc-pagebody .sym-find-hint {
   margin: 12px 4px 0 var(--sym-find-inset);
-  font-size: 14px;
+  font-size: 15px;
   line-height: 1.5;
   color: #8a8b8d;
 }
@@ -5431,43 +5430,9 @@
   padding: 0 0 8px 0;
 }
 
-/*
- * The theme swaps the wide hero for this image below 992 and gives it a width
- * and no height, so it came in at its intrinsic 400px — the single largest
- * thing above the search box on a tablet. Fixing the height also removes a
- * layout shift the page has always had, since nothing was reserved until the
- * image decoded.
- */
-@media (max-width: 991px) {
-  #mobileheroimage.sc-heroimg {
-    height: 160px;
-    object-fit: cover;
-    object-position: center 30%;
-  }
-}
-
-@media (max-width: 767px) {
-  #mobileheroimage.sc-heroimg {
-    height: 96px;
-  }
-}
-
 @media (min-width: 992px) {
   .sc-index {
     padding-top: 34px;
-  }
-
-  /*
-   * The theme's `#usergeneratedsection .herowrap` is 512px, and it is the wide
-   * hero from 992 up. At 1280 that put the search box 182px below the fold, so
-   * the whole first screen was a photograph and a 911 banner with nothing to
-   * say the page does anything. Same specificity as the theme's rule, later in
-   * the cascade: site.css is emitted after style.css in both
-   * `authored/head.html` and `document.ts`. The id supplies the specificity;
-   * the class it styles is ours.
-   */
-  #usergeneratedsection .sc-herowrap {
-    height: 340px;
   }
 }
 
@@ -5789,51 +5754,34 @@
  * prefix is load-bearing rather than tidy: without it the theme's
  * `.pagebody p` at 18px wins and the hint alone grows 39px.
  */
+/*
+ * The band under the hero, and no longer a second blue.
+ *
+ * It was `#2b93d1` because below 992 it sat directly under the theme's blue
+ * `.mobileheromessage`, and matching it made the two read as one block. The
+ * hero above is now `.dent-hero`, the same photograph-and-wash the 164 symptom
+ * pages use, at every width — so the theme's blue band is gone and the reason
+ * for this one's fill went with it. What was left was two different blues
+ * meeting at a hard horizontal seam: the photograph's own blue above, a flat
+ * `#2b93d1` below.
+ *
+ * White also retires the plinth. The card existed to give the input and its
+ * hint a white ground to be legible on; on a white band that is the band's
+ * job, and a white card on white is an outline around nothing. `#8a8b8d` on
+ * white is 3.54:1 for the hint, which is why it is 15px here rather than 14.
+ */
 .sc-findband {
-  background: #2b93d1;
-  padding: 0 0 14px 0;
-  /*
-   * A block formatting context, so the plinth's negative top margin below 992
-   * stays inside this element.
-   *
-   * Without it the margin collapsed straight through the band's top edge and
-   * moved the band itself: measured at 1280, the hero ended at y=456 and the
-   * band began at y=410 — exactly the 46px it was supposed to pull the card
-   * up by. Nothing straddled anything. The band's blue simply painted over the
-   * bottom 46px of the hero across the full 1280, cutting a hard horizontal
-   * line through the photograph, and the card sat flush at the top of it.
-   */
-  display: flow-root;
+  background: #ffffff;
+  padding: 30px 0 28px 0;
 }
 
-/*
- * The plinth's `#f4f5f6` fill and its `3px #2b93d1` top edge both existed to
- * separate it from the white band it used to sit in. On blue, white is the
- * separation and a blue edge says nothing.
- */
 .sc-findband .sc-find-plinth {
   max-width: 660px;
   margin: 0;
-  padding: 10px;
-  background: #ffffff;
+  padding: 0;
+  background: none;
   border: 0;
-  border-radius: 14px;
-}
-
-@media (min-width: 992px) {
-  .sc-findband {
-    padding: 0 0 22px 0;
-  }
-
-  /*
-   * The card straddles the hero's bottom edge rather than sitting under it, so
-   * the search is in the hero and not merely near it.
-   */
-  .sc-findband .sc-find-plinth {
-    margin-top: -46px;
-    padding: 14px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
-  }
+  border-radius: 0;
 }
 
 /* ------------------------------- "Getting your child seen", uncluttered -- */
@@ -6159,5 +6107,67 @@
   .sym-doctor-call,
   .sym-doctor-911 {
     padding-left: 20px;
+  }
+}
+
+/* ------------------------------------- symptom index: the hero ---------- */
+
+/*
+ * The index now wears the same hero as the 164 pages under it.
+ *
+ * It had the theme's three-part arrangement: `.herowrap` with a background
+ * image above 992, `.mobileheromessage` below it, and a separate
+ * `#mobileheroimage` photograph under that. Three elements, two of them
+ * mutually exclusive, and the page title rendered twice in two treatments.
+ *
+ * The mobile one was the fault worth measuring: `.interiorpagetitle` computes
+ * to `#636466` at 18px regular on the `#2b93d1` band — 1.75:1, against the
+ * 4.50 AA needs for normal text, and not title-sized either. The page's own
+ * name was the least legible thing on it.
+ *
+ * `.dent-hero` solves both by construction: one photograph at every width, and
+ * a wash that guarantees the type its ground whatever the picture is doing
+ * underneath. White on that wash is the same white the symptom pages use, and
+ * the index and its children now open identically.
+ */
+.sc-hero .dent-hero-title {
+  max-width: 9em;
+}
+
+/*
+ * Shorter than a symptom page's hero: that one carries an eyebrow, a title, a
+ * lead and two buttons, and this carries a title and a lead, with the search
+ * box immediately below the fold line rather than another band away.
+ */
+.sc-hero .dent-hero-inner {
+  min-height: 300px;
+  padding-top: 56px;
+  padding-bottom: 36px;
+}
+
+@media (max-width: 767px) {
+  /*
+   * The trail is `position: absolute`, so the inner's top padding is the only
+   * thing keeping the title out of it. At 52px the title's box started 8px
+   * ABOVE the last crumb's bottom — the same overlap `.sym-hero` records
+   * finding at 40px. Measured, not guessed: 68px against a trail lifted to
+   * 10px leaves 16px of daylight at 390.
+   */
+  .sc-hero .hero-crumbs {
+    top: 10px;
+  }
+
+  .sc-hero .dent-hero-inner {
+    min-height: 0;
+    padding-top: 68px;
+    padding-bottom: 26px;
+  }
+
+  .sc-hero .dent-hero-title {
+    font-size: 38px;
+  }
+
+  .sc-hero .dent-hero-lead {
+    font-size: 17px;
   }
 }
