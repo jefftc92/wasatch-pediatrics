@@ -182,11 +182,6 @@ function renderSymptomPage(symptom: Symptom): string {
   const moreInGroup = siblings.length > NEIGHBOURS;
 
   return `${heroBand(symptom)}
-<div class="sym-alert">
-	<div class="container">
-		<p>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <strong class="sym-911">call 911 now</strong>.</p>
-	</div>
-</div>
 ${
   symptom.noTool
     ? `<div class="graybg padme90 sym-tool">
@@ -206,6 +201,7 @@ ${
 		<div class="row">
 			<div class="col-12">
 				<h2 class="dent-band-title">${escapeAttribute(symptom.aapHeading)}</h2>
+				<p class="sym-tool-lead">${escapeAttribute(symptom.aapLead)}</p>
 				<div class="sym-embed">
 					<p class="sym-embed-cap"><span class="sym-embed-name">AAP Symptom Checker</span><span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span><button type="button" class="sym-embed-act sym-embed-grow" data-sym-frame="${escapeAttribute(aapFrameUrl(symptom))}" data-sym-title="${escapeAttribute(symptom.title)}: Symptom Checker, from the American Academy of Pediatrics" hidden>Read full screen<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 2.5H2.5V6M10 2.5h3.5V6M6 13.5H2.5V10M10 13.5h3.5V10"></path></svg></button></p>
 					<div class="sym-embed-stage">
@@ -219,7 +215,6 @@ ${
 						<a class="sym-embed-act sym-embed-open" href="${escapeAttribute(aapPageUrl(symptom))}" target="_blank" rel="noopener">Open on HealthyChildren.org<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3h7v7M13 3L6.5 9.5M11 9.5V13H3V5h3.5"></path></svg></a>
 					</p>
 				</div>
-				<p class="sym-tool-lead">${escapeAttribute(symptom.aapLead)}</p>
 				<dialog class="sym-modal" aria-label="Symptom Checker: ${escapeAttribute(symptom.short)}">
 					<div class="sym-modal-bar">
 						<span class="sym-embed-name">Symptom Checker<span class="sym-embed-topic">${escapeAttribute(symptom.short)}</span></span>
@@ -240,7 +235,7 @@ ${
 `
 }
 ${seeDoctorBand(symptom)}
-<div class="whitebg padme90 sym-next">
+<div class="graybg padme90 sym-next">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
