@@ -20,10 +20,14 @@
  * can see; the introductions have to do the differentiating, so each one is
  * written for its own symptom and none of them is a template.
  *
- * What is deliberately absent: thresholds. No "call us if the temperature is
- * above", no "go to the emergency room when". Those belong in the frame, from
- * the people who revise them, and putting our own numbers beside theirs would
- * only create two sources that can disagree.
+ * Thresholds were deliberately absent here, on the grounds that our numbers
+ * beside the AAP's create two sources that can disagree. The client's final
+ * copy reverses that: `seeDoctor` carries 100.4°F on four pages and "younger
+ * than 3 months" on six. It is their call, and it is consistent with
+ * EDITORIAL_RULES 18 — naming a threshold and then withholding it is the
+ * worse failure of the two. What has not changed is where the rest lives: the
+ * frame still owns the decision tree, and nothing clinical is copied out of it
+ * into these fields.
  */
 
 export type Symptom = {
