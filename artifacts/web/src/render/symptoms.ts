@@ -440,6 +440,10 @@ export function symptomFindBox(): string {
   return `<div class="sc-findband">
 	<div class="container">
 		<div class="sc-find-plinth">
+			<svg class="sc-find-wash" viewBox="0 0 1200 420" preserveAspectRatio="none" aria-hidden="true" focusable="false"><path d="M0 300 C 180 250 300 350 480 320 C 660 290 780 200 1200 250 L1200 420 L0 420 Z"></path><path class="sc-find-wash-b" d="M0 60 C 260 130 420 20 640 70 C 860 120 1000 40 1200 90 L1200 0 L0 0 Z"></path></svg>
+			<svg class="sc-find-heart" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-heart"></use></svg>
+			<p class="sc-find-mark lys" aria-hidden="true">All Better</p>
+			<p class="sc-find-eyebrow">Symptom guide</p>
 			<h2 class="sc-find-title">Start with what you can see</h2>
 			<p class="sc-find-sub">Search for a symptom, or describe what is happening in your own words.</p>
 			<div class="sym-find">
@@ -513,7 +517,7 @@ export function symptomIndexList(): string {
       const list = byGroup.get(group)!;
       const look = lookFor(group);
       return `<div class="sym-group">
-							<h3 class="sym-group-title">${groupBadge(group)}<span class="sym-group-text"><span class="sym-group-name">${escapeAttribute(group)}</span><span class="sym-group-blurb">${escapeAttribute(look.blurb)}</span></span><span class="sym-group-count">${list.length}</span></h3>
+							<h3 class="sym-group-title">${groupBadge(group)}<span class="sym-group-text"><span class="sym-group-name">${escapeAttribute(group)}</span><span class="sym-group-blurb">${escapeAttribute(look.blurb)}</span><span class="sym-group-count">${list.length} pages</span></span></h3>
 							<ul class="sym-tiles">${list.map(tile).join("")}</ul>
 						</div>`;
     })
@@ -531,5 +535,6 @@ export function symptomIndexList(): string {
 						<div class="sym-browse-grid">
 						${groups}
 						</div>
+						<p class="sym-browse-foot"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-smiley"></use></svg>Not sure what to choose? <a href="#sym-find-input">Search by what you can see</a></p>
 					</div>`;
 }

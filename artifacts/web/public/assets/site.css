@@ -5772,19 +5772,12 @@
   position: relative;
 }
 
-.sc-index .sym-sec:after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 44px;
-  height: 2px;
-  background: #2b93d1;
-}
-
-.sc-index .sym-common .sym-sec:after {
-  background: #f58220;
-}
+/*
+ * The accent bar was pinned to the bottom of a heading that had a border to sit
+ * on. That border is gone and the heading is a flex column now, so the bar is a
+ * row in it — see the ordered rule further down. Left absolute it landed on top
+ * of "all 164 pages".
+ */
 
 @media (min-width: 768px) {
   .sc-index .sym-browse {
@@ -5854,6 +5847,99 @@
   border: 0;
   border-radius: 20px;
   text-align: center;
+}
+
+/*
+ * The panel's decoration, and the only three things on it that are not words.
+ *
+ * The example carried soft waves, a heart outline and a handwritten line. The
+ * first two are shapes and are drawn here; the third was "Healthy children,
+ * brighter tomorrows", which is not this practice's. Its mark is ALL BETTER —
+ * `.allbetter` in the theme, set in LemonYellowSun — so that is what the panel
+ * carries. Inventing a tagline to match a mockup would be the one thing on
+ * this page nobody could sign off.
+ *
+ * All three are `aria-hidden` and sit behind the content at low opacity, so
+ * nothing here is load-bearing for a reader or a screen reader.
+ */
+.sc-find-plinth {
+  position: relative;
+  overflow: hidden;
+}
+
+.sc-find-wash {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: #2b93d1;
+  opacity: 0.06;
+  pointer-events: none;
+}
+
+.sc-find-wash-b {
+  opacity: 0.75;
+}
+
+.sc-find-heart {
+  position: absolute;
+  top: 26px;
+  right: 30px;
+  width: 34px;
+  height: 34px;
+  fill: none;
+  stroke: #2b93d1;
+  stroke-width: 8;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+/*
+ * Top left, opposite the heart. At the bottom it collided with the 911 note —
+ * the one thing on this panel that must stay legible — and read as a rendering
+ * fault rather than a mark. Hidden below 768, where the panel has no margin to
+ * spare for decoration.
+ */
+.sc-find-mark {
+  position: absolute;
+  left: 28px;
+  top: 26px;
+  margin: 0;
+  font-size: 24px;
+  line-height: 1;
+  color: #f58220;
+  opacity: 0.34;
+  pointer-events: none;
+}
+
+@media (max-width: 767px) {
+  .sc-find-mark,
+  .sc-find-heart {
+    display: none;
+  }
+}
+
+.sc-find-plinth > *:not(.sc-find-wash):not(.sc-find-heart):not(.sc-find-mark) {
+  position: relative;
+}
+
+.sc-find-eyebrow {
+  margin: 0 0 12px 0;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #2b93d1;
+}
+
+.sc-find-eyebrow:after {
+  content: "";
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin: 9px auto 0 auto;
+  border-radius: 2px;
+  background: #2b93d1;
 }
 
 .sc-find-title {
@@ -6649,4 +6735,107 @@
 
 .sym-browse-more button[aria-expanded="true"] svg {
   transform: rotate(180deg);
+}
+
+/*
+ * The two section headings, as the example has them: a large sentence-case
+ * line rather than a small-caps label with a rule under it. The accent bar
+ * stays — it is the index's own way of marking where a zone begins, and it is
+ * the one part of the old treatment carrying meaning rather than style.
+ */
+.sc-index .sym-sec {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0 0 6px 0;
+  padding: 0;
+  border-bottom: 0;
+  font-size: 26px;
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #1a4e70;
+}
+
+/* Ordered, so the bar sits between the heading and its note rather than under
+   both — the note is a child of the heading, so source order put it first. */
+.sc-index .sym-sec:after {
+  content: "";
+  order: 1;
+  display: block;
+  width: 44px;
+  height: 3px;
+  margin: 10px 0 0 0;
+  border-radius: 2px;
+  background: #f58220;
+}
+
+.sc-index .sym-browse-title:after {
+  background: #2b93d1;
+}
+
+.sc-index .sym-sec-note {
+  order: 2;
+  display: block;
+  margin: 8px 0 0 0;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #6b6d70;
+}
+
+.sc-index .sym-sec-row {
+  margin-bottom: 20px;
+}
+
+.sc-index .sym-sec-row .sym-sec {
+  margin-bottom: 0;
+}
+
+.sym-sec-all {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* The count is a line in the card now, not a pill at its edge. */
+.sym-group-text .sym-group-count {
+  display: block;
+  margin: 3px 0 0 0;
+  padding: 0;
+  background: none;
+  font-size: 13px;
+  font-weight: 600;
+  color: #8a8b8d;
+}
+
+.sym-browse-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  margin: 22px 0 0 0;
+  font-size: 15px;
+  color: #6b6d70;
+}
+
+.sym-browse-foot svg {
+  width: 19px;
+  height: 19px;
+  fill: #2b93d1;
+}
+
+.sym-browse-foot a {
+  color: #1a6f9f;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Two columns, as the example has, so a blurb gets a line rather than three. */
+@media (min-width: 1200px) {
+  .sym-browse-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
