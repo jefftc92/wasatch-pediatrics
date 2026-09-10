@@ -5700,8 +5700,13 @@
   .sym-browse-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 10px 18px;
-    align-items: start;
+    gap: 14px 18px;
+    align-items: stretch;
+  }
+
+  .sym-browse-grid > .sym-group > .sym-group-title,
+  .sym-browse-grid > .sym-group > .sym-group-toggle {
+    height: 100%;
   }
 
   /*
@@ -5826,19 +5831,268 @@
  * job, and a white card on white is an outline around nothing. `#8a8b8d` on
  * white is 3.54:1 for the hint, which is why it is 15px here rather than 14.
  */
+/*
+ * The search zone as one tinted panel, centred.
+ *
+ * It was a bare input on white under a left-aligned heading a screen further
+ * down, so the page's own instruction and the box that carries it out were two
+ * unrelated things. They are one object now: heading, sub-line, field, hint and
+ * the 911 note, on a ground tinted from the brand blue rather than a new
+ * colour — `#2b93d1` at the weight that lands on `#eef6fc`, which is the
+ * lightest step the palette already implies rather than a fifth hue.
+ */
 .sc-findband {
   background: #ffffff;
-  padding: 30px 0 28px 0;
+  padding: 26px 0 30px 0;
 }
 
 .sc-findband .sc-find-plinth {
-  max-width: 660px;
+  max-width: none;
   margin: 0;
-  padding: 0;
-  background: none;
+  padding: 34px 20px 30px 20px;
+  background: #eef6fc;
   border: 0;
-  border-radius: 0;
+  border-radius: 20px;
+  text-align: center;
 }
+
+.sc-find-title {
+  margin: 0;
+  font-size: 30px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #1a4e70;
+}
+
+.sc-find-sub {
+  margin: 10px auto 0 auto;
+  max-width: 40em;
+  font-size: 16px;
+  line-height: 25px;
+  color: #4a4b4d;
+}
+
+.sc-find-plinth .sym-find {
+  margin: 20px auto 0 auto;
+  max-width: 620px;
+  text-align: left;
+}
+
+/* The field is a pill with a button inside it, so the two read as one control. */
+.sc-find-plinth .sym-find-input {
+  padding-right: 116px;
+  border-color: #cfe0ec;
+  box-shadow: 0 1px 2px rgba(26, 78, 112, 0.06);
+}
+
+/*
+ * Not a `<button>`: the list filters as the reader types, so there is nothing
+ * for a submit to do that has not happened already. A control that looks like
+ * it acts and does not is worse than none, so this is a label — it names what
+ * the field is for and is `aria-hidden`, leaving the input itself as the only
+ * thing in the tab order.
+ */
+.sym-find-go {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  bottom: 5px;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  border-radius: 999px;
+  background: #2b93d1;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sc-find-plinth .sym-find-hint,
+.sc-find-plinth .sym-find-count {
+  margin-left: 0;
+  text-align: center;
+}
+
+/*
+ * The label goes on a phone.
+ *
+ * It was eating the field: at 390 the placeholder measured 198px against
+ * 192px of room and rendered as "Type what you are see", and the input cannot
+ * be set below 16px to buy the space because iOS zooms the page on focus at
+ * anything smaller. Shrinking the label to 15px still left 360 and 390 short.
+ *
+ * Nothing is lost by dropping it. It is `aria-hidden` decoration rather than a
+ * control — the list filters as you type — and the magnifier at the other end
+ * of the field already says what the field is. It returns at 576, where there
+ * is room for both.
+ */
+@media (max-width: 575px) {
+  .sym-find-go {
+    display: none;
+  }
+
+  .sc-find-plinth .sym-find-input {
+    padding-right: 18px;
+  }
+}
+
+.sc-find-plinth .sym-find-hint {
+  color: #5f7d92;
+}
+
+/*
+ * The 911 line inside the panel. Same words and the same one emphasised
+ * phrase as the symptom pages; here it keeps a ground of its own, because on
+ * the panel's blue a plain rule would be the third thing on that tint.
+ */
+.sym-alert-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  max-width: 720px;
+  margin: 22px auto 0 auto;
+  padding: 12px 18px;
+  border-radius: 14px;
+  background: #fff4e8;
+  font-size: 15px;
+  line-height: 23px;
+  color: #6b6d70;
+  text-align: left;
+}
+
+.sym-alert-mark {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  color: #f58220;
+}
+
+.sym-alert-note .sym-911 {
+  color: #8a4b12;
+}
+
+.sc-find-plinth .sym-none,
+.sc-find-plinth .sym-emergency {
+  text-align: left;
+}
+
+@media (min-width: 768px) {
+  .sc-findband .sc-find-plinth {
+    padding: 44px 40px 38px 40px;
+  }
+
+  .sc-find-title {
+    font-size: 38px;
+  }
+
+  .sc-find-sub {
+    font-size: 17px;
+  }
+}
+
+/* ------------------------------------- the group discs and the tiles ---- */
+
+/*
+ * One disc per group, and the same disc wherever that group appears: on its
+ * own card, and on every common symptom belonging to it. The tint is the
+ * colour at 14%, which is why the four brand colours can carry thirteen groups
+ * without any of them shouting.
+ */
+.sym-badge {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--sym-badge) 14%, #ffffff);
+  color: var(--sym-badge);
+}
+
+.sym-badge svg {
+  width: 21px;
+  height: 21px;
+  fill: currentColor;
+}
+
+/* A browser without color-mix still gets a disc, just a plain one. */
+@supports not (background: color-mix(in srgb, red 14%, white)) {
+  .sym-badge {
+    background: #eef2f5;
+  }
+}
+
+.sym-sec-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.sym-sec-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a6f9f;
+  white-space: nowrap;
+}
+
+.sym-sec-all svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* The common list: a disc, then the name, in a grid rather than a pill row. */
+.sym-tiles-lead {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+
+.sym-tiles-lead li {
+  margin: 0;
+}
+
+.sym-tiles-lead .sym-tile-icon {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 62px;
+  padding: 10px 14px;
+  border: 1px solid #e4e7ea;
+  border-radius: 14px;
+  background: #ffffff;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a6f9f;
+  text-decoration: none;
+}
+
+.sym-tiles-lead .sym-tile-icon:hover,
+.sym-tiles-lead .sym-tile-icon:focus-visible {
+  border-color: #2b93d1;
+  background: #f7fbfe;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) {
+  .sym-tiles-lead {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+}
+
 
 /* ------------------------------- "Getting your child seen", uncluttered -- */
 
@@ -6269,4 +6523,130 @@
 
 .sym-next .sym-call-item {
   background: #ffffff;
+}
+
+/* --------------------------------- the category cards on the index ------ */
+
+/*
+ * A category was a name and a number on a bar, so a parent had to already know
+ * that a sore throat lives under "Ears, nose, mouth and teeth". The card now
+ * carries the group's disc, its name, and a line naming what is actually
+ * inside it in the words somebody would search with.
+ *
+ * The chevron moves to the far right and the count sits beside it, so the left
+ * edge of every card is a disc and the reading order is disc, name, blurb.
+ */
+.sc-index .sym-browse .sym-group-toggle {
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 14px;
+}
+
+/*
+ * `setOpen`'s button wraps whatever the heading held in a single `<span>`, so
+ * the disc, the text and the count are that span's children rather than the
+ * button's. Without this they stack: the disc took a line of its own and the
+ * chevron sat in the middle of the card.
+ */
+.sym-browse .sym-group-toggle > span {
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.sym-group-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sym-group-name {
+  font-size: 16px;
+  line-height: 22px;
+  font-weight: 700;
+  color: #2b2c2e;
+}
+
+.sym-group-blurb {
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #6b6d70;
+}
+
+.sym-group-toggle .sym-group-count {
+  order: 8;
+  margin-left: auto;
+}
+
+.sym-group-toggle .sym-group-chevron {
+  order: 9;
+  transform: rotate(90deg);
+}
+
+.sym-group-toggle[aria-expanded="true"] .sym-group-chevron {
+  transform: rotate(-90deg);
+}
+
+/* With script off the heading is not a button, so it lays itself out. */
+.sym-browse .sym-group-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+/*
+ * Thirteen categories is a wall on first sight, so four are shown and the rest
+ * follow on a press. Script-driven: with JavaScript off every category ships
+ * visible and there is no button, which is the same rule the groups themselves
+ * follow.
+ */
+.sym-browse-grid.is-capped > .sym-group[hidden] {
+  display: none;
+}
+
+.sym-browse-more {
+  display: flex;
+  justify-content: center;
+  margin: 18px 0 0 0;
+}
+
+.sym-browse-more button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 26px;
+  border: 1px solid #cfe0ec;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #1a6f9f;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.sym-browse-more button:hover,
+.sym-browse-more button:focus-visible {
+  border-color: #2b93d1;
+  background: #f7fbfe;
+}
+
+.sym-browse-more svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.18s ease;
+}
+
+.sym-browse-more button[aria-expanded="true"] svg {
+  transform: rotate(180deg);
 }

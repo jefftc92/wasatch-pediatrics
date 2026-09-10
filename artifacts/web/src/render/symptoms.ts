@@ -21,6 +21,7 @@
 
 import { symptoms, type Symptom } from "../data/symptoms.ts";
 import { symptomTerms } from "../data/symptomTerms.ts";
+import { lookFor } from "../data/symptomGroups.ts";
 import { offices, formatPhone } from "../data/offices.ts";
 import { locationNames } from "../data/services.ts";
 import { escapeAttribute, SITE, type GeneratedPage } from "./generated.ts";
@@ -398,8 +399,27 @@ function tileTerms(symptom: Symptom): string {
   return [...new Set(words)].join(" ");
 }
 
+/**
+ * The coloured disc a group is known by, on its own card and on every common
+ * symptom that belongs to it. One object, two placements, so the orange on a
+ * "Fever" tile and the orange on the "Fever and infection" card are read as
+ * the same statement rather than two coincidences.
+ *
+ * `aria-hidden`, because the name is always beside it: the colour and the
+ * glyph are decoration and never the only way to tell two groups apart.
+ */
+function groupBadge(group: string): string {
+  const look = lookFor(group);
+  return `<span class="sym-badge" style="--sym-badge:${look.color}"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${escapeAttribute(look.icon)}"></use></svg></span>`;
+}
+
 function tile(symptom: Symptom): string {
   return `<li data-terms="${escapeAttribute(tileTerms(symptom))}"><a href="${symptomHref(symptom)}">${escapeAttribute(symptom.short)}</a></li>`;
+}
+
+/** The same tile, led by its group's disc. Used for the common list only. */
+function iconTile(symptom: Symptom): string {
+  return `<li data-terms="${escapeAttribute(tileTerms(symptom))}"><a class="sym-tile-icon" href="${symptomHref(symptom)}">${groupBadge(symptom.group)}<span>${escapeAttribute(symptom.short)}</span></a></li>`;
 }
 
 /**
@@ -420,17 +440,21 @@ export function symptomFindBox(): string {
   return `<div class="sc-findband">
 	<div class="container">
 		<div class="sc-find-plinth">
+			<h2 class="sc-find-title">Start with what you can see</h2>
+			<p class="sc-find-sub">Search for a symptom, or describe what is happening in your own words.</p>
 			<div class="sym-find">
 				<label class="visually-hidden" for="sym-find-input">Type what you are seeing</label>
 				<div class="sym-find-box">
 					<svg class="sym-find-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6"></circle><path d="M13.5 13.5L18 18"></path></svg>
 					<input id="sym-find-input" class="sym-find-input" type="search" autocomplete="off" placeholder="Type what you are seeing&#8230;">
 					<button type="button" class="sym-find-clear" hidden>Clear<span class="visually-hidden"> the search</span></button>
+					<span class="sym-find-go" aria-hidden="true">Search</span>
 				</div>
 				<p class="sym-find-hint">Everyday words work: &#8220;throwing up&#8221;, &#8220;poop&#8221;, &#8220;bug bite&#8221;, &#8220;hit head&#8221;.</p>
 				<p class="sym-find-count" role="status" aria-live="polite"></p>
 			</div>
 			<noscript><p class="sym-find-off">Type-to-search needs JavaScript. Every one of the ${symptoms.length} pages is listed below, grouped by what you can see or hear.</p></noscript>
+			<p class="sym-alert-note"><svg class="sym-alert-mark" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-warning-circle"></use></svg><span>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <strong class="sym-911">call 911 now</strong>.</span></p>
 			<div class="sym-emergency" hidden>
 				<p class="sym-emergency-lead">This one is an emergency.</p>
 				<p class="sym-emergency-body"></p>
@@ -487,18 +511,22 @@ export function symptomIndexList(): string {
   const groups = order
     .map((group) => {
       const list = byGroup.get(group)!;
+      const look = lookFor(group);
       return `<div class="sym-group">
-							<h3 class="sym-group-title">${escapeAttribute(group)} <span class="sym-group-count">${list.length}</span></h3>
+							<h3 class="sym-group-title">${groupBadge(group)}<span class="sym-group-text"><span class="sym-group-name">${escapeAttribute(group)}</span><span class="sym-group-blurb">${escapeAttribute(look.blurb)}</span></span><span class="sym-group-count">${list.length}</span></h3>
 							<ul class="sym-tiles">${list.map(tile).join("")}</ul>
 						</div>`;
     })
     .join("\n\t\t\t\t\t\t");
 
   return `<div class="sym-group sym-common">
-						<h3 class="sym-sec">Common right now</h3>
-						<ul class="sym-tiles">${common.map(tile).join("")}</ul>
+						<div class="sym-sec-row">
+							<h3 class="sym-sec">Common symptoms</h3>
+							<a class="sym-sec-all" href="#sym-browse">All ${symptoms.length} symptoms<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4l4 4-4 4"></path></svg></a>
+						</div>
+						<ul class="sym-tiles sym-tiles-lead">${common.map(iconTile).join("")}</ul>
 					</div>
-					<div class="sym-browse">
+					<div class="sym-browse" id="sym-browse">
 						<h3 class="sym-sec sym-browse-title">Browse by category<span class="sym-sec-note">all ${symptoms.length} pages</span></h3>
 						<div class="sym-browse-grid">
 						${groups}
