@@ -119,6 +119,47 @@ function callList(): string {
 						<p class="sym-acts sym-call-acts"><a class="btn blue" href="/locations/">Hours, addresses and directions</a></p>`;
 }
 
+/**
+ * "When to see a doctor": the client's two lists, kept two.
+ *
+ * `contact` is call your pediatrician and `emergency` is call 911. They are
+ * rendered as two blocks rather than one list because they are two different
+ * decisions, and a reader who cannot tell which line belongs to which is the
+ * collision EDITORIAL_RULES 19 is about. Each keeps the client's own lead-in
+ * sentence verbatim, including its colon.
+ *
+ * The rules are the page's existing idiom — `.sym-route-now` marks the urgent
+ * route the same way — and they are colour-coded rather than decorative: blue
+ * is the practice, orange is 911, which is the same orange the alert band at
+ * the top of the page and `.sym-911` already use. Orange rather than red is a
+ * decision this project already made and recorded: a red block on a page about
+ * a cough frightens more people than it helps.
+ */
+function seeDoctorBand(symptom: Symptom): string {
+	const list = (items: string[]) =>
+		items.map((item) => `<li>${escapeAttribute(item)}</li>`).join("");
+
+	return `<div class="whitebg padme90 sym-doctor">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<h2 class="dent-band-title">When to see a doctor</h2>
+				<div class="sym-route-pair">
+					<div class="sym-route sym-doctor-call">
+						<p class="sym-route-title">Contact your pediatrician or another healthcare professional if:</p>
+						<ul class="sym-doctor-list">${list(symptom.seeDoctor.contact)}</ul>
+					</div>
+					<div class="sym-route sym-doctor-911">
+						<p class="sym-route-title">Call 911 or get emergency care if:</p>
+						<ul class="sym-doctor-list">${list(symptom.seeDoctor.emergency)}</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>`;
+}
+
 function renderSymptomPage(symptom: Symptom): string {
   const intro = symptom.intro
     .map((p) => `\t\t\t\t\t<p>${escapeAttribute(p)}</p>`)
@@ -216,6 +257,7 @@ ${
 `
 }
 ${symptom.noTool ? "" : `</div>`}
+${seeDoctorBand(symptom)}
 <div class="whitebg padme90 sym-next">
 	<div class="container">
 		<div class="row">

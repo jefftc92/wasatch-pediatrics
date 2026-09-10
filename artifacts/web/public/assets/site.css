@@ -4448,6 +4448,7 @@
 .sc-reach,
 .sc-questions,
 .sym-tool,
+.sym-doctor,
 .sym-next,
 .sym-seen,
 .sym-others {
@@ -5519,6 +5520,7 @@
  */
 .sym-intro.padme90,
 .sym-tool.padme90,
+.sym-doctor.padme90,
 .sym-next.padme90,
 .sym-seen.padme90,
 .sym-others.padme90 {
@@ -5529,6 +5531,7 @@
 @media (min-width: 768px) {
   .sym-intro.padme90,
   .sym-tool.padme90,
+  .sym-doctor.padme90,
   .sym-next.padme90,
   .sym-seen.padme90,
   .sym-others.padme90 {
@@ -6048,5 +6051,84 @@
 
   .sym-call-list > li:nth-child(-n + 4) .sym-call-item {
     border-top: 0;
+  }
+}
+
+/* ---------------------------------------- "When to see a doctor" ------- */
+
+/*
+ * The client's two lists. They reuse `.sym-route` and `.sym-route-pair`, so
+ * the block geometry, the title treatment and the 2-up-from-768 behaviour are
+ * the ones the appointment section already uses rather than a fifth idiom.
+ *
+ * Each block carries a 3px rule, and the rules are the information rather than
+ * decoration: blue is the practice, orange is 911. Orange rather than red is a
+ * decision this project already made and recorded — a red block on a page
+ * about a cough frightens more people than it helps — and it is the same
+ * orange the alert band and `.sym-911` use, so the page has one emergency
+ * colour and not two.
+ *
+ * The lead-in ends in a colon and the list completes the sentence, so the two
+ * are set tight together: 6px, against the 20px between one block and the
+ * next.
+ */
+.sym-doctor-call,
+.sym-doctor-911 {
+  padding-left: 16px;
+  border-left: 3px solid #2b93d1;
+}
+
+.sym-doctor-911 {
+  border-left-color: #f58220;
+}
+
+.sym-doctor-call .sym-route-title,
+.sym-doctor-911 .sym-route-title {
+  margin-bottom: 6px;
+}
+
+.sym-doctor-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/*
+ * A marker rather than a bullet glyph, so the hanging indent is ours and a
+ * wrapped line lines up under the first word instead of under the dot. The
+ * same 8px dot the routing list used before it stopped being a list.
+ */
+.sym-doctor-list li {
+  position: relative;
+  margin: 0 0 8px 0;
+  padding-left: 18px;
+  font-size: 16px;
+  line-height: 25px;
+  color: #4a4b4d;
+}
+
+.sym-doctor-list li:last-child {
+  margin-bottom: 0;
+}
+
+.sym-doctor-list li:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #c3c7cb;
+}
+
+.sym-doctor-911 .sym-doctor-list li:before {
+  background: #f58220;
+}
+
+@media (min-width: 768px) {
+  .sym-doctor-call,
+  .sym-doctor-911 {
+    padding-left: 20px;
   }
 }
