@@ -4464,7 +4464,20 @@
  * of it beats any amount of scrolling. The groups stay underneath for the
  * people who do not have the word, collapsed so the whole set is one screen.
  */
+/*
+ * One number owns where the field's text begins, so the hint under it cannot
+ * drift out of line with it again.
+ *
+ * It had: the hint was set from the card's padding plus a 4px margin and
+ * landed at x=100 at 1280, while the input's placeholder began at x=152 —
+ * 52px apart, and 4px off the input's own left edge. Near-alignment reads
+ * worse than either alignment, because the eye finds the 4px and not the
+ * intent. The inset is the input's border plus its padding, and the hint and
+ * the result count are both indented by it, so all three text runs share one
+ * vertical line.
+ */
 .sym-find {
+  --sym-find-inset: 56px; /* 2px border + 54px padding */
   max-width: 660px;
   margin: 4px 0 38px 0;
 }
@@ -4489,7 +4502,7 @@
 
 .sym-find-input {
   width: 100%;
-  padding: 18px 20px 18px 54px;
+  padding: 18px 20px 18px calc(var(--sym-find-inset) - 2px);
   border: 2px solid #dfe2e5;
   border-radius: 999px;
   background: #ffffff;
@@ -4528,14 +4541,14 @@
 /* Scoped to the band: the theme sets a 23px paragraph size inside
  * .usergenerated, which a bare class cannot outrank. */
 .sc-pagebody .sym-find-hint {
-  margin: 12px 4px 0 4px;
+  margin: 12px 4px 0 var(--sym-find-inset);
   font-size: 14px;
   line-height: 1.5;
   color: #8a8b8d;
 }
 
 .sc-pagebody .sym-find-count {
-  margin: 12px 4px 0 4px;
+  margin: 12px 4px 0 var(--sym-find-inset);
   font-size: 14px;
   line-height: 1.5;
   font-weight: 600;
@@ -4772,9 +4785,13 @@
 }
 
 @media (max-width: 575px) {
+  .sym-find {
+    --sym-find-inset: 50px; /* 2px border + 48px padding */
+  }
+
   .sym-find-input {
     font-size: 16px;
-    padding: 15px 16px 15px 48px;
+    padding: 15px 16px 15px calc(var(--sym-find-inset) - 2px);
   }
 
   .sym-find-icon {
@@ -5654,7 +5671,7 @@
 
 .sc-find-plinth .sym-find-hint,
 .sc-find-plinth .sym-find-count {
-  margin: 6px 4px 0 4px;
+  margin: 6px 4px 0 var(--sym-find-inset);
 }
 
 /* White on `#f4f5f6` is 1.09:1, so the input has to keep an edge of its own. */
@@ -5775,6 +5792,18 @@
 .sc-findband {
   background: #2b93d1;
   padding: 0 0 14px 0;
+  /*
+   * A block formatting context, so the plinth's negative top margin below 992
+   * stays inside this element.
+   *
+   * Without it the margin collapsed straight through the band's top edge and
+   * moved the band itself: measured at 1280, the hero ended at y=456 and the
+   * band began at y=410 — exactly the 46px it was supposed to pull the card
+   * up by. Nothing straddled anything. The band's blue simply painted over the
+   * bottom 46px of the hero across the full 1280, cutting a hard horizontal
+   * line through the photograph, and the card sat flush at the top of it.
+   */
+  display: flow-root;
 }
 
 /*
