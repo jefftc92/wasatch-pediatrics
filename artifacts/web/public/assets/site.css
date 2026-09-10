@@ -4369,8 +4369,14 @@
  * in the intro band 300px above, so the page ran two rhythms. It sits below
  * the frame now, so the margin is on the other side.
  */
+/*
+ * Above the frame, because all 164 of these sentences say "The AAP guide
+ * below". It was rendering after the frame, so every page promised something
+ * underneath a paragraph that was already underneath it. Moving one element is
+ * the fix; rewriting 164 strings to say "above" is not.
+ */
 .sym-tool-lead {
-  margin: 16px 0 0 0;
+  margin: 0 0 16px 0;
   color: #636466;
   font-size: 18px;
   line-height: 28px;
@@ -6240,4 +6246,27 @@
   .sym-hero .dent-hero-lead {
     max-width: 44em;
   }
+}
+
+/*
+ * The three sections a parent acts on alternate, so each is its own surface
+ * rather than one long white field: the frame's band is grey, "When to see a
+ * doctor" white, the nurse line grey, "When can my child be seen" white, and
+ * the group index grey again.
+ *
+ * `.sym-next` takes the theme's `graybg`, which is `#F4F4F4`. The phone
+ * directory inside it draws its hairlines in `#e6e9ec`, which is 1.06:1 on
+ * that grey — invisible, where it was the whole structure of the directory on
+ * white. On grey the cells take a white ground of their own instead, which is
+ * the same separation by a different means and keeps the eight numbers reading
+ * as eight rows.
+ */
+.sym-next .sym-call-list {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sym-next .sym-call-item {
+  background: #ffffff;
 }
