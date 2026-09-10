@@ -1434,6 +1434,14 @@
     var button = group.querySelector(".sym-group-toggle");
     list.hidden = !open;
     if (button) button.setAttribute("aria-expanded", String(open));
+    /*
+     * From 768 up the groups are a grid, and an open one spans every column so
+     * its pages lay out in a wide row rather than a narrow strip. Set here
+     * rather than with `:has()` so it does not depend on selector support, and
+     * because the class is only ever meaningful once this script has made the
+     * groups openable at all.
+     */
+    group.classList.toggle("is-open", open);
   }
 
   function showCounts(show) {
