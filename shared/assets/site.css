@@ -264,6 +264,66 @@
     display: none;
   }
 
+  /*
+   * The 28px of dead ground between the menu bar and the panel.
+   *
+   * The panel opens below the whole header row rather than below the item, so
+   * the item's box ends at y89 and the panel starts at y116. Straight down,
+   * that is survivable -- the pointer is over the item until it is over the
+   * panel. Diagonally it is not, and diagonally is how anyone actually reaches
+   * a link that is not directly beneath the word they hovered: the pointer
+   * drifts off the item's width while still in the band, the item stops being
+   * hovered, and the panel shuts in transit. Measured, five of six paths to a
+   * real link died in that band, each between y97 and y108.
+   *
+   * So while an item is open, it also owns the band: a full-width strip along
+   * the bottom of the bar, which is the pointer's whole journey from the word
+   * to the panel. It is a pseudo-element of the item, so resting on it counts
+   * as resting on the item and neither :hover nor the theme's own mouseleave
+   * sees the pointer leave. It exists only while the panel is open, so it
+   * never stands between the pointer and anything else.
+   *
+   * `bottom: 0` and not `top`, because the item is `position: static` here --
+   * deliberately, so the panel can measure itself against #graynav and span
+   * the page -- and this measures against the same box the panel does.
+   */
+  .mainnav > li.mega:hover::after,
+  .mainnav > li.mega.active::after,
+  .mainnav > li.mega:focus-within::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 30px;
+    /*
+     * Above the other items' own links, which are `position: relative` at
+     * z-index auto and come later in the markup, so without this they paint
+     * over the strip and take the pointer back. That is what still killed the
+     * three longest paths: crossing under "Services" on the way to a link on
+     * the right of the Locations panel handed the hover to Services, and
+     * crossing under "Providers", which has no panel at all, simply left
+     * nothing open.
+     */
+    z-index: 1;
+  }
+
+  /*
+   * ...and the two things the strip would otherwise cover.
+   *
+   * It spans the bar's full width, and the logo (y49..103) and the
+   * "Schedule Appointment" button (y54..98) both hang into the band. Both are
+   * `position: static`, so they paint below anything positioned and the strip
+   * would have taken their clicks for as long as a menu was open -- including
+   * the site's main call to action. Raised above it; the strip still covers
+   * the menu items themselves, which is the point.
+   */
+  #logo a,
+  .header-cta {
+    position: relative;
+    z-index: 2;
+  }
+
   .megamenu > li {
     position: static;
   }
@@ -5718,8 +5778,22 @@
     align-items: stretch;
   }
 
-  .sym-browse-grid > .sym-group > .sym-group-title,
-  .sym-browse-grid > .sym-group > .sym-group-toggle {
+  /*
+   * Only the shut ones stretch.
+   *
+   * This is here so two collapsed cards sharing a row are the same height
+   * whatever their blurbs do. Applied to an open card as well, it was the
+   * whole of the expansion bug: the heading took the full row height, 258px
+   * against the 74px it needs, which left a blank band under the title and
+   * pushed the symptom list past the card's own bottom edge -- the list
+   * started at y1435 where the card ended at y1425, so it painted over the
+   * two cards below it, which had been laid out at y1439.
+   *
+   * An open card has to size itself to its heading plus its list, so it is
+   * excluded and does that.
+   */
+  .sym-browse-grid > .sym-group:not(.is-open) > .sym-group-title,
+  .sym-browse-grid > .sym-group:not(.is-open) > .sym-group-toggle {
     height: 100%;
   }
 
