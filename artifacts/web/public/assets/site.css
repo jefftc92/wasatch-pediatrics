@@ -7101,29 +7101,26 @@
   }
 
   /*
-   * 11px, which is the size that fits all four examples on one line: the
-   * string needs 379px at 13 and 350 at 12, against the 330px column the
-   * panel can give, and 321 at 11. The client picked keeping the examples
-   * over keeping the step -- this is the smallest type on the page, and it is
-   * a hint beneath a filled-in field rather than anything a parent has to
-   * read. Still 5.42:1 on the tint.
-   */
-  /*
-   * 12px of panel padding and a 20px mark rather than 16 and 24, which is
-   * what carries both of the lines above through 375 as well as 390 -- the
-   * SE and the mini sit there, and without it the hint went back to two lines
-   * and the 911 to three. At 360 the hint wraps again and that is where this
-   * stops being worth chasing.
+   * A 20px mark rather than 24, with the 12px of panel padding above: between
+   * them they carry the 911 line's two lines through 375 as well as 390 --
+   * the SE and the mini sit there, and without it that line goes to three.
    */
   .sym-alert-note .sym-alert-mark {
     width: 20px;
     height: 20px;
   }
 
+  /*
+   * Back to 13px. 11px fitted all four examples on one line and was too small
+   * to read, which is the wrong trade for a line whose whole job is to be
+   * skimmed. The copy gives up an example instead: three of them measure
+   * 317px against the 338px column, so this still sets on one line at a size
+   * a parent can actually read.
+   */
   .sc-find-plinth .sym-find-hint {
     margin-top: 4px;
-    font-size: 11px;
-    line-height: 17px;
+    font-size: 13px;
+    line-height: 19px;
   }
 
   /*

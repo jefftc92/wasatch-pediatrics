@@ -468,7 +468,7 @@ export function symptomFindBox(): string {
 					<button type="button" class="sym-find-clear" hidden>Clear<span class="visually-hidden"> the search</span></button>
 					<span class="sym-find-go" aria-hidden="true">Search</span>
 				</div>
-				<p class="sym-find-hint">Everyday words work: &#8220;throwing&#160;up&#8221;, &#8220;poop&#8221;, &#8220;bug&#160;bite&#8221;, &#8220;hit&#160;head&#8221;.</p>
+				<p class="sym-find-hint">Everyday words work: &#8220;throwing&#160;up&#8221;, &#8220;poop&#8221;, &#8220;hit&#160;head&#8221;.</p>
 				<p class="sym-find-count" role="status" aria-live="polite"></p>
 			</div>
 			<noscript><p class="sym-find-off">Type-to-search needs JavaScript. Every one of the ${symptoms.length} pages is listed below, grouped by what you can see or hear.</p></noscript>
