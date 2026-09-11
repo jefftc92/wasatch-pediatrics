@@ -56,7 +56,7 @@ export const symptomGroupLook: Record<string, SymptomGroupLook> = {
   "Stomach and bowels": {
     icon: "stomach",
     color: GREEN,
-    blurb: "Stomach pain, vomiting, diarrhea and constipation",
+    blurb: "Stomach pain, vomiting and diarrhea",
   },
   "Skin and rashes": {
     icon: "skin-spots",

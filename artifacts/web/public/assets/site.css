@@ -7042,9 +7042,126 @@
  * there the theme outranked us, here we outranked ourselves.
  */
 @media (max-width: 575px) {
+  /*
+   * And the vertical compression, measured against the client's phone
+   * drawing. From the top of the band to the foot we were at 1412px where the
+   * drawing fits its whole page in roughly 960, so every row was giving away
+   * height: a 30px title on two lines, a 15px hint on two more, four-line
+   * 911 copy, 56px tiles and cards whose two-line blurbs ran to 102px.
+   *
+   * Nothing here is a wholesale shrink. Type comes down a step where it has a
+   * step to give, padding comes out where it was a desktop figure inherited
+   * unchanged, and the gaps close up.
+   */
+  .sc-findband .sc-find-plinth {
+    padding-top: 18px;
+  }
+
+  .sc-find-title {
+    font-size: 26px;
+    line-height: 31px;
+  }
+
+  .sc-pagebody .sc-find-sub {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .sc-find-plinth .sym-find {
+    margin-top: 12px;
+  }
+
+  .sc-find-plinth .sym-find-input {
+    padding-top: 13px;
+    padding-bottom: 13px;
+  }
+
+  .sc-find-plinth .sym-find-hint {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 19px;
+  }
+
+  .sc-pagebody .sym-alert-note {
+    padding: 10px 12px;
+    font-size: 13px;
+    line-height: 19px;
+  }
+
+  /*
+   * 48px tiles, not the drawing's ~35. Everything else here follows the
+   * mockup; this one does not, because a tile is a tap target and 44px is the
+   * floor every platform's guidance sets. 48 keeps a comfortable margin over
+   * it and still takes 8px off each of the four rows.
+   */
+  .sym-tiles-lead {
+    gap: 8px;
+  }
+
+  .sym-tiles-lead .sym-tile-icon {
+    min-height: 48px;
+    padding: 6px 10px;
+  }
+
+  /* The cards: the toggle's padding was the desktop's, and its margin
+   * double-counted the grid's gap. */
+  .sym-browse-grid {
+    gap: 8px;
+  }
+
+  .sc-index .sym-browse .sym-group-toggle {
+    gap: 10px;
+    padding: 10px 12px;
+    margin-bottom: 0;
+  }
+
+  .sym-group-name {
+    font-size: 15px;
+    line-height: 21px;
+  }
+
+  .sym-group-blurb {
+    font-size: 13px;
+    line-height: 19px;
+  }
+
+  .sym-browse .sym-badge {
+    width: 32px;
+    height: 32px;
+  }
+
+  .sym-browse .sym-badge svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  /*
+   * The two section headings sat 20px clear of their content. Written on
+   * `.sc-index .sym-sec`, because that is the rule holding the 20px --
+   * `.sym-browse-title` is one of these too, and at (0,1,0) it lost to it.
+   * The row heading keeps its own 0 from the rule below it.
+   */
+  .sc-index .sym-sec {
+    margin-bottom: 14px;
+  }
+
+  .sc-index .sym-sec-row {
+    margin-bottom: 14px;
+  }
+
+  /* A tighter rule under the eyebrow, and less air under that. */
+  .sc-pagebody .sc-find-eyebrow {
+    margin-bottom: 8px;
+  }
+
+  .sc-pagebody .sc-find-eyebrow:after {
+    margin-top: 6px;
+  }
+
   .sc-pagebody .sym-alert-note {
     order: 99;
-    margin: 16px -16px 0 -16px;
+    margin: 14px -16px 0 -16px;
     border-radius: 0 0 24px 24px;
   }
 
