@@ -5900,7 +5900,7 @@
  * fault rather than a mark. Hidden below 768, where the panel has no margin to
  * spare for decoration.
  */
-.sc-find-mark {
+.sc-pagebody .sc-find-mark {
   position: absolute;
   left: 28px;
   top: 26px;
@@ -5923,16 +5923,21 @@
   position: relative;
 }
 
-.sc-find-eyebrow {
+.sc-pagebody .sc-find-eyebrow {
   margin: 0 0 12px 0;
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: #2b93d1;
+  /*
+   * The darker blue again, not the brand blue: 13px is small, and `#2b93d1` on
+   * the `#eef6fc` plinth is 3.1:1. This is 5.03:1 on the same tint. The title
+   * below it keeps the brand blue, which it can, being 38px.
+   */
+  color: #1a6f9f;
 }
 
-.sc-find-eyebrow:after {
+.sc-pagebody .sc-find-eyebrow:after {
   content: "";
   display: block;
   width: 40px;
@@ -5942,15 +5947,22 @@
   background: #2b93d1;
 }
 
+/*
+ * Brand blue, because that is what a section heading is on this site —
+ * `.dent-band-title` is `#2b93d1` on every other band, and a page that opens
+ * in a navy nobody else uses is a page that has left the brand to match a
+ * mockup. Measured: 3.10:1 on the panel's tint and 3.39:1 on white, against
+ * the 3.0 AA asks of text this size, which every heading here is.
+ */
 .sc-find-title {
   margin: 0;
   font-size: 30px;
   line-height: 1.2;
   font-weight: 700;
-  color: #1a4e70;
+  color: #2b93d1;
 }
 
-.sc-find-sub {
+.sc-pagebody .sc-find-sub {
   margin: 10px auto 0 auto;
   max-width: 40em;
   font-size: 16px;
@@ -5967,7 +5979,7 @@
 /* The field is a pill with a button inside it, so the two read as one control. */
 .sc-find-plinth .sym-find-input {
   padding-right: 116px;
-  border-color: #cfe0ec;
+  border-color: #c9ced4;
   box-shadow: 0 1px 2px rgba(26, 78, 112, 0.06);
 }
 
@@ -5987,7 +5999,14 @@
   align-items: center;
   padding: 0 24px;
   border-radius: 999px;
-  background: #2b93d1;
+  /*
+   * `#1a6f9f`, the site's darker blue, not the brand blue: white on `#2b93d1`
+   * is 3.39:1, and a 16px label is normal text however bold it is, so it needs
+   * 4.5. On this it is 5.50:1. The pill still reads as the brand's blue; it is
+   * the same hue a step down, and it is already the colour of every link on
+   * the page.
+   */
+  background: #1a6f9f;
   color: #ffffff;
   font-size: 16px;
   font-weight: 700;
@@ -6022,8 +6041,13 @@
   }
 }
 
+/*
+ * Brand grey. It was `#5f7d92`, a blue-grey invented to sit on the tint, and
+ * it measured 3.98:1 there — under the 4.5 AA needs for text this size.
+ * `#636466` is the brand's own grey and is 5.42:1 on the same ground.
+ */
 .sc-find-plinth .sym-find-hint {
-  color: #5f7d92;
+  color: #636466;
 }
 
 /*
@@ -6121,7 +6145,7 @@
 /* A browser without color-mix still gets a disc, just a plain one. */
 @supports not (background: color-mix(in srgb, red 14%, white)) {
   .sym-badge {
-    background: #eef2f5;
+    background: #f4f5f6;
   }
 }
 
@@ -6133,7 +6157,7 @@
   flex-wrap: wrap;
 }
 
-.sym-sec-all {
+.sc-pagebody .sym-sec-all {
   display: inline-flex;
   align-items: center;
   gap: 7px;
@@ -6143,7 +6167,7 @@
   white-space: nowrap;
 }
 
-.sym-sec-all svg {
+.sc-pagebody .sym-sec-all svg {
   width: 15px;
   height: 15px;
   fill: none;
@@ -6183,7 +6207,7 @@
 .sym-tiles-lead .sym-tile-icon:hover,
 .sym-tiles-lead .sym-tile-icon:focus-visible {
   border-color: #2b93d1;
-  background: #f7fbfe;
+  background: #f2f8fc;
   text-decoration: none;
 }
 
@@ -6721,7 +6745,7 @@
   align-items: center;
   gap: 10px;
   padding: 12px 26px;
-  border: 1px solid #cfe0ec;
+  border: 1px solid #c9ced4;
   border-radius: 999px;
   background: #ffffff;
   color: #1a6f9f;
@@ -6734,7 +6758,7 @@
 .sym-browse-more button:hover,
 .sym-browse-more button:focus-visible {
   border-color: #2b93d1;
-  background: #f7fbfe;
+  background: #f2f8fc;
 }
 
 .sym-browse-more svg {
@@ -6759,6 +6783,14 @@
  * the one part of the old treatment carrying meaning rather than style.
  */
 /*
+ * Scoped to `.sc-pagebody`, all of it, because the theme's `.pagebody p` and
+ * `.pagebody a` are (0,1,1) and a bare class is (0,1,0). Unscoped, the eyebrow
+ * and the sub-line rendered at the theme's 23px rather than the 13 and 16 set
+ * here, and the "View all symptoms" link kept the theme's blue. Three rules in
+ * this file already carry the prefix for this reason; these now do too.
+ */
+
+/*
  * The heading, and nothing under it.
  *
  * It carried a 44px accent bar and, on the browse section, an "all 164 pages"
@@ -6781,7 +6813,7 @@
   font-weight: 700;
   letter-spacing: 0;
   text-transform: none;
-  color: #1a4e70;
+  color: #2b93d1;
 }
 
 .sc-index .sym-sec:after {
@@ -6805,7 +6837,7 @@
   text-underline-offset: 3px;
 }
 
-.sym-browse-foot {
+.sc-pagebody .sym-browse-foot {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6815,13 +6847,13 @@
   color: #6b6d70;
 }
 
-.sym-browse-foot svg {
+.sc-pagebody .sym-browse-foot svg {
   width: 19px;
   height: 19px;
   fill: #2b93d1;
 }
 
-.sym-browse-foot a {
+.sc-pagebody .sym-browse-foot a {
   color: #1a6f9f;
   font-weight: 600;
   text-decoration: underline;
