@@ -21,7 +21,7 @@
 
 import { symptoms, type Symptom } from "../data/symptoms.ts";
 import { symptomTerms } from "../data/symptomTerms.ts";
-import { lookFor } from "../data/symptomGroups.ts";
+import { lookFor, symptomIcon } from "../data/symptomGroups.ts";
 import { offices, formatPhone } from "../data/offices.ts";
 import { locationNames } from "../data/services.ts";
 import { escapeAttribute, SITE, type GeneratedPage } from "./generated.ts";
@@ -109,14 +109,14 @@ function heroBand(symptom: Symptom): string {
  * that height is gone with the paragraph it sat in.
  */
 function callList(): string {
-	const items = offices
-		.map((office) => {
-			const name = locationNames[office.slug] ?? office.slug;
-			return `<li><a class="sym-call-item" href="tel:${office.phone}"><span class="sym-call-office">${escapeAttribute(name)}</span><span class="sym-call-num">${formatPhone(office.phone)}</span></a></li>`;
-		})
-		.join("");
+  const items = offices
+    .map((office) => {
+      const name = locationNames[office.slug] ?? office.slug;
+      return `<li><a class="sym-call-item" href="tel:${office.phone}"><span class="sym-call-office">${escapeAttribute(name)}</span><span class="sym-call-num">${formatPhone(office.phone)}</span></a></li>`;
+    })
+    .join("");
 
-	return `<ul class="sym-call-list">${items}</ul>
+  return `<ul class="sym-call-list">${items}</ul>
 						<p class="sym-acts sym-call-acts"><a class="btn blue" href="/locations/">Hours, addresses and directions</a></p>`;
 }
 
@@ -137,10 +137,10 @@ function callList(): string {
  * a cough frightens more people than it helps.
  */
 function seeDoctorBand(symptom: Symptom): string {
-	const list = (items: string[]) =>
-		items.map((item) => `<li>${escapeAttribute(item)}</li>`).join("");
+  const list = (items: string[]) =>
+    items.map((item) => `<li>${escapeAttribute(item)}</li>`).join("");
 
-	return `<div class="whitebg padme90 sym-doctor">
+  return `<div class="whitebg padme90 sym-doctor">
 	<div class="container">
 		<div class="row">
 			<div class="col-12">
@@ -411,18 +411,29 @@ function tileTerms(symptom: Symptom): string {
  * `aria-hidden`, because the name is always beside it: the colour and the
  * glyph are decoration and never the only way to tell two groups apart.
  */
+function badge(icon: string, color: string): string {
+  return `<span class="sym-badge" style="--sym-badge:${color}"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${escapeAttribute(icon)}"></use></svg></span>`;
+}
+
 function groupBadge(group: string): string {
   const look = lookFor(group);
-  return `<span class="sym-badge" style="--sym-badge:${look.color}"><svg aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-${escapeAttribute(look.icon)}"></use></svg></span>`;
+  return badge(look.icon, look.color);
 }
 
 function tile(symptom: Symptom): string {
   return `<li data-terms="${escapeAttribute(tileTerms(symptom))}"><a href="${symptomHref(symptom)}">${escapeAttribute(symptom.short)}</a></li>`;
 }
 
-/** The same tile, led by its group's disc. Used for the common list only. */
+/**
+ * The same tile, led by a disc. Used for the common list only.
+ *
+ * The disc keeps its group's colour but takes the symptom's own glyph where
+ * `symptomIcon` has one, so no two tiles in the row draw the same picture.
+ */
 function iconTile(symptom: Symptom): string {
-  return `<li data-terms="${escapeAttribute(tileTerms(symptom))}"><a class="sym-tile-icon" href="${symptomHref(symptom)}">${groupBadge(symptom.group)}<span>${escapeAttribute(symptom.short)}</span></a></li>`;
+  const look = lookFor(symptom.group);
+  const icon = symptomIcon[symptom.slug] ?? look.icon;
+  return `<li data-terms="${escapeAttribute(tileTerms(symptom))}"><a class="sym-tile-icon" href="${symptomHref(symptom)}">${badge(icon, look.color)}<span>${escapeAttribute(symptom.short)}</span></a></li>`;
 }
 
 /**
@@ -513,7 +524,9 @@ export function symptomIndexList(): string {
   });
 
   const bySlug = new Map(symptoms.map((s) => [s.slug, s]));
-  const common = COMMON.map((slug) => bySlug.get(slug)).filter(Boolean) as Symptom[];
+  const common = COMMON.map((slug) => bySlug.get(slug)).filter(
+    Boolean,
+  ) as Symptom[];
 
   const groups = order
     .map((group) => {

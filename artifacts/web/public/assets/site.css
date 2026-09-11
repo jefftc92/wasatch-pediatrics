@@ -295,7 +295,6 @@
   .mega-list-split li {
     break-inside: avoid;
   }
-
 }
 
 @media (max-width: 991px) and (min-width: 768px) {
@@ -2541,7 +2540,6 @@
   color: #2b93d1;
 }
 
-
 /*
  * One container for all three bands: the utility strip, the primary row and
  * the section bar. Bootstrap's stepped container used to govern them, so the
@@ -2603,11 +2601,9 @@
      */
     --toolsband: 36px;
     background:
-      linear-gradient(#dfe2e5 0 1px, transparent 1px) 0 calc(var(--toolsband) - 1px) / 100% 1px no-repeat,
-      linear-gradient(
-        #f4f5f6 0 var(--toolsband),
-        #ffffff var(--toolsband)
-      );
+      linear-gradient(#dfe2e5 0 1px, transparent 1px) 0
+        calc(var(--toolsband) - 1px) / 100% 1px no-repeat,
+      linear-gradient(#f4f5f6 0 var(--toolsband), #ffffff var(--toolsband));
   }
 
   .secheadrow {
@@ -4148,7 +4144,6 @@
     border-radius: 25px 0 0 25px;
     aspect-ratio: auto;
   }
-
 }
 
 /*
@@ -4229,7 +4224,6 @@
   font-size: 15px;
   font-weight: 500;
 }
-
 
 /* -------------------------------------------------------------- symptoms -- */
 
@@ -4853,7 +4847,9 @@
   font-weight: 600;
   line-height: 22px;
   text-decoration: none;
-  transition: border-color 0.15s ease, color 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .sym-tiles a:hover,
@@ -4989,7 +4985,6 @@
   text-decoration: none;
   white-space: nowrap;
 }
-
 
 .sym-embed-open:hover {
   color: #f58220;
@@ -5696,6 +5691,25 @@
   border-radius: 10px;
 }
 
+/*
+ * One column on a phone, and `gap` owning the spacing there too.
+ *
+ * The grid below only started at 768, so on a phone the cards stayed a plain
+ * block stack and kept `.sym-group`'s own 34px bottom margin -- written for a
+ * stack, and more than three times the 10px between the tiles directly above
+ * them. Thirteen cards at 34px apart is 300px of gap in a column a parent is
+ * already scrolling.
+ */
+.sym-browse-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.sym-browse-grid > .sym-group {
+  margin: 0;
+}
+
 @media (min-width: 768px) {
   .sym-browse-grid {
     display: grid;
@@ -6039,6 +6053,39 @@
   .sc-find-plinth .sym-find-input {
     padding-right: 18px;
   }
+
+  /*
+   * The band was 472px tall at 390 and 494 at 360 -- more than half a phone
+   * screen spent before the first symptom. The padding comes in, and the
+   * sub-line goes: it says "search for a symptom, or describe what is
+   * happening in your own words", which is what the title says above it and
+   * what the examples under the field show. On a wide screen it is a useful
+   * second beat; on a phone it is two more lines of the same sentence.
+   */
+  .sc-findband {
+    padding: 18px 0 22px 0;
+  }
+
+  .sc-findband .sc-find-plinth {
+    padding: 24px 18px 22px 18px;
+  }
+
+  .sc-pagebody .sc-find-sub {
+    display: none;
+  }
+
+  .sc-pagebody .sc-find-eyebrow {
+    margin-bottom: 10px;
+  }
+
+  .sc-find-plinth .sym-find {
+    margin-top: 16px;
+  }
+
+  .sc-pagebody .sym-alert-note {
+    padding: 11px 12px;
+    line-height: 21px;
+  }
 }
 
 /*
@@ -6104,7 +6151,16 @@
 
 @media (min-width: 768px) {
   .sc-findband .sc-find-plinth {
-    padding: 44px 40px 38px 40px;
+    /*
+     * Capped, and centred, rather than the full content width. At 1280 the
+     * plinth measured 1116 wide around a 620 search field, which left 248px
+     * of empty tint down each side and made the field look undersized in its
+     * own box. 880 puts 130 either side of the field: enough for the tint to
+     * read as a panel, not enough to look like padding nobody filled.
+     */
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 40px 40px 34px 40px;
   }
 
   .sc-find-title {
@@ -6218,6 +6274,83 @@
   }
 }
 
+/*
+ * Every tile the same height, whatever its label does. The measurements
+ * above buy "Stomach pain" a single line at 360, but the next symptom
+ * promoted into this row may not be so accommodating, and a lone 64px tile
+ * beside a 56px one reads as a mistake. `1fr` rows plus a full-height link
+ * means a wrapped label lengthens the whole grid evenly instead.
+ */
+.sym-tiles-lead {
+  grid-auto-rows: 1fr;
+}
+
+.sym-tiles-lead li {
+  display: flex;
+}
+
+/*
+ * An author `display` beats the browser's own `[hidden] { display: none }`,
+ * so the rule above would leave a hidden tile painted. Nothing hides these
+ * today -- the search hides the whole section rather than tile by tile -- but
+ * the site's other filter does hide item by item with `el.hidden`, and the
+ * next thing written here should not have to rediscover why it did nothing.
+ */
+.sym-tiles-lead li[hidden] {
+  display: none;
+}
+
+/*
+ * The theme puts `margin: 15px 0` on `.pagebody ul li`, which is (0,1,2) and
+ * beat every `.sym-... li { margin: 0 }` in this file at (0,1,1). Nothing
+ * looked broken, so it went unnoticed: the lists simply carried 30px of
+ * invisible padding on every row. On a phone that was 90px of empty space
+ * down the eight common symptoms and as much again down the category cards,
+ * measured as a 96px step between rows of 56px tiles.
+ *
+ * Scoped to `.sc-pagebody` to reach (0,2,1), which is how the eyebrow, the
+ * hint and the 911 banner each ended up escaping the same trap.
+ */
+.sc-pagebody .sym-tiles-lead li,
+.sc-pagebody .sym-browse-grid li,
+.sc-pagebody .sym-tiles li {
+  margin: 0;
+}
+
+.sym-tiles-lead .sym-tile-icon {
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .sym-tiles-lead {
+    gap: 12px;
+  }
+}
+
+/*
+ * The phone sizes for these tiles live here, after the base rules rather than
+ * with the rest of the small-screen block further up. Both are one class deep,
+ * so the later one wins whatever the viewport is: written up there, the 30px
+ * disc and 10px padding lost to the 38px disc and 14px padding below them, and
+ * "Stomach pain" kept wrapping with 93px of room for a 97px label.
+ */
+@media (max-width: 575px) {
+  .sym-tiles-lead .sym-tile-icon {
+    gap: 8px;
+    padding: 9px 10px;
+    font-size: 15px;
+  }
+
+  .sym-tiles-lead .sym-badge {
+    width: 30px;
+    height: 30px;
+  }
+
+  .sym-tiles-lead .sym-badge svg {
+    width: 17px;
+    height: 17px;
+  }
+}
 
 /* ------------------------------- "Getting your child seen", uncluttered -- */
 
