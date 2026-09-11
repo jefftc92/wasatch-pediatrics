@@ -364,6 +364,13 @@ export function symptomRoutes(): Array<GeneratedPage & { route: string }> {
  * list so that the common case never involves scrolling: on mobile the
  * grouped list alone runs close to nine thousand pixels.
  */
+/*
+ * Eight, which is what the example shows and what fits two rows of four at
+ * every width the grid uses. It was twelve, and the four dropped — colds,
+ * croup, head injury and pink eye — are a line in `symptomTerms.ts` away from
+ * the search box and one press away under their categories, so nothing is
+ * unreachable. Restoring any of them is one line here.
+ */
 const COMMON = [
   "fever",
   "cough",
@@ -372,11 +379,7 @@ const COMMON = [
   "rash",
   "sore-throat",
   "earache",
-  "colds",
   "stomach-pain",
-  "head-injury",
-  "croup",
-  "pink-eye",
 ];
 
 /** Everything a tile can be found by, for the type-to-filter box. */
@@ -458,7 +461,7 @@ export function symptomFindBox(): string {
 				<p class="sym-find-count" role="status" aria-live="polite"></p>
 			</div>
 			<noscript><p class="sym-find-off">Type-to-search needs JavaScript. Every one of the ${symptoms.length} pages is listed below, grouped by what you can see or hear.</p></noscript>
-			<p class="sym-alert-note"><svg class="sym-alert-mark" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-warning-circle"></use></svg><span>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <strong class="sym-911">call 911 now</strong>.</span></p>
+			<p class="sym-alert-note"><svg class="sym-alert-mark" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><use href="/assets/icons.svg#i-warning-circle-fill"></use></svg><span>If your child is struggling to breathe, cannot be woken, is having a seizure, or is badly hurt, <strong class="sym-911">call 911 now</strong>.</span></p>
 			<div class="sym-emergency" hidden>
 				<p class="sym-emergency-lead">This one is an emergency.</p>
 				<p class="sym-emergency-body"></p>
@@ -517,7 +520,7 @@ export function symptomIndexList(): string {
       const list = byGroup.get(group)!;
       const look = lookFor(group);
       return `<div class="sym-group">
-							<h3 class="sym-group-title">${groupBadge(group)}<span class="sym-group-text"><span class="sym-group-name">${escapeAttribute(group)}</span><span class="sym-group-blurb">${escapeAttribute(look.blurb)}</span><span class="sym-group-count">${list.length} pages</span></span></h3>
+							<h3 class="sym-group-title">${groupBadge(group)}<span class="sym-group-text"><span class="sym-group-name">${escapeAttribute(group)}</span><span class="sym-group-blurb">${escapeAttribute(look.blurb)}</span></span></h3>
 							<ul class="sym-tiles">${list.map(tile).join("")}</ul>
 						</div>`;
     })
@@ -526,7 +529,7 @@ export function symptomIndexList(): string {
   return `<div class="sym-group sym-common">
 						<div class="sym-sec-row">
 							<h3 class="sym-sec">Common symptoms</h3>
-							<a class="sym-sec-all" href="#sym-browse">All ${symptoms.length} symptoms<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4l4 4-4 4"></path></svg></a>
+							<a class="sym-sec-all" href="#sym-browse">View all symptoms<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4l4 4-4 4"></path></svg></a>
 						</div>
 						<ul class="sym-tiles sym-tiles-lead">${common.map(iconTile).join("")}</ul>
 					</div>
