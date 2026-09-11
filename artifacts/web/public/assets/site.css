@@ -7106,8 +7106,20 @@
     line-height: 19px;
   }
 
+  /*
+   * 10px more text column, which is what takes this from three lines to two.
+   *
+   * Not a type problem: at 13px the sentence needs 589px and two lines of the
+   * 308px column offer 616, so it fits with room to spare -- but the break has
+   * to land on a word. "…cannot be woken," came to 308.4px against 308 of
+   * column and lost the last word by less than half a pixel, which pushed
+   * eleven words onto a third line. Trimming the note's own padding and gap
+   * gives 318px, "woken," stays up, and the rest lands on line two. Same size,
+   * 77px down to 58.
+   */
   .sc-pagebody .sym-alert-note {
-    padding: 10px 12px;
+    padding: 10px 8px;
+    gap: 8px;
     font-size: 13px;
     line-height: 19px;
   }
