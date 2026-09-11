@@ -6151,16 +6151,20 @@
 
 @media (min-width: 768px) {
   .sc-findband .sc-find-plinth {
-    /*
-     * Capped, and centred, rather than the full content width. At 1280 the
-     * plinth measured 1116 wide around a 620 search field, which left 248px
-     * of empty tint down each side and made the field look undersized in its
-     * own box. 880 puts 130 either side of the field: enough for the tint to
-     * read as a panel, not enough to look like padding nobody filled.
-     */
-    max-width: 880px;
-    margin: 0 auto;
     padding: 40px 40px 34px 40px;
+  }
+
+  /*
+   * The panel keeps the full content width and the field grows instead.
+   *
+   * Capping the panel at 880 was the wrong half to change: it fixed the ratio
+   * of tint to field by shrinking the panel, and the panel is the thing the
+   * page is built around. The mockup sets the field at about three quarters
+   * of the panel it sits in; at 620 inside 1116 ours was 56%, which is what
+   * left the field looking lost in its own box. 840 is 75% of 1116.
+   */
+  .sc-find-plinth .sym-find {
+    max-width: 840px;
   }
 
   .sc-find-title {
