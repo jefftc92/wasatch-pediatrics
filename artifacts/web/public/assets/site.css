@@ -6063,7 +6063,7 @@
   }
 
   .sc-findband .sc-find-plinth {
-    padding: 22px 16px 0 16px;
+    padding: 22px 12px 0 12px;
   }
 
   .sc-pagebody .sc-find-sub {
@@ -7100,10 +7100,30 @@
     padding-bottom: 13px;
   }
 
+  /*
+   * 11px, which is the size that fits all four examples on one line: the
+   * string needs 379px at 13 and 350 at 12, against the 330px column the
+   * panel can give, and 321 at 11. The client picked keeping the examples
+   * over keeping the step -- this is the smallest type on the page, and it is
+   * a hint beneath a filled-in field rather than anything a parent has to
+   * read. Still 5.42:1 on the tint.
+   */
+  /*
+   * 12px of panel padding and a 20px mark rather than 16 and 24, which is
+   * what carries both of the lines above through 375 as well as 390 -- the
+   * SE and the mini sit there, and without it the hint went back to two lines
+   * and the 911 to three. At 360 the hint wraps again and that is where this
+   * stops being worth chasing.
+   */
+  .sym-alert-note .sym-alert-mark {
+    width: 20px;
+    height: 20px;
+  }
+
   .sc-find-plinth .sym-find-hint {
     margin-top: 4px;
-    font-size: 13px;
-    line-height: 19px;
+    font-size: 11px;
+    line-height: 17px;
   }
 
   /*
@@ -7118,8 +7138,8 @@
    * 77px down to 58.
    */
   .sc-pagebody .sym-alert-note {
-    padding: 10px 8px;
-    gap: 8px;
+    padding: 10px 6px;
+    gap: 6px;
     font-size: 13px;
     line-height: 19px;
   }
@@ -7196,7 +7216,7 @@
 
   .sc-pagebody .sym-alert-note {
     order: 99;
-    margin: 14px -16px 0 -16px;
+    margin: 14px -12px 0 -12px;
     border-radius: 0 0 24px 24px;
   }
 
