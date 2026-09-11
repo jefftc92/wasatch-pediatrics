@@ -7032,6 +7032,29 @@
 }
 
 /*
+ * Even lines, rather than a full line and an orphan.
+ *
+ * The default is greedy: the browser fills each line to the edge and drops
+ * whatever is left onto the next one. On a phone that gave the title 290px
+ * and then "see" on a line of its own, the hint 317px and then "hit head",
+ * and the 911 copy two full lines and then "call 911 now" -- which is the
+ * difference the client spotted against the mockup, where these break down
+ * the middle. It reads as a font-size problem and is not one: the type fits,
+ * it is the break points that are wrong.
+ *
+ * `balance` evens the lines out. Browsers cap it at a handful of lines and
+ * anything older simply ignores it, in which case the text sets exactly as it
+ * does now, so there is nothing to fall back to.
+ */
+.sc-find-title,
+.sc-pagebody .sc-find-sub,
+.sc-find-plinth .sym-find-hint,
+.sc-pagebody .sym-alert-note,
+.sym-group-blurb {
+  text-wrap: balance;
+}
+
+/*
  * The rest of the phone layout, down here on purpose.
  *
  * These four lost where they were first written a few hundred lines above:
