@@ -5926,6 +5926,12 @@
   pointer-events: none;
 }
 
+/*
+ * The script mark stays off below 768 -- at 366px of panel it runs into the
+ * centred title, which the mockup's wider drawing has room for. The heart is
+ * small and lives in the corner, so the phone block further down turns it
+ * back on.
+ */
 @media (max-width: 767px) {
   .sc-find-mark,
   .sc-find-heart {
@@ -6046,32 +6052,25 @@
  * is room for both.
  */
 @media (max-width: 575px) {
-  .sym-find-go {
-    display: none;
-  }
-
-  .sc-find-plinth .sym-find-input {
-    padding-right: 18px;
-  }
-
   /*
-   * The band was 472px tall at 390 and 494 at 360 -- more than half a phone
-   * screen spent before the first symptom. The padding comes in, and the
-   * sub-line goes: it says "search for a symptom, or describe what is
-   * happening in your own words", which is what the title says above it and
-   * what the examples under the field show. On a wide screen it is a useful
-   * second beat; on a phone it is two more lines of the same sentence.
+   * The phone layout, against the client's phone mockup.
+   *
+   * The sub-line is back: an earlier pass cut it here to buy height, and the
+   * mockup keeps it, so the height comes out of the padding instead.
    */
   .sc-findband {
     padding: 18px 0 22px 0;
   }
 
   .sc-findband .sc-find-plinth {
-    padding: 24px 18px 22px 18px;
+    padding: 22px 16px 0 16px;
   }
 
   .sc-pagebody .sc-find-sub {
-    display: none;
+    display: block;
+    margin: 6px 0 0 0;
+    font-size: 15px;
+    line-height: 22px;
   }
 
   .sc-pagebody .sc-find-eyebrow {
@@ -6079,7 +6078,30 @@
   }
 
   .sc-find-plinth .sym-find {
-    margin-top: 16px;
+    margin-top: 14px;
+  }
+
+  /*
+   * The 911 line becomes the panel's footer rather than a box floating inside
+   * it. The mockup runs it as its own band directly under the panel; it is a
+   * child of the panel in the markup, and on a desktop the mockup wants it
+   * inside the tint, so `order` moves it last and the negative margins take it
+   * out to the panel's edges. Welded to the bottom rather than separated by a
+   * gap, which is the one place this departs from the drawing -- a gap needs
+   * the tint to stop early, and the tint is the panel's own background.
+   */
+  .sc-find-plinth {
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* The decorations the mockup keeps on a phone. */
+  .sc-find-heart {
+    display: block;
+    top: 16px;
+    right: 16px;
+    width: 26px;
+    height: 26px;
   }
 
   .sc-pagebody .sym-alert-note {
@@ -6353,6 +6375,11 @@
   .sym-tiles-lead .sym-badge svg {
     width: 17px;
     height: 17px;
+  }
+
+  /* Pills on a phone, as the mockup draws them; the desktop keeps its cards. */
+  .sym-tiles-lead .sym-tile-icon {
+    border-radius: 999px;
   }
 }
 
@@ -7001,5 +7028,66 @@
 @media (min-width: 1200px) {
   .sym-browse-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/*
+ * The rest of the phone layout, down here on purpose.
+ *
+ * These four lost where they were first written a few hundred lines above:
+ * each is the same specificity as the base rule it has to beat and came
+ * before it, so the note kept its `margin: 22px 0 0`, the heading kept 29px,
+ * and the row went on wrapping. Written after the rules they override, they
+ * apply. The same lesson as `.pagebody ul li` from the other direction --
+ * there the theme outranked us, here we outranked ourselves.
+ */
+@media (max-width: 575px) {
+  .sc-pagebody .sym-alert-note {
+    order: 99;
+    margin: 16px -16px 0 -16px;
+    border-radius: 0 0 24px 24px;
+  }
+
+  /*
+   * The Search pill stays on a phone, as the mockup draws it.
+   *
+   * It came off once because the placeholder clipped to "Type what you are
+   * see" -- 198px of text in a 192px field. The input's 16px is a floor, not a
+   * choice (anything under it makes iOS zoom the page on focus), so the pill
+   * gives the width back instead: narrower padding and a 15px label. Measured
+   * at 360 as well as 390.
+   */
+  .sym-find-go {
+    padding: 0 14px;
+    font-size: 15px;
+  }
+
+  .sc-find-plinth .sym-find-input {
+    padding-right: 86px;
+  }
+
+  /*
+   * "Common symptoms" and "View all symptoms" share a line here, as they do in
+   * the mockup, rather than the link dropping underneath. 29px of heading plus
+   * the link measured 451px against 366 of screen, so the heading comes down
+   * to 23 and the link to 14.
+   */
+  .sc-index .sym-sec {
+    font-size: 21px;
+  }
+
+  .sym-sec-row {
+    gap: 10px;
+  }
+
+  .sc-pagebody .sym-sec-all {
+    font-size: 14px;
+  }
+
+  /* The foot centres and stacks rather than wrapping mid-sentence. */
+  .sc-pagebody .sym-browse-foot {
+    flex-direction: column;
+    gap: 4px;
+    text-align: center;
   }
 }

@@ -464,7 +464,7 @@ export function symptomFindBox(): string {
 				<label class="visually-hidden" for="sym-find-input">Type what you are seeing</label>
 				<div class="sym-find-box">
 					<svg class="sym-find-icon" viewBox="0 0 20 20" aria-hidden="true" focusable="false"><circle cx="9" cy="9" r="6"></circle><path d="M13.5 13.5L18 18"></path></svg>
-					<input id="sym-find-input" class="sym-find-input" type="search" autocomplete="off" placeholder="Type what you are seeing&#8230;">
+					<input id="sym-find-input" class="sym-find-input" type="search" autocomplete="off" placeholder="Type what you see&#8230;">
 					<button type="button" class="sym-find-clear" hidden>Clear<span class="visually-hidden"> the search</span></button>
 					<span class="sym-find-go" aria-hidden="true">Search</span>
 				</div>
