@@ -1429,6 +1429,54 @@
   });
   browse.classList.add("is-collapsible");
 
+  /*
+   * Thirteen categories is a wall on first sight, so four are shown and the
+   * rest follow on a press.
+   *
+   * Done here rather than in the markup because it must not happen without
+   * script: with JavaScript off every category ships visible and no button is
+   * emitted, so nothing is ever hidden behind a control that cannot be worked.
+   * The cap lifts itself the moment a search runs, since a filtered result
+   * that landed in category nine would otherwise be hidden by it.
+   */
+  var CAP = 4;
+  var grid = browse.querySelector(".sym-browse-grid");
+  var capped = false;
+  var moreBtn = null;
+
+  function setCap(on) {
+    if (!grid || groups.length <= CAP) return;
+    capped = on;
+    grid.classList.toggle("is-capped", on);
+    groups.forEach(function (group, i) {
+      if (i >= CAP) group.hidden = on;
+    });
+    if (moreBtn) {
+      moreBtn.setAttribute("aria-expanded", String(!on));
+      moreBtn.querySelector("span").textContent = on
+        ? "Show all categories"
+        : "Show fewer categories";
+    }
+  }
+
+  if (grid && groups.length > CAP) {
+    var wrap = document.createElement("p");
+    wrap.className = "sym-browse-more";
+    moreBtn = document.createElement("button");
+    moreBtn.type = "button";
+    moreBtn.setAttribute("aria-controls", "sym-browse");
+    moreBtn.innerHTML =
+      "<span>Show all categories</span>" +
+      '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 6L8 10.5L12.5 6"></path></svg>';
+    moreBtn.addEventListener("click", function () {
+      setCap(!capped);
+      if (capped) grid.scrollIntoView({ block: "nearest" });
+    });
+    wrap.appendChild(moreBtn);
+    grid.parentNode.insertBefore(wrap, grid.nextSibling);
+    setCap(true);
+  }
+
   function setOpen(group, open) {
     var list = group.querySelector(".sym-tiles");
     var button = group.querySelector(".sym-group-toggle");
@@ -1480,6 +1528,14 @@
         group.hidden = false;
         setOpen(group, false);
       });
+      /*
+       * This branch unhides every group, which is right for a cleared search
+       * and wrong for the four-category cap — it was clobbering it on load,
+       * because `apply()` also runs once to set the initial state. Putting the
+       * cap back here is what makes "cleared" mean the page as it first looked
+       * rather than all thirteen open.
+       */
+      setCap(true);
       if (common) common.hidden = false;
       if (browseTitle) browseTitle.hidden = false;
       if (none) none.hidden = true;
@@ -1491,6 +1547,14 @@
       showCounts(true);
       return;
     }
+
+    /*
+     * A hit in category nine must not be hidden by the four-category cap — but
+     * only once there is a query. `apply()` also runs once on load to set the
+     * initial state, and lifting the cap there would mean it never applied at
+     * all.
+     */
+    if (typed.length && capped) setCap(false);
 
     var hits = 0;
     tiles.forEach(function (tile, i) {
