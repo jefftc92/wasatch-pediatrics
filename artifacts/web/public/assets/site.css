@@ -6031,20 +6031,34 @@
  * phrase as the symptom pages; here it keeps a ground of its own, because on
  * the panel's blue a plain rule would be the third thing on that tint.
  */
-.sym-alert-note {
+/*
+ * Scoped to `.sc-pagebody`, and that prefix is the whole reason this works.
+ *
+ * The theme's `.pagebody p { margin: 15px 0 }` is (0,1,1) and a bare
+ * `.sym-alert-note` is (0,1,0), so `margin: auto` lost and the box sat flush
+ * left: measured 122..842 against a panel centred on 640, 158px off. The same
+ * trap is already recorded two rules up for the hint, which carries the prefix
+ * for the same reason.
+ *
+ * It spans the panel's content width rather than a fixed 720px, and its text
+ * is centred, so it reads as the example's full-width strip. One line needs
+ * about 1,020px with the disc; whether it gets it is a function of the window,
+ * and it stays centred either way.
+ */
+.sc-pagebody .sym-alert-note {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  max-width: 720px;
-  margin: 22px auto 0 auto;
-  padding: 12px 18px;
+  gap: 10px;
+  max-width: none;
+  margin: 22px 0 0 0;
+  padding: 12px 16px;
   border-radius: 14px;
   background: #fff4e8;
-  font-size: 15px;
-  line-height: 23px;
+  font-size: 14px;
+  line-height: 22px;
   color: #6b6d70;
-  text-align: left;
+  text-align: center;
 }
 
 .sym-alert-mark {
