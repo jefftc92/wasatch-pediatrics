@@ -6010,11 +6010,34 @@
  * the field is for and is `aria-hidden`, leaving the input itself as the only
  * thing in the tab order.
  */
+/*
+ * The clear button, out from under the Search pill.
+ *
+ * Both are absolutely positioned against the right-hand end of the field, one
+ * at right:8 and one at right:5, and the pill was added to this page later
+ * without moving the other. Measured, the clear button's box sat entirely
+ * inside the pill's -- 976 to 1052 against 954 to 1055 -- so it was invisible
+ * behind it and could not be pressed. It now sits to the pill's left, clear
+ * of it at both sizes.
+ */
+.sc-find-plinth .sym-find-clear {
+  right: 112px;
+}
+
 .sym-find-go {
   position: absolute;
   top: 5px;
   right: 5px;
   bottom: 5px;
+  /*
+   * It is a painted label, not a control -- the list filters as you type, so
+   * there is nothing for it to do -- and it sits over the right-hand end of
+   * the field. Leaving it able to take a tap meant it swallowed every one
+   * aimed at what was underneath it, which is where the clear button sits.
+   * A tap now falls through to the input and puts the cursor in the field,
+   * which is what someone reaching for a search box wants anyway.
+   */
+  pointer-events: none;
   display: flex;
   align-items: center;
   padding: 0 24px;
@@ -6347,6 +6370,32 @@
   height: 100%;
 }
 
+/*
+ * The common tiles carry a bare blue glyph, not a tinted disc.
+ *
+ * The disc was carrying its category's colour, which made the row read as
+ * eight unrelated colours in an order nobody can see a rule in -- the rule
+ * was real (each tile takes its group's colour) but a rule you have to be
+ * told is not one the eye can use. Colour now appears once on this page, on
+ * the category cards, where it separates four things sitting side by side.
+ *
+ * Dropping the disc also drops its 38px box to the glyph's own width, so the
+ * label gets 14px back; the icon grows a little to hold the space the disc
+ * used to hold.
+ */
+.sym-tiles-lead .sym-badge {
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  color: #2b93d1;
+}
+
+.sym-tiles-lead .sym-badge svg {
+  width: 24px;
+  height: 24px;
+}
+
 @media (min-width: 768px) {
   .sym-tiles-lead {
     gap: 12px;
@@ -6367,14 +6416,9 @@
     font-size: 15px;
   }
 
-  .sym-tiles-lead .sym-badge {
-    width: 30px;
-    height: 30px;
-  }
-
   .sym-tiles-lead .sym-badge svg {
-    width: 17px;
-    height: 17px;
+    width: 21px;
+    height: 21px;
   }
 
   /* Pills on a phone, as the mockup draws them; the desktop keeps its cards. */
@@ -7257,6 +7301,10 @@
 
   .sc-find-plinth .sym-find-input {
     padding-right: 86px;
+  }
+
+  .sc-find-plinth .sym-find-clear {
+    right: 88px;
   }
 
   /*

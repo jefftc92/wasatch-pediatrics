@@ -165,7 +165,11 @@
     var closeNav = function (except) {
       $(parents).each(function () {
         if (this === except || !$(this).hasClass("open")) return;
-        $(this).removeClass("open").children(".sub-menu").stop(true, true).slideUp("fast");
+        $(this)
+          .removeClass("open")
+          .children(".sub-menu")
+          .stop(true, true)
+          .slideUp("fast");
         $(this).children(".navtoggle").attr("aria-expanded", "false");
       });
     };
@@ -322,10 +326,13 @@
    * copied in by tools/build-icons.mjs so they cannot drift from the key.
    */
   var CARE_ICON = {
-      "stethoscope": "M220 160a12 12 0 1 1-12-12a12 12 0 0 1 12 12m-4.55 39.29A48.08 48.08 0 0 1 168 240h-24a48.05 48.05 0 0 1-48-48v-40.51A64 64 0 0 1 40 88V40a8 8 0 0 1 8-8h24a8 8 0 0 1 0 16H56v40a48 48 0 0 0 48.64 48c26.11-.34 47.36-22.25 47.36-48.83V48h-16a8 8 0 0 1 0-16h24a8 8 0 0 1 8 8v47.17c0 32.84-24.53 60.29-56 64.31V192a32 32 0 0 0 32 32h24a32.06 32.06 0 0 0 31.22-25a40 40 0 1 1 16.23.27ZM232 160a24 24 0 1 0-24 24a24 24 0 0 0 24-24",
-      "heart": "M178 40c-20.65 0-38.73 8.88-50 23.89C116.73 48.88 98.65 40 78 40a62.07 62.07 0 0 0-62 62c0 70 103.79 126.66 108.21 129a8 8 0 0 0 7.58 0C136.21 228.66 240 172 240 102a62.07 62.07 0 0 0-62-62m-50 174.8c-18.26-10.64-96-59.11-96-112.8a46.06 46.06 0 0 1 46-46c19.45 0 35.78 10.36 42.6 27a8 8 0 0 0 14.8 0c6.82-16.67 23.15-27 42.6-27a46.06 46.06 0 0 1 46 46c0 53.61-77.76 102.15-96 112.8",
-      "baby": "M92 140a12 12 0 1 1 12-12a12 12 0 0 1-12 12m72-24a12 12 0 1 0 12 12a12 12 0 0 0-12-12m-12.27 45.23a45 45 0 0 1-47.46 0a8 8 0 0 0-8.54 13.54a61 61 0 0 0 64.54 0a8 8 0 0 0-8.54-13.54M232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88.11 88.11 0 0 0-84.09-87.91C120.32 56.38 120 71.88 120 72a8 8 0 0 0 16 0a8 8 0 0 1 16 0a24 24 0 0 1-48 0c0-.73.13-14.3 8.46-30.63A88 88 0 1 0 216 128",
-      "tooth": "M171 71.42L149.54 80L171 88.57a8 8 0 1 1-6 14.85l-37-14.81l-37 14.81a8 8 0 1 1-6-14.85L106.46 80L85 71.42a8 8 0 1 1 6-14.85l37 14.81l37-14.81a8 8 0 1 1 6 14.85m53 8.33c0 42.72-8 75.4-14.69 95.28c-8.73 25.8-20.63 45.49-32.65 54a15.69 15.69 0 0 1-15.95 1.41a16.09 16.09 0 0 1-9.18-13.36c-.85-11.5-5.05-49.08-23.53-49.08s-22.68 37.59-23.53 49.11a16.09 16.09 0 0 1-16 14.9a15.67 15.67 0 0 1-9.13-2.95c-12-8.53-23.92-28.22-32.65-54C40 155.15 32 122.47 32 79.75A56 56 0 0 1 88 24h80a56 56 0 0 1 56 55.75m-16 0A40 40 0 0 0 168 40H88a40 40 0 0 0-40 39.76c0 40.55 7.51 71.4 13.85 90.14c11.05 32.66 23 43.37 26.61 46C91.57 174.67 105.59 152 128 152s36.45 22.71 39.49 63.94c3.6-2.59 15.57-13.26 26.66-46c6.34-18.78 13.85-49.63 13.85-90.18Z"
+    stethoscope:
+      "M220 160a12 12 0 1 1-12-12a12 12 0 0 1 12 12m-4.55 39.29A48.08 48.08 0 0 1 168 240h-24a48.05 48.05 0 0 1-48-48v-40.51A64 64 0 0 1 40 88V40a8 8 0 0 1 8-8h24a8 8 0 0 1 0 16H56v40a48 48 0 0 0 48.64 48c26.11-.34 47.36-22.25 47.36-48.83V48h-16a8 8 0 0 1 0-16h24a8 8 0 0 1 8 8v47.17c0 32.84-24.53 60.29-56 64.31V192a32 32 0 0 0 32 32h24a32.06 32.06 0 0 0 31.22-25a40 40 0 1 1 16.23.27ZM232 160a24 24 0 1 0-24 24a24 24 0 0 0 24-24",
+    heart:
+      "M178 40c-20.65 0-38.73 8.88-50 23.89C116.73 48.88 98.65 40 78 40a62.07 62.07 0 0 0-62 62c0 70 103.79 126.66 108.21 129a8 8 0 0 0 7.58 0C136.21 228.66 240 172 240 102a62.07 62.07 0 0 0-62-62m-50 174.8c-18.26-10.64-96-59.11-96-112.8a46.06 46.06 0 0 1 46-46c19.45 0 35.78 10.36 42.6 27a8 8 0 0 0 14.8 0c6.82-16.67 23.15-27 42.6-27a46.06 46.06 0 0 1 46 46c0 53.61-77.76 102.15-96 112.8",
+    baby: "M92 140a12 12 0 1 1 12-12a12 12 0 0 1-12 12m72-24a12 12 0 1 0 12 12a12 12 0 0 0-12-12m-12.27 45.23a45 45 0 0 1-47.46 0a8 8 0 0 0-8.54 13.54a61 61 0 0 0 64.54 0a8 8 0 0 0-8.54-13.54M232 128A104 104 0 1 1 128 24a104.11 104.11 0 0 1 104 104m-16 0a88.11 88.11 0 0 0-84.09-87.91C120.32 56.38 120 71.88 120 72a8 8 0 0 0 16 0a8 8 0 0 1 16 0a24 24 0 0 1-48 0c0-.73.13-14.3 8.46-30.63A88 88 0 1 0 216 128",
+    tooth:
+      "M171 71.42L149.54 80L171 88.57a8 8 0 1 1-6 14.85l-37-14.81l-37 14.81a8 8 0 1 1-6-14.85L106.46 80L85 71.42a8 8 0 1 1 6-14.85l37 14.81l37-14.81a8 8 0 1 1 6 14.85m53 8.33c0 42.72-8 75.4-14.69 95.28c-8.73 25.8-20.63 45.49-32.65 54a15.69 15.69 0 0 1-15.95 1.41a16.09 16.09 0 0 1-9.18-13.36c-.85-11.5-5.05-49.08-23.53-49.08s-22.68 37.59-23.53 49.11a16.09 16.09 0 0 1-16 14.9a15.67 15.67 0 0 1-9.13-2.95c-12-8.53-23.92-28.22-32.65-54C40 155.15 32 122.47 32 79.75A56 56 0 0 1 88 24h80a56 56 0 0 1 56 55.75m-16 0A40 40 0 0 0 168 40H88a40 40 0 0 0-40 39.76c0 40.55 7.51 71.4 13.85 90.14c11.05 32.66 23 43.37 26.61 46C91.57 174.67 105.59 152 128 152s36.45 22.71 39.49 63.94c3.6-2.59 15.57-13.26 26.66-46c6.34-18.78 13.85-49.63 13.85-90.18Z",
   };
 
   /*
@@ -368,8 +375,7 @@
   }
 
   /** The teardrop's outline, on a 40x52 grid. */
-  var DROP =
-    "M20 51C20 51 35 32.5 35 20A15 15 0 0 0 5 20C5 32.5 20 51 20 51Z";
+  var DROP = "M20 51C20 51 35 32.5 35 20A15 15 0 0 0 5 20C5 32.5 20 51 20 51Z";
 
   /**
    * Zoomed out: the care types divide the pin's own head.
@@ -385,26 +391,49 @@
     var seg = "";
 
     if (n === 1) {
-      seg = '<circle cx="20" cy="20" r="' + r + '" fill="' +
-        (colors[0] || "#2b93d1") + '"/>';
+      seg =
+        '<circle cx="20" cy="20" r="' +
+        r +
+        '" fill="' +
+        (colors[0] || "#2b93d1") +
+        '"/>';
     } else {
       for (var i = 0; i < n; i++) {
         var a0 = (Math.PI * 2 * i) / n - Math.PI / 2;
         var a1 = (Math.PI * 2 * (i + 1)) / n - Math.PI / 2;
         seg +=
-          '<path d="M20 20 L' + (20 + r * Math.cos(a0)).toFixed(2) + " " +
-          (20 + r * Math.sin(a0)).toFixed(2) + " A" + r + " " + r + " 0 " +
-          (a1 - a0 > Math.PI ? 1 : 0) + " 1 " +
-          (20 + r * Math.cos(a1)).toFixed(2) + " " +
-          (20 + r * Math.sin(a1)).toFixed(2) + ' Z" fill="' + colors[i] + '"/>';
+          '<path d="M20 20 L' +
+          (20 + r * Math.cos(a0)).toFixed(2) +
+          " " +
+          (20 + r * Math.sin(a0)).toFixed(2) +
+          " A" +
+          r +
+          " " +
+          r +
+          " 0 " +
+          (a1 - a0 > Math.PI ? 1 : 0) +
+          " 1 " +
+          (20 + r * Math.cos(a1)).toFixed(2) +
+          " " +
+          (20 + r * Math.sin(a1)).toFixed(2) +
+          ' Z" fill="' +
+          colors[i] +
+          '"/>';
       }
     }
 
     return (
       '<svg xmlns="http://www.w3.org/2000/svg" width="40" height="52" viewBox="0 0 40 52">' +
-      '<g opacity="' + (dim ? 0.45 : 1) + '">' +
-      '<path d="' + DROP + '" fill="#ffffff"/>' + seg +
-      '<circle cx="20" cy="20" r="' + r + '" fill="none" stroke="#ffffff" stroke-width="3"/>' +
+      '<g opacity="' +
+      (dim ? 0.45 : 1) +
+      '">' +
+      '<path d="' +
+      DROP +
+      '" fill="#ffffff"/>' +
+      seg +
+      '<circle cx="20" cy="20" r="' +
+      r +
+      '" fill="none" stroke="#ffffff" stroke-width="3"/>' +
       "</g></svg>"
     );
   }
@@ -422,33 +451,76 @@
       var x = midX - bw / 2 + BAR_PAD + i * (BADGE + BADGE_GAP);
       var path = CARE_ICON[icons[i]];
       badges +=
-        '<rect x="' + x.toFixed(1) + '" y="' + BAR_PAD + '" width="' + BADGE +
-        '" height="' + BADGE + '" rx="4" fill="' + colors[i] + '"/>';
+        '<rect x="' +
+        x.toFixed(1) +
+        '" y="' +
+        BAR_PAD +
+        '" width="' +
+        BADGE +
+        '" height="' +
+        BADGE +
+        '" rx="4" fill="' +
+        colors[i] +
+        '"/>';
       if (path) {
         /* 256-unit artwork scaled into a 14px square, centred in the badge. */
         var s = 14 / 256;
         badges +=
-          '<g transform="translate(' + (x + (BADGE - 14) / 2).toFixed(1) + " " +
-          (BAR_PAD + (BADGE - 14) / 2).toFixed(1) + ') scale(' + s.toFixed(5) +
-          ')"><path fill="#ffffff" d="' + path + '"/></g>';
+          '<g transform="translate(' +
+          (x + (BADGE - 14) / 2).toFixed(1) +
+          " " +
+          (BAR_PAD + (BADGE - 14) / 2).toFixed(1) +
+          ") scale(" +
+          s.toFixed(5) +
+          ')"><path fill="#ffffff" d="' +
+          path +
+          '"/></g>';
       }
     }
 
     var bar =
-      '<rect x="' + (midX - bw / 2 + BAR_EDGE / 2).toFixed(1) + '" y="' +
-      (BAR_EDGE / 2).toFixed(1) + '" width="' + (bw - BAR_EDGE).toFixed(1) +
-      '" height="' + (bh - BAR_EDGE).toFixed(1) +
-      '" rx="6" fill="#ffffff" stroke="' + BAR_EDGE_COLOR + '" stroke-width="' +
-      BAR_EDGE + '"/>' + badges;
+      '<rect x="' +
+      (midX - bw / 2 + BAR_EDGE / 2).toFixed(1) +
+      '" y="' +
+      (BAR_EDGE / 2).toFixed(1) +
+      '" width="' +
+      (bw - BAR_EDGE).toFixed(1) +
+      '" height="' +
+      (bh - BAR_EDGE).toFixed(1) +
+      '" rx="6" fill="#ffffff" stroke="' +
+      BAR_EDGE_COLOR +
+      '" stroke-width="' +
+      BAR_EDGE +
+      '"/>' +
+      badges;
 
     return (
-      '<svg xmlns="http://www.w3.org/2000/svg" width="' + box.w + '" height="' +
-      box.h + '" viewBox="0 0 ' + box.w + " " + box.h + '">' +
-      '<g opacity="' + (dim ? 0.45 : 1) + '">' + bar +
-      '<g transform="translate(' + (midX - PIN_W / 2).toFixed(1) + " " +
-      (bh + BAR_GAP) + ')">' +
-      '<svg width="' + PIN_W + '" height="' + PIN_H + '" viewBox="0 0 40 52">' +
-      '<path d="' + DROP + '" fill="#2b93d1" stroke="#ffffff" stroke-width="2.5"/>' +
+      '<svg xmlns="http://www.w3.org/2000/svg" width="' +
+      box.w +
+      '" height="' +
+      box.h +
+      '" viewBox="0 0 ' +
+      box.w +
+      " " +
+      box.h +
+      '">' +
+      '<g opacity="' +
+      (dim ? 0.45 : 1) +
+      '">' +
+      bar +
+      '<g transform="translate(' +
+      (midX - PIN_W / 2).toFixed(1) +
+      " " +
+      (bh + BAR_GAP) +
+      ')">' +
+      '<svg width="' +
+      PIN_W +
+      '" height="' +
+      PIN_H +
+      '" viewBox="0 0 40 52">' +
+      '<path d="' +
+      DROP +
+      '" fill="#2b93d1" stroke="#ffffff" stroke-width="2.5"/>' +
       '<circle cx="20" cy="19" r="5.5" fill="#ffffff" opacity="0.92"/>' +
       "</svg></g></g></svg>"
     );
@@ -485,17 +557,35 @@
 
   function popupMarkup(office) {
     var cats = office.categories.length
-      ? '<p class="loc-pop-cats">' + office.categories.join(" &middot; ") + "</p>"
+      ? '<p class="loc-pop-cats">' +
+        office.categories.join(" &middot; ") +
+        "</p>"
       : "";
     return (
       '<div class="loc-pop">' +
-      '<p class="loc-pop-name"><a href="' + office.href + '">' + office.name + "</a></p>" +
-      "<p>" + office.address + "</p>" +
-      '<p><a href="tel:' + office.phone + '">' + office.phoneText + "</a></p>" +
+      '<p class="loc-pop-name"><a href="' +
+      office.href +
+      '">' +
+      office.name +
+      "</a></p>" +
+      "<p>" +
+      office.address +
+      "</p>" +
+      '<p><a href="tel:' +
+      office.phone +
+      '">' +
+      office.phoneText +
+      "</a></p>" +
       cats +
       '<p class="loc-pop-links">' +
-      '<a href="#office-' + office.slug + '" data-office-jump="' + office.slug + '">What we offer here</a>' +
-      '<a href="' + office.directions + '" target="_blank" rel="noopener">Directions</a>' +
+      '<a href="#office-' +
+      office.slug +
+      '" data-office-jump="' +
+      office.slug +
+      '">What we offer here</a>' +
+      '<a href="' +
+      office.directions +
+      '" target="_blank" rel="noopener">Directions</a>' +
       "</p></div>"
     );
   }
@@ -513,8 +603,10 @@
     };
     var js = document.createElement("script");
     js.src =
-      "https://maps.googleapis.com/maps/api/js?key=" + encodeURIComponent(key) +
-      "&libraries=marker&loading=async&callback=" + cb;
+      "https://maps.googleapis.com/maps/api/js?key=" +
+      encodeURIComponent(key) +
+      "&libraries=marker&loading=async&callback=" +
+      cb;
     js.async = true;
     js.onerror = fail;
     document.head.appendChild(js);
@@ -685,20 +777,31 @@
       cards.forEach(function (card) {
         var hide = false;
         if (serviceSlug) {
-          hide = (card.getAttribute("data-services") || "").split(" ").indexOf(serviceSlug) === -1;
+          hide =
+            (card.getAttribute("data-services") || "")
+              .split(" ")
+              .indexOf(serviceSlug) === -1;
         } else if (careSlug) {
-          hide = (card.getAttribute("data-cares") || "").split(" ").indexOf(careSlug) === -1;
+          hide =
+            (card.getAttribute("data-cares") || "")
+              .split(" ")
+              .indexOf(careSlug) === -1;
         }
         card.hidden = hide;
       });
 
       keyBtns.forEach(function (btn) {
-        btn.setAttribute("aria-pressed", String(btn.getAttribute("data-care") === careSlug));
+        btn.setAttribute(
+          "aria-pressed",
+          String(btn.getAttribute("data-care") === careSlug),
+        );
       });
       if (keyBox) keyBox.classList.toggle("has-choice", Boolean(careSlug));
 
       if (careSlug) {
-        var chosen = document.querySelector('.loc-key-btn[data-care="' + careSlug + '"]');
+        var chosen = document.querySelector(
+          '.loc-key-btn[data-care="' + careSlug + '"]',
+        );
         if (chosen) label = chosen.textContent.trim();
       }
 
@@ -743,10 +846,13 @@
     });
 
     document.addEventListener("click", function (event) {
-      var jump = event.target.closest && event.target.closest("[data-office-jump]");
+      var jump =
+        event.target.closest && event.target.closest("[data-office-jump]");
       if (!jump) return;
       event.preventDefault();
-      var card = document.getElementById("office-" + jump.getAttribute("data-office-jump"));
+      var card = document.getElementById(
+        "office-" + jump.getAttribute("data-office-jump"),
+      );
       if (!card) return;
       card.scrollIntoView({ behavior: "smooth", block: "center" });
       card.focus({ preventScroll: true });
@@ -794,7 +900,13 @@
     var seen = false;
     var watcher = new IntersectionObserver(
       function (entries) {
-        if (seen || !entries.some(function (e) { return e.isIntersecting; })) return;
+        if (
+          seen ||
+          !entries.some(function (e) {
+            return e.isIntersecting;
+          })
+        )
+          return;
         seen = true;
         watcher.disconnect();
         fn();
@@ -863,7 +975,9 @@
       '<svg xmlns="http://www.w3.org/2000/svg" width="34" height="44" viewBox="0 0 40 52">' +
       '<path d="M20 51C20 51 35 32.5 35 20A15 15 0 0 0 5 20C5 32.5 20 51 20 51Z" fill="#2b93d1" stroke="#ffffff" stroke-width="2"/>' +
       '<text x="20" y="26" text-anchor="middle" font-family="Helvetica,Arial,sans-serif" ' +
-      'font-size="18" font-weight="700" fill="#ffffff">' + n + "</text>" +
+      'font-size="18" font-weight="700" fill="#ffffff">' +
+      n +
+      "</text>" +
       "</svg>";
     return "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
   }
@@ -901,7 +1015,12 @@
         img.width = w;
         img.height = h;
         img.alt = "";
-        marker = new Advanced({ map: map, position: position, title: title, content: img });
+        marker = new Advanced({
+          map: map,
+          position: position,
+          title: title,
+          content: img,
+        });
       } else {
         marker = new google.maps.Marker({
           map: map,
@@ -931,7 +1050,9 @@
       26,
       13,
       data.city.name,
-      '<div class="area-pop"><p class="area-pop-name">' + data.city.name + "</p>" +
+      '<div class="area-pop"><p class="area-pop-name">' +
+        data.city.name +
+        "</p>" +
         '<p class="area-pop-line">You are here</p></div>',
     );
 
@@ -944,10 +1065,24 @@
         44,
         office.name,
         '<div class="area-pop"><p class="area-pop-name">' +
-          '<a href="' + office.href + '">' + office.name + "</a></p>" +
-          '<p class="area-pop-drive">' + office.drive + " from " + data.city.name.split(",")[0] + "</p>" +
-          '<p class="area-pop-line">' + office.address + "</p>" +
-          '<p class="area-pop-line"><a href="tel:' + office.phone + '">' + office.phoneText + "</a></p></div>",
+          '<a href="' +
+          office.href +
+          '">' +
+          office.name +
+          "</a></p>" +
+          '<p class="area-pop-drive">' +
+          office.drive +
+          " from " +
+          data.city.name.split(",")[0] +
+          "</p>" +
+          '<p class="area-pop-line">' +
+          office.address +
+          "</p>" +
+          '<p class="area-pop-line"><a href="tel:' +
+          office.phone +
+          '">' +
+          office.phoneText +
+          "</a></p></div>",
       );
     });
 
@@ -1237,11 +1372,13 @@
 
   // Two of them now: the icon in the bar, and the full-width one at the foot
   // that a thumb can actually reach on a phone.
-  [].slice.call(modal.querySelectorAll("[data-sym-close]")).forEach(function (closer) {
-    closer.addEventListener("click", function () {
-      modal.close();
+  [].slice
+    .call(modal.querySelectorAll("[data-sym-close]"))
+    .forEach(function (closer) {
+      closer.addEventListener("click", function () {
+        modal.close();
+      });
     });
-  });
 
   // A click on the backdrop lands on the dialog itself, never on its contents.
   modal.addEventListener("click", function (event) {
@@ -1275,7 +1412,8 @@
   var none = document.querySelector(".sym-none");
   var noneQ = none && none.querySelector(".sym-none-q");
   var emergency = document.querySelector(".sym-emergency");
-  var emergencyBody = emergency && emergency.querySelector(".sym-emergency-body");
+  var emergencyBody =
+    emergency && emergency.querySelector(".sym-emergency-body");
   var browseTitle = browse.querySelector(".sym-browse-title");
   var groups = [].slice.call(browse.querySelectorAll(".sym-group"));
   var tiles = [].slice.call(browse.querySelectorAll(".sym-tiles li"));
@@ -1287,9 +1425,12 @@
    * is added to the 164 data-terms attributes and the page stays 72KB.
    */
   var index = tiles.map(function (tile) {
-    var words = (tile.getAttribute("data-terms") || "").split(" ").filter(Boolean);
+    var words = (tile.getAttribute("data-terms") || "")
+      .split(" ")
+      .filter(Boolean);
     var tokens = words.slice();
-    for (var i = 0; i < words.length - 1; i++) tokens.push(words[i] + words[i + 1]);
+    for (var i = 0; i < words.length - 1; i++)
+      tokens.push(words[i] + words[i + 1]);
     return " " + tokens.join(" ");
   });
 
@@ -1326,7 +1467,7 @@
     vomitting: "vomiting",
     vomitted: "vomited",
     oedema: "edema",
-    faeces: "feces"
+    faeces: "feces",
   };
 
   // Shortest useful root: "constipated" -> "constipat", "pukes" -> "puk".
@@ -1348,7 +1489,8 @@
   function has(terms, word) {
     var fixed = SPELLING[word] || word;
     return (
-      terms.indexOf(" " + fixed) !== -1 || terms.indexOf(" " + stem(fixed)) !== -1
+      terms.indexOf(" " + fixed) !== -1 ||
+      terms.indexOf(" " + stem(fixed)) !== -1
     );
   }
 
@@ -1363,7 +1505,8 @@
   function hasSplit(terms, word) {
     if (word.length < 6) return false;
     for (var i = 3; i <= word.length - 3; i++) {
-      if (has(terms, word.slice(0, i)) && has(terms, word.slice(i))) return true;
+      if (has(terms, word.slice(0, i)) && has(terms, word.slice(i)))
+        return true;
     }
     return false;
   }
@@ -1376,20 +1519,37 @@
    */
   var EMERGENCY = [
     {
-      words: ["seizure", "seizures", "seizing", "convulsion", "convulsions", "fitting"],
+      words: [
+        "seizure",
+        "seizures",
+        "seizing",
+        "convulsion",
+        "convulsions",
+        "fitting",
+      ],
       body:
         "Call 911 now. A child who is having a seizure, or who has just had one" +
         " for the first time, needs emergency services rather than a page on" +
-        " this site."
+        " this site.",
     },
     {
-      words: ["choking", "choke", "choked", "notbreathing", "cantbreathe", "bluelips", "unconscious", "unresponsive", "drowning"],
+      words: [
+        "choking",
+        "choke",
+        "choked",
+        "notbreathing",
+        "cantbreathe",
+        "bluelips",
+        "unconscious",
+        "unresponsive",
+        "drowning",
+      ],
       body:
         "Call 911 now if your child cannot breathe, cough or cry, cannot be" +
         " woken, or has blue lips. If something was swallowed and breathing is" +
-        " normal, <a href=\"/symptom-checker/swallowed-object/\">Swallowed" +
-        " object</a> is the page for that."
-    }
+        ' normal, <a href="/symptom-checker/swallowed-object/">Swallowed' +
+        " object</a> is the page for that.",
+    },
   ];
 
   function emergencyFor(words) {
@@ -1424,7 +1584,11 @@
 
     setOpen(group, false);
     button.addEventListener("click", function () {
-      setOpen(group, list.hidden);
+      var open = list.hidden;
+      setOpen(group, open);
+      // Opened during a search: it is the reader's choice now, so it has to
+      // survive the search being cleared.
+      if (before) before.open[index] = open;
     });
   });
   browse.classList.add("is-collapsible");
@@ -1443,6 +1607,7 @@
   var grid = browse.querySelector(".sym-browse-grid");
   var capped = false;
   var moreBtn = null;
+  var more = null;
 
   function setCap(on) {
     if (!grid || groups.length <= CAP) return;
@@ -1460,8 +1625,8 @@
   }
 
   if (grid && groups.length > CAP) {
-    var wrap = document.createElement("p");
-    wrap.className = "sym-browse-more";
+    more = document.createElement("p");
+    more.className = "sym-browse-more";
     moreBtn = document.createElement("button");
     moreBtn.type = "button";
     moreBtn.setAttribute("aria-controls", "sym-browse");
@@ -1470,12 +1635,33 @@
       '<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 6L8 10.5L12.5 6"></path></svg>';
     moreBtn.addEventListener("click", function () {
       setCap(!capped);
+      if (before) before.capped = capped;
       if (capped) grid.scrollIntoView({ block: "nearest" });
     });
-    wrap.appendChild(moreBtn);
-    grid.parentNode.insertBefore(wrap, grid.nextSibling);
+    more.appendChild(moreBtn);
+    grid.parentNode.insertBefore(more, grid.nextSibling);
     setCap(true);
   }
+
+  /*
+   * What the reader had set up before a search began, or null when no search
+   * is running.
+   *
+   * A search has to move this furniture -- it opens the groups holding hits,
+   * hides the ones holding none, and lifts the four-category cap so a hit in
+   * category nine is reachable. Clearing the box then has to put it back, and
+   * what it used to put back was the page's opening state: every group shut
+   * and the cap on. That threw away the reader's own choices along with the
+   * search's. Press "Show all categories", open a category, type a letter and
+   * delete it, and the categories you opened shut and the nine you asked for
+   * disappeared again.
+   *
+   * So the two are told apart. This is taken once, when a search first starts
+   * changing things, and restored when the box empties; anything the reader
+   * does while the search is running writes into it, because from then on it
+   * is their choice and not the search's.
+   */
+  var before = null;
 
   function setOpen(group, open) {
     var list = group.querySelector(".sym-tiles");
@@ -1493,9 +1679,11 @@
   }
 
   function showCounts(show) {
-    [].slice.call(browse.querySelectorAll(".sym-group-count")).forEach(function (badge) {
-      badge.hidden = !show;
-    });
+    [].slice
+      .call(browse.querySelectorAll(".sym-group-count"))
+      .forEach(function (badge) {
+        badge.hidden = !show;
+      });
   }
 
   function apply() {
@@ -1524,18 +1712,21 @@
       tiles.forEach(function (tile) {
         tile.hidden = false;
       });
-      groups.forEach(function (group) {
-        group.hidden = false;
-        setOpen(group, false);
-      });
       /*
-       * This branch unhides every group, which is right for a cleared search
-       * and wrong for the four-category cap — it was clobbering it on load,
-       * because `apply()` also runs once to set the initial state. Putting the
-       * cap back here is what makes "cleared" mean the page as it first looked
-       * rather than all thirteen open.
+       * Only a search's own changes are undone here. With no search running
+       * there is nothing to put back, and the groups are left exactly as the
+       * reader left them -- which is also what makes a lone space harmless:
+       * it tokenises to nothing and used to collapse the whole page.
        */
-      setCap(true);
+      if (before) {
+        groups.forEach(function (group, i) {
+          group.hidden = false;
+          setOpen(group, before.open[i]);
+        });
+        setCap(before.capped);
+        before = null;
+      }
+      if (more) more.hidden = false;
       if (common) common.hidden = false;
       if (browseTitle) browseTitle.hidden = false;
       if (none) none.hidden = true;
@@ -1554,7 +1745,28 @@
      * initial state, and lifting the cap there would mean it never applied at
      * all.
      */
+    if (!before) {
+      before = {
+        capped: capped,
+        open: groups.map(function (group) {
+          return group.classList.contains("is-open");
+        }),
+      };
+    }
+
     if (typed.length && capped) setCap(false);
+
+    /*
+     * And the cap's own button goes away for as long as the search runs.
+     *
+     * The cap and the search both decide a group's `hidden`, and pressing
+     * "Show fewer categories" mid-search let the cap win: it re-hid everything
+     * past the fourth group, so a search whose only hit was in group five
+     * emptied the page completely. The two never need to be on screen at once
+     * -- a filtered list is not a list you cap -- and "Browse by category"
+     * above it is already hidden here for the same reason.
+     */
+    if (more) more.hidden = true;
 
     var hits = 0;
     tiles.forEach(function (tile, i) {
@@ -1648,9 +1860,11 @@
 
     // A group with nothing in it should not sit there as an empty heading.
     groups.forEach(function (group) {
-      var any = [].slice.call(group.querySelectorAll(".sym-tiles li")).some(function (t) {
-        return !t.hidden;
-      });
+      var any = [].slice
+        .call(group.querySelectorAll(".sym-tiles li"))
+        .some(function (t) {
+          return !t.hidden;
+        });
       group.hidden = !any;
       if (any) setOpen(group, true);
     });
@@ -1672,7 +1886,9 @@
       // and "the page read me". Truncated so a long paste cannot widen the
       // panel, and kept out of the live region so a fast typist is not read
       // their own keystrokes back.
-      if (noneQ) noneQ.textContent = "\u201C" + find.value.trim().slice(0, 40) + "\u201D";
+      if (noneQ)
+        noneQ.textContent =
+          "\u201C" + find.value.trim().slice(0, 40) + "\u201D";
     }
     if (count) {
       count.classList.toggle("is-none", hits === 0);
